@@ -1,6 +1,5 @@
-import android.os.Bundle;
 package com.carelink;
-
+import android.os.Bundle;
 import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {

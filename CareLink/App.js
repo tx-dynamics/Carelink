@@ -8,15 +8,16 @@ import {
   Text,
   View,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import Main from './src/Main';
 
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>App.js</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Main />
+    </NavigationContainer>
+
   );
 };
 
