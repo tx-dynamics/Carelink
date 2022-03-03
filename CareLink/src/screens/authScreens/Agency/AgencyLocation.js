@@ -7,67 +7,55 @@ import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
 
-const Register = ({ navigation }) => {
+const AgencyLocation = ({ navigation }) => {
 
     return (
-
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
-                <Apptext style={styles.createTxt}>Create a free account to see your agency </Apptext>
+                <Apptext style={styles.createTxt}>Your location where your agency located? </Apptext>
             </View>
             <View>
-                <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
+                <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
             </View>
             <View>
                 <FormInput
-                    title={"First name"}
+                    title={"Street Address"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                 />
                 <FormInput
-                    title={"Last name"}
+                    title={"Apartment Number"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                 />
-                <FormInput
+                  <FormInput
+                    title={"ZIP Code"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-                    title={"Email"}
                 />
-                <FormInput
+                  <FormInput
+                    title={"State"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-                    title={"Password"}
                 />
             </View>
-            <View style={styles.termsTxt} >
-                <Apptext style={styles.createTxt1} >By clicking “ Join now,”you agree to our 
-                </Apptext>
-                <View style={{flexDirection:'row', alignSelf:'center' }}>
-                <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
-                    <Apptext style={styles.hyperLink}>Terms of Use</Apptext>
-                </TouchableOpacity>
-                <Apptext style={styles.createTxt1}> and </Apptext>
-                <TouchableOpacity onPress={() => navigation.navigate("Policy")}>
-                    <Apptext style={styles.hyperLink} >Privacy Policy. </Apptext>
-                </TouchableOpacity>
-                </View>
-            </View>
-            <View style={{ marginTop: wp('8%') }}>
+            <View style={{ marginTop: wp('26%') }}>
                 <FormButton
-                    buttonTitle={"Create Now"}
-                    onPress={() => navigation.navigate("EmailVerification")}
+                    buttonTitle={"Next"}
+                    width={wp('90%')}
+                    height={wp('15%')}
+                    onPress={() => navigation.navigate("AgencyMap")}
                 />
             </View>
         </ScrollView>
     )
 }
 
-export default Register;
+export default AgencyLocation ;
 
 
 const styles = StyleSheet.create({
@@ -82,18 +70,4 @@ const styles = StyleSheet.create({
         fontSize: wp('6%'),
         marginHorizontal: wp('5%')
     },
-    createTxt1:{
-        alignSelf:'center', fontSize:13, fontFamily:'Poppins-Regular' 
-    },
-    termsTxt: {
-        width:wp('90%'),marginTop:41,
-        // backgroundColor:"red",
-        alignSelf:'center'
-    },
-    hyperLink: {
-        fontSize: 13,
-        fontFamily: 'Poppins-Regular',
-        textDecorationLine: 'underline',
-        color: "#004cbe"
-    }
 });

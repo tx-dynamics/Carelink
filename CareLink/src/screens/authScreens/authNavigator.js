@@ -6,6 +6,15 @@ import Step2 from "./OnBoarding/Step2";
 import Step3 from "./OnBoarding/Step3";
 import AskRegister from "./AskRegister";
 import Register from "./Register";
+import Policy from "./Register/Policy";
+import Terms from "./Register/Terms";
+import EmailVerification from "./Verify/EmailVerfication";
+import Verified from "./Verify/Verified";
+import Success from "./Verify/Success";
+import AgencyBasic from "./Agency/AgencyBasic";
+import AgencyPhotos from "./Agency/AgencyPhotos";
+import AgencyLocation from "./Agency/AgencyLocation";
+import AgencyMap from "./Agency/AgencyMap";
 
 
 const AuthStack = createNativeStackNavigator()
@@ -22,8 +31,17 @@ const SplashNavigator = () => {
             <AuthStack.Screen name ="Step3" component={Step3}/>
             <AuthStack.Screen name ="AskRegister" component={AskRegister}/>
             <AuthStack.Screen name ="Register" component={Register}/>
+            <AuthStack.Screen name ="Terms" component={Terms}/>
+            <AuthStack.Screen name ="Policy" component={Policy}/>
+            <AuthStack.Screen name ="EmailVerification" component={EmailVerification}/>
+            <AuthStack.Screen name ="Verified" component={Verified}/>
+            <AuthStack.Screen name ="Success" component={Success}/>
+            <AuthStack.Screen name ="AgencyBasic" component={AgencyBasic}/>
+            <AuthStack.Screen name ="AgencyPhotos" component={AgencyPhotos}/>
+            <AuthStack.Screen name ="AgencyLocation" component={AgencyLocation}/>
+            <AuthStack.Screen name ="AgencyMap" component={AgencyMap}/>
 
-            
+
         </AuthStack.Navigator>
     )
 }
