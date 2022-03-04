@@ -17,12 +17,12 @@ const Register = ({ navigation }) => {
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
-                <Apptext style={styles.createTxt}>Create a free account to see your agency </Apptext>
+                <Apptext style={styles.createTxt}>Create a free account to start your agency </Apptext>
             </View>
             <View>
                 <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
             </View>
-            <View>
+            <View style={{marginTop:-10}}>
                 <FormInput
                     title={"First name"}
                     borderColor={DefaultStyles.colors.black}
@@ -53,11 +53,11 @@ const Register = ({ navigation }) => {
                 </TouchableOpacity>
                 <Apptext style={styles.createTxt1}> and </Apptext>
                 <TouchableOpacity onPress={() => navigation.navigate("Policy")}>
-                    <Apptext style={styles.hyperLink} >Privacy Policy. </Apptext>
+                    <Apptext style={styles.hyperLink} >Privacy Policy.</Apptext>
                 </TouchableOpacity>
                 </View>
             </View>
-            <View style={{ marginTop: wp('8%') }}>
+            <View style={{ marginTop: wp('6%') }}>
                 <FormButton
                     buttonTitle={"Create Now"}
                     onPress={() => navigation.navigate("EmailVerification")}

@@ -15,6 +15,12 @@ import AgencyBasic from "./Agency/AgencyBasic";
 import AgencyPhotos from "./Agency/AgencyPhotos";
 import AgencyLocation from "./Agency/AgencyLocation";
 import AgencyMap from "./Agency/AgencyMap";
+import PaymentPlans from "./Payment/PaymentPlans";
+import PaymentMethod from "./Payment/PaymentMethod";
+import SelectCard from "./Payment/SelectCard";
+import PaymentDone from "./Payment/PaymentDone";
+import PayPalDetails from "./Payment/PayPalDetails";
+import AddCard from "./Payment/AddCard";
 
 
 const AuthStack = createNativeStackNavigator()
@@ -40,6 +46,13 @@ const SplashNavigator = () => {
             <AuthStack.Screen name ="AgencyPhotos" component={AgencyPhotos}/>
             <AuthStack.Screen name ="AgencyLocation" component={AgencyLocation}/>
             <AuthStack.Screen name ="AgencyMap" component={AgencyMap}/>
+            <AuthStack.Screen name ="PaymentPlans" component={PaymentPlans}/>
+            <AuthStack.Screen name ="PaymentMethod" component={PaymentMethod}/>
+            <AuthStack.Screen name ="SelectCard" component={SelectCard}/>
+            <AuthStack.Screen name ="PaymentDone" component={PaymentDone}/>
+            <AuthStack.Screen name ="PayPalDetails" component={PayPalDetails}/>
+            <AuthStack.Screen name ="AddCard" component={AddCard}/>
+
 
 
         </AuthStack.Navigator>

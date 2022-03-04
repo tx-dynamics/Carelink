@@ -36,7 +36,7 @@ const AgencyMap = ({ navigation }) => {
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}
-                    // onPress={() => navigation.navigate("EmailVerification")}
+                    onPress={() => navigation.navigate("PaymentPlans")}
                 />
             </View>
         </ScrollView>
@@ -52,18 +52,18 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     createTxt: {
-        marginTop: wp('8%'),
+        marginTop: wp('5%'),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
         fontSize: wp('6%'),
-        marginHorizontal: wp('5%')
+        marginHorizontal: wp('6%')
     },
     imgView:{
         flexDirection:'row',
         justifyContent:'flex-end',
         width:wp('90%'),
         height:wp('90%'),
-        marginTop:32,
+        marginTop:wp('5%'),
         alignSelf:'center',
         borderRadius:10 
     },
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
         height:47,
         alignItems:'center',
         justifyContent:'center',
-        marginTop:wp('65%'),
+        marginTop:wp('68%'),
         marginHorizontal:wp('5%'),
         backgroundColor:DefaultStyles.colors.primary
     },
     adrs:{
         fontFamily:'Poppins-Regular',
         fontSize:16,
-        marginHorizontal:wp('5%'),
+        marginHorizontal:wp('6%'),
         lineHeight:25
 
     }

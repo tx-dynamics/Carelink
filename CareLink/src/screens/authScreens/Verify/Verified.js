@@ -23,7 +23,7 @@ const Verified = ({ navigation }) => {
      
             <View style={{ marginTop: wp('80%'), marginBottom:wp('20/%') }}>
                 <FormButton
-                    buttonTitle={"Let Started"}
+                    buttonTitle={"Let started"}
                     width={wp('90%')}
                     onPress={() => navigation.navigate("Success") }
                 />

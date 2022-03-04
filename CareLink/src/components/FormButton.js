@@ -4,12 +4,16 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import Apptext from './Apptext';
 import DefaultStyles from "../config/Styles";
 
-  const FormButton = ({width = wp('80%'), height=wp('15%'), buttonTitle,onPress, style, ...rest}) => {
+  const FormButton = ({width = wp('80%'), height=wp('15%'),
+   buttonTitle,onPress, style,
+   borderRadius=30, fontSize= 21,
+   ...rest}) => {
   return (
     <TouchableOpacity 
     onPress={onPress}
-    style={[styles.buttonContainer, {width:width, height:height}]} {...rest}>
-      <Apptext style={styles.buttonText}>{buttonTitle}</Apptext>
+    style={[styles.buttonContainer, {width:width, height:height,borderRadius:borderRadius}]} {...rest}>
+    
+      <Apptext style={[styles.buttonText, {fontSize: fontSize}]}>{buttonTitle}</Apptext>
     </TouchableOpacity>
   );
 };
@@ -22,11 +26,9 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     backgroundColor: DefaultStyles.colors.primary,
-    borderRadius:30,
     alignSelf:'center'
   },
   buttonText: {
-    fontSize: 21,
     color: '#ffffff',
     fontFamily:'Poppins-Regular'
   },

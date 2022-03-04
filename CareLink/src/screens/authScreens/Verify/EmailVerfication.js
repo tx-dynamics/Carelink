@@ -30,7 +30,7 @@ const EmailVerification = ({ navigation }) => {
             <View style={{ marginTop: wp('17%') }}>
                 <FormButton
                     buttonTitle={"Resend Email"}
-                    width={wp('90%')}
+                    width={wp('95%')}
                     onPress={() => navigation.navigate("Verified")}
                 />
             </View>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         marginTop:wp('8%'),
         fontSize:24,
         width:wp('95%'),
+        textAlign:'center',
         color:DefaultStyles.colors.black,
         alignSelf:'center',
         fontFamily:'Poppins-Regular'

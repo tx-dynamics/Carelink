@@ -21,7 +21,7 @@ const AgencyLocation = ({ navigation }) => {
             <View>
                 <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
             </View>
-            <View>
+            <View style={{marginTop:-15}} >
                 <FormInput
                     title={"Street Address"}
                     borderColor={DefaultStyles.colors.black}

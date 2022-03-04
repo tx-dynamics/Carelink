@@ -21,8 +21,9 @@ const Step3 = ({navigation}) => {
            </View>
             <View style={styles.threeDots}>
                 <View style={styles.dot}></View>
-                <View style={styles.line}></View>
                 <View style={styles.dot}></View>
+                <View style={styles.line}></View>
+
             </View>
             <View style={styles.underLine}>
             <TouchableOpacity 

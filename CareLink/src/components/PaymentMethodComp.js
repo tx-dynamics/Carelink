@@ -4,18 +4,20 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
 
-const FvrtComp = ({ labelValue, placeholderText,
+const PaymentMethodComp = ({ labelValue, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
-    onPress,borderRadius= 6,rightOnPress,
+    onPress,borderRadius= 10,rightOnPress,
     rightIconType, ...rest }) => {
     return (
-        <TouchableOpacity 
+        <View 
         onPress={onPress}
         style={[styles.inputContainer, {borderRadius:borderRadius}]} >
             <View style={{ flexDirection: 'row',alignItems:'center' }}>
-               <Image style={styles.imgStl}
+              <View style={styles.imgView}>
+               <Image
                 source={leftImgName}
                />
+               </View>
                <View style={styles.txtView}>
                 <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                 </View>
@@ -25,22 +27,32 @@ const FvrtComp = ({ labelValue, placeholderText,
                 source={rightImgName}  />
                 </TouchableOpacity>
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
 
-export default FvrtComp;
+export default PaymentMethodComp;
 
 const styles = StyleSheet.create({
-    HumanInput: {
-        paddingLeft: wp('2%'),
-        width: wp('70%'),
-    
+    inputContainer: {
+        width: wp('88%'),
+        marginBottom:wp('5%'),
+        alignSelf: 'center',
+        height:wp('23%'),
+        justifyContent:'center',
+        padding:wp('2%'),
+        paddingLeft:wp('4%'),
+        backgroundColor: DefaultStyles.colors.primary,
+        borderBottomColor: "white",
+       
     },
-    imgStl:{
-        width:57,
-        height:57,
-        borderRadius:43,
+    imgView:{
+        width:46,
+        height:46,
+        borderRadius:10,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor:DefaultStyles.colors.white
     },
     txtView:{
         justifyContent:'center',
@@ -48,28 +60,11 @@ const styles = StyleSheet.create({
         width:wp('50%'),
     },
     txtVal:{
-        fontFamily:'poppins-Regular',
-        fontSize:wp('4%')
+        fontFamily:'Poppins-Regular',
+        fontSize:wp('4%'),
+        color:DefaultStyles.colors.white
     },
-    inputContainer: {
-        width: wp('88%'),
-        marginBottom:wp('3%'),
-        alignSelf: 'center',
-        // height:75,
-        padding:wp('2%'),
-        paddingLeft:wp('4%'),
-        backgroundColor: DefaultStyles.colors.grash,
-        borderBottomColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 5,
-        // },
-        // shadowOpacity: 0.34,
-        // shadowRadius: 6.27,
-        
-        // elevation: 3,
-    },
+   
     hrtStl:{
         width:25,
         height:25,

@@ -16,6 +16,7 @@ const FormInput = ({ labelValue, placeholderText,
     borderBottomColor=borderBottomColor ,
     backgroundColor= DefaultStyles.colors.white,
     height= wp('13%'),
+    width= wp('90%'),
     marginTop=marginTop,
     rightIconType, ...rest }) => {
     return (
@@ -23,6 +24,7 @@ const FormInput = ({ labelValue, placeholderText,
         <View style={[styles.inputContainer, 
             {backgroundColor : backgroundColor,
             height:height,
+            width:width,
             borderColor:borderColor,
             borderWidth:borderWidth,
             borderBottomColor:borderBottomColor}]}>         
@@ -60,9 +62,8 @@ const FormInput = ({ labelValue, placeholderText,
                     placeholderTextColor={ placeholderTextColor} 
                     {...rest}
                 />
-                <TouchableOpacity onPress={onPress}>
-                <Image style={{width:14, height:14,tintColor:"gray",
-                marginTop:wp('5%'), marginHorizontal:wp('5%') }} source={rightImgName} />
+                <TouchableOpacity style={{marginTop:-10, justifyContent:'center'}} onPress={onPress}>
+                <Image style={{tintColor:"gray",marginHorizontal:wp('8%') }} source={rightImgName} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -75,14 +76,17 @@ export default FormInput;
 
 const styles = StyleSheet.create({
     HumanInput: {
-        //paddingLeft: wp('2%'),
         width: wp('70%'),
-        // backgroundColor:"red"
-        // paddingTop:-15,
+        // backgroundColor:"red",
+        // height:40,
+        marginTop:-20,
+        paddingTop:20
+        // paddingTop:-20,
+        // alignItems:'center'
+        // paddingTop:-10,
         
     },
     inputContainer: {
-        width: wp('90%'),
         marginTop: wp('11%'),
         alignSelf: 'center',
         paddingLeft: wp('3%'),
@@ -96,7 +100,8 @@ const styles = StyleSheet.create({
         // marginTop:-13,
         // alignSelf:'center',
         // marginHorizontal:wp('5%'),
-        alignSelf:'flex-start'
+        alignSelf:'flex-start',
+        marginTop :-10
         // marginLeft:-200,
 
     },
@@ -105,6 +110,7 @@ const styles = StyleSheet.create({
         fontSize:16,
         backgroundColor:DefaultStyles.colors.white,
         // backgroundColor:"red",
+        height:22,
         // alignSelf:'center',
         marginLeft:wp('2%'),
         textAlign:'left',

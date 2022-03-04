@@ -28,6 +28,6 @@ export default {
   background1: "#EEE4FC",
   modalcolor: "#D8D3E6",
   modalItem: "#CDC4E7",
-  yellow: "#F7AE3E",
+  yellow: "#ffc300",
   yellowtext: "#FFB402",
 };

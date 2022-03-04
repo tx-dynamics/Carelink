@@ -20,8 +20,8 @@ const Step1 = ({navigation}) => {
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
             <View style={styles.threeDots}>
-                <View style={styles.dot}></View>
                 <View style={styles.line}></View>
+                <View style={styles.dot}></View>
                 <View style={styles.dot}></View>
             </View>
             <View style={styles.underLine}>
