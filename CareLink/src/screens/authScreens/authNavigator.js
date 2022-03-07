@@ -21,6 +21,12 @@ import SelectCard from "./Payment/SelectCard";
 import PaymentDone from "./Payment/PaymentDone";
 import PayPalDetails from "./Payment/PayPalDetails";
 import AddCard from "./Payment/AddCard";
+import ListingOptions from "./ServiceSide/ListingOptions";
+import RoomsAvailable from "./ServiceSide/RoomsAvailable";
+import RoomsCalender from "./ServiceSide/Calender/RoomsCalender";
+import HourlyPricing from "./ServiceSide/Pricing/HourlyPricing";
+import Note from "./ServiceSide/Pricing/Note";
+import PricingType from "./ServiceSide/Pricing/PricingType";
 
 
 const AuthStack = createNativeStackNavigator()
@@ -52,8 +58,12 @@ const SplashNavigator = () => {
             <AuthStack.Screen name ="PaymentDone" component={PaymentDone}/>
             <AuthStack.Screen name ="PayPalDetails" component={PayPalDetails}/>
             <AuthStack.Screen name ="AddCard" component={AddCard}/>
-
-
+            <AuthStack.Screen name ="ListingOptions" component={ListingOptions}/>
+            <AuthStack.Screen name ="RoomsAvailable" component={RoomsAvailable}/>
+            <AuthStack.Screen name ="RoomsCalender" component={RoomsCalender}/>
+            <AuthStack.Screen name ="HourlyPricing" component={HourlyPricing}/>
+            <AuthStack.Screen name ="Note" component={Note}/>
+            <AuthStack.Screen name ="PricingType" component={PricingType}/>
 
         </AuthStack.Navigator>
     )

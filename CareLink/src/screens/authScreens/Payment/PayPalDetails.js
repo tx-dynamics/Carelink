@@ -20,7 +20,7 @@ const PayPalDetails = ({ navigation }) => {
                 <Apptext style={styles.createTxt}>Add Paypal Details </Apptext>
                 <Image style={{marginLeft:-25}} source={require('../../../../assets/paypal.png')} />
             </View>
-            <View style={[styles.inputContainer, {marginTop:wp('11%')}]}>
+            <View style={[styles.inputContainer, {marginTop:wp('6%')}]}>
             <TextInput
                     numberOfLines={1}
                     placeholder={"Email"}
@@ -34,7 +34,7 @@ const PayPalDetails = ({ navigation }) => {
                     
                 />
             </View>
-            <View style={{ marginTop: wp('70%')}}>
+            <View style={{ marginTop: wp('95%')}}>
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}

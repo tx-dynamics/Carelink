@@ -74,7 +74,7 @@ const SelectCard = ({ navigation }) => {
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
             </View>
-            <View style={{marginTop:wp('12%')}}>
+            <View style={{marginTop:wp('8%')}}>
             <FormButton 
             buttonTitle={"+ Add"}
             width={wp('45%')}
@@ -146,7 +146,8 @@ const styles = StyleSheet.create({
         marginHorizontal:wp('5%')
     },
     selectTxt:{
-        marginTop:wp('10%'),
+        marginTop:wp('5%'),
+        marginHorizontal:wp('1%'),
         color:DefaultStyles.colors.lightgray,
         fontSize:12,
         fontFamily:'Poppins-Regular'

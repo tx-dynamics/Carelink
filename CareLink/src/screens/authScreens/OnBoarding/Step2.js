@@ -22,13 +22,12 @@ const Step2 = ({navigation}) => {
                 <View style={styles.line}></View>
                 <View style={styles.dot}></View>
             </View>
-            <View style={styles.underLine}>
+          
             <TouchableOpacity 
             onPress={() => navigation.navigate("Step3")}
-            style={styles.btn}>
-            <Image source={require('../../../../assets/rightArrow.png')} />
+            style={{ alignSelf:'center',marginTop:wp('25%'), }}>
+            <Image style={{width:105, height:105,}} source={require('../../../../assets/step2Box.png')} />
             </TouchableOpacity>
-            </View>
         </ScrollView>
     )
 }

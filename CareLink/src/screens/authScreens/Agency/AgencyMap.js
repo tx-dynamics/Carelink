@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         height:47,
         alignItems:'center',
         justifyContent:'center',
-        marginTop:wp('68%'),
+        marginTop:wp('72%'),
         marginHorizontal:wp('5%'),
         backgroundColor:DefaultStyles.colors.primary
     },

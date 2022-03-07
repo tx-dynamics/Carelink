@@ -5,15 +5,19 @@ import Apptext from './Apptext';
 import DefaultStyles from "../config/Styles";
 
   const FormButton = ({width = wp('80%'), height=wp('15%'),
-   buttonTitle,onPress, style,
+    color= '#ffffff',
+    buttonTitle,onPress, style,
+   backgroundColor= DefaultStyles.colors.primary,
    borderRadius=30, fontSize= 21,
    ...rest}) => {
   return (
     <TouchableOpacity 
     onPress={onPress}
-    style={[styles.buttonContainer, {width:width, height:height,borderRadius:borderRadius}]} {...rest}>
-    
-      <Apptext style={[styles.buttonText, {fontSize: fontSize}]}>{buttonTitle}</Apptext>
+    style={[styles.buttonContainer, {width:width,
+     height:height,
+    backgroundColor: backgroundColor,
+     borderRadius:borderRadius}]} {...rest}>
+      <Apptext style={[styles.buttonText, {color: color, fontSize: fontSize}]} {...rest}>{buttonTitle}</Apptext>
     </TouchableOpacity>
   );
 };
@@ -25,11 +29,9 @@ const styles = StyleSheet.create({
     marginBottom:wp('5%'),
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor: DefaultStyles.colors.primary,
     alignSelf:'center'
   },
   buttonText: {
-    color: '#ffffff',
     fontFamily:'Poppins-Regular'
   },
 });

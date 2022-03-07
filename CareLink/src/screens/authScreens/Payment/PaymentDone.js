@@ -56,8 +56,8 @@ const PaymentDone = ({ navigation }) => {
                 <Apptext style={styles.doneTxt}>Payment done</Apptext>
             </View>
             <View style={[styles.txtView, {marginTop:wp('4%')}]} >
-                <Apptext style={styles.roomsTxt}> Your Rooms </Apptext>
-                <Apptext style={styles.roomsTxt}> Successfully Registerd </Apptext>
+                <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
+                <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
             </View>
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
@@ -65,7 +65,7 @@ const PaymentDone = ({ navigation }) => {
 
             <View style={{marginTop:wp('60%')}} >
             <FormButton
-                    buttonTitle={"Continue"}
+                    buttonTitle={"Get Started"}
                     width={'88%'}
                     // onPress={() => navigation.navigate("EmailVerification")}
                 />
@@ -85,11 +85,13 @@ const styles = StyleSheet.create({
     doneTxt: {
         fontSize:20,
         fontFamily:'Poppins-Regular',
-        marginTop:wp('8%'),
+        marginTop:wp('2%'),
         color:'#00da09'
     },
     centerView:{
-        alignSelf:'center', alignItems:'center', marginTop:wp('17%')
+        alignSelf:'center',
+        alignItems:'center',
+        marginTop:wp('17%')
     },
     txtView: {
         width: wp('90%'),

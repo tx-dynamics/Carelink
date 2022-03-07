@@ -62,7 +62,7 @@ const PaymentMethod = ({ navigation }) => {
             <View>
                 <Apptext style={styles.createTxt}>Select your Payment Method to Pay for Your Monthly Subscription</Apptext>
             </View>
-            <View style={{marginTop:wp('14%') }} >
+            <View style={{marginTop:wp('8%') }} >
                 <FlatList
                     data={DATA}
                     keyExtractor={(item, index) => index}
@@ -82,7 +82,7 @@ const PaymentMethod = ({ navigation }) => {
                     )}
                 />
             </View>
-            <View style={{marginTop:371}} >
+            <View style={{marginTop:wp('95%')}} >
             <FormButton
                     buttonTitle={"Next"}
                     width={'88%'}

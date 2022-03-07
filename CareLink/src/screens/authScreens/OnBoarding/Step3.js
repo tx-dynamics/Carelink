@@ -25,13 +25,18 @@ const Step3 = ({navigation}) => {
                 <View style={styles.line}></View>
 
             </View>
-            <View style={styles.underLine}>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("AskRegister")}
+            style={{ alignSelf:'center',marginTop:wp('25%'), }}>
+            <Image style={{width:105, height:105,}} source={require('../../../../assets/step3Box.png')} />
+            </TouchableOpacity>
+            {/* <View style={styles.underLine}>
             <TouchableOpacity 
             onPress={() => navigation.navigate("AskRegister")}
             style={styles.btn}>
             <Image source={require('../../../../assets/rightArrow.png')} />
             </TouchableOpacity>
-            </View>
+            </View> */}
         </ScrollView>
     )
 }

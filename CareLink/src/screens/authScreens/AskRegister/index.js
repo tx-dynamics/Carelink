@@ -15,7 +15,9 @@ const AskRegister = ({navigation}) => {
           <View style={styles.pinkBox}>
             <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity
+            onPress={() => navigation.navigate("ListingOptions")}
+            style={styles.btn}>
                 <Apptext>Create</Apptext>
             </TouchableOpacity>
           </View>

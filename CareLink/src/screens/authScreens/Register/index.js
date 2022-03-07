@@ -53,8 +53,9 @@ const Register = ({ navigation }) => {
                 </TouchableOpacity>
                 <Apptext style={styles.createTxt1}> and </Apptext>
                 <TouchableOpacity onPress={() => navigation.navigate("Policy")}>
-                    <Apptext style={styles.hyperLink} >Privacy Policy.</Apptext>
+                    <Apptext style={styles.hyperLink} >Privacy Policy</Apptext>
                 </TouchableOpacity>
+                <Apptext style={styles.createTxt1}>.</Apptext>
                 </View>
             </View>
             <View style={{ marginTop: wp('6%') }}>

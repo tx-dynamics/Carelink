@@ -22,7 +22,7 @@ const AddCard = ({ navigation }) => {
             <View>
                 <Apptext style={styles.createTxt}>Add new card</Apptext>
             </View>
-            <View>
+            <View style={{marginTop:-10}}>
             <FormInput
                     title={"Card number"}
                     borderColor={DefaultStyles.colors.black}
@@ -31,13 +31,13 @@ const AddCard = ({ navigation }) => {
                     rightImgName={require('../../../../assets/grayCard.png')}
 
                 />
-                <View style={{flexDirection:'row',justifyContent:'space-around' }}> 
+                <View style={{flexDirection:'row',justifyContent:'space-around', marginHorizontal:wp('3%') }}> 
 
                   <FormInput
                     title={"Expiry date"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-                    width={wp('41%')}
+                    width={wp('44%')}
                     placeholderText={"MM/YY"}
                     style={{width:wp('20%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/grayCalender.png')}
@@ -49,7 +49,7 @@ const AddCard = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     placeholderText={"..."}
-                    width={wp('41%')}
+                    width={wp('44%')}
                     style={{width:wp('20%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/infoCircle.png')}
 
