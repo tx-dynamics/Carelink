@@ -6,9 +6,13 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import SelectCardComp from '../../../components/SelectCardComp';
-
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { setUser } from '../../../redux/actions/authAction';
 
 const PaymentDone = ({ navigation }) => {
+
+    let dispatch = useDispatch()
 
     const DATA = [
         {
@@ -67,7 +71,9 @@ const PaymentDone = ({ navigation }) => {
             <FormButton
                     buttonTitle={"Get Started"}
                     width={'88%'}
-                    // onPress={() => navigation.navigate("EmailVerification")}
+                    onPress={() => {
+                        dispatch(setUser(true))
+                    }}
                 />
             </View>
         </ScrollView>

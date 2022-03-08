@@ -63,7 +63,7 @@ const FormInput = ({ labelValue, placeholderText,
                     {...rest}
                 />
                 <TouchableOpacity style={{marginTop:-10, justifyContent:'center'}} onPress={onPress}>
-                <Image style={{tintColor:"gray",marginHorizontal:wp('8%') }} source={rightImgName} />
+                <Image style={{tintColor:"gray",marginHorizontal:wp('10%') }} source={rightImgName} />
                 </TouchableOpacity>
             </View>
         </View>

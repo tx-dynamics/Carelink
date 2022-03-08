@@ -20,7 +20,7 @@ const HourlyPricing = ({ navigation }) => {
                 <Apptext style={styles.createTxt}>Set up your pricing </Apptext>
             </View>
             <Apptext style={styles.bkTxt} >Hourly Pricing:</Apptext>
-            <View style={{ marginTop: -10 }}>
+            <View style={{ marginTop: -15 }}>
                 <FormInput
                     title="From"
                     borderColor={DefaultStyles.colors.black}
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        marginTop: wp('7%')
+        marginTop: wp('4%')
     },
     hyperLink: {
         fontSize: 16,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginHorizontal: wp('6%'),
-        marginTop: wp('10%')
+        marginTop: wp('8%')
     }
 
 });

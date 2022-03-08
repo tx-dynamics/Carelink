@@ -38,11 +38,10 @@ const PricingType = ({ navigation }) => {
                         value={value}
                         items={items}
                         placeholder="Price Type"
-                        containerStyle={{width:wp('90%'),marginTop:wp('12%'), alignSelf:'center'}}
+                        containerStyle={{width:wp('90%'),marginTop:wp('7%'), alignSelf:'center'}}
                         style={{width:wp('90%'), alignSelf:'center'}}
                         setOpen={setOpen}
                         setValue={setValue}
-                        
                         setItems={setItems}
                     />
 
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        marginTop: wp('7%')
+        marginTop: wp('4%')
     },
     dropdown: {
         height: 190, borderRadius: 2, borderBottomLeftRadius: 10,

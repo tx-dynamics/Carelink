@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         borderRadius:10,
         alignItems:'center',
         justifyContent:'center',
-        marginTop:wp('6%')
+        marginTop:wp('5%')
     },
     lblTxt:{
         fontFamily:'Poppins-Bold',

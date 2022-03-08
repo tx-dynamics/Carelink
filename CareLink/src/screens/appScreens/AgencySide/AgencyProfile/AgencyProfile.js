@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, Image,TextInput, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import DefaultStyles from "../../../config/Styles";
-import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
-import FormButton from '../../../components/FormButton';
+import DefaultStyles from "../../../../config/Styles";
+import Apptext from '../../../../components/Apptext';
+import FormInput from '../../../../components/FormInput';
+import FormButton from '../../../../components/FormButton';
 
 
-const ListingOptions = ({ navigation }) => {
+const AgencyProfile = ({ navigation }) => {
 
     const [isValue, setValue] = useState('');
     const [isKitchen, setKitchen] = useState(false)
@@ -17,7 +17,7 @@ const ListingOptions = ({ navigation }) => {
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
+                    source={require('../../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
                 <Apptext style={styles.createTxt}>Choose the options aboout your listing </Apptext>
@@ -28,22 +28,22 @@ const ListingOptions = ({ navigation }) => {
             <View style={styles.DirectionView}>
                 <View style={styles.boxesView}>
                     <TouchableOpacity>
-                    <Image  source={require('../../../../assets/arrowUp.png')} />
+                    <Image  source={require('../../../../../assets/arrowUp.png')} />
                     </TouchableOpacity>
                     <Apptext style={styles.numberTxt} >2</Apptext>
                     <TouchableOpacity>
-                    <Image source={require('../../../../assets/arrowDown.png')} />
+                    <Image source={require('../../../../../assets/arrowDown.png')} />
                     </TouchableOpacity>
                 </View>
                {/* ///////////////////////////// */}
 
                <View style={styles.boxesView}>
                     <TouchableOpacity>
-                    <Image  source={require('../../../../assets/arrowUp.png')} />
+                    <Image  source={require('../../../../../assets/arrowUp.png')} />
                     </TouchableOpacity>
                     <Apptext style={styles.numberTxt} >2</Apptext>
                     <TouchableOpacity>
-                    <Image source={require('../../../../assets/arrowDown.png')} />
+                    <Image source={require('../../../../../assets/arrowDown.png')} />
                     </TouchableOpacity>
                 </View>
                </View>
@@ -59,22 +59,22 @@ const ListingOptions = ({ navigation }) => {
 
             <TouchableOpacity 
             onPress={() => {
-                // setParking(false)
+                setParking(false)
                 setKitchen(!isKitchen)
             }}
             style={styles.radioBtn}>
             {isKitchen ?
-            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../assets/tickBox.png')} />
+            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../../assets/tickBox.png')} />
             : null}
             </TouchableOpacity>
             <TouchableOpacity 
             onPress={() => {
-                // setKitchen(false)
+                setKitchen(false)
                 setParking(!isParking)
             }}
             style={styles.radioBtn}>
             {isParking ?
-            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../assets/tickBox.png')} />
+            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../../assets/tickBox.png')} />
             : null}
             </TouchableOpacity>
             </View>
@@ -88,8 +88,8 @@ const ListingOptions = ({ navigation }) => {
                 </View>
             <View style={styles.insideDropDowm}>
                 <Apptext style={styles.descTxt} >2nd</Apptext>
-               <Image style={{marginHorizontal:wp('2%'), marginTop:-3 }}
-                source={require('../../../../assets/arrowDown.png') } />
+               <Image style={{marginHorizontal:wp('5%') }}
+                source={require('../../../../../assets/arrowDown.png') } />
            </View>
            </TouchableOpacity>
            <View style={{marginTop:wp('30%')}}>
@@ -103,7 +103,7 @@ const ListingOptions = ({ navigation }) => {
     )
 }
 
-export default ListingOptions;
+export default AgencyProfile;
 
 
 const styles = StyleSheet.create({
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     },
     boxesView:{
         width:wp('25%'),
-        marginTop:wp('9%'),
+        marginTop:wp('13%'),
         // height:150,
         // backgroundColor:"red",
         alignItems:'center',
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
         fontSize:16
     },
     radioBtn:{
-        marginTop:wp('9%'),
+        marginTop:wp('12%'),
         width:30,
         height:30,
         borderRadius:10,
