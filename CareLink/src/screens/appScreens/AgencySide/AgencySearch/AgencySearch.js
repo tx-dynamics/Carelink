@@ -49,8 +49,8 @@ const AgencySearch = ({ navigation }) => {
         <TouchableOpacity style={styles.searchBar}>
                 <Image style={{width:15, height:15, tintColor:"lightgray", marginHorizontal:20}}
                  source={require('../../../../../assets/search.png')} />
-                <TextInput style={{ color: 'grey' }}
-                    style={{width:wp('70%')}}
+                <TextInput
+                    style={{color: 'grey' , width:wp('70%')}}
                     placeholder='Search'
                     onChangeText={(val) => console.log(val)}
                 />
@@ -69,7 +69,7 @@ const AgencySearch = ({ navigation }) => {
                         showHrt={true}
                         fors={"For 20 days"}
                         hourly={"$20 - 70 Hourly"}
-
+                        onPress={() => navigation.navigate("ListingDetails")}
                         />
                     )}
                 />

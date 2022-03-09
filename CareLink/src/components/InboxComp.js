@@ -28,16 +28,25 @@ function InboxComp({
           <Apptext style={{color:DefaultStyles.colors.white}}>{countLabel}</Apptext>
 
           </TouchableOpacity> */}
-                <TouchableOpacity style={{marginLeft:wp('1%')}}>
+                <TouchableOpacity style={{width:56,marginLeft:wp('3%')}}>
                     <ImageBackground style={styles.inboxImg} source={imgName}>
                       
                     </ImageBackground>
                 </TouchableOpacity>
+                <View style={{marginLeft:wp('12%')}}>
                 <Apptext style={styles.inboxName}>{label}</Apptext>
+                </View>
 
+                <Image style={{marginTop:wp('2%'), marginLeft:wp('10%') }} 
+                source={require('../../assets/online.png')} />
                 <Apptext style={styles.inboxDate}>{txtDatee}</Apptext>
             </View>
+            <View style={{flexDirection:'row'}}>
             <Apptext style={[styles.inboxTxt]}>{msg}</Apptext>
+            <Apptext style={[styles.inboxTxt, {marginLeft:wp('1%')}]}>{"Now"}</Apptext>
+            </View>
+            <Apptext style={styles.line}></Apptext>
+
         </TouchableOpacity>
     );
 }
@@ -52,6 +61,7 @@ const styles = StyleSheet.create({
     marginTop: wp('4%'),
     alignSelf: 'center',
     width: wp('92%'),
+    // backgroundColor:"red"
     // height: 70,
   },
   inboxInnerView: {
@@ -59,6 +69,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: wp('3%')
     
+  },
+  line:{
+    width:wp('90%'),
+    height:0.5,
+    marginTop:22,
+    backgroundColor:DefaultStyles.colors.lightgray
   },
   inboxCount: {
     justifyContent: 'center', alignItems: 'center',
@@ -69,14 +85,14 @@ const styles = StyleSheet.create({
     backgroundColor: DefaultStyles.colors.secondary
   },
   inboxImg: {
-    width: 50, height: 50,
-     borderRadius: 20
+    width: 55, height: 55,
+     borderRadius: 20,
+    //  backgroundColor:"red"
   },
   inboxName: {
-    fontSize:15,
-    width: wp('56%'),
-    marginLeft: wp('3%'),
-    marginTop: wp('1%')
+    fontSize:19,
+    width: wp('65%'),
+    // marginLeft: wp('2%'),
   },
   inboxDate: {
     width: wp('16%'),
@@ -84,10 +100,13 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   inboxTxt: {
-    color: DefaultStyles.colors.black, 
-    fontSize:11,
-    width: 160, alignSelf: 'center',
-    marginLeft: -32,
+    color: DefaultStyles.colors.gray, 
+    fontSize:15,
+    width: wp('60%'),
+    // backgroundColor:"red",
+    alignSelf: 'center',
+    marginLeft:wp('18%'),
+    // marginLeft: -12,
     marginTop: -20,
   }
 

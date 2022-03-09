@@ -43,6 +43,7 @@ const RoomsProposals = ({ navigation }) => {
         leftImgName={require('../../../../../assets/headerBack.png')}
         rightImg={require('../../../../../assets/sendIcon.png')}
         onPressLeft={() => navigation.goBack()}
+        onPressRight={() => navigation.navigate("Messages") }
         headerLabel={"Rooms & Proposal"}
         />
         <ScrollView>
@@ -59,7 +60,7 @@ const RoomsProposals = ({ navigation }) => {
                         labelValue={"3 Room on 2nd Floor"}
                         name={"James Clear"}
                         location={"Location : abc Town , Washington, DC"}
-
+                        onPress={() => navigation.navigate("RoomsDetails")}
                         />
                     )}
                 />

@@ -13,6 +13,11 @@ import AgencyProfile from "./appScreens/AgencySide/AgencyProfile/AgencyProfile";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { useSelector } from 'react-redux';
 import RoomsProposals from "./appScreens/AgencySide/AgencyHome/RoomsProposals";
+import RoomsDetails from "./appScreens/AgencySide/AgencyHome/RoomsDetails";
+import ClientProfile from "./appScreens/AgencySide/AgencyProfile/ClientProfile";
+import ListingDetails from "./appScreens/AgencySide/AgencySearch/ListingDetails";
+import SendProposal from "./appScreens/AgencySide/AgencySearch/SendProposal";
+import Messages from "./appScreens/AgencySide/AgencyHome/Messages/Messages";
 
 
 const Tab = createBottomTabNavigator();
@@ -84,6 +89,7 @@ const GeneralNavigator = () => {
             }}>
                 
             <StackNavigator.Screen name="HomeNavigator" component={HomeNavigator} />
+            <StackNavigator.Screen name="Messages" component={Messages} />
 
         </StackNavigator.Navigator>
     )
@@ -99,6 +105,9 @@ const HomeNavigator = () => {
             }}>
             <StackNavigator.Screen name="AgencyHome" component={AgencyHome} />
             <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
+            <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
+            <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
+
         </StackNavigator.Navigator>
     )
 }
@@ -111,7 +120,8 @@ const SearchNavigator = () => {
                 headerShown: false
             }}>
             <StackNavigator.Screen name="AgencySearch" component={AgencySearch} />
-
+            <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
+            <StackNavigator.Screen name="SendProposal" component={SendProposal} />
         </StackNavigator.Navigator>
     )
 }
