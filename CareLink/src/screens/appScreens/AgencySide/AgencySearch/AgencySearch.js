@@ -9,6 +9,7 @@ import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
 import FvrtComp from '../../../../components/FvrtComp';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
+import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
 const AgencySearch = ({ navigation }) => {
@@ -42,6 +43,8 @@ const AgencySearch = ({ navigation }) => {
         <Header
         leftImgName={require('../../../../../assets/drawerIcon.png')}
         rightImg={require('../../../../../assets/sendIcon.png')}
+        onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
         headerLabel={"Find Listings"}
         />
         <ScrollView>
@@ -69,7 +72,7 @@ const AgencySearch = ({ navigation }) => {
                         showHrt={true}
                         fors={"For 20 days"}
                         hourly={"$20 - 70 Hourly"}
-                        onPress={() => navigation.navigate("ListingDetails")}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"ListingDetails"})}
                         />
                     )}
                 />

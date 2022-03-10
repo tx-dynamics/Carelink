@@ -26,15 +26,17 @@ function ChatDetailComp({
                 ...styles.PicMainView,
                 backgroundColor: backgroundColor,
                 ...style,}}>
-
+{/* 
                 <View>
                     <Apptext style={styles.labelTxt }>
                         {label}</Apptext>
-                </View>
+                </View> */}
                 <View  style={styles.msgView}>
                     <Apptext style={styles.msgTxt} >{msg} </Apptext>
+                    
                 </View>
-         
+                <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
+                
         </View>
     );
 }
@@ -52,10 +54,11 @@ const styles = StyleSheet.create({
     
     },
     msgView:{
-        width:wp('70%'),
-        borderRadius:13,
-        backgroundColor:"white",
-        padding:15,
+        width:wp('51%'),
+        borderRadius:60,
+        backgroundColor:DefaultStyles.colors.primary,
+        padding:10,
+        // marginVertical:wp('10%'),
         paddingLeft:12,
         shadowColor: "#000",
         shadowOffset: {
@@ -69,7 +72,16 @@ const styles = StyleSheet.create({
     msgTxt:{
         fontFamily:'Poppins-Regular',
         fontSize:13,
-        color:DefaultStyles.colors.black
+        color:DefaultStyles.colors.white
+    },
+    timeTxt:{
+        width:wp('50%'),
+        textAlign:'right',
+        fontSize:11,
+        color:'#edcfab',
+        marginTop:wp('1%'),
+        // marginHorizontal:wp('2%'),
+        // backgroundColor:"red"
     },
       ChatCallingView:{
         width: 35,

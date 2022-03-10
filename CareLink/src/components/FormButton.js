@@ -7,6 +7,7 @@ import DefaultStyles from "../config/Styles";
   const FormButton = ({width = wp('80%'), height=wp('15%'),
     color= '#ffffff',
     buttonTitle,onPress, style,
+    borderWidth,borderColor,
    backgroundColor= DefaultStyles.colors.primary,
    borderRadius=30, fontSize= 21,
    ...rest}) => {
@@ -16,6 +17,8 @@ import DefaultStyles from "../config/Styles";
     style={[styles.buttonContainer, {width:width,
      height:height,
     backgroundColor: backgroundColor,
+    borderWidth:borderWidth,
+    borderColor:borderColor,
      borderRadius:borderRadius}]} {...rest}>
       <Apptext style={[styles.buttonText, {color: color, fontSize: fontSize}]} {...rest}>{buttonTitle}</Apptext>
     </TouchableOpacity>

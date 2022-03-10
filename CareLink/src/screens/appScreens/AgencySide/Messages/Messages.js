@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import DefaultStyles from "../../../../../config/Styles";
-import Apptext from '../../../../../components/Apptext';
-import Header from '../../../../../components/Header';
-import InboxComp from '../../../../../components/InboxComp';
+import DefaultStyles from "../../../../config/Styles";
+import Apptext from '../../../../components/Apptext';
+import Header from '../../../../components/Header';
+import InboxComp from '../../../../components/InboxComp';
 
 
 const Messages = ({ navigation }) => {
@@ -20,7 +20,7 @@ const Messages = ({ navigation }) => {
             count: "+5",
             label: "James Clear",
             msg: "Hi Jackson, can you tell …",
-            Img: require("../../../../../../assets/JC.png"),
+            Img: require("../../../../../assets/JC.png"),
             dt: "5 minutes ago",
             move: "Detail"
         },
@@ -29,7 +29,7 @@ const Messages = ({ navigation }) => {
             count: "",
             label: 'Amelia Tray',
             msg: "Will do, super, thank you",
-            Img: require("../../../../../../assets/JC.png"),
+            Img: require("../../../../../assets/JC.png"),
             dt: "2 hours ago",
             move: "Detail"
         },
@@ -41,7 +41,7 @@ const Messages = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../../assets/headerBack.png')}
+                leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
             <ScrollView>
@@ -50,7 +50,7 @@ const Messages = ({ navigation }) => {
                 </View>
                 <TouchableOpacity style={styles.searchBar}>
                     <Image style={{ width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20 }}
-                        source={require('../../../../../../assets/search.png')} />
+                        source={require('../../../../../assets/search.png')} />
                     <TextInput
                         style={{ color: 'grey', width: wp('70%') }}
                         placeholder='Search'
@@ -76,7 +76,7 @@ const Messages = ({ navigation }) => {
                                 imgName={item.Img}
                                 label={item.label}
                                 msg={item.msg}
-                       
+                                onPress={() => navigation.navigate("ChatDetail")}
                             />
 
                         )}

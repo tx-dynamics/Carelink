@@ -1,184 +1,207 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image,TextInput, ActivityIndicator, Text, View } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import DefaultStyles from "../../../../config/Styles";
+import {
+    View, TouchableOpacity, FlatList, ActivityIndicator,
+    TextInput, Alert, Image, StyleSheet, ScrollView,
+}
+    from 'react-native';
+import {
+    widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
-import FormButton from '../../../../components/FormButton';
+import BackgroundHeader from '../../../../components/BackgroundHeader';
+import ReviewsComp from '../../../../components/ReviewsComp';
+
+const Profile = ({ navigation }) => {
 
 
-const AgencyProfile = ({ navigation }) => {
+    const DATA = [
+        {
+            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+            price: "$29.99",
+            plans: "/month",
+            label: "Debit/Credit Card",
+            description: `You will get 20 listing to post in a month with this monthly plan`
+        },
 
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
+        {
+            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
+            price: "$29.99",
+            plans: "/month",
+            label: "PayPal",
+            description: `You will get 20 listing to post in a month with this monthly plan`
+        },
+    ];
 
     return (
-        <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Choose the options aboout your listing </Apptext>
-            </View>
-            <View>
-                <Apptext style={[styles.bedsTxt]}>How many bedrooms and bathrooms? </Apptext>
-            </View>
-            <View style={styles.DirectionView}>
-                <View style={styles.boxesView}>
-                    <TouchableOpacity>
-                    <Image  source={require('../../../../../assets/arrowUp.png')} />
-                    </TouchableOpacity>
-                    <Apptext style={styles.numberTxt} >2</Apptext>
-                    <TouchableOpacity>
-                    <Image source={require('../../../../../assets/arrowDown.png')} />
-                    </TouchableOpacity>
-                </View>
-               {/* ///////////////////////////// */}
-
-               <View style={styles.boxesView}>
-                    <TouchableOpacity>
-                    <Image  source={require('../../../../../assets/arrowUp.png')} />
-                    </TouchableOpacity>
-                    <Apptext style={styles.numberTxt} >2</Apptext>
-                    <TouchableOpacity>
-                    <Image source={require('../../../../../assets/arrowDown.png')} />
-                    </TouchableOpacity>
-                </View>
-               </View>
-            <View style={[styles.DirectionView, { marginTop:wp('6%')}]}>
-            <Apptext style={styles.descTxt}>Bedrooms</Apptext>
-            <Apptext style={styles.descTxt}>Bathrooms </Apptext>
-            </View>
-            <View>
-                <Apptext style={[styles.bedsTxt]}>Is kitchen and parking available ? </Apptext>
-            </View>
-            <View style={styles.DirectionView}>
+        <View style={styles.container}>
+            <BackgroundHeader
+                backImg={require('../../../../../assets/back.png')}
+                leftImgName={require('../../../../../assets/headerBack.png')}
+                rightImg={require('../../../../../assets/dots.png')}
+                onPressLeft={() => navigation.goBack()}
 
 
-            <TouchableOpacity 
-            onPress={() => {
-                setParking(false)
-                setKitchen(!isKitchen)
-            }}
-            style={styles.radioBtn}>
-            {isKitchen ?
-            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../../assets/tickBox.png')} />
-            : null}
-            </TouchableOpacity>
-            <TouchableOpacity 
-            onPress={() => {
-                setKitchen(false)
-                setParking(!isParking)
-            }}
-            style={styles.radioBtn}>
-            {isParking ?
-            <Image style={{tintColor:DefaultStyles.colors.primary}} source={require('../../../../../assets/tickBox.png')} />
-            : null}
-            </TouchableOpacity>
-            </View>
-            <View style={[styles.DirectionView, {marginTop:wp('3%')}]}>
-            <Apptext style={[styles.descTxt, {marginHorizontal:wp('5%')}]}>Kitchen</Apptext>
-            <Apptext style={styles.descTxt}>Car Parking </Apptext>
-            </View>
-            <TouchableOpacity style={styles.inputContainer}>
-                <View style={styles.cutView}>
-                    <Apptext> Floor</Apptext>
+            />
+            <View style={styles.whiteView}>
+                <View style={styles.imgBox} >
+                    <Image source={require('../../../../../assets/photo.png')} />
+                    <TouchableOpacity style={styles.cameraView}>
+                        <Image source={require('../../../../../assets/camera.png')} />
+                    </TouchableOpacity>
                 </View>
-            <View style={styles.insideDropDowm}>
-                <Apptext style={styles.descTxt} >2nd</Apptext>
-               <Image style={{marginHorizontal:wp('5%') }}
-                source={require('../../../../../assets/arrowDown.png') } />
-           </View>
-           </TouchableOpacity>
-           <View style={{marginTop:wp('30%')}}>
-           <FormButton 
-            buttonTitle={"Next"}
-            width={wp('90%')}
-            onPress={() => navigation.navigate("RoomsAvailable") }
-           />
-           </View>
-        </ScrollView>
+
+                    <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
+                    <View style={{ alignSelf: 'center' }}>
+                        <Image source={require('../../../../../assets/stars.png')} />
+                    </View>
+                    <ScrollView>
+
+                    <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
+                    <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
+                    <View style={styles.txtView}>
+                        <Apptext style={styles.rms} >About</Apptext>
+                        <TouchableOpacity
+                        // onPress={() => navigation.navigate("RoomsProposals")}
+                        >
+                            <Apptext style={styles.dtls} >Edit your about</Apptext>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.paraView}>
+                        <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat, erat quis commodo facilisis ultricies. Aliquam semper eget dictumst donec elit in.</Apptext>
+                    </View>
+                    <View style={styles.txtView}>
+                        <Apptext style={styles.rms} >Location</Apptext>
+                        <TouchableOpacity
+                        // onPress={() => navigation.navigate("RoomsProposals")}
+                        >
+                            <Apptext style={styles.dtls} >Edit your Location</Apptext>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.paraView}>
+                        <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </Apptext>
+                    </View>
+
+
+                    <Image
+                        style={styles.mapImg}
+                        source={require('../../../../../assets/profileMao.png')} />
+                    <View style={styles.txtView}>
+                        <Apptext style={styles.rms} >Reviews</Apptext>
+                    </View>
+                    <View style={{ marginTop: wp('5%') }}>
+                        <FlatList
+                            data={DATA}
+                            keyExtractor={(item, index) => index}
+                            renderItem={({ item, index }) => (
+                                <ReviewsComp
+                                    showProposals={true}
+                                    labelValue={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."}
+                                    name={"Tebasy C."}
+                                    when={"Would rehire"}
+                                    fors={"Punctual"}
+                                    hourly={"Dependable"}
+                                    location={"Feb 28th, 2021"}
+                                />
+                            )}
+                        />
+                        <View style={{ height: wp('25%') }}>
+
+                        </View>
+                    </View>
+
+                </ScrollView>
+
+            </View>
+
+        </View>
     )
 }
 
-export default AgencyProfile;
-
+export default Profile;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        // backgroundColor: DefaultStyles.colors.white,
     },
-    inputContainer:{
-        width:wp('90%'),
-        alignSelf:'center',
-        borderRadius:10,
-        // alignItems:'center',
-        justifyContent:'center',
-        height:48,
-        marginTop:wp('12%'),
-        borderWidth:1,
-        borderColor:DefaultStyles.colors.black
+    whiteView: {
+        width: wp('100%'),
+        height: wp('100%'),
+        // marginTop: -20,
+        backgroundColor: "white",
     },
-    insideDropDowm:{
-        flexDirection: 'row',
-        justifyContent:'space-between',
-        alignItems:'center',
+    imgBox: {
+        width: 164,
+        marginTop: -150,
+        height: 164,
+        borderWidth: 0.2,
+        borderColor: "lightgray",
+        borderRadius: 20,
+        alignSelf: 'center'
+    },
+    cameraView: {
+        width: 51,
+        height: 51,
+        backgroundColor: "white",
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 30,
+        marginTop: -40,
+        marginHorizontal: wp('35%'),
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 5,
+        },
+        shadowOpacity: 0.34,
+        shadowRadius: 6.27,
+
+        elevation: 3,
+    },
+    imgTxt: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 20,
+        alignSelf: 'center',
         // backgroundColor:"red",
-        marginTop:wp('2%'),
-        marginHorizontal:wp('5%')
+        marginTop: wp('2%')
     },
-    cutView:{
-        width:41,
-        marginTop:-20,
-        marginHorizontal:wp('5%'),
-        height:20,
-        backgroundColor:"white"
-    },
-    createTxt: {
-        marginTop: wp('8%'),
-        color: DefaultStyles.colors.black,
+    mngTxt: {
+        fontSize: 16,
         fontFamily: 'Poppins-Regular',
-        fontSize: wp('6%'),
-        marginHorizontal: wp('5%')
+        textAlign: 'center',
+        width: wp('95%'),
+        marginTop: 5,
+        alignSelf: 'center'
     },
-    bedsTxt:{
-        fontFamily:'Poppins-Medium', 
-        fontSize:15,
-        alignSelf:'center',
-        textAlign:'center',
-        // backgroundColor:"red",
-        width:wp('90%'),
-        marginTop:wp('10%')
+    txtView: {
+        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+        marginTop: wp('5%'), marginHorizontal: wp('5%')
     },
-    DirectionView:{
-        flexDirection:'row', justifyContent:'space-around'
+    rms: {
+        fontFamily: 'Poppins-SemiBold',
+        fontSize: 16
     },
-    boxesView:{
-        width:wp('25%'),
-        marginTop:wp('13%'),
-        // height:150,
-        // backgroundColor:"red",
-        alignItems:'center',
-        // justifyContent:'center'
+    dtls: {
+        color: DefaultStyles.colors.black,
+        fontSize: 11,
+        textDecorationLine: 'underline',
     },
-    numberTxt:{
-        fontFamily:'Poppins-Medium',
-        fontSize:23,
-        marginVertical:wp('4%')
+    paraView: {
+        width: wp('90%'),
+        alignSelf: 'center',
+        marginTop: wp('2%')
     },
-    descTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:16
+    para: {
+        fontSize: 14,
+        fontFamily: 'Poppins-Regular'
     },
-    radioBtn:{
-        marginTop:wp('12%'),
-        width:30,
-        height:30,
-        borderRadius:10,
-        borderColor:"lightgray",
-        borderWidth:1
+    mapImg: {
+        width: wp('90%'),
+        alignSelf: 'center',
+        marginTop: wp('8%'),
+        borderRadius: 15
     }
 });

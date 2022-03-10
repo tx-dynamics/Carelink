@@ -5,6 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import NotificationsComp from '../../../../components/NotificationsComp';
+import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
 const AgencyNotifications = ({ navigation }) => {
@@ -59,6 +60,9 @@ const AgencyNotifications = ({ navigation }) => {
         leftImgName={require('../../../../../assets/drawerIcon.png')}
         rightImg={require('../../../../../assets/sendIcon.png')}
         headerLabel={"Notifications"}
+        onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
+        onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+
         />
         <ScrollView>
         <View style={{marginTop:wp('6%')}}>

@@ -17,8 +17,10 @@ import RoomsDetails from "./appScreens/AgencySide/AgencyHome/RoomsDetails";
 import ClientProfile from "./appScreens/AgencySide/AgencyProfile/ClientProfile";
 import ListingDetails from "./appScreens/AgencySide/AgencySearch/ListingDetails";
 import SendProposal from "./appScreens/AgencySide/AgencySearch/SendProposal";
-import Messages from "./appScreens/AgencySide/AgencyHome/Messages/Messages";
-
+import Messages from "./appScreens/AgencySide/Messages/Messages";
+import ChatDetail from "./appScreens/AgencySide/Messages/ChatDetail";
+import DrawerContent from "./Drawer/DrawerContent";
+import Help from "./appScreens/AgencySide/Help/Help";
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
@@ -30,37 +32,49 @@ const DrawerNavigator = () => {
         screenOptions={{
             headerShown:false 
         }}
+        // drawerStyle={isLargeScreen ? null : { width: '100%' }}
         drawerStyle={{
-          borderRadius: wp("8%"),
-          borderWidth: 2,
+        //   borderRadius: wp("8%"),
+        //   borderWidth: 2,
+        //   backgroundColor:"red",
           borderColor: DefaultStyles.colors.primary,
-          overflow: "hidden",
-          width: wp("70%"),
+        //   overflow: "hidden",
+          width: wp("100%"),
         }}
-        // drawerContent={(props) => <DrawerContent {...props} />}
+        drawerContent={(props) => <DrawerContent {...props} />}
       >
         <Drawer.Screen name="Drawer" component={AppNavigator} />
       </Drawer.Navigator>
-
+    
+    // <Drawer.Navigator
+    //     drawerStyle={{backgroundColor:DefaultStyles.colors.white, width: '75%'}}
+    //     drawerContent={props => <DrawerContent {...props} />}>
+    //      <Drawer.Screen name="Drawer" component={AppNavigator} />
+    // </Drawer.Navigator>
     )
 }
 
 
-// const WithoutBottomTabnavigator = () => {
+const WithoutBottomTabnavigator = () => {
     
-//     return(
-//     <StackNavigator.Navigator
-//     screenOptions={{
-//         headerShown: false
-//     }}
-//     >
-//     <StackNavigator.Screen name="AskPaymentOption" component={AskPaymentOption} />
-//     <StackNavigator.Screen name="Payment" component={Payment} />
-//     <StackNavigator.Screen name="ElsePayment" component={ElsePayment } />
-
-//     </StackNavigator.Navigator>
-// )
-// }
+    return(
+    <StackNavigator.Navigator
+    screenOptions={{
+        headerShown: false
+    }}
+    >
+            <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
+            <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
+            <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
+            <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
+            <StackNavigator.Screen name="SendProposal" component={SendProposal} />
+            <StackNavigator.Screen name="Messages" component={Messages} />
+            <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
+            <StackNavigator.Screen name="Help" component={Help} />
+            
+    </StackNavigator.Navigator>
+)
+}
 
 
 const AppNavigator = () => {
@@ -70,9 +84,9 @@ const AppNavigator = () => {
             <StackNavigator.Screen name="Root" options={{ headerShown: false }}>
                 {props => <MyTabs {...props} />}
             </StackNavigator.Screen>
-{/* 
+
             <StackNavigator.Screen name="withoutBottomTabnavigator" component={WithoutBottomTabnavigator}
-                options={{ headerShown: false }} /> */}
+                options={{ headerShown: false }} />
         </StackNavigator.Navigator>
 
     )
@@ -89,7 +103,7 @@ const GeneralNavigator = () => {
             }}>
                 
             <StackNavigator.Screen name="HomeNavigator" component={HomeNavigator} />
-            <StackNavigator.Screen name="Messages" component={Messages} />
+           
 
         </StackNavigator.Navigator>
     )
@@ -104,9 +118,6 @@ const HomeNavigator = () => {
                 headerShown: false
             }}>
             <StackNavigator.Screen name="AgencyHome" component={AgencyHome} />
-            <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
-            <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
-            <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
 
         </StackNavigator.Navigator>
     )
@@ -120,8 +131,6 @@ const SearchNavigator = () => {
                 headerShown: false
             }}>
             <StackNavigator.Screen name="AgencySearch" component={AgencySearch} />
-            <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
-            <StackNavigator.Screen name="SendProposal" component={SendProposal} />
         </StackNavigator.Navigator>
     )
 }

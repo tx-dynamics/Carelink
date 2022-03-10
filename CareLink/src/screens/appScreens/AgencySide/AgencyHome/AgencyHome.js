@@ -9,6 +9,7 @@ import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
 import FvrtComp from '../../../../components/FvrtComp';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
+import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
 const AgencyHome = ({ navigation }) => {
@@ -42,12 +43,15 @@ const AgencyHome = ({ navigation }) => {
         <Header
         leftImgName={require('../../../../../assets/drawerIcon.png')}
         rightImg={require('../../../../../assets/sendIcon.png')}
+        onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+        onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
         headerLabel={"Home"}
         />
         <ScrollView>
         <View style={styles.txtView}>
             <Apptext style={styles.rms} >Rooms & Proposals</Apptext>
-            <TouchableOpacity onPress={() => navigation.navigate("RoomsProposals")}>
+            <TouchableOpacity 
+            onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"RoomsProposals"})}>
             <Apptext style={styles.dtls} >See Details</Apptext>
             </TouchableOpacity>
         </View>
@@ -95,6 +99,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        zIndex:999
     },
     txtView:{
         flexDirection:'row',alignItems:'center',justifyContent:'space-between',

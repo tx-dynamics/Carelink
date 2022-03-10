@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, ImageBackground,TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,13 +10,13 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 
-function Header({
+function BackgroundHeader({
   headerLabel,
   backgroundColor,
+  backImg,
   leftImgName,
   centerImg,
   isBack = true,
-  height = wp("23%"),
   contentColor = DefaultStyles.colors.secondary,
   onPressLeft,
   onPressRight,
@@ -24,68 +24,53 @@ function Header({
   style,
 }) {
   return (
-    <View
+    <ImageBackground
+    source={backImg}
+    resizeMode='contain'
       style={{
         ...styles.container,
-        height:height,
         backgroundColor: backgroundColor,
         ...style,
       }}
     >
-      {/* <MaterialCommunityIcons
-        size={20}
-        onPress={onPressLeft}
-        name={leftIcon}
-        color={contentColor}
-      /> */}
+     
       <TouchableOpacity 
       onPress={onPressLeft} 
-      style={{width:wp('6%')}}>
+      style={{width:wp('6%'), marginTop:-150}}>
       {isBack ? (
-        <Image source={leftImgName} />
+        <Image style={{tintColor:"white"}} source={leftImgName} />
       ) : null}
       </TouchableOpacity>
-      <View style={{alignItems:'center', width:wp('70%'), height:wp('5%')}}>
-      <Image style={style} source={centerImg} />
+      <View>
+      <Image source={centerImg} />
       <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={{width:wp('6%')}} onPress={onPressRight}>
-        <Image source={rightImg} />
+      <TouchableOpacity onPress={onPressRight}>
+        <Image style={{marginTop:-85, tintColor:"white" }} source={rightImg} />
       </TouchableOpacity>
 
 
-    </View>
+    </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
  
   container: {
+    height: 240,
     width: wp("100%"),
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: wp('6%'),
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 5,
-    // },
-    // shadowOpacity: 0.34,
-    // shadowRadius: 6.27,
-    // // borderBottomColor:'lightgray',
-    // // borderBottomWidth:0.5,
-    // elevation: 3,
+    padding: wp('5%'),
+  
   },
   headerLabel:{
     fontFamily:'Poppins-SemiBold',
     color:DefaultStyles.colors.secondary,
-    height:30,
-    marginTop:-7,
-    fontSize:wp('6%'),
-    // backgroundColor:"red",
+    fontSize:14
   }
 });
 
-export default Header;
+export default BackgroundHeader;

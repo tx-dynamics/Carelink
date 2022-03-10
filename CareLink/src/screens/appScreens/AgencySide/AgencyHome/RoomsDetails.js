@@ -42,6 +42,7 @@ const RoomsDetails = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
                 onPressLeft={() => navigation.goBack()}
                 headerLabel={"Room Details"}
             />
