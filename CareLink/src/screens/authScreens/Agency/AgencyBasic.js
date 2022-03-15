@@ -34,8 +34,9 @@ const AgencyBasic = ({ navigation }) => {
                     borderWidth={1}
                     title={"About"}
                     height={wp('65%')}
-                    marginTop={-105}
-                />
+                    marginTop={-125}
+                    inputMargin={-155}
+/>
             </View>
             <View style={{ marginTop: wp('18%') }}>
                 <FormButton

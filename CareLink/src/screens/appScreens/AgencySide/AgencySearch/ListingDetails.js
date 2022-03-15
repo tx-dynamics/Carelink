@@ -104,8 +104,8 @@ const ListingDetails = ({ navigation }) => {
 
                 {/* Section */}
                 <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Note : </Apptext>
-                    <Apptext style={{ width: wp('70%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
+                    <Apptext style={styles.jobsTxt}> Note :     </Apptext>
+                    <Apptext style={{ width: wp('70%'),marginTop:wp('1%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
                 {/* Section Ends Here */}
                 <View>
@@ -123,12 +123,12 @@ const ListingDetails = ({ navigation }) => {
                 </View>
                 <View style={styles.btnView}>
                    <TouchableOpacity>
-                    <Image style={{width:46, height:40}}
+                    <Image style={{width:40, height:33}}
                     source={require('../../../../../assets/heart.png')} />
                    </TouchableOpacity>
                    <View style={{marginTop:wp('5%')}}>
                     <FormButton
-                        width={wp('80%')}
+                        width={wp('75%')}
                         buttonTitle={"Submit Proposal"}
                         onPress={() => navigation.navigate("SendProposal")}
                     />
@@ -161,14 +161,14 @@ const styles = StyleSheet.create({
     jobsTxt: {
         fontFamily: 'Poppins-Medium',
         fontSize: 15,
-        marginHorizontal: wp('5%')
+        marginLeft: wp('5%')
     },
     dtls: {
         color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
     },
     marginView: {
         marginHorizontal: wp('5%'),
-        marginTop: wp('6%'),
+        marginTop: wp('4%'),
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

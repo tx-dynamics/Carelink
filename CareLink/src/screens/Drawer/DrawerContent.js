@@ -55,13 +55,17 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"RoomsProposals"})}
+                    style={styles.items}>
                         <Apptext style={styles.itemsTxt}>My Jobs</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"SavedListing"})}
+                    style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
@@ -90,7 +94,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
             <View style={{ marginTop: wp('12%') }}>
                 <FormButton
                     buttonTitle={"Log out"}
-                    width={wp('75%')}
+                    width={wp('70%')}
                     backgroundColor={DefaultStyles.colors.white}
                     color={"black"}
                     borderColor="black"

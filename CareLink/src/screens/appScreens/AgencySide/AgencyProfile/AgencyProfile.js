@@ -35,7 +35,7 @@ const Profile = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <BackgroundHeader
                 backImg={require('../../../../../assets/back.png')}
                 leftImgName={require('../../../../../assets/headerBack.png')}
@@ -53,10 +53,9 @@ const Profile = ({ navigation }) => {
                 </View>
 
                     <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
-                    <View style={{ alignSelf: 'center' }}>
+                    <View style={{marginTop:-6,alignSelf: 'center' }}>
                         <Image source={require('../../../../../assets/stars.png')} />
                     </View>
-                    <ScrollView>
 
                     <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
                     <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
@@ -107,16 +106,13 @@ const Profile = ({ navigation }) => {
                                 />
                             )}
                         />
-                        <View style={{ height: wp('25%') }}>
-
-                        </View>
+                        
                     </View>
 
-                </ScrollView>
 
             </View>
 
-        </View>
+        </ScrollView>
     )
 }
 
@@ -125,11 +121,11 @@ export default Profile;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: DefaultStyles.colors.white,
+        backgroundColor: DefaultStyles.colors.white,
     },
     whiteView: {
         width: wp('100%'),
-        height: wp('100%'),
+        // height: wp('100%'),
         // marginTop: -20,
         backgroundColor: "white",
     },

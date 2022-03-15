@@ -36,7 +36,7 @@ function BackgroundHeader({
      
       <TouchableOpacity 
       onPress={onPressLeft} 
-      style={{width:wp('6%'), marginTop:-150}}>
+      style={{width:wp('6%'), marginTop:-160}}>
       {isBack ? (
         <Image style={{tintColor:"white"}} source={leftImgName} />
       ) : null}
@@ -46,7 +46,7 @@ function BackgroundHeader({
       <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
       <TouchableOpacity onPress={onPressRight}>
-        <Image style={{marginTop:-85, tintColor:"white" }} source={rightImg} />
+        <Image style={{marginTop:-100, tintColor:"white" }} source={rightImg} />
       </TouchableOpacity>
 
 

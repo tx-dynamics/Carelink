@@ -44,7 +44,7 @@ const RoomsProposals = ({ navigation }) => {
         rightImg={require('../../../../../assets/sendIcon.png')}
         onPressLeft={() => navigation.goBack()}
         onPressRight={() => navigation.navigate("Messages") }
-        headerLabel={"Rooms & Proposal"}
+        headerLabel={"Rooms & Proposals"}
         />
         <ScrollView>
      
@@ -88,7 +88,6 @@ const RoomsProposals = ({ navigation }) => {
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
                         <LatestListingsComp
-                        showProposals={true}
                         labelValue={"3 Room on 2nd Floor"}
                         name={"James Clear"}
                         location={"Location : abc Town , Washington, DC"}
@@ -117,7 +116,8 @@ const styles = StyleSheet.create({
     },
     rms:{
         fontFamily:'Poppins-SemiBold',
-        fontSize:16
+        fontSize:16,
+        marginTop:wp('3%')
     },
     dtls:{
         color:DefaultStyles.colors.primary,textDecorationLine: 'underline', 

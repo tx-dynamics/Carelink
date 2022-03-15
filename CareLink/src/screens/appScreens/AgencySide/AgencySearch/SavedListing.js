@@ -12,7 +12,7 @@ import LatestListingsComp from '../../../../components/LatestListingsComp';
 import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
-const AgencySearch = ({ navigation }) => {
+const SavedListing = ({ navigation }) => {
 
     const [isValue, setValue] = useState('');
     const [isKitchen, setKitchen] = useState(false)
@@ -41,25 +41,14 @@ const AgencySearch = ({ navigation }) => {
     return (
         <View style={styles.container}>
         <Header
-        leftImgName={require('../../../../../assets/drawerIcon.png')}
-        rightImg={require('../../../../../assets/sendIcon.png')}
-        onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-        onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
-        headerLabel={"Find Listings"}
+        leftImgName={require('../../../../../assets/leftArrow.png')}
+        onPressLeft={() => navigation.goBack()}
         />
         <ScrollView>
-        <View style={styles.marginView} >
-        <TouchableOpacity style={styles.searchBar}>
-                <Image style={{width:15, height:15, tintColor:"lightgray", marginHorizontal:20}}
-                 source={require('../../../../../assets/search.png')} />
-                <TextInput
-                    style={{color: 'grey' ,marginLeft:-10, width:wp('70%')}}
-                    placeholder='Search'
-                    onChangeText={(val) => console.log(val)}
-                />
-            </TouchableOpacity>
-          <View style={{flexDirection:'row',marginTop:wp('8%'), justifyContent:'space-between'}}>
-            <Apptext style={styles.rms} >Latest Listings</Apptext>
+        <View style={styles.marginView}>
+            
+          <View style={{flexDirection:'row',marginTop:-25, justifyContent:'space-between'}}>
+            <Apptext style={styles.rms} >Saved Listings</Apptext>
         </View>
         <View style={{marginTop:21}}>
         <FlatList
@@ -69,10 +58,12 @@ const AgencySearch = ({ navigation }) => {
                         <LatestListingsComp
                         labelValue={"3 Room on 2nd Floor"}
                         when={"Right Now"}
+                        rightImg={require('../../../../../assets/fillHeart.png')}
                         showHrt={true}
                         fors={"For 20 days"}
                         hourly={"$20 - 70 Hourly"}
-                        onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"ListingDetails"})}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator",
+                        {screen:"ListingDetails"})}
                         />
                     )}
                 />
@@ -83,7 +74,7 @@ const AgencySearch = ({ navigation }) => {
     )
 }
 
-export default AgencySearch;
+export default SavedListing;
 
 
 const styles = StyleSheet.create({
@@ -96,7 +87,9 @@ const styles = StyleSheet.create({
          marginTop:wp('5%'), marginHorizontal:wp('5%')
     },
     rms:{
-        fontFamily:'Poppins-Medium', fontSize:20
+        fontFamily:'Poppins-SemiBold',
+        marginLeft:wp('1%'),
+        fontSize:20
     },
     dtls:{
         color:DefaultStyles.colors.primary,textDecorationLine: 'underline', 

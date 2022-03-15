@@ -20,9 +20,11 @@ const Note = ({ navigation }) => {
                 <Apptext style={styles.createTxt}>Write your note if you want any? </Apptext>
             </View>
             <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-            <View style={{ marginTop: -10 }}>
+            <View style={{ marginTop: -20 }}>
                 <FormInput
                     height={wp('65%')}
+                    inputMargin={-200}
+                    numberOfLines={5}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}  
                 />
@@ -36,11 +38,13 @@ const Note = ({ navigation }) => {
                 backgroundColor={'#e6e6e6'}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
+            <View style={{marginTop:-8}}>
             <FormButton
                 buttonTitle={"Next"}
                 width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
+            </View>
             </View>
         </ScrollView>
     )
@@ -65,7 +69,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        marginTop: wp('7%')
+        marginTop: wp('4%')
     },
     hyperLink: {
         fontSize: 16,

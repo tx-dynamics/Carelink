@@ -3,8 +3,13 @@ import {StyleSheet,ScrollView, TouchableOpacity,Image,ActivityIndicator, Text, V
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
+import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { setUser, setUserType } from '../../../redux/actions/authAction';
 
 const AskRegister = ({navigation}) => {
+
+    let dispatch = useDispatch();
 
     return (
 
@@ -16,7 +21,10 @@ const AskRegister = ({navigation}) => {
             <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
             <TouchableOpacity
-            onPress={() => navigation.navigate("ListingOptions")}
+            onPress={() => {
+                dispatch(setUserType("ServiceSide"))
+                navigation.navigate("ListingOptions")
+            }}
             style={styles.btn}>
                 <Apptext>Create</Apptext>
             </TouchableOpacity>
@@ -26,7 +34,10 @@ const AskRegister = ({navigation}) => {
             <Apptext style={[styles.firstTxt]}>I want to register as an agency</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and register your agency now</Apptext>
             <TouchableOpacity 
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => {
+                dispatch(setUserType("AgencySide"))
+                navigation.navigate("Register")
+            }}
             style={styles.btn}>
                 <Apptext>Register</Apptext>
             </TouchableOpacity>

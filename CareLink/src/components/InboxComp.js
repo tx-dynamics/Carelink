@@ -28,12 +28,12 @@ function InboxComp({
           <Apptext style={{color:DefaultStyles.colors.white}}>{countLabel}</Apptext>
 
           </TouchableOpacity> */}
-                <TouchableOpacity style={{width:56,marginLeft:wp('3%')}}>
+                <TouchableOpacity style={{width:56,marginLeft:wp('5%')}}>
                     <ImageBackground style={styles.inboxImg} source={imgName}>
                       
                     </ImageBackground>
                 </TouchableOpacity>
-                <View style={{marginLeft:wp('12%')}}>
+                <View style={{marginLeft:wp('10%')}}>
                 <Apptext style={styles.inboxName}>{label}</Apptext>
                 </View>
 
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   line:{
     width:wp('90%'),
     height:0.5,
-    marginTop:22,
+    marginTop:wp('3%'),
     backgroundColor:DefaultStyles.colors.lightgray
   },
   inboxCount: {

@@ -62,7 +62,7 @@ const ClientProfile = ({ navigation }) => {
                     <Apptext style={styles.mmbrTxt} >Hired 5 providers</Apptext>
                 </View>
                 <Apptext style={styles.acntTxt}>Account Details</Apptext>
-                <View style={{ marginTop: 29 }}>
+                <View style={{ marginTop: wp('3%') }}>
                     <FlatList
                         data={DATA}
                         keyExtractor={(item, index) => index}
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
     imgView: {
         width: wp('30%'),
-        marginTop: wp('15%'),
+        marginTop: wp('7%'),
         height: wp('30%'),
         alignSelf: 'center',
         // backgroundColor:"red",
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     acntTxt: {
         fontFamily: 'Poppins-Regular',
         fontSize: 18,
-        marginTop: wp('6%'),
+        marginTop: wp('5%'),
         alignSelf: 'center',
         color: DefaultStyles.colors.primary,
         textDecorationLine: 'underline'

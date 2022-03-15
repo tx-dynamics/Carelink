@@ -21,6 +21,7 @@ import Messages from "./appScreens/AgencySide/Messages/Messages";
 import ChatDetail from "./appScreens/AgencySide/Messages/ChatDetail";
 import DrawerContent from "./Drawer/DrawerContent";
 import Help from "./appScreens/AgencySide/Help/Help";
+import SavedListing from "./appScreens/AgencySide/AgencySearch/SavedListing";
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
@@ -71,6 +72,8 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="Messages" component={Messages} />
             <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
             <StackNavigator.Screen name="Help" component={Help} />
+            <StackNavigator.Screen name="SavedListing" component={SavedListing} />
+
             
     </StackNavigator.Navigator>
 )

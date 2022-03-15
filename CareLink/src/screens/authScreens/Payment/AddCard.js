@@ -39,7 +39,7 @@ const AddCard = ({ navigation }) => {
                     borderWidth={1}
                     width={wp('44%')}
                     placeholderText={"MM/YY"}
-                    style={{width:wp('20%'),marginTop:-10,}}
+                    style={{width:wp('23%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/grayCalender.png')}
 
 
@@ -50,7 +50,7 @@ const AddCard = ({ navigation }) => {
                     borderWidth={1}
                     placeholderText={"..."}
                     width={wp('44%')}
-                    style={{width:wp('20%'),marginTop:-10,}}
+                    style={{width:wp('24%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/infoCircle.png')}
 
                 />

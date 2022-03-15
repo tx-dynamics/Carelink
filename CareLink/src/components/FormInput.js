@@ -10,11 +10,13 @@ import Apptext from './Apptext';
 const FormInput = ({ labelValue, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
     onPress,title,
+    inputMargin = -10,
     placeholderTextColor = '#929292',
     borderWidth=borderWidth,
     borderColor=borderColor ,
     borderBottomColor=borderBottomColor ,
     backgroundColor= DefaultStyles.colors.white,
+    numberOfLines =1,
     height= wp('13%'),
     width= wp('90%'),
     marginTop=marginTop,
@@ -56,8 +58,8 @@ const FormInput = ({ labelValue, placeholderText,
                
                 <TextInput
                     value={labelValue}
-                    style={styles.HumanInput}
-                    numberOfLines={1}
+                    style={[styles.HumanInput, {marginTop:inputMargin}]}
+                    numberOfLines={numberOfLines}
                     placeholder={placeholderText}
                     placeholderTextColor={ placeholderTextColor} 
                     {...rest}
@@ -79,8 +81,7 @@ const styles = StyleSheet.create({
         width: wp('70%'),
         // backgroundColor:"red",
         // height:40,
-        marginTop:-20,
-        paddingTop:20
+        // paddingTop:20
         // paddingTop:-20,
         // alignItems:'center'
         // paddingTop:-10,

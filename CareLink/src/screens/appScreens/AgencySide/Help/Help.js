@@ -18,7 +18,7 @@ const Help = ({ navigation }) => {
             <View>
             <Apptext style={[styles.createTxt, { fontFamily:'Poppins-SemiBold'}]}>Help Center</Apptext>
 
-                <Apptext style={[styles.createTxt, {marginTop:wp('4%')}]}>THis is a help center of CARE LINK .Submit your problems here</Apptext>
+                <Apptext style={[styles.createTxt, {marginTop:wp('4%')}]}>This is a help center of CARE LINK .Submit your problems here</Apptext>
             </View>
             <View>
                 <FormInput
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     createTxt: {
-        marginTop: wp('10%'),
+        marginTop: wp('7%'),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
         fontSize: 15,

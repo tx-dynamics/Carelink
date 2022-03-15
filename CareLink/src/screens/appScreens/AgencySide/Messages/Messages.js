@@ -52,14 +52,14 @@ const Messages = ({ navigation }) => {
                     <Image style={{ width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20 }}
                         source={require('../../../../../assets/search.png')} />
                     <TextInput
-                        style={{ color: 'grey', width: wp('70%') }}
+                        style={{ color: 'grey',marginLeft:-10, width: wp('70%') }}
                         placeholder='Search'
                         placeholderTextColor={DefaultStyles.colors.lightgray}
                         onChangeText={(val) => console.log(val)}
                     />
                 </TouchableOpacity>
 
-                <View style={{marginTop:wp('10%')}}>
+                <View style={{marginTop:wp('2%')}}>
                     <FlatList
                         data={DATA}
                         showsVerticalScrollIndicator={false}
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         flexDirection: 'row',
         alignSelf: 'center',
-        marginTop: wp('6%'),
+        marginTop: wp('4%'),
         borderRadius: 9,
         alignItems: 'center',
         borderWidth: 0.5,

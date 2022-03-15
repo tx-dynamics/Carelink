@@ -104,14 +104,15 @@ const RoomsDetails = ({ navigation }) => {
 
                 {/* Section */}
                 <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Note : </Apptext>
-                    <Apptext style={{ width: wp('70%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
+                    <Apptext style={styles.jobsTxt}> Note :    </Apptext>
+                    <Apptext style={{ width: wp('70%'),marginTop:wp('1%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
                 {/* Section Ends Here */}
                 <View style={{ marginTop: wp('45%') }}>
                     <FormButton
                         width={wp('90%')}
                         buttonTitle={"Mark to Book"}
+                        onPress={() => navigation.navigate("AgencyHome")}
                     />
                 </View>
             </ScrollView>
@@ -141,7 +142,8 @@ const styles = StyleSheet.create({
     jobsTxt: {
         fontFamily: 'Poppins-Medium',
         fontSize: 15,
-        marginHorizontal: wp('5%')
+        marginLeft:wp('5%')
+        // marginHorizontal: wp('5%')
     },
     dtls: {
         color: DefaultStyles.colors.primary, textDecorationLine: 'underline',

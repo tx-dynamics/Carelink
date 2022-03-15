@@ -39,9 +39,9 @@ const ChatDetail = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
                 centerImg={require('../../../../../assets/JC.png')}
-                style={{width:61, height:61, marginTop:-5}} 
+                style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
             />
-            <View style={styles.marginView} >
+            <View>
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
             <ScrollView>
@@ -56,7 +56,7 @@ const ChatDetail = ({ navigation }) => {
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
 
                     </View>
-                    <View style={{ marginVertical: wp('10%') }}>
+                    <View style={{ marginVertical: wp('5%') }}>
                         <FlatList
                             data={DATA}
                             showsVerticalScrollIndicator={false}
@@ -76,13 +76,14 @@ const ChatDetail = ({ navigation }) => {
                             )}
                         />
                     </View>
-                    <View style={styles.PicMainView}>
+                    
+                    <View style={[styles.PicMainView, {marginTop:-10}]}>
                         <View style={styles.msgView}>
                             <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
                         </View>
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
                     </View>
-                    <View style={{ marginVertical: wp('10%') }}>
+                    <View style={{ marginVertical: wp('5%') }}>
                         <FlatList
                             data={DATA}
                             showsVerticalScrollIndicator={false}
@@ -102,7 +103,7 @@ const ChatDetail = ({ navigation }) => {
                             )}
                         />
                     </View>
-                    <View style={styles.PicMainView}>
+                    <View style={[styles.PicMainView, {marginTop:-10}]}>
 
                         <View style={styles.msgView}>
                             <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
@@ -152,8 +153,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
         marginTop: wp('5%'), marginHorizontal: wp('5%')
     },
+    marginView:{
+        alignSelf:'center'
+    },
     rms: {
         marginTop:wp('5%'),
+        marginLeft:wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
         alignSelf: 'center'
@@ -167,6 +172,7 @@ const styles = StyleSheet.create({
     },
     PicMainView: {
         marginBottom: wp('2%'),
+        
         marginHorizontal: wp('45%')
     },
     msgView: {
@@ -199,7 +205,7 @@ const styles = StyleSheet.create({
     },
     ChatMsgView: {
         flexDirection: 'row',
-        height: wp('14%'),
+        height: wp('12%'),
         marginTop: wp('4%'),
         justifyContent: 'space-between',
         width: wp('75%'),

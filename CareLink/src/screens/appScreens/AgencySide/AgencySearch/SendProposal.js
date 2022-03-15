@@ -26,7 +26,7 @@ const SendProposal = ({ navigation }) => {
                     <Apptext style={styles.rms}> Submit a Proposal</Apptext>
                 </View>
                 <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
-                <View>
+                <View >
                     <FormInput 
                     title={"Cover Letter"}
                     borderColor={DefaultStyles.colors.black}
@@ -39,6 +39,7 @@ const SendProposal = ({ navigation }) => {
                     <FormButton
                         width={wp('90%')}
                         buttonTitle={"Submit Now"}
+                        onPress={() => navigation.navigate("AgencyHome")}
                     />
                     </View>
             </ScrollView>
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     },
     marginView: {
         marginHorizontal: wp('5%'),
-        marginTop: wp('6%'),
+        // marginTop: wp('%'),
         flexDirection: 'row',
         justifyContent: 'space-between'
     },

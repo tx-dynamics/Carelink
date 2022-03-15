@@ -6,7 +6,7 @@ import Apptext from './Apptext';
 
 const AgencyHomeComp = ({ labelValue, AvailableRooms, BookedRooms,
     placeholderText, iconType, leftIconType, leftImgName, rightImgName,
-    onPress,borderRadius= 10,rightOnPress,
+    onPress,borderRadius= 10,rightOnPress, firstTxt,scndTxt,
     rightIconType, ...rest }) => {
     return (
         <TouchableOpacity 
@@ -16,12 +16,18 @@ const AgencyHomeComp = ({ labelValue, AvailableRooms, BookedRooms,
                <View style={styles.txtView}>
                 <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                 </View>
+                <View style={{width:wp('20%'),alignItems:'center',}}>
                 <View style={styles.circle} >
                 <Apptext style={[styles.nmbr]}>{AvailableRooms}</Apptext>
                 </View>
+                <Apptext style={[styles.txt]}>{firstTxt}</Apptext>
+                </View>
                 {/* /////////////////////////// */}
-                <View style={[styles.circle, { backgroundColor:"#999999"}]} >
-                <Apptext style={[styles.nmbr, {color:"white"}]} >{BookedRooms} </Apptext>                
+                <View style={{width:wp('20%'),alignItems:'center',}}>
+                <View style={[styles.circle, {backgroundColor:"#999999"}]} >
+                <Apptext style={[styles.nmbr, {color:"white"}]}>{BookedRooms}</Apptext>
+                </View>
+                <Apptext style={[styles.txt, {color:"white"}]}>{scndTxt}</Apptext>
                 </View>
             </View>
         </TouchableOpacity>
@@ -43,9 +49,7 @@ const styles = StyleSheet.create({
     },
     txtView:{
         justifyContent:'center',
-        marginHorizontal:wp('3%'),
         width:wp('45%'),
-        // backgroundColor:"green"
     },
     txtVal:{
         fontFamily:'poppins-Regular',
@@ -68,26 +72,23 @@ const styles = StyleSheet.create({
         fontSize:25,
         lineHeight:35,
     },
+    txt:{
+        fontSize:12,
+        fontFamily:'Poppins-Regular',
+        color:DefaultStyles.colors.white
+    },
     inputContainer: {
         width: wp('90%'),
         marginBottom:wp('7%'),
         flexDirection:'row',
-        alignSelf: 'center',
-        justifyContent:'center',
+        // alignSelf: 'center',
+        // justifyContent:'center',
         height:105,
         padding:wp('2%'),
         paddingLeft:wp('4%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderBottomColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 5,
-        // },
-        // shadowOpacity: 0.34,
-        // shadowRadius: 6.27,
-        
-        // elevation: 3,
+
     },
     hrtStl:{
         width:25,

@@ -6,7 +6,7 @@ import Apptext from './Apptext';
 
 const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
-    showHrt,showProposals,name,location,
+    showHrt,showProposals,name,location,rightImg = require('../../assets/heart.png'),
     onPress,borderRadius= 10,rightOnPress,
     rightIconType, ...rest }) => {
     return (
@@ -18,13 +18,13 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
             {showProposals ? <View style={{height:55}}>
             <View style={{flexDirection:'row', marginTop:wp('1%')}}>
             <TouchableOpacity style={styles.imgView}>
-            <Image style={{width:51, height:51}} source={require('../../assets/circleProfile.png')} />
+            <Image style={{width:51, height:51}} source={require('../../assets/JC.png')} />
             </TouchableOpacity>
             <Apptext style={styles.jamesTxt} >{name}</Apptext>
             <Apptext style={[styles.jamesTxt, {fontSize:13, textDecorationLine: 'underline', }]}>See Details</Apptext>
 
             </View>
-            <Apptext style={{marginLeft:80,fontSize:9, marginTop:-27}} >{location}</Apptext>
+            <Apptext style={{marginLeft:80,fontSize:9, marginTop:-25}} >{location}</Apptext>
 
             </View> : null}
             {/* Propsal Ends Here */}
@@ -34,7 +34,7 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                
                 <Apptext style={styles.lightTxt}>{"  "+  "Posted 12 min ago"}</Apptext>   
                 <TouchableOpacity>             
-                <Image style={{marginHorizontal:wp('5%') }} source={require('../../assets/heart.png')} />
+                <Image style={{marginLeft:wp('4%') }} source={rightImg} />
                 </TouchableOpacity>
                 </View> :
                  <View style={styles.txtView}>
@@ -42,17 +42,20 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                  </View>
                 }
             <View style={{marginHorizontal:wp('5%'), flexDirection: 'row',alignItems:'center' }}>
-                <Apptext style={styles.scndTxt}>{when + " "}</Apptext>
+                <Apptext style={styles.scndTxt}>{when + "  "}</Apptext>
                 <Apptext style={styles.dot} ></Apptext>
-                <Apptext style={styles.scndTxt}>{" "+ fors + " "}</Apptext>
+                <Apptext style={styles.scndTxt}>{"  "+ fors + "  "}</Apptext>
                 <Apptext style={styles.dot} >  </Apptext>
-                <Apptext style={styles.scndTxt}>{ " " + hourly + " "}</Apptext>
+                <Apptext style={styles.scndTxt}>{ "  " + hourly + "  "}</Apptext>
                 
             </View>
             <View style={{flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'), marginLeft:-18} }>
-                <Apptext style={[styles.scndTxt, {backgroundColor:'#f0a1f0',padding:2, borderRadius:5 }]}>{"kitchen available"}</Apptext>
-                <Apptext style={[styles.scndTxt, {backgroundColor:'#f0a1f0',padding:2, marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
+                <Apptext style={[styles.scndTxt, { backgroundColor:'#f0a1f0',padding:5,borderRadius:5 }]}>{"kitchen available"}</Apptext>
+                <Apptext style={[styles.scndTxt, {backgroundColor:'#f0a1f0',padding:5,marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
                 
+                </View>
+                <View style={{height:wp('2%')}}>
+
                 </View>
         </TouchableOpacity>
     );
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:15,
         width:wp('42%'),
+        marginTop:wp('1%')
         // backgroundColor:"blue"
     },
     imgStl:{
@@ -93,11 +97,12 @@ const styles = StyleSheet.create({
     },
     txtVal:{
         fontFamily:'poppins-Regular',
-        fontSize:18
+        fontSize:18,
+        marginTop:wp('2%')
     },
     lightTxt:{
         fontSize:8,
-        marginTop:wp('2%'),
+        marginTop:wp('4%'),
         color:"lightgray",
     },
     scndTxt:{
@@ -108,8 +113,9 @@ const styles = StyleSheet.create({
     dot:{
         width:5,
         height:5,
-        backgroundColor:"gray",
-        borderRadius:5
+        backgroundColor:"black",
+        borderRadius:5,
+        marginTop:wp('1%')
     },
     inputContainer: {
         width: wp('90%'),
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         // height:105,
         padding:wp('2%'),
-        paddingLeft:wp('4%'),
+        paddingLeft:0,
         backgroundColor: DefaultStyles.colors.white,
         borderBottomColor: "white",
         shadowColor: "#000",

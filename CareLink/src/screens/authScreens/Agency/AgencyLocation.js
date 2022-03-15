@@ -5,9 +5,13 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
+import { useSelector } from 'react-redux';
 
 
 const AgencyLocation = ({ navigation }) => {
+
+    const usertype = useSelector((state) => state.auth.usertype)
+    // console.log(usertype)
 
     return (
         <ScrollView style={styles.container}>
@@ -16,8 +20,12 @@ const AgencyLocation = ({ navigation }) => {
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
+                {usertype === "ServiceSide" ? 
+                <Apptext style={styles.createTxt}>Your location where your rooms located? </Apptext>
+                :
                 <Apptext style={styles.createTxt}>Your location where your agency located? </Apptext>
-            </View>
+                }
+                </View>
             <View>
                 <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
             </View>

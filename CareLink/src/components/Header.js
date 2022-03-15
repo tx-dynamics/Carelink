@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     padding: wp('6%'),
+    marginTop:-5
     // shadowColor: "#000",
     // shadowOffset: {
     //   width: 0,

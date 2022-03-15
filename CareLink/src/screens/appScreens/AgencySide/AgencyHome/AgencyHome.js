@@ -22,17 +22,21 @@ const AgencyHome = ({ navigation }) => {
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
-            label: "Debit/Credit Card",
+            no:"3",
+            no1:"3",
+            label: "Rooms",
+            msg:"Available",
+            msg1:"Booked",
             description:`You will get 20 listing to post in a month with this monthly plan`
         },
     
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
-            label: "PayPal",
+            no:"6",
+            no1:"9",
+            label: "Proposals",
+            msg:"Accepted",
+            msg1:"Submitted",
             description:`You will get 20 listing to post in a month with this monthly plan`
         },
     ];
@@ -61,9 +65,11 @@ const AgencyHome = ({ navigation }) => {
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
                         <AgencyHomeComp
-                        labelValue={"Rooms"}
-                        AvailableRooms={"3"}
-                        BookedRooms={"9"}
+                        labelValue={item.label}
+                        AvailableRooms={item.no}
+                        BookedRooms={item.no1}
+                        firstTxt={item.msg}
+                        scndTxt={item.msg1}
                         />
                     )}
                 />
@@ -102,8 +108,11 @@ const styles = StyleSheet.create({
         zIndex:999
     },
     txtView:{
-        flexDirection:'row',alignItems:'center',justifyContent:'space-between',
-         marginTop:wp('5%'), marginHorizontal:wp('5%')
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        marginTop:wp('3%'),
+        marginHorizontal:wp('5%')
     },
     rms:{
         fontFamily:'Poppins-Medium', fontSize:20
