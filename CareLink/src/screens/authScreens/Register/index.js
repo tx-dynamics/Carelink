@@ -5,19 +5,25 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
+import { useSelector } from 'react-redux';
 
 
 const Register = ({ navigation }) => {
 
-    return (
+    const usertype = useSelector((state) => state.auth.usertype)
 
+    return (
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
+            {usertype === "ServiceSide" ? 
+                <Apptext style={styles.createTxt}>Create a free account to see your best match  </Apptext>
+                :
                 <Apptext style={styles.createTxt}>Create a free account to start your agency </Apptext>
+                }
             </View>
             <View>
                 <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
@@ -61,7 +67,7 @@ const Register = ({ navigation }) => {
             <View style={{ marginTop: wp('6%') }}>
                 <FormButton
                     buttonTitle={"Create Now"}
-                    onPress={() => navigation.navigate("EmailVerification")}
+                    onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification") }
                 />
             </View>
         </ScrollView>

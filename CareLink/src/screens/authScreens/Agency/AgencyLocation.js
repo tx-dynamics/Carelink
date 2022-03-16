@@ -21,7 +21,7 @@ const AgencyLocation = ({ navigation }) => {
             </TouchableOpacity>
             <View>
                 {usertype === "ServiceSide" ? 
-                <Apptext style={styles.createTxt}>Your location where your rooms located? </Apptext>
+                <Apptext style={styles.createTxt}>Your location where your listed rooms located? </Apptext>
                 :
                 <Apptext style={styles.createTxt}>Your location where your agency located? </Apptext>
                 }

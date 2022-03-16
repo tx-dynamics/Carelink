@@ -6,9 +6,12 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import PlansComp from '../../../components/PlansComp';
+import { useSelector } from 'react-redux';
 
 
 const PaymentPlans = ({ navigation }) => {
+
+    const usertype = useSelector((state) => state.auth.usertype)
 
     const DATA = [
         {
@@ -16,7 +19,8 @@ const PaymentPlans = ({ navigation }) => {
             price:"$29.99",
             plans:"/month",
             label: "Subscribe",
-            description:`You will get 20 listing to post in a month with this monthly plan`
+            description:`You will get 20 listing to post in a month with this monthly plan`,
+            desc1 : "You will get 20 Proposals to submit in a month with this monthly plan"
         },
     
         {
@@ -24,7 +28,8 @@ const PaymentPlans = ({ navigation }) => {
             price:"$59.99",
             plans:"/month",
             label: "Subscribe",
-            description:"You will get 50 listing to post in a month with this monthly plan"
+            description:"You will get 50 listing to post in a month with this monthly plan",
+            desc1:"You will get 50 Proposals to submit in a month with this monthly plan"
         },
     
         {
@@ -32,7 +37,8 @@ const PaymentPlans = ({ navigation }) => {
             price:"$99.99",
             plans:"/month",
             label: "Subscribe",
-            description:"You will get 100 listing to post in a month with this monthly plan"
+            description:"You will get 100 listing to post in a month with this monthly plan",
+            desc1:"You will get 100 Proposals to submit in a month with this monthly plan"
         },
     
 
@@ -62,7 +68,7 @@ const PaymentPlans = ({ navigation }) => {
                         btnTxt={item.label}
                         price={item.price }
                         plan={"/month"}
-                        desc={item.description}
+                        desc={usertype === "ServiceSide" ? item.description : item.desc1}
                         onPress={() =>navigation.navigate("PaymentMethod") }
                     />
                   

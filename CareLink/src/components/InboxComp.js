@@ -28,11 +28,11 @@ function InboxComp({
           <Apptext style={{color:DefaultStyles.colors.white}}>{countLabel}</Apptext>
 
           </TouchableOpacity> */}
-                <TouchableOpacity style={{width:56,marginLeft:wp('5%')}}>
+                <TouchableOpacity style={{width:56, marginLeft:wp('5%')}}>
                     <ImageBackground style={styles.inboxImg} source={imgName}>
                       
                     </ImageBackground>
-                </TouchableOpacity>
+                </TouchableOpacity>/
                 <View style={{marginLeft:wp('10%')}}>
                 <Apptext style={styles.inboxName}>{label}</Apptext>
                 </View>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   inboxImg: {
     width: 55, height: 55,
-     borderRadius: 20,
+    //  borderRadius: 50,
     //  backgroundColor:"red"
   },
   inboxName: {

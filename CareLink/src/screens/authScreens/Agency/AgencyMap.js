@@ -5,12 +5,14 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
+import { useSelector } from 'react-redux';
 
 
 const AgencyMap = ({ navigation }) => {
 
-    return (
+    const usertype = useSelector((state) => state.auth.usertype)
 
+    return (
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
@@ -36,7 +38,7 @@ const AgencyMap = ({ navigation }) => {
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}
-                    onPress={() => navigation.navigate("PaymentPlans")}
+                    onPress={() => usertype === "ServiceSide" ? navigation.navigate("Register") : navigation.navigate("PaymentPlans") }
                 />
             </View>
         </ScrollView>

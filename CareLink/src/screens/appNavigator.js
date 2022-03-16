@@ -22,48 +22,53 @@ import ChatDetail from "./appScreens/AgencySide/Messages/ChatDetail";
 import DrawerContent from "./Drawer/DrawerContent";
 import Help from "./appScreens/AgencySide/Help/Help";
 import SavedListing from "./appScreens/AgencySide/AgencySearch/SavedListing";
+import ServiceHome from "./appScreens/ServiceSide/ServiceHome/ServiceHome";
+import ServiceRooms from "./appScreens/ServiceSide/ServiceRooms";
+import ServiceChatDetail from "./appScreens/ServiceSide/ServiceMessages/ServiceChatDetail";
+import ServiceMessages from "./appScreens/ServiceSide/ServiceMessages/ServiceMessages";
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
 const Drawer = createDrawerNavigator();
 
+
 const DrawerNavigator = () => {
     return (
-      <Drawer.Navigator
-        screenOptions={{
-            headerShown:false 
-        }}
-        // drawerStyle={isLargeScreen ? null : { width: '100%' }}
-        drawerStyle={{
-        //   borderRadius: wp("8%"),
-        //   borderWidth: 2,
-        //   backgroundColor:"red",
-          borderColor: DefaultStyles.colors.primary,
-        //   overflow: "hidden",
-          width: wp("100%"),
-        }}
-        drawerContent={(props) => <DrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Drawer" component={AppNavigator} />
-      </Drawer.Navigator>
-    
-    // <Drawer.Navigator
-    //     drawerStyle={{backgroundColor:DefaultStyles.colors.white, width: '75%'}}
-    //     drawerContent={props => <DrawerContent {...props} />}>
-    //      <Drawer.Screen name="Drawer" component={AppNavigator} />
-    // </Drawer.Navigator>
+        <Drawer.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+            // drawerStyle={isLargeScreen ? null : { width: '100%' }}
+            drawerStyle={{
+                //   borderRadius: wp("8%"),
+                //   borderWidth: 2,
+                //   backgroundColor:"red",
+                borderColor: DefaultStyles.colors.primary,
+                //   overflow: "hidden",
+                width: wp("100%"),
+            }}
+            drawerContent={(props) => <DrawerContent {...props} />}
+        >
+            <Drawer.Screen name="Drawer" component={AppNavigator} />
+        </Drawer.Navigator>
+
+        // <Drawer.Navigator
+        //     drawerStyle={{backgroundColor:DefaultStyles.colors.white, width: '75%'}}
+        //     drawerContent={props => <DrawerContent {...props} />}>
+        //      <Drawer.Screen name="Drawer" component={AppNavigator} />
+        // </Drawer.Navigator>
     )
 }
 
 
 const WithoutBottomTabnavigator = () => {
-    
-    return(
-    <StackNavigator.Navigator
-    screenOptions={{
-        headerShown: false
-    }}
-    >
+
+    return (
+        <StackNavigator.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
             <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
             <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
             <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
@@ -71,12 +76,13 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="SendProposal" component={SendProposal} />
             <StackNavigator.Screen name="Messages" component={Messages} />
             <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
+            <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
             <StackNavigator.Screen name="Help" component={Help} />
             <StackNavigator.Screen name="SavedListing" component={SavedListing} />
 
-            
-    </StackNavigator.Navigator>
-)
+
+        </StackNavigator.Navigator>
+    )
 }
 
 
@@ -104,49 +110,64 @@ const GeneralNavigator = () => {
             screenOptions={{
                 headerShown: false
             }}>
-                
+
             <StackNavigator.Screen name="HomeNavigator" component={HomeNavigator} />
-           
+
 
         </StackNavigator.Navigator>
     )
 }
 
 const HomeNavigator = () => {
-
+    const usertype = useSelector((state) => state.auth.usertype)
     return (
 
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-            <StackNavigator.Screen name="AgencyHome" component={AgencyHome} />
-
+            {usertype === "ServiceSide" ?
+                <StackNavigator.Screen name="ServiceHome" component={ServiceHome} />
+                :
+                <StackNavigator.Screen name="AgencyHome" component={AgencyHome} />
+            }
         </StackNavigator.Navigator>
     )
 }
+
 const SearchNavigator = () => {
 
+    const usertype = useSelector((state) => state.auth.usertype)
     return (
 
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-            <StackNavigator.Screen name="AgencySearch" component={AgencySearch} />
+                {usertype === "ServiceSide" ?
+                <StackNavigator.Screen name="ServiceRooms" component={ServiceRooms} />
+                :
+                <StackNavigator.Screen name="AgencySearch" component={AgencySearch} />
+                }
+
         </StackNavigator.Navigator>
     )
 }
 
 const BellNavigator = () => {
 
+    const usertype = useSelector((state) => state.auth.usertype)
+   
     return (
-
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-            <StackNavigator.Screen name="AgencyNotifications" component={AgencyNotifications} />
+                {usertype === "ServiceSide" ?
+                <StackNavigator.Screen name="ServiceMessages" component={ServiceMessages} />
+                :
+                <StackNavigator.Screen name="AgencyNotifications" component={AgencyNotifications} />
+                }
 
         </StackNavigator.Navigator>
     )
@@ -161,7 +182,7 @@ const ProfileNavigator = () => {
                 headerShown: false
             }}>
 
-        <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
+            <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
 
         </StackNavigator.Navigator>
     )
@@ -169,6 +190,8 @@ const ProfileNavigator = () => {
 
 const MyTabs = () => {
 
+    const usertype = useSelector((state) => state.auth.usertype)
+    
     return (
         <Tab.Navigator
             // tabBarOptions={{
@@ -178,7 +201,7 @@ const MyTabs = () => {
                 showIcon: true,
                 showLabel: false,
                 keyboardHidesTabBar: true,
-              }}
+            }}
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: DefaultStyles.colors.textColor,
@@ -199,98 +222,85 @@ const MyTabs = () => {
 
             <Tab.Screen name="GeneralNavigator" component={GeneralNavigator}
                 options={{
-                    tabBarLabel: ({ focused }) => (
-                        <Apptext style={{ fontSize: wp('1%'), fontFamily: "Poppins-Regular",
-                         color: focused ? DefaultStyles.colors.white : DefaultStyles.colors.white }}>
-                             Home</Apptext>
-                    ),
+                
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                            <View style={styles.tabBox1}>
+                            <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    source={require('../../assets/home.png')}
+                                    source={usertype === "ServiceSide" ? require('../../assets/serviceHome.png') : require('../../assets/home.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
-                            
-                            <View style={styles.tabBox}>
+
+                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    style={{tintColor:"black"}}
-                                    source={require('../../assets/home.png')}
+                                    style={{ tintColor: "black" }}
+                                    source={usertype === "ServiceSide" ? require('../../assets/serviceHome.png') : require('../../assets/home.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
                 }} />
-                 <Tab.Screen name="SearchNavigator" component={SearchNavigator}
+            <Tab.Screen name="SearchNavigator" component={SearchNavigator}
                 options={{
-                    tabBarLabel: ({ focused }) => (
-                        <Apptext style={{ fontSize: wp('1%'), fontFamily: "Poppins-Regular", 
-                        color: focused ? DefaultStyles.colors.white : DefaultStyles.colors.white }}>
-                            Home</Apptext>
-                    ),
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                            <View style={styles.tabBox1}>
+                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{tintColor:"white"}}
-                                    source={require('../../assets/search.png')}
+                                    style={{ tintColor: "white" }}
+                                    source={usertype === "ServiceSide" ? require('../../assets/scTwo.png') : require('../../assets/search.png')}
+                                    
                                     resizeMode={"contain"} />
                             </View>
                             :
-                            
-                            <View style={styles.tabBox}>
+
+                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    source={require('../../assets/search.png')}
+                                    source={usertype === "ServiceSide" ? require('../../assets/scTwo.png') : require('../../assets/search.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
                 }} />
 
-                <Tab.Screen name="bell" component={BellNavigator}
+            <Tab.Screen name="bell" component={BellNavigator}
                 options={{
-                    tabBarLabel: ({ focused }) => (
-                        <Apptext style={{ fontSize: wp('1%'), fontFamily: "Poppins-Regular", 
-                        color: focused ? DefaultStyles.colors.white : DefaultStyles.colors.white }}>
-                            Home</Apptext>
-                    ),
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                            <View style={styles.tabBox1}>
+                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{tintColor:"white"}}
-                                    source={require('../../assets/bell.png')}
+                                    style={{ tintColor: "white" }}
+                                    source={usertype === "ServiceSide" ? require('../../assets/scMsg.png') : require('../../assets/bell.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
-                            
-                            <View style={styles.tabBox}>
+                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
+
                                 <Image
-                                    source={require('../../assets/bell.png')}
+                                    source={usertype === "ServiceSide" ? require('../../assets/scMsg.png') : require('../../assets/bell.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
                 }} />
-                 <Tab.Screen name="ProfileNavigator" component={ProfileNavigator}
+            <Tab.Screen name="ProfileNavigator" component={ProfileNavigator}
                 options={{
                     tabBarLabel: ({ focused }) => (
-                        <Apptext style={{ fontSize: wp('1%'), fontFamily: "Poppins-Regular",
-                        color: focused ? DefaultStyles.colors.white : DefaultStyles.colors.white }}>
+                        <Apptext style={{
+                            fontSize: wp('1%'), fontFamily: "Poppins-Regular",
+                            color: focused ? DefaultStyles.colors.white : DefaultStyles.colors.white
+                        }}>
                             Home</Apptext>
                     ),
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                            <View style={styles.tabBox1}>
+                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{tintColor:"white"}}
-                                    source={require('../../assets/profiles.png')}
-                                    resizeMode={"contain"} />
+                                    style={{ tintColor: "white" }}
+                                    source={usertype === "ServiceSide" ? require('../../assets/scPrfl.png') : require('../../assets/profiles.png')}/>
                             </View>
                             :
-                            
-                            <View style={styles.tabBox}>
+                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    source={require('../../assets/profiles.png')}
-                                    resizeMode={"contain"} />
+                                    source={usertype === "ServiceSide" ? require('../../assets/scPrfl.png') : require('../../assets/profiles.png')}
+                                     />
                             </View>
                     )
                 }} />
@@ -304,6 +314,7 @@ const MyTabs = () => {
 const MainNavigator = () => {
 
     const user = useSelector((state) => state.auth.user)
+
     console.log("chkk", user)
 
     if (user != false) {
@@ -312,7 +323,7 @@ const MainNavigator = () => {
     else {
         return <AuthNavigator />
     }
-    
+
 }
 
 export default MainNavigator;
@@ -332,6 +343,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: wp("14%"),
         borderRadius: 25,
+        backgroundColor: DefaultStyles.colors.primary
+    },
+    scBox: {
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 40,
+        borderRadius: 20,
+    },
+    scBox1: {
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 40,
+        borderRadius: 20,
         backgroundColor: DefaultStyles.colors.primary
     }
 });

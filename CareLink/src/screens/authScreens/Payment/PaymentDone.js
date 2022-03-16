@@ -13,6 +13,8 @@ import { setUser } from '../../../redux/actions/authAction';
 const PaymentDone = ({ navigation }) => {
 
     let dispatch = useDispatch()
+    const usertype = useSelector((state) => state.auth.usertype)
+    const user = useSelector((state) => state.auth.user)
 
     const DATA = [
         {
@@ -48,7 +50,6 @@ const PaymentDone = ({ navigation }) => {
     ];
 
     return (
-
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
@@ -59,10 +60,16 @@ const PaymentDone = ({ navigation }) => {
                 <Image source={require('../../../../assets/bigCircleTick.png')} />
                 <Apptext style={styles.doneTxt}>Payment done</Apptext>
             </View>
+         {usertype ==="ServiceSide" ?
+         <View style={[styles.txtView, {marginTop:wp('4%')}]} >
+                <Apptext style={styles.roomsTxt}> Your Rooms  </Apptext>
+                <Apptext style={styles.roomsTxt}> Successfully Registerd </Apptext>
+            </View> :
             <View style={[styles.txtView, {marginTop:wp('4%')}]} >
                 <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
                 <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
             </View>
+            }
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
             </View>
@@ -71,9 +78,7 @@ const PaymentDone = ({ navigation }) => {
             <FormButton
                     buttonTitle={"Get Started"}
                     width={'88%'}
-                    onPress={() => {
-                        dispatch(setUser(true))
-                    }}
+                    onPress={() => dispatch(setUser(true))}
                 />
             </View>
         </ScrollView>
