@@ -5,9 +5,9 @@ import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
 
 const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
-    iconType, leftIconType, leftImgName, rightImgName,
+    iconType, leftIconType, leftImgName, rightImgName,showTags = true,
     showHrt,showProposals,name,location,rightImg = require('../../assets/heart.png'),
-    onPress,borderRadius= 10,rightOnPress,
+    onPress,borderRadius= 10,rightOnPress,rightTxt = "Edit",
     rightIconType, ...rest }) => {
     return (
         <TouchableOpacity 
@@ -24,14 +24,16 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
             <Apptext style={[styles.jamesTxt, 
             {fontSize:15,fontFamily:'Poppins-Medium',
             textDecorationLine: 'underline',}]}>
-            Edit</Apptext>
+            {rightTxt}</Apptext>
             </View>
             <Apptext style={{marginLeft:80,fontSize:9, marginTop:-35}} >{location}</Apptext>
             <Image style={{marginLeft:77,height:15, width:80  }}  source={require('../../assets/stars.png')} />
             </View> : null}
             {/* Propsal Ends Here */}
 
-                 <View style={styles.txtView}>
+              {showTags ? 
+              <View>
+              <View style={styles.txtView}>
                  <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                  </View>
 
@@ -51,6 +53,12 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
                 <View style={{height:wp('2%')}}>
 
                 </View>
+                </View>
+                : 
+                <View style={{height:wp('2%')}}>
+
+                </View>
+                }
         </TouchableOpacity>
     );
 };

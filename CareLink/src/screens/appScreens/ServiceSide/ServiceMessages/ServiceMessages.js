@@ -9,11 +9,6 @@ import InboxComp from '../../../../components/InboxComp';
 
 const ServiceMessages = ({ navigation }) => {
 
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -64,13 +59,6 @@ const ServiceMessages = ({ navigation }) => {
                         data={DATA}
                         showsVerticalScrollIndicator={false}
                         keyExtractor={(item) => item.id}
-                        ListEmptyComponent={() => {
-                            return (
-                                <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
-                                    No Item Found
-                                </Apptext>
-                            );
-                        }}
                         renderItem={({ item, index }) => (
                             <InboxComp
                                 imgName={item.Img}

@@ -54,6 +54,7 @@ const ServiceRooms = ({ navigation }) => {
                         when={"Right Now"}
                         fors={"For 20 days"}
                         hourly={"$20-70 Hourly"}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator",  {screen : "ReceivedProposal"}) }
                         />
                     )}
                 />

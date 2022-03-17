@@ -32,7 +32,7 @@ function InboxComp({
                     <ImageBackground style={styles.inboxImg} source={imgName}>
                       
                     </ImageBackground>
-                </TouchableOpacity>/
+                </TouchableOpacity>
                 <View style={{marginLeft:wp('10%')}}>
                 <Apptext style={styles.inboxName}>{label}</Apptext>
                 </View>

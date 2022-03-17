@@ -12,9 +12,12 @@ import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import BackgroundHeader from '../../../../components/BackgroundHeader';
 import ReviewsComp from '../../../../components/ReviewsComp';
+import { useSelector } from 'react-redux';
+
 
 const Profile = ({ navigation }) => {
 
+    const usertype = useSelector((state) => state.auth.usertype)
 
     const DATA = [
         {
@@ -47,67 +50,82 @@ const Profile = ({ navigation }) => {
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
-                    <TouchableOpacity style={styles.cameraView}>
-                        <Image source={require('../../../../../assets/camera.png')} />
-                    </TouchableOpacity>
+
+                    {
+                        usertype === "ServiceSide" ?
+                            <TouchableOpacity 
+                            onPress={() => navigation.navigate("ServiceClientProfile")}
+                            style={styles.cameraView}>
+                                <Image source={require('../../../../../assets/scChat.png')} />
+                            </TouchableOpacity>
+
+                            :
+                            <TouchableOpacity style={styles.cameraView}>
+                                <Image source={require('../../../../../assets/camera.png')} />
+                            </TouchableOpacity>
+
+                    }
                 </View>
 
-                    <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
-                    <View style={{marginTop:-6,alignSelf: 'center' }}>
-                        <Image source={require('../../../../../assets/stars.png')} />
-                    </View>
+                <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
+                <View style={{ marginTop: -6, alignSelf: 'center' }}>
+                    <Image source={require('../../../../../assets/stars.png')} />
+                </View>
 
-                    <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
-                    <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
-                    <View style={styles.txtView}>
-                        <Apptext style={styles.rms} >About</Apptext>
-                        <TouchableOpacity
-                        // onPress={() => navigation.navigate("RoomsProposals")}
-                        >
-                            <Apptext style={styles.dtls} >Edit your about</Apptext>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.paraView}>
-                        <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat, erat quis commodo facilisis ultricies. Aliquam semper eget dictumst donec elit in.</Apptext>
-                    </View>
-                    <View style={styles.txtView}>
-                        <Apptext style={styles.rms} >Location</Apptext>
-                        <TouchableOpacity
-                        // onPress={() => navigation.navigate("RoomsProposals")}
-                        >
-                            <Apptext style={styles.dtls} >Edit your Location</Apptext>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.paraView}>
-                        <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </Apptext>
-                    </View>
+                <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
+                <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
+                <View style={styles.txtView}>
+                    <Apptext style={styles.rms} >About</Apptext>
+                    {
+                        usertype === "ServiceSide" ?
+                            null :
+
+                            <TouchableOpacity>
+                                <Apptext style={styles.dtls} >Edit your about</Apptext>
+                            </TouchableOpacity>}
+                </View>
+                <View style={styles.paraView}>
+                    <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat, erat quis commodo facilisis ultricies. Aliquam semper eget dictumst donec elit in.</Apptext>
+                </View>
+                <View style={styles.txtView}>
+                    <Apptext style={styles.rms} >Location</Apptext>
+                    {
+                        usertype === "ServiceSide" ?
+                            null :
+                            <TouchableOpacity>
+                                <Apptext style={styles.dtls} >Edit your Location</Apptext>
+                            </TouchableOpacity>}
+                </View>
+                <View style={styles.paraView}>
+                    <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </Apptext>
+                </View>
 
 
-                    <Image
-                        style={styles.mapImg}
-                        source={require('../../../../../assets/profileMao.png')} />
-                    <View style={styles.txtView}>
-                        <Apptext style={styles.rms} >Reviews</Apptext>
-                    </View>
-                    <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
-                            data={DATA}
-                            keyExtractor={(item, index) => index}
-                            renderItem={({ item, index }) => (
-                                <ReviewsComp
-                                    showProposals={true}
-                                    labelValue={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."}
-                                    name={"Tebasy C."}
-                                    when={"Would rehire"}
-                                    fors={"Punctual"}
-                                    hourly={"Dependable"}
-                                    location={"Feb 28th, 2021"}
-                                />
-                            )}
-                        />
-                        
-                    </View>
+                <Image
+                    style={styles.mapImg}
+                    source={require('../../../../../assets/profileMao.png')} />
+                <View style={styles.txtView}>
+                    <Apptext style={styles.rms} >Reviews</Apptext>
+                </View>
+                <View style={{ marginTop: wp('5%') }}>
+                    <FlatList
+                        data={DATA}
+                        keyExtractor={(item, index) => index}
+                        renderItem={({ item, index }) => (
+                            <ReviewsComp
+                                showProposals={true}
+                                labelValue={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."}
+                                name={"Tebasy C."}
+                                when={"Would rehire"}
+                                fors={"Punctual"}
+                                hourly={"Dependable"}
+                                location={"Feb 28th, 2021"}
+                            />
+                        )}
+                    />
+
+                </View>
 
 
             </View>

@@ -26,6 +26,10 @@ import ServiceHome from "./appScreens/ServiceSide/ServiceHome/ServiceHome";
 import ServiceRooms from "./appScreens/ServiceSide/ServiceRooms";
 import ServiceChatDetail from "./appScreens/ServiceSide/ServiceMessages/ServiceChatDetail";
 import ServiceMessages from "./appScreens/ServiceSide/ServiceMessages/ServiceMessages";
+import ReceivedProposal from "./appScreens/ServiceSide/ServiceRooms/ReceivedProposal";
+import ProposalTerms from "./appScreens/ServiceSide/ServiceRooms/ProposalTerms";
+import ProposalAccept from "./appScreens/ServiceSide/ServiceRooms/ProposalAccept";
+import ServiceClientProfile from "./appScreens/ServiceSide/ServiceProfile/ServiceClientProfile";
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
@@ -79,6 +83,9 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
             <StackNavigator.Screen name="Help" component={Help} />
             <StackNavigator.Screen name="SavedListing" component={SavedListing} />
+            <StackNavigator.Screen name="ReceivedProposal" component={ReceivedProposal} />
+            <StackNavigator.Screen name="ProposalTerms" component={ProposalTerms} />
+            <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
 
 
         </StackNavigator.Navigator>
@@ -183,6 +190,8 @@ const ProfileNavigator = () => {
             }}>
 
             <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
+            <StackNavigator.Screen name="ServiceClientProfile" component={ServiceClientProfile} />
+
 
         </StackNavigator.Navigator>
     )
