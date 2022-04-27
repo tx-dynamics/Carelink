@@ -17,6 +17,7 @@ const PaymentPlans = ({ navigation }) => {
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             price:"$29.99",
+            price1: "$199.99",
             plans:"/month",
             label: "Subscribe",
             description:`You will get 20 listing to post in a month with this monthly plan`,
@@ -26,6 +27,7 @@ const PaymentPlans = ({ navigation }) => {
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
             price:"$59.99",
+            price1: "$299.99",
             plans:"/month",
             label: "Subscribe",
             description:"You will get 50 listing to post in a month with this monthly plan",
@@ -35,6 +37,7 @@ const PaymentPlans = ({ navigation }) => {
         {
             id: 'bd7acbea-c1b1-46c23-aed5-3ad53abb28ba',
             price:"$99.99",
+            price1: "$499.99",
             plans:"/month",
             label: "Subscribe",
             description:"You will get 100 listing to post in a month with this monthly plan",
@@ -66,7 +69,7 @@ const PaymentPlans = ({ navigation }) => {
                     renderItem={({ item, index }) => (
                         <PlansComp
                         btnTxt={item.label}
-                        price={item.price }
+                        price={usertype === "ServiceSide" ? item.price : item.price1}
                         plan={"/month"}
                         desc={usertype === "ServiceSide" ? item.description : item.desc1}
                         onPress={() =>navigation.navigate("PaymentMethod") }

@@ -105,7 +105,8 @@ const ListingDetails = ({ navigation }) => {
                 {/* Section */}
                 <View style={styles.directionView}>
                     <Apptext style={styles.jobsTxt}> Note :     </Apptext>
-                    <Apptext style={{ width: wp('70%'),marginTop:wp('1%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
+                    <Apptext style={{ width: wp('70%'),marginTop:wp('1%'), 
+                    fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
                 {/* Section Ends Here */}
                 <View>
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Medium'
     },
     pinkBox:{
-        backgroundColor:'#ffabff',
+        backgroundColor:DefaultStyles.colors.lightPrimary,
         marginTop:wp('5%'),
         borderRadius:6,
         // width:wp('45%'),

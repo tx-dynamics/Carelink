@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         width: 200,
         // height:55,
         borderRadius: 10,
-        backgroundColor: '#ffabff',
+        backgroundColor: DefaultStyles.colors.lightPrimary,
         alignSelf: 'center',
         marginTop: wp('3%')
     },

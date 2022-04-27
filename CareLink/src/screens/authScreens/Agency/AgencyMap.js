@@ -24,7 +24,7 @@ const AgencyMap = ({ navigation }) => {
                 <ImageBackground 
                 style={styles.imgView}
                 source={require('../../../../assets/map.png')}>
-                    <Image style={{ marginTop:wp('18%')}} source={require('../../../../assets/pin.png')}  />
+                    <Image style={{ marginTop:wp('18%')}} source={require('../../../../assets/pin-fill.png')}  />
                <TouchableOpacity style={styles.pinkBox} >
                <Image source={require('../../../../assets/zoom.png')}  />
                </TouchableOpacity>

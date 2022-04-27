@@ -30,6 +30,15 @@ import ReceivedProposal from "./appScreens/ServiceSide/ServiceRooms/ReceivedProp
 import ProposalTerms from "./appScreens/ServiceSide/ServiceRooms/ProposalTerms";
 import ProposalAccept from "./appScreens/ServiceSide/ServiceRooms/ProposalAccept";
 import ServiceClientProfile from "./appScreens/ServiceSide/ServiceProfile/ServiceClientProfile";
+import StartContract from "./appScreens/AgencySide/Contract/StartContract";
+import MakeContract from "./appScreens/AgencySide/Contract/MakeContract";
+import Rates from "./appScreens/AgencySide/Rates";
+import ContractRead from "./appScreens/AgencySide/Contract/ContractRead";
+import Read1 from "./appScreens/AgencySide/Contract/Read1";
+import Read2 from "./appScreens/AgencySide/Contract/Read2";
+import Read3 from "./appScreens/AgencySide/Contract/Read3";
+
+
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
@@ -80,6 +89,14 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="SendProposal" component={SendProposal} />
             <StackNavigator.Screen name="Messages" component={Messages} />
             <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
+            <StackNavigator.Screen name="StartContract" component={StartContract} />
+            <StackNavigator.Screen name="MakeContract" component={MakeContract} />
+            <StackNavigator.Screen name="ContractRead" component={ContractRead} />
+            <StackNavigator.Screen name="Read1" component={Read1} />
+            <StackNavigator.Screen name="Read2" component={Read2} />
+            <StackNavigator.Screen name="Read3" component={Read3} />
+
+            <StackNavigator.Screen name="Rates" component={Rates} />
             <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
             <StackNavigator.Screen name="Help" component={Help} />
             <StackNavigator.Screen name="SavedListing" component={SavedListing} />

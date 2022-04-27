@@ -57,7 +57,9 @@ const PaymentDone = ({ navigation }) => {
             </TouchableOpacity>
             {/* //////////////////////////////////// */}
             <View style={styles.centerView}>
-                <Image source={require('../../../../assets/bigCircleTick.png')} />
+                <Image
+                style={{tintColor: DefaultStyles.colors.primary }}
+                source={require('../../../../assets/bigCircleTick.png')} />
                 <Apptext style={styles.doneTxt}>Payment done</Apptext>
             </View>
          {usertype ==="ServiceSide" ?

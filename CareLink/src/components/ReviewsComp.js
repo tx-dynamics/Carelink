@@ -31,12 +31,14 @@ const ReviewsComp = ({ labelValue, when, fors, hourly, placeholderText,
             </View> : null}
             {/* Propsal Ends Here */}
             <View style={{marginHorizontal:wp('3%'),marginTop:wp('5%'), flexDirection: 'row',alignItems:'center' }}>
-                <Image source={require('../../assets/circleTick.png')} />
-                <Apptext style={styles.scndTxt}>{when + " "}</Apptext>
-                <Image source={require('../../assets/circleTick.png')} />
-                <Apptext style={styles.scndTxt}>{fors + " "}</Apptext>
-                <Image source={require('../../assets/circleTick.png')} />
-                <Apptext style={styles.scndTxt}>{hourly + " "}</Apptext>
+                <Image 
+                // style={{tintColor : DefaultStyles.colors.lightPrimary }}
+                source={require('../../assets/circleTickNew.png')} />
+                <Apptext style={styles.scndTxt}>{" " + when + " "}</Apptext>
+                <Image source={require('../../assets/circleTickNew.png')} />
+                <Apptext style={styles.scndTxt}>{" " + fors + " "}</Apptext>
+                <Image source={require('../../assets/circleTickNew.png')} />
+                <Apptext style={styles.scndTxt}>{" " + hourly + " "}</Apptext>
                 
             </View>
                  <View style={styles.txtView}>

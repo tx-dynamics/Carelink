@@ -17,27 +17,27 @@ const HourlyPricing = ({ navigation }) => {
                     source={require('../../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View>
-                <Apptext style={styles.createTxt}>Set up your pricing </Apptext>
+                <Apptext style={styles.createTxt}>Set up availibilty time </Apptext>
             </View>
-            <Apptext style={styles.bkTxt} >Hourly Pricing:</Apptext>
+            <Apptext style={styles.bkTxt} >Time Availibilty:</Apptext>
             <View style={{ marginTop: -15 }}>
                 <FormInput
-                    title="From"
+                    title="Time"
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     
                 />
                 <FormInput
-                    title="To"
+                    title="Minimum hours per booking"
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                 />
             </View>
-            <View style={styles.priceTxt}>
+            {/* <View style={styles.priceTxt}>
                 <TouchableOpacity onPress={() => navigation.navigate("PricingType")}>
                     <Apptext style={styles.hyperLink}>Change price type</Apptext>
                 </TouchableOpacity>
-            </View>
+            </View> */}
             <View style={{marginTop:wp('50%')}}>
             <FormButton
                 buttonTitle={"Next"}

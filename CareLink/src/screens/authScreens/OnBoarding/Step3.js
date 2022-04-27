@@ -15,7 +15,8 @@ const Step3 = ({navigation}) => {
            <Apptext style={styles.skipTxt}>Skip</Apptext>
            </TouchableOpacity>
            <View style={styles.boxView} >
-               <Image style={{width:154,alignSelf:'center', height:274 }} source={require('../../../../assets/step3.png')} />
+               <Image style={{width:154,alignSelf:'center', height:274 }} 
+               source={require('../../../../assets/step3New.png')} />
                <Apptext style={styles.pinkTxt} >List your extra rooms </Apptext>
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
@@ -28,7 +29,7 @@ const Step3 = ({navigation}) => {
             <TouchableOpacity 
             onPress={() => navigation.navigate("AskRegister")}
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:105, height:105,}} source={require('../../../../assets/step3Box.png')} />
+            <Image style={{width:105, height:105,}} source={require('../../../../assets/Step2BoxNew.png')} />
             </TouchableOpacity>
             {/* <View style={styles.underLine}>
             <TouchableOpacity 

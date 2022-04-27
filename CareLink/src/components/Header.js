@@ -21,6 +21,7 @@ function Header({
   onPressLeft,
   onPressRight,
   rightImg,
+  rightstyle,
   style,
 }) {
   return (
@@ -46,7 +47,7 @@ function Header({
       ) : null}
       </TouchableOpacity>
       <View style={{alignItems:'center', width:wp('70%'), height:wp('5%')}}>
-      <Image style={style} source={centerImg} />
+      <Image source={centerImg} />
       <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
       <TouchableOpacity style={{width:wp('6%')}} onPress={onPressRight}>

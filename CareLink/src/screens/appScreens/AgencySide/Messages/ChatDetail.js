@@ -38,10 +38,21 @@ const ChatDetail = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                centerImg={require('../../../../../assets/JC.png')}
-                style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
+                // rightImg={require('../../../../../assets/chatContact.png') }
+                // centerImg={require('../../../../../assets/JC.png')}
+                // rightstyle={{marginLeft:-10}} 
             />
-            <View>
+                <TouchableOpacity 
+                onPress={() => navigation.navigate("StartContract")}
+                style={{flexDirection:'row', justifyContent:'flex-end', 
+                marginHorizontal:wp('5%'),marginTop:-50 }}>
+                <Apptext style={styles.dtls} >Make contract</Apptext>
+                </TouchableOpacity>
+        
+            <View style={{flexDirection:'row',marginHorizontal:wp('7%')}} >
+                <Image
+                style={{width:61, height:61, marginTop:wp('10%')}}
+                source={require('../../../../../assets/JC.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
             <ScrollView>
@@ -157,11 +168,11 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     rms: {
-        marginTop:wp('5%'),
+        marginTop:wp('15%'),
         marginLeft:wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
-        alignSelf: 'center'
+        // alignSelf: 'center'
     },
     labelTxt: {
 
@@ -225,6 +236,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.primary
+    },
+    dtls:{
+        color:DefaultStyles.colors.primary,
+        fontSize:16,
+        textDecorationLine: 'underline', 
     },
 
 

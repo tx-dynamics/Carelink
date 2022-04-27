@@ -20,21 +20,32 @@ const Success = ({ navigation }) => {
                 <Apptext style={styles.createTxt}>You have created account successfully!  </Apptext>
             </View>
             <View style={styles.DirectionView}>
-                <Image source={require('../../../../assets/circleProfile.png')}  />
+                <Image 
+                style={{tintColor : DefaultStyles.colors.primary }}
+                source={require('../../../../assets/circleProfile.png')}  />
                 <Apptext style={styles.smallTxt} >Now complete your agency profile</Apptext>
             </View>
             <View style={styles.DirectionView}>
-                <Image source={require('../../../../assets/man.png')}  />
+                <Image 
+                style={{tintColor : DefaultStyles.colors.primary }}
+                
+                source={require('../../../../assets/man.png')}  />
                 <Apptext style={styles.smallTxt2} >Build a agency profile to show the world what you can offer </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
             </View>
             <View style={styles.DirectionView}>
-                <Image source={require('../../../../assets/openmsg.png')}  />
+                <Image 
+                style={{tintColor : DefaultStyles.colors.primary }}
+                
+                source={require('../../../../assets/openmsg.png')}  />
                 <Apptext style={styles.smallTxt2} >Apply for open roles or list services for clients to buy </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
             </View>
             <View style={styles.DirectionView}>
-                <Image source={require('../../../../assets/dollar.png')}  />
+                <Image 
+                style={{tintColor : DefaultStyles.colors.primary }}
+                
+                source={require('../../../../assets/dollar.png')}  />
                 <Apptext style={styles.smallTxt2}>Get paid safely and know we’re there to help </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
             </View>

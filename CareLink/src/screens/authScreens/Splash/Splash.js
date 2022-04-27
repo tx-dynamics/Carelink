@@ -15,7 +15,8 @@ const Splash = ({navigation}) => {
     return (
 
         <View style ={styles.container}>
-           <Apptext style={styles.logoTxt}>Care Link</Apptext>
+            <Image source={require('../../../../assets/Care_Link_Logo.png')} />
+           {/* <Apptext style={styles.logoTxt}>Care Link</Apptext> */}
         </View>
     )
 }
@@ -25,7 +26,7 @@ export default Splash;
 
 const styles = StyleSheet.create({
     container :{
-        backgroundColor : DefaultStyles.colors.primary ,
+        backgroundColor : DefaultStyles.colors.white ,
         flex:1,
         justifyContent:'center',
         alignItems:'center'

@@ -52,7 +52,7 @@ const ListingOptions = ({ navigation }) => {
             <Apptext style={styles.descTxt}>Bathrooms </Apptext>
             </View>
             <View>
-                <Apptext style={[styles.bedsTxt]}>Is kitchen and parking available ? </Apptext>
+                <Apptext style={[styles.bedsTxt]}>Check the available things </Apptext>
             </View>
             <View style={styles.DirectionView}>
 
@@ -79,8 +79,8 @@ const ListingOptions = ({ navigation }) => {
             </TouchableOpacity>
             </View>
             <View style={[styles.DirectionView, {marginTop:wp('3%')}]}>
-            <Apptext style={[styles.descTxt, {marginHorizontal:wp('5%')}]}>Kitchen</Apptext>
             <Apptext style={styles.descTxt}>Car Parking </Apptext>
+            <Apptext style={[styles.descTxt, {marginHorizontal:wp('5%')}]}>Wheelchair</Apptext>
             </View>
             <TouchableOpacity style={styles.inputContainer}>
                 <View style={styles.cutView}>

@@ -17,7 +17,7 @@ const EmailVerification = ({ navigation }) => {
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View style={styles.logoView}>
-                <Image source={require('../../../../assets/email.png')} />
+                <Image source={require('../../../../assets/emailNew.png')} />
             </View>
             <Apptext style={styles.verifyTxt}>Verify your email to proceed</Apptext>
             <View style={styles.paraView} >

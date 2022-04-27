@@ -15,7 +15,7 @@ const Step1 = ({navigation}) => {
            <Apptext style={styles.skipTxt}>Skip</Apptext>
            </TouchableOpacity>
            <View style={styles.boxView} >
-               <Image source={require('../../../../assets/step1.png')} />
+               <Image source={require('../../../../assets/step1New.png')} />
                <Apptext style={styles.pinkTxt} >Quit & Easy Services</Apptext>
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
@@ -29,7 +29,7 @@ const Step1 = ({navigation}) => {
             <TouchableOpacity 
             onPress={() => navigation.navigate("Step2")}
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:105, height:105,}} source={require('../../../../assets/step1Box.png')} />
+            <Image style={{width:105, height:105,}} source={require('../../../../assets/Step1BoxNew.png')} />
             </TouchableOpacity>
             {/* <TouchableOpacity 
             onPress={() => navigation.navigate("Step2")}

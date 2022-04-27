@@ -71,8 +71,11 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Payment Reports</Apptext>
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Rates"})}
+                    
+                    style={styles.items}>
+                        <Apptext style={styles.itemsTxt}>Rates</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
 

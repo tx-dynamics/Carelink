@@ -17,7 +17,7 @@ const Verified = ({ navigation }) => {
                     source={require('../../../../assets/leftArrow.png')} />
             </TouchableOpacity>
             <View style={styles.logoView}>
-                <Image source={require('../../../../assets/VerifiedEmail.png')} />
+                <Image source={require('../../../../assets/VerifiedEmailNew.png')} />
             </View>
             <Apptext style={styles.verifyTxt}>Congrats ! Your account is Verified now</Apptext>
      

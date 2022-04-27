@@ -1,5 +1,7 @@
 export default {
-  primary: "#ff00ff",
+  primaryOld: "#ff00ff",
+  primary:"#058ec9",
+  lightPrimary:"#8bdcff",
   secondary: "#09154a",
   sky:'#dbf7ff',
   grash:'#f0f0f0',

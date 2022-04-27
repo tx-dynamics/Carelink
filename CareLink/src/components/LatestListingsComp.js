@@ -21,7 +21,8 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
             <Image style={{width:51, height:51}} source={require('../../assets/JC.png')} />
             </TouchableOpacity>
             <Apptext style={styles.jamesTxt} >{name}</Apptext>
-            <Apptext style={[styles.jamesTxt, {fontSize:13, textDecorationLine: 'underline', }]}>See Details</Apptext>
+            <Apptext style={[styles.jamesTxt, {fontSize:13, 
+                textDecorationLine: 'underline', }]}>See Details</Apptext>
 
             </View>
             <Apptext style={{marginLeft:80,fontSize:9, marginTop:-25}} >{location}</Apptext>
@@ -49,9 +50,12 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                 <Apptext style={styles.scndTxt}>{ "  " + hourly + "  "}</Apptext>
                 
             </View>
-            <View style={{flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'), marginLeft:-18} }>
-                <Apptext style={[styles.scndTxt, { backgroundColor:'#f0a1f0',padding:5,borderRadius:5 }]}>{"kitchen available"}</Apptext>
-                <Apptext style={[styles.scndTxt, {backgroundColor:'#f0a1f0',padding:5,marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
+            <View style={{flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'),
+             marginLeft:-18} }>
+                <Apptext style={[styles.scndTxt, { backgroundColor:DefaultStyles.colors.lightPrimary ,padding:5,borderRadius:5 }]}>
+                    {"kitchen available"}</Apptext>
+                <Apptext style={[styles.scndTxt, {backgroundColor:DefaultStyles.colors.lightPrimary,padding:5,marginLeft:-20, 
+                borderRadius:5 }]}>{"Car Parking available"}</Apptext>
                 
                 </View>
                 <View style={{height:wp('2%')}}>
