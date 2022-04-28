@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         marginTop:wp('5%')
     },
     lblTxt:{
-        fontFamily:'Poppins-Bold',
+        fontFamily:'Poppins-SemiBold',
         fontSize:18,
         width:wp('25'),
         textAlign:'center',

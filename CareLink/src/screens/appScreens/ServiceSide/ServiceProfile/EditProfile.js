@@ -13,7 +13,7 @@ import SelectBox from '../../../../components/SelectBox';
 import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
-const ServiceClientProfile = ({ navigation }) => {
+const EditProfile = ({ navigation }) => {
 
     const DATA = [
         {
@@ -45,50 +45,48 @@ const ServiceClientProfile = ({ navigation }) => {
 
             <ScrollView>
                 <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >Profile</Apptext>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "EditProfile" })}>
-                        <Apptext style={styles.dtls} >Edit</Apptext>
-                    </TouchableOpacity>
+                    <Apptext style={styles.rms} >Edit Profile</Apptext>
+                   
                 </View>
                 <TouchableOpacity style={styles.imgView} >
                     <Image style={{ width: wp('30%'), height: wp('30%') }}
                         source={require('../../../../../assets/JC.png')} />
                 </TouchableOpacity>
-                {/* <View style={{alignSelf:'center'}}>
+                  <View style={{alignSelf:'center'}}>
                 <Apptext style={styles.upldTxt} >Upload photo</Apptext>
-                </View> */}
-                <View style={{ alignSelf: 'center' }} >
-                    <Apptext style={styles.jmsTxt} >James Clear</Apptext>
-                    <Apptext style={styles.dcTxt} >Washington, DC</Apptext>
                 </View>
-                <View style={styles.pinkBox}>
-                    <Apptext style={styles.mmbrTxt} >Member since October 2021</Apptext>
-                    <Apptext style={styles.mmbrTxt} >Hired 0 providers</Apptext>
-                </View>
-                <TouchableOpacity style={styles.btn}>
-                <Apptext style={styles.acntTxt}>List a room</Apptext>
-                </TouchableOpacity>
-                <View style={{ marginTop: wp('3%') }}>
-                    <FlatList
-                        data={DATA}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({ item, index }) => (
-                            <SelectBox
-                                leftTitle={item.label}
-                                count={item.count}
-                                backgroundColor={item.color}
-                            />
 
-                        )}
-                    />
-                </View>
+                <View style={{marginTop:wp('5%')}}>
+                <FormInput
+                    title={"First name"}
+                    borderColor={DefaultStyles.colors.black}
+                    borderWidth={1}
+                />
+                <FormInput
+                    title={"Last name"}
+                    borderColor={DefaultStyles.colors.black}
+                    borderWidth={1}
+                />
+                <FormInput
+                    borderColor={DefaultStyles.colors.black}
+                    borderWidth={1}
+                    title={"Email"}
+                />
+            </View>
+
+            <View style={{ marginTop: wp('55%') }}>
+                <FormButton
+                    buttonTitle={"Save Update"}
+              
+              />
+            </View>
+
             </ScrollView>
         </View>
     )
 }
 
-export default ServiceClientProfile;
+export default EditProfile;
 
 
 const styles = StyleSheet.create({
@@ -169,6 +167,6 @@ const styles = StyleSheet.create({
         color:DefaultStyles.colors.black,
         textDecorationLine: 'underline', 
     },
-
+ 
 
 });

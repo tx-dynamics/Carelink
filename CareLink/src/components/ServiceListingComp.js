@@ -45,9 +45,12 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
                 <Apptext style={styles.scndTxt}>{ "  " + hourly + "  "}</Apptext>
                 
             </View>
-            <View style={{flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'), marginLeft:-18} }>
-                <Apptext style={[styles.scndTxt, { backgroundColor:'#f0a1f0',padding:5,borderRadius:5 }]}>{"kitchen available"}</Apptext>
-                <Apptext style={[styles.scndTxt, {backgroundColor:'#f0a1f0',padding:5,marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
+            <View style={{flexDirection:'row',justifyContent:'space-evenly',
+                marginHorizontal:wp('5%'), marginLeft:-18} }>
+                <Apptext style={[styles.scndTxt, { backgroundColor:DefaultStyles.colors.lightPrimary,
+                padding:5,borderRadius:5 }]}>{"kitchen available"}</Apptext>
+                <Apptext style={[styles.scndTxt, {backgroundColor:DefaultStyles.colors.lightPrimary ,padding:5,
+                marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
                 
                 </View>
                 <View style={{height:wp('2%')}}>

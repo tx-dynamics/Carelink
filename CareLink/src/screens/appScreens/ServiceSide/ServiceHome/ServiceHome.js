@@ -102,7 +102,7 @@ const ServiceHome = ({ navigation }) => {
         <View style={styles.whiteBox}>
         <View style={{flexDirection:'row', alignItems:'center',}}>
         <View style={styles.imgView}>
-        <Image style={{marginTop:15,}} source={require('../../../../../assets/mbl.png')} />
+        <Image style={{marginTop:15 }} source={require('../../../../../assets/blueMbl.png')} />
         </View>
         <Apptext style={styles.listingTxt}>
         Start listing your extra home with an agency and make money

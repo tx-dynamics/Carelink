@@ -20,22 +20,14 @@ import {
 import Apptext from "../../components/Apptext";
 import FormButton from "../../components/FormButton";
 import { useNavigation, useIsFocused , DrawerActions} from '@react-navigation/native'
+import { useSelector } from 'react-redux';
 
 
 function DrawerContent({ navigation, userImg, username, userEmail }) {
     const backimg = require("../../../assets/cross.png");
-    const [back1, setback1] = useState();
-    const [back2, setback2] = useState();
-    const [back3, setback3] = useState();
-    const [back4, setback4] = useState();
-    const [back5, setback5] = useState();
-    const [back6, setback6] = useState();
-    const [back7, setback7] = useState();
-    const [back8, setback8] = useState();
-    const [back9, setback9] = useState();
-    const [back10, setback10] = useState();
-    const [back11, setback11] = useState();
-    const [back12, setback12] = useState();
+    
+    const usertype = useSelector((state) => state.auth.usertype)
+    // console.log(usertype,"lllll")
 
     return (
         <View style={styles.container} >
@@ -55,28 +47,35 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
+                    {
+                    usertype === "ServiceSide" ?
+                    <TouchableOpacity 
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Feedback"})}
+                    style={styles.items}>
+                        <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
+                    </TouchableOpacity>
+                    :     
+                    <View>
                     <TouchableOpacity 
                     onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"RoomsProposals"})}
                     style={styles.items}>
                         <Apptext style={styles.itemsTxt}>My Jobs</Apptext>
                     </TouchableOpacity>
-                    {/* ITEMS ENDS HERE */}
-
-                    {/* Single Item */}
+                    
                     <TouchableOpacity 
                     onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"SavedListing"})}
                     style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
                     </TouchableOpacity>
-                    {/* ITEMS ENDS HERE */}
-
-                    {/* Single Item */}
+                   
                     <TouchableOpacity 
                     onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Rates"})}
                     
                     style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Rates</Apptext>
                     </TouchableOpacity>
+                    </View>
+                    }
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}

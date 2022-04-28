@@ -38,12 +38,30 @@ const ServiceChatDetail = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                centerImg={require('../../../../../assets/photo.png')}
+                // centerImg={require('../../../../../assets/photo.png')}
                 style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
             />
-            <View>
-                <Apptext style={styles.rms} >Abc Rental Agency</Apptext>
+             <TouchableOpacity 
+                onPress={() => navigation.navigate("Received")}
+                style={{
+                width:wp('25%'),
+                backgroundColor:DefaultStyles.colors.primary,
+                borderRadius:5,
+                flexDirection:'row',
+                justifyContent:'center',
+                marginHorizontal:wp('70%'),
+                marginTop:-40
+                 }}>
+                <Apptext style={{fontSize:12,color:DefaultStyles.colors.white, textAlign:'center' }} >Contracts</Apptext>
+                </TouchableOpacity>
+
+             <View style={{flexDirection:'row',marginHorizontal:wp('7%')}} >
+                <Image
+                style={{width:61, height:61, marginTop:wp('5%')}}
+                source={require('../../../../../assets/inbox.png')} />
+                <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
+
             <ScrollView>
 
                 <View style={{ marginTop: wp('5%') }} >
@@ -157,11 +175,10 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     rms: {
-        marginTop:wp('5%'),
+        marginTop:wp('10%'),
         marginLeft:wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
-        alignSelf: 'center'
     },
     labelTxt: {
 

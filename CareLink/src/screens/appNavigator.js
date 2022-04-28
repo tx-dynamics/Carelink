@@ -37,6 +37,9 @@ import ContractRead from "./appScreens/AgencySide/Contract/ContractRead";
 import Read1 from "./appScreens/AgencySide/Contract/Read1";
 import Read2 from "./appScreens/AgencySide/Contract/Read2";
 import Read3 from "./appScreens/AgencySide/Contract/Read3";
+import EditProfile from "./appScreens/ServiceSide/ServiceProfile/EditProfile";
+import Received from "./appScreens/ServiceSide/Contract/Received";
+import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
 
 
 
@@ -98,11 +101,14 @@ const WithoutBottomTabnavigator = () => {
 
             <StackNavigator.Screen name="Rates" component={Rates} />
             <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
+            <StackNavigator.Screen name="Received" component={Received} />
             <StackNavigator.Screen name="Help" component={Help} />
             <StackNavigator.Screen name="SavedListing" component={SavedListing} />
             <StackNavigator.Screen name="ReceivedProposal" component={ReceivedProposal} />
             <StackNavigator.Screen name="ProposalTerms" component={ProposalTerms} />
             <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
+            <StackNavigator.Screen name="Feedback" component={Feedback} />
+            <StackNavigator.Screen name="EditProfile" component={EditProfile} />
 
 
         </StackNavigator.Navigator>

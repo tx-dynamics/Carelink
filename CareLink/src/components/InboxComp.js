@@ -29,7 +29,9 @@ function InboxComp({
 
           </TouchableOpacity> */}
                 <TouchableOpacity style={{width:56, marginLeft:wp('5%')}}>
-                    <ImageBackground style={styles.inboxImg} source={imgName}>
+                    <ImageBackground 
+                    imageStyle={{borderRadius:40}}
+                    style={styles.inboxImg} source={imgName}>
                       
                     </ImageBackground>
                 </TouchableOpacity>

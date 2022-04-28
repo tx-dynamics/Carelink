@@ -25,6 +25,7 @@ const HourlyPricing = ({ navigation }) => {
                     title="Time"
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
+                    rightImgName={require('../../../../../assets/clock.png')}
                     
                 />
                 <FormInput

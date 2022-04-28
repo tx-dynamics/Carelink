@@ -19,7 +19,9 @@ const ProposalAccept = ({ navigation }) => {
           
             {/* //////////////////////////////////// */}
             <View style={styles.centerView}>
-                <Image source={require('../../../../../assets/bigCircleTick.png')} />
+                <Image 
+                style={{tintColor:DefaultStyles.colors.primary}}
+                source={require('../../../../../assets/bigCircleTick.png')} />
             </View>
        
             <View style={[styles.txtView, {marginTop:wp('4%')}]} >

@@ -102,14 +102,14 @@ const ReceivedProposal = ({ navigation }) => {
                     flexDirection: 'row', justifyContent: 'space-around',
                     marginTop: 21, marginLeft: wp('15%')
                 }}>
-                    <View style={[styles.pinkBox, { backgroundColor: '#ffabff' }]} >
+                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary  }]} >
                         <Apptext style={styles.pinkboxTxt}>
                             Kitchen available
                         </Apptext>
                     </View>
                     {/* /////////////////////// */}
 
-                    <View style={[styles.pinkBox, { backgroundColor: '#ffabff' }]} >
+                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary }]} >
                         <Apptext style={styles.pinkboxTxt}>
                             Car Parking available
                         </Apptext>

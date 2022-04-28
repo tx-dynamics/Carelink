@@ -5,7 +5,9 @@ import DefaultStyles from "../config/Styles";
 import Apptext from '../components/Apptext';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const SelectBox = ({ count, leftTitle,myStl,backgroundColor=DefaultStyles.colors.primary,onPress, ...rest }) => {
+const SelectBox = ({ count, leftTitle,myStl,
+    circle = true,
+    backgroundColor=DefaultStyles.colors.primary,onPress, ...rest }) => {
 
     return (
 
@@ -17,11 +19,12 @@ const SelectBox = ({ count, leftTitle,myStl,backgroundColor=DefaultStyles.colors
             <Apptext style={styles.SightingText1 }>
                 {leftTitle}
             </Apptext>
-            <View style={styles.boxWidth}>
+           {circle === true ?
+           <View style={styles.boxWidth}>
             <View style={[styles.pinkCircle, {backgroundColor:backgroundColor}]}>
             <Apptext style={styles.countStl1}>{count}</Apptext>
             </View>
-            </View>
+            </View> : null }
            
             </View>
             </TouchableOpacity>
@@ -76,7 +79,7 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     SightingText1: {
-        fontFamily: "Poppins-Bold",
+        fontFamily: "Poppins-SemiBold",
         fontSize: 18,
         width: wp('70%'),
         color: DefaultStyles.colors.secondary,

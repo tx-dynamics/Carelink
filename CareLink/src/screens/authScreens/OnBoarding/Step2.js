@@ -14,7 +14,7 @@ const Step2 = ({navigation}) => {
            </TouchableOpacity>
            <View style={styles.boxView} >
                <Image style={{width:wp('90%')}} source={require('../../../../assets/step2New.png')} />
-               <Apptext style={styles.pinkTxt} >Care your house with us</Apptext>
+               <Apptext style={styles.pinkTxt} >List your home with us</Apptext>
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
             <View style={styles.threeDots}>
