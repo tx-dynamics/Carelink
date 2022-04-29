@@ -53,6 +53,7 @@ _______________________________
                 <View style={{ marginTop: wp('15%') }}>
                     <FormButton
                         buttonTitle={"Next"}
+                        width={wp('88%')}
                         onPress={() => navigation.navigate("Read3")}
                     />
                 </View>

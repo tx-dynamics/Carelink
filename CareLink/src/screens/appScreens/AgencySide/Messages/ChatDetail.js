@@ -42,12 +42,26 @@ const ChatDetail = ({ navigation }) => {
                 // centerImg={require('../../../../../assets/JC.png')}
                 // rightstyle={{marginLeft:-10}} 
             />
-                <TouchableOpacity 
+               <TouchableOpacity 
+                onPress={() => navigation.navigate("StartContract")}
+                style={{
+                width:wp('40%'),
+                // backgroundColor:DefaultStyles.colors.primary,
+                borderRadius:5,
+                flexDirection:'row',
+                justifyContent:'center',
+                marginHorizontal:wp('60%'),
+                marginTop:-55
+                 }}>
+                <Apptext style={styles.dtls} >Make contract</Apptext>
+                     
+                </TouchableOpacity>
+                {/* <TouchableOpacity 
                 onPress={() => navigation.navigate("StartContract")}
                 style={{flexDirection:'row', justifyContent:'flex-end', 
                 marginHorizontal:wp('5%'),marginTop:-50 }}>
                 <Apptext style={styles.dtls} >Make contract</Apptext>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
         
             <View style={{flexDirection:'row',marginHorizontal:wp('7%')}} >
                 <Image

@@ -81,6 +81,7 @@ const StartContract = ({ navigation }) => {
                 <View style={{ marginTop:  wp('70%') }}>
                 <FormButton
                     buttonTitle={"Start Contract"}
+                    width={wp('88%')}
                     onPress={() => navigation.navigate("MakeContract")}
              />
             </View>
@@ -108,13 +109,14 @@ const styles = StyleSheet.create({
     },
     descTxt: {
         fontFamily: 'Poppins-Regular',
-        fontSize: 16
+        fontSize: 16,
+        marginHorizontal:wp('6%')
     },
     radioBtn:{
         marginTop:wp('20%'),
         width:30,
         height:30,
-        borderRadius:10,
+        borderRadius:6,
         borderColor:"lightgray",
         borderWidth:1
     },

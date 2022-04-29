@@ -24,7 +24,8 @@ intends to contract with
 
 _______________________________
 
-SSN:____________________________
+SSN:
+_______________________________
 
 as a Provider, whose address is
 
@@ -56,6 +57,7 @@ hereinafter referred to as “Provider”;
                 <View style={{ marginTop: wp('35%') }}>
                     <FormButton
                         buttonTitle={"Next"}
+                        width={wp('88%')}
                         onPress={() => navigation.navigate("Read1")}
                     />
                 </View>

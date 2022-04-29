@@ -5,6 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import InboxComp from '../../../../components/InboxComp';
+import {DrawerActions, useNavigation} from '@react-navigation/native'
 
 
 const ServiceMessages = ({ navigation }) => {
@@ -36,8 +37,10 @@ const ServiceMessages = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
-                onPressLeft={() => navigation.goBack()} />
+                leftImgName={require('../../../../../assets/drawerIcon.png')}
+                onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+                
+                />
 
             <ScrollView>
                 <View style={styles.marginView} >

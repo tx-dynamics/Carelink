@@ -44,8 +44,10 @@ const Rates = ({ navigation }) => {
                         title={"State"}
                         borderColor={DefaultStyles.colors.black}
                         borderWidth={1}
+                        editable={false}
                         placeholderText={"ABC State"}
                         placeholderTextColor={DefaultStyles.colors.textColor}
+                        rightImgName={require('../../../../../assets/arrowDown.png')}
                     />
                 </View>
                 <View style={styles.container1}>
@@ -108,5 +110,5 @@ const styles = StyleSheet.create({
     },
     container1: { flex: 1, padding: 15, paddingTop: wp('17%') ,  backgroundColor: '#fff' },
     head: { height: 40, backgroundColor: '#f1f8ff' },
-    text: { margin: 15, fontFamily:'Poppins-Medium',  fontSize:16, color:DefaultStyles.colors.textColor }
+    text: { margin: 15, fontFamily:'Poppins-Medium', textAlign:'center', fontSize:16, color:DefaultStyles.colors.textColor }
 });

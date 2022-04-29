@@ -42,7 +42,7 @@ const Profile = ({ navigation }) => {
             <BackgroundHeader
                 backImg={require('../../../../../assets/back.png')}
                 leftImgName={require('../../../../../assets/headerBack.png')}
-                // rightImg={require('../../../../../assets/dots.png')}
+                rightImg={usertype === "ServiceSide" ? require('../../../../../assets/dots.png') : null}
                 onPressLeft={() => navigation.goBack()}
 
 

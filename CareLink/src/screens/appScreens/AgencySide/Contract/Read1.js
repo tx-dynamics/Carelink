@@ -53,6 +53,7 @@ Provider also desires to provide care, supervision, support, and assistance serv
                 <View style={{ marginTop: wp('15%') }}>
                     <FormButton
                         buttonTitle={"Next"}
+                        width={wp('88%')}
                         onPress={() => navigation.navigate("Read2")}
                     />
                 </View>
