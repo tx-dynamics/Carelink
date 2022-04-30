@@ -52,8 +52,9 @@ const Help = ({ navigation }) => {
             <View style={{ marginTop: wp('10%') }}>
                 <FormButton
                     buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
-                    width={usertype === "ServiceSide" ? wp('50%') : wp('90%')}
-                    height={wp('15%')}
+                    width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}
+                    height={wp('13%')}
+                    fontSize={usertype === "ServiceSide" ? 17 : 21}
                     borderRadius={usertype === "ServiceSide" ? 10 : 30}
                 />
             </View>

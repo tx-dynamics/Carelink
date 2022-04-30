@@ -42,12 +42,14 @@ const RoomsCalender = ({ navigation }) => {
                     //     '2022-03-19': {disabled: true, disableTouchEvent: true}
                     //   }}
                     renderArrow={renderArrow}
+                    
                     theme={{
                         textMonthFontSize: 20,
                         textMonthFontFamily: 'Poppins-Regular',
                         textDayHeaderFontWeight: "bold",
                         calendarBackground: "transparent",
                         selectedDayTextColor: "red",
+                        
                         todayTextColor: DefaultStyles.colors.primary,
                         dayTextColor: "#2d4150",
                         selectedDayBackgroundColor:DefaultStyles.colors.primary,
@@ -90,9 +92,12 @@ const RoomsCalender = ({ navigation }) => {
                     dayComponent={({ date, state, marking }) => {
                         return (
                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <TouchableOpacity>
+                                <TouchableOpacity 
+                                onPress={() => console.log(date.dateString)}
+                                >
                                     <Text style={{
-                                        textAlign: 'center', color: state === 'disabled' ? 'transparent' : marking ? 'green' : '#383838',
+                                        textAlign: 'center', color: state === 'disabled' ? 
+                                        'transparent' : marking ? 'green' : '#383838',
                                         fontFamily: 'Poppins-Medium', fontSize: 18, 
                                         marginRight: 10,
                                     }}>

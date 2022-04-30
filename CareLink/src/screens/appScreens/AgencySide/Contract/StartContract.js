@@ -40,7 +40,12 @@ const StartContract = ({ navigation }) => {
                         }}
                         style={styles.radioBtn}>
                         {isKitchen ?
-                            <Image style={{ tintColor: DefaultStyles.colors.primary }} 
+                            <Image style={[styles.radioBtn,{
+                                marginTop:0,
+                                borderRadius:4,
+                                borderColor:DefaultStyles.colors.primary,
+                                tintColor: DefaultStyles.colors.primary }]} 
+
                             source={require('../../../../../assets/tickBox.png')} />
                             : null}
                     </TouchableOpacity>
@@ -51,7 +56,12 @@ const StartContract = ({ navigation }) => {
                         }}
                         style={styles.radioBtn}>
                         {isParking ?
-                            <Image style={{ tintColor: DefaultStyles.colors.primary }}
+                            <Image 
+                            style={[styles.radioBtn,{
+                                marginTop:0,
+                                borderRadius:4,
+                                borderColor:DefaultStyles.colors.primary,
+                                tintColor: DefaultStyles.colors.primary }]}
                              source={require('../../../../../assets/tickBox.png')} />
                             : null}
                     </TouchableOpacity>

@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     timeTxt: {
         width: wp('20%'),
         fontSize: 11,
-        color: '#edcfab',
+        color: DefaultStyles.colors.lightPrimary,
         marginTop: wp('1%'),
         marginHorizontal: wp('2%')
         // backgroundColor:"red"

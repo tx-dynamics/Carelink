@@ -22,6 +22,10 @@ const ServiceClientProfile = ({ navigation }) => {
             plans: "/month",
             label: "Available Rooms",
             color: DefaultStyles.colors.primary,
+            chk:false,
+            circle:true,
+            bgClr:"white",
+            txtClr:DefaultStyles.colors.textColor,
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
 
@@ -31,7 +35,23 @@ const ServiceClientProfile = ({ navigation }) => {
             plans: "/month",
             color: '#999999',
             label: "Booked Rooms",
+            chk:false,
+            circle:true,
+            bgClr:"white",
+            txtClr:DefaultStyles.colors.textColor,
             description: `You will get 20 listing to post in a month with this monthly plan`
+        },
+        {
+            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
+            count: "11",
+            plans: "/month",
+            color: '#999999',
+            label: "Subscription",
+            chk:true,
+            circle:false,
+            bgClr:DefaultStyles.colors.primary,
+            txtClr:DefaultStyles.colors.white,
+            description: `20 Listings Monthly`
         },
     ];
 
@@ -78,6 +98,11 @@ const ServiceClientProfile = ({ navigation }) => {
                                 leftTitle={item.label}
                                 count={item.count}
                                 backgroundColor={item.color}
+                                isDesc={item.chk}
+                                bg={item.bgClr}
+                                txtClr={item.txtClr}
+                                circle={item.circle}
+                                description={item.description}
                             />
 
                         )}
@@ -158,7 +183,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
-        marginTop:wp('3%'),
+        marginTop:wp('1%'),
         marginHorizontal:wp('5%')
     },
     rms:{

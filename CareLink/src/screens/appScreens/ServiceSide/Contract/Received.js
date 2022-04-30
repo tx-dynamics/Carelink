@@ -41,7 +41,7 @@ const Received = ({ navigation }) => {
                 </View>
             <ScrollView>
 
-                <View style={{ marginTop: wp('15%') }} >
+                <View style={{ marginTop: wp('10%') }} >
 
                         <FlatList
                             data={DATA}

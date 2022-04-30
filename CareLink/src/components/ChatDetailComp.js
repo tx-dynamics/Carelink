@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         width:wp('50%'),
         textAlign:'right',
         fontSize:11,
-        color:'#edcfab',
+        color:DefaultStyles.colors.lightPrimary,
         marginTop:wp('1%'),
         // marginHorizontal:wp('2%'),
         // backgroundColor:"red"

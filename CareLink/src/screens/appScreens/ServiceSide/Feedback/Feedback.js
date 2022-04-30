@@ -52,9 +52,9 @@ const Feedback = ({ navigation }) => {
                 </View>
                 <View style={styles.txtView}>
 
-                    <Apptext style={[styles.rms, { marginTop: wp('8%') }]} >Click to write: </Apptext>
+                    <Apptext style={[styles.rms, {fontFamily:'Poppins-Medium', marginTop: wp('8%') }]} >Click to write: </Apptext>
                 </View>
-                <View style={{ marginTop: -15 }} >
+                <View style={{ marginTop: -25 }} >
                     <FormInput
                         // title={"Cover Letter"}
                         borderColor={DefaultStyles.colors.black}
@@ -108,6 +108,7 @@ const Feedback = ({ navigation }) => {
                 <View style={{ marginTop: wp('35%') }}>
                     <FormButton
                         buttonTitle={"Submit"}
+                        width={wp('90%')}
 
                     />
                 </View>
@@ -191,8 +192,8 @@ const styles = StyleSheet.create({
         marginHorizontal: wp('5%')
     },
     rms: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 17
+        fontFamily: 'Poppins-SemiBold',
+        fontSize: 19
     },
     dtls: {
         color: DefaultStyles.colors.black,

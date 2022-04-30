@@ -39,8 +39,8 @@ const EditProfile = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/drawerIcon.png')}
-                onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+                leftImgName={require('../../../../../assets/headerBack.png')}
+                onPressLeft={() => navigation.goBack()}
             />
 
             <ScrollView>
@@ -77,6 +77,7 @@ const EditProfile = ({ navigation }) => {
             <View style={{ marginTop: wp('55%') }}>
                 <FormButton
                     buttonTitle={"Save Update"}
+                    width={wp('90%')}
               
               />
             </View>
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between',
-        marginTop:wp('3%'),
+        marginTop:wp('1%'),
         marginHorizontal:wp('5%')
     },
     rms:{
