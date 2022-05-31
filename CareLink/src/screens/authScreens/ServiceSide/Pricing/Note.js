@@ -22,8 +22,10 @@ const Note = ({ navigation }) => {
             <Apptext style={styles.bkTxt} >Click to write:</Apptext>
             <View style={{ marginTop: -20 }}>
                 <FormInput
-                    height={wp('65%')}
-                    inputMargin={-200}
+                    // height={wp('65%')}
+                    // style={{textAlignVertical:'top' }}
+                    // inputMargin={-200}
+                    title={"Write a Note"}
                     numberOfLines={5}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}  

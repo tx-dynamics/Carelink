@@ -46,7 +46,7 @@ const Help = ({ navigation }) => {
                     borderWidth={1}
                     title={"Your Problem"}
                     height={wp('65%')}
-                    marginTop={-105}
+                    // marginTop={-105}
                 />
             </View>
             <View style={{ marginTop: wp('10%') }}>

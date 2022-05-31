@@ -56,11 +56,11 @@ const Feedback = ({ navigation }) => {
                 </View>
                 <View style={{ marginTop: -25 }} >
                     <FormInput
-                        // title={"Cover Letter"}
+                        title={"Feedback"}
                         borderColor={DefaultStyles.colors.black}
                         borderWidth={1}
-                        height={wp('60%')}
-                        marginTop={-125}
+                        // height={wp('60%')}
+                        // marginTop={-125}
                     />
                 </View>
                 <View style={[styles.DirectionView1, { marginTop:wp('8%')}]}>

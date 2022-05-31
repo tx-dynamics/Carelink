@@ -31,8 +31,8 @@ const SendProposal = ({ navigation }) => {
                     title={"Cover Letter"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-                    height={wp('75%')}
-                    marginTop={-125}
+                    // height={wp('75%')}
+                    // marginTop={-125}
                     />
                 </View>
                 <View style={{marginTop:wp('70%')}}>

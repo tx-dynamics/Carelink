@@ -31,15 +31,15 @@ const AddCard = ({ navigation }) => {
                     rightImgName={require('../../../../assets/grayCard.png')}
 
                 />
-                <View style={{flexDirection:'row',justifyContent:'space-around', marginHorizontal:wp('3%') }}> 
+                <View style={{flexDirection:'row', }}> 
 
                   <FormInput
                     title={"Expiry date"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-                    width={wp('44%')}
+                    width={wp('47%')}
                     placeholderText={"MM/YY"}
-                    style={{width:wp('23%'),marginTop:-10,}}
+                    // style={{width:wp('23%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/grayCalender.png')}
 
 
@@ -49,8 +49,8 @@ const AddCard = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     placeholderText={"..."}
-                    width={wp('44%')}
-                    style={{width:wp('24%'),marginTop:-10,}}
+                    width={wp('48%')}
+                    // style={{width:wp('24%'),marginTop:-10,}}
                     rightImgName={require('../../../../assets/infoCircle.png')}
 
                 />
