@@ -8,28 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* CareLinkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CareLinkTests.m */; };
+		0D5CD7AB74904A7DB9B66BE2 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364883837C7400EA33158CB /* Poppins-ExtraBold.ttf */; };
+		12D05EE2EE41747360446DB2 /* libPods-CareLink-CareLinkTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1788A66F947F5A2D7B3CAEC /* libPods-CareLink-CareLinkTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2C98DFABE5CD4F8886C70AC0 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8EC828D463457290D77AFC /* Poppins-BoldItalic.ttf */; };
+		2EE53B95B82F467E9136C947 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B19E501BB35741CC9EB1107F /* Poppins-MediumItalic.ttf */; };
+		2EFB4F4885BD176431A4F670 /* libPods-CareLink.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D7D7CB92F064CD7A85B2A1D1 /* libPods-CareLink.a */; };
+		4A3F80C5C1BE4C388F7C80DB /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C9D783897CE4565BAA15110 /* Poppins-SemiBoldItalic.ttf */; };
+		55D04537990C408F903C9269 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CB83CCFE2084DA3A72B1A50 /* Poppins-ExtraLight.ttf */; };
+		5958512912DF4E8D89A22DCF /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48D93687E67840298321E3A1 /* Poppins-Thin.ttf */; };
+		63838F95093F45BF950D8A78 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B7D4EFF6434A00938C5B81 /* Poppins-LightItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8DCDF611F4C3457A86A370AD /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85460F6DB5CC4C7DB50709A0 /* Poppins-Black.ttf */; };
+		90DDDAC3F09D4F91A1476AD3 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CAB43DD198441FA37AAD54 /* Poppins-SemiBold.ttf */; };
 		9355FE87104E49EE8B1ED300 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 13E577CEB7324E118AC25246 /* Poppins-BlackItalic.ttf */; };
 		95E764E1074943518AF6A896 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCAD3F55A76A46FCBB93010E /* Poppins-Bold.ttf */; };
-		2C98DFABE5CD4F8886C70AC0 /* Poppins-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD8EC828D463457290D77AFC /* Poppins-BoldItalic.ttf */; };
-		0D5CD7AB74904A7DB9B66BE2 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2364883837C7400EA33158CB /* Poppins-ExtraBold.ttf */; };
-		DD8611D6752A47EA9672ED1E /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2AA80522B944DB9A81EA9F /* Poppins-ExtraBoldItalic.ttf */; };
-		55D04537990C408F903C9269 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8CB83CCFE2084DA3A72B1A50 /* Poppins-ExtraLight.ttf */; };
-		D94F6FC0885B4963A2479FB7 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E48D67711D946DE97F75FCE /* Poppins-ExtraLightItalic.ttf */; };
-		F7F1E03151BF47A1B3F9BA51 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 569606BB66624C7E9A84B62B /* Poppins-Italic.ttf */; };
 		A28A1F014AC34807894C1B88 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46B72558E5DF441687BF5E9D /* Poppins-Light.ttf */; };
-		63838F95093F45BF950D8A78 /* Poppins-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B7D4EFF6434A00938C5B81 /* Poppins-LightItalic.ttf */; };
-		CB2E3BB5462E42ADAD8DA0BB /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A28754AC311B4989A1C2B51C /* Poppins-Medium.ttf */; };
-		2EE53B95B82F467E9136C947 /* Poppins-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B19E501BB35741CC9EB1107F /* Poppins-MediumItalic.ttf */; };
 		AA26AF33619E4AEA9DC75FD5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AE96847D87544A28CEC6D6F /* Poppins-Regular.ttf */; };
-		90DDDAC3F09D4F91A1476AD3 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79CAB43DD198441FA37AAD54 /* Poppins-SemiBold.ttf */; };
-		4A3F80C5C1BE4C388F7C80DB /* Poppins-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C9D783897CE4565BAA15110 /* Poppins-SemiBoldItalic.ttf */; };
-		5958512912DF4E8D89A22DCF /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 48D93687E67840298321E3A1 /* Poppins-Thin.ttf */; };
+		CB2E3BB5462E42ADAD8DA0BB /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A28754AC311B4989A1C2B51C /* Poppins-Medium.ttf */; };
+		D94F6FC0885B4963A2479FB7 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E48D67711D946DE97F75FCE /* Poppins-ExtraLightItalic.ttf */; };
+		DD8611D6752A47EA9672ED1E /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A2AA80522B944DB9A81EA9F /* Poppins-ExtraBoldItalic.ttf */; };
 		F16FC1BAE32148DD8ADD9455 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE0123DBBED04274BF9595D6 /* Poppins-ThinItalic.ttf */; };
+		F7F1E03151BF47A1B3F9BA51 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 569606BB66624C7E9A84B62B /* Poppins-Italic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,35 +45,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00785FE8A71F8571E0B562B7 /* Pods-CareLink.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CareLink.release.xcconfig"; path = "Target Support Files/Pods-CareLink/Pods-CareLink.release.xcconfig"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* CareLinkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CareLinkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* CareLinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CareLinkTests.m; sourceTree = "<group>"; };
+		0836AC16EBAE8B91DCC888DD /* Pods-CareLink-CareLinkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CareLink-CareLinkTests.release.xcconfig"; path = "Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests.release.xcconfig"; sourceTree = "<group>"; };
+		0C9D783897CE4565BAA15110 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* CareLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CareLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CareLink/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CareLink/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = CareLink/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CareLink/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CareLink/main.m; sourceTree = "<group>"; };
+		13E577CEB7324E118AC25246 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BlackItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
+		2364883837C7400EA33158CB /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		46B72558E5DF441687BF5E9D /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		48D93687E67840298321E3A1 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Thin.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Thin.ttf"; sourceTree = "<group>"; };
+		4A2AA80522B944DB9A81EA9F /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		569606BB66624C7E9A84B62B /* Poppins-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Italic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		79B7D4EFF6434A00938C5B81 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-LightItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<group>"; };
+		79CAB43DD198441FA37AAD54 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = CareLink/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85460F6DB5CC4C7DB50709A0 /* Poppins-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Black.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Black.ttf"; sourceTree = "<group>"; };
+		8AE96847D87544A28CEC6D6F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		8CB83CCFE2084DA3A72B1A50 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLight.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
+		8E48D67711D946DE97F75FCE /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraLightItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		9F496495787C12139ECD828C /* Pods-CareLink-CareLinkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CareLink-CareLinkTests.debug.xcconfig"; path = "Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A28754AC311B4989A1C2B51C /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		B1788A66F947F5A2D7B3CAEC /* libPods-CareLink-CareLinkTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CareLink-CareLinkTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B19E501BB35741CC9EB1107F /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-MediumItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; };
+		BCAD3F55A76A46FCBB93010E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		BD8EC828D463457290D77AFC /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-BoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; };
+		BE0123DBBED04274BF9595D6 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ThinItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
+		D7D7CB92F064CD7A85B2A1D1 /* libPods-CareLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CareLink.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBD8D0E66E70FE9E3985CD17 /* Pods-CareLink.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CareLink.debug.xcconfig"; path = "Target Support Files/Pods-CareLink/Pods-CareLink.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		85460F6DB5CC4C7DB50709A0 /* Poppins-Black.ttf */ = {isa = PBXFileReference; name = "Poppins-Black.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		13E577CEB7324E118AC25246 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-BlackItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BCAD3F55A76A46FCBB93010E /* Poppins-Bold.ttf */ = {isa = PBXFileReference; name = "Poppins-Bold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BD8EC828D463457290D77AFC /* Poppins-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-BoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2364883837C7400EA33158CB /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraBold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4A2AA80522B944DB9A81EA9F /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraBoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8CB83CCFE2084DA3A72B1A50 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraLight.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8E48D67711D946DE97F75FCE /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-ExtraLightItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		569606BB66624C7E9A84B62B /* Poppins-Italic.ttf */ = {isa = PBXFileReference; name = "Poppins-Italic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		46B72558E5DF441687BF5E9D /* Poppins-Light.ttf */ = {isa = PBXFileReference; name = "Poppins-Light.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		79B7D4EFF6434A00938C5B81 /* Poppins-LightItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-LightItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A28754AC311B4989A1C2B51C /* Poppins-Medium.ttf */ = {isa = PBXFileReference; name = "Poppins-Medium.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B19E501BB35741CC9EB1107F /* Poppins-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-MediumItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8AE96847D87544A28CEC6D6F /* Poppins-Regular.ttf */ = {isa = PBXFileReference; name = "Poppins-Regular.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		79CAB43DD198441FA37AAD54 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; name = "Poppins-SemiBold.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		0C9D783897CE4565BAA15110 /* Poppins-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-SemiBoldItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		48D93687E67840298321E3A1 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; name = "Poppins-Thin.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		BE0123DBBED04274BF9595D6 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; name = "Poppins-ThinItalic.ttf"; path = "../src/Assets/Fonts/Poppins/Poppins-ThinItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12D05EE2EE41747360446DB2 /* libPods-CareLink-CareLinkTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EFB4F4885BD176431A4F670 /* libPods-CareLink.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +119,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		02DAEC70E8A69A2FDE387AD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EBD8D0E66E70FE9E3985CD17 /* Pods-CareLink.debug.xcconfig */,
+				00785FE8A71F8571E0B562B7 /* Pods-CareLink.release.xcconfig */,
+				9F496495787C12139ECD828C /* Pods-CareLink-CareLinkTests.debug.xcconfig */,
+				0836AC16EBAE8B91DCC888DD /* Pods-CareLink-CareLinkTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* CareLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,43 +147,14 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				D7D7CB92F064CD7A85B2A1D1 /* libPods-CareLink.a */,
+				B1788A66F947F5A2D7B3CAEC /* libPods-CareLink-CareLinkTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		83CBB9F61A601CBA00E9B192 = {
-			isa = PBXGroup;
-			children = (
-				13B07FAE1A68108700A75B9A /* CareLink */,
-				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* CareLinkTests */,
-				83CBBA001A601CBA00E9B192 /* Products */,
-				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				72CCE2624C05479ABF075A63 /* Resources */,
-			);
-			indentWidth = 2;
-			sourceTree = "<group>";
-			tabWidth = 2;
-			usesTabs = 0;
-		};
-		83CBBA001A601CBA00E9B192 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13B07F961A680F5B00A75B9A /* CareLink.app */,
-				00E356EE1AD99517003FC87E /* CareLinkTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		72CCE2624C05479ABF075A63 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				85460F6DB5CC4C7DB50709A0 /* Poppins-Black.ttf */,
 				13E577CEB7324E118AC25246 /* Poppins-BlackItalic.ttf */,
@@ -185,7 +177,38 @@
 			);
 			name = Resources;
 			sourceTree = "<group>";
-			path = "";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				13B07FAE1A68108700A75B9A /* CareLink */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* CareLinkTests */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				72CCE2624C05479ABF075A63 /* Resources */,
+				02DAEC70E8A69A2FDE387AD7 /* Pods */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* CareLink.app */,
+				00E356EE1AD99517003FC87E /* CareLinkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -194,9 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "CareLinkTests" */;
 			buildPhases = (
+				7AB1904B81B6522B25977005 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				293BD2F9CEAFED1C435CEDEA /* [CP] Embed Pods Frameworks */,
+				161E42E9E5854429D8A82A10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -212,11 +238,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "CareLink" */;
 			buildPhases = (
+				6A18FCB49E6C364A32D7571E /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				192605A1F05AB7A1A526541A /* [CP] Embed Pods Frameworks */,
+				78F2AD0D2CD8A086F562C3A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -315,6 +344,118 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		161E42E9E5854429D8A82A10 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		192605A1F05AB7A1A526541A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		293BD2F9CEAFED1C435CEDEA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CareLink-CareLinkTests/Pods-CareLink-CareLinkTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A18FCB49E6C364A32D7571E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CareLink-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78F2AD0D2CD8A086F562C3A9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CareLink/Pods-CareLink-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7AB1904B81B6522B25977005 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CareLink-CareLinkTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +508,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F496495787C12139ECD828C /* Pods-CareLink-CareLinkTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -393,6 +535,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0836AC16EBAE8B91DCC888DD /* Pods-CareLink-CareLinkTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -416,10 +559,12 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBD8D0E66E70FE9E3985CD17 /* Pods-CareLink.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U62C7KV4X9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = CareLink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -431,7 +576,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.CareLinkAPP;
 				PRODUCT_NAME = CareLink;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -441,10 +586,12 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 00785FE8A71F8571E0B562B7 /* Pods-CareLink.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U62C7KV4X9;
 				INFOPLIST_FILE = CareLink/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -455,7 +602,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.CareLinkAPP;
 				PRODUCT_NAME = CareLink;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -495,6 +642,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -559,6 +707,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

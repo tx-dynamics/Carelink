@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View,SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
@@ -13,7 +13,8 @@ const Register = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
 
     return (
-        <ScrollView style={styles.container}>
+       <SafeAreaView>
+       <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
                     source={require('../../../../assets/leftArrow.png')} />
@@ -71,6 +72,7 @@ const Register = ({ navigation }) => {
                 />
             </View>
         </ScrollView>
+        </SafeAreaView>
     )
 }
 
@@ -80,7 +82,7 @@ export default Register;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
-        flex: 1,
+       // flex: 1,
     },
     createTxt: {
         marginTop: wp('8%'),

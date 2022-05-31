@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import { SafeAreaView } from "react-native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from '../authScreens/Splash/Splash';
 import Step1 from '../authScreens/OnBoarding/Step1';
@@ -71,8 +72,10 @@ const SplashNavigator = () => {
 
 const AuthNavigator = () => {  
 
-         return <SplashNavigator />
-     
+         return (
+        
+         <SplashNavigator />
+         )
     
     
 }
