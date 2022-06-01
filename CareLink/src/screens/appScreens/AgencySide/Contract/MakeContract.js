@@ -49,7 +49,6 @@ const MakeContract = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
 
                 <View>
                     <Apptext style={styles.msgTxt} >Make Contract </Apptext>
@@ -68,7 +67,6 @@ const MakeContract = ({ navigation }) => {
                 />
             </View>
 
-            </ScrollView>
         </View>
     )
 }

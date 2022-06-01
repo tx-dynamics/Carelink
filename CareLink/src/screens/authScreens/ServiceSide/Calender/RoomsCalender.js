@@ -23,7 +23,7 @@ const RoomsCalender = ({ navigation }) => {
       }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
            
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -116,7 +116,7 @@ const RoomsCalender = ({ navigation }) => {
                 width={"90%"}
                 onPress={() => navigation.navigate("HourlyPricing")}
             />
-        </ScrollView>
+        </View>
     )
 }
 

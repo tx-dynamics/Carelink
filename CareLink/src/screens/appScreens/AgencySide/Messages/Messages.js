@@ -44,7 +44,6 @@ const Messages = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms} >Messages</Apptext>
                 </View>
@@ -83,7 +82,6 @@ const Messages = ({ navigation }) => {
                     />
 
                 </View>
-            </ScrollView>
         </View>
     )
 }

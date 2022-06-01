@@ -12,7 +12,7 @@ import { iconPath } from '../../../../config/icon';
 const HourlyPricing = ({ navigation }) => {
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
        
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -46,7 +46,7 @@ const HourlyPricing = ({ navigation }) => {
                 onPress={() => navigation.navigate("Note")}
             />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

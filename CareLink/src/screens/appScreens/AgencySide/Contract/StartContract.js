@@ -9,7 +9,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp , heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const StartContract = ({ navigation }) => {
 
@@ -24,7 +24,6 @@ const StartContract = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
 
                 <View>
                     <Apptext style={styles.msgTxt} >Choose What you want Extras </Apptext>
@@ -88,14 +87,13 @@ const StartContract = ({ navigation }) => {
                     <Apptext style={styles.lTxt}>Price start In  ABC State is $500 with Extras you should pay $650</Apptext>
                 </View>
 
-                <View style={{ marginTop:  wp('70%') }}>
+                <View style={{ marginTop:  wp('5%') }}>
                 <FormButton
                     buttonTitle={"Start Contract"}
                     width={wp('88%')}
                     onPress={() => navigation.navigate("MakeContract")}
              />
             </View>
-            </ScrollView>
         </View>
     )
 }

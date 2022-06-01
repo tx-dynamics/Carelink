@@ -16,7 +16,7 @@ const Help = ({ navigation }) => {
 
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
           
 
             <IconHeaderComp
@@ -50,7 +50,7 @@ const Help = ({ navigation }) => {
                 // marginTop={-105}
                 />
             </View>
-            <View style={{ marginTop: wp('30%') }}>
+            <View style={{ marginTop: wp('40%') }}>
                 <FormButton
                     buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
                     width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}
@@ -59,7 +59,7 @@ const Help = ({ navigation }) => {
                     borderRadius={usertype === "ServiceSide" ? 10 : 30}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

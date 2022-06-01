@@ -15,7 +15,7 @@ const ProposalAccept = ({ navigation }) => {
     const user = useSelector((state) => state.auth.user)
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
           
             {/* //////////////////////////////////// */}
             <View style={styles.centerView}>
@@ -35,13 +35,13 @@ const ProposalAccept = ({ navigation }) => {
                 <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
             </View>
 
-            <View style={{marginTop:wp('60%')}} >
+            <View style={{marginTop:wp('35%')}} >
             <FormButton
                     buttonTitle={"Continue"}
                     width={'88%'}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

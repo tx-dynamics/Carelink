@@ -64,7 +64,6 @@ const AgencyNotifications = ({ navigation }) => {
         onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
 
         />
-        <ScrollView>
         <View style={{marginTop:wp('6%')}}>
         <Apptext style={styles.headTxt}>Today</Apptext>
         <FlatList
@@ -93,7 +92,6 @@ const AgencyNotifications = ({ navigation }) => {
                     )}
                 />
         </View>
-        </ScrollView>
         </View>
     )
 }

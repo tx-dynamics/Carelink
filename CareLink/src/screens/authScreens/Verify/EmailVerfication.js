@@ -14,7 +14,7 @@ const EmailVerification = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
 
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
@@ -39,7 +39,7 @@ const EmailVerification = ({ navigation }) => {
                     onPress={() => navigation.navigate("Verified")}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

@@ -57,7 +57,7 @@ const PaymentMethod = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
          
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -84,7 +84,7 @@ const PaymentMethod = ({ navigation }) => {
                     )}
                 />
             </View>
-            <View style={{marginTop:wp('95%')}} >
+            <View style={{marginTop:wp('35%')}} >
             <FormButton
                     buttonTitle={"Next"}
                     width={'88%'}
@@ -95,7 +95,7 @@ const PaymentMethod = ({ navigation }) => {
                     }}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

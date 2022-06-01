@@ -52,7 +52,7 @@ const PaymentPlans = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
          
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -67,6 +67,7 @@ const PaymentPlans = ({ navigation }) => {
                 <FlatList
                     data={DATA}
                     keyExtractor={(item, index) => index}
+                    style={{maxHeight:'80%'}}
                     renderItem={({ item, index }) => (
                         <PlansComp
                         btnTxt={item.label}
@@ -81,7 +82,7 @@ const PaymentPlans = ({ navigation }) => {
                 />
 
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import {StyleSheet,ScrollView, TouchableOpacity,Image,ActivityIndicator, Text, View } from 'react-native';
+import {StyleSheet,ScrollView, TouchableOpacity,Image,SafeAreaView, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
@@ -7,8 +7,8 @@ import Apptext from '../../../components/Apptext';
 const Step1 = ({navigation}) => {
 
     return (
-
-        <ScrollView style ={styles.container}>
+        <View style ={styles.container}>
+        {/* <ScrollView> */}
            <TouchableOpacity style={styles.skipDirection}
             onPress={() => navigation.navigate("Step2")}>
                 
@@ -31,13 +31,8 @@ const Step1 = ({navigation}) => {
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
             <Image style={{width:105, height:105,}} source={require('../../../../assets/Step1BoxNew.png')} />
             </TouchableOpacity>
-            {/* <TouchableOpacity 
-            onPress={() => navigation.navigate("Step2")}
-            style={styles.btn}>
-            <Image source={require('../../../../assets/rightArrow.png')} />
-            </TouchableOpacity> */}
-            {/* </View> */}
-        </ScrollView>
+        {/* </ScrollView> */}
+        </View>
     )
 }
 

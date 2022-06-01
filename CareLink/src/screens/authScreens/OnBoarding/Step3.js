@@ -8,7 +8,7 @@ const Step3 = ({navigation}) => {
 
     return (
 
-        <ScrollView style ={styles.container}>
+        <View style ={styles.container}>
            <TouchableOpacity 
            onPress={() => navigation.navigate("AskRegister")}
            style={styles.skipDirection}>
@@ -38,7 +38,7 @@ const Step3 = ({navigation}) => {
             <Image source={require('../../../../assets/rightArrow.png')} />
             </TouchableOpacity>
             </View> */}
-        </ScrollView>
+        </View>
     )
 }
 

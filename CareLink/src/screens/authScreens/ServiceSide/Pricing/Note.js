@@ -13,7 +13,7 @@ import { iconPath } from '../../../../config/icon';
 const Note = ({ navigation }) => {
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
         
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -49,7 +49,7 @@ const Note = ({ navigation }) => {
             />
             </View>
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

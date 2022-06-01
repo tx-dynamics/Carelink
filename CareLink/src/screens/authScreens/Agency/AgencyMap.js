@@ -15,7 +15,7 @@ const AgencyMap = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
      
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -35,14 +35,14 @@ const AgencyMap = ({ navigation }) => {
                 <Apptext style={[styles.adrs]}>123 street, 11 apartment ,USA,11221</Apptext>
 
             </View>
-            <View style={{ marginTop: wp('13%')  }}>
+            <View style={{ marginTop: wp('10%')  }}>
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}
                     onPress={() => usertype === "ServiceSide" ? navigation.navigate("Register") : navigation.navigate("PaymentPlans") }
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'flex-end',
         width:wp('90%'),
-        height:wp('90%'),
+        height:wp('70%'),
         marginTop:wp('5%'),
         alignSelf:'center',
         borderRadius:10 
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         height:47,
         alignItems:'center',
         justifyContent:'center',
-        marginTop:wp('72%'),
+        marginTop:wp('50%'),
         marginHorizontal:wp('5%'),
         backgroundColor:DefaultStyles.colors.primary
     },

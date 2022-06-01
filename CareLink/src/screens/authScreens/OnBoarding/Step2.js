@@ -8,7 +8,7 @@ const Step2 = ({navigation}) => {
 
     return (
 
-        <ScrollView style ={styles.container}>
+        <View style ={styles.container}>
            <TouchableOpacity style={styles.skipDirection} onPress={() => {navigation.navigate("Step3")}}>
            <Apptext style={styles.skipTxt}>Skip</Apptext>
            </TouchableOpacity>
@@ -28,7 +28,7 @@ const Step2 = ({navigation}) => {
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
             <Image style={{width:105, height:105,}} source={require('../../../../assets/Step3BoxNew.png')} />
             </TouchableOpacity>
-        </ScrollView>
+        </View>
     )
 }
 

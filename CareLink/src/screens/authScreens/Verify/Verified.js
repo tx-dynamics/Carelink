@@ -13,7 +13,7 @@ const Verified = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
            
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
@@ -24,14 +24,14 @@ const Verified = ({ navigation }) => {
             </View>
             <Apptext style={styles.verifyTxt}>Congrats ! Your account is Verified now</Apptext>
      
-            <View style={{ marginTop: wp('80%'), marginBottom:wp('20/%') }}>
+            <View style={{ marginTop: wp('50%'),  }}>
                 <FormButton
                     buttonTitle={"Let started"}
                     width={wp('90%')}
                     onPress={() => navigation.navigate("Success") }
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

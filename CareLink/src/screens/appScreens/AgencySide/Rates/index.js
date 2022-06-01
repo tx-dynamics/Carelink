@@ -30,7 +30,6 @@ const Rates = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
 
                 <View>
                     <Apptext style={styles.msgTxt} >Rate </Apptext>
@@ -50,7 +49,8 @@ const Rates = ({ navigation }) => {
                         editable={false}
                         placeholderText={"ABC State"}
                         placeholderTextColor={DefaultStyles.colors.textColor}
-                        rightImgName={require('../../../../../assets/arrowDown.png')}
+                        // rightImgName={require('../../../../../assets/arrowDown.png')}
+                        style={{ marginBottom:'10%'}}
                     />
                 </View>
                 <View style={styles.container1}>
@@ -67,7 +67,6 @@ const Rates = ({ navigation }) => {
                     </Table>
                 </View>
 
-            </ScrollView>
         </View>
     )
 }
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: DefaultStyles.colors.textColor
     },
-    container1: { flex: 1, padding: 15, paddingTop: wp('17%') ,  backgroundColor: '#fff' },
+    container1: { flex: 1, padding: 15, paddingTop: wp('10%') ,  backgroundColor: '#fff' },
     head: { height: 40, backgroundColor: '#f1f8ff' },
     text: { margin: 15, fontFamily:'Poppins-Medium', textAlign:'center', fontSize:16, color:DefaultStyles.colors.textColor }
 });

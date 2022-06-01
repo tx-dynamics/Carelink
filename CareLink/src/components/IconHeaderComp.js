@@ -3,12 +3,14 @@ import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-nati
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 
 function IconHeaderComp ({heading,imgName,onPress,style,  ...rest }){
 
     return (
-        <View>
+        
+        <View style={{marginTop:getStatusBarHeight(true),}}>
              <TouchableOpacity onPress={onPress} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
                     source={imgName} />

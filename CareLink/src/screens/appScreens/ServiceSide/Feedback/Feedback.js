@@ -44,8 +44,6 @@ const Feedback = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-           
                 <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -115,7 +113,6 @@ const Feedback = ({ navigation }) => {
                     />
                 </View>
 
-            </ScrollView>
         </View>
     )
 }

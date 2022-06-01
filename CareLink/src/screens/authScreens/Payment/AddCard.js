@@ -17,7 +17,7 @@ const AddCard = ({ navigation }) => {
 
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -80,7 +80,7 @@ const AddCard = ({ navigation }) => {
                 </TouchableOpacity>
                 <Apptext style={styles.saveCardTxt}>Save card</Apptext>
             </View>
-            <View style={{marginTop:wp('78%')}} >
+            <View style={{marginTop:wp('35%')}} >
             <FormButton
                     buttonTitle={"Add"}
                     width={'88%'}
@@ -89,7 +89,7 @@ const AddCard = ({ navigation }) => {
                     }}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

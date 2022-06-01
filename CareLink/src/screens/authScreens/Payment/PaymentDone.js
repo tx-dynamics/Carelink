@@ -53,7 +53,7 @@ const PaymentDone = ({ navigation }) => {
     ];
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
         
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -80,14 +80,14 @@ const PaymentDone = ({ navigation }) => {
                 <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
             </View>
 
-            <View style={{marginTop:wp('60%')}} >
+            <View style={{marginTop:wp('35%')}} >
             <FormButton
                     buttonTitle={"Get Started"}
                     width={'88%'}
                     onPress={() => dispatch(setUser(true))}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     centerView:{
         alignSelf:'center',
         alignItems:'center',
-        marginTop:wp('10%')
+        // marginTop:wp('5%')
     },
     txtView: {
         width: wp('90%'),

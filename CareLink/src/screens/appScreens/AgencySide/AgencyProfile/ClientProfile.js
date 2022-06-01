@@ -48,7 +48,6 @@ const ClientProfile = ({ navigation }) => {
                 onPressLeft={() => navigation.goBack()}
                 headerLabel={"Client Profile"}
             />
-            <ScrollView>
                 <TouchableOpacity style={styles.imgView} >
                     <Image style={{ width: wp('30%'), height: wp('30%') }}
                         source={require('../../../../../assets/JC.png')} />
@@ -76,7 +75,6 @@ const ClientProfile = ({ navigation }) => {
                         )}
                     />
                 </View>
-            </ScrollView>
         </View>
     )
 }

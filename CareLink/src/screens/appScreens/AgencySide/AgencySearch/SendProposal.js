@@ -20,7 +20,6 @@ const SendProposal = ({ navigation }) => {
                 onPressLeft={() => navigation.goBack()}
                 
             />
-            <ScrollView>
 
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms}> Submit a Proposal</Apptext>
@@ -35,14 +34,13 @@ const SendProposal = ({ navigation }) => {
                     // marginTop={-125}
                     />
                 </View>
-                <View style={{marginTop:wp('70%')}}>
+                <View style={{marginTop:wp('65%')}}>
                     <FormButton
                         width={wp('90%')}
                         buttonTitle={"Submit Now"}
                         onPress={() => navigation.navigate("AgencyHome")}
                     />
                     </View>
-            </ScrollView>
         </View>
     )
 }

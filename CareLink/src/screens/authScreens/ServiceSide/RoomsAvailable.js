@@ -49,7 +49,7 @@ const RoomsAvailable = ({ navigation }) => {
 
     return (
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -68,7 +68,7 @@ const RoomsAvailable = ({ navigation }) => {
                         )}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

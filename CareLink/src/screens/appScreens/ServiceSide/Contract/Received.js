@@ -39,7 +39,6 @@ const Received = ({ navigation }) => {
                     <Apptext style={styles.rms} >Received Contracts</Apptext>
                    
                 </View>
-            <ScrollView>
 
                 <View style={{ marginTop: wp('10%') }} >
 
@@ -64,7 +63,6 @@ const Received = ({ navigation }) => {
                         />
                     </View>
                     
-            </ScrollView>
          
         </View>
     )

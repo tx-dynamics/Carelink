@@ -13,7 +13,7 @@ import { iconPath } from '../../../config/icon';
 const AgencyBasic = ({ navigation }) => {
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
          
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
@@ -41,7 +41,7 @@ const AgencyBasic = ({ navigation }) => {
                     // inputMargin={-155}
 />
             </View>
-            <View style={{ marginTop: wp('18%') }}>
+            <View style={{ marginTop: wp('35%') }}>
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}
@@ -49,7 +49,7 @@ const AgencyBasic = ({ navigation }) => {
                     onPress={() => navigation.navigate("AgencyPhotos")}
                 />
             </View>
-        </ScrollView>
+        </View>
     )
 }
 

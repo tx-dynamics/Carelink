@@ -9,6 +9,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 
 function Header({
   headerLabel,
@@ -29,6 +31,7 @@ function Header({
       style={{
         ...styles.container,
         height:height,
+        marginTop:getStatusBarHeight(true),
         backgroundColor: backgroundColor,
         ...style,
       }}

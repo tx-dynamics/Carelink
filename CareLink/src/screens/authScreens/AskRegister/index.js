@@ -14,7 +14,7 @@ const AskRegister = ({navigation}) => {
 
     return (
 
-        <ScrollView style ={styles.container}>
+        <View style ={styles.container}>
             
            <IconHeaderComp
            heading={"Let’s get started. Choose an option"}
@@ -45,7 +45,7 @@ const AskRegister = ({navigation}) => {
             </TouchableOpacity>
           </View>
 
-        </ScrollView>
+        </View>
     )
 }
 
