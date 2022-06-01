@@ -149,8 +149,9 @@ const styles = StyleSheet.create({
     },
     imgBox: {
         width: 164,
-        marginTop: -150,
+        marginTop: wp(-35),
         height: 164,
+        // backgroundColor:"red",
         borderWidth: 0.2,
         borderColor: "lightgray",
         borderRadius: 20,
