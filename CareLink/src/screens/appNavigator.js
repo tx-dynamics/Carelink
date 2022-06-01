@@ -318,7 +318,8 @@ const MyTabs = () => {
                         <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
                                     style={[styles.iconSize, { tintColor: "white" }]}
-                                    source={usertype === "ServiceSide" ? require('../../assets/serviceTab3.png') 
+                                    source={usertype === "ServiceSide" ? 
+                                    require('../../assets/serviceTab3.png') 
                                     :
                                      require('../../assets/thirdTab.png')}
                                     resizeMode={"contain"} />
@@ -327,7 +328,7 @@ const MyTabs = () => {
                             <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
 
                                 <Image
-                                style={[styles.iconSize]}
+                                style={[styles.iconSize ]}
                                     source={usertype === "ServiceSide" ? 
                                     require('../../assets/serviceTab3.png') 
                                     :
@@ -392,33 +393,33 @@ export default MainNavigator;
 
 const styles = StyleSheet.create({
     tabBox: {
-        height: wp('10%'),
+        height: wp(12),
         alignItems: 'center',
         justifyContent: 'center',
-        width: wp('10%'),
-        borderRadius: 20,
+        width: wp(12),
+        borderRadius: wp(20),
         // backgroundColor: DefaultStyles.colors.primary
     },
     tabBox1: {
-        height: wp('14%'),
+        height: wp(12),
         alignItems: 'center',
         justifyContent: 'center',
-        width: wp("14%"),
-        borderRadius: 25,
+        width: wp(12),
+        borderRadius: wp(20),
         backgroundColor: DefaultStyles.colors.primary
     },
     scBox: {
-        height: wp(15),
+        height: wp(12),
         alignItems: 'center',
         justifyContent: 'center',
-        width: wp(15),
+        width: wp(12),
         borderRadius: wp(20),
     },
     scBox1: {
-        height: wp(15),
+        height: wp(12),
         alignItems: 'center',
         justifyContent: 'center',
-        width: wp(15),
+        width: wp(12),
         borderRadius: wp(20),
         backgroundColor: DefaultStyles.colors.primary
     },
