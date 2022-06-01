@@ -67,7 +67,7 @@ const PaymentPlans = ({ navigation }) => {
                 <FlatList
                     data={DATA}
                     keyExtractor={(item, index) => index}
-                    style={{maxHeight:'80%'}}
+                    // style={{maxHeight:'80%'}}
                     renderItem={({ item, index }) => (
                         <PlansComp
                         btnTxt={item.label}

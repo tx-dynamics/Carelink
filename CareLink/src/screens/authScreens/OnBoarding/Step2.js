@@ -26,7 +26,7 @@ const Step2 = ({navigation}) => {
             <TouchableOpacity 
             onPress={() => navigation.navigate("Step3")}
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:105, height:105,}} source={require('../../../../assets/Step3BoxNew.png')} />
+            <Image style={{width:wp(30), height:wp(30)}} source={require('../../../../assets/Step3BoxNew.png')} />
             </TouchableOpacity>
         </View>
     )

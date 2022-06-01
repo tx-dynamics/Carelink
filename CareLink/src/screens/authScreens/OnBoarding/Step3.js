@@ -29,7 +29,7 @@ const Step3 = ({navigation}) => {
             <TouchableOpacity 
             onPress={() => navigation.navigate("AskRegister")}
             style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:105, height:105,}} source={require('../../../../assets/Step2BoxNew.png')} />
+            <Image style={{width:wp(30), height:wp(30)}} source={require('../../../../assets/Step2BoxNew.png')} />
             </TouchableOpacity>
             {/* <View style={styles.underLine}>
             <TouchableOpacity 
