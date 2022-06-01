@@ -8,6 +8,9 @@ import FormButton from '../../../components/FormButton';
 import PaymentMethodComp from '../../../components/PaymentMethodComp';
 
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
+
 const AddCard = ({ navigation }) => {
 
     const [isTick, setTick] = useState(false);
@@ -15,13 +18,12 @@ const AddCard = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Add new card</Apptext>
-            </View>
+            
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Add new card"}
+            />
             <View style={{marginTop:-10}}>
             <FormInput
                     title={"Card number"}

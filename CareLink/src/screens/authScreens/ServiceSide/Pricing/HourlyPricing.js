@@ -6,19 +6,19 @@ import RoomsComp from '../../../../components/RoomsComp';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
-
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
 
 const HourlyPricing = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Set up availibilty time </Apptext>
-            </View>
+       
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Set up availibilty time"}
+            />
             <Apptext style={styles.bkTxt} >Time Availibilty:</Apptext>
             <View style={{ marginTop: -15 }}>
                 <FormInput

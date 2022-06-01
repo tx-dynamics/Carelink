@@ -13,6 +13,9 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
+
 const Rates = ({ navigation }) => {
 
     const tableData = [

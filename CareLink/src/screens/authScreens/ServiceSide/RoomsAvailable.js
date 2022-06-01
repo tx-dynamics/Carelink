@@ -4,6 +4,8 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import RoomsComp from '../../../components/RoomsComp';
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 
 const RoomsAvailable = ({ navigation }) => {
@@ -48,13 +50,11 @@ const RoomsAvailable = ({ navigation }) => {
     return (
 
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>When your rooms available for rent? </Apptext>
-            </View>
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"When your rooms available for rent?"}
+            />
             <View style={{alignSelf:'center'}}>
             <FlatList
                     data={DATA}

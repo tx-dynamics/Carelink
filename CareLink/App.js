@@ -21,9 +21,9 @@ const App = () => {
     <NavigationContainer>
     
       <Provider store={store}>
-     
+     {/* <SafeAreaView> */}
       <Main />
-      
+      {/* </SafeAreaView> */}
       </Provider>
      
     </NavigationContainer>

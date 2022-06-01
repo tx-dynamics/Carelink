@@ -6,19 +6,21 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const Policy = ({navigation}) => {
 
     return (
 
         <ScrollView style ={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-            <Image style={{marginHorizontal:wp('5%'),marginTop:18 }}
-             source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-          <View>
-              <Apptext style={styles.createTxt}>Privacy Policies</Apptext>
-          </View>
+            
+          <IconHeaderComp
+           onPress={() => {navigation.goBack()}}
+           imgName={iconPath.leftArrow}
+           heading={"Privacy Policies"}
+           style={styles.createTxt}
+             /> 
           <Apptext style={styles.termsTxt}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum, sed eros, scelerisque velit. Consectetur nec in elit porttitor malesuada aenean tortor. Consequat, at tincidunt quis amet imperdiet aliquam. Feugiat tortor malesuada phasellus id enim in. Tincidunt consectetur morbi enim, viverra habitant commodo sed phasellus non. Hendrerit habitasse aenean 
            

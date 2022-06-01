@@ -8,6 +8,8 @@ import FormButton from '../../../components/FormButton';
 import PlansComp from '../../../components/PlansComp';
 import { useSelector } from 'react-redux';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const PaymentPlans = ({ navigation }) => {
 
@@ -51,13 +53,12 @@ const PaymentPlans = ({ navigation }) => {
     return (
 
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Subscribe your plan to continue</Apptext>
-            </View>
+         
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Subscribe your plan to continue"}
+            />
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt} >Subscribe Care Link to submit your rooms listings </Apptext>
                 <Apptext style={[styles.submitTxt, { fontFamily: 'Poppins-Medium' }]}>Choose your plan and get started</Apptext>

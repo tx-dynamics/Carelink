@@ -33,6 +33,7 @@ const ProposalTerms = ({ navigation }) => {
                         fontSize: 24, fontFamily: 'Poppins-Regular'
                     }]} >Accept the terms and conditions of agency</Apptext>
                 </View>
+             
                 <View style={[styles.txtView, { marginTop: wp('5%') }]}>
                     <Apptext style={styles.rms} >Terms and Conditions</Apptext>
                 </View>

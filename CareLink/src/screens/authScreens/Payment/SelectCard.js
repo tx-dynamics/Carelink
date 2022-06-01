@@ -7,6 +7,8 @@ import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import SelectCardComp from '../../../components/SelectCardComp';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const SelectCard = ({ navigation }) => {
 
@@ -64,13 +66,12 @@ const SelectCard = ({ navigation }) => {
     return (
 
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Add/Select your card for payments </Apptext>
-            </View>
+            
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Add/Select your card for payments"}
+            />
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
             </View>

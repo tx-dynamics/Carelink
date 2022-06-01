@@ -6,17 +6,18 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const PayPalDetails = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-        
-            <View style={{flexDirection:'row',alignItems:'center', marginTop: wp('8%') }}>
+             <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+            />
+            <View style={{flexDirection:'row',alignItems:'center',  }}>
                 <Apptext style={styles.createTxt}>Add Paypal Details </Apptext>
                 <Image style={{marginLeft:-25}} source={require('../../../../assets/paypal.png')} />
             </View>

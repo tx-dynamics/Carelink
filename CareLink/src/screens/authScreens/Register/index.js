@@ -7,6 +7,8 @@ import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import { useSelector } from 'react-redux';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const Register = ({ navigation }) => {
 
@@ -15,17 +17,12 @@ const Register = ({ navigation }) => {
     return (
        <SafeAreaView>
        <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-            {usertype === "ServiceSide" ? 
-                <Apptext style={styles.createTxt}>Create a free account to see your best match  </Apptext>
-                :
-                <Apptext style={styles.createTxt}>Create a free account to start your agency </Apptext>
-                }
-            </View>
+           
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
+            />
             <View>
                 <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
             </View>

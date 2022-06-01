@@ -7,6 +7,8 @@ import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import { useSelector } from 'react-redux';
 
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
 
 const Help = ({ navigation }) => {
 
@@ -15,21 +17,20 @@ const Help = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            {usertype === "ServiceSide" ?
-                <Apptext style={[styles.createTxt, {fontSize:22, marginTop: wp('10%') }]}>
-                    This is Care Link Help center. Proceed your query with us.
-                </Apptext>
+          
 
-                : <View>
-                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-SemiBold' }]}>Help Center</Apptext>
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={usertype === "ServiceSide" ? 
+                "This is Care Link Help center. Proceed your query with us."
+                 :
+                 "This is a help center of CARE LINK .Submit your problems here"
+                 
+                }
+                style={usertype === "ServiceSide" ? {} : styles.createTxt}
+            />
 
-                    <Apptext style={[styles.createTxt, { marginTop: wp('4%') }]}>This is a help center of CARE LINK .Submit your problems here</Apptext>
-                </View>
-            }
             <View>
                 <FormInput
                     title={"Name"}
@@ -45,11 +46,11 @@ const Help = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     title={"Your Problem"}
-                    height={wp('65%')}
-                    // marginTop={-105}
+                    // height={wp('65%')}
+                // marginTop={-105}
                 />
             </View>
-            <View style={{ marginTop: wp('10%') }}>
+            <View style={{ marginTop: wp('30%') }}>
                 <FormButton
                     buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
                     width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}

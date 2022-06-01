@@ -6,18 +6,20 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const AgencyPhotos = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Add your agency cover and profile photo </Apptext>
-            </View>
+       
+            <IconHeaderComp
+                onPress={() => { navigation.goBack() }}
+                imgName={iconPath.leftArrow}
+                heading={"Add your agency cover and profile photo"}
+                style={styles.createTxt}
+            />
             <TouchableOpacity style={styles.cover}>
             <Image source={require('../../../../assets/addPhoto.png')} />
             <Apptext style={styles.cvrTxt}>Add Cover Photo</Apptext>

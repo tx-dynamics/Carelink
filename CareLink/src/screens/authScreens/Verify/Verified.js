@@ -6,16 +6,19 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const Verified = ({ navigation }) => {
 
     return (
 
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
+           
+            <IconHeaderComp
+                onPress={() => { navigation.goBack() }}
+                imgName={iconPath.leftArrow}
+            />
             <View style={styles.logoView}>
                 <Image source={require('../../../../assets/VerifiedEmailNew.png')} />
             </View>
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     },
     logoView:{
         alignSelf:'center',
-        marginTop:wp('25%')
+        marginTop:wp('5%')
     },
     verifyTxt:{
         marginTop:33,

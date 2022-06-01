@@ -10,6 +10,9 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { setUser } from '../../../redux/actions/authAction';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
+
 const PaymentDone = ({ navigation }) => {
 
     let dispatch = useDispatch()
@@ -51,10 +54,11 @@ const PaymentDone = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
+        
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+            />
             {/* //////////////////////////////////// */}
             <View style={styles.centerView}>
                 <Image
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     centerView:{
         alignSelf:'center',
         alignItems:'center',
-        marginTop:wp('17%')
+        marginTop:wp('10%')
     },
     txtView: {
         width: wp('90%'),

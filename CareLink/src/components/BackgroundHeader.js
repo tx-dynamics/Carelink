@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, ImageBackground,TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, ImageBackground, TouchableOpacity } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -25,51 +25,70 @@ function BackgroundHeader({
 }) {
   return (
     <ImageBackground
-    source={backImg}
-    resizeMode='contain'
+      source={backImg}
+      resizeMode='cover'
       style={{
         ...styles.container,
         backgroundColor: backgroundColor,
         ...style,
       }}
     >
-     
-      <TouchableOpacity 
-      onPress={onPressLeft} 
-      style={{width:wp('6%'), marginTop:-160}}>
-      {isBack ? (
-        <Image style={{tintColor:"white"}} source={leftImgName} />
-      ) : null}
+      <View style={styles.headerIcons}>
+      <TouchableOpacity
+        onPress={onPressLeft}
+        // style={{ width: wp('6%'), }}
+        >
+        {isBack ? (
+          <Image style={[styles.icons, ]} source={leftImgName} />
+        ) : null}
       </TouchableOpacity>
-      <View>
-      <Image source={centerImg} />
-      <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
-      </View>
+      {/* <View >
+        <Image style={styles.imgView} source={centerImg} />
+        <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
+      </View> */}
       <TouchableOpacity onPress={onPressRight}>
-        <Image style={{marginTop:-100, tintColor:"white" }} source={rightImg} />
+        <Image style={[styles.icons,]} source={rightImg} />
       </TouchableOpacity>
-
+      </View>
 
     </ImageBackground>
   );
 }
 const styles = StyleSheet.create({
- 
+
   container: {
-    height: 240,
-    width: wp("100%"),
+    height: wp('67%'),
+    width: "100%",
+    // alignSelf:'center',
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,
     alignItems: "center",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    padding: wp('5%'),
-  
+    // justifyContent: "space-between",
+    // flexDirection: "row",
+    // padding: wp('5%'),
+
   },
-  headerLabel:{
-    fontFamily:'Poppins-SemiBold',
-    color:DefaultStyles.colors.secondary,
-    fontSize:14
+  icons:
+  {
+    tintColor: "white",
+    marginHorizontal:wp(5),
+    marginTop:wp(5)
+    // position:"absolute",
+    // bottom:0,
+  },
+  imgView: {
+    width: '100%'
+  },
+  headerLabel: {
+    fontFamily: 'Poppins-SemiBold',
+    color: DefaultStyles.colors.secondary,
+    fontSize: 14
+  },
+  headerIcons:{
+    flexDirection:'row',
+    width:'100%',
+    justifyContent:'space-between',
+    // alignItems:'center'
   }
 });
 

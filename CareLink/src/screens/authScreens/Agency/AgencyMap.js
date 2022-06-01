@@ -7,6 +7,8 @@ import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import { useSelector } from 'react-redux';
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const AgencyMap = ({ navigation }) => {
 
@@ -14,13 +16,12 @@ const AgencyMap = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Pin your listed room location on the map</Apptext>
-            </View>
+     
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Pin your listed room location on the map"}
+            />
                 <ImageBackground 
                 style={styles.imgView}
                 source={require('../../../../assets/map.png')}>

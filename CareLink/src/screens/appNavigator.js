@@ -40,7 +40,7 @@ import Read3 from "./appScreens/AgencySide/Contract/Read3";
 import EditProfile from "./appScreens/ServiceSide/ServiceProfile/EditProfile";
 import Received from "./appScreens/ServiceSide/Contract/Received";
 import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
-
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 const Tab = createBottomTabNavigator();
@@ -258,16 +258,29 @@ const MyTabs = () => {
                     tabBarIcon: ({ focused }) => (
                         focused ?
                             <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
+                                {/* <Icon 
+                                    size={45}
+                                    color={"white"}
+                                    name={"fa-house"}
+                                    /> */}
                                 <Image
-                                    source={usertype === "ServiceSide" ? require('../../assets/serviceHome.png') : require('../../assets/home.png')}
+                                    style={[styles.iconSize, {tintColor:"white"}]}
+                                    source={usertype === "ServiceSide" ? 
+                                    require('../../assets/serviceTab1.png') 
+                                    : 
+                                   
+                                    require('../../assets/firstTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
 
                             <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    style={{ tintColor: "black" }}
-                                    source={usertype === "ServiceSide" ? require('../../assets/serviceHome.png') : require('../../assets/home.png')}
+                                    style={[styles.iconSize, { tintColor: "black" }]}
+                                    source={usertype === "ServiceSide" ?
+                                     require('../../assets/serviceTab1.png') 
+                                     :
+                                     require('../../assets/firstTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
@@ -278,8 +291,10 @@ const MyTabs = () => {
                         focused ?
                         <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{ tintColor: "white" }}
-                                    source={usertype === "ServiceSide" ? require('../../assets/scTwo.png') : require('../../assets/search.png')}
+                                    style={[styles.iconSize, { tintColor: "white" }]}
+                                    source={usertype === "ServiceSide" ? 
+                                    require('../../assets/serviceTab2.png') : 
+                                    require('../../assets/scndTab.png')}
                                     
                                     resizeMode={"contain"} />
                             </View>
@@ -287,7 +302,10 @@ const MyTabs = () => {
 
                             <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    source={usertype === "ServiceSide" ? require('../../assets/scTwo.png') : require('../../assets/search.png')}
+                                    style={[styles.iconSize]}
+                                    source={usertype === "ServiceSide" ? require('../../assets/serviceTab2.png') 
+                                    :
+                                    require('../../assets/scndTab.png')}                                    
                                     resizeMode={"contain"} />
                             </View>
                     )
@@ -299,15 +317,21 @@ const MyTabs = () => {
                         focused ?
                         <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{ tintColor: "white" }}
-                                    source={usertype === "ServiceSide" ? require('../../assets/scMsg.png') : require('../../assets/bell.png')}
+                                    style={[styles.iconSize, { tintColor: "white" }]}
+                                    source={usertype === "ServiceSide" ? require('../../assets/serviceTab3.png') 
+                                    :
+                                     require('../../assets/thirdTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
                             <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
 
                                 <Image
-                                    source={usertype === "ServiceSide" ? require('../../assets/scMsg.png') : require('../../assets/bell.png')}
+                                style={[styles.iconSize]}
+                                    source={usertype === "ServiceSide" ? 
+                                    require('../../assets/serviceTab3.png') 
+                                    :
+                                    require('../../assets/thirdTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
@@ -325,13 +349,19 @@ const MyTabs = () => {
                         focused ?
                         <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                    style={{ tintColor: "white" }}
-                                    source={usertype === "ServiceSide" ? require('../../assets/scPrfl.png') : require('../../assets/profiles.png')}/>
+                                style={[styles.iconSize, {tintColor: "white"}]}
+                                    source={usertype === "ServiceSide" ? 
+                                    require('../../assets/serviceTab4.png') :
+                                    require('../../assets/frthTab.png')}/>
                             </View>
                             :
                             <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
-                                    source={usertype === "ServiceSide" ? require('../../assets/scPrfl.png') : require('../../assets/profiles.png')}
+                                    style={[styles.iconSize]}
+                                    source={usertype === "ServiceSide" ? 
+                                     require('../../assets/serviceTab4.png')
+                                     : 
+                                     require('../../assets/frthTab.png')}
                                      />
                             </View>
                     )
@@ -378,18 +408,22 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.primary
     },
     scBox: {
-        height: 40,
+        height: wp(15),
         alignItems: 'center',
         justifyContent: 'center',
-        width: 40,
-        borderRadius: 20,
+        width: wp(15),
+        borderRadius: wp(20),
     },
     scBox1: {
-        height: 40,
+        height: wp(15),
         alignItems: 'center',
         justifyContent: 'center',
-        width: 40,
-        borderRadius: 20,
+        width: wp(15),
+        borderRadius: wp(20),
         backgroundColor: DefaultStyles.colors.primary
+    },
+    iconSize:{
+        height:wp(8),
+        width:wp(8)
     }
 });

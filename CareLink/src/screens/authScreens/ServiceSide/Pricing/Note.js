@@ -7,18 +7,19 @@ import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
 
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
 
 const Note = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Write your note if you want any? </Apptext>
-            </View>
+        
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Write your note if you want any?"}
+            />
             <Apptext style={styles.bkTxt} >Click to write:</Apptext>
             <View style={{ marginTop: -20 }}>
                 <FormInput

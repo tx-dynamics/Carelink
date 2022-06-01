@@ -7,6 +7,8 @@ import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import { Calendar } from 'react-native-calendars';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
 
 
 const RoomsCalender = ({ navigation }) => {
@@ -22,13 +24,12 @@ const RoomsCalender = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Select your rooms availibilty time and date </Apptext>
-            </View>
+           
+            <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Select your rooms availibilty time and date"}
+            />
             <Apptext style={styles.bkTxt} >Book now</Apptext>
             <View style={{ alignSelf: 'center' }}>
                 <Calendar

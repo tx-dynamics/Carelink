@@ -6,6 +6,7 @@ import Apptext from '../../../components/Apptext';
 import { useSelector } from 'react-redux';
 import { useDispatch } from "react-redux";
 import { setUser, setUserType } from '../../../redux/actions/authAction';
+import IconHeaderComp from '../../../components/IconHeaderComp';
 
 const AskRegister = ({navigation}) => {
 
@@ -14,9 +15,10 @@ const AskRegister = ({navigation}) => {
     return (
 
         <ScrollView style ={styles.container}>
-          <View>
-              <Apptext style={styles.createTxt}>Let’s get started. Choose an option</Apptext>
-          </View>
+            
+           <IconHeaderComp
+           heading={"Let’s get started. Choose an option"}
+             /> 
           <View style={styles.pinkBox}>
             <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
@@ -55,13 +57,7 @@ const styles = StyleSheet.create({
         backgroundColor : DefaultStyles.colors.white ,
         flex:1,
     },
-    createTxt:{
-        marginTop:wp('16%'),
-        color:DefaultStyles.colors.black,
-        fontFamily:'Poppins-Regular',
-        fontSize:wp('6%'),
-        marginHorizontal:wp('5%')
-    },
+  
     pinkBox:{   
         marginTop:wp('12%'),
         width:wp('90%'),

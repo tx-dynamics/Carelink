@@ -7,17 +7,20 @@ import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 
 
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
+
 const AgencyBasic = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                <Apptext style={styles.createTxt}>Enter your agency name and about </Apptext>
-            </View>
+         
+            <IconHeaderComp
+                onPress={() => { navigation.goBack() }}
+                imgName={iconPath.leftArrow}
+                heading={"Enter your agency name and about"}
+                style={styles.createTxt}
+            />
             <View>
                 <FormInput
                     title={"Agency name"}

@@ -9,6 +9,9 @@ import Header from '../../../../components/Header';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 
 
+import IconHeaderComp from '../../../../components/IconHeaderComp';
+import { iconPath } from '../../../../config/icon';
+
 const Feedback = ({ navigation }) => {
 
     
@@ -41,15 +44,14 @@ const Feedback = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
-                onPressLeft={() => navigation.goBack()}
-            />
-
             <ScrollView>
-                <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >Submit a feedback to your hired agency</Apptext>
-                </View>
+           
+                <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={"Submit a feedback to your hired agency"}
+                style={styles.rms}
+            />
                 <View style={styles.txtView}>
 
                     <Apptext style={[styles.rms, {fontFamily:'Poppins-Medium', marginTop: wp('8%') }]} >Click to write: </Apptext>

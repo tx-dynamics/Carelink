@@ -6,7 +6,8 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import { useSelector } from 'react-redux';
-
+import IconHeaderComp from '../../../components/IconHeaderComp';
+import { iconPath } from '../../../config/icon';
 
 const AgencyLocation = ({ navigation }) => {
 
@@ -15,17 +16,12 @@ const AgencyLocation = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
-            <TouchableOpacity onPress={() => navigation.goBack()} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
-                    source={require('../../../../assets/leftArrow.png')} />
-            </TouchableOpacity>
-            <View>
-                {usertype === "ServiceSide" ? 
-                <Apptext style={styles.createTxt}>Your location where your listed rooms located? </Apptext>
-                :
-                <Apptext style={styles.createTxt}>Your location where your agency located? </Apptext>
-                }
-                </View>
+         
+                <IconHeaderComp
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}
+            />
             <View>
                 <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
             </View>
