@@ -36,7 +36,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>to show user current data according to location </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To get user profile image. </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
