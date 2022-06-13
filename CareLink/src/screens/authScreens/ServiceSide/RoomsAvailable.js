@@ -63,7 +63,8 @@ const RoomsAvailable = ({ navigation }) => {
                     renderItem={({ item, index }) => (
                         <RoomsComp 
                         label={item.label}
-                        onPress={() => navigation.navigate("RoomsCalender") }
+                        // onPress={() => navigation.navigate("RoomsCalender") }
+                        onPress={() => navigation.navigate("HourlyPricing") }
                         />
                         )}
                 />

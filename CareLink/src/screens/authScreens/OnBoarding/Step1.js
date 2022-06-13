@@ -16,7 +16,7 @@ const Step1 = ({navigation}) => {
            </TouchableOpacity>
            <View style={styles.boxView} >
                <Image source={require('../../../../assets/step1New.png')} />
-               <Apptext style={styles.pinkTxt} >Quit & Easy Services</Apptext>
+               <Apptext style={styles.pinkTxt} >Quick & Easy Services</Apptext>
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
             <View style={styles.threeDots}>

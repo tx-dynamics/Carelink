@@ -52,7 +52,8 @@ const AgencyLocation = ({ navigation }) => {
                     buttonTitle={"Next"}
                     width={wp('90%')}
                     height={wp('15%')}
-                    onPress={() => navigation.navigate("AgencyMap")}
+                    // onPress={() => navigation.navigate("AgencyMap")}
+                    onPress={() => navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")}
                 />
             </View>
         </ScrollView>

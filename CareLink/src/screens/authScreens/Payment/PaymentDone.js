@@ -77,7 +77,7 @@ const PaymentDone = ({ navigation }) => {
             </View>
             }
             <View style={styles.txtView} >
-                <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
+                <Apptext style={styles.submitTxt}> This is Sample Text. Please Provide Original Text to be pasted here  </Apptext>
             </View>
 
             <View style={{marginTop:wp('35%')}} >
