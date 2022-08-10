@@ -53,7 +53,6 @@ const PaymentPlans = ({ navigation }) => {
     return (
 
         <View style={styles.container}>
-         
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}

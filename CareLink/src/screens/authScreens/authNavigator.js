@@ -23,6 +23,12 @@ import PaymentDone from "./Payment/PaymentDone";
 import PayPalDetails from "./Payment/PayPalDetails";
 import AddCard from "./Payment/AddCard";
 import ListingOptions from "./ServiceSide/ListingOptions";
+import SelectCareGiver from "./ProviderScreens/SelectCareGiver";
+import ActivitySelect from "./ProviderScreens/ActivitySelect";
+import ReviewDetails from "./ProviderScreens/ReviewDetails";
+import CareGiver from "./ProviderScreens/CareGiver";
+import TellDescription from "./ProviderScreens/TellDescription";
+import Schedule from "./ProviderScreens/Schedule";
 import RoomsAvailable from "./ServiceSide/RoomsAvailable";
 import RoomsCalender from "./ServiceSide/Calender/RoomsCalender";
 import HourlyPricing from "./ServiceSide/Pricing/HourlyPricing";
@@ -60,6 +66,12 @@ const SplashNavigator = () => {
             <AuthStack.Screen name ="PayPalDetails" component={PayPalDetails}/>
             <AuthStack.Screen name ="AddCard" component={AddCard}/>
             <AuthStack.Screen name ="ListingOptions" component={ListingOptions}/>
+            <AuthStack.Screen name ="SelectCareGiver" component={SelectCareGiver}/>
+            <AuthStack.Screen name ="ActivitySelect" component={ActivitySelect}/>
+            <AuthStack.Screen name ="ReviewDetails" component={ReviewDetails}/>
+            <AuthStack.Screen name ="CareGiver" component={CareGiver}/>
+            <AuthStack.Screen name ="TellDescription" component={TellDescription}/>
+            <AuthStack.Screen name ="Schedule" component={Schedule}/>
             <AuthStack.Screen name ="RoomsAvailable" component={RoomsAvailable}/>
             <AuthStack.Screen name ="RoomsCalender" component={RoomsCalender}/>
             <AuthStack.Screen name ="HourlyPricing" component={HourlyPricing}/>

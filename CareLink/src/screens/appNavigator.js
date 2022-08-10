@@ -133,17 +133,12 @@ const AppNavigator = () => {
 
 
 const GeneralNavigator = () => {
-
     return (
-
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-
             <StackNavigator.Screen name="HomeNavigator" component={HomeNavigator} />
-
-
         </StackNavigator.Navigator>
     )
 }
@@ -151,7 +146,6 @@ const GeneralNavigator = () => {
 const HomeNavigator = () => {
     const usertype = useSelector((state) => state.auth.usertype)
     return (
-
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
@@ -166,64 +160,48 @@ const HomeNavigator = () => {
 }
 
 const SearchNavigator = () => {
-
     const usertype = useSelector((state) => state.auth.usertype)
     return (
-
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-                {usertype === "ServiceSide" ?
+            {usertype === "ServiceSide" ?
                 <StackNavigator.Screen name="ServiceRooms" component={ServiceRooms} />
                 :
                 <StackNavigator.Screen name="AgencySearch" component={AgencySearch} />
-                }
-
+            }
         </StackNavigator.Navigator>
     )
 }
 
 const BellNavigator = () => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-   
     return (
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-                {usertype === "ServiceSide" ?
+            {usertype === "ServiceSide" ?
                 <StackNavigator.Screen name="ServiceMessages" component={ServiceMessages} />
                 :
                 <StackNavigator.Screen name="AgencyNotifications" component={AgencyNotifications} />
-                }
-
+            }
         </StackNavigator.Navigator>
     )
 }
 
 const ProfileNavigator = () => {
-
     return (
-
-        <StackNavigator.Navigator
-            screenOptions={{
-                headerShown: false
-            }}>
-
+        <StackNavigator.Navigator screenOptions={{ headerShown: false }}>
             <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
             <StackNavigator.Screen name="ServiceClientProfile" component={ServiceClientProfile} />
-
-
         </StackNavigator.Navigator>
     )
 }
 
 const MyTabs = () => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-    
     return (
         <Tab.Navigator
             // tabBarOptions={{
@@ -249,38 +227,36 @@ const MyTabs = () => {
                     fontFamily: "Poppins-Regular",
                     color: DefaultStyles.colors.primary
                 },
-
             }}>
 
             <Tab.Screen name="GeneralNavigator" component={GeneralNavigator}
                 options={{
-                
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                            <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 {/* <Icon 
                                     size={45}
                                     color={"white"}
                                     name={"fa-house"}
                                     /> */}
                                 <Image
-                                    style={[styles.iconSize, {tintColor:"white"}]}
-                                    source={usertype === "ServiceSide" ? 
-                                    require('../../assets/serviceTab1.png') 
-                                    : 
-                                   
-                                    require('../../assets/firstTab.png')}
+                                    style={[styles.iconSize, { tintColor: "white" }]}
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab1.png')
+                                        :
+
+                                        require('../../assets/firstTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
 
-                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
                                     style={[styles.iconSize, { tintColor: "black" }]}
                                     source={usertype === "ServiceSide" ?
-                                     require('../../assets/serviceTab1.png') 
-                                     :
-                                     require('../../assets/firstTab.png')}
+                                        require('../../assets/serviceTab1.png')
+                                        :
+                                        require('../../assets/firstTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
@@ -289,50 +265,49 @@ const MyTabs = () => {
                 options={{
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
                                     style={[styles.iconSize, { tintColor: "white" }]}
-                                    source={usertype === "ServiceSide" ? 
-                                    require('../../assets/serviceTab2.png') : 
-                                    require('../../assets/scndTab.png')}
-                                    
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab2.png') :
+                                        require('../../assets/scndTab.png')}
+
                                     resizeMode={"contain"} />
                             </View>
                             :
 
-                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
                                     style={[styles.iconSize]}
-                                    source={usertype === "ServiceSide" ? require('../../assets/serviceTab2.png') 
-                                    :
-                                    require('../../assets/scndTab.png')}                                    
+                                    source={usertype === "ServiceSide" ? require('../../assets/serviceTab2.png')
+                                        :
+                                        require('../../assets/scndTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
                 }} />
-
             <Tab.Screen name="bell" component={BellNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
                                     style={[styles.iconSize, { tintColor: "white" }]}
-                                    source={usertype === "ServiceSide" ? 
-                                    require('../../assets/serviceTab3.png') 
-                                    :
-                                     require('../../assets/thirdTab.png')}
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab3.png')
+                                        :
+                                        require('../../assets/thirdTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                             :
-                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox : styles.tabBox}>
 
                                 <Image
-                                style={[styles.iconSize ]}
-                                    source={usertype === "ServiceSide" ? 
-                                    require('../../assets/serviceTab3.png') 
-                                    :
-                                    require('../../assets/thirdTab.png')}
+                                    style={[styles.iconSize]}
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab3.png')
+                                        :
+                                        require('../../assets/thirdTab.png')}
                                     resizeMode={"contain"} />
                             </View>
                     )
@@ -348,22 +323,22 @@ const MyTabs = () => {
                     ),
                     tabBarIcon: ({ focused }) => (
                         focused ?
-                        <View style={usertype ==="ServiceSide" ? styles.scBox1 : styles.tabBox1}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox1 : styles.tabBox1}>
                                 <Image
-                                style={[styles.iconSize, {tintColor: "white"}]}
-                                    source={usertype === "ServiceSide" ? 
-                                    require('../../assets/serviceTab4.png') :
-                                    require('../../assets/frthTab.png')}/>
+                                    style={[styles.iconSize, { tintColor: "white" }]}
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab4.png') :
+                                        require('../../assets/frthTab.png')} />
                             </View>
                             :
-                            <View style={usertype ==="ServiceSide" ? styles.scBox : styles.tabBox}>
+                            <View style={usertype === "ServiceSide" ? styles.scBox : styles.tabBox}>
                                 <Image
                                     style={[styles.iconSize]}
-                                    source={usertype === "ServiceSide" ? 
-                                     require('../../assets/serviceTab4.png')
-                                     : 
-                                     require('../../assets/frthTab.png')}
-                                     />
+                                    source={usertype === "ServiceSide" ?
+                                        require('../../assets/serviceTab4.png')
+                                        :
+                                        require('../../assets/frthTab.png')}
+                                />
                             </View>
                     )
                 }} />
@@ -423,8 +398,8 @@ const styles = StyleSheet.create({
         borderRadius: wp(20),
         backgroundColor: DefaultStyles.colors.primary
     },
-    iconSize:{
-        height:wp(8),
-        width:wp(8)
+    iconSize: {
+        height: wp(8),
+        width: wp(8)
     }
 });

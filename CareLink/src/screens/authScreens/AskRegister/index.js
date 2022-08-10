@@ -16,9 +16,8 @@ const AskRegister = ({navigation}) => {
 
         <View style ={styles.container}>
             
-           <IconHeaderComp
-           heading={"Let’s get started. Choose an option"}
-             /> 
+           <IconHeaderComp heading={"Let’s get started. Choose an option"}/> 
+         
           <View style={styles.pinkBox}>
             <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
@@ -32,7 +31,20 @@ const AskRegister = ({navigation}) => {
             </TouchableOpacity>
           </View>
 
-          <View style={[styles.pinkBox, {marginTop:wp('13%')}]}>
+          <View style={[styles.pinkBox, {marginTop:wp('8%')}]}>
+            <Apptext style={[styles.firstTxt]}>I want to find the right Provider</Apptext>
+            <Apptext style={styles.scndTxt}>Fill the details and find the right Provider for your baby,mother & father</Apptext>
+            <TouchableOpacity 
+            onPress={() => {
+                dispatch(setUserType("ServiceSide"))
+                navigation.navigate("SelectCareGiver")
+            }}
+            style={styles.btn}>
+                <Apptext>Find Now</Apptext>
+            </TouchableOpacity>
+          </View>
+
+          <View style={[styles.pinkBox, {marginTop:wp('8%')}]}>
             <Apptext style={[styles.firstTxt]}>I want to register as an agency</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and register your agency now</Apptext>
             <TouchableOpacity 
