@@ -5,7 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import InboxComp from '../../../../components/InboxComp';
-import {DrawerActions, useNavigation} from '@react-navigation/native'
+import { DrawerActions, useNavigation } from '@react-navigation/native'
 
 
 const ServiceMessages = ({ navigation }) => {
@@ -29,35 +29,31 @@ const ServiceMessages = ({ navigation }) => {
             dt: "2 hours ago",
             move: "Detail"
         },
-   
-       
-    ];
 
+
+    ];
 
     return (
         <View style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                
-                />
-
+            />
             <ScrollView>
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms} >Messages</Apptext>
                 </View>
                 <TouchableOpacity style={styles.searchBar}>
-                    <Image style={{ width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20 }}
+                    <Image style={styles.srchImg}
                         source={require('../../../../../assets/search.png')} />
                     <TextInput
-                        style={{ color: 'grey',marginLeft:-10, width: wp('70%') }}
+                        style={styles.srchTxt}
                         placeholder='Search'
                         placeholderTextColor={DefaultStyles.colors.lightgray}
                         onChangeText={(val) => console.log(val)}
                     />
                 </TouchableOpacity>
-
-                <View style={{marginTop:wp('2%')}}>
+                <View style={{ marginTop: wp('2%') }}>
                     <FlatList
                         data={DATA}
                         showsVerticalScrollIndicator={false}
@@ -67,7 +63,7 @@ const ServiceMessages = ({ navigation }) => {
                                 imgName={item.Img}
                                 label={item.label}
                                 msg={item.msg}
-                                onPress={() => navigation.navigate("withoutBottomTabnavigator", {screen : "ServiceChatDetail"})}
+                                onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ServiceChatDetail" })}
                             />
 
                         )}
@@ -116,8 +112,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 0.5,
         borderColor: "gray"
-
     },
+    srchImg: {
+        width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20
+    },
+    srchTxt: {
+        color: 'grey', marginLeft: -10, width: wp('70%')
+    }
 
 
 

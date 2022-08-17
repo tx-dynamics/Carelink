@@ -51,7 +51,7 @@ const Register = ({ navigation }) => {
             <View style={styles.termsTxt} >
                 <Apptext style={styles.createTxt1} >By clicking “ Join now,”you agree to our 
                 </Apptext>
-                <View style={{flexDirection:'row', alignSelf:'center' }}>
+                <View style={styles.termsUse}>
                 <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
                     <Apptext style={styles.hyperLink}>Terms of Use</Apptext>
                 </TouchableOpacity>
@@ -79,7 +79,6 @@ export default Register;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
-       // flex: 1,
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -93,7 +92,6 @@ const styles = StyleSheet.create({
     },
     termsTxt: {
         width:wp('90%'),marginTop:41,
-        // backgroundColor:"red",
         alignSelf:'center'
     },
     hyperLink: {
@@ -101,5 +99,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         textDecorationLine: 'underline',
         color: "#004cbe"
+    },
+    termsUse:{
+        flexDirection:'row', alignSelf:'center'
     }
 });

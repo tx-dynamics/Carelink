@@ -20,7 +20,6 @@ const ReceivedProposal = ({ navigation }) => {
         },
     ];
 
-
     return (
         <View style={styles.container}>
             <Header
@@ -94,15 +93,12 @@ const ReceivedProposal = ({ navigation }) => {
                 {/* Section */}
                 <View style={styles.directionView}>
                     <Apptext style={styles.jobsTxt}> Note :    </Apptext>
-                    <Apptext style={{ width: wp('70%'), marginTop: wp('1%'), fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
+                    <Apptext style={styles.lrmTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
                 {/* Section Ends Here */}
 
-                <View style={{
-                    flexDirection: 'row', justifyContent: 'space-around',
-                    marginTop: 21, marginLeft: wp('15%')
-                }}>
-                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary  }]} >
+                <View style={styles.ktTxtView}>
+                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary }]} >
                         <Apptext style={styles.pinkboxTxt}>
                             Kitchen available
                         </Apptext>
@@ -119,28 +115,28 @@ const ReceivedProposal = ({ navigation }) => {
                     <Apptext style={styles.rms} >Proposals</Apptext>
 
                 </View>
-                <Apptext style={{marginHorizontal:wp('5%'), marginTop:wp('6%')}} >
+                <Apptext style={styles.sameTxt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus. Aliquam commodo, sed nunc tincidunt ultrices volutpat sem metus. Est, volutpat elit consectetur fames arcu elit interdum vivamus molestie. In dignissim eleifend massa euismod molestie risus, in. Eleifend volutpat, varius pulvinar purus ultricies sit at consectetur mauris. Ultrices vulputate nam molestie pellentesque lectus. Ut sem leo varius posuere pellentesque.
                 </Apptext>
-                <Apptext style={{marginHorizontal:wp('5%'), marginTop:wp('6%')}}>
-                A ultrices malesuada consequat metus etiam morbi augue donec praesent. Enim feugiat nisi, tristique sit eget sit nunc. Enim, gravida ut sed tincidunt pellentesque venenatis faucibus arcu. Mauris dui at egestas fringilla est ultrices curabitur at vitae. Nullam vitae quisque ipsum sit sit dolor convallis. Duis non turpis vestibulum id nulla. Mattis est etiam turpis cras sollicitudin. At sed suscipit eros, aliquet gravida eleifend morbi. Eleifend laoreet mauris scelerisque dui.
+                <Apptext style={styles.sameTxt}>
+                    A ultrices malesuada consequat metus etiam morbi augue donec praesent. Enim feugiat nisi, tristique sit eget sit nunc. Enim, gravida ut sed tincidunt pellentesque venenatis faucibus arcu. Mauris dui at egestas fringilla est ultrices curabitur at vitae. Nullam vitae quisque ipsum sit sit dolor convallis. Duis non turpis vestibulum id nulla. Mattis est etiam turpis cras sollicitudin. At sed suscipit eros, aliquet gravida eleifend morbi. Eleifend laoreet mauris scelerisque dui.
                 </Apptext>
                 {/* /////////////////////////////////////// */}
 
-                <View style={{marginTop:wp('13%')}}>
+                <View style={{ marginTop: wp('13%') }}>
                     <FormButton
-                    width={wp('90%')}
-                    buttonTitle={"Reject"}
-                    backgroundColor={"#e6e6e6"}
-                    color={"black"}
+                        width={wp('90%')}
+                        buttonTitle={"Reject"}
+                        backgroundColor={"#e6e6e6"}
+                        color={"black"}
                     />
                 </View>
-                <View style={{marginTop:-7}}>
+                <View style={{ marginTop: -7 }}>
                     <FormButton
-                    width={wp('90%')}
-                    buttonTitle={"Accept"}
-                    color={"white"}
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"ProposalTerms"})}
+                        width={wp('90%')}
+                        buttonTitle={"Accept"}
+                        color={"white"}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
                     />
                 </View>
 
@@ -174,7 +170,6 @@ const styles = StyleSheet.create({
     dtls: {
         color: DefaultStyles.colors.white,
         fontSize: 11
-        // textDecorationLine: 'underline',
     },
     marginView: {
         marginHorizontal: wp('5%'),
@@ -203,14 +198,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Medium',
         fontSize: 15,
         marginLeft: wp('5%')
-        // marginHorizontal: wp('5%')
     },
     pinkBox1: {
         backgroundColor: '#ffabff',
         marginTop: wp('5%'),
         borderRadius: 6,
-        // width:wp('45%'),
-        // padding:1,
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: wp('23%')
@@ -219,5 +211,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 10
     },
+    lrmTxt:{
+        width: wp('70%'), marginTop: wp('1%'), fontSize: 12
+    },
+    ktTxtView:{
+        flexDirection: 'row', justifyContent: 'space-around',
+        marginTop: 21, marginLeft: wp('15%')
+    },
+    sameTxt:{
+        marginHorizontal: wp('5%'), marginTop: wp('6%') 
+    }
 
 });

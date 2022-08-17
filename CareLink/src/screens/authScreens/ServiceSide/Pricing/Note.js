@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Apptext from '../../../../components/Apptext';
-import RoomsComp from '../../../../components/RoomsComp';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
-
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 
@@ -14,7 +12,6 @@ const Note = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-        
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -23,16 +20,12 @@ const Note = ({ navigation }) => {
             <Apptext style={styles.bkTxt} >Click to write:</Apptext>
             <View style={{ marginTop: -20 }}>
                 <FormInput
-                    // height={wp('65%')}
-                    // style={{textAlignVertical:'top' }}
-                    // inputMargin={-200}
                     title={"Write a Note"}
                     numberOfLines={5}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}  
                 />
             </View>
-
             <View style={{marginTop:wp('50%')}}>
             <FormButton
                 buttonTitle={"Skip"}

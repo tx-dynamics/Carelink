@@ -10,10 +10,8 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const AgencyPhotos = ({ navigation }) => {
-
     return (
         <ScrollView style={styles.container}>
-       
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}

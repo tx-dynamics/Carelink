@@ -1,11 +1,8 @@
 import React,{useState, useEffect} from 'react';
 import {StyleSheet,Image,ActivityIndicator, Text, View } from 'react-native';
-// import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
-import Apptext from '../../../components/Apptext';
 
 const Splash = ({navigation}) => {
-
     useEffect(() => {
         setTimeout(() => {
             navigation.replace("Step1")
@@ -13,10 +10,8 @@ const Splash = ({navigation}) => {
     }, []);
 
     return (
-
         <View style ={styles.container}>
             <Image source={require('../../../../assets/Care_Link_Logo.png')} />
-           {/* <Apptext style={styles.logoTxt}>Care Link</Apptext> */}
         </View>
     )
 }

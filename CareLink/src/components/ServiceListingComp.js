@@ -16,18 +16,18 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
 
             {/* Propsal Starts Here */}
             {showProposals ? <View style={{height:55}}>
-            <View style={{flexDirection:'row', marginTop:wp('1%')}}>
+            <View style={styles.direcView}>
             <TouchableOpacity>
-            <Image style={styles.imgView} source={require('../../assets/photo.png')} />
+            <Image style={styles.imgView} 
+            source={require('../../assets/photo.png')} />
             </TouchableOpacity>
-            <Apptext style={styles.jamesTxt} >{name}</Apptext>
-            <Apptext style={[styles.jamesTxt, 
-            {fontSize:15,fontFamily:'Poppins-Medium',
-            textDecorationLine: 'underline',}]}>
+            <Apptext style={styles.jamesTxt}>{name}</Apptext>
+            <Apptext style={styles.jamesTxt1}> 
             {rightTxt}</Apptext>
             </View>
-            <Apptext style={{marginLeft:80,fontSize:9, marginTop:-35}} >{location}</Apptext>
-            <Image style={{marginLeft:77,height:15, width:80  }}  source={require('../../assets/stars.png')} />
+            <Apptext style={styles.locTxt} >{location}</Apptext>
+            <Image style={styles.strImg} 
+            source={require('../../assets/stars.png')} />
             </View> : null}
             {/* Propsal Ends Here */}
 
@@ -37,7 +37,7 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
                  <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                  </View>
 
-            <View style={{marginHorizontal:wp('5%'), flexDirection: 'row',alignItems:'center' }}>
+            <View style={styles.fvTxt}>
                 <Apptext style={styles.scndTxt}>{when + "  "}</Apptext>
                 <Apptext style={styles.dot} ></Apptext>
                 <Apptext style={styles.scndTxt}>{"  "+ fors + "  "}</Apptext>
@@ -51,16 +51,11 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
                 padding:5,borderRadius:5 }]}>{"kitchen available"}</Apptext>
                 <Apptext style={[styles.scndTxt, {backgroundColor:DefaultStyles.colors.lightPrimary ,padding:5,
                 marginLeft:-20, borderRadius:5 }]}>{"Car Parking available"}</Apptext>
-                
                 </View>
-                <View style={{height:wp('2%')}}>
-
-                </View>
+                <View style={{height:wp('2%')}}></View>
                 </View>
                 : 
-                <View style={{height:wp('2%')}}>
-
-                </View>
+                <View style={{height:wp('2%')}}></View>
                 }
         </TouchableOpacity>
     );
@@ -69,6 +64,15 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
 export default ServiceListingComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection:'row', marginTop:wp('1%')
+    },
+    locTxt:{
+        marginLeft:80,fontSize:9, marginTop:-35
+    },
+    strImg:{
+        marginLeft:77,height:15, width:80 
+    },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
@@ -85,8 +89,15 @@ const styles = StyleSheet.create({
         fontSize:15,
         width:wp('58%'),
         marginLeft:-8,
-        // marginTop:wp('1%'),
-        // backgroundColor:"blue"
+    },
+    jamesTxt1:{
+        width:wp('58%'),
+        marginLeft:-8,
+        fontSize:15,fontFamily:'Poppins-Medium',
+        textDecorationLine: 'underline',
+    },
+    fvTxt:{
+        marginHorizontal:wp('5%'), flexDirection: 'row',alignItems:'center'
     },
     imgStl:{
         width:57,
@@ -99,7 +110,6 @@ const styles = StyleSheet.create({
         marginHorizontal:wp('5%'),
         width:wp('75%'),
         marginTop:wp('3%'),
-        // backgroundColor:"red"
     },
     txtVal:{
         fontFamily:'Poppins-Medium',
@@ -127,7 +137,6 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         marginBottom:wp('5%'),
         alignSelf: 'center',
-        // height:105,
         padding:wp('2%'),
         paddingLeft:0,
         backgroundColor: DefaultStyles.colors.white,

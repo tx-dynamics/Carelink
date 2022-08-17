@@ -9,11 +9,6 @@ import InboxComp from '../../../../components/InboxComp';
 
 const Messages = ({ navigation }) => {
 
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -37,7 +32,6 @@ const Messages = ({ navigation }) => {
        
     ];
 
-
     return (
         <View style={styles.container}>
             <Header
@@ -48,10 +42,10 @@ const Messages = ({ navigation }) => {
                     <Apptext style={styles.rms} >Messages</Apptext>
                 </View>
                 <TouchableOpacity style={styles.searchBar}>
-                    <Image style={{ width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20 }}
+                    <Image style={styles.srchView}
                         source={require('../../../../../assets/search.png')} />
                     <TextInput
-                        style={{ color: 'grey',marginLeft:-10, width: wp('70%') }}
+                        style={styles.srchTxt}
                         placeholder='Search'
                         placeholderTextColor={DefaultStyles.colors.lightgray}
                         onChangeText={(val) => console.log(val)}
@@ -65,7 +59,7 @@ const Messages = ({ navigation }) => {
                         keyExtractor={(item) => item.id}
                         ListEmptyComponent={() => {
                             return (
-                                <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
+                                <Apptext style={styles.noTxt}>
                                     No Item Found
                                 </Apptext>
                             );
@@ -123,8 +117,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 0.5,
         borderColor: "gray"
-
     },
+    srchView:{
+        width: 15, height: 15, tintColor: "lightgray",
+        marginHorizontal: 20 
+    },
+    srchTxt:{
+        color: 'grey',marginLeft:-10, width: wp('70%') 
+    },
+    noTxt:{
+        alignSelf: "center", marginTop: 50 
+    }
 
 
 

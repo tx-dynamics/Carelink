@@ -12,9 +12,7 @@ const ReportComp = ({
         <TouchableOpacity 
         onPress={onPress}
         style={styles.inputContainer}>
-            <View style={{
-        flexDirection:'row',
-        justifyContent:'space-between',}}>
+            <View style={styles.direcView}>
 
         <View style={styles.marginView}>
         <Apptext style={styles.headTxt} >{firstHead}</Apptext>
@@ -26,12 +24,7 @@ const ReportComp = ({
         </View>
         </View>
         {/* ////////////////////////////////////////////// */}
-        <View style={{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        marginTop:wp('4%')
-        }}>
-
+        <View style={styles.lastDirec}>
         <View style={styles.marginView}>
         <Apptext style={styles.headTxt} >{firstHead}</Apptext>
         <Apptext style={styles.prcTxt} >{frstPrc}</Apptext>
@@ -49,12 +42,19 @@ const ReportComp = ({
 export default ReportComp;
 
 const styles = StyleSheet.create({
-    
+    direcView:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+    },
+    lastDirec:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:wp('4%')
+    },
     inputContainer: {
         width: wp('90%'),
         marginBottom:wp('6%'),
         alignSelf: 'center',
-        // height:132,
         padding:wp('4%'),
         borderRadius:10,
         backgroundColor: DefaultStyles.colors.white,

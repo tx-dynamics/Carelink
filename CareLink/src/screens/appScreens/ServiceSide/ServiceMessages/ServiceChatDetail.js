@@ -7,16 +7,9 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import InboxComp from '../../../../components/InboxComp';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
 
 const ServiceChatDetail = ({ navigation }) => {
-
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -31,34 +24,22 @@ const ServiceChatDetail = ({ navigation }) => {
 
 
     ];
-
-
     return (
         <View style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                // centerImg={require('../../../../../assets/photo.png')}
                 style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
             />
              <TouchableOpacity 
                 onPress={() => navigation.navigate("Received")}
-                style={{
-                width:wp('25%'),
-                backgroundColor:DefaultStyles.colors.primary,
-                borderRadius:5,
-                flexDirection:'row',
-                justifyContent:'center',
-                marginHorizontal:wp('70%'),
-                marginTop:-40
-                 }}>
-                <Apptext style={{fontSize:12,color:DefaultStyles.colors.white, textAlign:'center' }} >
-                Contracts</Apptext>
+                style={styles.RcvdView}>
+                <Apptext style={styles.cntTxt}>Contracts</Apptext>
                 </TouchableOpacity>
 
-             <View style={{flexDirection:'row',marginHorizontal:wp('7%')}} >
+             <View style={styles.direView} >
                 <Image
-                style={{width:61, height:61, marginTop:wp('5%')}}
+                style={styles.imgStl}
                 source={require('../../../../../assets/inbox.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
@@ -135,15 +116,10 @@ const ServiceChatDetail = ({ navigation }) => {
             <KeyboardAvoidingView
                 behavior={Platform.OS == "ios" ? "padding" : "height"}
                 keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                style={{
-                    width: '100%', flexDirection: 'row', alignItems: 'center',
-                    borderTopColor: '#F5F5F5', borderTopWidth: 1
-                }}>
-
+                style={styles.kbView}  >
                 <View style={styles.ChatMsgView} >
                     <TextInput
                         onChangeText={(val) => console.log(val)}
-                        // value={"input"}
                         placeholder="Type a message"
                         placeholderTextColor={DefaultStyles.colors.lightgray}
                         style={{
@@ -219,7 +195,6 @@ const styles = StyleSheet.create({
         color: DefaultStyles.colors.lightPrimary,
         marginTop: wp('1%'),
         marginHorizontal: wp('2%')
-        // backgroundColor:"red"
     },
     ChatMsgView: {
         flexDirection: 'row',
@@ -228,8 +203,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: wp('75%'),
         alignItems: 'center',
-        // position: "absolute",
-        // bottom: 0,
         backgroundColor: "#e5e5e5",
         borderRadius: 23,
         marginHorizontal: '5%',
@@ -244,6 +217,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.primary
     },
+    RcvdView:{
+        width:wp('25%'),
+        backgroundColor:DefaultStyles.colors.primary,
+        borderRadius:5,
+        flexDirection:'row',
+        justifyContent:'center',
+        marginHorizontal:wp('70%'),
+        marginTop:-40
+    },
+    cntTxt:{
+        fontSize:12,color:DefaultStyles.colors.white, textAlign:'center'
+    },
+    direView:{
+        flexDirection:'row',marginHorizontal:wp('7%')
+    },
+    imgStl:{
+        width:61, height:61, marginTop:wp('5%')
+    },
+    kbView:{
+        width: '100%', flexDirection: 'row', alignItems: 'center',
+        borderTopColor: '#F5F5F5', borderTopWidth: 1
+    }
 
 
 });

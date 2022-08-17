@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
     user: false,
     usertype:null
- 
 }
 
 export default function (state = INITIAL_STATE, action){

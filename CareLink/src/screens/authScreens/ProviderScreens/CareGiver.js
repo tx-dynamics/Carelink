@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, FlatList, Image, View, Pressable, TextInput } from 'react-native';
+import { StyleSheet, FlatList, Image, View, Pressable, TextInput, TouchableOpacity } from 'react-native';
 
 import Apptext from '../../../components/Apptext';
 import Fonticon from '../../../Constants/FontIcon';
@@ -14,23 +14,76 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const CareGiver = ({ navigation }) => {
 
-    const [hourValue, setHourValue] = useState("3.5");
     const [open, setOpen] = useState(false);
+    const [tickName, setTickName] = useState('');
+    const [tickName1, setTickName1] = useState('');
+    const [tickName2, setTickName2] = useState('');
     const [value, setValue] = useState(null);
+    const [isItem, setSelectedItem] = useState([3]);
+    const [isItem1, setSelectedItem1] = useState([1]);
+    const [isItem2, setSelectedItem2] = useState([2]);
     const [items, setItems] = useState([
         { label: 'Abc', value: 'Abc' },
         { label: 'xyz', value: 'xyz' },
-        { label: 'Abc', value: 'Abc' },
-        { label: 'xyz', value: 'xyz' },
-        { label: 'Abc', value: 'Abc' },
-        { label: 'xyz', value: 'xyz' },
+        { label: 'Qwerty', value: 'Qwerty' },
+        { label: 'RQST', value: 'RQST' },
+        { label: 'Follow', value: 'Follow' },
     ]);
-    const [openAMPM, setOpenAMPM] = useState(false);
-    const [AMPMvalue, setAMPMvalue] = useState("AM");
-    const [AMPMitems, setAMPMItems] = useState([
-        { label: 'AM', value: 'AM' },
-        { label: 'PM', value: 'PM' },
-    ]);
+    const DATA = [
+        { id: 1, label: 'Any Gender' },
+        { id: 2, label: 'Female' },
+        { id: 3, label: 'Male' },
+    ]
+    const DATA1 = [
+        { id: 1, label: 'In my mother’s home (Live-in)' },
+        { id: 2, label: 'In my mother’s home (Live-in)' },
+    ]
+    const DATA2 = [
+        { id: 1, label: 'Family or personal fund' },
+        { id: 2, label: 'Long-term care insurance' },
+        { id: 3, label: 'Medicated' },
+        { id: 4, label: 'Other sources' },
+
+    ]
+    const addCategories = async (item) => {
+        var selectedIdss = [...isItem]
+        if (selectedIdss.includes(item.id)) {
+            selectedIdss = selectedIdss.filter(id => id !== item.id)
+            console.log(selectedIdss)
+        }
+        else {
+            selectedIdss = [];
+            selectedIdss.push(item.id)
+        }
+        await setSelectedItem(selectedIdss)
+        console.log(isItem, tickName)
+    }
+    const addCategories1 = async (item) => {
+        var selectedIdss = [...isItem1]
+        if (selectedIdss.includes(item.id)) {
+            selectedIdss = selectedIdss.filter(id => id !== item.id)
+            console.log(selectedIdss)
+        }
+        else {
+            selectedIdss = [];
+            selectedIdss.push(item.id)
+        }
+        await setSelectedItem1(selectedIdss)
+        console.log(isItem1, tickName1)
+    }
+    const addCategories2 = async (item) => {
+        var selectedIdss = [...isItem2]
+        if (selectedIdss.includes(item.id)) {
+            selectedIdss = selectedIdss.filter(id => id !== item.id)
+            console.log(selectedIdss)
+        }
+        else {
+            selectedIdss = [];
+            selectedIdss.push(item.id)
+        }
+        await setSelectedItem2(selectedIdss)
+        console.log(isItem2, tickName2)
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -41,32 +94,32 @@ const CareGiver = ({ navigation }) => {
             />
             <Apptext style={styles.innerText}>Our caregiver is...</Apptext>
 
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Any Gender</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.Check_box} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Female</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Male</Apptext>
-            </View>
-
+            <FlatList
+                data={DATA}
+                style={{ flex: 1 }}
+                keyExtractor={(item, index) => index}
+                renderItem={({ item, index }) => (
+                    <TouchableOpacity onPress={() => { addCategories(item), setTickName(item?.label) }} style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
+                        <Image source={isItem.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                        <Apptext style={[styles.checkBoxText]}>{item.label}</Apptext>
+                    </TouchableOpacity>
+                )}
+            />
             <Apptext style={[styles.innerText, { marginTop: 20 }]}>She would be living...</Apptext>
-
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.Check_box} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>In her own room (Live-out)</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>In my mother’s home (Live-in)</Apptext>
-            </View>
-
+            <FlatList
+                data={DATA1}
+                style={{ flex: 1 }}
+                keyExtractor={(item, index) => index}
+                renderItem={({ item, index }) => (
+                    <TouchableOpacity 
+                    onPress={() => { addCategories1(item), setTickName1(item?.label) }}
+                    style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
+                      <Image source={isItem1.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                      <Apptext style={[styles.checkBoxText]}>{item?.label}</Apptext>
+                    </TouchableOpacity> 
+                )}
+            />
             <Apptext style={[styles.innerText, { marginTop: 24 }]}>Our caregiver speaks these languages...</Apptext>
-
             <DropDownPicker
                 open={open}
                 value={value}
@@ -80,24 +133,19 @@ const CareGiver = ({ navigation }) => {
             />
 
             <Apptext style={[styles.innerText, { marginTop: 22 }]}>We plan to payour caregiver through...</Apptext>
-
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Family or personal fund</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.Check_box} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Long-term care insurance</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Medicaid</Apptext>
-            </View>
-            <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                <Apptext style={[styles.checkBoxText]}>Other sources</Apptext>
-            </View>
-
+            <FlatList
+                data={DATA2}
+                style={{ flex: 1 }}
+                keyExtractor={(item, index) => index}
+                renderItem={({ item, index }) => (
+                    <TouchableOpacity 
+                    onPress={() => { addCategories2(item), setTickName2(item?.label) }}
+                    style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
+                        <Image source={isItem2.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                        <Apptext style={[styles.checkBoxText]}>{item?.label}</Apptext>
+                    </TouchableOpacity>
+                )}
+            />
             <View style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 30, marginTop: 50 }}>
                 <FormButton
                     buttonTitle={"Next"}

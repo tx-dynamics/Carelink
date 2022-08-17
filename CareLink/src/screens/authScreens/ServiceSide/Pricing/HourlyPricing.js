@@ -13,7 +13,6 @@ const HourlyPricing = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-       
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -26,19 +25,8 @@ const HourlyPricing = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     rightImgName={require('../../../../../assets/clock.png')}
-                    
                 />
-                {/* <FormInput
-                    title="Minimum hours per booking"
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                /> */}
             </View>
-            {/* <View style={styles.priceTxt}>
-                <TouchableOpacity onPress={() => navigation.navigate("PricingType")}>
-                    <Apptext style={styles.hyperLink}>Change price type</Apptext>
-                </TouchableOpacity>
-            </View> */}
             <View style={{marginTop:wp('70%')}}>
             <FormButton
                 buttonTitle={"Next"}

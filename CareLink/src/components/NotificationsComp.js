@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     },
     txtView:{
         width:wp('78%'),
-        // backgroundColor:"red",
         flexDirection:'row'
     },
     txtVal:{
@@ -49,22 +48,9 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: wp('88%'),
-        // marginBottom:wp('1%'),
         alignSelf: 'center',
-        // height:75,
         padding:wp('2%'),
-        // paddingLeft:wp('4%'),
-        // backgroundColor: DefaultStyles.colors.grash,
         borderBottomColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 5,
-        // },
-        // shadowOpacity: 0.34,
-        // shadowRadius: 6.27,
-        
-        // elevation: 3,
     },
     hrtStl:{
         width:25,

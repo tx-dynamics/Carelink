@@ -1,10 +1,9 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, ImageBackground, Image } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 
@@ -42,7 +41,6 @@ const styles = StyleSheet.create({
         fontSize:18,
         width:wp('25'),
         textAlign:'center',
-        // backgroundColor:"red"
     }
 
 })

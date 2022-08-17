@@ -1,9 +1,5 @@
 import { Dimensions, Platform } from "react-native";
 import colors from "./colors";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 export default {
   colors,

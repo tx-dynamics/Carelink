@@ -15,55 +15,52 @@ const MakeContract = ({ navigation }) => {
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
+            price: "$29.99",
+            plans: "/month",
             label: "General Contract",
-            description:`You will get 20 listing to post in a month with this monthly plan`
+            description: `You will get 20 listing to post in a month with this monthly plan`
         },
-    
+
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$59.99",
-            plans:"/month",
+            price: "$59.99",
+            plans: "/month",
             label: "ABC Contract",
-            description:"You will get 50 listing to post in a month with this monthly plan"
+            description: "You will get 50 listing to post in a month with this monthly plan"
         },
-    
+
         {
             id: 'bd7acbea-c1b1-46c23-aed5-3ad53abb28ba',
-            price:"$99.99",
-            plans:"/month",
+            price: "$99.99",
+            plans: "/month",
             label: "XYZ Contract",
-            description:"You will get 100 listing to post in a month with this monthly plan"
+            description: "You will get 100 listing to post in a month with this monthly plan"
         },
-        
-    
+
+
 
 
     ];
-
 
     return (
         <View style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-
-
-                <View>
-                    <Apptext style={styles.msgTxt} >Make Contract </Apptext>
-                </View>
-                <View style={{alignSelf:'center', marginTop:wp('10%')}}>
-            <FlatList
+            <View>
+                <Apptext style={styles.msgTxt} >Make Contract </Apptext>
+            </View>
+            <View style={{ alignSelf: 'center', marginTop: wp('10%') }}>
+                <FlatList
                     data={DATA}
                     numColumns={2}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
-                        <RoomsComp 
-                        label={item.label}
-                        onPress={() => navigation.navigate("ContractRead")}
+                        <RoomsComp
+                            label={item.label}
+                            onPress={() => navigation.navigate("ContractRead")}
                         />
-                        )}
+                    )}
                 />
             </View>
 

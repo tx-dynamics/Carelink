@@ -81,8 +81,6 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         marginBottom:wp('7%'),
         flexDirection:'row',
-        // alignSelf: 'center',
-        // justifyContent:'center',
         height:105,
         padding:wp('2%'),
         paddingLeft:wp('4%'),

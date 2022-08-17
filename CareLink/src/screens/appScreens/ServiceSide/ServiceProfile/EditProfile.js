@@ -6,35 +6,8 @@ import Apptext from '../../../../components/Apptext';
 import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
-import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import FvrtComp from '../../../../components/FvrtComp';
-import LatestListingsComp from '../../../../components/LatestListingsComp';
-import SelectBox from '../../../../components/SelectBox';
-import {DrawerActions, useNavigation} from '@react-navigation/native'
-
 
 const EditProfile = ({ navigation }) => {
-
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "6",
-            plans: "/month",
-            label: "Available Rooms",
-            color: DefaultStyles.colors.primary,
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "11",
-            plans: "/month",
-            color: '#999999',
-            label: "Booked Rooms",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
-
 
     return (
         <View style={styles.container}>
@@ -42,20 +15,17 @@ const EditProfile = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
             />
-
             <ScrollView>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Edit Profile</Apptext>
-                   
                 </View>
                 <TouchableOpacity style={styles.imgView} >
-                    <Image style={{ width: wp('30%'), height: wp('30%') }}
+                    <Image style={styles.imgStl}
                         source={require('../../../../../assets/JC.png')} />
                 </TouchableOpacity>
                   <View style={{alignSelf:'center'}}>
                 <Apptext style={styles.upldTxt} >Upload photo</Apptext>
                 </View>
-
                 <View style={{marginTop:wp('5%')}}>
                 <FormInput
                     title={"First name"}
@@ -78,7 +48,6 @@ const EditProfile = ({ navigation }) => {
                 <FormButton
                     buttonTitle={"Save Update"}
                     width={wp('90%')}
-              
               />
             </View>
 
@@ -103,21 +72,21 @@ const styles = StyleSheet.create({
         marginTop: wp('7%'),
         height: wp('30%'),
         alignSelf: 'center',
-        // backgroundColor:"red",
         borderRadius: 60
+    },
+    imgStl:{
+        width: wp('30%'), height: wp('30%') 
     },
     upldTxt:{
         fontSize: 12,
         fontFamily: 'Poppins-Regular',
         marginTop:wp('3%'),
         color:"#407fb9"
-    
     },
     jmsTxt: {
         marginTop: wp('4%'),
         fontSize: 22,
         fontFamily: 'Poppins-SemiBold'
-    
     },
     dcTxt: {
         fontFamily: 'Poppins-Medium',
@@ -126,7 +95,6 @@ const styles = StyleSheet.create({
     },
     pinkBox: {
         width: 200,
-        // height:55,
         borderRadius: 10,
         backgroundColor: DefaultStyles.colors.lightPrimary,
         alignSelf: 'center',

@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {
-    StyleSheet, ScrollView, TouchableOpacity,
-    FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View
-} from 'react-native';
-
+    StyleSheet, View } from 'react-native';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
-
-import IconHeaderComp from '../../../../components/IconHeaderComp';
-import { iconPath } from '../../../../config/icon';
 
 const Rates = ({ navigation }) => {
 
@@ -29,17 +21,11 @@ const Rates = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-
-
                 <View>
                     <Apptext style={styles.msgTxt} >Rate </Apptext>
                 </View>
-
                 <View>
-                    <Apptext style={[styles.msgTxt, {
-                        fontSize: 15, fontFamily: 'Poppins-Regular',
-                        marginTop: wp('5%')
-                    }]} >Check Rates State Wise </Apptext>
+                    <Apptext style={[styles.msgTxt1]} >Check Rates State Wise </Apptext>
                 </View>
                 <View style={{ marginTop: wp('5%') }}>
                     <FormInput
@@ -49,20 +35,16 @@ const Rates = ({ navigation }) => {
                         editable={false}
                         placeholderText={"ABC State"}
                         placeholderTextColor={DefaultStyles.colors.textColor}
-                        // rightImgName={require('../../../../../assets/arrowDown.png')}
                         style={{ marginBottom:'10%'}}
                     />
                 </View>
                 <View style={styles.container1}>
                     <Table 
-                        // style={{borderRadius:10, }}
-            
                     borderStyle={{
                         borderWidth: 1,
                         borderColor:DefaultStyles.colors.textColor,
                         }}>
                         <Rows data={tableData}
-                        // style={{borderRadius:10, }}
                         textStyle={styles.text} />
                     </Table>
                 </View>
@@ -85,6 +67,13 @@ const styles = StyleSheet.create({
         color: DefaultStyles.colors.black,
         marginHorizontal: wp('5%')
     },
+    msgTxt1: {
+        color: DefaultStyles.colors.black,
+        marginHorizontal: wp('5%'),
+        fontSize: 15, fontFamily: 'Poppins-Regular',
+        marginTop: wp('5%')
+    },
+   
     DirectionView: {
         flexDirection: 'row', justifyContent: 'space-around'
     },

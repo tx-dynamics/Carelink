@@ -2,23 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
-import Apptext from '../../../../components/Apptext';
 import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import { useSelector } from 'react-redux';
-
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 
 const Help = ({ navigation }) => {
 
     const usertype = useSelector((state) => state.auth.usertype)
-
-
     return (
         <View style={styles.container}>
-          
-
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -46,8 +40,6 @@ const Help = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     title={"Your Problem"}
-                    // height={wp('65%')}
-                // marginTop={-105}
                 />
             </View>
             <View style={{ marginTop: wp('40%') }}>
@@ -83,7 +75,6 @@ const styles = StyleSheet.create({
     },
     termsTxt: {
         width: wp('90%'), marginTop: 41,
-        // backgroundColor:"red",
         alignSelf: 'center'
     },
     hyperLink: {

@@ -12,9 +12,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const PaymentPlans = ({ navigation }) => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -51,7 +49,6 @@ const PaymentPlans = ({ navigation }) => {
     ];
 
     return (
-
         <View style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
@@ -66,7 +63,6 @@ const PaymentPlans = ({ navigation }) => {
                 <FlatList
                     data={DATA}
                     keyExtractor={(item, index) => index}
-                    // style={{maxHeight:'80%'}}
                     renderItem={({ item, index }) => (
                         <PlansComp
                         btnTxt={item.label}
@@ -75,8 +71,6 @@ const PaymentPlans = ({ navigation }) => {
                         desc={usertype === "ServiceSide" ? item.description : item.desc1}
                         onPress={() =>navigation.navigate("PaymentMethod") }
                     />
-                  
-
                     )}
                 />
 

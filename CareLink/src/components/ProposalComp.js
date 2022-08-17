@@ -15,15 +15,16 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
         style={[styles.inputContainer, {borderRadius:borderRadius}]}>
 
             {/* Propsal Starts Here */}
-            <View style={{flexDirection:'row', marginTop:wp('1%')}}>
+            <View style={styles.direcView}>
             <TouchableOpacity>
-            <Image style={styles.imgView} source={require('../../assets/photo.png')} />
+            <Image style={styles.imgView} 
+            source={require('../../assets/photo.png')} />
             </TouchableOpacity>
             <Apptext style={styles.jamesTxt} >{name}</Apptext>
            
             </View>
-            <Apptext style={{marginLeft:wp('32%'),fontSize:16, marginTop:-60}} >{location}</Apptext>
-            <Apptext style={{marginLeft:wp('32%'),fontSize:16,color:"lightgray" }} >{description}</Apptext>
+            <Apptext style={styles.locTxt} >{location}</Apptext>
+            <Apptext style={styles.descTxt} >{description}</Apptext>
            
             {/* Propsal Ends Here */}
 
@@ -35,6 +36,9 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
 export default ProposalComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection:'row', marginTop:wp('1%')
+    },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
@@ -112,5 +116,11 @@ const styles = StyleSheet.create({
         width:25,
         height:25,
         marginRight:wp('10%')
+    },
+    locTxt:{
+        marginLeft:wp('32%'),fontSize:16, marginTop:-60
+    },
+    descTxt:{
+        marginLeft:wp('32%'),fontSize:16,color:"lightgray" 
     }
 });

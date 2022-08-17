@@ -11,62 +11,54 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const SelectCard = ({ navigation }) => {
-
-    const [img, setImg]= useState(false);
+    const [img, setImg] = useState(false);
     const [isItem, setSelectedItem] = useState([]);
-
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
+            price: "$29.99",
+            plans: "/month",
             label: "*** ***  *5695",
-            leftImg:require('../../../../assets/Bvisa.png'),
-            rightImg:require('../../../../assets/roundTick.png'),
+            leftImg: require('../../../../assets/Bvisa.png'),
+            rightImg: require('../../../../assets/roundTick.png'),
 
-            description:`You will get 20 listing to post in a month with this monthly plan`
+            description: `You will get 20 listing to post in a month with this monthly plan`
         },
-    
+
         {
             id: 'bd2327ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
+            price: "$29.99",
+            plans: "/month",
             label: "*** ***  *8569",
-            leftImg:require('../../../../assets/master1.png'),
-            rightImg:require('../../../../assets/roundTick.png'),
-            description:`You will get 20 listing to post in a month with this monthly plan`
+            leftImg: require('../../../../assets/master1.png'),
+            rightImg: require('../../../../assets/roundTick.png'),
+            description: `You will get 20 listing to post in a month with this monthly plan`
         },
-        
+
         {
             id: 'bd7ac4bea-c1b51-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
-            plans:"/month",
+            price: "$29.99",
+            plans: "/month",
             label: "*** *** *5869",
-            leftImg:require('../../../../assets/card.png'),
-            rightImg:require('../../../../assets/roundTick.png'),
-            description:`You will get 20 listing to post in a month with this monthly plan`
+            leftImg: require('../../../../assets/card.png'),
+            rightImg: require('../../../../assets/roundTick.png'),
+            description: `You will get 20 listing to post in a month with this monthly plan`
         },
     ];
-
-  
     const addCategories = async (item) => {
         var selectedIdss = [...isItem]
         if (selectedIdss.includes(item.id)) {
             selectedIdss = selectedIdss.filter(id => id !== item.id)
         }
         else {
-            selectedIdss=[]
+            selectedIdss = []
             selectedIdss.push(item.id)
         }
         await setSelectedItem(selectedIdss)
     }
 
-
     return (
-
         <ScrollView style={styles.container}>
-            
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -75,39 +67,39 @@ const SelectCard = ({ navigation }) => {
             <View style={styles.txtView} >
                 <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
             </View>
-            <View style={{marginTop:wp('8%')}}>
-            <FormButton 
-            buttonTitle={"+ Add"}
-            width={wp('45%')}
-            borderRadius={10}
-            fontSize={15}
-            onPress={() => navigation.navigate("AddCard")}
-            />
+            <View style={{ marginTop: wp('8%') }}>
+                <FormButton
+                    buttonTitle={"+ Add"}
+                    width={wp('45%')}
+                    borderRadius={10}
+                    fontSize={15}
+                    onPress={() => navigation.navigate("AddCard")}
+                />
             </View>
             <View style={styles.marginView}>
                 <Apptext style={styles.selectTxt}>Select Payment Method</Apptext>
-            <View style={{marginTop:wp('4%') }} >
-                <FlatList
-                    data={DATA}
-                    keyExtractor={(item, index) => index}
-                    renderItem={({ item, index }) => (
-                        <SelectCardComp
-                        leftImgName={item.leftImg}
-                        labelValue={item.label}
-                        rightImgName={item.rightImg}
-                        onPress={() => {
-                            addCategories(item)
-                            setImg(!img)
-                        }}
-                        myStl = {isItem.includes(item.id) ? true : false}
-                        />
-                    )}
-                />
-            </View>
+                <View style={{ marginTop: wp('4%') }} >
+                    <FlatList
+                        data={DATA}
+                        keyExtractor={(item, index) => index}
+                        renderItem={({ item, index }) => (
+                            <SelectCardComp
+                                leftImgName={item.leftImg}
+                                labelValue={item.label}
+                                rightImgName={item.rightImg}
+                                onPress={() => {
+                                    addCategories(item)
+                                    setImg(!img)
+                                }}
+                                myStl={isItem.includes(item.id) ? true : false}
+                            />
+                        )}
+                    />
+                </View>
             </View>
 
-            <View style={{marginTop:wp('33%')}} >
-            <FormButton
+            <View style={{ marginTop: wp('33%') }} >
+                <FormButton
                     buttonTitle={"Continue"}
                     width={'88%'}
                     onPress={() => navigation.navigate("PaymentDone")}
@@ -117,7 +109,7 @@ const SelectCard = ({ navigation }) => {
     )
 }
 
-export default SelectCard ;
+export default SelectCard;
 
 
 const styles = StyleSheet.create({
@@ -143,14 +135,14 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
 
     },
-    marginView:{
-        marginHorizontal:wp('5%')
+    marginView: {
+        marginHorizontal: wp('5%')
     },
-    selectTxt:{
-        marginTop:wp('5%'),
-        marginHorizontal:wp('1%'),
-        color:DefaultStyles.colors.lightgray,
-        fontSize:12,
-        fontFamily:'Poppins-Regular'
+    selectTxt: {
+        marginTop: wp('5%'),
+        marginHorizontal: wp('1%'),
+        color: DefaultStyles.colors.lightgray,
+        fontSize: 12,
+        fontFamily: 'Poppins-Regular'
     }
 });

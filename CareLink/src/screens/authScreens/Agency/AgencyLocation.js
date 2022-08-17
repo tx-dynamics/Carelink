@@ -10,13 +10,9 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const AgencyLocation = ({ navigation }) => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-    // console.log(usertype)
-
     return (
-        <ScrollView style={styles.container}>
-         
+        <ScrollView style={styles.container}> 
                 <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -52,7 +48,6 @@ const AgencyLocation = ({ navigation }) => {
                     buttonTitle={"Next"}
                     width={wp('90%')}
                     height={wp('15%')}
-                    // onPress={() => navigation.navigate("AgencyMap")}
                     onPress={() => navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")}
                 />
             </View>

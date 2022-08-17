@@ -11,7 +11,6 @@ import { iconPath } from '../../../config/icon';
 
 const ListingOptions = ({ navigation }) => {
 
-    const [isValue, setValue] = useState('');
     const [isKitchen, setKitchen] = useState(false)
     const [isParking, setParking] = useState(false)
 
@@ -36,8 +35,6 @@ const ListingOptions = ({ navigation }) => {
                         <Image source={require('../../../../assets/arrowDown.png')} />
                     </TouchableOpacity>
                 </View>
-                {/* ///////////////////////////// */}
-
                 <View style={styles.boxesView}>
                     <TouchableOpacity>
                         <Image source={require('../../../../assets/arrowUp.png')} />
@@ -56,11 +53,8 @@ const ListingOptions = ({ navigation }) => {
                 <Apptext style={[styles.bedsTxt]}>Check the available things </Apptext>
             </View>
             <View style={styles.DirectionView}>
-
-
                 <TouchableOpacity
                     onPress={() => {
-                        // setParking(false)
                         setKitchen(!isKitchen)
                     }}
                     style={styles.radioBtn}>
@@ -70,7 +64,6 @@ const ListingOptions = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        // setKitchen(false)
                         setParking(!isParking)
                     }}
                     style={styles.radioBtn}>
@@ -116,7 +109,6 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         alignSelf: 'center',
         borderRadius: 10,
-        // alignItems:'center',
         justifyContent: 'center',
         height: 48,
         marginTop: wp('12%'),
@@ -127,7 +119,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor:"red",
         marginTop: wp('2%'),
         marginHorizontal: wp('5%')
     },
@@ -150,7 +141,6 @@ const styles = StyleSheet.create({
         fontSize: 15,
         alignSelf: 'center',
         textAlign: 'center',
-        // backgroundColor:"red",
         width: wp('90%'),
         marginTop: wp('10%')
     },
@@ -160,10 +150,7 @@ const styles = StyleSheet.create({
     boxesView: {
         width: wp('25%'),
         marginTop: wp('9%'),
-        // height:150,
-        // backgroundColor:"red",
         alignItems: 'center',
-        // justifyContent:'center'
     },
     numberTxt: {
         fontFamily: 'Poppins-Medium',

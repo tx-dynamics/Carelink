@@ -1,10 +1,3 @@
-// Margin and padding rules
-// margin={[20,0,0,0]} Top margin=20
-// margin={[0,20,0,0]} right margin=20
-// margin={[0,0,20,0]} Bottom margin=20
-// margin={[0,0,0,20]} Left margin=20
-// margin={[0,20]} Horizental margin=20
-// margin={[20,0]} VERTICAL margin=20
 export const   handlePadding = (padding) => {
   if (typeof padding === 'number') {
     return {

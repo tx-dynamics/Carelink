@@ -41,55 +41,55 @@ const AuthStack = createNativeStackNavigator()
 const SplashNavigator = () => {
     return (
         <AuthStack.Navigator
-        screenOptions = {{
-            headerShown: false
-        }}>
-            <AuthStack.Screen name ="Splash" component={Splash}/>
-            <AuthStack.Screen name ="Step1" component={Step1}/>
-            <AuthStack.Screen name ="Step2" component={Step2}/>
-            <AuthStack.Screen name ="Step3" component={Step3}/>
-            <AuthStack.Screen name ="AskRegister" component={AskRegister}/>
-            <AuthStack.Screen name ="Register" component={Register}/>
-            <AuthStack.Screen name ="Terms" component={Terms}/>
-            <AuthStack.Screen name ="Policy" component={Policy}/>
-            <AuthStack.Screen name ="EmailVerification" component={EmailVerification}/>
-            <AuthStack.Screen name ="Verified" component={Verified}/>
-            <AuthStack.Screen name ="Success" component={Success}/>
-            <AuthStack.Screen name ="AgencyBasic" component={AgencyBasic}/>
-            <AuthStack.Screen name ="AgencyPhotos" component={AgencyPhotos}/>
-            <AuthStack.Screen name ="AgencyLocation" component={AgencyLocation}/>
-            <AuthStack.Screen name ="AgencyMap" component={AgencyMap}/>
-            <AuthStack.Screen name ="PaymentPlans" component={PaymentPlans}/>
-            <AuthStack.Screen name ="PaymentMethod" component={PaymentMethod}/>
-            <AuthStack.Screen name ="SelectCard" component={SelectCard}/>
-            <AuthStack.Screen name ="PaymentDone" component={PaymentDone}/>
-            <AuthStack.Screen name ="PayPalDetails" component={PayPalDetails}/>
-            <AuthStack.Screen name ="AddCard" component={AddCard}/>
-            <AuthStack.Screen name ="ListingOptions" component={ListingOptions}/>
-            <AuthStack.Screen name ="SelectCareGiver" component={SelectCareGiver}/>
-            <AuthStack.Screen name ="ActivitySelect" component={ActivitySelect}/>
-            <AuthStack.Screen name ="ReviewDetails" component={ReviewDetails}/>
-            <AuthStack.Screen name ="CareGiver" component={CareGiver}/>
-            <AuthStack.Screen name ="TellDescription" component={TellDescription}/>
-            <AuthStack.Screen name ="Schedule" component={Schedule}/>
-            <AuthStack.Screen name ="RoomsAvailable" component={RoomsAvailable}/>
-            <AuthStack.Screen name ="RoomsCalender" component={RoomsCalender}/>
-            <AuthStack.Screen name ="HourlyPricing" component={HourlyPricing}/>
-            <AuthStack.Screen name ="Note" component={Note}/>
-            <AuthStack.Screen name ="PricingType" component={PricingType}/>
+            screenOptions={{
+                headerShown: false
+            }}>
+            <AuthStack.Screen name="Splash" component={Splash} />
+            <AuthStack.Screen name="Step1" component={Step1} />
+            <AuthStack.Screen name="Step2" component={Step2} />
+            <AuthStack.Screen name="Step3" component={Step3} />
+            <AuthStack.Screen name="AskRegister" component={AskRegister} />
+            <AuthStack.Screen name="Register" component={Register} />
+            <AuthStack.Screen name="Terms" component={Terms} />
+            <AuthStack.Screen name="Policy" component={Policy} />
+            <AuthStack.Screen name="EmailVerification" component={EmailVerification} />
+            <AuthStack.Screen name="Verified" component={Verified} />
+            <AuthStack.Screen name="Success" component={Success} />
+            <AuthStack.Screen name="AgencyBasic" component={AgencyBasic} />
+            <AuthStack.Screen name="AgencyPhotos" component={AgencyPhotos} />
+            <AuthStack.Screen name="AgencyLocation" component={AgencyLocation} />
+            <AuthStack.Screen name="AgencyMap" component={AgencyMap} />
+            <AuthStack.Screen name="PaymentPlans" component={PaymentPlans} />
+            <AuthStack.Screen name="PaymentMethod" component={PaymentMethod} />
+            <AuthStack.Screen name="SelectCard" component={SelectCard} />
+            <AuthStack.Screen name="PaymentDone" component={PaymentDone} />
+            <AuthStack.Screen name="PayPalDetails" component={PayPalDetails} />
+            <AuthStack.Screen name="AddCard" component={AddCard} />
+            <AuthStack.Screen name="ListingOptions" component={ListingOptions} />
+            <AuthStack.Screen name="SelectCareGiver" component={SelectCareGiver} />
+            <AuthStack.Screen name="ActivitySelect" component={ActivitySelect} />
+            <AuthStack.Screen name="ReviewDetails" component={ReviewDetails} />
+            <AuthStack.Screen name="CareGiver" component={CareGiver} />
+            <AuthStack.Screen name="TellDescription" component={TellDescription} />
+            <AuthStack.Screen name="Schedule" component={Schedule} />
+            <AuthStack.Screen name="RoomsAvailable" component={RoomsAvailable} />
+            <AuthStack.Screen name="RoomsCalender" component={RoomsCalender} />
+            <AuthStack.Screen name="HourlyPricing" component={HourlyPricing} />
+            <AuthStack.Screen name="Note" component={Note} />
+            <AuthStack.Screen name="PricingType" component={PricingType} />
 
         </AuthStack.Navigator>
     )
 }
 
-const AuthNavigator = () => {  
+const AuthNavigator = () => {
 
-         return (
-        
-         <SplashNavigator />
-         )
-    
-    
+    return (
+
+        <SplashNavigator />
+    )
+
+
 }
 
 export default AuthNavigator

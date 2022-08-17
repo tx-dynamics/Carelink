@@ -5,9 +5,7 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 
 const Step3 = ({navigation}) => {
-
     return (
-
         <View style ={styles.container}>
            <TouchableOpacity 
            onPress={() => navigation.navigate("AskRegister")}
@@ -24,20 +22,12 @@ const Step3 = ({navigation}) => {
                 <View style={styles.dot}></View>
                 <View style={styles.dot}></View>
                 <View style={styles.line}></View>
-
             </View>
             <TouchableOpacity 
             onPress={() => navigation.navigate("AskRegister")}
-            style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:wp(30), height:wp(30)}} source={require('../../../../assets/Step2BoxNew.png')} />
+            style={styles.box}>
+            <Image style={styles.boxImg} source={require('../../../../assets/Step2BoxNew.png')} />
             </TouchableOpacity>
-            {/* <View style={styles.underLine}>
-            <TouchableOpacity 
-            onPress={() => navigation.navigate("AskRegister")}
-            style={styles.btn}>
-            <Image source={require('../../../../assets/rightArrow.png')} />
-            </TouchableOpacity>
-            </View> */}
         </View>
     )
 }
@@ -83,7 +73,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         marginHorizontal:wp('43%')
-        // alignSelf:'center',
     },
     dot:{
         width:8,
@@ -102,8 +91,6 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         borderRadius:50,
         borderWidth:2,
-        // backgroundColor:"white",
-        // borderColor:"#F1F1F1",
         borderTopColor :DefaultStyles.colors.primary,
         borderRightColor:DefaultStyles.colors.primary,
         borderLeftColor:DefaultStyles.colors.primary,
@@ -119,6 +106,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         backgroundColor:DefaultStyles.colors.primary,
         alignSelf:'center',
+    },
+    box:{
+        alignSelf:'center',marginTop:wp('25%'),
+    },
+    boxImg:{
+        width:wp(30), height:wp(30)
     }
 
   });

@@ -10,10 +10,8 @@ import FontAwesome5ProIcon from 'react-native-vector-icons/FontAwesome5Pro';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import { useTheme } from 'react-native-paper';
 
 const fontIcon = ({type, name, size, color, ...props}) => {
-    // const theme = useTheme();
     switch (type) {
         case "MaterialCommunityIcons": return <MaterialCommunityIcons  name={name} size={size || 16} color={color || '#fff'}  {...props}/>
         case "AntDesign": return <AntDesignIcon name={name} size={size || 16} color={color || '#fff'} {...props} />

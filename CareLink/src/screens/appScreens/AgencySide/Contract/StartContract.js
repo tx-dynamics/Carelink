@@ -13,28 +13,20 @@ import { widthPercentageToDP as wp , heightPercentageToDP as hp} from 'react-nat
 
 const StartContract = ({ navigation }) => {
 
-    const [isValue, setValue] = useState('');
     const [isKitchen, setKitchen] = useState(false)
     const [isParking, setParking] = useState(false)
-
 
     return (
         <View style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-
-
                 <View>
                     <Apptext style={styles.msgTxt} >Choose What you want Extras </Apptext>
                 </View>
-
                 <View style={styles.DirectionView}>
-
-
                     <TouchableOpacity
                         onPress={() => {
-                            // setParking(false)
                             setKitchen(!isKitchen)
                         }}
                         style={styles.radioBtn}>
@@ -50,7 +42,6 @@ const StartContract = ({ navigation }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => {
-                            // setKitchen(false)
                             setParking(!isParking)
                         }}
                         style={styles.radioBtn}>
@@ -65,7 +56,6 @@ const StartContract = ({ navigation }) => {
                             : null}
                     </TouchableOpacity>
                 </View>
-
                 <View style={[styles.DirectionView, { marginTop: wp('3%') }]}>
                     <Apptext style={styles.descTxt}>Car Parking </Apptext>
                     <Apptext style={[styles.descTxt, { marginHorizontal: wp('5%') }]}>Wheelchair</Apptext>

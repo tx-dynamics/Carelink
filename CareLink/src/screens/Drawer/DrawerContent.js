@@ -1,39 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     View,
     StyleSheet,
-    Text,
     Image,
-    ImageBackground,
-    ScrollView,
     TouchableOpacity,
 } from "react-native";
 import DefaultStyles from "../../config/Styles";
-import {
-    DrawerContentScrollView,
-    DrawerItem,
-} from "@react-navigation/drawer";
 import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import Apptext from "../../components/Apptext";
 import FormButton from "../../components/FormButton";
-import { useNavigation, useIsFocused , DrawerActions} from '@react-navigation/native'
+import { DrawerActions} from '@react-navigation/native'
 import { useSelector } from 'react-redux';
 
 
 function DrawerContent({ navigation, userImg, username, userEmail }) {
     const backimg = require("../../../assets/cross.png");
-    
     const usertype = useSelector((state) => state.auth.usertype)
-    // console.log(usertype,"lllll")
 
     return (
         <View style={styles.container} >
             <View style={styles.DirectionView}>
                 <TouchableOpacity
-                    // onPress={() => navigation.goBack()}
                     onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                     style={styles.bck}>
                     <Image style={{ tintColor: "black", width: 16, height: 16 }} source={backimg} />
@@ -109,12 +99,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
 
 const styles = StyleSheet.create({
     container: {
-        // marginTop: 0,
         flex: 1,
-        // flexGrow:1,
-        // width: wp('90%'),
-        // height:wp('100%'),
-        // backgroundColor: "red"
     },
     bck: {
         marginTop: wp('10%'),

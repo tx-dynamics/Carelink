@@ -8,10 +8,8 @@ const Step1 = ({navigation}) => {
 
     return (
         <View style ={styles.container}>
-        {/* <ScrollView> */}
            <TouchableOpacity style={styles.skipDirection}
-            onPress={() => navigation.navigate("Step2")}>
-                
+            onPress={() => navigation.navigate("Step2")}>         
            <Apptext style={styles.skipTxt}>Skip</Apptext>
            </TouchableOpacity>
            <View style={styles.boxView} >
@@ -24,14 +22,12 @@ const Step1 = ({navigation}) => {
                 <View style={styles.dot}></View>
                 <View style={styles.dot}></View>
             </View>
-            {/* <View style={styles.underLine}> */}
-        
             <TouchableOpacity 
             onPress={() => navigation.navigate("Step2")}
-            style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:wp(30), height:wp(30),}} source={require('../../../../assets/Step1BoxNew.png')} />
+            style={styles.box}>
+            <Image style={styles.boxImg} 
+            source={require('../../../../assets/Step1BoxNew.png')} />
             </TouchableOpacity>
-        {/* </ScrollView> */}
         </View>
     )
 }
@@ -77,7 +73,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         marginHorizontal:wp('43%')
-        // alignSelf:'center',
     },
     dot:{
         width:8,
@@ -96,8 +91,6 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         borderRadius:50,
         borderWidth:2,
-        // backgroundColor:"white",
-        // borderColor:"#F1F1F1",
         borderTopColor :'#F1F1F1',
         borderRightColor:DefaultStyles.colors.primary,
         borderLeftColor:"#F1F1F1",
@@ -113,6 +106,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         backgroundColor:DefaultStyles.colors.primary,
         alignSelf:'center',
+    },
+    box:{
+        alignSelf:'center',marginTop:wp('25%'), 
+    },
+    boxImg:{
+        width:wp(30), height:wp(30),
     }
 
   });

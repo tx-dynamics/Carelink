@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, FlatList, Image, View, Pressable } from 'react-native';
-
 import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import DefaultStyles from "../../../config/Styles";

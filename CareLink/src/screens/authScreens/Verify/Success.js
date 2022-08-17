@@ -3,18 +3,13 @@ import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Tex
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const Success = ({ navigation }) => {
-
     return (
-
         <ScrollView style={styles.container}>
-       
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
@@ -23,30 +18,27 @@ const Success = ({ navigation }) => {
             />
             <View style={styles.DirectionView}>
                 <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
+                    style={styles.tntClr}
                     source={require('../../../../assets/circleProfile.png')} />
                 <Apptext style={styles.smallTxt} >Now complete your agency profile</Apptext>
             </View>
             <View style={styles.DirectionView}>
                 <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-
+                    style={styles.tntClr}
                     source={require('../../../../assets/man.png')} />
                 <Apptext style={styles.smallTxt2} >Build a agency profile to show the world what you can offer </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
             </View>
             <View style={styles.DirectionView}>
                 <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-
+                    style={styles.tntClr}
                     source={require('../../../../assets/openmsg.png')} />
                 <Apptext style={styles.smallTxt2} >Apply for open roles or list services for clients to buy </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
             </View>
             <View style={styles.DirectionView}>
                 <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-
+                    style={styles.tntClr}
                     source={require('../../../../assets/dollar.png')} />
                 <Apptext style={styles.smallTxt2}>Get paid safely and know we’re there to help </Apptext>
                 <Apptext style={styles.divider}> </Apptext>
@@ -95,6 +87,9 @@ const styles = StyleSheet.create({
         height: 1,
         width: wp('90%'),
         backgroundColor: "#C3C3C3",
+    },
+    tntClr:{
+        tintColor: DefaultStyles.colors.primary 
     }
 
 });

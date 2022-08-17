@@ -56,7 +56,6 @@ const styles = StyleSheet.create({
     width: wp('90%'),
     alignSelf: 'center',
     borderRadius: 10,
-    // alignItems:'center',
     justifyContent: 'center',
     height: 48,
     marginTop: wp('12%'),
@@ -67,12 +66,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // backgroundColor:"red",
     marginTop: wp('2%'),
     marginHorizontal: wp('5%'),
   },
   cutView: {
-    // width: "auto",
     marginTop: -20,
     marginHorizontal: wp('5%'),
     height: 20,
@@ -81,6 +78,7 @@ const styles = StyleSheet.create({
   },
   descTxt: {
     fontFamily: 'Poppins-Regular',
-    fontSize: 16
+    fontSize: 16,
+    marginTop:-3
   },
 });

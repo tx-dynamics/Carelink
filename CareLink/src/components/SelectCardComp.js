@@ -14,7 +14,7 @@ const SelectCardComp = ({ labelValue, placeholderText,
         style={myStl ? [styles.inputContainer, { borderColor:DefaultStyles.colors.primary,
             borderWidth:1,borderRadius:borderRadius}] : [styles.inputContainer, {borderRadius:borderRadius}]} >
             
-            <View style={{ flexDirection: 'row', alignItems:'center' }}>
+            <View style={styles.direcView}>
               <View style={styles.imgView}>
                <Image
                 source={leftImgName}
@@ -35,6 +35,9 @@ const SelectCardComp = ({ labelValue, placeholderText,
 export default SelectCardComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection: 'row', alignItems:'center' 
+    },
     inputContainer: {
         width: wp('88%'),
         marginBottom:wp('5%'),
@@ -44,8 +47,6 @@ const styles = StyleSheet.create({
         padding:wp('2%'),
         paddingLeft:wp('8%'),
         backgroundColor: DefaultStyles.colors.white,
-        // borderBottomColor: "white",
-        
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -73,7 +74,6 @@ const styles = StyleSheet.create({
     },
     txtView:{
         justifyContent:'center',
-        // backgroundColor:"red",
         textAlign:'center',
         alignItems:'center',
         width:wp('52%'),
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:wp('3%') ,
         color:DefaultStyles.colors.black,
-        
     },
     hrtStl:{
         width:25,

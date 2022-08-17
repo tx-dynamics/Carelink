@@ -9,15 +9,10 @@ import { setUser, setUserType } from '../../../redux/actions/authAction';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 
 const AskRegister = ({navigation}) => {
-
     let dispatch = useDispatch();
-
     return (
-
-        <View style ={styles.container}>
-            
+        <View style ={styles.container}> 
            <IconHeaderComp heading={"Let’s get started. Choose an option"}/> 
-         
           <View style={styles.pinkBox}>
             <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
@@ -30,7 +25,6 @@ const AskRegister = ({navigation}) => {
                 <Apptext>Create</Apptext>
             </TouchableOpacity>
           </View>
-
           <View style={[styles.pinkBox, {marginTop:wp('8%')}]}>
             <Apptext style={[styles.firstTxt]}>I want to find the right Provider</Apptext>
             <Apptext style={styles.scndTxt}>Fill the details and find the right Provider for your baby,mother & father</Apptext>
@@ -40,10 +34,9 @@ const AskRegister = ({navigation}) => {
                 navigation.navigate("SelectCareGiver")
             }}
             style={styles.btn}>
-                <Apptext>Find Now</Apptext>
+            <Apptext>Find Now</Apptext>
             </TouchableOpacity>
           </View>
-
           <View style={[styles.pinkBox, {marginTop:wp('8%')}]}>
             <Apptext style={[styles.firstTxt]}>I want to register as an agency</Apptext>
             <Apptext style={styles.scndTxt}>Create your profile and register your agency now</Apptext>
@@ -69,11 +62,9 @@ const styles = StyleSheet.create({
         backgroundColor : DefaultStyles.colors.white ,
         flex:1,
     },
-  
     pinkBox:{   
         marginTop:wp('12%'),
         width:wp('90%'),
-        // height:wp('46%'),
         backgroundColor:DefaultStyles.colors.primary,
         borderRadius:10,
         alignSelf:'center',
@@ -90,7 +81,6 @@ const styles = StyleSheet.create({
         fontSize:14,
         marginTop:13,
         width:wp('80%'),
-        // backgroundColor:"red",
         textAlign:'center',
         alignSelf:'center'
     },

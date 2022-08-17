@@ -16,8 +16,8 @@ const ServiceRoomComp = ({ labelValue, AvailableRooms, BookedRooms,
         {   width: width,
             borderRadius:borderRadius
         }]} >
-            <View style={{ flexDirection: 'row',alignItems:'center' }}>
-                <View style={{width:wp('20%'),alignItems:'center',}}>
+            <View style={styles.direcView}>
+                <View style={styles.lwrView}>
                 <View style={styles.circle} >
                 <Apptext style={[styles.nmbr]}>{AvailableRooms}</Apptext>
                 </View>
@@ -32,10 +32,15 @@ const ServiceRoomComp = ({ labelValue, AvailableRooms, BookedRooms,
 export default ServiceRoomComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection: 'row',alignItems:'center' 
+    },
+    lwrView:{
+        width:wp('20%'),alignItems:'center',
+    },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
-    
     },
     imgStl:{
         width:57,
@@ -76,15 +81,11 @@ const styles = StyleSheet.create({
     inputContainer: {
         marginBottom:wp('5%'),
         flexDirection:'row',
-        // alignSelf: 'center',
         justifyContent:'center',
         height:120,
-        // padding:wp('2%'),
-        // paddingLeft:wp('4%'),
         marginHorizontal:wp('1%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderBottomColor: "white",
-
     },
     hrtStl:{
         width:25,

@@ -5,16 +5,12 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const AgencyBasic = ({ navigation }) => {
-
     return (
         <View style={styles.container}>
-         
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
@@ -36,10 +32,7 @@ const AgencyBasic = ({ navigation }) => {
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     title={"About"}
-                    // height={wp('65%')}
-                    // marginTop={-125}
-                    // inputMargin={-155}
-/>
+                />
             </View>
             <View style={{ marginTop: wp('35%') }}>
                 <FormButton
@@ -68,13 +61,12 @@ const styles = StyleSheet.create({
         fontSize: wp('6%'),
         marginHorizontal: wp('5%')
     },
-    createTxt1:{
-        alignSelf:'center', fontSize:13, fontFamily:'Poppins-Regular' 
+    createTxt1: {
+        alignSelf: 'center', fontSize: 13, fontFamily: 'Poppins-Regular'
     },
     termsTxt: {
-        width:wp('90%'),marginTop:41,
-        // backgroundColor:"red",
-        alignSelf:'center'
+        width: wp('90%'), marginTop: 41,
+        alignSelf: 'center'
     },
     hyperLink: {
         fontSize: 13,

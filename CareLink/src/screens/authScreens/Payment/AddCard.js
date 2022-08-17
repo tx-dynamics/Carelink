@@ -12,80 +12,68 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const AddCard = ({ navigation }) => {
-
     const [isTick, setTick] = useState(false);
-
-
     return (
         <View style={styles.container}>
-            
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Add new card"}
             />
-            <View style={{marginTop:-10}}>
-            <FormInput
+            <View style={{ marginTop: -10 }}>
+                <FormInput
                     title={"Card number"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
                     placeholderText={"98170000 0000 0000"}
                     rightImgName={require('../../../../assets/grayCard.png')}
-
                 />
-                <View style={{flexDirection:'row', }}> 
-
-                  <FormInput
-                    title={"Expiry date"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                    width={wp('47%')}
-                    placeholderText={"MM/YY"}
-                    // style={{width:wp('23%'),marginTop:-10,}}
-                    rightImgName={require('../../../../assets/grayCalender.png')}
-
-
-                />
-                  <FormInput
-                    title={"CVC/CVV"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                    placeholderText={"..."}
-                    width={wp('48%')}
-                    // style={{width:wp('24%'),marginTop:-10,}}
-                    rightImgName={require('../../../../assets/infoCircle.png')}
-
-                />
+                <View style={{ flexDirection: 'row', }}>
+                    <FormInput
+                        title={"Expiry date"}
+                        borderColor={DefaultStyles.colors.black}
+                        borderWidth={1}
+                        width={wp('47%')}
+                        placeholderText={"MM/YY"}
+                        rightImgName={require('../../../../assets/grayCalender.png')}
+                    />
+                    <FormInput
+                        title={"CVC/CVV"}
+                        borderColor={DefaultStyles.colors.black}
+                        borderWidth={1}
+                        placeholderText={"..."}
+                        width={wp('48%')}
+                        rightImgName={require('../../../../assets/infoCircle.png')}
+                    />
                 </View>
-                  <FormInput
+                <FormInput
                     title={"Cardholder name"}
                     placeholderText={"Enter cardholder’s full name"}
                     borderColor={DefaultStyles.colors.black}
                     borderWidth={1}
-
                 />
             </View>
             <View style={styles.saveView}>
                 <TouchableOpacity onPress={() => setTick(!isTick)}>
-                 {isTick ? (
-                <Image style={{tintColor:DefaultStyles.colors.primary }} 
-                source={require('../../../../assets/tickBox.png')} />)
-                : 
-                <TouchableOpacity 
-                onPress={() => setTick(!isTick)}
-                style={styles.unTickBox}>
-                </TouchableOpacity>
-                
-                }
+                    {isTick ? (
+                        <Image style={{ tintColor: DefaultStyles.colors.primary }}
+                            source={require('../../../../assets/tickBox.png')} />)
+                        :
+                        <TouchableOpacity
+                            onPress={() => setTick(!isTick)}
+                            style={styles.unTickBox}>
+                        </TouchableOpacity>
+
+                    }
                 </TouchableOpacity>
                 <Apptext style={styles.saveCardTxt}>Save card</Apptext>
             </View>
-            <View style={{marginTop:wp('35%')}} >
-            <FormButton
+            <View style={{ marginTop: wp('35%') }} >
+                <FormButton
                     buttonTitle={"Add"}
                     width={'88%'}
                     onPress={() => {
-                        navigation.navigate("SelectCard")            
+                        navigation.navigate("SelectCard")
                     }}
                 />
             </View>
@@ -108,21 +96,21 @@ const styles = StyleSheet.create({
         fontSize: wp('6%'),
         marginHorizontal: wp('5%')
     },
-    unTickBox:{
-        width:30,
-        borderWidth:1,
-        borderColor:DefaultStyles.colors.lightgray ,
-        height:28,
-        borderRadius:6
+    unTickBox: {
+        width: 30,
+        borderWidth: 1,
+        borderColor: DefaultStyles.colors.lightgray,
+        height: 28,
+        borderRadius: 6
     },
-    saveView:{
-        flexDirection:'row',
-        marginHorizontal:wp('5%'),
-        marginTop:wp('10%')
+    saveView: {
+        flexDirection: 'row',
+        marginHorizontal: wp('5%'),
+        marginTop: wp('10%')
     },
-    saveCardTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:20,
-        marginHorizontal:wp('4%')
+    saveCardTxt: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 20,
+        marginHorizontal: wp('4%')
     }
 });

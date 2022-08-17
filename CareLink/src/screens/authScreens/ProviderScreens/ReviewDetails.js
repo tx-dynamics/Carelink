@@ -35,7 +35,10 @@ export default function ReviewDetails({ navigation }) {
 
             <Apptext style={[styles.innerText, { marginTop: 0 }]}>{"Job Description"}</Apptext>
 
-            <TextInput style={{ borderWidth: 1, borderRadius: 10, height: 160, marginHorizontal: wp(5), marginTop: 5, paddingHorizontal: 8, textAlign: "justify" }}
+            <TextInput style={{ borderWidth: 1, borderRadius: 10, height: 160, paddingTop:'5%',
+            marginHorizontal: wp(5), marginTop: 5, paddingHorizontal: 8, textAlign: "justify",
+            textAlignVertical:'top'
+            }} 
                 value={descValue}
                 onChangeText={(txt) => setDescValue(txt)}
                 multiline>

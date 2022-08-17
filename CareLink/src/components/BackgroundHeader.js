@@ -5,19 +5,14 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import Icon from "react-native-vector-icons/Ionicons";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 
 function BackgroundHeader({
-  headerLabel,
   backgroundColor,
   backImg,
   leftImgName,
-  centerImg,
   isBack = true,
   contentColor = DefaultStyles.colors.secondary,
   onPressLeft,
@@ -39,16 +34,12 @@ function BackgroundHeader({
       <View style={styles.headerIcons}>
       <TouchableOpacity
         onPress={onPressLeft}
-        // style={{ width: wp('6%'), }}
         >
         {isBack ? (
           <Image style={[styles.icons, ]} source={leftImgName} />
         ) : null}
       </TouchableOpacity>
-      {/* <View >
-        <Image style={styles.imgView} source={centerImg} />
-        <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
-      </View> */}
+     
       <TouchableOpacity onPress={onPressRight}>
         <Image style={[styles.icons,]} source={rightImg} />
       </TouchableOpacity>
@@ -62,13 +53,9 @@ const styles = StyleSheet.create({
   container: {
     height: wp('67%'),
     width: "100%",
-    // alignSelf:'center',
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,
     alignItems: "center",
-    // justifyContent: "space-between",
-    // flexDirection: "row",
-    // padding: wp('5%'),
 
   },
   icons:
@@ -76,8 +63,6 @@ const styles = StyleSheet.create({
     tintColor: "white",
     marginHorizontal:wp(5),
     marginTop:wp(5)
-    // position:"absolute",
-    // bottom:0,
   },
   imgView: {
     width: '100%'
@@ -91,7 +76,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     width:'100%',
     justifyContent:'space-between',
-    // alignItems:'center'
   }
 });
 

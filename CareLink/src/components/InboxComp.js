@@ -9,12 +9,10 @@ import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 
 function InboxComp({
-    countLabel,
     imgName,
     label,
     msg,
     txtDatee,
-    backgroundColor,
     contentColor = DefaultStyles.colors.primary,
     onPress,
     style,
@@ -24,10 +22,6 @@ function InboxComp({
         onPress={onPress}
         style={styles.inboxMainView}>
             <View style={styles.inboxInnerView}>
-                {/* <TouchableOpacity style={DefaultStyles.inboxCount}>
-          <Apptext style={{color:DefaultStyles.colors.white}}>{countLabel}</Apptext>
-
-          </TouchableOpacity> */}
                 <TouchableOpacity style={{width:56, marginLeft:wp('5%')}}>
                     <ImageBackground 
                     imageStyle={{borderRadius:40}}
@@ -38,7 +32,6 @@ function InboxComp({
                 <View style={{marginLeft:wp('10%')}}>
                 <Apptext style={styles.inboxName}>{label}</Apptext>
                 </View>
-
                 <Image style={{marginTop:wp('2%'), marginLeft:wp('10%') }} 
                 source={require('../../assets/online.png')} />
                 <Apptext style={styles.inboxDate}>{txtDatee}</Apptext>
@@ -59,18 +52,14 @@ export default InboxComp;
 const styles = StyleSheet.create({
 
  inboxMainView: {
-  //  backgroundColor:"red",
     marginTop: wp('4%'),
     alignSelf: 'center',
     width: wp('92%'),
-    // backgroundColor:"red"
-    // height: 70,
   },
   inboxInnerView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: wp('3%')
-    
   },
   line:{
     width:wp('90%'),
@@ -88,13 +77,10 @@ const styles = StyleSheet.create({
   },
   inboxImg: {
     width: 55, height: 55,
-    //  borderRadius: 50,
-    //  backgroundColor:"red"
   },
   inboxName: {
     fontSize:19,
     width: wp('65%'),
-    // marginLeft: wp('2%'),
   },
   inboxDate: {
     width: wp('16%'),
@@ -105,10 +91,8 @@ const styles = StyleSheet.create({
     color: DefaultStyles.colors.gray, 
     fontSize:15,
     width: wp('60%'),
-    // backgroundColor:"red",
     alignSelf: 'center',
     marginLeft:wp('18%'),
-    // marginLeft: -12,
     marginTop: -20,
   }
 

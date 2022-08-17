@@ -34,14 +34,7 @@ function Header({
         marginTop:getStatusBarHeight(true),
         backgroundColor: backgroundColor,
         ...style,
-      }}
-    >
-      {/* <MaterialCommunityIcons
-        size={20}
-        onPress={onPressLeft}
-        name={leftIcon}
-        color={contentColor}
-      /> */}
+      }}>
       <TouchableOpacity 
       onPress={onPressLeft} 
       style={{width:wp('6%')}}>
@@ -49,7 +42,7 @@ function Header({
         <Image source={leftImgName} />
       ) : null}
       </TouchableOpacity>
-      <View style={{alignItems:'center', width:wp('70%'), height:wp('5%')}}>
+      <View style={styles.hdrView}>
       <Image source={centerImg} />
       <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
@@ -72,16 +65,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: wp('6%'),
     marginTop:-5
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 5,
-    // },
-    // shadowOpacity: 0.34,
-    // shadowRadius: 6.27,
-    // // borderBottomColor:'lightgray',
-    // // borderBottomWidth:0.5,
-    // elevation: 3,
   },
   headerLabel:{
     fontFamily:'Poppins-SemiBold',
@@ -89,7 +72,9 @@ const styles = StyleSheet.create({
     height:30,
     marginTop:-7,
     fontSize:wp('6%'),
-    // backgroundColor:"red",
+  },
+  hdrView:{
+    alignItems:'center', width:wp('70%'), height:wp('5%')
   }
 });
 

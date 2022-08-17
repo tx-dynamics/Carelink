@@ -7,15 +7,9 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import InboxComp from '../../../../components/InboxComp';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
 
 const ChatDetail = ({ navigation }) => {
-
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
 
     const DATA = [
         {
@@ -27,9 +21,6 @@ const ChatDetail = ({ navigation }) => {
             dt: "5 minutes ago",
             move: "Detail"
         },
-
-
-
     ];
 
 
@@ -38,48 +29,27 @@ const ChatDetail = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                // rightImg={require('../../../../../assets/chatContact.png') }
-                // centerImg={require('../../../../../assets/JC.png')}
-                // rightstyle={{marginLeft:-10}} 
             />
                <TouchableOpacity 
                 onPress={() => navigation.navigate("StartContract")}
-                style={{
-                width:wp('40%'),
-                // backgroundColor:DefaultStyles.colors.primary,
-                borderRadius:5,
-                flexDirection:'row',
-                justifyContent:'center',
-                marginHorizontal:wp('60%'),
-                marginTop:-55
-                 }}>
+                style={styles.scView}  >
                 <Apptext style={styles.dtls} >Make contract</Apptext>
-                     
                 </TouchableOpacity>
-                {/* <TouchableOpacity 
-                onPress={() => navigation.navigate("StartContract")}
-                style={{flexDirection:'row', justifyContent:'flex-end', 
-                marginHorizontal:wp('5%'),marginTop:-50 }}>
-                <Apptext style={styles.dtls} >Make contract</Apptext>
-                </TouchableOpacity> */}
         
-            <View style={{flexDirection:'row',marginHorizontal:wp('7%')}} >
+            <View style={styles.direcView} >
                 <Image
-                style={{width:61, height:61, marginTop:wp('10%')}}
+                style={styles.jcImg}
                 source={require('../../../../../assets/JC.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
             <ScrollView>
 
                 <View style={{ marginTop: wp('5%') }} >
-
                     <View style={styles.PicMainView}>
-
                         <View style={styles.msgView}>
                             <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
                         </View>
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
-
                     </View>
                     <View style={{ marginVertical: wp('5%') }}>
                         <FlatList
@@ -115,7 +85,7 @@ const ChatDetail = ({ navigation }) => {
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
-                                    <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
+                                    <Apptext style={styles.noItem}>
                                         No Item Found
                                     </Apptext>
                                 );
@@ -141,15 +111,10 @@ const ChatDetail = ({ navigation }) => {
             <KeyboardAvoidingView
                 behavior={Platform.OS == "ios" ? "padding" : "height"}
                 keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                style={{
-                    width: '100%', flexDirection: 'row', alignItems: 'center',
-                    borderTopColor: '#F5F5F5', borderTopWidth: 1
-                }}>
-
+                style={styles.kbView}>
                 <View style={styles.ChatMsgView} >
                     <TextInput
                         onChangeText={(val) => console.log(val)}
-                        // value={"input"}
                         placeholder="Type a message"
                         placeholderTextColor={DefaultStyles.colors.lightgray}
                         style={{
@@ -186,7 +151,6 @@ const styles = StyleSheet.create({
         marginLeft:wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
-        // alignSelf: 'center'
     },
     labelTxt: {
 
@@ -226,7 +190,6 @@ const styles = StyleSheet.create({
         color: DefaultStyles.colors.lightPrimary,
         marginTop: wp('1%'),
         marginHorizontal: wp('2%')
-        // backgroundColor:"red"
     },
     ChatMsgView: {
         flexDirection: 'row',
@@ -235,8 +198,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: wp('75%'),
         alignItems: 'center',
-        // position: "absolute",
-        // bottom: 0,
         backgroundColor: "#e5e5e5",
         borderRadius: 23,
         marginHorizontal: '5%',
@@ -256,6 +217,26 @@ const styles = StyleSheet.create({
         fontSize:16,
         textDecorationLine: 'underline', 
     },
-
+    scView:{
+        width:wp('40%'),
+        borderRadius:5,
+        flexDirection:'row',
+        justifyContent:'center',
+        marginHorizontal:wp('60%'),
+        marginTop:-55
+    },
+    direcView:{
+        flexDirection:'row',marginHorizontal:wp('7%')
+    },
+    jcImg:{
+        width:61, height:61, marginTop:wp('10%')
+    },
+    noItem:{
+        alignSelf: "center", marginTop: 50
+    },
+    kbView:{
+        width: '100%', flexDirection: 'row', alignItems: 'center',
+        borderTopColor: '#F5F5F5', borderTopWidth: 1
+    }
 
 });

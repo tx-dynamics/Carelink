@@ -16,9 +16,7 @@ import { useSelector } from 'react-redux';
 
 
 const Profile = ({ navigation }) => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -44,8 +42,6 @@ const Profile = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={usertype === "ServiceSide" ? require('../../../../../assets/dots.png') : null}
                 onPressLeft={() => navigation.goBack()}
-
-
             />
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
@@ -143,15 +139,12 @@ const styles = StyleSheet.create({
     },
     whiteView: {
         width: wp('100%'),
-        // height: wp('100%'),
-        // marginTop: -20,
         backgroundColor: "white",
     },
     imgBox: {
         width: 164,
         marginTop: wp(-35),
         height: 164,
-        // backgroundColor:"red",
         borderWidth: 0.2,
         borderColor: "lightgray",
         borderRadius: 20,
@@ -180,7 +173,6 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Medium',
         fontSize: 20,
         alignSelf: 'center',
-        // backgroundColor:"red",
         marginTop: wp('2%')
     },
     mngTxt: {

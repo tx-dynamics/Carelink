@@ -40,13 +40,11 @@ import Read3 from "./appScreens/AgencySide/Contract/Read3";
 import EditProfile from "./appScreens/ServiceSide/ServiceProfile/EditProfile";
 import Received from "./appScreens/ServiceSide/Contract/Received";
 import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
-import Icon from 'react-native-vector-icons/FontAwesome5';
 
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator()
 const Drawer = createDrawerNavigator();
-
 
 const DrawerNavigator = () => {
     return (
@@ -54,25 +52,14 @@ const DrawerNavigator = () => {
             screenOptions={{
                 headerShown: false
             }}
-            // drawerStyle={isLargeScreen ? null : { width: '100%' }}
             drawerStyle={{
-                //   borderRadius: wp("8%"),
-                //   borderWidth: 2,
-                //   backgroundColor:"red",
                 borderColor: DefaultStyles.colors.primary,
-                //   overflow: "hidden",
                 width: wp("100%"),
             }}
             drawerContent={(props) => <DrawerContent {...props} />}
         >
             <Drawer.Screen name="Drawer" component={AppNavigator} />
         </Drawer.Navigator>
-
-        // <Drawer.Navigator
-        //     drawerStyle={{backgroundColor:DefaultStyles.colors.white, width: '75%'}}
-        //     drawerContent={props => <DrawerContent {...props} />}>
-        //      <Drawer.Screen name="Drawer" component={AppNavigator} />
-        // </Drawer.Navigator>
     )
 }
 
@@ -83,8 +70,7 @@ const WithoutBottomTabnavigator = () => {
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
-            }}
-        >
+            }}>
             <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
             <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
             <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
@@ -98,7 +84,6 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="Read1" component={Read1} />
             <StackNavigator.Screen name="Read2" component={Read2} />
             <StackNavigator.Screen name="Read3" component={Read3} />
-
             <StackNavigator.Screen name="Rates" component={Rates} />
             <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
             <StackNavigator.Screen name="Received" component={Received} />
@@ -109,7 +94,6 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
             <StackNavigator.Screen name="Feedback" component={Feedback} />
             <StackNavigator.Screen name="EditProfile" component={EditProfile} />
-
 
         </StackNavigator.Navigator>
     )
@@ -204,9 +188,6 @@ const MyTabs = () => {
     const usertype = useSelector((state) => state.auth.usertype)
     return (
         <Tab.Navigator
-            // tabBarOptions={{
-            //     keyboardHidesTabBar: true,
-            // }}
             tabBarOptions={{
                 showIcon: true,
                 showLabel: false,
@@ -215,7 +196,6 @@ const MyTabs = () => {
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: DefaultStyles.colors.textColor,
-                // keyboardHidesTabBar: true,
                 tabBarStyle: {
                     borderTopWidth: 0,
                     backgroundColor: DefaultStyles.colors.white,
@@ -234,11 +214,6 @@ const MyTabs = () => {
                     tabBarIcon: ({ focused }) => (
                         focused ?
                             <View style={usertype === "ServiceSide" ? styles.scBox1 : styles.tabBox1}>
-                                {/* <Icon 
-                                    size={45}
-                                    color={"white"}
-                                    name={"fa-house"}
-                                    /> */}
                                 <Image
                                     style={[styles.iconSize, { tintColor: "white" }]}
                                     source={usertype === "ServiceSide" ?
@@ -373,7 +348,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: wp(12),
         borderRadius: wp(20),
-        // backgroundColor: DefaultStyles.colors.primary
     },
     tabBox1: {
         height: wp(12),

@@ -6,13 +6,10 @@ import RoomsComp from '../../../../components/RoomsComp';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import { Calendar } from 'react-native-calendars';
-import AntDesign from 'react-native-vector-icons/AntDesign'
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 
-
 const RoomsCalender = ({ navigation }) => {
-
 
     const renderArrow = (direction) => {
         if (direction === 'left') {
@@ -24,7 +21,6 @@ const RoomsCalender = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-           
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -35,27 +31,16 @@ const RoomsCalender = ({ navigation }) => {
                 <Calendar
                     markingType='multi-dot'
                     marking={true}
-                    // markedDates={markedDays}
-                    // markedDates={{
-                    //     '2022-03-16': {selected: true, marked: true, selectedColor: 'blue'},
-                    //     '2022-03-17': {marked: true},
-                    //     '2022-03-18': {marked: true, dotColor: 'red', activeOpacity: 0},
-                    //     '2022-03-19': {disabled: true, disableTouchEvent: true}
-                    //   }}
                     renderArrow={renderArrow}
-                    
                     theme={{
                         textMonthFontSize: 20,
                         textMonthFontFamily: 'Poppins-Regular',
                         textDayHeaderFontWeight: "bold",
                         calendarBackground: "transparent",
                         selectedDayTextColor: "red",
-                        
                         todayTextColor: DefaultStyles.colors.primary,
                         dayTextColor: "#2d4150",
                         selectedDayBackgroundColor:DefaultStyles.colors.primary,
-                        // selectedDayTextColor:"white",
-                        
                         monthTextColor: "#383838",
                         textMonthFontFamily: 'Poppins-Regular',
                         textMonthFontWeight: '400',
@@ -67,11 +52,6 @@ const RoomsCalender = ({ navigation }) => {
                               backgroundColor:"#f0f0f0",
                               width:wp('85%')
                             },
-                            // header: {
-                            //   alignSelf: "flex-start",
-                            //   right: 2,
-                            //   marginBottom: 20,
-                            // },
                           },
                           "stylesheet.day.basic": {
                             base: {
@@ -83,7 +63,6 @@ const RoomsCalender = ({ navigation }) => {
                             text: {
                               marginTop: -5,
                               color: "black",
-                              // fontWeight: 'bold',
                               fontSize: 12,
                               fontFamily: 'Poppins',
                             },

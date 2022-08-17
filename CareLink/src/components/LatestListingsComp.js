@@ -25,7 +25,7 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                 textDecorationLine: 'underline', }]}>See Details</Apptext>
 
             </View>
-            <Apptext style={{marginLeft:80,fontSize:9, marginTop:-25}} >{location}</Apptext>
+            <Apptext style={styles.locTxt} >{location}</Apptext>
 
             </View> : null}
             {/* Propsal Ends Here */}
@@ -42,7 +42,7 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                  <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                  </View>
                 }
-            <View style={{marginHorizontal:wp('5%'), flexDirection: 'row',alignItems:'center' }}>
+            <View style={styles.fvtxtView}>
                 <Apptext style={styles.scndTxt}>{when + "  "}</Apptext>
                 <Apptext style={styles.dot} ></Apptext>
                 <Apptext style={styles.scndTxt}>{"  "+ fors + "  "}</Apptext>
@@ -50,13 +50,11 @@ const LatestListingsComp = ({ labelValue, when, fors, hourly, placeholderText,
                 <Apptext style={styles.scndTxt}>{ "  " + hourly + "  "}</Apptext>
                 
             </View>
-            <View style={{flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'),
-             marginLeft:-18} }>
+            <View style={styles.direcView}>
                 <Apptext style={[styles.scndTxt, { backgroundColor:DefaultStyles.colors.lightPrimary ,padding:5,borderRadius:5 }]}>
                     {"kitchen available"}</Apptext>
                 <Apptext style={[styles.scndTxt, {backgroundColor:DefaultStyles.colors.lightPrimary,padding:5,marginLeft:-20, 
                 borderRadius:5 }]}>{"Car Parking available"}</Apptext>
-                
                 </View>
                 <View style={{height:wp('2%')}}>
 
@@ -84,7 +82,6 @@ const styles = StyleSheet.create({
         fontSize:15,
         width:wp('42%'),
         marginTop:wp('1%')
-        // backgroundColor:"blue"
     },
     imgStl:{
         width:57,
@@ -96,8 +93,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         marginHorizontal:wp('5%'),
         width:wp('75%'),
-        // marginTop:wp('4%'),
-        // backgroundColor:"red"
     },
     txtVal:{
         fontFamily:'poppins-Regular',
@@ -125,7 +120,6 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         marginBottom:wp('5%'),
         alignSelf: 'center',
-        // height:105,
         padding:wp('2%'),
         paddingLeft:0,
         backgroundColor: DefaultStyles.colors.white,
@@ -137,12 +131,21 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
-        
         elevation: 3,
     },
     hrtStl:{
         width:25,
         height:25,
         marginRight:wp('10%')
+    },
+    locTxt:{
+        marginLeft:80,fontSize:9, marginTop:-25
+    },
+    fvtxtView:{
+        marginHorizontal:wp('5%'), flexDirection: 'row',alignItems:'center'
+    },
+    direcView:{
+        flexDirection:'row',justifyContent:'space-evenly', marginHorizontal:wp('5%'),
+        marginLeft:-18 
     }
 });

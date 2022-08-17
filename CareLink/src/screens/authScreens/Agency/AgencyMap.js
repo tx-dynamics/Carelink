@@ -11,12 +11,9 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
 const AgencyMap = ({ navigation }) => {
-
     const usertype = useSelector((state) => state.auth.usertype)
-
     return (
         <View style={styles.container}>
-     
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -33,7 +30,6 @@ const AgencyMap = ({ navigation }) => {
             <View>
                 <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Address</Apptext>
                 <Apptext style={[styles.adrs]}>123 street, 11 apartment ,USA,11221</Apptext>
-
             </View>
             <View style={{ marginTop: wp('10%')  }}>
                 <FormButton

@@ -12,11 +12,8 @@ import { iconPath } from '../../../config/icon';
 
 
 const PaymentMethod = ({ navigation }) => {
-
     const [method, setMethod]= useState('Debit/Credit Card');
     const [isItem, setSelectedItem] = useState(['bd7acbea-c1b1-46c2-aed5-3ad53abb28ba']);
-
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -38,7 +35,6 @@ const PaymentMethod = ({ navigation }) => {
             description:`You will get 20 listing to post in a month with this monthly plan`
         },
     ];
-
     const addCategories = async (item) => {
        
         var selectedIdss = [...isItem]
@@ -54,11 +50,8 @@ const PaymentMethod = ({ navigation }) => {
         await setSelectedItem(selectedIdss)
         console.log(isItem)
     }
-
     return (
-
-        <View style={styles.container}>
-         
+        <View style={styles.container}> 
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -79,8 +72,6 @@ const PaymentMethod = ({ navigation }) => {
                             setMethod(item.label)
                         }}
                         />
-                  
-
                     )}
                 />
             </View>

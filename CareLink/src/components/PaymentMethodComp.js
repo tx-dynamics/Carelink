@@ -12,7 +12,7 @@ const PaymentMethodComp = ({ labelValue, placeholderText,
         <View 
         onPress={onPress}
         style={[styles.inputContainer, {borderRadius:borderRadius}]} >
-            <View style={{ flexDirection: 'row',alignItems:'center' }}>
+            <View style={styles.direcView}>
               <View style={styles.imgView}>
                <Image
                 source={leftImgName}
@@ -34,6 +34,9 @@ const PaymentMethodComp = ({ labelValue, placeholderText,
 export default PaymentMethodComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection: 'row',alignItems:'center'
+    },
     inputContainer: {
         width: wp('88%'),
         marginBottom:wp('5%'),

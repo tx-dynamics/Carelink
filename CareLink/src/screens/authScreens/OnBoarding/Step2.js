@@ -9,11 +9,13 @@ const Step2 = ({navigation}) => {
     return (
 
         <View style ={styles.container}>
-           <TouchableOpacity style={styles.skipDirection} onPress={() => {navigation.navigate("Step3")}}>
+           <TouchableOpacity style={styles.skipDirection} 
+           onPress={() => {navigation.navigate("Step3")}}>
            <Apptext style={styles.skipTxt}>Skip</Apptext>
            </TouchableOpacity>
            <View style={styles.boxView} >
-               <Image style={{width:wp('90%')}} source={require('../../../../assets/step2New.png')} />
+               <Image style={{width:wp('90%')}} 
+               source={require('../../../../assets/step2New.png')} />
                <Apptext style={styles.pinkTxt} >List your home with us</Apptext>
                <Apptext style={styles.lightTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vulputate ultricies viverra congue platea fermentum volutpat eget porta facilisis.</Apptext>
            </View>
@@ -22,11 +24,11 @@ const Step2 = ({navigation}) => {
                 <View style={styles.line}></View>
                 <View style={styles.dot}></View>
             </View>
-          
             <TouchableOpacity 
             onPress={() => navigation.navigate("Step3")}
-            style={{ alignSelf:'center',marginTop:wp('25%'), }}>
-            <Image style={{width:wp(30), height:wp(30)}} source={require('../../../../assets/Step3BoxNew.png')} />
+            style={styles.box}>
+            <Image style={styles.boxImg}
+            source={require('../../../../assets/Step3BoxNew.png')} />
             </TouchableOpacity>
         </View>
     )
@@ -73,7 +75,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         marginHorizontal:wp('43%')
-        // alignSelf:'center',
     },
     dot:{
         width:8,
@@ -92,8 +93,6 @@ const styles = StyleSheet.create({
         alignSelf:'center',
         borderRadius:50,
         borderWidth:2,
-        // backgroundColor:"white",
-        // borderColor:"#F1F1F1",
         borderTopColor :DefaultStyles.colors.primary,
         borderRightColor:DefaultStyles.colors.primary,
         borderLeftColor:"#F1F1F1",
@@ -109,6 +108,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         backgroundColor:DefaultStyles.colors.primary,
         alignSelf:'center',
+    },
+    box:{
+        alignSelf:'center',marginTop:wp('25%'),
+    },
+    boxImg:{
+        width:wp(30), height:wp(30)
     }
 
   });

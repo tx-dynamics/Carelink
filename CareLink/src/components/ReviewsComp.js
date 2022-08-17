@@ -17,22 +17,19 @@ const ReviewsComp = ({ labelValue, when, fors, hourly, placeholderText,
 
             {/* Propsal Starts Here */}
             {showProposals ? <View style={{height:55}}>
-            <View style={{flexDirection:'row', marginTop:wp('1%')}}>
+            <View style={styles.direcView}>
             <TouchableOpacity style={styles.imgView}>
-            <Image style={{width:51, height:51}} source={require('../../assets/JC.png')} />
+            <Image style={styles.jcImg} source={require('../../assets/JC.png')} />
             </TouchableOpacity>
             <Apptext style={styles.jamesTxt} >{name}</Apptext>
-            {/* <Apptext style={[styles.jamesTxt, {fontSize:13, textDecorationLine: 'underline', }]}>See Details</Apptext> */}
-
             </View>
-            <Apptext style={{marginLeft:80,color:DefaultStyles.colors.gray, fontSize:14, marginTop:-25}} >{location}</Apptext>
-            {/* <Apptext style={styles.txtVal}>{labelValue}</Apptext> */}
-
+            <Apptext style={styles.locTxt} >{location}</Apptext>
             </View> : null}
             {/* Propsal Ends Here */}
-            <View style={{marginHorizontal:wp('3%'),marginTop:wp('5%'), flexDirection: 'row',alignItems:'center' }}>
+
+
+            <View style={styles.lastDirec}>
                 <Image 
-                // style={{tintColor : DefaultStyles.colors.lightPrimary }}
                 source={require('../../assets/circleTickNew.png')} />
                 <Apptext style={styles.scndTxt}>{" " + when + " "}</Apptext>
                 <Image source={require('../../assets/circleTickNew.png')} />
@@ -53,10 +50,23 @@ const ReviewsComp = ({ labelValue, when, fors, hourly, placeholderText,
 export default ReviewsComp;
 
 const styles = StyleSheet.create({
+    direcView:{
+        flexDirection:'row', marginTop:wp('1%')
+    },
+    jcImg:{
+        width:51, height:51
+    },
+    locTxt:{
+        marginLeft:80,
+        color:DefaultStyles.colors.gray,
+        fontSize:14, marginTop:-25
+    },
+    lastDirec:{
+        marginHorizontal:wp('3%'),marginTop:wp('5%'), flexDirection: 'row',alignItems:'center'
+    },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
-    
     },
     imgView:{
         width:51,

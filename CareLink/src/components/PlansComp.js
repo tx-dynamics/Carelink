@@ -42,9 +42,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop:wp('8%'),
         justifyContent:'center',
-        // height:75,
-        // padding:wp('2%'),
-        // paddingLeft:wp('4%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderBottomColor: "white",
     },
@@ -55,7 +52,6 @@ const styles = StyleSheet.create({
         marginTop:-20
     },
     yellowView:{
-        // marginTop:-10,
         width:wp('82%'),
         borderRadius:10,
         height:wp('30%'),
@@ -89,6 +85,5 @@ const styles = StyleSheet.create({
         fontFamily:'Poppins-Regular',
         fontSize:wp('3.5%'),
         lineHeight:23
-        // backgroundColor:"red",
     }
 });

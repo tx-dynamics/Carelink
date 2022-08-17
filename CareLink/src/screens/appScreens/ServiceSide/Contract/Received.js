@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet, ScrollView, TouchableOpacity,
-    FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View
-} from 'react-native';
+import { StyleSheet, FlatList,View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
@@ -22,11 +19,7 @@ const Received = ({ navigation }) => {
             dt: "5 minutes ago",
             move: "Detail"
         },
-
-
-
     ];
-
 
     return (
         <View style={styles.container}>
@@ -37,9 +30,7 @@ const Received = ({ navigation }) => {
             />
               <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Received Contracts</Apptext>
-                   
                 </View>
-
                 <View style={{ marginTop: wp('10%') }} >
 
                         <FlatList
@@ -48,7 +39,7 @@ const Received = ({ navigation }) => {
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
-                                    <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
+                                    <Apptext style={styles.noItem}>
                                         No Item Found
                                     </Apptext>
                                 );
@@ -127,7 +118,6 @@ const styles = StyleSheet.create({
         color: '#edcfab',
         marginTop: wp('1%'),
         marginHorizontal: wp('2%')
-        // backgroundColor:"red"
     },
     ChatMsgView: {
         flexDirection: 'row',
@@ -136,8 +126,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: wp('75%'),
         alignItems: 'center',
-        // position: "absolute",
-        // bottom: 0,
         backgroundColor: "#e5e5e5",
         borderRadius: 23,
         marginHorizontal: '5%',
@@ -152,6 +140,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.primary
     },
+    noItem:{
+        alignSelf: "center", marginTop: 50 
+    }
 
 
 });

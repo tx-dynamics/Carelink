@@ -3,39 +3,10 @@ import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, A
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
-import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import FvrtComp from '../../../../components/FvrtComp';
-import LatestListingsComp from '../../../../components/LatestListingsComp';
-
 
 const ListingDetails = ({ navigation }) => {
-
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
-
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "Debit/Credit Card",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "PayPal",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
-
 
     return (
         <View style={styles.container}>
@@ -105,8 +76,7 @@ const ListingDetails = ({ navigation }) => {
                 {/* Section */}
                 <View style={styles.directionView}>
                     <Apptext style={styles.jobsTxt}> Note :     </Apptext>
-                    <Apptext style={{ width: wp('70%'),marginTop:wp('1%'), 
-                    fontSize: 12 }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
+                    <Apptext style={styles.loremTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
                 {/* Section Ends Here */}
                 <View>
@@ -115,7 +85,6 @@ const ListingDetails = ({ navigation }) => {
                     Kitchen available
                     </Apptext>
                     </View>
-                    {/* /////////////////////// */}
                     <View style={styles.pinkBox} >
                     <Apptext style={styles.pinkboxTxt}>
                     Car Parking available
@@ -124,7 +93,7 @@ const ListingDetails = ({ navigation }) => {
                 </View>
                 <View style={styles.btnView}>
                    <TouchableOpacity>
-                    <Image style={{width:40, height:33}}
+                    <Image style={styles.hrtImg}
                     source={require('../../../../../assets/heart.png')} />
                    </TouchableOpacity>
                    <View style={{marginTop:wp('5%')}}>
@@ -181,7 +150,6 @@ const styles = StyleSheet.create({
         backgroundColor:DefaultStyles.colors.lightPrimary,
         marginTop:wp('5%'),
         borderRadius:6,
-        // width:wp('45%'),
         padding:2,
         alignItems:'center',
         justifyContent:'center',
@@ -195,8 +163,14 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-evenly',
         alignItems:'center',
-        // backgroundColor:"red",
         marginTop: 90 
+    },
+    loremTxt:{
+        width: wp('70%'),marginTop:wp('1%'), 
+        fontSize: 12 
+    },
+    hrtImg:{
+        width:40, height:33
     }
 
 

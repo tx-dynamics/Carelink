@@ -3,21 +3,11 @@ import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, A
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
-import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
-import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import FvrtComp from '../../../../components/FvrtComp';
-import LatestListingsComp from '../../../../components/LatestListingsComp';
 import SelectBox from '../../../../components/SelectBox';
 
 
 const ClientProfile = ({ navigation }) => {
-
-    const [isValue, setValue] = useState('');
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
 
     const DATA = [
         {
@@ -38,7 +28,6 @@ const ClientProfile = ({ navigation }) => {
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
     ];
-
 
     return (
         <View style={styles.container}>
@@ -95,7 +84,6 @@ const styles = StyleSheet.create({
         marginTop: wp('7%'),
         height: wp('30%'),
         alignSelf: 'center',
-        // backgroundColor:"red",
         borderRadius: 60
     },
     jmsTxt: {
@@ -110,7 +98,6 @@ const styles = StyleSheet.create({
     },
     pinkBox: {
         width: 200,
-        // height:55,
         borderRadius: 10,
         backgroundColor: DefaultStyles.colors.lightPrimary,
         alignSelf: 'center',

@@ -5,42 +5,13 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
-import Header from '../../../../components/Header';
-import { DrawerActions, useNavigation } from '@react-navigation/native'
-
-
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 
 const Feedback = ({ navigation }) => {
-
-    
     const [isParking, setParking] = useState(false)
     const [isKitchen, setKitchen] = useState(false)
     const [isDependable, setDependable] = useState(false)
-
-
-
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "6",
-            plans: "/month",
-            label: "Available Rooms",
-            color: DefaultStyles.colors.primary,
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "11",
-            plans: "/month",
-            color: '#999999',
-            label: "Booked Rooms",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
-
 
     return (
         <View style={styles.container}>
@@ -51,16 +22,13 @@ const Feedback = ({ navigation }) => {
                 style={styles.rms}
             />
                 <View style={styles.txtView}>
-
-                    <Apptext style={[styles.rms, {fontFamily:'Poppins-Medium', marginTop: wp('8%') }]} >Click to write: </Apptext>
+                    <Apptext style={[styles.rms1]} >Click to write: </Apptext>
                 </View>
                 <View style={{ marginTop: -25 }} >
                     <FormInput
                         title={"Feedback"}
                         borderColor={DefaultStyles.colors.black}
                         borderWidth={1}
-                        // height={wp('60%')}
-                        // marginTop={-125}
                     />
                 </View>
                 <View style={[styles.DirectionView1, { marginTop:wp('8%')}]}>
@@ -70,8 +38,8 @@ const Feedback = ({ navigation }) => {
                         }}
                         style={styles.radioBtn}>
                         {isKitchen ?
-                            <Image style={{width:24, height:24,  tintColor: DefaultStyles.colors.primary }}
-                                source={require('../../../../../assets/tickBox.png')} />
+                            <Image style={styles.imgStl}
+                            source={require('../../../../../assets/tickBox.png')} />
                             : null}
                     </TouchableOpacity>
                     <Apptext style={styles.descTxt}>Would rehire</Apptext>
@@ -84,8 +52,8 @@ const Feedback = ({ navigation }) => {
                         }}
                         style={styles.radioBtn}>
                         {isDependable ?
-                            <Image style={{width:24, height:24, tintColor: DefaultStyles.colors.primary }}
-                                source={require('../../../../../assets/tickBox.png')} />
+                            <Image style={styles.imgStl}
+                            source={require('../../../../../assets/tickBox.png')} />
                             : null}
                     </TouchableOpacity>
                     <Apptext style={styles.descTxt}>Punctual</Apptext>
@@ -98,7 +66,7 @@ const Feedback = ({ navigation }) => {
                         }}
                         style={styles.radioBtn}>
                         {isParking ?
-                            <Image style={{width:24, height:24, tintColor: DefaultStyles.colors.primary }}
+                            <Image style={styles.imgStl}
                                 source={require('../../../../../assets/newTick.png')} />
                             : null}
                     </TouchableOpacity>
@@ -133,7 +101,6 @@ const styles = StyleSheet.create({
         marginTop: wp('7%'),
         height: wp('30%'),
         alignSelf: 'center',
-        // backgroundColor:"red",
         borderRadius: 60
     },
     upldTxt: {
@@ -141,13 +108,11 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         marginTop: wp('3%'),
         color: "#407fb9"
-
     },
     jmsTxt: {
         marginTop: wp('4%'),
         fontSize: 22,
         fontFamily: 'Poppins-SemiBold'
-
     },
     dcTxt: {
         fontFamily: 'Poppins-Medium',
@@ -156,7 +121,6 @@ const styles = StyleSheet.create({
     },
     pinkBox: {
         width: 200,
-        // height:55,
         borderRadius: 10,
         backgroundColor: DefaultStyles.colors.lightPrimary,
         alignSelf: 'center',
@@ -187,12 +151,16 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        // marginTop:wp('3%'),
         marginHorizontal: wp('5%')
     },
     rms: {
         fontFamily: 'Poppins-SemiBold',
         fontSize: 19
+    },
+    rms1:{
+        fontSize: 19,
+        fontFamily:'Poppins-Medium', 
+        marginTop: wp('8%')
     },
     dtls: {
         color: DefaultStyles.colors.black,
@@ -216,6 +184,8 @@ const styles = StyleSheet.create({
         marginTop:wp('6%'),
         marginHorizontal:wp('5%')
     },
-
+    imgStl:{
+        width:24, height:24, tintColor: DefaultStyles.colors.primary 
+    }
 
 });

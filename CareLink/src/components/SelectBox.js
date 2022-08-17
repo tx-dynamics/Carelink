@@ -3,15 +3,12 @@ import { View, TouchableOpacity, StyleSheet, Image, ImageBackground } from 'reac
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from '../components/Apptext';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const SelectBox = ({ count, leftTitle,myStl,
     circle = false,description,isDesc = false,
     bg = DefaultStyles.colors.white,txtClr = DefaultStyles.colors.textColor,
     backgroundColor=DefaultStyles.colors.primary,onPress, ...rest }) => {
-
     return (
-
             <TouchableOpacity
              onPress={onPress}
              style={[styles.SightingContainer, {
@@ -84,8 +81,6 @@ const styles = StyleSheet.create({
    
     pinkCircle:{
         width:wp('11%'),
-        // borderWidth:2,
-        // borderColor:DefaultStyles.colors.secondary,
         height:wp('11%'),
         borderRadius:20,
         alignItems:'center',

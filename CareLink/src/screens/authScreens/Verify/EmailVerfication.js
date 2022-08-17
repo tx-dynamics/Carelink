@@ -3,24 +3,17 @@ import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Tex
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 
-
 const EmailVerification = ({ navigation }) => {
-
     return (
-
         <View style={styles.container}>
-
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
             />
-
             <View style={styles.logoView}>
                 <Image source={require('../../../../assets/emailNew.png')} />
             </View>
@@ -72,7 +65,6 @@ const styles = StyleSheet.create({
     },
     paraView: {
         marginTop: wp('10%'),
-        // backgroundColor:"red",
         width: wp('90%'),
         alignSelf: 'center'
     },

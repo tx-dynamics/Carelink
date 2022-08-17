@@ -2,13 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, ScrollView, Modal, TouchableOpacity, FlatList, Image, ActivityIndicator, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import Apptext from '../../../../components/Apptext';
-import RoomsComp from '../../../../components/RoomsComp';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
-import FormInput from '../../../../components/FormInput';
 import DropDownPicker from 'react-native-dropdown-picker';
-
-
 
 const PricingType = ({ navigation }) => {
 
@@ -22,7 +18,6 @@ const PricingType = ({ navigation }) => {
         { label: 'Don’t Show', value: 'Don’t Show' }
 
     ]);
-
     return (
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -74,9 +69,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         width: wp('90%'),
         alignSelf: 'center',
-        // backgroundColor:"green",
         borderRadius: 10,
-        // alignItems:'center',
         justifyContent: 'center',
         height: 48,
         marginTop: wp('12%'),
@@ -87,7 +80,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor:"red",
         marginTop: wp('2%'),
         marginHorizontal: wp('5%')
     },

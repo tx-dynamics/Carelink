@@ -3,7 +3,6 @@ import {
     StyleSheet, ScrollView, TouchableOpacity,
     FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View
 } from 'react-native';
-
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
@@ -40,20 +39,16 @@ hereinafter referred to as “Provider”;
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-
             <ScrollView>
-
                 <View>
                     <Apptext style={styles.msgTxt} >Read And FIll the General Contract </Apptext>
                 </View>
-
                 <View>
                     <Apptext style={styles.hostTxt} >{Host} </Apptext>
                 </View>
                 <View>
                     <Apptext style={styles.oneTxt} >{one} </Apptext>
                 </View>
-
                 <View style={{ marginTop: wp('35%') }}>
                     <FormButton
                         buttonTitle={"Next"}

@@ -22,23 +22,19 @@ const FormInput = ({ labelValue, placeholderText,
     marginTop = marginTop,
     rightIconType, ...rest }) => {
     return (
-        <View style={{flexDirection:'row'}}>
+        <View style={{ flexDirection: 'row' }}>
 
-                <View style={{ justifyContent: 'center' }} >
-                    <Image source={leftImgName} />
-                </View>
-                <View   style={[styles.inputContainer,
-                    {
-                        backgroundColor: backgroundColor,
-                        height: height,
-                        width: width,
-                        // borderColor:borderColor,
-                        // borderWidth:borderWidth,
-                        borderBottomColor: borderBottomColor,
-                    }]}>
+            <View style={{ justifyContent: 'center' }} >
+                <Image source={leftImgName} />
+            </View>
+            <View style={[styles.inputContainer,
+            {
+                backgroundColor: backgroundColor,
+                height: height,
+                width: width,
+                borderBottomColor: borderBottomColor,
+            }]}>
                 <TextInput
-                  
-                    // value={title}
                     label={title}
                     value={labelValue}
                     mode='outlined'
@@ -47,99 +43,52 @@ const FormInput = ({ labelValue, placeholderText,
                     activeOutlineColor={borderColor}
                     numberOfLines={1}
                     placeholder={title}
-            
-                    style={{backgroundColor:"white",}}
+
+                    style={{ backgroundColor: "white", }}
                     placeholderTextColor={placeholderTextColor}
                     {...rest}
                 />
-                
+
                 <TouchableOpacity onPress={onPress}>
-                    <Image style={{position:"absolute",right:0,marginHorizontal:wp('5%'),
-                    marginTop:wp(-11),
-                    tintColor: "gray", }} source={rightImgName} />
+                    <Image style={{
+                        position: "absolute", right: 0, marginHorizontal: wp('5%'),
+                        marginTop: wp(-11),
+                        tintColor: "gray",
+                    }} source={rightImgName} />
                 </TouchableOpacity>
 
-                </View>
-
-                {/* <View style={[styles.inputContainer, 
-            {backgroundColor : backgroundColor,
-            height:height,
-            width:width,
-            borderColor:borderColor,
-            borderWidth:borderWidth,
-            borderBottomColor:borderBottomColor}]}>         
-          
-         
-         <View style={styles.titleView} >
-                    <Apptext style={[styles.titleTxt, {marginTop:marginTop }]}>{title}</Apptext>
-                </View>
-            <View style={{ flexDirection: 'row' }}>
-               
-                <View style={{ justifyContent: 'center' }} >
-                    <Image source={leftImgName} />
-                </View>
-               
-                <TextInput
-                    value={labelValue}
-                    style={[styles.HumanInput, {marginTop:inputMargin}]}
-                    numberOfLines={numberOfLines}
-                    placeholder={placeholderText}
-                    placeholderTextColor={ placeholderTextColor} 
-                    {...rest}
-                />
-                <TouchableOpacity style={{marginTop:-10, justifyContent:'center'}} onPress={onPress}>
-                <Image style={{tintColor:"gray",marginHorizontal:wp('5%') }} source={rightImgName} />
-                </TouchableOpacity>
             </View>
-        </View> */}
-            </View>
+        </View>
 
-            );
+    );
 };
 
 
-            export default FormInput;
+export default FormInput;
 
-            const styles = StyleSheet.create({
-                HumanInput: {
-                width: wp('70%'),
-        // backgroundColor:"red",
-        // height:40,
-        // paddingTop:20
-        // paddingTop:-20,
-        // alignItems:'center'
-        // paddingTop:-10,
+const styles = StyleSheet.create({
+    HumanInput: {
+        width: wp('70%'),
 
     },
-            inputContainer: {
-                marginTop: wp('11%'),
-            // alignSelf: 'center',
-            paddingLeft: wp('3%'),
-            //paddingTop: wp('1%'),
-            justifyContent: 'center',
-            borderRadius: 10,
+    inputContainer: {
+        marginTop: wp('11%'),
+        paddingLeft: wp('3%'),
+        justifyContent: 'center',
+        borderRadius: 10,
     },
-            titleView: {
-                // backgroundColor:DefaultStyles.colors.white,
-                // height:22,
-                // marginTop:-13,
-                // alignSelf:'center',
-                // marginHorizontal:wp('5%'),
-                alignSelf: 'flex-start',
-            marginTop: -10
-        // marginLeft:-200,
+    titleView: {
+        alignSelf: 'flex-start',
+        marginTop: -10
 
     },
-            titleTxt: {
-                // width:wp('25%'),
-                fontSize: 16,
-            backgroundColor: DefaultStyles.colors.white,
-            // backgroundColor:"red",
-            height: 22,
-            // alignSelf:'center',
-            marginLeft: wp('2%'),
-            textAlign: 'left',
-            color: DefaultStyles.colors.black,
-            fontFamily: 'Poppins-Regular'
+    titleTxt: {
+        fontSize: 16,
+        backgroundColor: DefaultStyles.colors.white,
+        height: 22,
+        marginLeft: wp('2%'),
+        textAlign: 'left',
+        color: DefaultStyles.colors.black,
+        fontFamily: 'Poppins-Regular'
     }
 });

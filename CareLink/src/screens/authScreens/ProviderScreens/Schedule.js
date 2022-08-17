@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, FlatList, Image, View, Pressable, TextInput } from 'react-native';
+import { StyleSheet, FlatList, Image, TouchableOpacity, View, Pressable, TextInput } from 'react-native';
 
 import Apptext from '../../../components/Apptext';
 import Fonticon from '../../../Constants/FontIcon';
@@ -16,6 +16,8 @@ const Schedule = ({ navigation }) => {
     const [hourValue, setHourValue] = useState("3.5");
     const [selectWeek, setSelectWeek] = useState(4);
     const [weekName, setWeekName] = useState("Thursday");
+    const [tickName, setTickName] = useState("");
+    const [isTick, setTick] = useState(false);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -32,11 +34,9 @@ const Schedule = ({ navigation }) => {
         { label: 'AM', value: 'AM' },
         { label: 'PM', value: 'PM' },
     ]);
-
     useEffect(() => {
         setWeekName(selectWeek == 1 ? "Monday" : selectWeek == 2 ? "Thuesday" : selectWeek == 3 ? "Wednesday" : selectWeek == 4 ? "Thursday" : selectWeek == 5 ? "Friday" : selectWeek == 6 ? "Saturday" : "Sunday")
     }, [selectWeek])
-    
 
     return (
         <View style={styles.container}>
@@ -49,7 +49,9 @@ const Schedule = ({ navigation }) => {
 
             <View style={styles.dateContainer}>
                 <Apptext style={{ flex: 1, fontSize: 15, fontFamily: 'Poppins-Regular', }}>{"23/06/2022"}</Apptext>
-                <Image source={iconPath.calendar} style={{ width: wp(6), height: wp(6), resizeMode: "contain" }} />
+                <TouchableOpacity>
+                    <Image source={iconPath.calendar} style={{ width: wp(6), height: wp(6), resizeMode: "contain" }} />
+                </TouchableOpacity>
             </View>
             <Apptext style={[styles.innerText, { marginTop: 15 }]}>How long do you expect to need care for your mother?</Apptext>
             <DropDownPicker
@@ -65,40 +67,42 @@ const Schedule = ({ navigation }) => {
             />
 
             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                <TouchableOpacity onPress={() => { setTick(!isTick), setTickName("Flexible schedule") }}>
+                    <Image source={isTick ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                </TouchableOpacity>
                 <Apptext style={[styles.checkBoxText]}>Flexible schedule</Apptext>
             </View>
             <View style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                <Image source={iconPath.Check_box} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                <TouchableOpacity onPress={() => { setTick(!isTick), setTickName("Set schedule for week") }}>
+                    <Image source={isTick ? iconPath.check_blank : iconPath.Check_box} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                </TouchableOpacity>
                 <Apptext style={[styles.checkBoxText]}>Set schedule for week</Apptext>
             </View>
             <Apptext style={[styles.innerText, { marginTop: 20 }]}>Please specify when you need care</Apptext>
 
             <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginHorizontal: wp(5), marginTop: 20 }}>
-                <Pressable onPress={() => setSelectWeek(1)} style={[styles.weekBorder, { backgroundColor: selectWeek == 1 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 1 ? "#fff" : "#999999"}]}>M</Apptext>
+                <Pressable onPress={() => setSelectWeek(1)} style={[styles.weekBorder, { backgroundColor: selectWeek == 1 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 1 ? "#fff" : "#999999" }]}>M</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(2)} style={[styles.weekBorder, { backgroundColor: selectWeek == 2 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 2 ? "#fff" : "#999999"}]}>T</Apptext>
+                <Pressable onPress={() => setSelectWeek(2)} style={[styles.weekBorder, { backgroundColor: selectWeek == 2 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 2 ? "#fff" : "#999999" }]}>T</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(3)} style={[styles.weekBorder, { backgroundColor: selectWeek == 3 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 3 ? "#fff" : "#999999"}]}>W</Apptext>
+                <Pressable onPress={() => setSelectWeek(3)} style={[styles.weekBorder, { backgroundColor: selectWeek == 3 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 3 ? "#fff" : "#999999" }]}>W</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(4)} style={[styles.weekBorder, { backgroundColor: selectWeek == 4 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 4 ? "#fff" : "#999999"}]}>T</Apptext>
+                <Pressable onPress={() => setSelectWeek(4)} style={[styles.weekBorder, { backgroundColor: selectWeek == 4 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 4 ? "#fff" : "#999999" }]}>T</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(5)} style={[styles.weekBorder, { backgroundColor: selectWeek == 5 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 5 ? "#fff" : "#999999"}]}>F</Apptext>
+                <Pressable onPress={() => setSelectWeek(5)} style={[styles.weekBorder, { backgroundColor: selectWeek == 5 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 5 ? "#fff" : "#999999" }]}>F</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(6)} style={[styles.weekBorder, { backgroundColor: selectWeek == 6 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 6 ? "#fff" : "#999999"}]}>S</Apptext>
+                <Pressable onPress={() => setSelectWeek(6)} style={[styles.weekBorder, { backgroundColor: selectWeek == 6 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 6 ? "#fff" : "#999999" }]}>S</Apptext>
                 </Pressable>
-                <Pressable onPress={() => setSelectWeek(7)} style={[styles.weekBorder, { backgroundColor: selectWeek == 7 ? DefaultStyles.colors.primary :"transparent" }]}>
-                    <Apptext style={[styles.weekName, {color: selectWeek == 7 ? "#fff" : "#999999"}]}>S</Apptext>
+                <Pressable onPress={() => setSelectWeek(7)} style={[styles.weekBorder, { backgroundColor: selectWeek == 7 ? DefaultStyles.colors.primary : "transparent" }]}>
+                    <Apptext style={[styles.weekName, { color: selectWeek == 7 ? "#fff" : "#999999" }]}>S</Apptext>
                 </Pressable>
-
             </View>
-
             <View style={{ flexDirection: "row", marginTop: 20, marginHorizontal: wp(5) }}>
                 <View style={{ flex: .4, alignItems: "flex-start" }}>
                     <Apptext style={[styles.dayText]}>{weekName}</Apptext>
@@ -128,10 +132,7 @@ const Schedule = ({ navigation }) => {
                         <Apptext style={[styles.hourText]}>hours/week</Apptext>
                     </View>
                 </View>
-
             </View>
-
-
             <View style={{ flex: 1, justifyContent: "flex-end", paddingBottom: 30 }}>
                 <FormButton
                     buttonTitle={"Next"}
@@ -166,7 +167,8 @@ const styles = StyleSheet.create({
         fontSize: 16, fontFamily: 'Poppins-Regular', color: "#999999",
     },
     weekBorder: {
-        borderWidth: 1, width: 32, height: 32, alignItems: "center", justifyContent: "center", borderRadius: 16, borderColor: "#999999",
+        borderWidth: 1, width: 32, height: 32, alignItems: "center", justifyContent: "center",
+        borderRadius: 16, borderColor: "#999999",
     },
     dayText: {
         fontSize: 14, fontFamily: 'Poppins-Regular',
@@ -174,5 +176,11 @@ const styles = StyleSheet.create({
     hourText: {
         fontSize: 15, fontFamily: 'Poppins-Regular', color: "#999999"
     },
+    tickBox: {
+        width: 25, height: 25, borderColor: 'gray', borderWidth: 1, borderRadius: 5
+    },
+    tickBox1: {
+        width: 25, height: 25, borderColor: 'gray', borderWidth: 1, borderRadius: 5
+    }
 
 });

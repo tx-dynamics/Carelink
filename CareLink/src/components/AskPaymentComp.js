@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from '../components/Apptext';
@@ -17,7 +17,7 @@ const AskPaymentComp = ({ labelValue, placeholderText,
           
           <Image source={centerImg} /> 
           {isOffer ? 
-          <Apptext style={{fontSize:14,marginTop:10, fontWeight:"700", color:"#ff9d33"}}>{labelValue}</Apptext>
+          <Apptext style={styles.lblStl}>{labelValue}</Apptext>
            : null}
         </TouchableOpacity>
     );
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
-    
     },
     imgStl:{
         width:57,
@@ -69,15 +68,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f0f0',
         borderRadius: 6,
         borderBottomColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 5,
-        // },
-        // shadowOpacity: 0.34,
-        // shadowRadius: 6.27,
-        
-        // elevation: 3,
     },
     inputContainer1: {
         width: wp('92%'),
@@ -90,18 +80,13 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.sky,
         borderRadius: 6,
         borderBottomColor: "white",
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 5,
-        // },
-        // shadowOpacity: 0.34,
-        // shadowRadius: 6.27,
         
-        // elevation: 3,
     },
     hrtStl:{
         width:22,
         height:20
+    },
+    lblStl:{
+        fontSize:14,marginTop:10, fontWeight:"700", color:"#ff9d33"
     }
 });

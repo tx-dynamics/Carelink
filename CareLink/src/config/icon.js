@@ -1,5 +1,4 @@
 const leftArrow = require("../../assets/leftArrow.png");
-
 const bathtub =require("../Assets/Images/bathtub.png");
 const beauty_saloon =require("../Assets/Images/beauty_saloon.png");
 const cooking =require("../Assets/Images/cooking.png");

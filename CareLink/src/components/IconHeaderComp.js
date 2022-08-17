@@ -12,7 +12,7 @@ function IconHeaderComp ({heading,imgName,onPress,style,  ...rest }){
         
         <View style={{marginTop:getStatusBarHeight(true),}}>
              <TouchableOpacity onPress={onPress} >
-                <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
+                <Image style={styles.imgStl}
                     source={imgName} />
             </TouchableOpacity>
               <Apptext style={[styles.createTxt, {...style}]}>{heading}</Apptext>
@@ -30,4 +30,7 @@ const styles = StyleSheet.create({
         fontSize:wp('6%'),
         marginHorizontal:wp('5%')
     },
+    imgStl:{
+        marginHorizontal: wp('5%'), marginTop: 18 
+    }
 });
