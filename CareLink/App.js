@@ -17,14 +17,26 @@ import {useSelector} from 'react-redux'
 
 const App = () => {
   return (
+   
     <NavigationContainer>
+    
       <Provider store={store}>
      {/* <SafeAreaView> */}
       <Main />
       {/* </SafeAreaView> */}
       </Provider>
+     
     </NavigationContainer>
+   
   );
 };
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    flex:1,
+  alignItems:'center',
+  justifyContent:'center'
+  }
+});
 
 export default App;
