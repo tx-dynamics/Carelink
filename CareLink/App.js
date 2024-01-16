@@ -17,17 +17,13 @@ import {useSelector} from 'react-redux'
 
 const App = () => {
   return (
-   
     <NavigationContainer>
-    
       <Provider store={store}>
      {/* <SafeAreaView> */}
       <Main />
       {/* </SafeAreaView> */}
       </Provider>
-     
     </NavigationContainer>
-   
   );
 };
 
