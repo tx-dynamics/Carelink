@@ -1,8 +1,10 @@
-import React,{useState, useEffect} from 'react';
-import {StyleSheet,Image,ActivityIndicator, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Image, ActivityIndicator, Text, View, StatusBar } from 'react-native';
 import DefaultStyles from "../../../config/Styles";
+import { widthPixel } from '../../../Constants';
+import colors from '../../../config/colors';
 
-const Splash = ({navigation}) => {
+const Splash = ({ navigation }) => {
     useEffect(() => {
         setTimeout(() => {
             navigation.replace("Step1")
@@ -10,8 +12,12 @@ const Splash = ({navigation}) => {
     }, []);
 
     return (
-        <View style ={styles.container}>
-            <Image source={require('../../../../assets/Care_Link_Logo.png')} />
+        <View style={styles.container}>
+            <StatusBar backgroundColor={colors.white} barStyle={"dark-content"} />
+            <Image resizeMode='contain' source={require('../../../../assets/Care_Link_Logo.png')} style={{
+                width: widthPixel(120),
+                height: widthPixel(120)
+            }} />
         </View>
     )
 }
@@ -20,18 +26,18 @@ export default Splash;
 
 
 const styles = StyleSheet.create({
-    container :{
-        backgroundColor : DefaultStyles.colors.white ,
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center'
+    container: {
+        backgroundColor: DefaultStyles.colors.white,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    logoTxt:{
-        color:DefaultStyles.colors.white,
-        fontSize:45,
-        fontFamily:'Poppins-SemiBold',
-        fontStyle:'italic',
-        lineHeight:68
+    logoTxt: {
+        color: DefaultStyles.colors.white,
+        fontSize: 45,
+        fontFamily: 'Poppins-SemiBold',
+        fontStyle: 'italic',
+        lineHeight: 68
     },
 
-  });
+});

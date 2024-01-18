@@ -7,6 +7,7 @@ import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Note = ({ navigation }) => {
 
@@ -17,31 +18,15 @@ const Note = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 heading={"Write your note if you want any?"}
             />
-            <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-            <View style={{ marginTop: -20 }}>
-                <FormInput
-                    title={"Write a Note"}
-                    numberOfLines={5}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}  
-                />
-            </View>
-            <View style={{marginTop:wp('50%')}}>
-            <FormButton
-                buttonTitle={"Skip"}
-                width={"90%"}
-                color={DefaultStyles.colors.black}
-                backgroundColor={'#e6e6e6'}
-                onPress={() => navigation.navigate("AgencyLocation")}
-            />
-            <View style={{marginTop:-8}}>
+            <KeyboardAwareScrollView style={{}}>
+                <Apptext style={styles.bkTxt} >Click to write:</Apptext>
+
+            </KeyboardAwareScrollView>
             <FormButton
                 buttonTitle={"Next"}
                 width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
-            </View>
-            </View>
         </View>
     )
 }
@@ -65,7 +50,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        marginTop: wp('4%')
+        // marginTop: wp('4%')
     },
     hyperLink: {
         fontSize: 16,
