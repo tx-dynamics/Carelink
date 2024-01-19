@@ -10,6 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { heightPixel, widthPixel } from "../Constants";
 
 
 function Header({
@@ -30,24 +31,29 @@ function Header({
     <View
       style={{
         ...styles.container,
-        height:height,
-        marginTop:getStatusBarHeight(true),
+        height: height,
         backgroundColor: backgroundColor,
         ...style,
       }}>
-      <TouchableOpacity 
-      onPress={onPressLeft} 
-      style={{width:wp('6%')}}>
-      {isBack ? (
-        <Image source={leftImgName} />
-      ) : null}
+      <TouchableOpacity
+        onPress={onPressLeft}
+        style={{ width: wp('6%') }}>
+        {isBack ? (
+          <Image resizeMode="contain" style={{
+            width: widthPixel(23),
+            height: heightPixel(16),
+          }} source={leftImgName} />
+        ) : null}
       </TouchableOpacity>
       <View style={styles.hdrView}>
-      <Image source={centerImg} />
-      <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
+        <Image source={centerImg} />
+        <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={{width:wp('6%')}} onPress={onPressRight}>
-        <Image source={rightImg} />
+      <TouchableOpacity style={{ width: wp('6%'), }} onPress={onPressRight}>
+        <Image resizeMode="contain" source={rightImg} style={{
+          width: widthPixel(24),
+          height: heightPixel(31),
+        }} />
       </TouchableOpacity>
 
 
@@ -55,7 +61,7 @@ function Header({
   );
 }
 const styles = StyleSheet.create({
- 
+
   container: {
     width: wp("100%"),
     borderBottomRightRadius: 1,
@@ -64,17 +70,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     padding: wp('6%'),
-    marginTop:-5
+    marginTop: -5
   },
-  headerLabel:{
-    fontFamily:'Poppins-SemiBold',
-    color:DefaultStyles.colors.secondary,
-    height:30,
-    marginTop:-7,
-    fontSize:wp('6%'),
+  headerLabel: {
+    fontFamily: 'Poppins-SemiBold',
+    color: DefaultStyles.colors.secondary,
+    height: 30,
+    marginTop: -7,
+    fontSize: wp('6%'),
   },
-  hdrView:{
-    alignItems:'center', width:wp('70%'), height:wp('5%')
+  hdrView: {
+    alignItems: 'center', width: wp('70%'), height: wp('5%')
   }
 });
 

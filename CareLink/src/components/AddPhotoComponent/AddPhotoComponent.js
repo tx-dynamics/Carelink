@@ -12,7 +12,6 @@ const AddPhotoComponent = ({ }) => {
         </View>
     )
 }
-
 export default AddPhotoComponent
 export const PhotoComponent = ({ pic, crossPress }) => {
     return (
@@ -43,8 +42,8 @@ const styles = StyleSheet.create({
         color: colors.smallHeadingBlack
     },
     photoContainer: {
-        marginRight: widthPixel(10),
-        // marginBottom: heightPixel(10),
+        marginRight: widthPixel(15),
+        marginTop: heightPixel(10),
         width: widthPixel(113),
         height: widthPixel(113),
         justifyContent: "flex-start",
@@ -74,6 +73,7 @@ const styles = StyleSheet.create({
         borderColor: colors.black,
         justifyContent: "center",
         alignItems: "center",
+        marginTop: heightPixel(10)
     },
     addPlusIcon: {
         width: widthPixel(24),

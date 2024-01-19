@@ -10,42 +10,40 @@ import { useSelector } from 'react-redux';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { heightPixel } from '../../../Constants';
 
 const PaymentPlans = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$29.99",
+            price: "$29.99",
             price1: "$199.99",
-            plans:"/month",
+            plans: "/month",
             label: "Subscribe",
-            description:`You will get 20 listing to post in a month with this monthly plan`,
-            desc1 : "You will get 20 Proposals to submit in a month with this monthly plan"
+            description: `You will get 20 listing to post in a month with this monthly plan`,
+            desc1: "You will get 20 Proposals to submit in a month with this monthly plan"
         },
-    
+
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price:"$59.99",
+            price: "$59.99",
             price1: "$299.99",
-            plans:"/month",
+            plans: "/month",
             label: "Subscribe",
-            description:"You will get 50 listing to post in a month with this monthly plan",
-            desc1:"You will get 50 Proposals to submit in a month with this monthly plan"
+            description: "You will get 50 listing to post in a month with this monthly plan",
+            desc1: "You will get 50 Proposals to submit in a month with this monthly plan"
         },
-    
+
         {
             id: 'bd7acbea-c1b1-46c23-aed5-3ad53abb28ba',
-            price:"$99.99",
+            price: "$99.99",
             price1: "$499.99",
-            plans:"/month",
+            plans: "/month",
             label: "Subscribe",
-            description:"You will get 100 listing to post in a month with this monthly plan",
-            desc1:"You will get 100 Proposals to submit in a month with this monthly plan"
+            description: "You will get 100 listing to post in a month with this monthly plan",
+            desc1: "You will get 100 Proposals to submit in a month with this monthly plan"
         },
-    
-
-
     ];
 
     return (
@@ -59,22 +57,23 @@ const PaymentPlans = ({ navigation }) => {
                 <Apptext style={styles.submitTxt} >Subscribe Care Link to submit your rooms listings </Apptext>
                 <Apptext style={[styles.submitTxt, { fontFamily: 'Poppins-Medium' }]}>Choose your plan and get started</Apptext>
             </View>
-            <View>
-                <FlatList
-                    data={DATA}
-                    keyExtractor={(item, index) => index}
-                    renderItem={({ item, index }) => (
-                        <PlansComp
+            {/* <View> */}
+            <FlatList
+                ListFooterComponent={() => <View style={{ marginBottom: heightPixel(20) }}></View>}
+                data={DATA}
+                keyExtractor={(item, index) => index}
+                renderItem={({ item, index }) => (
+                    <PlansComp
                         btnTxt={item.label}
                         price={usertype === "ServiceSide" ? item.price : item.price1}
                         plan={"/month"}
                         desc={usertype === "ServiceSide" ? item.description : item.desc1}
-                        onPress={() =>navigation.navigate("PaymentMethod") }
+                        onPress={() => navigation.navigate("PaymentMethod")}
                     />
-                    )}
-                />
+                )}
+            />
 
-            </View>
+            {/* </View> */}
         </View>
     )
 }

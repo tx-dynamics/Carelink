@@ -1,31 +1,53 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
+import { fontPixel, heightPixel, widthPixel } from '../Constants';
+import { fonts } from '../Constants/Fonts';
+import colors from '../config/colors';
 
 const SelectCardComp = ({ labelValue, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
-    onPress,borderRadius= 6,rightOnPress,myStl,
+    onPress, borderRadius = 6, rightOnPress, myStl, cardName,
     rightIconType, ...rest }) => {
     return (
-        <TouchableOpacity 
-        onPress={onPress}
-        style={myStl ? [styles.inputContainer, { borderColor:DefaultStyles.colors.primary,
-            borderWidth:1,borderRadius:borderRadius}] : [styles.inputContainer, {borderRadius:borderRadius}]} >
-            
+        <TouchableOpacity
+            onPress={onPress}
+            style={myStl ? [styles.inputContainer, {
+                borderColor: DefaultStyles.colors.primary,
+                borderWidth: 1, borderRadius: borderRadius
+            }] : [styles.inputContainer, { borderRadius: borderRadius }]} >
+
             <View style={styles.direcView}>
-              <View style={styles.imgView}>
-               <Image
-                source={leftImgName}
-               />
-               </View>
-               <View style={styles.txtView}>
-                <Apptext style={styles.txtVal}>{labelValue}</Apptext>
+                <View style={styles.imgView}>
+                    <View style={{
+                        alignItems: "center",
+                        width: widthPixel(90),
+                    }}>
+                        <Image resizeMode='contain' style={{
+                            width: widthPixel(40),
+                            height: widthPixel(40),
+                            // marginRight: widthPixel(20)
+                        }}
+                            source={leftImgName}
+                        />
+                        <Text style={{
+                            fontSize: fontPixel(12),
+                            fontFamily: fonts.Poppins_Bold,
+                            color: colors.cardTextColor
+                        }}>{cardName}</Text>
+                    </View>
+                    <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                 </View>
-              {myStl ? <View style={styles.pinkCircle}>
-                <Image
-                source={rightImgName}  />
+                {/* <View style={styles.txtView}>
+                </View> */}
+                {myStl ? <View style={styles.pinkCircle}>
+                    <Image resizeMode='contain' style={{
+                        width: widthPixel(24),
+                        height: widthPixel(24),
+                    }}
+                        source={rightImgName} />
                 </View> : null}
             </View>
         </TouchableOpacity>
@@ -35,17 +57,18 @@ const SelectCardComp = ({ labelValue, placeholderText,
 export default SelectCardComp;
 
 const styles = StyleSheet.create({
-    direcView:{
-        flexDirection: 'row', alignItems:'center' 
+    direcView: {
+        paddingRight: widthPixel(20),
+        justifyContent: "space-between",
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     inputContainer: {
-        width: wp('88%'),
-        marginBottom:wp('5%'),
+        width: widthPixel(343),
+        marginBottom: heightPixel(20),
         alignSelf: 'center',
-        height:wp('23%'),
-        justifyContent:'center',
-        padding:wp('2%'),
-        paddingLeft:wp('8%'),
+        height: heightPixel(74),
+        justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.white,
         shadowColor: "#000",
         shadowOffset: {
@@ -54,38 +77,40 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
-        elevation: 3, 
+        elevation: 3,
     },
-    pinkCircle:{
-        width:36,
-        height:36,
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:DefaultStyles.colors.primary,
-        borderRadius:20
+    pinkCircle: {
+        width: 36,
+        height: 36,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: DefaultStyles.colors.primary,
+        borderRadius: 20
     },
-    imgView:{
-        width:46,
-        height:46,
-        borderRadius:10,
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:DefaultStyles.colors.white
+    imgView: {
+        // width: 46,
+        // height: 46,
+        // borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: "row",
+        backgroundColor: DefaultStyles.colors.white
     },
-    txtView:{
-        justifyContent:'center',
-        textAlign:'center',
-        alignItems:'center',
-        width:wp('52%'),
+    txtView: {
+        justifyContent: 'center',
+        textAlign: 'center',
+        alignItems: 'center',
+        width: wp('52%'),
     },
-    txtVal:{
-        fontFamily:'Poppins-Regular',
-        fontSize:wp('3%') ,
-        color:DefaultStyles.colors.black,
+    txtVal: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: wp('3%'),
+        color: DefaultStyles.colors.black,
+        marginLeft: widthPixel(20)
     },
-    hrtStl:{
-        width:25,
-        height:25,
-        marginRight:wp('10%')
+    hrtStl: {
+        width: 25,
+        height: 25,
+        marginRight: wp('10%')
     }
 });

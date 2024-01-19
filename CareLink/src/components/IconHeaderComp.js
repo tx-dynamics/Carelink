@@ -6,16 +6,15 @@ import Apptext from './Apptext';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 
-function IconHeaderComp ({heading,imgName,onPress,style,  ...rest }){
+function IconHeaderComp({ heading, imgName, onPress, style, ...rest }) {
 
     return (
-        
-        <View style={{marginTop:getStatusBarHeight(true),}}>
-             <TouchableOpacity onPress={onPress} >
+        <View style={{ marginTop: getStatusBarHeight(true), }}>
+            <TouchableOpacity onPress={onPress} >
                 <Image style={styles.imgStl}
                     source={imgName} />
             </TouchableOpacity>
-              <Apptext style={[styles.createTxt, {...style}]}>{heading}</Apptext>
+            <Apptext style={[styles.createTxt, { ...style }]}>{heading}</Apptext>
         </View>
     );
 };
@@ -23,14 +22,14 @@ function IconHeaderComp ({heading,imgName,onPress,style,  ...rest }){
 export default IconHeaderComp;
 
 const styles = StyleSheet.create({
-    createTxt:{
-        marginTop:wp('10%'),
-        color:DefaultStyles.colors.black,
-        fontFamily:'Poppins-Regular',
-        fontSize:wp('6%'),
-        marginHorizontal:wp('5%')
+    createTxt: {
+        marginTop: wp('6%'),
+        color: DefaultStyles.colors.black,
+        fontFamily: 'Poppins-Regular',
+        fontSize: wp('6%'),
+        marginHorizontal: wp('5%')
     },
-    imgStl:{
-        marginHorizontal: wp('5%'), marginTop: 18 
+    imgStl: {
+        marginHorizontal: wp('5%'), marginTop: 18
     }
 });

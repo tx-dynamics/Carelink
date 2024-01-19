@@ -12,7 +12,7 @@ import {
 } from "react-native-responsive-screen";
 import Apptext from "../../components/Apptext";
 import FormButton from "../../components/FormButton";
-import { DrawerActions} from '@react-navigation/native'
+import { DrawerActions } from '@react-navigation/native'
 import { useSelector } from 'react-redux';
 
 
@@ -38,33 +38,33 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
 
                     {/* Single Item */}
                     {
-                    usertype === "ServiceSide" ?
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Feedback"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
-                    </TouchableOpacity>
-                    :     
-                    <View>
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"RoomsProposals"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>My Jobs</Apptext>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"SavedListing"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
-                    </TouchableOpacity>
-                   
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Rates"})}
-                    
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Rates</Apptext>
-                    </TouchableOpacity>
-                    </View>
+                        usertype === "ServiceSide" ?
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Feedback" })}
+                                style={styles.items}>
+                                <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
+                            </TouchableOpacity>
+                            :
+                            <View>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "RoomsProposals" })}
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>My Jobs</Apptext>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "SavedListing" })}
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Rates" })}
+
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>Rates</Apptext>
+                                </TouchableOpacity>
+                            </View>
                     }
                     {/* ITEMS ENDS HERE */}
 
@@ -75,9 +75,9 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Help"})}
-                    style={styles.items}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Help" })}
+                        style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Help</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
@@ -99,7 +99,8 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        width: "100%"
     },
     bck: {
         marginTop: wp('10%'),

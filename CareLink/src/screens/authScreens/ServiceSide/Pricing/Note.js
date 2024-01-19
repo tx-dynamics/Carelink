@@ -8,6 +8,9 @@ import FormInput from '../../../../components/FormInput';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput';
+import colors from '../../../../config/colors';
+import { heightPixel } from '../../../../Constants';
 
 const Note = ({ navigation }) => {
 
@@ -20,8 +23,14 @@ const Note = ({ navigation }) => {
             />
             <KeyboardAwareScrollView style={{}}>
                 <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-
+                <NewAppTextInput />
             </KeyboardAwareScrollView>
+            <FormButton backgroundColor={colors.skipButtonColor}
+                buttonTitle={"Skip"}
+                color={colors.black}
+                width={"90%"}
+                onPress={() => navigation.navigate("AgencyLocation")}
+            />
             <FormButton
                 buttonTitle={"Next"}
                 width={"90%"}
@@ -38,6 +47,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),

@@ -8,60 +8,59 @@ import FormButton from '../../../components/FormButton';
 import { useSelector } from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { heightPixel } from '../../../Constants';
 
 const AgencyLocation = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
     return (
-        <ScrollView style={styles.container}> 
+        <View style={styles.container}>
+            <KeyboardAwareScrollView style={{}}>
                 <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}
+                />
+                <View>
+                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
+                </View>
+                <View style={{ marginBottom: heightPixel(50) }} >
+                    <FormInput
+                        title={"Street Address"}
+                    />
+                    <FormInput
+                        title={"Apartment Number"}
+                    // borderColor={DefaultStyles.colors.black}
+                    // borderWidth={1}
+                    />
+                    <FormInput
+                        title={"ZIP Code"}
+                        borderColor={DefaultStyles.colors.black}
+                        borderWidth={1}
+                    />
+                    <FormInput
+                        title={"State"}
+                        borderColor={DefaultStyles.colors.black}
+                        borderWidth={1}
+                    />
+                </View>
+            </KeyboardAwareScrollView>
+            <FormButton
+                buttonTitle={"Next"}
+                onPress={() => navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")}
             />
-            <View>
-                <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
-            </View>
-            <View style={{marginTop:-15}} >
-                <FormInput
-                    title={"Street Address"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    title={"Apartment Number"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                  <FormInput
-                    title={"ZIP Code"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                  <FormInput
-                    title={"State"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-            </View>
-            <View style={{ marginTop: wp('26%') }}>
-                <FormButton
-                    buttonTitle={"Next"}
-                    width={wp('90%')}
-                    height={wp('15%')}
-                    onPress={() => navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")}
-                />
-            </View>
-        </ScrollView>
+        </View>
     )
 }
 
-export default AgencyLocation ;
+export default AgencyLocation;
 
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),

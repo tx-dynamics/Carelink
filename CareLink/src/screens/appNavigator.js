@@ -58,7 +58,7 @@ const DrawerNavigator = () => {
             }}
             drawerContent={(props) => <DrawerContent {...props} />}
         >
-            <Drawer.Screen name="Drawer" component={AppNavigator} />
+            <Drawer.Screen options={{ drawerStyle: { width: "100%" } }} name="Drawer" component={AppNavigator} />
         </Drawer.Navigator>
     )
 }

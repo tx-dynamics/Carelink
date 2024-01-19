@@ -36,4 +36,6 @@ export default {
   dotUnselected: "#ECECEC",
   smallHeadingBlack: "#242424",
   calendarColor: "#F4F4F4",
+  skipButtonColor: "#E6E6E6",
+  cardTextColor: "#B4B4B4",
 };

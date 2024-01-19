@@ -8,9 +8,11 @@ import { DrawerActions, useNavigation } from '@react-navigation/native'
 import ServiceRoomComp from '../../../../components/ServiceRoomComp';
 import ProposalComp from '../../../../components/ProposalComp';
 import ReportComp from '../../../../components/ReportComp';
+import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { heightPixel, widthPixel } from '../../../../Constants';
 
 const ServiceHome = ({ navigation }) => {
-
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -22,7 +24,6 @@ const ServiceHome = ({ navigation }) => {
             msg1: "Booked",
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
-
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
             no: "3",
@@ -43,47 +44,13 @@ const ServiceHome = ({ navigation }) => {
             msg1: "Booked",
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
-
-        {
-            id: 'bd547ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            no: "2",
-            no1: "9",
-            label: "Proposals",
-            msg: "Posted",
-            width: wp('33%'),
-            msg1: "Submitted",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
-    const DATAL = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            label: "ABC Rental Agency",
-            msg: "Room : 3",
-            desc: "Received : 3H Ago",
-            img: require('../../../../../assets/photo.png'),
-        },
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            label: "ABC Rental Agency",
-            msg: "Room : 3",
-            desc: "Received : 3H Ago",
-            img: require('../../../../../assets/photo.png'),
-        },
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            label: "ABC Rental Agency",
-            msg: "Room : 3",
-            desc: "Received : 3H Ago",
-            img: require('../../../../../assets/photo.png'),
-        },
-
     ];
 
 
     return (
         <View style={styles.container}>
-            <Header
+            <AppStatusbar />
+            <Header rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -94,7 +61,7 @@ const ServiceHome = ({ navigation }) => {
                 <View style={styles.whiteBox}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                         <View style={styles.imgView}>
-                            <Image style={{ marginTop: 15 }} source={require('../../../../../assets/blueMbl.png')} />
+                            <Image resizeMode='contain' style={{ marginTop: heightPixel(11), width: widthPixel(66), height: heightPixel(140) }} source={require('../../../../../assets/blueMbl.png')} />
                         </View>
                         <Apptext style={styles.listingTxt}>
                             Start listing your extra home with an agency and make money
@@ -104,34 +71,31 @@ const ServiceHome = ({ navigation }) => {
                         <Apptext style={styles.BtnTxt} >Start Listing</Apptext>
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.txtView, { marginTop: wp('9%') }]}>
+                <View style={[styles.txtView, { marginTop: heightPixel(40) }]}>
                     <Apptext style={styles.rms} >Rooms</Apptext>
                     <TouchableOpacity>
                         <Apptext style={styles.dtls} >See Details</Apptext>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.marginView} >
-                    <FlatList
+                    <FlatList style={{ alignSelf: "center" }}
                         data={DATA}
-                        numColumns={2}
+                        horizontal
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (
                             <ServiceRoomComp
                                 labelValue={item.label}
                                 AvailableRooms={item.no}
-                                BookedRooms={item.no1}
-                                width={item.width}
                                 firstTxt={item.msg}
-                                scndTxt={item.msg1}
                             />
                         )}
                     />
                     <View style={styles.direcView}>
                         <Apptext style={styles.rms} >Received Proposals</Apptext>
                     </View>
-                    <View style={{ marginTop: 21 }}>
+                    <View style={{ marginTop: heightPixel(21) }}>
                         <FlatList
-                            data={DATAL}
+                            data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
                                 <ProposalComp
@@ -140,7 +104,6 @@ const ServiceHome = ({ navigation }) => {
                                     location={item.msg}
                                     description={item.desc}
                                     img={item.img}
-
                                 />
                             )}
                         />
@@ -235,22 +198,24 @@ const styles = StyleSheet.create({
     },
     rms2: {
         fontFamily: 'Poppins-SemiBold',
-        marginHorizontal: -13, fontSize: 20 
+        marginHorizontal: -13, fontSize: 20
 
     },
     dtls: {
         color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
     },
     marginView: {
-        marginHorizontal: wp('5%'),
         marginTop: wp('6%')
     },
     ltst: {
         fontSize: 20,
         fontFamily: 'Poppins-Medium'
     },
-    direcView:{
-        flexDirection: 'row', marginTop: wp('5%'), justifyContent: 'space-between' 
+    direcView: {
+        paddingHorizontal: widthPixel(20),
+        flexDirection: 'row',
+        marginTop: wp('5%'),
+        justifyContent: 'space-between'
     }
 
 

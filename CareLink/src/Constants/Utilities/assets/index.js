@@ -13,6 +13,9 @@ const appIcons = {
     calendar: require(`${iconUrl}/calendar.png`),
     cross: require(`${iconUrl}/cross.png`),
     plus: require(`${iconUrl}/plus.png`),
+    hide: require(`${iconUrl}/hide.png`),
+    show: require(`${iconUrl}/show.png`),
+    thirdTab: require(`${iconUrl}/thirdTab.png`),
 
 
 }

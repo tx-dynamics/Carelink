@@ -21,7 +21,7 @@ import moment from 'moment';
 import AvailableComponent from '../../../components/AvailableComponent/AvailableComponent';
 import AddPhotoComponent, { AddButtonComponent, PhotoComponent } from '../../../components/AddPhotoComponent/AddPhotoComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import { removePic, uploadmage } from '../../../Services/HelpingMethods';
+import { removePic, uploadmageMultiPle } from '../../../Services/HelpingMethods';
 
 
 const ListingOptions = ({ navigation }) => {
@@ -44,7 +44,7 @@ const ListingOptions = ({ navigation }) => {
             },
         ]
     )
-    const [picData, setPicData] = useState([])
+    const [picData, setPicData] = useState([{ image: "", add: true }])
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
     const minDate = new Date();
@@ -78,7 +78,10 @@ const ListingOptions = ({ navigation }) => {
                 />
                 <AddPhotoComponent />
                 <View style={styles.flatlistStyle}>
-                    <FlatList horizontal data={picData} renderItem={({ item, index }) => <PhotoComponent pic={item} crossPress={() => removePic(index, setPicData, picData)} />} ListFooterComponent={() => <AddButtonComponent onPress={() => uploadmage(setPicData, picData)} />} />
+                    <FlatList numColumns={3} data={picData} renderItem={({ item, index }) => item.add ? <AddButtonComponent onPress={() => uploadmageMultiPle(setPicData, picData)} /> : <PhotoComponent pic={item.image} crossPress={() => removePic(index, setPicData, picData)} />}
+                    //     ListFooterComponent={() => 
+                    // } 
+                    />
                 </View>
                 <FormButton onPress={() => navigation.navigate("Note")} containerStyle={styles.btnStyle} buttonTitle={"Next"} />
             </KeyboardAwareScrollView>
@@ -97,6 +100,7 @@ const styles = StyleSheet.create({
         width: "95%",
     },
     flatlistStyle: {
+        // alignSelf: "center",
         justifyContent: "center",
         alignItems: "flex-start",
         paddingHorizontal: widthPixel(20)

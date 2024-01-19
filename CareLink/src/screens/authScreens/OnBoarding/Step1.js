@@ -41,7 +41,7 @@ const Step1 = ({ navigation }) => {
         <View style={styles.container}>
             <AppStatusbar />
             <TouchableOpacity style={styles.skipDirection}
-                onPress={() => navigation.navigate("AskRegister")}
+                onPress={() => navigation.replace("AskRegister")}
             >
                 <Apptext style={styles.skipTxt}>Skip</Apptext>
             </TouchableOpacity>

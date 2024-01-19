@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from '../../../redux/actions/authAction';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { heightPixel, widthPixel } from '../../../Constants';
 
 const PaymentDone = ({ navigation }) => {
     let dispatch = useDispatch()
@@ -18,37 +19,38 @@ const PaymentDone = ({ navigation }) => {
     const user = useSelector((state) => state.auth.user)
     return (
         <View style={styles.container}>
-
-            <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-            />
-            <View style={styles.centerView}>
-                <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-                    source={require('../../../../assets/bigCircleTick.png')} />
-                <Apptext style={styles.doneTxt}>Payment done</Apptext>
-            </View>
-            {usertype === "ServiceSide" ?
-                <View style={[styles.txtView, { marginTop: wp('4%') }]} >
-                    <Apptext style={styles.roomsTxt}> Your Rooms  </Apptext>
-                    <Apptext style={styles.roomsTxt}> Successfully Registerd </Apptext>
-                </View> :
-                <View style={[styles.txtView, { marginTop: wp('4%') }]} >
-                    <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
-                    <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
-                </View>
-            }
-            <View style={styles.txtView} >
-                <Apptext style={styles.submitTxt}> This is Sample Text. Please Provide Original Text to be pasted here  </Apptext>
-            </View>
-            <View style={{ marginTop: wp('35%') }} >
-                <FormButton
-                    buttonTitle={"Get Started"}
-                    width={'88%'}
-                    onPress={() => dispatch(setUser(true))}
+            <View>
+                <IconHeaderComp
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
                 />
+                <View style={styles.centerView}>
+                    <Image resizeMode='contain'
+                        style={{
+                            width: widthPixel(96),
+                            height: widthPixel(96),
+                        }}
+                        source={require('../../../../assets/bigCircleTick.png')} />
+                    <Apptext style={styles.doneTxt}>Payment done</Apptext>
+                </View>
+                {usertype === "ServiceSide" ?
+                    <View style={[styles.txtView, { marginTop: wp('4%') }]} >
+                        <Apptext style={styles.roomsTxt}> Your Rooms  </Apptext>
+                        <Apptext style={styles.roomsTxt}> Successfully Registerd </Apptext>
+                    </View> :
+                    <View style={[styles.txtView, { marginTop: wp('4%') }]} >
+                        <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
+                        <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
+                    </View>
+                }
+                <View style={styles.txtView} >
+                    <Apptext style={styles.submitTxt}> This is Sample Text. Please Provide Original Text to be pasted here  </Apptext>
+                </View>
             </View>
+            <FormButton
+                buttonTitle={"Continue"}
+                onPress={() => dispatch(setUser(true))}
+            />
         </View>
     )
 }
@@ -60,6 +62,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20),
     },
     doneTxt: {
         fontSize: 20,
