@@ -12,7 +12,7 @@ import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import { heightPixel, widthPixel } from '../../../../Constants';
 
-const ServiceHome = ({ navigation }) => {
+const ServiceHome = ({ }) => {
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -22,7 +22,7 @@ const ServiceHome = ({ navigation }) => {
             msg: "Available",
             width: wp('33%'),
             msg1: "Booked",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            desc: `3 hr ago`
         },
         {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -46,11 +46,11 @@ const ServiceHome = ({ navigation }) => {
         },
     ];
 
-
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header rightImg={appIcons.thirdTab}
+            <Header height={heightPixel(80)} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -73,7 +73,7 @@ const ServiceHome = ({ navigation }) => {
                 </View>
                 <View style={[styles.txtView, { marginTop: heightPixel(40) }]}>
                     <Apptext style={styles.rms} >Rooms</Apptext>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate("SearchNavigator", { screen: "ServiceRooms" })}>
                         <Apptext style={styles.dtls} >See Details</Apptext>
                     </TouchableOpacity>
                 </View>
@@ -102,19 +102,19 @@ const ServiceHome = ({ navigation }) => {
                                     showProposals={true}
                                     name={item.label}
                                     location={item.msg}
-                                    description={item.desc}
+                                    description={"Received: " + item.desc}
                                     img={item.img}
                                 />
                             )}
                         />
                     </View>
-                    <View style={[styles.txtView]}>
+                    {/* <View style={[styles.txtView]}>
                         <Apptext style={[styles.rms2]} >Payments Reports</Apptext>
                         <TouchableOpacity>
                             <Apptext style={styles.dtls} >Details</Apptext>
                         </TouchableOpacity>
-                    </View>
-                    <View style={{ marginTop: wp('7%') }}>
+                    </View> */}
+                    {/* <View style={{ marginTop: wp('7%') }}>
                         <ReportComp
                             firstHead={"Personal Balance"}
                             firstPrc={"$500.00"}
@@ -125,7 +125,7 @@ const ServiceHome = ({ navigation }) => {
                             thirdHead={"This month Payments"}
                             frthHead={"October Payments"}
                         />
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
         </View>
@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: wp('3%'),
         marginHorizontal: wp('5%')
     },
     rms: {

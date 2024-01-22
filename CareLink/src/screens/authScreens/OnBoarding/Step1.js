@@ -11,9 +11,13 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DotComponent from '../../../components/DotComponent/DotComponent';
 import * as Progress from 'react-native-progress';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser, setUserType } from '../../../redux/actions/authAction';
 
 const Step1 = ({ navigation }) => {
     const swiperRef = useRef({});
+    const user = useSelector((state) => state.auth.user)
+    const dispatch = useDispatch()
     const [isIndex, setIndex] = useState(0)
     const [isProgress, setProgress] = useState(.33)
     const onBoardingData = [
@@ -36,8 +40,13 @@ const Step1 = ({ navigation }) => {
             image: appIcons.onBoarding3,
         },
     ]
-
+    const onPressButton = () => {
+        dispatch(setUserType("ServiceSide"))
+        // dispatch(setUser(true))
+        navigation.replace("AskRegister")
+    }
     return (
+        console.log(user),
         <View style={styles.container}>
             <AppStatusbar />
             <TouchableOpacity style={styles.skipDirection}
@@ -91,7 +100,7 @@ const Step1 = ({ navigation }) => {
             <TouchableOpacity
                 onPress={() => {
                     setProgress(isProgress + .34)
-                    isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : navigation.replace("AskRegister")
+                    isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
                 }}
                 // onPress={() => navigation.navigate("Step2")}
                 style={styles.box}>

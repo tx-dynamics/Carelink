@@ -56,6 +56,7 @@ const ListingOptions = ({ navigation }) => {
             setStartDate(date)
         } else {
             setEndDate(date)
+
         }
     }
     return (

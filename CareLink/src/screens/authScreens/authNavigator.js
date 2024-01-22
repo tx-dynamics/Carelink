@@ -34,6 +34,8 @@ import RoomsCalender from "./ServiceSide/Calender/RoomsCalender";
 import HourlyPricing from "./ServiceSide/Pricing/HourlyPricing";
 import Note from "./ServiceSide/Pricing/Note";
 import PricingType from "./ServiceSide/Pricing/PricingType";
+import { routes } from "../../Constants";
+import ListingSummary from "./Agency/ListingSummary";
 
 
 const AuthStack = createNativeStackNavigator()
@@ -59,6 +61,7 @@ const SplashNavigator = () => {
             <AuthStack.Screen name="AgencyPhotos" component={AgencyPhotos} />
             <AuthStack.Screen name="AgencyLocation" component={AgencyLocation} />
             <AuthStack.Screen name="AgencyMap" component={AgencyMap} />
+            <AuthStack.Screen name={routes.listingSummary} component={ListingSummary} />
             <AuthStack.Screen name="PaymentPlans" component={PaymentPlans} />
             <AuthStack.Screen name="PaymentMethod" component={PaymentMethod} />
             <AuthStack.Screen name="SelectCard" component={SelectCard} />
@@ -83,7 +86,6 @@ const SplashNavigator = () => {
 }
 
 const AuthNavigator = () => {
-
     return (
 
         <SplashNavigator />

@@ -6,6 +6,8 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import ServiceListingComp from '../../../../components/ServiceListingComp';
+import { widthPixel } from '../../../../Constants';
+import { appIcons } from '../../../../Constants/Utilities/assets';
 
 
 const ServiceRooms = ({ navigation }) => {
@@ -28,7 +30,7 @@ const ServiceRooms = ({ navigation }) => {
     ];
     return (
         <View style={styles.container}>
-            <Header
+            <Header rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -38,7 +40,7 @@ const ServiceRooms = ({ navigation }) => {
                         <Apptext style={styles.rms} >Rooms Details</Apptext>
                     </View>
                     <Apptext style={[styles.rms, { marginTop: wp('6%') }]} >Available (3)</Apptext>
-                    <View style={{ marginTop: wp('5%') }}>
+                    <View style={{ marginTop: wp('5%'), }}>
                         <FlatList
                             data={DATA}
                             keyExtractor={(item, index) => index}
@@ -116,7 +118,7 @@ const styles = StyleSheet.create({
         color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
     },
     marginView: {
-        marginHorizontal: wp('5%'),
+        paddingHorizontal: wp('4.4%'),
     },
     ltst: {
         fontSize: 20,
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
         borderColor: "gray"
 
     },
-    direcView:{
+    direcView: {
         flexDirection: 'row', justifyContent: 'space-between'
     }
 

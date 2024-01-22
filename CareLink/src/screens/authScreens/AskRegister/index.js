@@ -19,11 +19,15 @@ const AskRegister = ({ navigation }) => {
             <View style={styles.pinkBox}>
                 <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
                 <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
-                <TouchableOpacity
+                <TouchableOpacity //for testing using this onPress,
                     onPress={() => {
                         dispatch(setUserType("ServiceSide"))
-                        navigation.navigate("ListingOptions")
+                        dispatch(setUser(true))
                     }}
+                    // onPress={() => {
+                    //     dispatch(setUserType("ServiceSide"))
+                    //     navigation.navigate("ListingOptions")
+                    // }}
                     style={styles.btn}>
                     <Apptext>Create</Apptext>
                 </TouchableOpacity>

@@ -6,29 +6,25 @@ import Apptext from './Apptext';
 
 const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
-    showHrt,showProposals,name,location,rightImg = require('../../assets/heart.png'),
-    onPress,borderRadius= 10,rightOnPress,description,
+    showHrt, showProposals, name, location, rightImg = require('../../assets/heart.png'),
+    onPress, borderRadius = 10, rightOnPress, description,
     rightIconType, ...rest }) => {
     return (
-        <TouchableOpacity 
-        onPress={onPress}
-        style={[styles.inputContainer, {borderRadius:borderRadius}]}>
-
+        <TouchableOpacity
+            onPress={onPress}
+            style={[styles.inputContainer, { borderRadius: borderRadius }]}>
             {/* Propsal Starts Here */}
             <View style={styles.direcView}>
-            <TouchableOpacity>
-            <Image style={styles.imgView} 
-            source={require('../../assets/photo.png')} />
-            </TouchableOpacity>
-            <Apptext style={styles.jamesTxt} >{name}</Apptext>
-           
+                <TouchableOpacity>
+                    <Image style={styles.imgView}
+                        source={require('../../assets/photo.png')} />
+                </TouchableOpacity>
+                <View>
+                    <Apptext numberOfLines={1} style={styles.jamesTxt} >{"name"}</Apptext>
+                    <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext>
+                    <Apptext numberOfLines={1} style={styles.descTxt} >{description}</Apptext>
+                </View>
             </View>
-            <Apptext style={styles.locTxt} >{location}</Apptext>
-            <Apptext style={styles.descTxt} >{description}</Apptext>
-           
-            {/* Propsal Ends Here */}
-
-           
         </TouchableOpacity>
     );
 };
@@ -36,70 +32,69 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
 export default ProposalComp;
 
 const styles = StyleSheet.create({
-    direcView:{
-        flexDirection:'row', marginTop:wp('1%')
+    direcView: {
+        alignItems: "center",
+        flexDirection: 'row',
+        marginTop: wp('1%')
     },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
-    
+
     },
-    imgView:{
-        width:94,
-        marginHorizontal:wp('4%'),
-        borderRadius:10,
-        height:96,
+    imgView: {
+        width: 94,
+        marginHorizontal: wp('4%'),
+        borderRadius: 10,
+        height: 96,
     },
-    jamesTxt:{
-        fontFamily:'Poppins-Medium',
-        fontSize:19,
-        marginLeft:-8,
-        width:wp('55%'),
-        marginTop:wp('1%'),
-        // backgroundColor:"blue"
+    jamesTxt: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 19,
+        width: wp('55%'),
     },
-    imgStl:{
-        width:57,
-        height:57,
-        borderRadius:43,
+    imgStl: {
+        width: 57,
+        height: 57,
+        borderRadius: 43,
     },
-    txtView:{
-        flexDirection:'row',
-        alignItems:'center',
-        marginHorizontal:wp('5%'),
-        width:wp('75%'),
+    txtView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: wp('5%'),
+        width: wp('75%'),
         // marginTop:wp('4%'),
         // backgroundColor:"red"
     },
-    txtVal:{
-        fontFamily:'poppins-Regular',
-        fontSize:18,
-        marginTop:wp('2%')
+    txtVal: {
+        fontFamily: 'poppins-Regular',
+        fontSize: 18,
+        marginTop: wp('2%')
     },
-    lightTxt:{
-        fontSize:8,
-        marginTop:wp('4%'),
-        color:"lightgray",
+    lightTxt: {
+        fontSize: 8,
+        marginTop: wp('4%'),
+        color: "lightgray",
     },
-    scndTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:11,
-        marginTop:wp('1%')
+    scndTxt: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 11,
+        marginTop: wp('1%')
     },
-    dot:{
-        width:5,
-        height:5,
-        backgroundColor:"black",
-        borderRadius:5,
-        marginTop:wp('1%')
+    dot: {
+        width: 5,
+        height: 5,
+        backgroundColor: "black",
+        borderRadius: 5,
+        marginTop: wp('1%')
     },
     inputContainer: {
         width: wp('90%'),
-        marginBottom:wp('6%'),
+        marginBottom: wp('6%'),
         alignSelf: 'center',
-        height:132,
-        padding:wp('4%'),
-        paddingLeft:0,
+        height: 132,
+        padding: wp('4%'),
+        paddingLeft: 0,
         backgroundColor: DefaultStyles.colors.white,
         borderBottomColor: "white",
         shadowColor: "#000",
@@ -109,18 +104,21 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
-        
+
         elevation: 3,
     },
-    hrtStl:{
-        width:25,
-        height:25,
-        marginRight:wp('10%')
+    hrtStl: {
+        width: 25,
+        height: 25,
+        marginRight: wp('10%')
     },
-    locTxt:{
-        marginLeft:wp('32%'),fontSize:16, marginTop:-60
+    locTxt: {
+        // marginLeft: wp('32%'),
+        fontSize: 16,
+        // marginTop: -60
     },
-    descTxt:{
-        marginLeft:wp('32%'),fontSize:16,color:"lightgray" 
+    descTxt: {
+        // marginLeft: wp('32%'),
+        fontSize: 16, color: "lightgray"
     }
 });

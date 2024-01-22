@@ -69,10 +69,10 @@ const SelectCard = ({ navigation }) => {
                     imgName={iconPath.leftArrow}
                     heading={"Add/Select your card for payments"}
                 />
-                <View style={styles.txtView} >
+                {/* <View style={styles.txtView} >
                     <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
-                </View>
-                <View style={{ marginTop: wp('8%') }}>
+                </View> */}
+                {/* <View style={{ marginTop: wp('8%') }}>
                     <FormButton
                         buttonTitle={"+ Add"}
                         width={wp('45%')}
@@ -80,11 +80,13 @@ const SelectCard = ({ navigation }) => {
                         fontSize={15}
                         onPress={() => navigation.navigate("AddCard")}
                     />
-                </View>
+                </View> */}
                 <View style={styles.marginView}>
                     <Apptext style={styles.selectTxt}>Select Payment Method</Apptext>
                     <View style={{ marginTop: wp('4%') }} >
+
                         <FlatList
+                            ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (

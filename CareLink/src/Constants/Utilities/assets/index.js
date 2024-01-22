@@ -16,7 +16,9 @@ const appIcons = {
     hide: require(`${iconUrl}/hide.png`),
     show: require(`${iconUrl}/show.png`),
     thirdTab: require(`${iconUrl}/thirdTab.png`),
-
+    dummyPic1: require(`${iconUrl}/dummyPic1.png`),
+    dummyPic2: require(`${iconUrl}/dummyPic2.png`),
+    dummyPic3: require(`${iconUrl}/dummyPic3.png`),
 
 }
 

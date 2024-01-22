@@ -6,7 +6,10 @@ const SCREEN_HEIGHT = Dimensions.get('screen').height;
 
 export const storageKey = {}
 
+export const routes = {
+    listingSummary: "listingSummary",
 
+}
 
 export const loaderStyles = {
     CircleFlip: 'CircleFlip',

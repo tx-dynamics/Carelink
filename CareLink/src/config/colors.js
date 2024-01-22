@@ -38,4 +38,5 @@ export default {
   calendarColor: "#F4F4F4",
   skipButtonColor: "#E6E6E6",
   cardTextColor: "#B4B4B4",
+  availableFacilityText: "#0A0A0A",
 };

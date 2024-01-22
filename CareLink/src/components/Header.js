@@ -49,10 +49,10 @@ function Header({
         <Image source={centerImg} />
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={{ width: wp('6%'), }} onPress={onPressRight}>
+      <TouchableOpacity onPress={onPressRight}>
         <Image resizeMode="contain" source={rightImg} style={{
-          width: widthPixel(24),
-          height: heightPixel(31),
+          width: widthPixel(38),
+          height: widthPixel(38),
         }} />
       </TouchableOpacity>
 

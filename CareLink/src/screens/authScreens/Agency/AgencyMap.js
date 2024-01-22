@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
-import { heightPixel } from '../../../Constants';
+import { heightPixel, routes } from '../../../Constants';
 
 const AgencyMap = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
@@ -37,7 +37,7 @@ const AgencyMap = ({ navigation }) => {
             <FormButton
                 buttonTitle={"Next"}
                 // width={wp('90%')}
-                onPress={() => usertype === "ServiceSide" ? navigation.navigate("Register") : navigation.navigate("PaymentPlans")}
+                onPress={() => usertype === "ServiceSide" ? navigation.navigate(routes.listingSummary) : navigation.navigate("PaymentPlans")}
             />
 
 
