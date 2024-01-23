@@ -11,9 +11,11 @@ function IconHeaderComp({ heading, imgName, onPress, style, ...rest }) {
 
     return (
         <View style={{ marginTop: getStatusBarHeight(true), }}>
-            <TouchableOpacity onPress={onPress} >
-                <Image resizeMode='contain' style={styles.imgStl}
-                    source={imgName} />
+            <TouchableOpacity style={styles.subView} onPress={onPress} >
+                {imgName &&
+                    <Image resizeMode='contain' style={styles.imgStl}
+                        source={imgName} />
+                }
             </TouchableOpacity>
             <Apptext style={[styles.createTxt, { ...style }]}>{heading}</Apptext>
         </View>
@@ -30,6 +32,9 @@ const styles = StyleSheet.create({
         fontSize: wp('6%'),
         paddingHorizontal: widthPixel(20),
         // marginHorizontal: wp('5%')
+    },
+    subView: {
+        height: heightPixel(17),
     },
     imgStl: {
         width: widthPixel(18),

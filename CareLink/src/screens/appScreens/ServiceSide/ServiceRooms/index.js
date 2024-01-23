@@ -6,8 +6,9 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import ServiceListingComp from '../../../../components/ServiceListingComp';
-import { widthPixel } from '../../../../Constants';
+import { heightPixel, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
+import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 
 
 const ServiceRooms = ({ navigation }) => {
@@ -16,8 +17,41 @@ const ServiceRooms = ({ navigation }) => {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             price: "$29.99",
             plans: "/month",
+            adress: "Brookside Place",
             label: "Debit/Credit Card",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            description: `You will get 20 listing to post in a month with this monthly plan`,
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+                },
+                {
+                    id: 2,
+                    title: "Car parking available"
+                },
+                {
+                    id: 3,
+                    title: "Tarrece"
+                },
+            ]
+        },
+        {
+            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b1',
+            price: "$20.99",
+            plans: "/month",
+            label: "Debit/Credit Card",
+            adress: "Hillcrest Heights",
+            description: `You will get 20 listing to post in a month with this monthly plan`,
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+                },
+                {
+                    id: 2,
+                    title: "Car parking available"
+                },
+            ]
         },
 
         {
@@ -25,12 +59,21 @@ const ServiceRooms = ({ navigation }) => {
             price: "$29.99",
             plans: "/month",
             label: "PayPal",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            adress: "Magnolia Meadows",
+            description: `You will get 20 listing to post in a month with this monthly plan`,
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+                },
+
+            ]
         },
     ];
     return (
         <View style={styles.container}>
-            <Header rightImg={appIcons.thirdTab}
+            <AppStatusbar />
+            <Header height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -41,32 +84,34 @@ const ServiceRooms = ({ navigation }) => {
                     </View>
                     <Apptext style={[styles.rms, { marginTop: wp('6%') }]} >Available (3)</Apptext>
                     <View style={{ marginTop: wp('5%'), }}>
-                        <FlatList
+                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
-                                <ServiceListingComp
+                                <ServiceListingComp disabled facilityData={item.facility}
+                                    // facilty={item.facility}
                                     showProposals={true}
-                                    labelValue={"3 Room on 2nd Floor"}
+                                    labelValue={item.adress}
                                     name={"ABC Rental Agency"}
                                     location={"7+ Year Experience"}
                                     when={"Right Now"}
                                     fors={"For 20 days"}
                                     hourly={"$20-70 Hourly"}
-                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
+                                // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
                                 />
                             )}
                         />
                     </View>
                     <Apptext style={styles.rms} >Booked (3)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
                                 <ServiceListingComp
+                                    facilityData={item.facility}
                                     showProposals={true}
-                                    labelValue={"3 Room on 2nd Floor"}
+                                    labelValue={item.adress}
                                     name={"James Clear"}
                                     location={"7+ Year Experience"}
                                     when={"Right Now"}
@@ -77,8 +122,8 @@ const ServiceRooms = ({ navigation }) => {
                             )}
                         />
                     </View>
-                    <Apptext style={styles.rms} >Posted (2)</Apptext>
-                    <View style={{ marginTop: wp('5%') }}>
+                    {/* <Apptext style={styles.rms} >Posted (2)</Apptext> */}
+                    {/* <View style={{ marginTop: wp('5%') }}>
                         <FlatList
                             data={DATA}
                             keyExtractor={(item, index) => index}
@@ -91,7 +136,7 @@ const ServiceRooms = ({ navigation }) => {
                                 />
                             )}
                         />
-                    </View>
+                    </View> */}
                 </View>
             </ScrollView>
         </View>
@@ -137,7 +182,10 @@ const styles = StyleSheet.create({
     },
     direcView: {
         flexDirection: 'row', justifyContent: 'space-between'
-    }
-
+    },
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
 
 });

@@ -7,6 +7,7 @@ import {
 
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { heightPixel, widthPixel } from "../Constants";
 
 
 function BackgroundHeader({
@@ -27,22 +28,22 @@ function BackgroundHeader({
       style={{
         ...styles.container,
         backgroundColor: backgroundColor,
-        marginTop:getStatusBarHeight(true),
+        marginTop: getStatusBarHeight(true),
         ...style,
       }}
     >
       <View style={styles.headerIcons}>
-      <TouchableOpacity
-        onPress={onPressLeft}
+        <TouchableOpacity
+          onPress={onPressLeft}
         >
-        {isBack ? (
-          <Image style={[styles.icons, ]} source={leftImgName} />
-        ) : null}
-      </TouchableOpacity>
-     
-      <TouchableOpacity onPress={onPressRight}>
-        <Image style={[styles.icons,]} source={rightImg} />
-      </TouchableOpacity>
+          {isBack ? (
+            <Image style={[styles.icons,]} source={leftImgName} />
+          ) : null}
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={onPressRight}>
+          <Image style={[styles.icons,]} source={rightImg} />
+        </TouchableOpacity>
       </View>
 
     </ImageBackground>
@@ -61,8 +62,10 @@ const styles = StyleSheet.create({
   icons:
   {
     tintColor: "white",
-    marginHorizontal:wp(5),
-    marginTop:wp(5)
+    marginHorizontal: widthPixel(15),
+    width: widthPixel(30),
+    height: widthPixel(30),
+    marginTop: wp(5)
   },
   imgView: {
     width: '100%'
@@ -72,10 +75,11 @@ const styles = StyleSheet.create({
     color: DefaultStyles.colors.secondary,
     fontSize: 14
   },
-  headerIcons:{
-    flexDirection:'row',
-    width:'100%',
-    justifyContent:'space-between',
+  headerIcons: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    marginTop: heightPixel(20)
   }
 });
 

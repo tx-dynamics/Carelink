@@ -15,6 +15,8 @@ import { heightPixel, widthPixel } from '../../../../Constants';
 const ServiceHome = ({ }) => {
     const DATA = [
         {
+            name: "ABC Rental Agency",
+            adress: "Oakwood Heights",
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             no: "3",
             no1: "3",
@@ -25,6 +27,8 @@ const ServiceHome = ({ }) => {
             desc: `3 hr ago`
         },
         {
+            name: "Pearl Villa Estate",
+            adress: "Meadowbrook Meadows",
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
             no: "3",
             no1: "9",
@@ -32,9 +36,11 @@ const ServiceHome = ({ }) => {
             msg: "Booked",
             width: wp('53%'),
             msg1: "Submitted",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            desc: `3 hr ago`
         },
         {
+            name: "Eastern Street Rent",
+            adress: "Willowbrook Terrace",
             id: 'bd7a42cbea-c1b1-46c2-aed5-3ad53abb28ba',
             no: "6",
             no1: "3",
@@ -42,7 +48,7 @@ const ServiceHome = ({ }) => {
             msg: "Listed",
             width: wp('53%'),
             msg1: "Booked",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            desc: `3 hr ago`
         },
     ];
 
@@ -50,7 +56,7 @@ const ServiceHome = ({ }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header height={heightPixel(80)} rightImg={appIcons.thirdTab}
+            <Header height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -94,14 +100,14 @@ const ServiceHome = ({ }) => {
                         <Apptext style={styles.rms} >Received Proposals</Apptext>
                     </View>
                     <View style={{ marginTop: heightPixel(21) }}>
-                        <FlatList
+                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
-                                <ProposalComp
+                                <ProposalComp onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
                                     showProposals={true}
-                                    name={item.label}
-                                    location={item.msg}
+                                    name={item.name}
+                                    location={item.adress}
                                     description={"Received: " + item.desc}
                                     img={item.img}
                                 />
@@ -215,8 +221,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: wp('5%'),
         justifyContent: 'space-between'
-    }
-
-
-
+    },
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
 });

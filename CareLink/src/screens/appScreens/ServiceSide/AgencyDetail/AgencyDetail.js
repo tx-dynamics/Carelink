@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     View, TouchableOpacity, FlatList, ActivityIndicator,
-    TextInput, Alert, Image, StyleSheet, ScrollView,
+    TextInput, Alert, Image, StyleSheet, ScrollView, StatusBar,
 }
     from 'react-native';
 import {
@@ -13,9 +13,11 @@ import Apptext from '../../../../components/Apptext';
 import BackgroundHeader from '../../../../components/BackgroundHeader';
 import ReviewsComp from '../../../../components/ReviewsComp';
 import { useSelector } from 'react-redux';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { heightPixel, widthPixel } from '../../../../Constants';
+import { Rating, AirbnbRating } from 'react-native-ratings';
 
-
-const Profile = ({ navigation }) => {
+const AgencyDetail = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
     const DATA = [
         {
@@ -37,59 +39,38 @@ const Profile = ({ navigation }) => {
 
     return (
         <ScrollView style={styles.container}>
+            <StatusBar translucent backgroundColor={"transparent"} />
             <BackgroundHeader
                 backImg={require('../../../../../assets/back.png')}
                 leftImgName={require('../../../../../assets/headerBack.png')}
-                rightImg={usertype === "ServiceSide" ? require('../../../../../assets/dots.png') : null}
+                rightImg={appIcons.menu}
                 onPressLeft={() => navigation.goBack()}
             />
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
-                    {
-                        usertype === "ServiceSide" ?
-                            <TouchableOpacity
-                                onPress={() => navigation.navigate("ServiceClientProfile")}
-                                style={styles.cameraView}>
-                                <Image source={require('../../../../../assets/scChat.png')} />
-                            </TouchableOpacity>
-
-                            :
-                            <TouchableOpacity style={styles.cameraView}>
-                                <Image source={require('../../../../../assets/camera.png')} />
-                            </TouchableOpacity>
-
-                    }
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("ServiceClientProfile")}
+                        style={styles.cameraView}>
+                        <Image resizeMode='contain'
+                            style={{
+                                width: widthPixel(23),
+                                height: heightPixel(26)
+                            }}
+                            source={appIcons.sendMessage}
+                        />
+                    </TouchableOpacity>
                 </View>
+                {/* <AirbnbRating count={11} /> */}
 
                 <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
-                <View style={{ marginTop: -6, alignSelf: 'center' }}>
-                    <Image source={require('../../../../../assets/stars.png')} />
-                </View>
-
                 <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
                 <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >About</Apptext>
-                    {
-                        usertype === "ServiceSide" ?
-                            null :
-
-                            <TouchableOpacity>
-                                <Apptext style={styles.dtls} >Edit your about</Apptext>
-                            </TouchableOpacity>}
                 </View>
                 <View style={styles.paraView}>
                     <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi consequat, erat quis commodo facilisis ultricies. Aliquam semper eget dictumst donec elit in.</Apptext>
-                </View>
-                <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >Location</Apptext>
-                    {
-                        usertype === "ServiceSide" ?
-                            null :
-                            <TouchableOpacity>
-                                <Apptext style={styles.dtls} >Edit your Location</Apptext>
-                            </TouchableOpacity>}
                 </View>
                 <View style={styles.paraView}>
                     <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -121,15 +102,13 @@ const Profile = ({ navigation }) => {
                     />
 
                 </View>
-
-
             </View>
 
         </ScrollView>
     )
 }
 
-export default Profile;
+export default AgencyDetail;
 
 const styles = StyleSheet.create({
     container: {
@@ -150,8 +129,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     cameraView: {
-        width: 51,
-        height: 51,
+        width: widthPixel(51),
+        height: widthPixel(51),
         backgroundColor: "white",
         alignItems: 'center',
         justifyContent: 'center',

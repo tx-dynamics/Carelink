@@ -11,12 +11,15 @@ import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import { heightPixel, widthPixel } from "../Constants";
+import Styles from "../config/Styles";
 
 
 function Header({
   headerLabel,
   backgroundColor,
   leftImgName,
+  leftImgStyle,
+  rightImgStyle,
   centerImg,
   isBack = true,
   height = wp("23%"),
@@ -39,21 +42,16 @@ function Header({
         onPress={onPressLeft}
         style={{ width: wp('6%') }}>
         {isBack ? (
-          <Image resizeMode="contain" style={{
-            width: widthPixel(23),
-            height: heightPixel(16),
-          }} source={leftImgName} />
+          <Image resizeMode="contain" style={[styles.leftImgStyle, leftImgStyle]} source={leftImgName} />
         ) : null}
       </TouchableOpacity>
       <View style={styles.hdrView}>
-        <Image source={centerImg} />
+        {centerImg && <Image source={centerImg} />}
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
       <TouchableOpacity onPress={onPressRight}>
-        <Image resizeMode="contain" source={rightImg} style={{
-          width: widthPixel(38),
-          height: widthPixel(38),
-        }} />
+        {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
+        }
       </TouchableOpacity>
 
 
@@ -81,7 +79,15 @@ const styles = StyleSheet.create({
   },
   hdrView: {
     alignItems: 'center', width: wp('70%'), height: wp('5%')
-  }
+  },
+  leftImgStyle: {
+    width: widthPixel(30),
+    height: widthPixel(30),
+  },
+  rightImgStyle: {
+    width: widthPixel(38),
+    height: widthPixel(38),
+  },
 });
 
 export default Header;

@@ -19,6 +19,8 @@ const appIcons = {
     dummyPic1: require(`${iconUrl}/dummyPic1.png`),
     dummyPic2: require(`${iconUrl}/dummyPic2.png`),
     dummyPic3: require(`${iconUrl}/dummyPic3.png`),
+    sendMessage: require(`${iconUrl}/sendMessage.png`),
+    menu: require(`${iconUrl}/menu.png`),
 
 }
 

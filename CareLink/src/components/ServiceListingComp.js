@@ -1,36 +1,36 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
 import { fontPixel, widthPixel } from '../Constants';
 import colors from '../config/colors';
 import { fonts } from '../Constants/Fonts';
+import AvailableFacilityComp from './AvaialableFacilityComp/AvailableFacilityComp';
 
-const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
+const ServiceListingComp = ({ labelValue, disabled, when, facilityData, facilty, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName, showTags = true,
     showHrt, showProposals, name, location, rightImg = require('../../assets/heart.png'),
-    onPress, borderRadius = 10, rightOnPress, rightTxt = "Edit",
+    onPress, borderRadius = 10, rightOnPress, rightTxt = "Edit", pic,
     rightIconType, ...rest }) => {
     return (
-        <TouchableOpacity
+        <TouchableOpacity disabled={disabled}
             onPress={onPress}
             style={[styles.inputContainer, { borderRadius: borderRadius }]}>
 
             {/* Propsal Starts Here */}
             {showProposals ? <View style={{ height: 55 }}>
                 <View style={styles.direcView}>
-                    <TouchableOpacity>
-                        <Image style={styles.imgView}
-                            source={require('../../assets/photo.png')} />
-                    </TouchableOpacity>
-                    <Apptext style={styles.jamesTxt}>{name}</Apptext>
+                    <View>
+                        <Image style={styles.imgView} source={pic} />
+                    </View>
+                    <View>
+                        <Apptext numberOfLines={1} style={styles.jamesTxt}>{name}</Apptext>
+                        <Apptext numberOfLines={2} style={styles.locTxt} >{location}</Apptext>
+                    </View>
                     <Apptext style={styles.jamesTxt1}>
                         {rightTxt}</Apptext>
                 </View>
-                <Apptext style={styles.locTxt} >{location}</Apptext>
-                <Image style={styles.strImg}
-                    source={require('../../assets/stars.png')} />
             </View> : null}
             {/* Propsal Ends Here */}
 
@@ -41,27 +41,13 @@ const ServiceListingComp = ({ labelValue, when, fors, hourly, placeholderText,
                     </View>
                     <View style={styles.fvTxt}>
                         <Apptext style={styles.scndTxt}>{"For 20 days"}</Apptext>
-                        {/* <Apptext style={styles.dot} ></Apptext> */}
-                        {/* <Apptext style={styles.scndTxt}>{"  " + fors + "  "}</Apptext> */}
-                        {/* <Apptext style={styles.dot} >  </Apptext> */}
-                        {/* <Apptext style={styles.scndTxt}>{"  " + hourly + "  "}</Apptext> */}
+                    </View>
+                    <FlatList horizontal style={{
+                        alignSelf: "flex-start",
+                        marginLeft: widthPixel(20),
 
-                    </View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        marginHorizontal: wp('5%'),
-                        // marginLeft: -18
-                    }}>
-                        <Apptext style={[styles.scndTxt, {
-                            backgroundColor: DefaultStyles.colors.lightPrimary,
-                            padding: 5, borderRadius: 5
-                        }]}>{"kitchen available"}</Apptext>
-                        {/* <Apptext style={[styles.scndTxt, {
-                            backgroundColor: DefaultStyles.colors.lightPrimary, padding: 5,
-                            marginLeft: -20, borderRadius: 5
-                        }]}>{"Car Parking available"}</Apptext> */}
-                    </View>
+                    }} data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
+
                     <View style={{ height: wp('2%') }}></View>
                 </View>
                 :
@@ -75,13 +61,14 @@ export default ServiceListingComp;
 
 const styles = StyleSheet.create({
     direcView: {
+        alignItems: "center",
         flexDirection: 'row',
         marginTop: wp('1%'),
         justifyContent: "space-between",
     },
     locTxt: {
-        marginLeft: 80,
-        fontSize: 9, marginTop: -35
+        width: widthPixel(240),
+        fontSize: 9,
     },
     strImg: {
         marginLeft: 77, height: 15, width: 80
@@ -92,16 +79,16 @@ const styles = StyleSheet.create({
 
     },
     imgView: {
-        width: 59,
-        marginHorizontal: wp('4%'),
-        borderRadius: 10,
-        height: 60,
+        width: widthPixel(60),
+        marginLeft: widthPixel(20),
+        marginRight: widthPixel(10),
+        borderRadius: widthPixel(10),
+        height: widthPixel(60),
     },
     jamesTxt: {
         fontFamily: 'Poppins-Regular',
         fontSize: 15,
-        width: wp('58%'),
-        marginLeft: -8,
+        width: widthPixel(240),
     },
     jamesTxt1: {
         width: wp('58%'),

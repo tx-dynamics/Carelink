@@ -4,35 +4,36 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
 
 const ProposalAccept = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-
-            {/* //////////////////////////////////// */}
-            <View style={styles.centerView}>
-                <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-                    source={require('../../../../../assets/bigCircleTick.png')} />
+            <View>
+                <View style={styles.centerView}>
+                    <Image resizeMode='contain'
+                        style={{
+                            width: widthPixel(115),
+                            height: widthPixel(115),
+                            tintColor: DefaultStyles.colors.primary
+                        }}
+                        source={require('../../../../../assets/bigCircleTick.png')} />
+                </View>
+                <View style={[styles.txtView, { marginTop: wp('4%') }]} >
+                    <Apptext style={styles.roomsTxt}> Proposal Accepted </Apptext>
+                    <Apptext style={[styles.roomsTxt1]}> Your are successfully signed</Apptext>
+                    <Apptext style={[styles.roomsTxt1]}> with <Apptext style={[styles.roomsTxt1]}>ABD Rental Agency</Apptext></Apptext>
+                </View>
+                <View style={styles.txtView} >
+                    <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
+                </View>
             </View>
-
-            <View style={[styles.txtView, { marginTop: wp('4%') }]} >
-                <Apptext style={styles.roomsTxt}> Proposal Accepted </Apptext>
-                <Apptext style={[styles.roomsTxt1]}> Your are successfully signed</Apptext>
-                <Apptext style={[styles.roomsTxt1]}> with <Apptext style={[styles.roomsTxt1]}>ABD Rental Agency</Apptext></Apptext>
-            </View>
-
-            <View style={styles.txtView} >
-                <Apptext style={styles.submitTxt}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus. </Apptext>
-            </View>
-
-            <View style={{ marginTop: wp('35%') }} >
-                <FormButton
-                    buttonTitle={"Continue"}
-                    width={'88%'}
-                />
-            </View>
+            <FormButton
+                // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
+                onPress={() => navigation.navigate(routes.agencyDetail)}
+                buttonTitle={"Continue"}
+            />
         </View>
     )
 }
@@ -44,6 +45,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20)
     },
     doneTxt: {
         fontSize: 20,

@@ -16,7 +16,7 @@ export default AvailableFacilityComp
 
 const styles = StyleSheet.create({
     container: {
-        height: heightPixel(16),
+        height: heightPixel(20),
         paddingHorizontal: widthPixel(10),
         backgroundColor: colors.lightPrimary,
         justifyContent: "center",
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
     },
     titleText: {
+        top: heightPixel(1),
         fontSize: fontPixel(11),
         fontFamily: fonts.Poppins_Light,
         color: colors.availableFacilityText

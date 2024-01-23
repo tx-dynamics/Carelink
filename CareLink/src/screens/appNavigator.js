@@ -40,6 +40,8 @@ import Read3 from "./appScreens/AgencySide/Contract/Read3";
 import EditProfile from "./appScreens/ServiceSide/ServiceProfile/EditProfile";
 import Received from "./appScreens/ServiceSide/Contract/Received";
 import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
+import { routes } from "../Constants";
+import AgencyDetail from "./appScreens/ServiceSide/AgencyDetail/AgencyDetail";
 
 
 const Tab = createBottomTabNavigator();
@@ -94,6 +96,7 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
             <StackNavigator.Screen name="Feedback" component={Feedback} />
             <StackNavigator.Screen name="EditProfile" component={EditProfile} />
+            <StackNavigator.Screen name={routes.agencyDetail} component={AgencyDetail} />
 
         </StackNavigator.Navigator>
     )
@@ -176,10 +179,14 @@ const BellNavigator = () => {
 }
 
 const ProfileNavigator = () => {
+    const usertype = useSelector((state) => state.auth.usertype)
     return (
         <StackNavigator.Navigator screenOptions={{ headerShown: false }}>
-            <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
-            <StackNavigator.Screen name="ServiceClientProfile" component={ServiceClientProfile} />
+            {usertype === "ServiceSide" ?
+                <StackNavigator.Screen name="ServiceClientProfile" component={ServiceClientProfile} />
+                :
+                <StackNavigator.Screen name="AgencyProfile" component={AgencyProfile} />
+            }
         </StackNavigator.Navigator>
     )
 }
@@ -325,7 +332,6 @@ const MyTabs = () => {
 
 
 const MainNavigator = () => {
-
     const user = useSelector((state) => state.auth.user)
 
     console.log("chkk", user)

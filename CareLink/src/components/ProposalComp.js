@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-nati
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
+import { widthPixel } from '../Constants';
 
 const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
@@ -15,12 +16,12 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
             style={[styles.inputContainer, { borderRadius: borderRadius }]}>
             {/* Propsal Starts Here */}
             <View style={styles.direcView}>
-                <TouchableOpacity>
+                <View>
                     <Image style={styles.imgView}
                         source={require('../../assets/photo.png')} />
-                </TouchableOpacity>
+                </View>
                 <View>
-                    <Apptext numberOfLines={1} style={styles.jamesTxt} >{"name"}</Apptext>
+                    <Apptext numberOfLines={1} style={styles.jamesTxt} >{name}</Apptext>
                     <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext>
                     <Apptext numberOfLines={1} style={styles.descTxt} >{description}</Apptext>
                 </View>
@@ -113,6 +114,7 @@ const styles = StyleSheet.create({
         marginRight: wp('10%')
     },
     locTxt: {
+        width: widthPixel(220),
         // marginLeft: wp('32%'),
         fontSize: 16,
         // marginTop: -60

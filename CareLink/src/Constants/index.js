@@ -8,7 +8,7 @@ export const storageKey = {}
 
 export const routes = {
     listingSummary: "listingSummary",
-
+    agencyDetail: "agencyDetail"
 }
 
 export const loaderStyles = {

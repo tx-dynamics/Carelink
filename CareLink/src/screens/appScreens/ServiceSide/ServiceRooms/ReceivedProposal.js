@@ -6,6 +6,11 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import FormButton from '../../../../components/FormButton';
+import { heightPixel, widthPixel } from '../../../../Constants';
+import AvailableFacilityComp from '../../../../components/AvaialableFacilityComp/AvailableFacilityComp';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import SimpleImageComponent from '../../../../components/SimpleImageComponent/SimpleImageComponent';
+import DetailTextComp from '../../../../components/DetailTextComp/DetailTextComp';
 
 
 const ReceivedProposal = ({ navigation }) => {
@@ -19,101 +24,95 @@ const ReceivedProposal = ({ navigation }) => {
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
     ];
-
+    const availableFacility = [
+        {
+            id: 1,
+            title: "Wheelchair",
+        },
+        {
+            id: 2,
+            title: "Car Parking available",
+        },
+        {
+            id: 3,
+            title: "Terrace",
+        },
+    ]
+    const imageData = [
+        {
+            id: 1,
+            pic: appIcons.dummyPic1,
+        },
+        {
+            id: 2,
+            pic: appIcons.dummyPic2,
+        },
+        {
+            id: 3,
+            pic: appIcons.dummyPic3,
+        },
+        {
+            id: 4,
+            pic: appIcons.dummyPic1,
+        },
+        {
+            id: 5,
+            pic: appIcons.dummyPic3,
+        },
+    ]
     return (
         <View style={styles.container}>
-            <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
+            <Header height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-
             <ScrollView>
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms} >Received Proposal</Apptext>
                 </View>
                 <View style={[styles.txtView, { marginTop: wp('9%') }]}>
                     <Apptext style={styles.rms} >Agency Details</Apptext>
-                    <TouchableOpacity style={styles.pinkBox}>
+                    {/* <TouchableOpacity style={styles.pinkBox}>
                         <Apptext style={styles.dtls} >Agency Details</Apptext>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
                 <View style={{ marginTop: wp('5%') }}>
-                    <FlatList
-                        data={DATA}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({ item, index }) => (
-                            <ServiceListingComp
-                                showProposals={true}
-                                showTags={false}
-                                labelValue={"3 Room on 2nd Floor"}
-                                name={"ABC Rental Agency"}
-                                location={"7+ Year Experience"}
-                                rightTxt={""}
-
-                            />
-                        )}
+                    <ServiceListingComp pic={appIcons.dummyPic1}
+                        showProposals={true}
+                        showTags={false}
+                        labelValue={"3 Room on 2nd Floor"}
+                        name={"ABC Rental Agency"}
+                        location={"7+ Year Experience"}
+                        rightTxt={""}
                     />
                 </View>
                 <View style={[styles.txtView]}>
                     <Apptext style={styles.rms} >Job Details</Apptext>
                 </View>
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Rooms : </Apptext>
-                    <Apptext> 3 Rooms</Apptext>
+                <View style={{ marginLeft: widthPixel(50) }}>
+                    <DetailTextComp title={"Rooms"} detail={"3 Rooms"} />
+                    <DetailTextComp title={"Floor"} detail={"3rd"} />
+                    <DetailTextComp title={"For"} detail={"20 Days"} />
                 </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Floor : </Apptext>
-                    <Apptext> 3rd</Apptext>
-                </View>
-                {/* Section Ends Here */}
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> When : </Apptext>
-                    <Apptext> Right Now</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> For : </Apptext>
-                    <Apptext> 20 Days</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Price : </Apptext>
-                    <Apptext> $20-70 Hourly</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
                 <View style={styles.directionView}>
                     <Apptext style={styles.jobsTxt}> Note :    </Apptext>
                     <Apptext style={styles.lrmTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
-                {/* Section Ends Here */}
-
-                <View style={styles.ktTxtView}>
-                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary }]} >
-                        <Apptext style={styles.pinkboxTxt}>
-                            Kitchen available
-                        </Apptext>
-                    </View>
-                    {/* /////////////////////// */}
-
-                    <View style={[styles.pinkBox, { backgroundColor: DefaultStyles.colors.lightPrimary }]} >
-                        <Apptext style={styles.pinkboxTxt}>
-                            Car Parking available
-                        </Apptext>
-                    </View>
-                </View>
+                <FlatList
+                    horizontal
+                    data={availableFacility}
+                    style={styles.availableFlatlist}
+                    renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
                 <View style={[styles.txtView, { marginTop: wp('9%') }]}>
+                    <Apptext style={styles.rms} >Images</Apptext>
+                </View>
+                <FlatList
+                    horizontal
+                    data={imageData}
+                    keyExtractor={(item, index) => index}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({ item, indedx }) => <SimpleImageComponent pic={item.pic} disabled />}
+                    style={{ alignSelf: "flex-start", marginTop: heightPixel(0), marginLeft: widthPixel(20) }} />
+                <View style={[styles.txtView, { marginTop: heightPixel(20) }]}>
                     <Apptext style={styles.rms} >Proposals</Apptext>
-
                 </View>
                 <Apptext style={styles.sameTxt}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus. Aliquam commodo, sed nunc tincidunt ultrices volutpat sem metus. Est, volutpat elit consectetur fames arcu elit interdum vivamus molestie. In dignissim eleifend massa euismod molestie risus, in. Eleifend volutpat, varius pulvinar purus ultricies sit at consectetur mauris. Ultrices vulputate nam molestie pellentesque lectus. Ut sem leo varius posuere pellentesque.
@@ -122,10 +121,8 @@ const ReceivedProposal = ({ navigation }) => {
                     A ultrices malesuada consequat metus etiam morbi augue donec praesent. Enim feugiat nisi, tristique sit eget sit nunc. Enim, gravida ut sed tincidunt pellentesque venenatis faucibus arcu. Mauris dui at egestas fringilla est ultrices curabitur at vitae. Nullam vitae quisque ipsum sit sit dolor convallis. Duis non turpis vestibulum id nulla. Mattis est etiam turpis cras sollicitudin. At sed suscipit eros, aliquet gravida eleifend morbi. Eleifend laoreet mauris scelerisque dui.
                 </Apptext>
                 {/* /////////////////////////////////////// */}
-
-                <View style={{ marginTop: wp('13%') }}>
+                <View style={{ marginTop: heightPixel(20) }}>
                     <FormButton
-                        width={wp('90%')}
                         buttonTitle={"Reject"}
                         backgroundColor={"#e6e6e6"}
                         color={"black"}
@@ -133,7 +130,6 @@ const ReceivedProposal = ({ navigation }) => {
                 </View>
                 <View style={{ marginTop: -7 }}>
                     <FormButton
-                        width={wp('90%')}
                         buttonTitle={"Accept"}
                         color={"white"}
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
@@ -152,6 +148,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     txtView: {
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
@@ -192,7 +189,8 @@ const styles = StyleSheet.create({
 
     },
     directionView: {
-        flexDirection: 'row', marginTop: wp('6%'),
+        flexDirection: 'row',
+        marginTop: heightPixel(10),
     },
     jobsTxt: {
         fontFamily: 'Poppins-Medium',
@@ -211,15 +209,21 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 10
     },
-    lrmTxt:{
+    lrmTxt: {
         width: wp('70%'), marginTop: wp('1%'), fontSize: 12
     },
-    ktTxtView:{
+    ktTxtView: {
         flexDirection: 'row', justifyContent: 'space-around',
         marginTop: 21, marginLeft: wp('15%')
     },
-    sameTxt:{
-        marginHorizontal: wp('5%'), marginTop: wp('6%') 
-    }
+    sameTxt: {
+        marginHorizontal: wp('5%'),
+        marginTop: heightPixel(10)
+    },
+    availableFlatlist: {
+        marginLeft: widthPixel(20),
+        marginTop: heightPixel(20),
+        alignSelf: "flex-start"
+    },
 
 });
