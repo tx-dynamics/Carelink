@@ -1,48 +1,44 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
+import { fontPixel, heightPixel, widthPixel } from '../Constants';
+import CheckMarkComponent from './CheckMarkComponent/CheckMarkComponent';
+import { appIcons } from '../Constants/Utilities/assets';
+import colors from '../config/colors';
+import { fonts } from '../Constants/Fonts';
 
-const ReviewsComp = ({ labelValue, when, fors, hourly, placeholderText,
+const ReviewsComp = ({ pic, data, labelValue, when, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
-    showHrt,showProposals,name,location,
-    onPress,borderRadius= 10,rightOnPress,
+    showHrt, showProposals, name, location,
+    onPress, borderRadius = 10, rightOnPress, disabled,
     rightIconType, ...rest }) => {
-    
-        return (
-        <TouchableOpacity 
-        onPress={onPress}
-        style={[styles.inputContainer, {borderRadius:borderRadius}]}>
+
+    return (
+        <TouchableOpacity disabled={disabled}
+            onPress={onPress}
+            style={[styles.inputContainer, { borderRadius: borderRadius }]}>
 
             {/* Propsal Starts Here */}
-            {showProposals ? <View style={{height:55}}>
-            <View style={styles.direcView}>
-            <TouchableOpacity style={styles.imgView}>
-            <Image style={styles.jcImg} source={require('../../assets/JC.png')} />
-            </TouchableOpacity>
-            <Apptext style={styles.jamesTxt} >{name}</Apptext>
-            </View>
-            <Apptext style={styles.locTxt} >{location}</Apptext>
+            {showProposals ? <View style={{ height: 55 }}>
+                <View style={styles.direcView}>
+                    <TouchableOpacity style={styles.imgView}>
+                        <Image style={styles.jcImg} source={pic ? pic : require('../../assets/JC.png')} />
+                    </TouchableOpacity>
+                    <View>
+                        <Apptext numberOfLines={1} style={styles.jamesTxt} >{name}</Apptext>
+                        <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext>
+                    </View>
+                </View>
             </View> : null}
             {/* Propsal Ends Here */}
-
-
-            <View style={styles.lastDirec}>
-                <Image 
-                source={require('../../assets/circleTickNew.png')} />
-                <Apptext style={styles.scndTxt}>{" " + when + " "}</Apptext>
-                <Image source={require('../../assets/circleTickNew.png')} />
-                <Apptext style={styles.scndTxt}>{" " + fors + " "}</Apptext>
-                <Image source={require('../../assets/circleTickNew.png')} />
-                <Apptext style={styles.scndTxt}>{" " + hourly + " "}</Apptext>
-                
+            <FlatList style={styles.flatlistStyle} horizontal data={data} renderItem={({ item, index }) => <CheckMarkComponent mark={item?.mark && appIcons.circleTick} title={item?.mark && item.title} />} />
+            <View style={styles.txtView}>
+                <Apptext style={styles.txtVal}>{labelValue}</Apptext>
             </View>
-                 <View style={styles.txtView}>
-                 <Apptext style={styles.txtVal}>{labelValue}</Apptext>
-                 </View>
-                
-       
+
+
         </TouchableOpacity>
     );
 };
@@ -50,76 +46,77 @@ const ReviewsComp = ({ labelValue, when, fors, hourly, placeholderText,
 export default ReviewsComp;
 
 const styles = StyleSheet.create({
-    direcView:{
-        flexDirection:'row', marginTop:wp('1%')
+    direcView: {
+        flexDirection: 'row', marginTop: wp('1%')
     },
-    jcImg:{
-        width:51, height:51
+    jcImg: {
+        width: widthPixel(55),
+        height: widthPixel(55)
     },
-    locTxt:{
-        marginLeft:80,
-        color:DefaultStyles.colors.gray,
-        fontSize:14, marginTop:-25
+    locTxt: {
+        color: colors.black,
+        fontFamily: fonts.Poppins_Light,
+        fontSize: fontPixel(17),
     },
-    lastDirec:{
-        marginHorizontal:wp('3%'),marginTop:wp('5%'), flexDirection: 'row',alignItems:'center'
+    lastDirec: {
+        marginHorizontal: wp('3%'), marginTop: wp('5%'), flexDirection: 'row', alignItems: 'center'
     },
     HumanInput: {
         paddingLeft: wp('2%'),
         width: wp('70%'),
     },
-    imgView:{
-        width:51,
-        marginHorizontal:wp('4%'),
-        borderRadius:30,
-        height:51,
+    imgView: {
+        width: 51,
+        marginHorizontal: wp('4%'),
+        borderRadius: 30,
+        height: 51,
     },
-    jamesTxt:{
-        fontFamily:'Poppins-Medium',
-        fontSize:17,
-        width:wp('42%'),
+    jamesTxt: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 17,
+        width: wp('42%'),
         // backgroundColor:"blue"
     },
-    imgStl:{
-        width:57,
-        height:57,
-        borderRadius:43,
+    imgStl: {
+        width: 57,
+        height: 57,
+        borderRadius: 43,
     },
-    txtView:{
-        flexDirection:'row',
-        alignItems:'center',
-        marginHorizontal:wp('5%'),
-        marginTop:wp('3%'),
-        width:wp('80%'),
+    txtView: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: wp('5%'),
+        marginTop: wp('3%'),
+        width: wp('80%'),
         // marginTop:wp('4%'),
         // backgroundColor:"red"
     },
-    txtVal:{
-        fontFamily:'poppins-Regular',
-        fontSize:14
+    txtVal: {
+        fontFamily: 'poppins-Regular',
+        fontSize: 14
     },
-    lightTxt:{
-        fontSize:8,
-        marginTop:wp('2%'),
-        color:"lightgray",
+    lightTxt: {
+        fontSize: 8,
+        marginTop: wp('2%'),
+        color: "lightgray",
     },
-    scndTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:12,
-        marginTop:wp('1%')
+    scndTxt: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
+        marginTop: wp('1%')
     },
-    dot:{
-        width:5,
-        height:5,
-        backgroundColor:"gray",
-        borderRadius:5
+    dot: {
+        width: 5,
+        height: 5,
+        backgroundColor: "gray",
+        borderRadius: 5
     },
     inputContainer: {
         width: wp('90%'),
-        marginBottom:wp('3%'),
+        marginBottom: wp('3%'),
         alignSelf: 'center',
         // height:105,
-        padding:wp('2%'),
+        padding: wp('2%'),
         // paddingLeft:wp('4%'),
         backgroundColor: DefaultStyles.colors.white,
         borderBottomColor: "white",
@@ -130,12 +127,16 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
-        
+
         elevation: 3,
     },
-    hrtStl:{
-        width:25,
-        height:25,
-        marginRight:wp('10%')
-    }
+    hrtStl: {
+        width: 25,
+        height: 25,
+        marginRight: wp('10%')
+    },
+    flatlistStyle: {
+        marginLeft: widthPixel(5),
+        marginTop: heightPixel(10)
+    },
 });

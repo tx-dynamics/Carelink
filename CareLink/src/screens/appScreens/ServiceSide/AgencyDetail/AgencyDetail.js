@@ -16,24 +16,132 @@ import { useSelector } from 'react-redux';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import { heightPixel, widthPixel } from '../../../../Constants';
 import { Rating, AirbnbRating } from 'react-native-ratings';
+import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
+import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
 
 const AgencyDetail = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
+    const [isVisible, setVisible] = useState(false)
     const DATA = [
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "Debit/Credit Card",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            id: 1,
+            name: "Tebasy C.",
+            date: "Feb 28th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: true,
+                    title: "Would rehire"
+                },
+                {
+                    mark: false,
+                    title: "Punctual"
+                },
+                {
+                    mark: true,
+                    title: "Dependable"
+                },
+            ]
         },
-
         {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "PayPal",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            id: 2,
+            name: "John Doe",
+            date: "Feb 29th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: true,
+                    title: "Would rehire"
+                },
+                {
+                    mark: true,
+                    title: "Punctual"
+                },
+                {
+                    mark: true,
+                    title: "Dependable"
+                },
+            ]
+        },
+        {
+            id: 3,
+            name: "Jack",
+            date: "Jan 28th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: false,
+                    title: "Would rehire"
+                },
+                {
+                    mark: false,
+                    title: "Punctual"
+                },
+                {
+                    mark: true,
+                    title: "Dependable"
+                },
+            ]
+        },
+        {
+            id: 3,
+            name: "Jack",
+            date: "Jan 28th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: false,
+                    title: "Would rehire"
+                },
+                {
+                    mark: true,
+                    title: "Punctual"
+                },
+                {
+                    mark: false,
+                    title: "Dependable"
+                },
+            ]
+        },
+        {
+            id: 3,
+            name: "Jack",
+            date: "Jan 28th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: true,
+                    title: "Would rehire"
+                },
+                {
+                    mark: false,
+                    title: "Punctual"
+                },
+                {
+                    mark: false,
+                    title: "Dependable"
+                },
+            ]
+        },
+        {
+            id: 3,
+            name: "Jack",
+            date: "Jan 28th, 2024",
+            desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.",
+            checks: [
+                {
+                    mark: false,
+                    title: "Would rehire"
+                },
+                {
+                    mark: true,
+                    title: "Punctual"
+                },
+                {
+                    mark: true,
+                    title: "Dependable"
+                },
+            ]
         },
     ];
 
@@ -50,7 +158,7 @@ const AgencyDetail = ({ navigation }) => {
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
                     <TouchableOpacity
-                        onPress={() => navigation.navigate("ServiceClientProfile")}
+                        onPress={() => navigation.navigate("ServiceChatDetail")}
                         style={styles.cameraView}>
                         <Image resizeMode='contain'
                             style={{
@@ -76,34 +184,32 @@ const AgencyDetail = ({ navigation }) => {
                     <Apptext style={styles.para} >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     </Apptext>
                 </View>
-
-
                 <Image
                     style={styles.mapImg}
                     source={require('../../../../../assets/profileMao.png')} />
                 <View style={styles.txtView}>
+                    <Apptext style={styles.rms} >Brochure</Apptext>
+                </View>
+                <BrochureComp pic={appIcons.brochure} onPress={() => setVisible(true)} />
+                <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Reviews</Apptext>
                 </View>
-                <View style={{ marginTop: wp('5%') }}>
-                    <FlatList
+                <View style={{ marginTop: heightPixel(10) }}>
+                    <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                         data={DATA}
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (
-                            <ReviewsComp
+                            <ReviewsComp disabled data={item.checks}
                                 showProposals={true}
-                                labelValue={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."}
-                                name={"Tebasy C."}
-                                when={"Would rehire"}
-                                fors={"Punctual"}
-                                hourly={"Dependable"}
-                                location={"Feb 28th, 2021"}
+                                labelValue={item.desc}
+                                name={item.name}
+                                location={item.date}
                             />
                         )}
                     />
-
                 </View>
             </View>
-
+            <BrochureModal onPress={() => setVisible(false)} visible={isVisible} onRequestClose={() => setVisible(false)} />
         </ScrollView>
     )
 }
@@ -167,7 +273,7 @@ const styles = StyleSheet.create({
     },
     rms: {
         fontFamily: 'Poppins-SemiBold',
-        fontSize: 16
+        fontSize: 16,
     },
     dtls: {
         color: DefaultStyles.colors.black,

@@ -6,84 +6,75 @@ import {
 } from "react-native-responsive-screen";
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
+import { heightPixel, widthPixel } from "../Constants";
+import colors from "../config/colors";
 
-function ChatDetailComp({
-  
-    msg,
-    backgroundColor,
-    contentColor = DefaultStyles.colors.primary,
-  
-    style,
-}) {
+function ChatDetailComp({ msg, style }) {
     return (
-        <View
-            style={{
-                ...styles.PicMainView,
-                backgroundColor: backgroundColor,
-                ...style,}}>
-                <View  style={styles.msgView}>
-                    <Apptext style={styles.msgTxt} >{msg} </Apptext>
-                    
-                </View>
-                <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
-                
+        <View style={[styles.PicMainView, style,]}>
+            <View style={styles.msgView}>
+                <Apptext style={styles.msgTxt} >{msg}</Apptext>
+            </View>
+            <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    labelTxt:{
-    fontFamily:'Poppins-Medium',
-    fontSize: 12,
-    marginTop: wp('2%'),
-    marginHorizontal:wp('3%')
+    labelTxt: {
+        fontFamily: 'Poppins-Medium',
+        fontSize: 12,
+        marginTop: wp('2%'),
+        marginHorizontal: wp('3%')
     },
-    PicMainView:{
-        marginBottom:wp('5%'),
-        marginHorizontal:wp('7%')
-    
+    PicMainView: {
+        alignItems: "flex-end",
+        alignSelf: "flex-start",
+        marginLeft: widthPixel(10),
+        marginBottom: heightPixel(10)
     },
-    msgView:{
-        width:wp('51%'),
-        borderRadius:60,
-        backgroundColor:DefaultStyles.colors.primary,
-        padding:10,
-        paddingLeft:12,
+    msgView: {
+        maxWidth: widthPixel(330),
+        borderRadius: widthPixel(30),
+        paddingVertical: heightPixel(10),
+        paddingHorizontal: widthPixel(20),
+        backgroundColor: colors.primary,
         shadowColor: "#000",
         shadowOffset: {
-          width: 0,
-          height: 5,
+            width: 0,
+            height: 5,
         },
         shadowOpacity: 0.34,
         shadowRadius: 6.27,
         elevation: 3,
     },
-    msgTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:13,
-        color:DefaultStyles.colors.white
+    msgTxt: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 13,
+        color: DefaultStyles.colors.white
     },
-    timeTxt:{
-        width:wp('50%'),
-        textAlign:'right',
-        fontSize:11,
-        color:DefaultStyles.colors.lightPrimary,
-        marginTop:wp('1%'),
+    timeTxt: {
+        textAlign: 'right',
+        fontSize: 11,
+        color: DefaultStyles.colors.lightPrimary,
+        marginTop: heightPixel(2),
+        marginRight: widthPixel(5)
     },
-      ChatCallingView:{
+    ChatCallingView: {
         width: 35,
-        height: 35, 
+        height: 35,
         borderRadius: 20,
-         backgroundColor:DefaultStyles.colors.lightgray,
-        justifyContent:'center', alignItems:'center' 
-      },
-    
-      ChatDtlImg: {
+        backgroundColor: DefaultStyles.colors.lightgray,
+        justifyContent: 'center', alignItems: 'center'
+    },
+
+    ChatDtlImg: {
         width: 70,
         height: 70, borderRadius: 50
-      },
-      
-    
+    },
+
+
 });
 
 export default ChatDetailComp;
