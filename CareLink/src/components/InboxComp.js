@@ -1,100 +1,84 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, ImageBackground, Image } from "react-native";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
+import { fontPixel, heightPixel, widthPixel } from "../Constants";
+import colors from "../config/colors";
+import { appIcons } from "../Constants/Utilities/assets";
+import { fonts } from "../Constants/Fonts";
 
-import Apptext from "./Apptext";
-import DefaultStyles from "../config/Styles";
-
-function InboxComp({
-    imgName,
-    label,
-    msg,
-    txtDatee,
-    contentColor = DefaultStyles.colors.primary,
-    onPress,
-    style,
-}) {
-    return (
-        <TouchableOpacity 
-        onPress={onPress}
-        style={styles.inboxMainView}>
-            <View style={styles.inboxInnerView}>
-                <TouchableOpacity style={{width:56, marginLeft:wp('5%')}}>
-                    <ImageBackground 
-                    imageStyle={{borderRadius:40}}
-                    style={styles.inboxImg} source={imgName}>
-                      
-                    </ImageBackground>
-                </TouchableOpacity>
-                <View style={{marginLeft:wp('10%')}}>
-                <Apptext style={styles.inboxName}>{label}</Apptext>
-                </View>
-                <Image style={{marginTop:wp('2%'), marginLeft:wp('10%') }} 
-                source={require('../../assets/online.png')} />
-                <Apptext style={styles.inboxDate}>{txtDatee}</Apptext>
-            </View>
-            <View style={{flexDirection:'row'}}>
-            <Apptext style={[styles.inboxTxt]}>{msg}</Apptext>
-            <Apptext style={[styles.inboxTxt, {marginLeft:wp('1%')}]}>{"Now"}</Apptext>
-            </View>
-            <Apptext style={styles.line}></Apptext>
-
-        </TouchableOpacity>
-    );
+function InboxComp({ onPress, image, label, message, time, online, tintColor }) {
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.container}>
+      <View style={styles.subView}>
+        <Image resizeMode="contain" source={image} style={styles.picStyle} />
+        <View style={styles.subRowView}>
+          <View style={styles.labelRowView}>
+            <Text numberOfLines={1} style={styles.labelText}>{label}</Text>
+            <Image resizeMode="contain" source={online} style={[styles.onlineImg, { tintColor: tintColor }]} />
+          </View>
+          <View style={styles.labelRowView}>
+            <Text numberOfLines={1} style={styles.messageText}>{message}</Text>
+            <Text style={styles.timeText}>{time}</Text>
+          </View>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 }
 
 
 export default InboxComp;
 
 const styles = StyleSheet.create({
-
- inboxMainView: {
-    marginTop: wp('4%'),
-    alignSelf: 'center',
-    width: wp('92%'),
+  container: {
+    borderBottomWidth: .5,
+    borderBottomColor: colors.messageBody,
+    marginBottom: heightPixel(10),
+    width: widthPixel(374),
+    height: heightPixel(85),
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: widthPixel(10),
+    paddingRight: widthPixel(20),
+    alignSelf: "center",
+    paddingBottom: heightPixel(10)
   },
-  inboxInnerView: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: wp('3%')
+  subView: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  line:{
-    width:wp('90%'),
-    height:0.5,
-    marginTop:wp('3%'),
-    backgroundColor:DefaultStyles.colors.lightgray
+  picStyle: {
+    width: widthPixel(61),
+    height: widthPixel(61),
+    borderRadius: widthPixel(40),
   },
-  inboxCount: {
-    justifyContent: 'center', alignItems: 'center',
-    width: 34, height: 34,
-    marginLeft: -17,
-    marginTop: -10,
-    borderRadius: 20,
-    backgroundColor: DefaultStyles.colors.secondary
+  subRowView: {
+    marginLeft: widthPixel(10),
+    width: "82%"
   },
-  inboxImg: {
-    width: 55, height: 55,
+  labelRowView: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-  inboxName: {
-    fontSize:19,
-    width: wp('65%'),
+  labelText: {
+    fontSize: fontPixel(19),
+    maxWidth: widthPixel(270),
+    fontFamily: fonts.Poppins_Regular,
+    color: colors.black
   },
-  inboxDate: {
-    width: wp('16%'),
-    marginTop: wp('1%'),
-    textAlign: 'right'
+  onlineImg: {
+    width: widthPixel(12),
+    height: widthPixel(12),
   },
-  inboxTxt: {
-    color: DefaultStyles.colors.gray, 
-    fontSize:15,
-    width: wp('60%'),
-    alignSelf: 'center',
-    marginLeft:wp('18%'),
-    marginTop: -20,
-  }
-
-
+  messageText: {
+    maxWidth: widthPixel(260),
+    fontSize: fontPixel(15),
+    fontFamily: fonts.Poppins_Regular,
+    color: colors.messageBody
+  },
+  timeText: {
+    fontSize: fontPixel(15),
+    fontFamily: fonts.Poppins_Regular,
+    color: colors.messageBody
+  },
 })

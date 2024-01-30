@@ -11,13 +11,13 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
+import { fontPixel, heightPixel, widthPixel } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 
-const LoginScreen = ({ navigation }) => {
+const ForgetUpdateScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -37,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
                 <View style={{ marginTop: heightPixel(15) }}>
                     <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} />
                     <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} />
-                    <Text style={styles.forgetText} onPress={() => navigation.navigate(routes.forgetPasswordEmail)}>Forget password?</Text>
+                    <Text style={styles.forgetText}>Forget password?</Text>
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation }) => {
     )
 }
 
-export default LoginScreen;
+export default ForgetUpdateScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,

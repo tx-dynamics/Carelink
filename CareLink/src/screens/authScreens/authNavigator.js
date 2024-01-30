@@ -36,6 +36,11 @@ import Note from "./ServiceSide/Pricing/Note";
 import PricingType from "./ServiceSide/Pricing/PricingType";
 import { routes } from "../../Constants";
 import ListingSummary from "./Agency/ListingSummary";
+import LoginScreen from "./Login";
+import ForgetEmailScreen from "./ForgetPasswordScreens/ForgetEmailScreen";
+import ForgetUpdateScreen from "./ForgetPasswordScreens/ForgetPasswordUpdate";
+import AddDocuments from "./VerificationProcess/AddDocuments";
+import AddInformation from "./VerificationProcess/AddInformation";
 
 
 const AuthStack = createNativeStackNavigator()
@@ -52,6 +57,11 @@ const SplashNavigator = () => {
             <AuthStack.Screen name="Step3" component={Step3} />
             <AuthStack.Screen name="AskRegister" component={AskRegister} />
             <AuthStack.Screen name="Register" component={Register} />
+            <AuthStack.Screen name={routes.loginScreen} component={LoginScreen} />
+            <AuthStack.Screen name={routes.forgetPasswordEmail} component={ForgetEmailScreen} />
+            <AuthStack.Screen name={routes.forgetPasswordUpdate} component={ForgetUpdateScreen} />
+            <AuthStack.Screen name={routes.addDocuments} component={AddDocuments} />
+            <AuthStack.Screen name={routes.addInformation} component={AddInformation} />
             <AuthStack.Screen name="Terms" component={Terms} />
             <AuthStack.Screen name="Policy" component={Policy} />
             <AuthStack.Screen name="EmailVerification" component={EmailVerification} />

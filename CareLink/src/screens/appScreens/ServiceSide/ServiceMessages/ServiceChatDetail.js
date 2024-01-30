@@ -14,7 +14,7 @@ import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const ServiceChatDetail = ({ navigation }) => {
+const ServiceChatDetail = ({ navigation, route }) => {
     const ref = useRef(null)
     const [isMessage, setMessage] = useState("")
     const [DATA, setData] = useState([
@@ -143,16 +143,16 @@ const ServiceChatDetail = ({ navigation }) => {
             title: isMessage,
         })
         setData(temp)
-        // ref.current.scrollToEnd({ animated: false });
+        ref.current.scrollToIndex({ animated: false, index: 0 });
         setMessage("")
     }
     useEffect(() => {
         statusbarAction()
-
     }, [])
     return (
         <View style={styles.container}>
-            <AppStatusbar />
+            <StatusBar translucent={false} backgroundColor={colors.white} />
+            {/* <AppStatusbar /> */}
             <View style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -163,11 +163,13 @@ const ServiceChatDetail = ({ navigation }) => {
                     leftImgName={require('../../../../../assets/headerBack.png')}
                     onPressLeft={() => navigation.goBack()}
                 />
-                <TouchableOpacity
-                    onPress={() => navigation.navigate("Received")}
-                    style={styles.RcvdView}>
-                    <Apptext style={styles.cntTxt}>Contracts</Apptext>
-                </TouchableOpacity>
+                {route?.params?.isContract &&
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("Received")}
+                        style={styles.RcvdView}>
+                        <Apptext style={styles.cntTxt}>Contracts</Apptext>
+                    </TouchableOpacity>
+                }
             </View>
             <View style={styles.direView} >
                 <Image
@@ -176,7 +178,7 @@ const ServiceChatDetail = ({ navigation }) => {
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
             <View style={{ marginTop: wp('5%'), flex: 1, }} >
-                <FlatList inverted
+                <FlatList inverted ref={ref}
                     // initialScrollIndex={DATA.length - 1} 
                     keyExtractor={(item, index) => item.id}
                     // ItemSeparatorComponent={() => <View style={{ marginBottom: heightPixel(7) }}></View>}

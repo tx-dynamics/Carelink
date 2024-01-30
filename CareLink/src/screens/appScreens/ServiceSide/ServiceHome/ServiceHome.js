@@ -51,7 +51,6 @@ const ServiceHome = ({ }) => {
             desc: `3 hr ago`
         },
     ];
-
     const navigation = useNavigation()
     return (
         <View style={styles.container}>

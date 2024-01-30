@@ -31,7 +31,7 @@ const ProposalAccept = ({ navigation }) => {
             </View>
             <FormButton
                 // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
-                onPress={() => navigation.navigate(routes.agencyDetail)}
+                onPress={() => navigation.navigate(routes.agencyDetail, { isChat: true })}
                 buttonTitle={"Continue"}
             />
         </View>

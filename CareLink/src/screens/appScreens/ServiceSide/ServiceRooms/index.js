@@ -20,6 +20,7 @@ const ServiceRooms = ({ navigation }) => {
             adress: "Brookside Place",
             label: "Debit/Credit Card",
             description: `You will get 20 listing to post in a month with this monthly plan`,
+            pic: appIcons.dummyPic1,
             facility: [
                 {
                     id: 1,
@@ -42,6 +43,7 @@ const ServiceRooms = ({ navigation }) => {
             label: "Debit/Credit Card",
             adress: "Hillcrest Heights",
             description: `You will get 20 listing to post in a month with this monthly plan`,
+            pic: appIcons.dummyPic2,
             facility: [
                 {
                     id: 1,
@@ -61,6 +63,7 @@ const ServiceRooms = ({ navigation }) => {
             label: "PayPal",
             adress: "Magnolia Meadows",
             description: `You will get 20 listing to post in a month with this monthly plan`,
+            pic: appIcons.dummyPic3,
             facility: [
                 {
                     id: 1,
@@ -89,7 +92,8 @@ const ServiceRooms = ({ navigation }) => {
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
                                 <ServiceListingComp disabled facilityData={item.facility}
-                                    // facilty={item.facility}
+                                    // facilty={item.facility} 
+                                    pic={item.pic}
                                     showProposals={true}
                                     labelValue={item.adress}
                                     name={"ABC Rental Agency"}
@@ -109,6 +113,7 @@ const ServiceRooms = ({ navigation }) => {
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
                                 <ServiceListingComp
+                                    pic={item.pic}
                                     facilityData={item.facility}
                                     showProposals={true}
                                     labelValue={item.adress}

@@ -6,7 +6,8 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import SelectBox from '../../../../components/SelectBox';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { heightPixel, widthPixel } from '../../../../Constants';
 
 const ServiceClientProfile = ({ navigation }) => {
     const DATA = [
@@ -50,7 +51,7 @@ const ServiceClientProfile = ({ navigation }) => {
     ];
     return (
         <View style={styles.container}>
-            <Header
+            <Header isBack height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
@@ -180,7 +181,9 @@ const styles = StyleSheet.create({
     },
     imgStl: {
         width: wp('30%'), height: wp('30%')
-    }
-
-
+    },
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
 });

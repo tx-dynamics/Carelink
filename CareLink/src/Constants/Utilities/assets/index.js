@@ -25,7 +25,12 @@ const appIcons = {
     brochure: require(`${iconUrl}/brochure.png`),
     download: require(`${iconUrl}/download.png`),
     sendBtn: require(`${iconUrl}/sendBtn.png`),
-
+    search: require(`${iconUrl}/search.png`),
+    online: require(`${iconUrl}/online.png`),
+    successTick: require(`${iconUrl}/successTick.png`),
+    back: require(`${iconUrl}/back.png`),
+    openMedia: require(`${iconUrl}/openMedia.png`),
+    openCamera: require(`${iconUrl}/openCamera.png`),
 }
 
 export { appImages, appIcons }

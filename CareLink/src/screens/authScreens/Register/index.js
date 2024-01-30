@@ -11,9 +11,11 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import { heightPixel } from '../../../Constants';
+import { fontPixel, heightPixel, routes } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import { appIcons } from '../../../Constants/Utilities/assets';
+import { fonts } from '../../../Constants/Fonts';
+import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 
 const Register = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
@@ -24,7 +26,7 @@ const Register = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView >
-                <IconHeaderComp
+                <IconHeaderComp title={"Sign Up"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                     heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
@@ -55,8 +57,10 @@ const Register = ({ navigation }) => {
             </KeyboardAwareScrollView>
             <FormButton
                 buttonTitle={"Create Now"}
-                onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+                // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+                onPress={() => navigation.navigate("EmailVerification")}
             />
+            <AlreadyText title={"Already Have an Account"} subtitle={" Sign In"} onPress={() => navigation.navigate(routes.loginScreen)} />
         </View>
     )
 }

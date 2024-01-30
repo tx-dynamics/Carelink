@@ -13,44 +13,33 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import colors from '../../../config/colors';
 import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
-import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
-import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 
-const LoginScreen = ({ navigation }) => {
+const ForgetEmailScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
-    const [isSecure, setSecure] = useState(true)
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView >
-                <IconHeaderComp title={"Sign In"}
+                <IconHeaderComp title={"Forgot Password"}
                     onPress={() => navigation.goBack()}
-                    imgName={iconPath.leftArrow}
-                    heading={"Sign in to continue to the care link"}
+                    imgName={iconPath.leftArrow} style={{ fontSize: fontPixel(20), fontFamily: fonts.Poppins_Medium }}
+                    heading={"To reset your password, enter the email address you used to sign up"}
                 />
-                <View>
-                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
-                </View>
                 <View style={{ marginTop: heightPixel(15) }}>
                     <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} />
-                    <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} />
-                    <Text style={styles.forgetText} onPress={() => navigation.navigate(routes.forgetPasswordEmail)}>Forget password?</Text>
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
-                buttonTitle={"Create Now"}
+                buttonTitle={"Continue"}
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
                 onPress={() => navigation.navigate("EmailVerification")}
             />
-            <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} />
         </View>
     )
 }
 
-export default LoginScreen;
+export default ForgetEmailScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,

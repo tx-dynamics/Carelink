@@ -6,32 +6,51 @@ import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
+import { fonts } from '../../../Constants/Fonts';
+import colors from '../../../config/colors';
+import OTPInputView from '@twotalltotems/react-native-otp-input';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
 
 const EmailVerification = ({ navigation }) => {
+    const [isOTP, setIsOTP] = useState(null)
+    const [visible, setVisible] = useState(false)
+    const onCountinue = () => {
+        setVisible(true)
+        setTimeout(() => {
+            navigation.replace(routes.addDocuments)
+            // setVisible(false)
+        }, 1500);
+    }
+    useEffect(() => {
+        setVisible(false)
+        return (
+            setVisible(false)
+        )
+    }, [])
     return (
         <View style={styles.container}>
-            <IconHeaderComp
-                onPress={() => { navigation.goBack() }}
-                imgName={iconPath.leftArrow}
-            />
-            <View style={styles.logoView}>
-                <Image source={require('../../../../assets/emailNew.png')} />
-            </View>
-            <Apptext style={styles.verifyTxt}>Verify your email to proceed</Apptext>
-            <View style={styles.paraView} >
-                <Apptext style={styles.paraTxt}>We just sent an email to the address </Apptext>
-                <Apptext style={[styles.paraTxt, { fontFamily: 'Poppins-SemiBold' }]}> abc@gmail.com </Apptext>
-                <Apptext style={styles.paraTxt} >Please check your email and click on the
-                    <Apptext style={[styles.paraTxt, { fontFamily: 'Poppins-SemiBold' }]} > link </Apptext>provided to your address
-                </Apptext>
-            </View>
-            <View style={{ marginTop: wp('17%') }}>
-                <FormButton
-                    buttonTitle={"Resend Email"}
-                    width={wp('90%')}
-                    onPress={() => navigation.navigate("Verified")}
+            <KeyboardAwareScrollView style={{}}>
+                <IconHeaderComp title={"Verify"} heading={"Enter the code we just sent your email"} style={styles.headerTextStyle}
+                    onPress={() => { navigation.goBack() }}
+                    imgName={iconPath.leftArrow}
                 />
-            </View>
+                <Text numberOfLines={1} style={styles.mailText}>myemail@gmail.com</Text>
+                <OTPInputView
+                    pinCount={4}
+                    autoFocusOnLoad={false}
+                    style={styles.OTPView}
+                    onCodeChanged={setIsOTP}
+                    selectionColor={colors.primary}
+                    codeInputFieldStyle={styles.underlineStyleBase}
+                    keyboardType='number-pad'
+                    codeInputHighlightStyle={styles.underlineStyleHighLighted}
+                />
+                <Text style={styles.resendText}>Didn’t get code? -<Text style={{ textDecorationLine: "underline" }}> Resend code</Text></Text>
+            </KeyboardAwareScrollView>
+            <FormButton onPress={onCountinue} buttonTitle={"Continue"} />
+            <EmailVerifiedModal visible={visible} subtitle={"You have successfully verified your email"} title={"Email verified"} />
         </View>
     )
 }
@@ -43,29 +62,40 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
-    logoView: {
-        alignSelf: 'center',
-        marginTop: wp('5%')
+    headerTextStyle: {
+        fontSize: fontPixel(20),
+        fontFamily: fonts.Poppins_Medium
     },
-    verifyTxt: {
-        marginTop: wp('8%'),
-        fontSize: 24,
-        width: wp('95%'),
-        textAlign: 'center',
-        color: DefaultStyles.colors.black,
-        alignSelf: 'center',
-        fontFamily: 'Poppins-Regular'
+    mailText: {
+        fontSize: fontPixel(20),
+        fontFamily: fonts.Poppins_Medium,
+        color: colors.black12,
+        marginTop: heightPixel(10),
+        paddingHorizontal: widthPixel(20)
     },
-    paraTxt: {
-        textAlign: 'center',
-        fontSize: 15,
-        fontFamily: 'Poppins-Regular',
-        lineHeight: 24
+    OTPView: {
+        alignSelf: "center",
+        width: '72%',
+        height: heightPixel(120),
     },
-    paraView: {
-        marginTop: wp('10%'),
-        width: wp('90%'),
-        alignSelf: 'center'
+    underlineStyleBase: {
+        color: colors.black,
+        width: widthPixel(58),
+        height: heightPixel(44),
+        borderWidth: 1,
+        borderRadius: widthPixel(15),
+        borderColor: colors.black12,
+    },
+    underlineStyleHighLighted: {
+        borderWidth: 2
+    },
+    resendText: {
+        textAlign: "center",
+        marginTop: heightPixel(50),
+        fontSize: fontPixel(16),
+        fontFamily: fonts.Poppins_Medium,
+        color: colors.black12
     },
 });

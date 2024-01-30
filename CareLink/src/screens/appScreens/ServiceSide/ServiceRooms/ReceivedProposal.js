@@ -6,7 +6,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import FormButton from '../../../../components/FormButton';
-import { heightPixel, widthPixel } from '../../../../Constants';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import AvailableFacilityComp from '../../../../components/AvaialableFacilityComp/AvailableFacilityComp';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import SimpleImageComponent from '../../../../components/SimpleImageComponent/SimpleImageComponent';
@@ -75,10 +75,9 @@ const ReceivedProposal = ({ navigation }) => {
                     </TouchableOpacity> */}
                 </View>
                 <View style={{ marginTop: wp('5%') }}>
-                    <ServiceListingComp pic={appIcons.dummyPic1}
+                    <ServiceListingComp onPress={() => navigation.navigate(routes.agencyDetail, { isChat: false })} pic={appIcons.dummyPic1}
                         showProposals={true}
                         showTags={false}
-                        labelValue={"3 Room on 2nd Floor"}
                         name={"ABC Rental Agency"}
                         location={"7+ Year Experience"}
                         rightTxt={""}

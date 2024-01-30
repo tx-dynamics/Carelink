@@ -16,8 +16,9 @@ const SendMessageComponent = ({ onPress, value, onChangeText, disabled }) => {
                     placeholder="Type a message"
                     placeholderTextColor={colors.lightgray}
                     style={{
+                        includeFontPadding: true,
                         flex: 1,
-                        paddingLeft: widthPixel(20),
+                        paddingHorizontal: widthPixel(20),
                         color: colors.black,
                     }}
                 />
@@ -42,6 +43,7 @@ const styles = StyleSheet.create({
     },
     ChatMsgView: {
         height: heightPixel(51),
+        maxHeight: heightPixel(100),
         flexDirection: 'row',
         marginTop: heightPixel(10),
         justifyContent: 'space-between',

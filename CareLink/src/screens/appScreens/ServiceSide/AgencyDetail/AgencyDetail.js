@@ -19,7 +19,7 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
 import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
 
-const AgencyDetail = ({ navigation }) => {
+const AgencyDetail = ({ navigation, route }) => {
     const usertype = useSelector((state) => state.auth.usertype)
     const [isVisible, setVisible] = useState(false)
     const DATA = [
@@ -157,17 +157,19 @@ const AgencyDetail = ({ navigation }) => {
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("ServiceChatDetail")}
-                        style={styles.cameraView}>
-                        <Image resizeMode='contain'
-                            style={{
-                                width: widthPixel(23),
-                                height: heightPixel(26)
-                            }}
-                            source={appIcons.sendMessage}
-                        />
-                    </TouchableOpacity>
+                    {route?.params?.isChat &&
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate("ServiceChatDetail")}
+                            style={styles.cameraView}>
+                            <Image resizeMode='contain'
+                                style={{
+                                    width: widthPixel(23),
+                                    height: heightPixel(26)
+                                }}
+                                source={appIcons.sendMessage}
+                            />
+                        </TouchableOpacity>
+                    }
                 </View>
                 {/* <AirbnbRating count={11} /> */}
 

@@ -15,14 +15,14 @@ const AskRegister = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <IconHeaderComp style={{ fontFamily: fonts.Poppins_Medium }} heading={"Let’s get started. Choose an option"} />
+            <IconHeaderComp title={"Choose User Type"} heading={"Let’s get started. Choose an option"} />
             <View style={styles.pinkBox}>
                 <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
                 <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
                 <TouchableOpacity //for testing using this onPress,
                     onPress={() => {
                         dispatch(setUserType("ServiceSide"))
-                        dispatch(setUser(true))
+                        navigation.navigate("Register")
                     }}
                     // onPress={() => {
                     //     dispatch(setUserType("ServiceSide"))
