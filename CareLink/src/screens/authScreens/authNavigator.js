@@ -78,7 +78,7 @@ const SplashNavigator = () => {
             <AuthStack.Screen name="PaymentDone" component={PaymentDone} />
             <AuthStack.Screen name="PayPalDetails" component={PayPalDetails} />
             <AuthStack.Screen name="AddCard" component={AddCard} />
-            <AuthStack.Screen name="ListingOptions" component={ListingOptions} />
+            <AuthStack.Screen name={routes.listingOptions} component={ListingOptions} />
             <AuthStack.Screen name="SelectCareGiver" component={SelectCareGiver} />
             <AuthStack.Screen name="ActivitySelect" component={ActivitySelect} />
             <AuthStack.Screen name="ReviewDetails" component={ReviewDetails} />

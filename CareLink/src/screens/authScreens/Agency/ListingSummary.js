@@ -16,11 +16,12 @@ const ListingSummary = ({ navigation }) => {
         <View style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp
+                title={"Summary"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Listing Summary"}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView >
                 <ServiceProviderInfo numberOfLines={1} title={"Oakwood Heights"} />
             </KeyboardAwareScrollView>
             <FormButton

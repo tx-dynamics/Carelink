@@ -11,41 +11,53 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import { fontPixel, heightPixel, widthPixel } from '../../../Constants';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
+import AppTextInput from '../../../components/AppTextInput/AppTextInput';
+import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
 
 const ForgetUpdateScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
+    const [isPassword, setPassword] = useState("")
+    const [isPasswordConfirm, setPasswordConfirm] = useState("")
     const [isSecure, setSecure] = useState(true)
+    const [isSecureConfirm, setSecureConfirm] = useState(true)
+    const [isVisible, setVisible] = useState(false)
+    const onPressUpdate = () => {
+        setVisible(true)
+        setTimeout(() => {
+            setVisible(false)
+            navigation.navigate(routes.loginScreen)
+        }, 1500);
+    }
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView >
-                <IconHeaderComp title={"Sign In"}
+                <IconHeaderComp title={"Update Password"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
-                    heading={"Sign in to continue to the care link"}
+                // heading={"Sign in to continue to the care link"}
                 />
                 <View>
-                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
+                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter and confirm new password</Apptext>
                 </View>
                 <View style={{ marginTop: heightPixel(15) }}>
-                    <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} />
-                    <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} />
-                    <Text style={styles.forgetText}>Forget password?</Text>
+                    <AppTextInput value={isPassword} onChangeText={setPassword} title={"Password"} secureTextEntry={isSecure} right={isSecure ? appIcons.hide : appIcons.show} rightPress={() => setSecure(!isSecure)} />
+                    <AppTextInput value={isPasswordConfirm} onChangeText={setPasswordConfirm} title={"Confirm Password"} secureTextEntry={isSecureConfirm} right={isSecureConfirm ? appIcons.hide : appIcons.show} rightPress={() => setSecureConfirm(!isSecureConfirm)} />
+                    {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
+                    {/* <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} /> */}
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
-                buttonTitle={"Create Now"}
+                buttonTitle={"Update Password"}
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
-                onPress={() => navigation.navigate("EmailVerification")}
+                onPress={onPressUpdate}
             />
-            <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} />
+            {/* <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} /> */}
+            <EmailVerifiedModal visible={isVisible} subtitle={"Password Updated"} title={"Password Updated"} />
         </View>
     )
 }
@@ -58,11 +70,11 @@ const styles = StyleSheet.create({
         paddingBottom: heightPixel(20)
     },
     createTxt: {
-        marginTop: wp('8%'),
+        marginTop: heightPixel(0),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
-        fontSize: wp('6%'),
-        marginHorizontal: wp('5%')
+        fontSize: fontPixel(20),
+        marginHorizontal: widthPixel(20)
     },
     createTxt1: {
         alignSelf: 'center', fontSize: 13, fontFamily: 'Poppins-Regular'

@@ -10,6 +10,7 @@ import PaymentMethodComp from '../../../components/PaymentMethodComp';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { heightPixel } from '../../../Constants';
+import { appIcons } from '../../../Constants/Utilities/assets';
 
 
 const PaymentMethod = ({ navigation }) => {
@@ -27,11 +28,20 @@ const PaymentMethod = ({ navigation }) => {
         },
 
         {
+            id: 'bd7ac4besadasa-c1b1-46c2-aed5-3ad53abb28ba',
+            price: "$29.99",
+            plans: "/month",
+            label: "Apple Pay",
+            leftImg: appIcons.apple,
+            rightImg: require('../../../../assets/emptyBox.png'),
+            description: `You will get 20 listing to post in a month with this monthly plan`
+        },
+        {
             id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
             price: "$29.99",
             plans: "/month",
-            label: "PayPal",
-            leftImg: require('../../../../assets/paypal.png'),
+            label: "Google Pay",
+            leftImg: appIcons.google,
             rightImg: require('../../../../assets/emptyBox.png'),
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
@@ -54,7 +64,7 @@ const PaymentMethod = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View>
-                <IconHeaderComp
+                <IconHeaderComp title={"Payment Method"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                     heading={"Select your Payment Method to Pay for Your Monthly Subscription"}
@@ -80,16 +90,11 @@ const PaymentMethod = ({ navigation }) => {
             </View>
             <FormButton
                 buttonTitle={"Next"}
-                onPress={() => {
-                    method === "Debit/Credit Card" ?
-                        navigation.navigate("SelectCard") :
-                        navigation.navigate("PayPalDetails")
-                }}
+                onPress={() => { navigation.navigate("SelectCard") }}
             />
         </View>
     )
 }
-
 export default PaymentMethod;
 
 

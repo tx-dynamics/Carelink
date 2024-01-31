@@ -8,6 +8,7 @@ export const storageKey = {}
 
 export const routes = {
     listingSummary: "listingSummary",
+    listingOptions: "listingOptions",
     agencyDetail: "agencyDetail",
     loginScreen: "loginScreen",
     forgetPasswordEmail: "forgetPasswordEmail",

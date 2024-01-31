@@ -8,7 +8,7 @@ const PlansComp = ({ btnTxt, price, plan, desc,
     onPress, borderRadius = 10, height = wp('35%'),
     rightIconType, ...rest }) => {
     return (
-        <View
+        <Pressable onPress={onPress}
             style={[styles.inputContainer,
             {
                 borderRadius: borderRadius,
@@ -17,9 +17,9 @@ const PlansComp = ({ btnTxt, price, plan, desc,
 
             <View style={styles.yellowView} >
                 <View style={styles.blackView}>
-                    <Pressable onPress={onPress} style={styles.sbsView} >
+                    <View style={styles.sbsView} >
                         <Apptext style={styles.sbsTxt}>{btnTxt}</Apptext>
-                    </Pressable>
+                    </View>
                 </View>
                 <View style={styles.marignView} >
                     <Apptext style={styles.priceTxt} >{price}<Apptext style={[styles.priceTxt, { fontSize: 17, fontFamily: 'Poppins-Regular' }]}>{plan}</Apptext> </Apptext>
@@ -27,7 +27,7 @@ const PlansComp = ({ btnTxt, price, plan, desc,
                 </View>
             </View>
 
-        </View>
+        </Pressable>
 
     );
 };

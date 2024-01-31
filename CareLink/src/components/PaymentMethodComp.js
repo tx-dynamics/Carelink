@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, Pressable } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
@@ -10,8 +10,8 @@ const PaymentMethodComp = ({ labelValue, placeholderText,
     onPress, borderRadius = 10, rightOnPress,
     rightIconType, ...rest }) => {
     return (
-        <View
-            onPress={onPress}
+        <Pressable onPress={rightOnPress}
+            // onPress={onPress}
             style={[styles.inputContainer, { borderRadius: borderRadius }]} >
             <View style={styles.direcView}>
                 <View style={styles.imgView}>
@@ -23,13 +23,13 @@ const PaymentMethodComp = ({ labelValue, placeholderText,
                 <View style={styles.txtView}>
                     <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                 </View>
-                <TouchableOpacity onPress={rightOnPress} >
+                <View >
                     <Image resizeMode='contain'
                         style={styles.hrtStl}
                         source={rightImgName} />
-                </TouchableOpacity>
+                </View>
             </View>
-        </View>
+        </Pressable>
     );
 };
 

@@ -49,6 +49,7 @@ const PaymentPlans = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <IconHeaderComp
+                title={"Subscription"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Subscribe your plan to continue"}
@@ -57,7 +58,6 @@ const PaymentPlans = ({ navigation }) => {
                 <Apptext style={styles.submitTxt} >Subscribe Care Link to submit your rooms listings </Apptext>
                 <Apptext style={[styles.submitTxt, { fontFamily: 'Poppins-Medium' }]}>Choose your plan and get started</Apptext>
             </View>
-            {/* <View> */}
             <FlatList
                 ListFooterComponent={() => <View style={{ marginBottom: heightPixel(20) }}></View>}
                 data={DATA}
@@ -72,8 +72,6 @@ const PaymentPlans = ({ navigation }) => {
                     />
                 )}
             />
-
-            {/* </View> */}
         </View>
     )
 }

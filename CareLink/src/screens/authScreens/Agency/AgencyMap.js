@@ -17,6 +17,7 @@ const AgencyMap = ({ navigation }) => {
         <View style={styles.container}>
             <View>
                 <IconHeaderComp
+                    title={"Pin Location"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                     heading={"Pin your listed room location on the map"}

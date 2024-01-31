@@ -5,7 +5,7 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
@@ -16,13 +16,18 @@ import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimple
 import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
+import AppTextInput from '../../../components/AppTextInput/AppTextInput';
+import { setUser } from '../../../redux/actions/authAction';
 
 const LoginScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
     const usertype = useSelector((state) => state.auth.usertype)
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
+    const [isPassword, setPassword] = useState("")
     const [isSecure, setSecure] = useState(true)
+    const onPressLogin = () => {
+        dispatch(setUser(true))
+    }
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView >
@@ -34,16 +39,18 @@ const LoginScreen = ({ navigation }) => {
                 <View>
                     <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
                 </View>
-                <View style={{ marginTop: heightPixel(15) }}>
-                    <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} />
-                    <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} />
+                <View style={{ marginTop: heightPixel(1) }}>
+                    <AppTextInput value={email} onChangeText={setEmail} title={"Email"} />
+                    <AppTextInput value={isPassword} onChangeText={setPassword} title={"Password"} secureTextEntry={isSecure} right={isSecure ? appIcons.hide : appIcons.show} rightPress={() => setSecure(!isSecure)} />
+                    {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
+                    {/* <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} /> */}
                     <Text style={styles.forgetText} onPress={() => navigation.navigate(routes.forgetPasswordEmail)}>Forget password?</Text>
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
-                buttonTitle={"Create Now"}
+                buttonTitle={"Sign In"}
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
-                onPress={() => navigation.navigate("EmailVerification")}
+                onPress={onPressLogin}
             />
             <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} />
         </View>
@@ -81,6 +88,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row', alignSelf: 'center'
     },
     forgetText: {
+        marginTop: heightPixel(5),
         textAlign: "right",
         fontSize: fontPixel(14),
         fontFamily: fonts.Poppins_Medium,

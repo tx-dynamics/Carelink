@@ -15,9 +15,10 @@ const FormButton = ({ width = widthPixel(357), height = heightPixel(56),
   borderRadius = 30, fontSize = 21,
   containerStyle,
   pic,
+  disabled,
   ...rest }) => {
   return (
-    <TouchableOpacity
+    <TouchableOpacity disabled={disabled}
       onPress={onPress}
       style={[styles.buttonContainer, containerStyle, {
         width: width,

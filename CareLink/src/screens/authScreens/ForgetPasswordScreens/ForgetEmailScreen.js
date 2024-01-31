@@ -14,6 +14,7 @@ import colors from '../../../config/colors';
 import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import { fonts } from '../../../Constants/Fonts';
+import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 
 const ForgetEmailScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.auth.usertype)
@@ -26,8 +27,9 @@ const ForgetEmailScreen = ({ navigation }) => {
                     imgName={iconPath.leftArrow} style={{ fontSize: fontPixel(20), fontFamily: fonts.Poppins_Medium }}
                     heading={"To reset your password, enter the email address you used to sign up"}
                 />
-                <View style={{ marginTop: heightPixel(15) }}>
-                    <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} />
+                <View style={{ marginTop: heightPixel(5) }}>
+                    <AppTextInput value={email} onChangeText={setEmail} title={"Email"} />
+                    {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
                 </View>
             </KeyboardAwareScrollView>
             <FormButton

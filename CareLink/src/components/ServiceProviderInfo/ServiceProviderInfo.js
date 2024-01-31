@@ -58,10 +58,12 @@ const ServiceProviderInfo = ({ title, container, numberOfLines }) => {
                 <Text style={styles.dateText}>November 15</Text>
             </View>
             <Text style={styles.forText}>For: <Text style={{ fontFamily: fonts.Poppins_Light }}>20 Days</Text></Text>
+            <Text numberOfLines={2} style={styles.forText}>Location: <Text style={{ fontFamily: fonts.Poppins_Light }}> abc Town , Washington, DC</Text></Text>
             <Text style={styles.forText}>Note:</Text>
             <Text style={styles.noteText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus</Text>
             <Text style={styles.forText}>Images</Text>
-            <FlatList showsHorizontalScrollIndicator={false} keyExtractor={(item, index) => index} style={styles.imgFlatlistStyle} horizontal data={image} renderItem={({ item, index }) => <SimpleImageComponent disabled pic={item.pic} />} />
+            <FlatList
+                showsHorizontalScrollIndicator={false} keyExtractor={(item, index) => index} style={styles.imgFlatlistStyle} horizontal data={image} renderItem={({ item, index }) => <SimpleImageComponent disabled pic={item.pic} />} />
 
         </View>
     )
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(5)
     },
     imgFlatlistStyle: {
-        alignSelf: "flex-start"
+        alignSelf: "flex-start",
+        marginBottom: heightPixel(20)
     },
 })

@@ -12,15 +12,23 @@ import colors from '../../../config/colors';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
+import { RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
 
-const EmailVerification = ({ navigation }) => {
-    const [isOTP, setIsOTP] = useState(null)
+const EmailVerification = ({ navigation, route }) => {
+    const [isOTP, setIsOTP] = useState("")
     const [visible, setVisible] = useState(false)
     const onCountinue = () => {
+        //APK // if (isOTP == "") {
+        //     RedSnackbar("Please enter OTP")
+        //     return
+        // }
+        // if (isOTP.length < 4) {
+        //     RedSnackbar("Please enter a 4 digit OTP")
+        //     return
+        // }
         setVisible(true)
         setTimeout(() => {
-            navigation.replace(routes.addDocuments)
-            // setVisible(false)
+            route.params?.register ? navigation.replace(routes.addDocuments) : navigation.replace(routes.forgetPasswordUpdate)
         }, 1500);
     }
     useEffect(() => {

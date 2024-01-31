@@ -63,6 +63,7 @@ const ListingOptions = ({ navigation }) => {
         <View style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp
+                title={"Add Listing"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Add Listing Information"}

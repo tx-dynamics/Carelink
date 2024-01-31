@@ -17,6 +17,7 @@ const Note = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <IconHeaderComp
+                title={"Write Note"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Write your note if you want any?"}

@@ -82,7 +82,9 @@ const AddDocuments = ({ navigation }) => {
                     imgName={iconPath.leftArrow} />
                 {isData[isIndex].media ? <DocumentComponent onPress={removeImage} pic={isData[isIndex].media} /> : <UploadDocumentComp title={isData[isIndex].title} subTitle={isData[isIndex].subtitle} onPress={() => setVisible(true)} />}
             </View>
-            {isData[isIndex].media && <FormButton buttonTitle={"Continue"} onPress={() => isIndex < 4 ? setIndex(isIndex + 1) : navigation.replace(routes.addInformation)} />}
+            <FormButton
+                //APK // disabled={isData[isIndex].media == null ? true : false} 
+                backgroundColor={isData[isIndex].media == null ? colors.gray : colors.primary} buttonTitle={"Continue"} onPress={() => isIndex < 4 ? setIndex(isIndex + 1) : navigation.replace(routes.addInformation)} />
             <ImageUploadModal cameraPress={openCamera} mediaPress={uploadImage} visible={isVisible} />
         </View>
     )
