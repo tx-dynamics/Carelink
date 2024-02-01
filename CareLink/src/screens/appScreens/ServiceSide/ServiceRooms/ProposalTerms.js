@@ -11,7 +11,7 @@ const ProposalTerms = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Header
+            <Header headerLabel={"Terms & Conditions"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
@@ -21,7 +21,7 @@ const ProposalTerms = ({ navigation }) => {
                         fontSize: 24, fontFamily: 'Poppins-Regular'
                     }]} >Accept the terms and conditions of agency</Apptext>
                 </View>
-             
+
                 <View style={[styles.txtView, { marginTop: wp('5%') }]}>
                     <Apptext style={styles.rms} >Terms and Conditions</Apptext>
                 </View>
@@ -37,12 +37,12 @@ const ProposalTerms = ({ navigation }) => {
                 </Apptext>
                 {/* /////////////////////////////////////// */}
 
-                <View style={{ marginTop:wp('15%') }}>
+                <View style={{ marginTop: wp('15%') }}>
                     <FormButton
                         width={wp('90%')}
                         buttonTitle={"Accept"}
                         color={"white"}
-                        onPress={() => {navigation.navigate("withoutBottomTabnavigator", {screen:"ProposalAccept" }) }}
+                        onPress={() => { navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalAccept" }) }}
                     />
                 </View>
 
@@ -60,8 +60,11 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('3%'), marginHorizontal: wp('5%')
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: wp('3%'),
+        marginHorizontal: wp('5%')
     },
     rms: {
         fontFamily: 'Poppins-SemiBold',
@@ -117,8 +120,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 10
     },
-    dummyTxt:{
-        marginHorizontal: wp('5%'), marginTop: wp('6%') 
+    dummyTxt: {
+        marginHorizontal: wp('5%'), marginTop: wp('6%')
     }
 
 });

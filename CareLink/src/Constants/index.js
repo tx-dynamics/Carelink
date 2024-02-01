@@ -15,6 +15,10 @@ export const routes = {
     forgetPasswordUpdate: "forgetPasswordUpdate",
     addDocuments: "addDocuments",
     addInformation: "addInformation",
+    bookedRoom: "bookedRoom",
+    availableRoom: "availableRoom",
+    feedback: "feedback",
+
 }
 
 export const loaderStyles = {

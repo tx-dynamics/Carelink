@@ -62,7 +62,7 @@ const ReceivedProposal = ({ navigation }) => {
     ]
     return (
         <View style={styles.container}>
-            <Header height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
+            <Header headerLabel={"Proposal"} height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
             <ScrollView>
                 <View style={styles.marginView} >
@@ -75,7 +75,7 @@ const ReceivedProposal = ({ navigation }) => {
                     </TouchableOpacity> */}
                 </View>
                 <View style={{ marginTop: wp('5%') }}>
-                    <ServiceListingComp onPress={() => navigation.navigate(routes.agencyDetail, { isChat: false })} pic={appIcons.dummyPic1}
+                    <ServiceListingComp reviews onPress={() => navigation.navigate(routes.agencyDetail, { isChat: false })} pic={appIcons.dummyPic1}
                         showProposals={true}
                         showTags={false}
                         name={"ABC Rental Agency"}

@@ -85,7 +85,7 @@ const Register = ({ navigation }) => {
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
-                buttonTitle={"Create Now"}
+                buttonTitle={"Join Now"}
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
                 onPress={onSignUp}
             />

@@ -5,6 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { appIcons } from '../../../../Constants/Utilities/assets';
 
 const ProposalAccept = ({ navigation }) => {
 
@@ -16,9 +17,8 @@ const ProposalAccept = ({ navigation }) => {
                         style={{
                             width: widthPixel(115),
                             height: widthPixel(115),
-                            tintColor: DefaultStyles.colors.primary
                         }}
-                        source={require('../../../../../assets/bigCircleTick.png')} />
+                        source={appIcons.successTick} />
                 </View>
                 <View style={[styles.txtView, { marginTop: wp('4%') }]} >
                     <Apptext style={styles.roomsTxt}> Proposal Accepted </Apptext>

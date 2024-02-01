@@ -3,20 +3,20 @@ import { View, TextInput, StyleSheet, Image, TouchableOpacity, FlatList } from '
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
-import { fontPixel, widthPixel } from '../Constants';
+import { fontPixel, heightPixel, widthPixel } from '../Constants';
 import colors from '../config/colors';
 import { fonts } from '../Constants/Fonts';
 import AvailableFacilityComp from './AvaialableFacilityComp/AvailableFacilityComp';
 
-const ServiceListingComp = ({ labelValue, disabled, when, facilityData, facilty, fors, hourly, placeholderText,
+const ServiceListingComp = ({ containerStyle, labelValue, disabled, when, facilityData, facilty, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName, showTags = true,
     showHrt, showProposals, name, location, rightImg = require('../../assets/heart.png'),
-    onPress, borderRadius = 10, rightOnPress, rightTxt = "Edit", pic,
+    onPress, borderRadius = 10, rightOnPress, rightTxt, pic, reviews, detail, rightTexPress,
     rightIconType, ...rest }) => {
     return (
         <TouchableOpacity disabled={disabled}
             onPress={onPress}
-            style={[styles.inputContainer, { borderRadius: borderRadius }]}>
+            style={[styles.inputContainer, containerStyle, { borderRadius: borderRadius }]}>
 
             {/* Propsal Starts Here */}
             {showProposals ? <View style={{ height: 55 }}>
@@ -26,10 +26,12 @@ const ServiceListingComp = ({ labelValue, disabled, when, facilityData, facilty,
                     </View>
                     <View>
                         <Apptext numberOfLines={1} style={styles.jamesTxt}>{name}</Apptext>
-                        <Apptext numberOfLines={2} style={styles.locTxt} >{location}</Apptext>
+                        {reviews && <Apptext numberOfLines={2} style={styles.locTxt} >{"See Reviews"}</Apptext>}
+                        {detail && <Apptext numberOfLines={2} style={styles.detailTxt} >{detail}</Apptext>}
                     </View>
-                    <Apptext style={styles.jamesTxt1}>
-                        {rightTxt}</Apptext>
+                    <TouchableOpacity onPress={rightTexPress}>
+                        <Apptext style={styles.jamesTxt1}>{rightTxt}</Apptext>
+                    </TouchableOpacity>
                 </View>
             </View> : null}
             {/* Propsal Ends Here */}
@@ -39,9 +41,9 @@ const ServiceListingComp = ({ labelValue, disabled, when, facilityData, facilty,
                     <View style={styles.txtView}>
                         <Apptext style={styles.txtVal}>{labelValue}</Apptext>
                     </View>
-                    <View style={styles.fvTxt}>
+                    {/* <View style={styles.fvTxt}>
                         <Apptext style={styles.scndTxt}>{"For 20 days"}</Apptext>
-                    </View>
+                    </View> */}
                     <FlatList horizontal style={{
                         alignSelf: "flex-start",
                         marginLeft: widthPixel(20),
@@ -61,14 +63,23 @@ export default ServiceListingComp;
 
 const styles = StyleSheet.create({
     direcView: {
-        alignItems: "center",
+        // alignItems: "center",
         flexDirection: 'row',
         marginTop: wp('1%'),
         justifyContent: "space-between",
     },
     locTxt: {
         width: widthPixel(240),
-        fontSize: 9,
+        fontSize: fontPixel(15),
+        fontFamily: fonts.PoppinsSemiBold,
+        color: colors.black,
+        textDecorationLine: "underline"
+    },
+    detailTxt: {
+        width: widthPixel(240),
+        fontSize: fontPixel(12),
+        fontFamily: fonts.Poppins_Regular,
+        color: colors.detailText,
     },
     strImg: {
         marginLeft: 77, height: 15, width: 80
@@ -93,7 +104,8 @@ const styles = StyleSheet.create({
     jamesTxt1: {
         width: wp('58%'),
         // marginLeft: -8,
-        fontSize: 15, fontFamily: 'Poppins-Medium',
+        fontSize: 15,
+        fontFamily: 'Poppins-Medium',
         textDecorationLine: 'underline',
     },
     fvTxt: {
@@ -112,9 +124,11 @@ const styles = StyleSheet.create({
         marginTop: wp('3%'),
     },
     txtVal: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 18,
-        marginTop: wp('2%')
+        fontFamily: fonts.Poppins_Medium,
+        fontSize: fontPixel(13),
+        color: colors.black,
+        marginVertical: heightPixel(5)
+        // marginTop: wp('2%')
     },
     lightTxt: {
         fontSize: 8,

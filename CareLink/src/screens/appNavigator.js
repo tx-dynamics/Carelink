@@ -42,6 +42,13 @@ import Received from "./appScreens/ServiceSide/Contract/Received";
 import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
 import { routes } from "../Constants";
 import AgencyDetail from "./appScreens/ServiceSide/AgencyDetail/AgencyDetail";
+import BookedRooms from "./appScreens/ServiceSide/ServiceRooms/BookedRooms";
+import AvailableRoom from "./appScreens/ServiceSide/ServiceRooms/AvailableRoom";
+import ListingOptions from "./authScreens/ServiceSide/ListingOptions";
+import Note from "./authScreens/ServiceSide/Pricing/Note";
+import AgencyLocation from "./authScreens/Agency/AgencyLocation";
+import AgencyMap from "./authScreens/Agency/AgencyMap";
+import ListingSummary from "./authScreens/Agency/ListingSummary";
 
 
 const Tab = createBottomTabNavigator();
@@ -94,9 +101,16 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="ReceivedProposal" component={ReceivedProposal} />
             <StackNavigator.Screen name="ProposalTerms" component={ProposalTerms} />
             <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
-            <StackNavigator.Screen name="Feedback" component={Feedback} />
+            <StackNavigator.Screen name={routes.feedback} component={Feedback} />
             <StackNavigator.Screen name="EditProfile" component={EditProfile} />
             <StackNavigator.Screen name={routes.agencyDetail} component={AgencyDetail} />
+            <StackNavigator.Screen name={routes.bookedRoom} component={BookedRooms} />
+            <StackNavigator.Screen name={routes.availableRoom} component={AvailableRoom} />
+            <StackNavigator.Screen name={routes.listingOptions} component={ListingOptions} />
+            <StackNavigator.Screen name="Note" component={Note} />
+            <StackNavigator.Screen name="AgencyLocation" component={AgencyLocation} />
+            <StackNavigator.Screen name="AgencyMap" component={AgencyMap} />
+            <StackNavigator.Screen name={routes.listingSummary} component={ListingSummary} />
 
         </StackNavigator.Navigator>
     )

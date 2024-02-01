@@ -42,4 +42,6 @@ export default {
   messageBody: "#666666",
   uploadButtonColor: "#001930",
   green: '#4CC26C',
+  welcomeText: "#252323",
+  detailText: "#5F5F5F",
 };

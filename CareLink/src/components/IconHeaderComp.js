@@ -24,7 +24,7 @@ function IconHeaderComp({ heading, imgName, onPress, title, style, ...rest }) {
                 <View style={styles.rightView}>
                 </View>
             </View>
-            <Apptext style={[styles.createTxt, { ...style }]}>{heading}</Apptext>
+            {heading && <Apptext style={[styles.createTxt, { ...style }]}>{heading}</Apptext>}
         </View>
     );
 };

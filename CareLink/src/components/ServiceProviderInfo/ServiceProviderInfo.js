@@ -7,7 +7,7 @@ import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityCo
 import { appIcons } from '../../Constants/Utilities/assets'
 import SimpleImageComponent from '../SimpleImageComponent/SimpleImageComponent'
 
-const ServiceProviderInfo = ({ title, container, numberOfLines }) => {
+const ServiceProviderInfo = ({ floor, attachBath, availableOn, location, note, images, days }) => {
     const data = [
 
         {
@@ -48,22 +48,49 @@ const ServiceProviderInfo = ({ title, container, numberOfLines }) => {
     ]
     return (
         <View style={styles.main}>
-            <Text numberOfLines={numberOfLines} style={[styles.container, container]}>{title}</Text>
-            <Text style={styles.bedroomText}>2 Bedrooms . 2 Bathrooms .</Text>
-            <Text style={styles.floorText}>Floor: 2nd</Text>
+            {/* <Text numberOfLines={numberOfLines} style={[styles.container, container]}>{title}</Text> */}
+            {/* <Text style={styles.bedroomText}>2 Bedrooms . 2 Bathrooms .</Text> */}
+            {floor && <Text style={styles.floorText}>Floor: {floor}</Text>}
+            {attachBath &&
+                <View style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: heightPixel(10)
+                }}>
+                    <Image resizeMode='contain' source={appIcons.tick1} style={{
+                        width: widthPixel(20),
+                        height: widthPixel(20),
+                        marginRight: widthPixel(10)
+                    }} />
+                    <Text style={{
+                        fontSize: fontPixel(14),
+                        fontFamily: fonts.Poppins_Light,
+                        color: colors.black12
+                    }}>Attach Washroom</Text>
+                </View>
+            }
             <FlatList keyExtractor={(itm, index) => index} style={styles.flatListStyle} horizontal data={data} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
-            <Text style={styles.availableText}>Available on</Text>
-            <View style={styles.calenderView}>
-                <Image resizeMode='contain' source={appIcons.calendar} style={styles.calenderIcon} />
-                <Text style={styles.dateText}>November 15</Text>
-            </View>
-            <Text style={styles.forText}>For: <Text style={{ fontFamily: fonts.Poppins_Light }}>20 Days</Text></Text>
-            <Text numberOfLines={2} style={styles.forText}>Location: <Text style={{ fontFamily: fonts.Poppins_Light }}> abc Town , Washington, DC</Text></Text>
-            <Text style={styles.forText}>Note:</Text>
-            <Text style={styles.noteText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus</Text>
-            <Text style={styles.forText}>Images</Text>
-            <FlatList
-                showsHorizontalScrollIndicator={false} keyExtractor={(item, index) => index} style={styles.imgFlatlistStyle} horizontal data={image} renderItem={({ item, index }) => <SimpleImageComponent disabled pic={item.pic} />} />
+            {availableOn &&
+                <>
+                    <Text style={styles.availableText}>Available on</Text>
+                    <View style={styles.calenderView}>
+                        <Image resizeMode='contain' source={appIcons.calendar} style={styles.calenderIcon} />
+                        <Text style={styles.dateText}>{availableOn}</Text>
+                    </View>
+                </>
+            }
+            {days && <Text style={styles.forText}>For: <Text style={{ fontFamily: fonts.Poppins_Light }}>{days}</Text></Text>}
+            {location && <Text numberOfLines={2} style={styles.forText}>Location: <Text style={{ fontFamily: fonts.Poppins_Light }}> {location}</Text></Text>}
+            {note && <>
+                <Text style={styles.forText}>Note:</Text>
+                <Text style={styles.noteText}>{note}</Text>
+            </>}
+            {images &&
+                <>
+                    <Text style={styles.forText}>Images</Text>
+                    <FlatList
+                        showsHorizontalScrollIndicator={false} keyExtractor={(item, index) => index} style={styles.imgFlatlistStyle} horizontal data={image} renderItem={({ item, index }) => <SimpleImageComponent disabled pic={item.pic} />} />
+                </>}
 
         </View>
     )

@@ -10,8 +10,8 @@ import ProposalComp from '../../../../components/ProposalComp';
 import ReportComp from '../../../../components/ReportComp';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { appIcons } from '../../../../Constants/Utilities/assets';
-import { heightPixel, widthPixel } from '../../../../Constants';
-
+import { fontPixel, heightPixel, widthPixel, fonts } from '../../../../Constants';
+import colors from '../../../../config/colors';
 const ServiceHome = ({ }) => {
     const DATA = [
         {
@@ -50,18 +50,32 @@ const ServiceHome = ({ }) => {
             msg1: "Booked",
             desc: `3 hr ago`
         },
+        {
+            name: "Eastern Street Rent",
+            adress: "Willowbrook Terrace",
+            id: 'bd7a42cbea-c1b1-46c2-aed5-3ad53abb28ba',
+            no: "6",
+            no1: "3",
+            label: "Rooms",
+            msg: "Inactive",
+            width: wp('53%'),
+            msg1: "Booked",
+            desc: `3 hr ago`,
+            inactive: true
+        },
     ];
     const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
+            <Header headerLabel={"Home"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
             <ScrollView>
                 <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >My Job Post</Apptext>
+                    <Text style={styles.welcomeText} >Welcome</Text>
+                    <Apptext style={styles.rms} >James Clear</Apptext>
                 </View>
                 <View style={styles.whiteBox}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
@@ -79,7 +93,7 @@ const ServiceHome = ({ }) => {
                 <View style={[styles.txtView, { marginTop: heightPixel(40) }]}>
                     <Apptext style={styles.rms} >Rooms</Apptext>
                     <TouchableOpacity onPress={() => navigation.navigate("SearchNavigator", { screen: "ServiceRooms" })}>
-                        <Apptext style={styles.dtls} >See Details</Apptext>
+                        {/* <Apptext style={styles.dtls} >See Details</Apptext> */}
                     </TouchableOpacity>
                 </View>
                 <View style={styles.marginView} >
@@ -92,6 +106,8 @@ const ServiceHome = ({ }) => {
                                 labelValue={item.label}
                                 AvailableRooms={item.no}
                                 firstTxt={item.msg}
+                                circleStyle={{ backgroundColor: item.inactive ? colors.messageBody : colors.white }}
+                                textStyle={{ color: item.inactive ? colors.white : colors.black }}
                             />
                         )}
                     />
@@ -190,10 +206,13 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: DefaultStyles.colors.white
     },
+    welcomeText: {
+        fontSize: fontPixel(16),
+        fontFamily: 'Poppins-Light',
+        color: colors.welcomeText
+    },
     txtView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        alignItems: 'flex-start',
         marginHorizontal: wp('5%')
     },
     rms: {

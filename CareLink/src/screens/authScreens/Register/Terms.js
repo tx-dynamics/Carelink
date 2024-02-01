@@ -13,7 +13,7 @@ const Terms = ({ navigation }) => {
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
-                heading={"Terms and Conditions"}
+                title={"Terms & Condition"}
                 style={styles.createTxt}
             />
             <Apptext style={styles.termsTxt}>

@@ -49,7 +49,10 @@ function Header({
         {centerImg && <Image source={centerImg} />}
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity onPress={onPressRight}>
+      <TouchableOpacity style={{
+        width: widthPixel(38),
+        height: widthPixel(38),
+      }} onPress={onPressRight}>
         {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
         }
       </TouchableOpacity>
@@ -67,8 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: wp('6%'),
-    marginTop: -5
+    paddingHorizontal: widthPixel(20),
   },
   headerLabel: {
     fontFamily: 'Poppins-SemiBold',

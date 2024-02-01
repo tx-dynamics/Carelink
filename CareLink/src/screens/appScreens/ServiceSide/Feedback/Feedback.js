@@ -7,80 +7,60 @@ import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
+import { fontPixel, heightPixel, routes } from '../../../../Constants';
+import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import FeedBackCheckBox from '../../../../components/FeedbackCheckBox/FeedBackCheckBox';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const Feedback = ({ navigation }) => {
-    const [isParking, setParking] = useState(false)
-    const [isKitchen, setKitchen] = useState(false)
-    const [isDependable, setDependable] = useState(false)
-
+    const [data, setData] = useState([
+        {
+            id: 0,
+            title: "Would rehire",
+            check: false
+        },
+        {
+            id: 1,
+            title: "Punctual",
+            check: false
+        },
+        {
+            id: 2,
+            title: "Dependable",
+            check: false
+        },
+    ])
+    const onCheckPress = (item, index) => {
+        const updatedDataArray = [...data]; // Create a copy of the dataArray
+        if (!item.check) {
+            updatedDataArray[index] = { ...item, check: true }; // Update the item's check property
+        }
+        else { updatedDataArray[index] = { ...item, check: false }; }
+        setData(updatedDataArray); // Update the state with the modified array
+    };
+    const onSubmitPress = () => {
+        SuccessSnackbar("Your feedback has been submitted")
+        // navigation.goBack()
+        navigation.navigate("HomeNavigator")
+    }
     return (
         <View style={styles.container}>
-                <IconHeaderComp
+            <IconHeaderComp title={"Add Review"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
                 heading={"Submit a feedback to your hired agency"}
                 style={styles.rms}
             />
+            <KeyboardAwareScrollView>
                 <View style={styles.txtView}>
                     <Apptext style={[styles.rms1]} >Click to write: </Apptext>
                 </View>
-                <View style={{ marginTop: -25 }} >
-                    <FormInput
-                        title={"Feedback"}
-                        borderColor={DefaultStyles.colors.black}
-                        borderWidth={1}
-                    />
-                </View>
-                <View style={[styles.DirectionView1, { marginTop:wp('8%')}]}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setKitchen(!isKitchen)
-                        }}
-                        style={styles.radioBtn}>
-                        {isKitchen ?
-                            <Image style={styles.imgStl}
-                            source={require('../../../../../assets/tickBox.png')} />
-                            : null}
-                    </TouchableOpacity>
-                    <Apptext style={styles.descTxt}>Would rehire</Apptext>
-                </View>
-
-                <View style={styles.DirectionView1}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setDependable(!isDependable)
-                        }}
-                        style={styles.radioBtn}>
-                        {isDependable ?
-                            <Image style={styles.imgStl}
-                            source={require('../../../../../assets/tickBox.png')} />
-                            : null}
-                    </TouchableOpacity>
-                    <Apptext style={styles.descTxt}>Punctual</Apptext>
-                </View>
-
-                <View style={styles.DirectionView1}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setParking(!isParking)
-                        }}
-                        style={styles.radioBtn}>
-                        {isParking ?
-                            <Image style={styles.imgStl}
-                                source={require('../../../../../assets/newTick.png')} />
-                            : null}
-                    </TouchableOpacity>
-                    <Apptext style={styles.descTxt}>Dependable</Apptext>
-                </View>
-              
-                <View style={{ marginTop: wp('35%') }}>
-                    <FormButton
-                        buttonTitle={"Submit"}
-                        width={wp('90%')}
-
-                    />
-                </View>
-
+                <NewAppTextInput multiline />
+                <FlatList scrollEnabled={false} keyExtractor={(item, index) => item.id} data={data} renderItem={({ item, index }) => <FeedBackCheckBox pic={item.check ? appIcons.tick1 : appIcons.untick} title={item.title} onPress={() => onCheckPress(item, index)} />} />
+            </KeyboardAwareScrollView>
+            <FormButton buttonTitle={"Submit"} onPress={onSubmitPress} />
         </View>
     )
 }
@@ -92,6 +72,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     directionView: {
         flexDirection: 'row', marginTop: wp('6%'),
@@ -154,13 +135,14 @@ const styles = StyleSheet.create({
         marginHorizontal: wp('5%')
     },
     rms: {
-        fontFamily: 'Poppins-SemiBold',
-        fontSize: 19
+        // fontFamily: 'Poppins-SemiBold',
+        fontSize: fontPixel(24)
     },
-    rms1:{
+    rms1: {
         fontSize: 19,
-        fontFamily:'Poppins-Medium', 
-        marginTop: wp('8%')
+        fontFamily: 'Poppins-Medium',
+        marginTop: heightPixel(20),
+        marginBottom: heightPixel(10)
     },
     dtls: {
         color: DefaultStyles.colors.black,
@@ -168,24 +150,24 @@ const styles = StyleSheet.create({
     },
     DirectionView1: {
         flexDirection: 'row',
-        marginHorizontal:wp('5%')
+        marginHorizontal: wp('5%')
     },
-    radioBtn:{
-        marginTop:wp('5%'),
-        width:27,
-        height:27,
-        borderRadius:6,
-        borderColor:DefaultStyles.colors.primary,
-        borderWidth:2
+    radioBtn: {
+        marginTop: wp('5%'),
+        width: 27,
+        height: 27,
+        borderRadius: 6,
+        borderColor: DefaultStyles.colors.primary,
+        borderWidth: 2
     },
     descTxt: {
         fontFamily: 'Poppins-Regular',
         fontSize: 16,
-        marginTop:wp('6%'),
-        marginHorizontal:wp('5%')
+        marginTop: wp('6%'),
+        marginHorizontal: wp('5%')
     },
-    imgStl:{
-        width:24, height:24, tintColor: DefaultStyles.colors.primary 
+    imgStl: {
+        width: 24, height: 24, tintColor: DefaultStyles.colors.primary
     }
 
 });

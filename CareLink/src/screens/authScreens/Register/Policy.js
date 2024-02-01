@@ -13,7 +13,7 @@ const Policy = ({ navigation }) => {
       <IconHeaderComp
         onPress={() => { navigation.goBack() }}
         imgName={iconPath.leftArrow}
-        heading={"Privacy Policies"}
+        title={"Privacy Policy"}
         style={styles.createTxt}
       />
       <Apptext style={styles.termsTxt}>

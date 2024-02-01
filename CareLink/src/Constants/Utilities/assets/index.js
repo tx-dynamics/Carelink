@@ -33,6 +33,8 @@ const appIcons = {
     openCamera: require(`${iconUrl}/openCamera.png`),
     apple: require(`${iconUrl}/apple.png`),
     google: require(`${iconUrl}/google.png`),
+    tick1: require(`${iconUrl}/tick1.png`),
+    untick: require(`${iconUrl}/untick.png`),
 }
 
 export { appImages, appIcons }

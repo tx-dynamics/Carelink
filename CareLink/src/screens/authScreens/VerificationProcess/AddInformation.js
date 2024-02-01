@@ -46,7 +46,7 @@ const AddInformation = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView>
-                <IconHeaderComp title={"Verification Process"} heading={"Verification Process"}
+                <IconHeaderComp title={"Verification Process"}
                     onPress={() => { navigation.goBack() }}
                     imgName={iconPath.leftArrow} />
                 <LeftBoldTitle title={"Enter your Information"} />

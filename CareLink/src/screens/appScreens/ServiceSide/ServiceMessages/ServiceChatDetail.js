@@ -159,7 +159,7 @@ const ServiceChatDetail = ({ navigation, route }) => {
                 justifyContent: "space-between",
                 paddingRight: widthPixel(20)
             }}>
-                <Header height={heightPixel(80)} style={{ width: widthPixel(70) }}
+                <Header headerLabel={"Chat"} height={heightPixel(80)} style={{ width: widthPixel(70) }}
                     leftImgName={require('../../../../../assets/headerBack.png')}
                     onPressLeft={() => navigation.goBack()}
                 />

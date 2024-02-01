@@ -22,7 +22,7 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
                 </View>
                 <View>
                     <Apptext numberOfLines={1} style={styles.jamesTxt} >{name}</Apptext>
-                    <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext>
+                    {/* <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext> */}
                     <Apptext numberOfLines={1} style={styles.descTxt} >{description}</Apptext>
                 </View>
             </View>
@@ -34,7 +34,7 @@ export default ProposalComp;
 
 const styles = StyleSheet.create({
     direcView: {
-        alignItems: "center",
+        // alignItems: "center",
         flexDirection: 'row',
         marginTop: wp('1%')
     },

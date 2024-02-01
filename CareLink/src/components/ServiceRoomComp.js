@@ -3,12 +3,13 @@ import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-nati
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
-import { heightPixel, widthPixel } from '../Constants';
+import { fontPixel, heightPixel, widthPixel } from '../Constants';
+import colors from '../config/colors';
 
 const ServiceRoomComp = ({ labelValue, AvailableRooms, BookedRooms,
     placeholderText, iconType, leftIconType, leftImgName, rightImgName,
     onPress, borderRadius = 10, rightOnPress, firstTxt, scndTxt,
-    width: width,
+    width: width, circleStyle, textStyle,
     rightIconType, ...rest }) => {
     return (
         <TouchableOpacity
@@ -19,8 +20,8 @@ const ServiceRoomComp = ({ labelValue, AvailableRooms, BookedRooms,
             }]} >
             <View style={styles.direcView}>
                 <View style={styles.lwrView}>
-                    <View style={styles.circle} >
-                        <Apptext style={[styles.nmbr]}>{AvailableRooms}</Apptext>
+                    <View style={[styles.circle, circleStyle]} >
+                        <Apptext style={[styles.nmbr, textStyle]}>{AvailableRooms}</Apptext>
                     </View>
                     <Apptext style={[styles.txt]}>{firstTxt}</Apptext>
                 </View>
@@ -62,16 +63,20 @@ const styles = StyleSheet.create({
 
     },
     circle: {
-        width: 39,
+        width: widthPixel(24),
         marginHorizontal: wp('3%'),
         alignItems: 'center',
         justifyContent: 'center',
-        height: 39, borderRadius: 20, backgroundColor: "white"
+        height: widthPixel(24),
+        borderRadius: 20,
+        backgroundColor: "white"
     },
     nmbr: {
         fontFamily: 'Poppins-Regular',
-        fontSize: 25,
-        lineHeight: 35,
+        fontSize: fontPixel(14),
+        top: heightPixel(1),
+        color: colors.black
+        // lineHeight: 35,
     },
     txt: {
         marginTop: wp('1%'),
@@ -80,11 +85,11 @@ const styles = StyleSheet.create({
         color: DefaultStyles.colors.white
     },
     inputContainer: {
-        width: widthPixel(118),
+        width: widthPixel(80),
         marginBottom: wp('5%'),
         flexDirection: 'row',
         justifyContent: 'center',
-        height: heightPixel(111),
+        height: heightPixel(79),
         marginHorizontal: wp('1%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderBottomColor: "white",

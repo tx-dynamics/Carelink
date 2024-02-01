@@ -65,6 +65,7 @@ const SelectCard = ({ navigation }) => {
         <View style={styles.container}>
             <KeyboardAwareScrollView nestedScrollEnabled>
                 <IconHeaderComp
+                    title={"Select Card"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                     heading={"Add/Select your card for payments"}
