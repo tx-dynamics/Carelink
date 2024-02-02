@@ -49,6 +49,13 @@ import Note from "./authScreens/ServiceSide/Pricing/Note";
 import AgencyLocation from "./authScreens/Agency/AgencyLocation";
 import AgencyMap from "./authScreens/Agency/AgencyMap";
 import ListingSummary from "./authScreens/Agency/ListingSummary";
+import AvailableList from "./appScreens/ServiceSide/RoomList/AvailableList";
+import ListedList from "./appScreens/ServiceSide/RoomList/ListedList";
+import BookedList from "./appScreens/ServiceSide/RoomList/BookedList";
+import InactiveList from "./appScreens/ServiceSide/RoomList/InactiveList";
+import InactiveRoom from "./appScreens/ServiceSide/ServiceRooms/InactiveRooms";
+import CertifcateScreen from "./appScreens/ServiceSide/ServiceProfile/CertifcateScreen";
+import CertifcateDetail from "./appScreens/ServiceSide/ServiceProfile/CertifcateDetail";
 
 
 const Tab = createBottomTabNavigator();
@@ -74,7 +81,6 @@ const DrawerNavigator = () => {
 
 
 const WithoutBottomTabnavigator = () => {
-
     return (
         <StackNavigator.Navigator
             screenOptions={{
@@ -106,12 +112,18 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name={routes.agencyDetail} component={AgencyDetail} />
             <StackNavigator.Screen name={routes.bookedRoom} component={BookedRooms} />
             <StackNavigator.Screen name={routes.availableRoom} component={AvailableRoom} />
+            <StackNavigator.Screen name={routes.inactiveRoom} component={InactiveRoom} />
             <StackNavigator.Screen name={routes.listingOptions} component={ListingOptions} />
             <StackNavigator.Screen name="Note" component={Note} />
             <StackNavigator.Screen name="AgencyLocation" component={AgencyLocation} />
             <StackNavigator.Screen name="AgencyMap" component={AgencyMap} />
             <StackNavigator.Screen name={routes.listingSummary} component={ListingSummary} />
-
+            <StackNavigator.Screen name={routes.availableList} component={AvailableList} />
+            <StackNavigator.Screen name={routes.listedList} component={ListedList} />
+            <StackNavigator.Screen name={routes.bookedList} component={BookedList} />
+            <StackNavigator.Screen name={routes.inactiveList} component={InactiveList} />
+            <StackNavigator.Screen name={routes.userCertificateList} component={CertifcateScreen} />
+            <StackNavigator.Screen name={routes.certificateDetail} component={CertifcateDetail} />
         </StackNavigator.Navigator>
     )
 }

@@ -4,7 +4,7 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 
-const UploadDocumentComp = ({ containerStyle, title, subTitle, onPress }) => {
+const UploadDocumentComp = ({ containerStyle, title, subTitle, onPress, btnTitle = "Upload" }) => {
     return (
         <TouchableOpacity onPress={onPress} style={[styles.topView, containerStyle]}>
             <View style={styles.container}>
@@ -13,7 +13,7 @@ const UploadDocumentComp = ({ containerStyle, title, subTitle, onPress }) => {
                     <Text style={styles.subtitleText}>{subTitle}</Text>
                 </View>
                 <View style={styles.uploadView}>
-                    <Text style={styles.uploadText}>Upload</Text>
+                    <Text style={styles.uploadText}>{btnTitle}</Text>
                 </View>
             </View>
         </TouchableOpacity >

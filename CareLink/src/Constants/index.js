@@ -17,7 +17,14 @@ export const routes = {
     addInformation: "addInformation",
     bookedRoom: "bookedRoom",
     availableRoom: "availableRoom",
+    inactiveRoom: "inactiveRoom",
     feedback: "feedback",
+    availableList: "availableList",
+    listedList: "listedList",
+    bookedList: "bookedList",
+    inactiveList: "inactiveList",
+    userCertificateList: "userCertificateList",
+    certificateDetail: "certificateDetail",
 
 }
 

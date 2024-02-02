@@ -15,6 +15,7 @@ const FormButton = ({ width = widthPixel(357), height = heightPixel(56),
   borderRadius = 30, fontSize = 21,
   containerStyle,
   pic,
+  textStyle,
   disabled,
   ...rest }) => {
   return (
@@ -28,7 +29,7 @@ const FormButton = ({ width = widthPixel(357), height = heightPixel(56),
         borderColor: borderColor,
         borderRadius: borderRadius
       }]} {...rest}>
-      <Apptext style={[styles.buttonText, { color: color, fontSize: fontSize }]} {...rest}>{buttonTitle}</Apptext>
+      <Apptext style={[styles.buttonText, textStyle, { color: color, fontSize: fontSize }]} {...rest}>{buttonTitle}</Apptext>
       {pic && <Image resizeMode='contain' source={pic} style={styles.imgStyle} />}
     </TouchableOpacity>
   );

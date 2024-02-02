@@ -10,7 +10,7 @@ import ProposalComp from '../../../../components/ProposalComp';
 import ReportComp from '../../../../components/ReportComp';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { appIcons } from '../../../../Constants/Utilities/assets';
-import { fontPixel, heightPixel, widthPixel, fonts } from '../../../../Constants';
+import { fontPixel, heightPixel, widthPixel, fonts, routes } from '../../../../Constants';
 import colors from '../../../../config/colors';
 const ServiceHome = ({ }) => {
     const DATA = [
@@ -24,7 +24,8 @@ const ServiceHome = ({ }) => {
             msg: "Available",
             width: wp('33%'),
             msg1: "Booked",
-            desc: `3 hr ago`
+            desc: `3 hr ago`,
+            route: routes.availableList
         },
         {
             name: "Pearl Villa Estate",
@@ -36,7 +37,8 @@ const ServiceHome = ({ }) => {
             msg: "Booked",
             width: wp('53%'),
             msg1: "Submitted",
-            desc: `3 hr ago`
+            desc: `3 hr ago`,
+            route: routes.bookedList
         },
         {
             name: "Eastern Street Rent",
@@ -48,7 +50,8 @@ const ServiceHome = ({ }) => {
             msg: "Listed",
             width: wp('53%'),
             msg1: "Booked",
-            desc: `3 hr ago`
+            desc: `3 hr ago`,
+            route: routes.listedList
         },
         {
             name: "Eastern Street Rent",
@@ -61,7 +64,8 @@ const ServiceHome = ({ }) => {
             width: wp('53%'),
             msg1: "Booked",
             desc: `3 hr ago`,
-            inactive: true
+            inactive: true,
+            route: routes.inactiveList
         },
     ];
     const navigation = useNavigation()
@@ -102,7 +106,7 @@ const ServiceHome = ({ }) => {
                         horizontal
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (
-                            <ServiceRoomComp
+                            <ServiceRoomComp onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: item.route })}
                                 labelValue={item.label}
                                 AvailableRooms={item.no}
                                 firstTxt={item.msg}

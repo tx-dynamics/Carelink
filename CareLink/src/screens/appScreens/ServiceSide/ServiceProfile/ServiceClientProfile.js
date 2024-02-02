@@ -7,65 +7,50 @@ import Header from '../../../../components/Header';
 import SelectBox from '../../../../components/SelectBox';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { appIcons } from '../../../../Constants/Utilities/assets';
-import { heightPixel, widthPixel } from '../../../../Constants';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import NewSelectBox from '../../../../components/NewSelectBox/NewSelectBox';
 
 const ServiceClientProfile = ({ navigation }) => {
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             count: "6",
-            plans: "/month",
-            label: "Available Rooms",
-            color: DefaultStyles.colors.primary,
-            chk: false,
-            circle: true,
-            bgClr: "white",
-            txtClr: DefaultStyles.colors.textColor,
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            forward: false,
+            title: "Available Rooms",
+            route: routes.availableList,
+        },
+        {
+            id: 'bd7acbea-c1b1-4qds6c2-aed5-3ad53abb28ba',
+            count: "11",
+            forward: false,
+            title: "Booked Rooms",
+            route: routes.bookedList,
+        },
+        {
+            id: 'bd7acbea-c1b1-46c2123-aed5-3ad53abb28ba',
+            forward: true,
+            title: "Certificates",
+            route: routes.userCertificateList,
         },
 
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "11",
-            plans: "/month",
-            color: '#999999',
-            label: "Booked Rooms",
-            chk: false,
-            circle: true,
-            bgClr: "white",
-            txtClr: DefaultStyles.colors.textColor,
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "11",
-            plans: "/month",
-            color: '#999999',
-            label: "Subscription",
-            chk: true,
-            circle: false,
-            bgClr: DefaultStyles.colors.primary,
-            txtClr: DefaultStyles.colors.white,
-            description: `20 Listings Monthly`
-        },
     ];
     return (
         <View style={styles.container}>
-            <Header isBack height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
+            <Header isBack headerLabel={"Profile"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
             <ScrollView>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Profile</Apptext>
-                    <TouchableOpacity
+                    <TouchableOpacity disabled
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "EditProfile" })}>
                         <Apptext style={styles.dtls} >Edit</Apptext>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.imgView} >
                     <Image style={styles.imgStl}
-                        source={require('../../../../../assets/JC.png')} />
+                        source={appIcons.dummyProfile} />
                 </TouchableOpacity>
                 <View style={{ alignSelf: 'center' }} >
                     <Apptext style={styles.jmsTxt} >James Clear</Apptext>
@@ -73,12 +58,23 @@ const ServiceClientProfile = ({ navigation }) => {
                 </View>
                 <View style={styles.pinkBox}>
                     <Apptext style={styles.mmbrTxt} >Member since October 2021</Apptext>
-                    <Apptext style={styles.mmbrTxt} >Hired 0 providers</Apptext>
+                    {/* <Apptext style={styles.mmbrTxt} >Hired 0 providers</Apptext> */}
                 </View>
                 <TouchableOpacity style={styles.btn}>
                     <Apptext style={styles.acntTxt}>List a room</Apptext>
                 </TouchableOpacity>
-                <View style={{ marginTop: wp('3%') }}>
+                <FlatList
+                    data={DATA}
+                    ListHeaderComponent={() => <View style={{ marginTop: heightPixel(2) }}></View>}
+                    renderItem={({ item, index }) =>
+                        <NewSelectBox
+                            title={item.title}
+                            count={item.count}
+                            forward={item.forward}
+                            onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: item.route })}
+                        />} />
+
+                {/* <View style={{ marginTop: wp('3%') }}>
                     <FlatList
                         data={DATA}
                         keyExtractor={(item, index) => index}
@@ -95,7 +91,7 @@ const ServiceClientProfile = ({ navigation }) => {
                             />
                         )}
                     />
-                </View>
+                </View> */}
             </ScrollView>
         </View>
     )
@@ -117,7 +113,7 @@ const styles = StyleSheet.create({
         marginTop: wp('7%'),
         height: wp('30%'),
         alignSelf: 'center',
-        borderRadius: 60
+
     },
     upldTxt: {
         fontSize: 12,
@@ -154,10 +150,11 @@ const styles = StyleSheet.create({
         width: 103,
         alignSelf: 'center',
         padding: 5,
-        marginTop: wp('13%'),
+        marginVertical: heightPixel(20),
 
     },
     acntTxt: {
+        top: heightPixel(1),
         fontFamily: 'Poppins-Regular',
         fontSize: 12,
         alignSelf: 'center',
@@ -180,7 +177,9 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
     imgStl: {
-        width: wp('30%'), height: wp('30%')
+        width: wp('30%'),
+        height: wp('30%'),
+        borderRadius: 60,
     },
     leftImgStyle: {
         width: widthPixel(23),
