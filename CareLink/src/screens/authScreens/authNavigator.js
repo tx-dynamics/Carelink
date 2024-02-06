@@ -62,8 +62,8 @@ const SplashNavigator = () => {
             <AuthStack.Screen name={routes.forgetPasswordUpdate} component={ForgetUpdateScreen} />
             <AuthStack.Screen name={routes.addDocuments} component={AddDocuments} />
             <AuthStack.Screen name={routes.addInformation} component={AddInformation} />
-            <AuthStack.Screen name="Terms" component={Terms} />
-            <AuthStack.Screen name="Policy" component={Policy} />
+            <AuthStack.Screen name={routes.termsAndCondition} component={Terms} />
+            <AuthStack.Screen name={routes.privacyPlicy} component={Policy} />
             <AuthStack.Screen name="EmailVerification" component={EmailVerification} />
             <AuthStack.Screen name="Verified" component={Verified} />
             <AuthStack.Screen name="Success" component={Success} />

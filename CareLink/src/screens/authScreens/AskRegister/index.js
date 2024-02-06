@@ -9,6 +9,8 @@ import { setUser, setUserType } from '../../../redux/actions/authAction';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { fonts } from '../../../Constants/Fonts';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
+// import { userType } from '../../../../android/app/src/redux/Slices/splashSlice';
+import { userType } from '../../../redux/Slices/splashSlice';
 
 const AskRegister = ({ navigation }) => {
     let dispatch = useDispatch();
@@ -21,7 +23,7 @@ const AskRegister = ({ navigation }) => {
                 <Apptext style={styles.scndTxt}>Create your profile and list your rooms now</Apptext>
                 <TouchableOpacity //for testing using this onPress,
                     onPress={() => {
-                        dispatch(setUserType("ServiceSide"))
+                        dispatch(userType("ServiceSide"))
                         navigation.navigate("Register")
                     }}
                     // onPress={() => {
@@ -49,7 +51,7 @@ const AskRegister = ({ navigation }) => {
                 <Apptext style={styles.scndTxt}>Create your profile and register your agency now</Apptext>
                 <TouchableOpacity
                     onPress={() => {
-                        dispatch(setUserType("AgencySide"))
+                        dispatch(userType("AgencySide"))
                         navigation.navigate("Register")
                     }}
                     style={styles.btn}>

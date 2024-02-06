@@ -5,9 +5,9 @@ import colors from '../../config/colors'
 import { appIcons } from '../../Constants/Utilities/assets'
 import { fonts } from '../../Constants/Fonts'
 
-const ImageUploadModal = ({ visible, cameraPress, mediaPress }) => {
+const ImageUploadModal = ({ visible, cameraPress, mediaPress, onRequestClose }) => {
     return (
-        <Modal animationType='fade' visible={visible} transparent>
+        <Modal animationType='fade' visible={visible} transparent onRequestClose={onRequestClose}>
             <View style={styles.container}>
                 <View style={styles.subView}>
                     <TouchableOpacity onPress={cameraPress} style={styles.pressView}>

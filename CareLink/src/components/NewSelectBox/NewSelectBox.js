@@ -4,12 +4,12 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 import { appIcons } from '../../Constants/Utilities/assets'
-const NewSelectBox = ({ title, count, onPress, forward, }) => {
+const NewSelectBox = ({ title, count, onPress, forward, circleStyle, }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
             <Text style={styles.title}>{title}</Text>
             {count &&
-                <View style={styles.countView}>
+                <View style={[styles.countView, circleStyle]}>
                     <Text style={styles.countText}>{count}</Text>
                 </View>}
             {forward &&

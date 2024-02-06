@@ -3,16 +3,16 @@ import React from 'react'
 import { heightPixel, widthPixel } from '../../Constants'
 import colors from '../../config/colors'
 
-const NewAppTextInput = ({ multiline, onChangeText, value }) => {
+const NewAppTextInput = ({ multiline, placeholder, onChangeText, value, inputStyle }) => {
     return (
         <View>
             <TextInput
-                placeholder='Write here'
+                placeholder={placeholder ? placeholder : 'Write here'}
                 placeholderTextColor={colors.gray}
                 multiline={multiline}
                 value={value}
                 onChangeText={onChangeText}
-                style={styles.container} />
+                style={[styles.container, inputStyle]} />
         </View>
     )
 }

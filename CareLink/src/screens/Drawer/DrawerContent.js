@@ -13,14 +13,19 @@ import {
 import Apptext from "../../components/Apptext";
 import FormButton from "../../components/FormButton";
 import { DrawerActions } from '@react-navigation/native'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// import { userSave } from "../../../android/app/src/redux/Slices/splashSlice";
+import { userSave } from "../../redux/Slices/splashSlice";
+import { routes, widthPixel } from "../../Constants";
 
 
 function DrawerContent({ navigation, userImg, username, userEmail }) {
     const backimg = require("../../../assets/cross.png");
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
+    const dispatch = useDispatch()
 
     return (
+
         <View style={styles.container} >
             <View style={styles.DirectionView}>
                 <TouchableOpacity
@@ -31,7 +36,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
 
                 <View style={{ marginTop: wp('5%') }} >
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
+                    <TouchableOpacity onPress={() => navigation.navigate("ProfileNavigator")} style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Profile</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
@@ -40,7 +45,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {
                         usertype === "ServiceSide" ?
                             <TouchableOpacity
-                                onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Feedback" })}
+                                onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.setting })}
                                 style={styles.items}>
                                 <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
                             </TouchableOpacity>
@@ -69,9 +74,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Articles & Guides</Apptext>
-                    </TouchableOpacity>
+
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
@@ -83,10 +86,13 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     {/* ITEMS ENDS HERE */}
                 </View>
             </View>
+            <TouchableOpacity style={styles.items} onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.deleteAccountPassword })}>
+                <Apptext style={styles.itemsTxt}>Delete Account</Apptext>
+            </TouchableOpacity>
             <View style={{ marginTop: wp('12%') }}>
-                <FormButton
+                <FormButton onPress={() => dispatch(userSave(null))}
                     buttonTitle={"Log out"}
-                    width={wp('70%')}
+                    width={widthPixel(357)}
                     backgroundColor={DefaultStyles.colors.white}
                     color={"black"}
                     borderColor="black"

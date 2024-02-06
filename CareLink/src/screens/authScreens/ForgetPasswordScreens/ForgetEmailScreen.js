@@ -17,7 +17,7 @@ import { fonts } from '../../../Constants/Fonts';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 
 const ForgetEmailScreen = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [email, setEmail] = useState("")
     return (
         <View style={styles.container}>

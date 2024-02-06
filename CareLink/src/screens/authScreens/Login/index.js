@@ -17,16 +17,16 @@ import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import { setUser } from '../../../redux/actions/authAction';
+import { userSave } from '../../../redux/Slices/splashSlice';
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch()
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [email, setEmail] = useState("")
     const [isPassword, setPassword] = useState("")
     const [isSecure, setSecure] = useState(true)
     const onPressLogin = () => {
-        dispatch(setUser(true))
+        dispatch(userSave(true))
     }
     return (
         <View style={styles.container}>

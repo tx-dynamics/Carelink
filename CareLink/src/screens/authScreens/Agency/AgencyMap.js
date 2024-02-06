@@ -12,7 +12,7 @@ import { iconPath } from '../../../config/icon';
 import { heightPixel, routes } from '../../../Constants';
 
 const AgencyMap = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <View style={styles.container}>
             <View>
@@ -38,7 +38,7 @@ const AgencyMap = ({ navigation }) => {
             <FormButton
                 buttonTitle={"Next"}
                 // width={wp('90%')}
-                onPress={() => usertype === "ServiceSide" ? navigation.navigate(routes.listingSummary) : navigation.navigate("PaymentPlans")}
+                onPress={() => navigation.navigate(routes.listingSummary)}
             />
 
 

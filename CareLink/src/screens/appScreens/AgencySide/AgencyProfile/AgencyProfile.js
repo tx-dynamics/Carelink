@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux';
 
 
 const Profile = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',

@@ -20,7 +20,7 @@ import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
 import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
 
 const AgencyDetail = ({ navigation, route }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [isVisible, setVisible] = useState(false)
     const DATA = [
         {

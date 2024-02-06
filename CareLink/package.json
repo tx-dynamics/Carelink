@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-native-clipboard/clipboard": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.2.0",
@@ -26,6 +27,7 @@
     "react-native-calendars": "^1.1303.0",
     "react-native-dropdown-picker": "^5.3.0",
     "react-native-gesture-handler": "^2.2.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "react-native-image-crop-picker": "^0.40.2",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-paper": "^4.11.2",
@@ -41,8 +43,10 @@
     "react-native-swiper-flatlist": "^3.2.3",
     "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^9.1.0",
+    "toggle-switch-react-native": "^3.3.0",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "yup": "^0.32.11"
   },

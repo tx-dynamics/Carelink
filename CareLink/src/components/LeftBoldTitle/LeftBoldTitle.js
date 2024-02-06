@@ -4,10 +4,10 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import { fonts } from '../../Constants/Fonts'
 import colors from '../../config/colors'
 
-const LeftBoldTitle = ({ title }) => {
+const LeftBoldTitle = ({ title, titleText }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>{title}</Text>
+            <Text style={[styles.titleText, titleText]}>{title}</Text>
         </View>
     )
 }

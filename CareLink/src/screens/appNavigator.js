@@ -56,6 +56,18 @@ import InactiveList from "./appScreens/ServiceSide/RoomList/InactiveList";
 import InactiveRoom from "./appScreens/ServiceSide/ServiceRooms/InactiveRooms";
 import CertifcateScreen from "./appScreens/ServiceSide/ServiceProfile/CertifcateScreen";
 import CertifcateDetail from "./appScreens/ServiceSide/ServiceProfile/CertifcateDetail";
+import PaymentPlans from "./authScreens/Payment/PaymentPlans";
+import PaymentMethod from "./authScreens/Payment/PaymentMethod";
+import SelectCard from "./authScreens/Payment/SelectCard";
+import PaymentDone from "./authScreens/Payment/PaymentDone";
+import SettingScreen from "./appScreens/ServiceSide/SettingScreen/SettingScreen";
+import ChangePassword from "./appScreens/GlobalScreens/ChangePassword/ChangePassword";
+import AppFeedback from "./appScreens/GlobalScreens/AppFeedback/AppFeedback";
+import HelpCenter from "./appScreens/GlobalScreens/HelpCenter/HelpCenter";
+import Policy from "./authScreens/Register/Policy";
+import Terms from "./authScreens/Register/Terms";
+import DeleteAccountPassword from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountPassword";
+import DeleteAccountOTP from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountOTP";
 
 
 const Tab = createBottomTabNavigator();
@@ -124,13 +136,25 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name={routes.inactiveList} component={InactiveList} />
             <StackNavigator.Screen name={routes.userCertificateList} component={CertifcateScreen} />
             <StackNavigator.Screen name={routes.certificateDetail} component={CertifcateDetail} />
+            <StackNavigator.Screen name="PaymentPlans" component={PaymentPlans} />
+            <StackNavigator.Screen name="PaymentMethod" component={PaymentMethod} />
+            <StackNavigator.Screen name="SelectCard" component={SelectCard} />
+            <StackNavigator.Screen name="PaymentDone" component={PaymentDone} />
+            <StackNavigator.Screen name={routes.setting} component={SettingScreen} />
+            <StackNavigator.Screen name={routes.changePassword} component={ChangePassword} />
+            <StackNavigator.Screen name={routes.appFeedback} component={AppFeedback} />
+            <StackNavigator.Screen name={routes.helpCenter} component={HelpCenter} />
+            <StackNavigator.Screen name={routes.privacyPlicy} component={Policy} />
+            <StackNavigator.Screen name={routes.termsAndCondition} component={Terms} />
+            <StackNavigator.Screen name={routes.deleteAccountPassword} component={DeleteAccountPassword} />
+            <StackNavigator.Screen name={routes.deleteAccountOTP} component={DeleteAccountOTP} />
+
         </StackNavigator.Navigator>
     )
 }
 
 
 const AppNavigator = () => {
-
     return (
         <StackNavigator.Navigator>
             <StackNavigator.Screen name="Root" options={{ headerShown: false }}>
@@ -157,13 +181,13 @@ const GeneralNavigator = () => {
 }
 
 const HomeNavigator = () => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <StackNavigator.Navigator
             screenOptions={{
                 headerShown: false
             }}>
-            {usertype === "ServiceSide" ?
+            {usertype == "ServiceSide" ?
                 <StackNavigator.Screen name="ServiceHome" component={ServiceHome} />
                 :
                 <StackNavigator.Screen name="AgencyHome" component={AgencyHome} />
@@ -173,7 +197,7 @@ const HomeNavigator = () => {
 }
 
 const SearchNavigator = () => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <StackNavigator.Navigator
             screenOptions={{
@@ -189,7 +213,7 @@ const SearchNavigator = () => {
 }
 
 const BellNavigator = () => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <StackNavigator.Navigator
             screenOptions={{
@@ -205,7 +229,7 @@ const BellNavigator = () => {
 }
 
 const ProfileNavigator = () => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <StackNavigator.Navigator screenOptions={{ headerShown: false }}>
             {usertype === "ServiceSide" ?
@@ -218,7 +242,7 @@ const ProfileNavigator = () => {
 }
 
 const MyTabs = () => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -358,11 +382,11 @@ const MyTabs = () => {
 
 
 const MainNavigator = () => {
-    const user = useSelector((state) => state.auth.user)
+    const user = useSelector((state) => state.splash.value)
 
     console.log("chkk", user)
 
-    if (user != false) {
+    if (user != null) {
         return <DrawerNavigator />
     }
     else {

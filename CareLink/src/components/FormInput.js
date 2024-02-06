@@ -20,9 +20,10 @@ const FormInput = ({ labelValue, placeholderText,
     backgroundColor = DefaultStyles.colors.white,
     numberOfLines = 1,
     height = heightPixel(48),
-    width = widthPixel(374),
+    width = widthPixel(357),
     marginTop = marginTop,
     onChangeText,
+    multiline,
     rightIconType, ...rest }) => {
     return (
         <View style={{ flexDirection: 'row', alignSelf: "center", }}>
@@ -39,6 +40,7 @@ const FormInput = ({ labelValue, placeholderText,
                 borderBottomColor: borderBottomColor,
             }]}>
                 <TextInput
+                    multiline={multiline}
                     label={title}
                     // dense={true}
                     value={labelValue}

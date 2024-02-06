@@ -25,6 +25,15 @@ export const routes = {
     inactiveList: "inactiveList",
     userCertificateList: "userCertificateList",
     certificateDetail: "certificateDetail",
+    setting: "setting",
+    changePassword: "changePassword",
+    helpCenter: "helpCenter",
+    appFeedback: "appFeedback",
+    privacyPlicy: "privacyPlicy",
+    termsAndCondition: "termsAndCondition",
+    deleteAccountPassword: "deleteAccountPassword",
+    deleteAccountOTP: "deleteAccountOTP",
+
 
 }
 

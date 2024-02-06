@@ -14,11 +14,22 @@ import { iconPath } from '../../../config/icon';
 import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
+import { fromProfile } from '../../../redux/Slices/appSlice';
+import { SuccessSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
 
 const PaymentDone = ({ navigation }) => {
-    let dispatch = useDispatch()
-    const usertype = useSelector((state) => state.auth.usertype)
-    const user = useSelector((state) => state.auth.user)
+    const dispatch = useDispatch()
+    const usertype = useSelector((state) => state.splash.userType)
+    const user = useSelector((state) => state.splash.value)
+    const isFromProfile = useSelector((state) => state.appSlice.fromProfile)
+    const onPressContinue = () => {
+        if (isFromProfile) {
+            dispatch(fromProfile(false))
+            navigation.navigate("GeneralNavigator")
+        } else {
+            navigation.navigate(routes.listingOptions)
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={{
@@ -37,7 +48,7 @@ const PaymentDone = ({ navigation }) => {
                 {usertype === "ServiceSide" ?
                     <View style={[styles.txtView, { marginTop: heightPixel(12) }]} >
                     </View> :
-                    <View style={[styles.txtView, { marginTop: wp('4%') }]} >
+                    <View style={[styles.txtView, { marginTop: wp('4%'), alignItems: "center" }]} >
                         <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
                         <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
                     </View>
@@ -48,7 +59,7 @@ const PaymentDone = ({ navigation }) => {
             </View>
             <FormButton
                 buttonTitle={"Continue"}
-                onPress={() => navigation.navigate(routes.listingOptions)}
+                onPress={onPressContinue}
             />
         </View>
     )

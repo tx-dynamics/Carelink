@@ -1,5 +1,5 @@
 import ImageCropPicker from "react-native-image-crop-picker"
-import { widthPixel } from "../Constants"
+import { heightPixel, widthPixel } from "../Constants"
 
 export const uploadmageMultiPle = (setPicData, picData) => {
     let temp = [...picData]
@@ -22,4 +22,26 @@ export const removePic = (index, setPicData, picData) => {
     picData.splice(index, 1)
     setPicData([...picData])
     console.log(picData.length)
+}
+export const uploadmageState = (setPic, setUpload, setVisible, height) => {
+    ImageCropPicker.openPicker({
+        width: widthPixel(414),
+        height: height ? height : heightPixel(360),
+        cropping: true
+    }).then(image => {
+        setUpload(true)
+        setVisible(false)
+        setPic(image?.path)
+    }).catch(e => console.log(e));
+}
+export const uploadmageCamState = (setPic, setUpload, setVisible, height) => {
+    ImageCropPicker.openCamera({
+        width: widthPixel(414),
+        height: height ? height : heightPixel(360),
+        cropping: true
+    }).then(image => {
+        setUpload(true)
+        setVisible(false)
+        setPic(image?.path)
+    }).catch(e => console.log(e));
 }

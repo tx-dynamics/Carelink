@@ -12,11 +12,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import DotComponent from '../../../components/DotComponent/DotComponent';
 import * as Progress from 'react-native-progress';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser, setUserType } from '../../../redux/actions/authAction';
-
+import { userType } from '../../../redux/Slices/splashSlice'
 const Step1 = ({ navigation }) => {
     const swiperRef = useRef({});
-    const user = useSelector((state) => state.auth.user)
+    const user = useSelector((state) => state.splash.value)
     const dispatch = useDispatch()
     const [isIndex, setIndex] = useState(0)
     const [isProgress, setProgress] = useState(.33)
@@ -41,7 +40,7 @@ const Step1 = ({ navigation }) => {
         },
     ]
     const onPressButton = () => {
-        dispatch(setUserType("ServiceSide"))
+        dispatch(userType("ServiceSide"))
         // dispatch(setUser(true))
         navigation.replace("AskRegister")
     }

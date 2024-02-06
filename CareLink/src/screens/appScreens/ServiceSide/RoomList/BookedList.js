@@ -27,7 +27,7 @@ const BookedList = ({ navigation }) => {
                 }}
                 ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                 data={ListedData}
-                keyExtractor={(item, index) => index}
+                // keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => (
                     <ServiceListingComp
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.bookedRoom })}

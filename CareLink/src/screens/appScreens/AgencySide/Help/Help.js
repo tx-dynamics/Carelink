@@ -1,56 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
-import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import { useSelector } from 'react-redux';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
+import { heightPixel, widthPixel } from '../../../../Constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput';
+import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const Help = ({ navigation }) => {
-
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
+    const onPressSubmit = () => {
+        SuccessSnackbar("Your message has been submitted")
+        navigation.goBack()
+    }
     return (
         <View style={styles.container}>
             <IconHeaderComp
+                title={"Help Center"}
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
-                heading={usertype === "ServiceSide" ? 
-                "This is Care Link Help center. Proceed your query with us."
-                 :
-                 "This is a help center of CARE LINK .Submit your problems here"
-                 
-                }
                 style={usertype === "ServiceSide" ? {} : styles.createTxt}
-            />
+                heading={usertype === "ServiceSide" ?
+                    "This is Care Link Help center. Proceed your query with us."
+                    :
+                    "This is a help center of CARE LINK .Submit your problems here"
+                }
 
-            <View>
-                <FormInput
-                    title={"Name"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    title={"Email"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                    title={"Your Problem"}
-                />
-            </View>
-            <View style={{ marginTop: wp('40%') }}>
-                <FormButton
-                    buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
-                    width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}
-                    height={wp('13%')}
-                    fontSize={usertype === "ServiceSide" ? 17 : 21}
-                    borderRadius={usertype === "ServiceSide" ? 10 : 30}
-                />
-            </View>
+            />
+            <KeyboardAwareScrollView>
+                <NewAppTextInput placeholder={"Name"} inputStyle={styles.nameStyle} />
+                <NewAppTextInput placeholder={"Email"} inputStyle={styles.emainStyle} />
+                <NewAppTextInput placeholder={"Description"} multiline inputStyle={styles.descriptionStyle} />
+            </KeyboardAwareScrollView>
+            <FormButton onPress={onPressSubmit}
+                buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
+                width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}
+                height={wp('13%')}
+                fontSize={usertype === "ServiceSide" ? 17 : 21}
+                borderRadius={usertype === "ServiceSide" ? 10 : 30}
+            />
         </View>
     )
 }
@@ -62,6 +54,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('7%'),
@@ -70,17 +63,27 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginHorizontal: wp('5%')
     },
-    createTxt1: {
-        alignSelf: 'center', fontSize: 13, fontFamily: 'Poppins-Regular'
+    nameStyle: {
+        width: widthPixel(357),
+        height: heightPixel(46),
+        borderRadius: widthPixel(5),
+        paddingBottom: 0,
+        paddingVertical: 0,
+        marginTop: heightPixel(30),
+        marginBottom: heightPixel(30),
     },
-    termsTxt: {
-        width: wp('90%'), marginTop: 41,
-        alignSelf: 'center'
+    emainStyle: {
+        width: widthPixel(357),
+        height: heightPixel(46),
+        borderRadius: widthPixel(5),
+        paddingBottom: 0,
+        marginBottom: heightPixel(30),
+        paddingVertical: 0,
     },
-    hyperLink: {
-        fontSize: 13,
-        fontFamily: 'Poppins-Regular',
-        textDecorationLine: 'underline',
-        color: "#004cbe"
-    }
+    descriptionStyle: {
+        width: widthPixel(357),
+        borderRadius: widthPixel(5),
+        paddingBottom: heightPixel(30),
+        paddingVertical: 0,
+    },
 });

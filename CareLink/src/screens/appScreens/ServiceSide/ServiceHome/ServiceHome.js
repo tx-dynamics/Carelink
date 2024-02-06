@@ -90,7 +90,7 @@ const ServiceHome = ({ }) => {
                             Start listing your extra home with an agency and make money
                         </Apptext>
                     </View>
-                    <TouchableOpacity style={styles.lilBtn} >
+                    <TouchableOpacity onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })} style={styles.lilBtn} >
                         <Apptext style={styles.BtnTxt} >Start Listing</Apptext>
                     </TouchableOpacity>
                 </View>
@@ -133,24 +133,6 @@ const ServiceHome = ({ }) => {
                             )}
                         />
                     </View>
-                    {/* <View style={[styles.txtView]}>
-                        <Apptext style={[styles.rms2]} >Payments Reports</Apptext>
-                        <TouchableOpacity>
-                            <Apptext style={styles.dtls} >Details</Apptext>
-                        </TouchableOpacity>
-                    </View> */}
-                    {/* <View style={{ marginTop: wp('7%') }}>
-                        <ReportComp
-                            firstHead={"Personal Balance"}
-                            firstPrc={"$500.00"}
-                            scndPrc={"$500.00"}
-                            thirdPrc={"$500.00"}
-                            frstPrc={"$500.00"}
-                            sncdHead={"Pending Payments"}
-                            thirdHead={"This month Payments"}
-                            frthHead={"October Payments"}
-                        />
-                    </View> */}
                 </View>
             </ScrollView>
         </View>

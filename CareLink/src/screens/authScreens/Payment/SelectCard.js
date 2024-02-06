@@ -63,7 +63,7 @@ const SelectCard = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView nestedScrollEnabled>
+            <View>
                 <IconHeaderComp
                     title={"Select Card"}
                     onPress={() => navigation.goBack()}
@@ -106,11 +106,10 @@ const SelectCard = ({ navigation }) => {
                     </View>
 
                 </View>
-            </KeyboardAwareScrollView>
+            </View>
             <FormButton
                 buttonTitle={"Continue"}
-                onPress={() => navigation.navigate("PaymentDone")}
-            />
+                onPress={() => navigation.navigate("PaymentDone")} />
         </View>
     )
 }
@@ -122,6 +121,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
         paddingBottom: heightPixel(20)
     },
     createTxt: {

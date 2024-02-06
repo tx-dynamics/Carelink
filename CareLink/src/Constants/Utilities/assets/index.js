@@ -41,6 +41,8 @@ const appIcons = {
     certificate: require(`${iconUrl}/certificate.png`),
     license: require(`${iconUrl}/license.png`),
     homePic: require(`${iconUrl}/homePic.png`),
+    setting: require(`${iconUrl}/setting.png`),
+    alertRed: require(`${iconUrl}/alertRed.png`),
 }
 
 export { appImages, appIcons }

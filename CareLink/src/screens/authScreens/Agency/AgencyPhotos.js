@@ -19,14 +19,14 @@ const AgencyPhotos = ({ navigation }) => {
                 style={styles.createTxt}
             />
             <TouchableOpacity style={styles.cover}>
-            <Image source={require('../../../../assets/addPhoto.png')} />
-            <Apptext style={styles.cvrTxt}>Add Cover Photo</Apptext>
+                <Image source={require('../../../../assets/addPhoto.png')} />
+                <Apptext style={styles.cvrTxt}>Add Cover Photo</Apptext>
             </TouchableOpacity>
             <TouchableOpacity style={styles.profileView}>
-            <Image source={require('../../../../assets/profile.png')} />
+                <Image source={require('../../../../assets/profile.png')} />
             </TouchableOpacity>
             <Apptext style={styles.addTxt} >Add profile</Apptext>
-            <View style={{ marginTop: wp('32%')}}>
+            <View style={{ marginTop: wp('32%') }}>
                 <FormButton
                     buttonTitle={"Next"}
                     width={wp('90%')}
@@ -56,42 +56,42 @@ const styles = StyleSheet.create({
         fontSize: wp('6%'),
         marginHorizontal: wp('5%')
     },
-    skipTxt:{
-        alignSelf:'center',
-        marginTop:wp('1%'),
-        fontSize:18,
-        fontFamily:'Poppins-Regular',
-        color:DefaultStyles.colors.primary
+    skipTxt: {
+        alignSelf: 'center',
+        marginTop: wp('1%'),
+        fontSize: 18,
+        fontFamily: 'Poppins-Regular',
+        color: DefaultStyles.colors.primary
     },
-    cover:{
-        marginTop:wp('7%'),
-        width:wp('100%') ,
-        height:wp('77%'),
-        backgroundColor:"#cccccc",
-        alignItems:'center',
-        justifyContent:'center'
+    cover: {
+        marginTop: wp('7%'),
+        width: wp('100%'),
+        height: wp('77%'),
+        backgroundColor: "#cccccc",
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    cvrTxt:{
-        marginTop:wp('3%') ,
-        fontFamily:'Poppins-Regular',
-        fontSize:12,
-        color:DefaultStyles.colors.gray
+    cvrTxt: {
+        marginTop: wp('3%'),
+        fontFamily: 'Poppins-Regular',
+        fontSize: 12,
+        color: DefaultStyles.colors.gray
     },
-    profileView:{
-        width:wp('36%') ,
-        height:wp('36%') ,
-        marginTop:-65,
-        alignSelf:'center',
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'#c4c4c4',
-        borderRadius:8
+    profileView: {
+        width: wp('36%'),
+        height: wp('36%'),
+        marginTop: -65,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#c4c4c4',
+        borderRadius: 8
     },
-    addTxt:{
-        alignSelf:'center',
-        marginTop:8,
-        fontFamily:'Poppins-Regular',
-        fontSize:19
+    addTxt: {
+        alignSelf: 'center',
+        marginTop: 8,
+        fontFamily: 'Poppins-Regular',
+        fontSize: 19
     }
 
 });

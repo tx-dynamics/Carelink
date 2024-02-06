@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import FormButton from '../../../components/FormButton'
 import SuccessfullListedModal from '../../../components/SuccessfullListedModal/SuccessfullListedModal'
 import { useDispatch } from 'react-redux'
-import { setUser } from '../../../redux/actions/authAction'
+import { userSave } from '../../../redux/Slices/splashSlice'
 
 const ListingSummary = ({ navigation }) => {
     const [isVisible, setVisible] = useState(false)
@@ -18,7 +18,7 @@ const ListingSummary = ({ navigation }) => {
 
     const onPressGoTo = () => {
         setVisible(false)
-        dispatch(setUser(true))
+        dispatch(userSave(true))
         navigation.navigate("HomeNavigator")
     }
     const onPressListNow = () => {

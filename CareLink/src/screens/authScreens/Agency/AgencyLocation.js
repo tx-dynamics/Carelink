@@ -14,7 +14,7 @@ import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
 
 const AgencyLocation = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [street, setStreet] = useState("")
     const [apartment, setApartment] = useState("")
     const [zipCode, setZipCode] = useState("")
@@ -24,7 +24,7 @@ const AgencyLocation = ({ navigation }) => {
         //     RedSnackbar("Details required")
         //     return
         // }
-        navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")
+        navigation.navigate("AgencyMap")
     }
     return (
         <View style={styles.container}>

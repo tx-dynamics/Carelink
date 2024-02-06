@@ -63,7 +63,6 @@ export default ServiceListingComp;
 
 const styles = StyleSheet.create({
     direcView: {
-        // alignItems: "center",
         flexDirection: 'row',
         marginTop: wp('1%'),
         justifyContent: "space-between",

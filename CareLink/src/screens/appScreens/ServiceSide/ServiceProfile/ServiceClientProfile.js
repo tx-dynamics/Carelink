@@ -9,8 +9,13 @@ import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import NewSelectBox from '../../../../components/NewSelectBox/NewSelectBox';
+import colors from '../../../../config/colors';
+import SubscriptionBox from '../../../../components/SubscriptionBox/SubscriptionBox';
+import { useDispatch } from 'react-redux';
+import { fromProfile } from '../../../../redux/Slices/appSlice';
 
 const ServiceClientProfile = ({ navigation }) => {
+    const dispatch = useDispatch()
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -34,23 +39,32 @@ const ServiceClientProfile = ({ navigation }) => {
         },
 
     ];
+    const onSubscriptionPress = () => {
+        dispatch(fromProfile(true))
+        navigation.navigate("withoutBottomTabnavigator", { screen: "PaymentPlans" })
+    }
     return (
         <View style={styles.container}>
-            <Header isBack headerLabel={"Profile"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
+            <Header isBack headerLabel={"Profile"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.setting} rightImgStyle={{
+                width: widthPixel(40),
+                height: widthPixel(25),
+                tintColor: colors.black
+            }}
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.setting })}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
             <ScrollView>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Profile</Apptext>
-                    <TouchableOpacity disabled
+                    <TouchableOpacity
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "EditProfile" })}>
                         <Apptext style={styles.dtls} >Edit</Apptext>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.imgView} >
                     <Image style={styles.imgStl}
-                        source={appIcons.dummyProfile} />
+                        source={appIcons.dummyPic1} />
                 </TouchableOpacity>
                 <View style={{ alignSelf: 'center' }} >
                     <Apptext style={styles.jmsTxt} >James Clear</Apptext>
@@ -60,7 +74,7 @@ const ServiceClientProfile = ({ navigation }) => {
                     <Apptext style={styles.mmbrTxt} >Member since October 2021</Apptext>
                     {/* <Apptext style={styles.mmbrTxt} >Hired 0 providers</Apptext> */}
                 </View>
-                <TouchableOpacity style={styles.btn}>
+                <TouchableOpacity onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })} style={styles.btn}>
                     <Apptext style={styles.acntTxt}>List a room</Apptext>
                 </TouchableOpacity>
                 <FlatList
@@ -68,30 +82,13 @@ const ServiceClientProfile = ({ navigation }) => {
                     ListHeaderComponent={() => <View style={{ marginTop: heightPixel(2) }}></View>}
                     renderItem={({ item, index }) =>
                         <NewSelectBox
+                            circleStyle={{ backgroundColor: index == 1 && colors.bookedCircle }}
                             title={item.title}
                             count={item.count}
                             forward={item.forward}
                             onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: item.route })}
                         />} />
-
-                {/* <View style={{ marginTop: wp('3%') }}>
-                    <FlatList
-                        data={DATA}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({ item, index }) => (
-                            <SelectBox
-                                leftTitle={item.label}
-                                count={item.count}
-                                backgroundColor={item.color}
-                                isDesc={item.chk}
-                                bg={item.bgClr}
-                                txtClr={item.txtClr}
-                                circle={item.circle}
-                                description={item.description}
-                            />
-                        )}
-                    />
-                </View> */}
+                <SubscriptionBox onPress={onSubscriptionPress} title={"Subscription"} count={"20"} subtitle={"Listings Monthly"} rightText={"Upgrade"} />
             </ScrollView>
         </View>
     )
@@ -177,9 +174,9 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
     imgStl: {
-        width: wp('30%'),
-        height: wp('30%'),
-        borderRadius: 60,
+        width: widthPixel(118),
+        height: widthPixel(118),
+        borderRadius: widthPixel(100)
     },
     leftImgStyle: {
         width: widthPixel(23),

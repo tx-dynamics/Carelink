@@ -20,7 +20,7 @@ import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { isSignupValid } from '../../../Constants/Utilities/validations';
 
 const Register = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
@@ -73,11 +73,11 @@ const Register = ({ navigation }) => {
                     <Apptext style={styles.createTxt1} >By clicking “ Join now,”you agree to our
                     </Apptext>
                     <View style={styles.termsUse}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Terms")}>
+                        <TouchableOpacity onPress={() => navigation.navigate(routes.termsAndCondition)}>
                             <Apptext style={styles.hyperLink}>Terms of Use</Apptext>
                         </TouchableOpacity>
                         <Apptext style={styles.createTxt1}> and </Apptext>
-                        <TouchableOpacity onPress={() => navigation.navigate("Policy")}>
+                        <TouchableOpacity onPress={() => navigation.navigate(routes.privacyPlicy)}>
                             <Apptext style={styles.hyperLink} >Privacy Policy</Apptext>
                         </TouchableOpacity>
                         <Apptext style={styles.createTxt1}>.</Apptext>

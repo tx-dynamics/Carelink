@@ -44,4 +44,8 @@ export default {
   green: '#4CC26C',
   welcomeText: "#252323",
   detailText: "#5F5F5F",
+  bookedCircle: "#999999",
+  leftDescription: "#333333",
+  inputBackground: "#FAFAFA",
+  inputBorder: "#D5D5D6",
 };

@@ -20,7 +20,7 @@ import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
 
 const ForgetUpdateScreen = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
     const [isPassword, setPassword] = useState("")
     const [isPasswordConfirm, setPasswordConfirm] = useState("")
     const [isSecure, setSecure] = useState(true)
