@@ -7,7 +7,7 @@ import colors from '../../config/colors'
 const LeftSideBoldHeading = ({ title, number, mainStyle, textStyle }) => {
     return (
         <View style={[styles.container, mainStyle]}>
-            <Text style={[styles.textStyle, textStyle]}>{title} {`(${number})`}</Text>
+            <Text style={[styles.textStyle, textStyle]}>{title} {number && `(${number})`}</Text>
         </View>
     )
 }

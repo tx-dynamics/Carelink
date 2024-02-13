@@ -5,6 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
+import { routes } from '../../../../Constants';
 
 const ListingDetails = ({ navigation }) => {
 
@@ -14,7 +15,7 @@ const ListingDetails = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
                 onPressLeft={() => navigation.goBack()}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
                 headerLabel={"Listing Details"}
             />
             <ScrollView>
@@ -81,27 +82,27 @@ const ListingDetails = ({ navigation }) => {
                 {/* Section Ends Here */}
                 <View>
                     <View style={styles.pinkBox} >
-                    <Apptext style={styles.pinkboxTxt}>
-                    Kitchen available
-                    </Apptext>
+                        <Apptext style={styles.pinkboxTxt}>
+                            Kitchen available
+                        </Apptext>
                     </View>
                     <View style={styles.pinkBox} >
-                    <Apptext style={styles.pinkboxTxt}>
-                    Car Parking available
-                    </Apptext>
+                        <Apptext style={styles.pinkboxTxt}>
+                            Car Parking available
+                        </Apptext>
                     </View>
                 </View>
                 <View style={styles.btnView}>
-                   <TouchableOpacity>
-                    <Image style={styles.hrtImg}
-                    source={require('../../../../../assets/heart.png')} />
-                   </TouchableOpacity>
-                   <View style={{marginTop:wp('5%')}}>
-                    <FormButton
-                        width={wp('75%')}
-                        buttonTitle={"Submit Proposal"}
-                        onPress={() => navigation.navigate("SendProposal")}
-                    />
+                    <TouchableOpacity>
+                        <Image style={styles.hrtImg}
+                            source={require('../../../../../assets/heart.png')} />
+                    </TouchableOpacity>
+                    <View style={{ marginTop: wp('5%') }}>
+                        <FormButton
+                            width={wp('75%')}
+                            buttonTitle={"Submit Proposal"}
+                            onPress={() => navigation.navigate(routes.sendProposal)}
+                        />
                     </View>
                 </View>
             </ScrollView>
@@ -146,31 +147,31 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: 'Poppins-Medium'
     },
-    pinkBox:{
-        backgroundColor:DefaultStyles.colors.lightPrimary,
-        marginTop:wp('5%'),
-        borderRadius:6,
-        padding:2,
-        alignItems:'center',
-        justifyContent:'center',
-        marginHorizontal:wp('23%')
+    pinkBox: {
+        backgroundColor: DefaultStyles.colors.lightPrimary,
+        marginTop: wp('5%'),
+        borderRadius: 6,
+        padding: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: wp('23%')
     },
-    pinkboxTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:14
+    pinkboxTxt: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 14
     },
-    btnView:{
-        flexDirection:'row',
-        justifyContent:'space-evenly',
-        alignItems:'center',
-        marginTop: 90 
+    btnView: {
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        marginTop: 90
     },
-    loremTxt:{
-        width: wp('70%'),marginTop:wp('1%'), 
-        fontSize: 12 
+    loremTxt: {
+        width: wp('70%'), marginTop: wp('1%'),
+        fontSize: 12
     },
-    hrtImg:{
-        width:40, height:33
+    hrtImg: {
+        width: 40, height: 33
     }
 
 

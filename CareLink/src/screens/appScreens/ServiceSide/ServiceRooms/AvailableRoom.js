@@ -23,7 +23,7 @@ const AvailableRoom = ({ navigation }) => {
                 onPressLeft={() => navigation.goBack()} />
             <KeyboardAwareScrollView >
                 <ServiceProviderInfo
-                    attachBath
+                    // attachBath
                     days={"20"}
                     floor={"2nd"}
                     availableOn={"November 15"}

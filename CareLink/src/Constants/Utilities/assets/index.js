@@ -43,6 +43,17 @@ const appIcons = {
     homePic: require(`${iconUrl}/homePic.png`),
     setting: require(`${iconUrl}/setting.png`),
     alertRed: require(`${iconUrl}/alertRed.png`),
+    dollar: require(`${iconUrl}/dollar.png`),
+    openmsg: require(`${iconUrl}/openmsg.png`),
+    man: require(`${iconUrl}/man.png`),
+    addPhoto: require(`${iconUrl}/addPhoto.png`),
+    profile: require(`${iconUrl}/profile.png`),
+    messageIcon: require(`${iconUrl}/messageIcon.png`),
+    leftArrow: require(`${iconUrl}/leftArrow.png`),
+    headerBack: require(`${iconUrl}/headerBack.png`),
+    heartRed: require(`${iconUrl}/heartRed.png`),
+    heartBlank: require(`${iconUrl}/heartBlank.png`),
+    dummyUser: require(`${iconUrl}/dummyUser.png`),
 }
 
 export { appImages, appIcons }

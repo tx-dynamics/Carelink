@@ -9,6 +9,7 @@ import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
 import FvrtComp from '../../../../components/FvrtComp';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
+import { routes } from '../../../../Constants';
 
 
 const RoomsProposals = ({ navigation }) => {
@@ -54,7 +55,7 @@ const RoomsProposals = ({ navigation }) => {
                                     labelValue={"3 Room on 2nd Floor"}
                                     name={"James Clear"}
                                     location={"Location : abc Town , Washington, DC"}
-                                    onPress={() => navigation.navigate("RoomsDetails")}
+                                    onPress={() => navigation.navigate(routes.roomDetails)}
                                 />
                             )}
                         />

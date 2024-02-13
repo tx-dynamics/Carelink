@@ -16,6 +16,7 @@ import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import { fromProfile } from '../../../redux/Slices/appSlice';
 import { SuccessSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
+import { userSave } from '../../../redux/Slices/splashSlice';
 
 const PaymentDone = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -24,10 +25,14 @@ const PaymentDone = ({ navigation }) => {
     const isFromProfile = useSelector((state) => state.appSlice.fromProfile)
     const onPressContinue = () => {
         if (isFromProfile) {
-            dispatch(fromProfile(false))
             navigation.navigate("GeneralNavigator")
-        } else {
-            navigation.navigate(routes.listingOptions)
+            dispatch(fromProfile(false))
+        }
+        else {
+            if (usertype == "AgencySide") {
+                dispatch(userSave(true))
+            }
+            else { navigation.navigate(routes.listingOptions) }
         }
     }
     return (

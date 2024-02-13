@@ -68,6 +68,7 @@ import Policy from "./authScreens/Register/Policy";
 import Terms from "./authScreens/Register/Terms";
 import DeleteAccountPassword from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountPassword";
 import DeleteAccountOTP from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountOTP";
+import CustomerListing from "./appScreens/AgencySide/CustomerListing/CustomerListing";
 
 
 const Tab = createBottomTabNavigator();
@@ -99,10 +100,10 @@ const WithoutBottomTabnavigator = () => {
                 headerShown: false
             }}>
             <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
-            <StackNavigator.Screen name="RoomsDetails" component={RoomsDetails} />
+            <StackNavigator.Screen name={routes.roomDetails} component={RoomsDetails} />
             <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
             <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
-            <StackNavigator.Screen name="SendProposal" component={SendProposal} />
+            <StackNavigator.Screen name={routes.sendProposal} component={SendProposal} />
             <StackNavigator.Screen name="Messages" component={Messages} />
             <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
             <StackNavigator.Screen name="StartContract" component={StartContract} />
@@ -148,6 +149,7 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name={routes.termsAndCondition} component={Terms} />
             <StackNavigator.Screen name={routes.deleteAccountPassword} component={DeleteAccountPassword} />
             <StackNavigator.Screen name={routes.deleteAccountOTP} component={DeleteAccountOTP} />
+            <StackNavigator.Screen name={routes.customerListing} component={CustomerListing} />
 
         </StackNavigator.Navigator>
     )
@@ -245,13 +247,16 @@ const MyTabs = () => {
     const usertype = useSelector((state) => state.splash.userType)
     return (
         <Tab.Navigator
-            tabBarOptions={{
-                showIcon: true,
-                showLabel: false,
-                keyboardHidesTabBar: true,
-            }}
+            // tabBarOptions={{
+            //     showIcon: true,
+            //     showLabel: false,
+            //     keyboardHidesTabBar: true,
+            // }}
             screenOptions={{
                 headerShown: false,
+                showIcon: true,
+                tabBarShowLabel: false,
+                tabBarHideOnKeyboard: true,
                 tabBarActiveTintColor: DefaultStyles.colors.textColor,
                 tabBarStyle: {
                     borderTopWidth: 0,

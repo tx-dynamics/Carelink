@@ -48,4 +48,6 @@ export default {
   leftDescription: "#333333",
   inputBackground: "#FAFAFA",
   inputBorder: "#D5D5D6",
+  inactiveColor: "#737373",
+  completeColor: "#098147",
 };

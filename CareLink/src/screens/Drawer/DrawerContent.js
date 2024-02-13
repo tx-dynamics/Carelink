@@ -23,7 +23,6 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
     const backimg = require("../../../assets/cross.png");
     const usertype = useSelector((state) => state.splash.userType)
     const dispatch = useDispatch()
-
     return (
 
         <View style={styles.container} >

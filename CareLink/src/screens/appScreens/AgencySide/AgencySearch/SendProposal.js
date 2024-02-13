@@ -6,18 +6,16 @@ import Apptext from '../../../../components/Apptext';
 import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
+import { appIcons } from '../../../../Constants/Utilities/assets';
 
 const SendProposal = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
+            <Header headerLabel={"Submit Proposal"}
+                leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
             />
-            <View style={styles.marginView} >
-                <Apptext style={styles.rms}> Submit a Proposal</Apptext>
-            </View>
             <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
             <View >
                 <FormInput
@@ -60,7 +58,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 15,
         marginHorizontal: wp('5%'),
-        marginTop: wp('5%'),
+        // marginTop: wp('5%'),
 
     },
     jobsTxt: {

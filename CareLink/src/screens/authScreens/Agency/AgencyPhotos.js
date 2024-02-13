@@ -8,36 +8,35 @@ import FormButton from '../../../components/FormButton';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import AddAgencyPhotoComp from '../../../components/AddAgencyPhotoComp/AddAgencyPhotoComp';
+import AddAgencyProfilePhoto from '../../../components/AddAgencyProfilePhoto/AddAgencyProfilePhoto';
+import { fontPixel, heightPixel } from '../../../Constants';
 
 const AgencyPhotos = ({ navigation }) => {
+    const [agencyImg, setAgencyImg] = useState(null)
+    const [profileImg, setProfileImg] = useState(null)
     return (
-        <ScrollView style={styles.container}>
-            <IconHeaderComp
-                onPress={() => { navigation.goBack() }}
-                imgName={iconPath.leftArrow}
-                heading={"Add your agency cover and profile photo"}
-                style={styles.createTxt}
-            />
-            <TouchableOpacity style={styles.cover}>
-                <Image source={require('../../../../assets/addPhoto.png')} />
-                <Apptext style={styles.cvrTxt}>Add Cover Photo</Apptext>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.profileView}>
-                <Image source={require('../../../../assets/profile.png')} />
-            </TouchableOpacity>
-            <Apptext style={styles.addTxt} >Add profile</Apptext>
-            <View style={{ marginTop: wp('32%') }}>
+        <View style={styles.container}>
+            <View>
+                <IconHeaderComp
+                    title={"Add Photo"}
+                    onPress={() => { navigation.goBack() }}
+                    imgName={iconPath.leftArrow}
+                    heading={"Add your agency cover and profile photo"}
+                />
+                <AddAgencyPhotoComp img={agencyImg} setImg={setAgencyImg} />
+                <AddAgencyProfilePhoto img={profileImg} setImg={setProfileImg} />
+            </View>
+            <View>
                 <FormButton
                     buttonTitle={"Next"}
-                    width={wp('90%')}
-                    height={wp('15%')}
                     onPress={() => navigation.navigate("AgencyLocation")}
                 />
+                <TouchableOpacity onPress={() => navigation.navigate("AgencyLocation")}>
+                    <Apptext style={styles.skipTxt} >Skip for now</Apptext>
+                </TouchableOpacity >
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("AgencyLocation")}>
-                <Apptext style={styles.skipTxt} >Skip for now</Apptext>
-            </TouchableOpacity >
-        </ScrollView>
+        </View>
     )
 }
 
@@ -48,6 +47,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
     },
     skipTxt: {
         alignSelf: 'center',
-        marginTop: wp('1%'),
-        fontSize: 18,
+        marginTop: heightPixel(5),
+        fontSize: fontPixel(18),
         fontFamily: 'Poppins-Regular',
         color: DefaultStyles.colors.primary
     },

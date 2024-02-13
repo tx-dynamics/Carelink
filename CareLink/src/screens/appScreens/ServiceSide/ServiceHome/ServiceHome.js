@@ -101,7 +101,7 @@ const ServiceHome = ({ }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.marginView} >
-                    <FlatList style={{ alignSelf: "center" }}
+                    <FlatList scrollEnabled={false} style={{ alignSelf: "center" }}
                         data={DATA}
                         horizontal
                         keyExtractor={(item, index) => index}
@@ -119,7 +119,7 @@ const ServiceHome = ({ }) => {
                         <Apptext style={styles.rms} >Received Proposals</Apptext>
                     </View>
                     <View style={{ marginTop: heightPixel(21) }}>
-                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                        <FlatList scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (

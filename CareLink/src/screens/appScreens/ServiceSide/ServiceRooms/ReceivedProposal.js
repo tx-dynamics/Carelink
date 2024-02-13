@@ -37,6 +37,26 @@ const ReceivedProposal = ({ navigation }) => {
             id: 3,
             title: "Terrace",
         },
+        {
+            id: 3,
+            title: "Air Condirioner",
+        },
+        {
+            id: 3,
+            title: "Security",
+        },
+        {
+            id: 3,
+            title: "Attach Bathroom",
+        },
+        {
+            id: 3,
+            title: "House Keeping",
+        },
+        {
+            id: 3,
+            title: "Community",
+        },
     ]
     const imageData = [
         {
@@ -84,7 +104,7 @@ const ReceivedProposal = ({ navigation }) => {
                     />
                 </View>
                 <View style={[styles.txtView]}>
-                    <Apptext style={styles.rms} >Job Details</Apptext>
+                    <Apptext style={styles.rms} >Room Details</Apptext>
                 </View>
                 <View style={{ marginLeft: widthPixel(50) }}>
                     <DetailTextComp title={"Rooms"} detail={"3 Rooms"} />
@@ -95,12 +115,14 @@ const ReceivedProposal = ({ navigation }) => {
                     <Apptext style={styles.jobsTxt}> Note :    </Apptext>
                     <Apptext style={styles.lrmTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
-                <FlatList
-                    horizontal
-                    data={availableFacility}
-                    style={styles.availableFlatlist}
-                    renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
-                <View style={[styles.txtView, { marginTop: wp('9%') }]}>
+                <View style={{
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    marginLeft: widthPixel(20)
+                }}>
+                    {availableFacility.map((item, index) => <AvailableFacilityComp title={item.title} />)}
+                </View>
+                <View style={[styles.txtView, { marginTop: heightPixel(15) }]}>
                     <Apptext style={styles.rms} >Images</Apptext>
                 </View>
                 <FlatList
@@ -127,14 +149,11 @@ const ReceivedProposal = ({ navigation }) => {
                         color={"black"}
                     />
                 </View>
-                <View style={{ marginTop: -7 }}>
-                    <FormButton
-                        buttonTitle={"Accept"}
-                        color={"white"}
-                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
-                    />
-                </View>
-
+                <FormButton
+                    buttonTitle={"Accept"}
+                    color={"white"}
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
+                />
             </ScrollView>
         </View>
     )

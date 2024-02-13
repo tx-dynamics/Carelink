@@ -1,60 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View, FlatList } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
+import { fonts } from '../../../Constants/Fonts';
+import colors from '../../../config/colors';
+import { appIcons } from '../../../Constants/Utilities/assets';
+import HeaderForSpace from '../../../components/HeaderForSpace/HeaderForSpace';
 
 const Success = ({ navigation }) => {
+    const listData = [
+        {
+            id: 1,
+            title: "Build a agency profile to show the world what you can offer ",
+            pic: appIcons.man
+        },
+        {
+            id: 2,
+            title: "Apply for open roles or list services for clients to buy",
+            pic: appIcons.openmsg
+        },
+        {
+            id: 3,
+            title: "Get paid safely and know we’re there to help",
+            pic: appIcons.dollar
+        },
+    ]
     return (
-        <ScrollView style={styles.container}>
-            <IconHeaderComp
-                onPress={() => { navigation.goBack() }}
-                imgName={iconPath.leftArrow}
-                heading={"You have created account successfully!"}
-                style={styles.createTxt}
-            />
-            <View style={styles.DirectionView}>
-                <Image
-                    style={styles.tntClr}
-                    source={require('../../../../assets/circleProfile.png')} />
-                <Apptext style={styles.smallTxt} >Now complete your agency profile</Apptext>
-            </View>
-            <View style={styles.DirectionView}>
-                <Image
-                    style={styles.tntClr}
-                    source={require('../../../../assets/man.png')} />
-                <Apptext style={styles.smallTxt2} >Build a agency profile to show the world what you can offer </Apptext>
-                <Apptext style={styles.divider}> </Apptext>
-            </View>
-            <View style={styles.DirectionView}>
-                <Image
-                    style={styles.tntClr}
-                    source={require('../../../../assets/openmsg.png')} />
-                <Apptext style={styles.smallTxt2} >Apply for open roles or list services for clients to buy </Apptext>
-                <Apptext style={styles.divider}> </Apptext>
-            </View>
-            <View style={styles.DirectionView}>
-                <Image
-                    style={styles.tntClr}
-                    source={require('../../../../assets/dollar.png')} />
-                <Apptext style={styles.smallTxt2}>Get paid safely and know we’re there to help </Apptext>
-                <Apptext style={styles.divider}> </Apptext>
-            </View>
-
-            <View style={{ marginTop: wp('20%') }}>
-                <FormButton
-                    buttonTitle={"Start Now"}
-                    onPress={() => { navigation.navigate("AgencyBasic") }}
-                    width={wp('90%')}
+        <View style={styles.container}>
+            <View>
+                <IconHeaderComp
+                    onPress={() => { navigation.goBack() }}
+                    imgName={iconPath.leftArrow}
+                    heading={"You have created account successfully!"}
                 />
+                <View style={styles.DirectionView}>
+                    <Image
+                        style={styles.tntClr}
+                        source={require('../../../../assets/circleProfile.png')} />
+                    <Apptext style={styles.smallTxt} >Now complete your agency profile</Apptext>
+                </View>
+                <FlatList
+                    data={listData}
+                    keyExtractor={(item, index) => index}
+                    ListHeaderComponent={() => <HeaderForSpace />}
+                    renderItem={({ item, index }) => <List pic={item.pic} title={item.title} />} />
             </View>
-        </ScrollView>
+            <FormButton
+                buttonTitle={"Start Now"}
+                onPress={() => { navigation.navigate(routes.agencyBasic) }}
+            />
+        </View>
     )
 }
-
+const List = ({ pic, title }) => {
+    return (
+        <View style={styles.listContainer}>
+            <Image resizeMode='contain'
+                style={styles.listPic}
+                source={pic} />
+            <Apptext style={styles.smallTxt2} >{title}</Apptext>
+            <Apptext style={styles.divider}> </Apptext>
+        </View>
+    )
+}
 export default Success;
 
 
@@ -62,6 +75,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -79,8 +94,10 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     smallTxt2: {
-        marginTop: wp('3%'),
-        fontSize: 11
+        marginTop: heightPixel(10),
+        fontSize: fontPixel(11),
+        fontFamily: fonts.Poppins_Regular,
+        color: colors.black
     },
     divider: {
         marginTop: 13,
@@ -88,8 +105,17 @@ const styles = StyleSheet.create({
         width: wp('90%'),
         backgroundColor: "#C3C3C3",
     },
-    tntClr:{
-        tintColor: DefaultStyles.colors.primary 
-    }
-
+    tntClr: {
+        width: widthPixel(72),
+        height: widthPixel(72),
+        tintColor: DefaultStyles.colors.primary
+    },
+    listContainer: {
+        alignItems: "center",
+        marginBottom: heightPixel(20)
+    },
+    listPic: {
+        width: widthPixel(30),
+        height: widthPixel(30),
+    },
 });

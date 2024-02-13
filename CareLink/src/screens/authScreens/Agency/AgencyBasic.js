@@ -1,47 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
-import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { heightPixel, routes } from '../../../Constants';
+import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 
 const AgencyBasic = ({ navigation }) => {
+    const [agencyName, setAgencyName] = useState("")
+    const [isExperience, setExperience] = useState("")
+    const [about, setAbout] = useState("")
     return (
         <View style={styles.container}>
-            <IconHeaderComp
+            <IconHeaderComp title={"Enter Information"}
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
-                heading={"Enter your agency name and about"}
-                style={styles.createTxt}
-            />
-            <View>
-                <FormInput
+                heading={"Enter your agency name and about"} />
+            <KeyboardAwareScrollView>
+                <AppTextInput
+                    value={agencyName}
                     title={"Agency name"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    title={"Experinence"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
+                    onChangeText={setAgencyName}
+                    mainViewStyle={styles.agencyStyle} />
+                <AppTextInput
+                    value={isExperience}
+                    title={"Experience"}
+                    onChangeText={setExperience} />
+                <AppTextInput
+                    multiline
+                    value={about}
                     title={"About"}
-                />
-            </View>
-            <View style={{ marginTop: wp('35%') }}>
-                <FormButton
-                    buttonTitle={"Next"}
-                    width={wp('90%')}
-                    height={wp('15%')}
-                    onPress={() => navigation.navigate("AgencyPhotos")}
-                />
-            </View>
+                    onChangeText={setAbout}
+                    containerStyle={styles.aboutHeight}
+                    mainViewStyle={styles.aboutMainStyle} />
+            </KeyboardAwareScrollView>
+            <FormButton
+                buttonTitle={"Next"}
+                onPress={() => navigation.navigate(routes.agencyPhotos)} />
         </View>
     )
 }
@@ -53,6 +51,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -73,5 +72,16 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         textDecorationLine: 'underline',
         color: "#004cbe"
+    },
+    agencyStyle: {
+        marginTop: heightPixel(40),
+    },
+    aboutMainStyle: {
+        marginBottom: heightPixel(20),
+    },
+    aboutHeight: {
+        height: null,
+        maxHeight: heightPixel(300),
+        minHeight: heightPixel(80),
     }
 });

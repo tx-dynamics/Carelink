@@ -6,16 +6,9 @@ import CalendarPicker from 'react-native-calendar-picker'
 import { fonts } from '../../Constants/Fonts'
 
 const CalendarComponent = ({ onDateChange, minDate, maxDate }) => {
-
     return (
         <View>
-            <Text style={{
-                fontSize: fontPixel(16),
-                fontFamily: fonts.Poppins_Medium,
-                color: colors.smallHeadingBlack,
-                marginLeft: widthPixel(20),
-                marginVertical: heightPixel(20)
-            }}>Add Availability</Text>
+            <Text style={styles.titleText}>Add Availability</Text>
             <CalendarPicker
                 headerWrapperStyle={styles.customHeaderWrapper}
                 allowBackwardRangeSelect={false}
@@ -29,8 +22,8 @@ const CalendarComponent = ({ onDateChange, minDate, maxDate }) => {
                 onDateChange={onDateChange}
                 previousTitle='<'
                 nextTitle='>'
-                previousTitleStyle={{ marginLeft: widthPixel(50), width: widthPixel(30), fontSize: fontPixel(25), color: colors.black }}
-                nextTitleStyle={{ marginRight: widthPixel(50), width: widthPixel(30), fontSize: fontPixel(25), color: colors.black }}
+                previousTitleStyle={styles.previousStyle}
+                nextTitleStyle={styles.nextStyle}
             />
         </View>
     )
@@ -40,10 +33,27 @@ export default CalendarComponent
 
 const styles = StyleSheet.create({
     customHeaderWrapper: {
-        // Customize the styles of the header wrapper
         backgroundColor: colors.calendarColor,
         width: "95%",
         borderRadius: widthPixel(10)
-
+    },
+    titleText: {
+        fontSize: fontPixel(16),
+        fontFamily: fonts.Poppins_Medium,
+        color: colors.smallHeadingBlack,
+        marginLeft: widthPixel(20),
+        marginVertical: heightPixel(20)
+    },
+    previousStyle: {
+        marginLeft: widthPixel(50),
+        width: widthPixel(30),
+        fontSize: fontPixel(25),
+        color: colors.black
+    },
+    nextStyle: {
+        marginRight: widthPixel(50),
+        width: widthPixel(30),
+        fontSize: fontPixel(25),
+        color: colors.black
     },
 })

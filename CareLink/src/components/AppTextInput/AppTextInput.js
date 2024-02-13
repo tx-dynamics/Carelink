@@ -5,17 +5,18 @@ import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 import { appIcons } from '../../Constants/Utilities/assets'
 
-const AppTextInput = ({ mainViewStyle, title, placeholder, value, onChangeText, secureTextEntry, keyboardType = 'default', left, right, rightPress, multiline }) => {
+const AppTextInput = ({ mainViewStyle, title, maxLength, placeholder, value, onChangeText, secureTextEntry, keyboardType = 'default', left, right, rightPress, multiline, containerStyle }) => {
     return (
         <View style={[styles.mainView, mainViewStyle]}>
             {title &&
                 <View style={styles.topView}>
                     <Text style={styles.titleText}>{title}</Text>
                 </View>}
-            <View style={styles.container}>{left &&
-                <View style={styles.leftView}>
-                </View>}
-                <TextInput
+            <View style={[styles.container, containerStyle]}>
+                {left &&
+                    <View style={styles.leftView}>
+                    </View>}
+                <TextInput maxLength={maxLength}
                     value={value}
                     secureTextEntry={secureTextEntry}
                     keyboardType={keyboardType}

@@ -17,6 +17,7 @@ export default AvailableFacilityComp
 const styles = StyleSheet.create({
     container: {
         height: heightPixel(20),
+        marginTop: heightPixel(10),
         paddingHorizontal: widthPixel(10),
         backgroundColor: colors.lightPrimary,
         justifyContent: "center",

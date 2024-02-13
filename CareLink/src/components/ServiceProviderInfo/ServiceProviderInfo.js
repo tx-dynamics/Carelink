@@ -7,9 +7,8 @@ import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityCo
 import { appIcons } from '../../Constants/Utilities/assets'
 import SimpleImageComponent from '../SimpleImageComponent/SimpleImageComponent'
 
-const ServiceProviderInfo = ({ floor, attachBath, availableOn, location, note, images, days }) => {
+const ServiceProviderInfo = ({ floor, availableOn, location, note, images, days }) => {
     const data = [
-
         {
             id: 1,
             title: "Wheelchair",
@@ -22,6 +21,22 @@ const ServiceProviderInfo = ({ floor, attachBath, availableOn, location, note, i
         {
             id: 3,
             title: "Terrace",
+        },
+        {
+            id: 3,
+            title: "Air Conditionar",
+        },
+        {
+            id: 3,
+            title: "Elevator",
+        },
+        {
+            id: 3,
+            title: "House Keeping",
+        },
+        {
+            id: 3,
+            title: "Security Guards",
         },
     ]
     const image = [
@@ -48,28 +63,10 @@ const ServiceProviderInfo = ({ floor, attachBath, availableOn, location, note, i
     ]
     return (
         <View style={styles.main}>
-            {/* <Text numberOfLines={numberOfLines} style={[styles.container, container]}>{title}</Text> */}
-            {/* <Text style={styles.bedroomText}>2 Bedrooms . 2 Bathrooms .</Text> */}
             {floor && <Text style={styles.floorText}>Floor: {floor}</Text>}
-            {attachBath &&
-                <View style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: heightPixel(10)
-                }}>
-                    <Image resizeMode='contain' source={appIcons.tick1} style={{
-                        width: widthPixel(20),
-                        height: widthPixel(20),
-                        marginRight: widthPixel(10)
-                    }} />
-                    <Text style={{
-                        fontSize: fontPixel(14),
-                        fontFamily: fonts.Poppins_Light,
-                        color: colors.black12
-                    }}>Attach Washroom</Text>
-                </View>
-            }
-            <FlatList keyExtractor={(itm, index) => index} style={styles.flatListStyle} horizontal data={data} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
+            <View style={styles.mapView}>
+                {data.map((item, index) => <AvailableFacilityComp title={item.title} />)}
+            </View>
             {availableOn &&
                 <>
                     <Text style={styles.availableText}>Available on</Text>
@@ -79,7 +76,7 @@ const ServiceProviderInfo = ({ floor, attachBath, availableOn, location, note, i
                     </View>
                 </>
             }
-            {days && <Text style={styles.forText}>For: <Text style={{ fontFamily: fonts.Poppins_Light }}>{days}</Text></Text>}
+            {days && <Text style={styles.forText}>For: <Text style={{ fontFamily: fonts.Poppins_Light }}>{days} Days</Text></Text>}
             {location && <Text numberOfLines={2} style={styles.forText}>Location: <Text style={{ fontFamily: fonts.Poppins_Light }}> {location}</Text></Text>}
             {note && <>
                 <Text style={styles.forText}>Note:</Text>
@@ -120,6 +117,25 @@ const styles = StyleSheet.create({
         fontFamily: fonts.Poppins_Medium,
         marginTop: heightPixel(20)
     },
+    attachBathView: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: heightPixel(10)
+    },
+    attachTick: {
+        width: widthPixel(20),
+        height: widthPixel(20),
+        marginRight: widthPixel(10)
+    },
+    mapView: {
+        flexWrap: "wrap",
+        flexDirection: "row"
+    },
+    attachText: {
+        fontSize: fontPixel(14),
+        fontFamily: fonts.Poppins_Light,
+        color: colors.black12
+    },
     availableText: {
         fontSize: fontPixel(14),
         color: colors.black,
@@ -128,7 +144,7 @@ const styles = StyleSheet.create({
     },
     flatListStyle: {
         alignSelf: "flex-start",
-        marginTop: heightPixel(20)
+        marginTop: heightPixel(10)
     },
     calenderView: {
         flexDirection: "row",

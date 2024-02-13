@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, FlatList, Text } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
@@ -8,11 +8,8 @@ import colors from '../config/colors';
 import { fonts } from '../Constants/Fonts';
 import AvailableFacilityComp from './AvaialableFacilityComp/AvailableFacilityComp';
 
-const ServiceListingComp = ({ containerStyle, labelValue, disabled, when, facilityData, facilty, fors, hourly, placeholderText,
-    iconType, leftIconType, leftImgName, rightImgName, showTags = true,
-    showHrt, showProposals, name, location, rightImg = require('../../assets/heart.png'),
-    onPress, borderRadius = 10, rightOnPress, rightTxt, pic, reviews, detail, rightTexPress,
-    rightIconType, ...rest }) => {
+const ServiceListingComp = ({ containerStyle, labelValue, disabled, facilityData, showTags = true,
+    showProposals, name, onPress, borderRadius = 10, rightTxt, pic, reviews, detail, rightTexPress, statusTab, statusStyle }) => {
     return (
         <TouchableOpacity disabled={disabled}
             onPress={onPress}
@@ -44,13 +41,16 @@ const ServiceListingComp = ({ containerStyle, labelValue, disabled, when, facili
                     {/* <View style={styles.fvTxt}>
                         <Apptext style={styles.scndTxt}>{"For 20 days"}</Apptext>
                     </View> */}
-                    <FlatList horizontal style={{
-                        alignSelf: "flex-start",
-                        marginLeft: widthPixel(20),
-
-                    }} data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
-
-                    <View style={{ height: wp('2%') }}></View>
+                    <View style={styles.bottomView}>
+                        <View style={styles.flatListView}>
+                            <FlatList numColumns={2} style={styles.flatListStyle} data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
+                        </View>
+                        {statusTab &&
+                            <View style={[styles.rightBottmView, statusStyle]}>
+                                <Text style={styles.rightBottomText}>{statusTab}</Text>
+                            </View>
+                        }
+                    </View>
                 </View>
                 :
                 <View style={{ height: wp('2%') }}></View>
@@ -129,6 +129,18 @@ const styles = StyleSheet.create({
         marginVertical: heightPixel(5)
         // marginTop: wp('2%')
     },
+    bottomView: {
+        paddingBottom: heightPixel(3),
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    flatListView: {
+        width: widthPixel(240),
+    },
+    flatListStyle: {
+        alignSelf: "flex-start",
+        marginLeft: widthPixel(20),
+    },
     lightTxt: {
         fontSize: 8,
         marginTop: wp('4%'),
@@ -168,5 +180,21 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         marginRight: wp('10%')
-    }
+    },
+    rightBottmView: {
+        right: widthPixel(5),
+        bottom: heightPixel(5),
+        width: widthPixel(91),
+        height: heightPixel(26),
+        backgroundColor: colors.primary,
+        borderRadius: widthPixel(8),
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    rightBottomText: {
+        top: heightPixel(1),
+        fontSize: fontPixel(12),
+        fontFamily: fonts.Poppins_Light,
+        color: colors.white
+    },
 });

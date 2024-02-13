@@ -12,7 +12,6 @@ import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { heightPixel, widthPixel } from '../../../../Constants';
 import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const ServiceChatDetail = ({ navigation, route }) => {
     const ref = useRef(null)
@@ -189,7 +188,7 @@ const ServiceChatDetail = ({ navigation, route }) => {
         </View>
     )
 }
-const MyMessage = ({ msg }) => {
+const MyMessage = React.memo(({ msg }) => {
     return (
         <View style={styles.PicMainView}>
             <View style={styles.msgView}>
@@ -198,7 +197,7 @@ const MyMessage = ({ msg }) => {
             <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
         </View>
     )
-}
+})
 export default ServiceChatDetail;
 
 

@@ -13,10 +13,13 @@ import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
 import { RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
+import { useSelector } from 'react-redux';
+import { userType } from '../../../redux/Slices/splashSlice';
 
 const EmailVerification = ({ navigation, route }) => {
     const [isOTP, setIsOTP] = useState("")
     const [visible, setVisible] = useState(false)
+    const usertype = useSelector((state) => state.splash.userType)
     const onCountinue = () => {
         //APK // if (isOTP == "") {
         //     RedSnackbar("Please enter OTP")
@@ -28,7 +31,13 @@ const EmailVerification = ({ navigation, route }) => {
         // }
         setVisible(true)
         setTimeout(() => {
-            route.params?.register ? navigation.replace(routes.addDocuments) : navigation.replace(routes.forgetPasswordUpdate)
+            if (usertype == "ServiceSide") {
+                route.params?.register ? navigation.replace(routes.addDocuments) : navigation.replace(routes.forgetPasswordUpdate)
+            }
+            if (usertype == "AgencySide") {
+                route.params?.register ? navigation.replace(routes.successAgency) : navigation.replace(routes.forgetPasswordUpdate)
+            }
+
         }, 1500);
     }
     useEffect(() => {

@@ -69,7 +69,7 @@ const ListingOptions = ({ navigation }) => {
                 heading={"Add Listing Information"}
             />
             <KeyboardAwareScrollView>
-                <AddRoomComponent />
+                {/* <AddRoomComponent /> */}
                 <BasicEntitiesComp basicData={basicData} setBasicData={setBasicData} />
                 <CalendarComponent maxDate={maxDate} minDate={minDate} onDateChange={onDateChange} />
                 <AvailableComponent
@@ -80,10 +80,7 @@ const ListingOptions = ({ navigation }) => {
                 />
                 <AddPhotoComponent />
                 <View style={styles.flatlistStyle}>
-                    <FlatList numColumns={3} data={picData} renderItem={({ item, index }) => item.add ? <AddButtonComponent onPress={() => uploadmageMultiPle(setPicData, picData)} /> : <PhotoComponent pic={item.image} crossPress={() => removePic(index, setPicData, picData)} />}
-                    //     ListFooterComponent={() => 
-                    // } 
-                    />
+                    <FlatList scrollEnabled={false} numColumns={3} data={picData} renderItem={({ item, index }) => item.add ? <AddButtonComponent onPress={() => uploadmageMultiPle(setPicData, picData)} /> : <PhotoComponent pic={item.image} crossPress={() => removePic(index, setPicData, picData)} />} />
                 </View>
                 <FormButton onPress={() => navigation.navigate("Note")} containerStyle={styles.btnStyle} buttonTitle={"Next"} />
             </KeyboardAwareScrollView>

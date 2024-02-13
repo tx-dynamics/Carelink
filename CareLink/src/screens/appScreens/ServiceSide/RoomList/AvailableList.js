@@ -12,6 +12,7 @@ import ServiceListingComp from '../../../../components/ServiceListingComp'
 export const ListedData = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+        status: "Available",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic1,
         facility: [
@@ -21,16 +22,14 @@ export const ListedData = [
             },
             {
                 id: 2,
-                title: "Car parking available"
+                title: "Car parking"
             },
-            {
-                id: 3,
-                title: "Tarrece"
-            },
+
         ]
     },
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b1',
+        status: "Booked",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic2,
         facility: [
@@ -40,13 +39,15 @@ export const ListedData = [
             },
             {
                 id: 2,
-                title: "Car parking available"
+                title: "Car parking"
             },
+
         ]
     },
 
     {
         id: 'bd7asdaac4bea-c1b1-46c2-aed5-3ad53abb28ba',
+        status: "Inactive",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [
@@ -60,6 +61,7 @@ export const ListedData = [
     {
         id: 'bd7ac4bhjfgea-c1b1-46c2-aed5-3ad53abb28ba',
         adress: "Magnolia Meadows",
+        status: "Available",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [
@@ -73,6 +75,7 @@ export const ListedData = [
     {
         id: 'bd7ac4bea-cjgtr1b1-46c2-aed5-3ad53abb28ba',
         adress: "Magnolia Meadows",
+        status: "Booked",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [
@@ -86,6 +89,7 @@ export const ListedData = [
     {
         id: 'bd7ac4bea-c1b1-3r4we46c2-aed5-3ad53abb28ba',
         adress: "Magnolia Meadows",
+        status: "Avalaible",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [
@@ -99,6 +103,7 @@ export const ListedData = [
     {
         id: 'bd7ac4bea-c1b1-46c2-123123aed5-3ad53abb28ba',
         adress: "Magnolia Meadows",
+        status: "Inactive",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [

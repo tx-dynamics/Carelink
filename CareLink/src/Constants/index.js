@@ -33,6 +33,13 @@ export const routes = {
     termsAndCondition: "termsAndCondition",
     deleteAccountPassword: "deleteAccountPassword",
     deleteAccountOTP: "deleteAccountOTP",
+    successAgency: "successAgency",
+    agencyBasic: "AgencyBasic",
+    agencyPhotos: "AgencyPhotos",
+    customerListing: "customerListing",
+    roomDetails: "roomDetails",
+    roomProposal: "roomProposals",
+    sendProposal: "sendProposal",
 
 
 }

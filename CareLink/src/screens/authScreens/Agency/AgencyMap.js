@@ -13,6 +13,14 @@ import { heightPixel, routes } from '../../../Constants';
 
 const AgencyMap = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
+    const onPressNext = () => {
+        if (usertype == "ServiceSide") {
+            navigation.navigate(routes.listingSummary)
+        } if (usertype == "AgencySide") {
+            navigation.navigate("PaymentPlans")
+
+        }
+    }
     return (
         <View style={styles.container}>
             <View>
@@ -38,7 +46,7 @@ const AgencyMap = ({ navigation }) => {
             <FormButton
                 buttonTitle={"Next"}
                 // width={wp('90%')}
-                onPress={() => navigation.navigate(routes.listingSummary)}
+                onPress={onPressNext}
             />
 
 

@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     txtView: {
         width: wp('90%'),
         alignSelf: 'center',
-        marginTop: wp('7%')
+        marginTop: heightPixel(10)
     },
     submitTxt: {
         fontSize: 11,
