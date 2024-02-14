@@ -25,10 +25,6 @@ export const agencyData = [
                 id: 2,
                 title: "Car parking available"
             },
-            {
-                id: 3,
-                title: "Tarrece"
-            },
         ]
     },
     {
@@ -80,13 +76,12 @@ const AgencyHome = ({ navigation }) => {
             <AppStatusbar />
             <Header
                 headerLabel={"Home"}
-                height={heightPixel(80)}
                 rightImg={appIcons.messageIcon}
                 leftImgStyle={styles.leftImgStyle}
                 rightImgStyle={styles.rightImgStyle}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
             />
             <ScrollView>
                 <View style={styles.txtView}>
@@ -110,7 +105,7 @@ const AgencyHome = ({ navigation }) => {
                         <Apptext style={styles.dtls} >See All</Apptext>
                     </TouchableOpacity>
                 </View>
-                <FlatList
+                <FlatList scrollEnabled={false}
                     data={agencyData}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({ item, index }) => <CustomerListingComp

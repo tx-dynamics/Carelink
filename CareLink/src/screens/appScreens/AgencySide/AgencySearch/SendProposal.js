@@ -7,30 +7,32 @@ import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
 import { appIcons } from '../../../../Constants/Utilities/assets';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
+import { heightPixel } from '../../../../Constants';
+import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const SendProposal = ({ navigation }) => {
-
+    const [value, setValue] = useState("")
+    const onPressSubmit = () => {
+        navigation.navigate("AgencyHome")
+        SuccessSnackbar("Your proposal has been submitted")
+    }
     return (
         <View style={styles.container}>
             <Header headerLabel={"Submit Proposal"}
                 leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
             />
-            <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
-            <View >
-                <FormInput
-                    title={"Cover Letter"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-            </View>
-            <View style={{ marginTop: wp('65%') }}>
-                <FormButton
-                    width={wp('90%')}
-                    buttonTitle={"Submit Now"}
-                    onPress={() => navigation.navigate("AgencyHome")}
-                />
-            </View>
+            <KeyboardAwareScrollView style={{}}>
+                <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
+                <AppTextInput value={value} onChangeText={setValue} title={"Cover Letter"} multiline containerStyle={{ height: null, minHeight: heightPixel(80), maxHeight: heightPixel(220), }} />
+
+            </KeyboardAwareScrollView>
+            <FormButton
+                buttonTitle={"Submit Now"}
+                onPress={onPressSubmit}
+            />
         </View>
     )
 }

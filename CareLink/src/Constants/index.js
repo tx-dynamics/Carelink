@@ -40,7 +40,7 @@ export const routes = {
     roomDetails: "roomDetails",
     roomProposal: "roomProposals",
     sendProposal: "sendProposal",
-
+    messages: "messages",
 
 }
 

@@ -6,6 +6,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import NotificationsComp from '../../../../components/NotificationsComp';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { routes } from '../../../../Constants';
 
 
 const AgencyNotifications = ({ navigation }) => {
@@ -60,7 +61,7 @@ const AgencyNotifications = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
                 headerLabel={"Notifications"}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
 
             />

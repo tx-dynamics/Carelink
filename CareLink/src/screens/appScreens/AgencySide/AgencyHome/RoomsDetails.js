@@ -7,24 +7,23 @@ import { appIcons } from '../../../../Constants/Utilities/assets';
 import UserInfoComp from '../../../../components/UserInfoComp/UserInfoComp';
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { heightPixel, routes } from '../../../../Constants';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
 
 const RoomsDetails = ({ navigation }) => {
     const [liked, setLiked] = useState(false)
     return (
         <View style={styles.container}>
             <Header
+                headerLabel={"Listing Details"}
                 leftImgName={appIcons.headerBack}
-                rightImg={liked ? appIcons.heartRed : appIcons.heartBlank}
                 onPressRight={() => setLiked(!liked)}
+                rightImgStyle={styles.rightIconStyle}
                 onPressLeft={() => navigation.goBack()}
-                headerLabel={"Room Details"}
-            />
+                rightImg={liked ? appIcons.heartRed : appIcons.heartBlank} />
             <KeyboardAwareScrollView >
                 <UserInfoComp pic={appIcons.dummyUser} title={"James Clear"} />
                 <ServiceProviderInfo
                     images
-                    attachBath
                     days={"20"}
                     floor={"2nd"}
                     availableOn={"November 15"}
@@ -43,5 +42,9 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
         paddingBottom: heightPixel(20)
+    },
+    rightIconStyle: {
+        width: widthPixel(30),
+        height: widthPixel(30),
     },
 });

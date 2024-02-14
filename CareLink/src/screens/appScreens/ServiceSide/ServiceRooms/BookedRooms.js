@@ -9,12 +9,14 @@ import ServiceListingComp from '../../../../components/ServiceListingComp'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import FormButton from '../../../../components/FormButton'
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo'
+import IconHeaderComp from '../../../../components/IconHeaderComp'
+import { iconPath } from '../../../../config/icon'
 
 const BookedRooms = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header headerLabel={"Booked Room"} height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
+            <Header headerLabel={"Booked Room"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
             <KeyboardAwareScrollView >
                 <ServiceListingComp containerStyle={{ marginTop: heightPixel(1), marginBottom: 0, }} reviews onPress={() => navigation.navigate(routes.agencyDetail, { isChat: false })} pic={appIcons.dummyPic1}
@@ -25,7 +27,6 @@ const BookedRooms = ({ navigation }) => {
                     rightTxt={""}
                 />
                 <ServiceProviderInfo
-                    attachBath
                     days={"20"}
                     floor={"2nd"}
                     availableOn={"November 15"}

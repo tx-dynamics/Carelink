@@ -10,11 +10,14 @@ import { heightPixel, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import SearchComponent from '../../../../components/SearchComponent/SearchComponent';
 import colors from '../../../../config/colors';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSelector } from 'react-redux';
 
 
 const ServiceMessages = ({ navigation }) => {
+    const usertype = useSelector((state) => state.splash.userType)
     const [search, setSearch] = useState("")
-    const DATA = [
+    const DATAService = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
             count: "+5",
@@ -166,20 +169,125 @@ const ServiceMessages = ({ navigation }) => {
             online: true
         },
     ];
+    const DATAAgency = [
+        {
+            id: 1,
+            label: "James Clear",
+            msg: "Hi Jackson, can you tell …",
+            dt: "12 mins ago",
+            Img: appIcons.dummyPic2,
+            online: true
 
+        },
+        {
+            id: 1,
+            label: "James Hype",
+            msg: "Hi Jackson, can you tell …",
+            dt: "2 mins ago",
+            Img: appIcons.dummyPic1,
+            online: false
+        },
+        {
+            id: 1,
+            label: "John Doe",
+            msg: "Hi Jackson, can you tell …",
+            dt: "23 mins ago",
+            Img: appIcons.dummyPic3,
+            online: true
+        },
+        {
+            id: 1,
+            label: "Camron",
+            msg: "Hi Jackson, can you tell …",
+            dt: "29 mins ago",
+            Img: appIcons.dummyPic2,
+            online: false
+        },
+        {
+            id: 1,
+            label: "Diana Brian",
+            msg: "Hi Jackson, can you tell …",
+            dt: "31 mins ago",
+            Img: appIcons.dummyPic3,
+            online: false
+        },
+        {
+            id: 1,
+            label: "Jasmine Grey",
+            msg: "Hi Jackson, can you tell …",
+            dt: "1 hrs ago",
+            Img: appIcons.dummyPic1,
+            online: true
+        },
+        {
+            id: 1,
+            label: "Zaur",
+            msg: "Hi Jackson, can you tell …",
+            dt: "2 hrs ago",
+            Img: appIcons.dummyPic2,
+            online: false
+        },
+        {
+            id: 1,
+            label: "Tom Hanks",
+            msg: "Hi Jackson, can you tell …",
+            dt: "4 hrs ago",
+            Img: appIcons.dummyPic1,
+            online: true
+        },
+        {
+            id: 1,
+            label: "Domenic",
+            msg: "Hi Jackson, can you tell …",
+            dt: "4 hrs ago",
+            Img: appIcons.dummyPic3,
+            online: false
+        },
+        {
+            id: 1,
+            label: "Morgan",
+            msg: "Hi Jackson, can you tell …",
+            dt: "10 hr ago",
+            Img: appIcons.dummyPic2,
+            online: true
+        },
+        {
+            id: 1,
+            label: "Jason Brown",
+            msg: "Hi Jackson, can you tell …",
+            dt: "10 hrs ago",
+            Img: appIcons.dummyPic3,
+            online: false
+        },
+        {
+            id: 1,
+            label: "Philips Nick",
+            msg: "Hi Jackson, can you tell …",
+            dt: "11 hrs ago",
+            Img: appIcons.dummyPic1,
+            online: true
+        },
+        {
+            id: 1,
+            label: "Johnny Gibs",
+            msg: "Hi Jackson, can you tell …",
+            dt: "12 mins ago",
+            Img: appIcons.dummyPic2,
+            online: false
+        },
+    ];
+    let DATA = usertype == "ServiceSide" ? DATAService : DATAAgency
     return (
         <View style={styles.container}>
-            <Header isBack height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
-                leftImgName={require('../../../../../assets/drawerIcon.png')}
-                onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            <Header headerLabel={"Inbox"} isBack leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
+                leftImgName={appIcons.leftArrow}
+                // onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+                onPressLeft={() => navigation.goBack()}
             />
-            <ScrollView>
-                <View style={styles.marginView} >
-                    <Apptext style={styles.rms} >Messages</Apptext>
-                </View>
+            <KeyboardAwareScrollView>
                 <SearchComponent onChangeText={(item) => setSearch(item)} />
-                <View style={{ marginTop: wp('2%') }}>
-                    <FlatList
+                <View style={{ marginTop: heightPixel(10) }}>
+                    <FlatList scrollEnabled={false}
                         ListHeaderComponent={() => <View style={{ marginTop: heightPixel(20) }}></View>}
                         data={DATA?.filter(data => data?.label?.toLowerCase()?.includes(search.toLowerCase()))}
                         showsVerticalScrollIndicator={false}
@@ -197,13 +305,12 @@ const ServiceMessages = ({ navigation }) => {
                         )}
                     />
                 </View>
-            </ScrollView>
+            </KeyboardAwareScrollView>
         </View>
     )
 }
 
 export default ServiceMessages;
-
 
 const styles = StyleSheet.create({
     container: {

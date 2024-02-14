@@ -8,15 +8,19 @@ import DetailTextComp from '../DetailTextComp/DetailTextComp'
 import AppGeneralTitle from '../AppGeneralTitle/AppGeneralTitle'
 import { appIcons } from '../../Constants/Utilities/assets'
 import FormButton from '../FormButton'
+import IconHeaderComp from '../IconHeaderComp'
 const BrochureModal = ({ onPress, onRequestClose, visible, downloadPress }) => {
     return (
         <Modal visible={visible} onRequestClose={onRequestClose}>
             <View style={styles.container}>
                 <View>
                     <AppStatusbar />
-                    <Header height={heightPixel(80)} leftImgName={require('../../../assets/headerBack.png')}
-                        onPressLeft={onPress} />
-                    <AppGeneralTitle title={"Agency Brochure"} />
+                    <IconHeaderComp
+                        title={"Brochure"}
+                        imgName={appIcons.leftArrow}
+                        onPress={onPress}
+                    />
+                    {/* <AppGeneralTitle title={"Agency Brochure"} /> */}
                     <View style={styles.subView}>
                         <Image resizeMode='contain' source={appIcons.brochure} style={styles.brochure} />
                     </View>

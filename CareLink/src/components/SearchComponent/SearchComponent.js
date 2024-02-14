@@ -4,9 +4,9 @@ import colors from '../../config/colors'
 import { heightPixel, widthPixel } from '../../Constants'
 import { appIcons } from '../../Constants/Utilities/assets'
 
-const SearchComponent = ({ value, onChangeText, }) => {
+const SearchComponent = ({ value, onChangeText, containerStyle }) => {
     return (
-        <TouchableOpacity style={styles.searchBar}>
+        <TouchableOpacity style={[styles.searchBar, containerStyle]}>
             <Image style={styles.srchImg}
                 source={appIcons.search} />
             <TextInput value={value}
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     searchBar: {
         height: heightPixel(49),
         width: widthPixel(376),
-        marginTop: heightPixel(10),
+        // marginTop: heightPixel(10),
         flexDirection: 'row',
         alignSelf: 'center',
         borderRadius: 9,
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     },
     srchTxt: {
         flex: 1,
-        color: 'grey',
-        // width: wp('70%')
+        color: colors.black,
     },
 })

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity, StatusBar } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,7 +10,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
-import { heightPixel, widthPixel } from "../Constants";
+import { fontPixel, heightPixel, widthPixel } from "../Constants";
 import Styles from "../config/Styles";
 
 
@@ -22,25 +22,21 @@ function Header({
   rightImgStyle,
   centerImg,
   isBack = true,
-  height = wp("23%"),
-  contentColor = DefaultStyles.colors.secondary,
   onPressLeft,
   onPressRight,
   rightImg,
-  rightstyle,
   style,
 }) {
   return (
     <View
       style={{
         ...styles.container,
-        height: height,
         backgroundColor: backgroundColor,
         ...style,
       }}>
       <TouchableOpacity
         onPress={onPressLeft}
-        style={{ width: wp('6%') }}>
+        style={styles.leftView}>
         {isBack ? (
           <Image resizeMode="contain" style={[styles.leftImgStyle, leftImgStyle]} source={leftImgName} />
         ) : null}
@@ -49,38 +45,37 @@ function Header({
         {centerImg && <Image source={centerImg} />}
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={{
-        width: widthPixel(38),
-        height: widthPixel(38),
-      }} onPress={onPressRight}>
+      <TouchableOpacity style={styles.leftView} onPress={onPressRight}>
         {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
         }
       </TouchableOpacity>
-
-
     </View>
   );
 }
 const styles = StyleSheet.create({
 
   container: {
-    width: wp("100%"),
+    marginTop: getStatusBarHeight(true) + heightPixel(10),
+    // marginTop: StatusBar.currentHeight,
+    width: "100%",
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
     paddingHorizontal: widthPixel(20),
+    marginBottom: heightPixel(20)
   },
   headerLabel: {
     fontFamily: 'Poppins-SemiBold',
     color: DefaultStyles.colors.secondary,
-    height: 30,
-    marginTop: -7,
-    fontSize: wp('6%'),
+    // height: 30,
+    // marginTop: -7,
+    fontSize: fontPixel(22),
   },
   hdrView: {
-    alignItems: 'center', width: wp('70%'), height: wp('5%')
+    alignItems: 'center',
+    width: widthPixel(270),
   },
   leftImgStyle: {
     width: widthPixel(30),
@@ -89,6 +84,11 @@ const styles = StyleSheet.create({
   rightImgStyle: {
     width: widthPixel(38),
     height: widthPixel(38),
+  },
+  leftView: {
+    width: widthPixel(40),
+    height: heightPixel(40),
+    justifyContent: "center",
   },
 });
 

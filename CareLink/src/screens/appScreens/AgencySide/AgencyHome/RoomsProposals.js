@@ -38,7 +38,7 @@ const RoomsProposals = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
                 onPressLeft={() => navigation.goBack()}
-                onPressRight={() => navigation.navigate("Messages")}
+                onPressRight={() => navigation.navigate(routes.messages)}
                 headerLabel={"Rooms & Proposals"}
             />
             <ScrollView>

@@ -55,7 +55,7 @@ export default BasicEntitiesComp
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: widthPixel(20),
-        marginTop: heightPixel(20)
+        marginTop: heightPixel(30)
     },
     titleText: {
         fontSize: fontPixel(16),

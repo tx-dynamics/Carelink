@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     titleText: {
-        fontSize: fontPixel(23),
+        fontSize: fontPixel(22),
         fontFamily: fonts.PoppinsSemiBold,
         color: colors.black
     },

@@ -72,7 +72,9 @@ const ServiceHome = ({ }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header headerLabel={"Home"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
+            <Header headerLabel={"Home"}
+                // height={heightPixel(80)} 
+                leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />

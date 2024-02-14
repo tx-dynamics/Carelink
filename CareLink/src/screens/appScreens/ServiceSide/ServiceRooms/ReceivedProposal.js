@@ -82,13 +82,10 @@ const ReceivedProposal = ({ navigation }) => {
     ]
     return (
         <View style={styles.container}>
-            <Header headerLabel={"Proposal"} height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
+            <Header headerLabel={"Proposal"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
             <ScrollView>
-                <View style={styles.marginView} >
-                    <Apptext style={styles.rms} >Received Proposal</Apptext>
-                </View>
-                <View style={[styles.txtView, { marginTop: wp('9%') }]}>
+                <View style={[styles.txtView, { marginTop: heightPixel(1) }]}>
                     <Apptext style={styles.rms} >Agency Details</Apptext>
                     {/* <TouchableOpacity style={styles.pinkBox}>
                         <Apptext style={styles.dtls} >Agency Details</Apptext>

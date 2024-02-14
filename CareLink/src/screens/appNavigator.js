@@ -104,7 +104,7 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
             <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
             <StackNavigator.Screen name={routes.sendProposal} component={SendProposal} />
-            <StackNavigator.Screen name="Messages" component={Messages} />
+            <StackNavigator.Screen name={routes.messages} component={ServiceMessages} />
             <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
             <StackNavigator.Screen name="StartContract" component={StartContract} />
             <StackNavigator.Screen name="MakeContract" component={MakeContract} />

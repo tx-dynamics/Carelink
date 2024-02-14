@@ -22,6 +22,7 @@ import AvailableComponent from '../../../components/AvailableComponent/Available
 import AddPhotoComponent, { AddButtonComponent, PhotoComponent } from '../../../components/AddPhotoComponent/AddPhotoComponent';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { removePic, uploadmageMultiPle } from '../../../Services/HelpingMethods';
+import AppDropDownPicker from '../../../components/AppDropDownPicker/AppDropDownPicker';
 
 
 const ListingOptions = ({ navigation }) => {
@@ -47,6 +48,30 @@ const ListingOptions = ({ navigation }) => {
     const [picData, setPicData] = useState([{ image: "", add: true }])
     const [startDate, setStartDate] = useState(null)
     const [endDate, setEndDate] = useState(null)
+    const [value, setValue] = useState("")
+    const [open, setOpen] = useState(false)
+    const [items, setItems] = useState([
+        {
+            id: 0,
+            label: "Basement",
+            value: "Basement"
+        },
+        {
+            id: 1,
+            label: "Ground Floor",
+            value: "Ground Floor"
+        },
+        {
+            id: 2,
+            label: "First Floor",
+            value: "First Floor"
+        },
+        {
+            id: 3,
+            label: "Second Floor",
+            value: "Second Floor"
+        },
+    ])
     const minDate = new Date();
     const maxDate = new Date(2025, 6, 3)
 
@@ -69,7 +94,17 @@ const ListingOptions = ({ navigation }) => {
                 heading={"Add Listing Information"}
             />
             <KeyboardAwareScrollView>
-                {/* <AddRoomComponent /> */}
+                <AddRoomComponent />
+                <AppDropDownPicker
+                    title={"Select Space"}
+                    open={open}
+                    setOpen={setOpen}
+                    items={items}
+                    setItems={setItems}
+                    value={value}
+                    setValue={setValue}
+                    onChangeValue={(v) => setValue(v)}
+                />
                 <BasicEntitiesComp basicData={basicData} setBasicData={setBasicData} />
                 <CalendarComponent maxDate={maxDate} minDate={minDate} onDateChange={onDateChange} />
                 <AvailableComponent

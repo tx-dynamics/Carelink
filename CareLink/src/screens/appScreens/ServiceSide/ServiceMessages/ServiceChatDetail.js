@@ -8,7 +8,6 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
-import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { heightPixel, widthPixel } from '../../../../Constants';
 import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';

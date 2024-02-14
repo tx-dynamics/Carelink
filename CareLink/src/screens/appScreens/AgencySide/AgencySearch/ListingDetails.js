@@ -15,7 +15,7 @@ const ListingDetails = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
                 onPressLeft={() => navigation.goBack()}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
                 headerLabel={"Listing Details"}
             />
             <ScrollView>

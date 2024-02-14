@@ -12,6 +12,7 @@ import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/Serv
 import { RedSnackbar, SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar'
 import { fonts } from '../../../../Constants/Fonts'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
+import IconHeaderComp from '../../../../components/IconHeaderComp'
 
 const InactiveRoom = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
@@ -30,11 +31,9 @@ const InactiveRoom = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <Header headerLabel={"Inactive Room"} height={heightPixel(80)} leftImgName={require('../../../../../assets/headerBack.png')}
-                onPressLeft={() => navigation.goBack()} />
+            <IconHeaderComp title={"Inactive Room"} imgName={appIcons.leftArrow} onPress={() => navigation.goBack()} />
             <KeyboardAwareScrollView >
                 <ServiceProviderInfo
-                    attachBath
                     days={"20"}
                     floor={"2nd"}
                     availableOn={"November 15"}

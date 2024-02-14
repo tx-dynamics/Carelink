@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar'
-import { heightPixel } from '../../../../Constants'
+import { heightPixel, routes } from '../../../../Constants'
 import colors from '../../../../config/colors'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
 import { iconPath } from '../../../../config/icon'
@@ -10,7 +10,7 @@ import Header from '../../../../components/Header'
 import { agencyData } from '../AgencyHome/AgencyHome'
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp'
 
-const CustomerListing = ({ navigation }) => {
+const CustomerListing = ({ navigation, route }) => {
     return (
         <View style={{
             flex: 1,
@@ -25,7 +25,8 @@ const CustomerListing = ({ navigation }) => {
                 renderItem={({ item, index }) => <CustomerListingComp
                     title={item.adress}
                     duration={item.duation}
-                    facilityData={item.facility} />} />
+                    facilityData={item.facility}
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })} />} />
         </View>
     )
 }

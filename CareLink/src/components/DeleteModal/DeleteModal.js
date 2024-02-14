@@ -6,16 +6,16 @@ import { appIcons } from '../../Constants/Utilities/assets'
 import { fonts } from '../../Constants/Fonts'
 import FormButton from '../FormButton'
 
-const DeleteModal = ({ visible, deletePress, cancelPress }) => {
+const DeleteModal = ({ visible, title, deletePress, cancelPress, rightButtonTitle }) => {
     return (
         <Modal visible={visible} transparent animationType='fade'>
             <View style={styles.container}>
                 <View style={styles.subView}>
                     <Image resizeMode='contain' source={appIcons.alertBlack} style={styles.alrtPic} />
-                    <Text style={styles.titleText}>Are you sure you want to delete this listing</Text>
+                    <Text style={styles.titleText}>{title ? title : "Are you sure you want to delete this listing"}</Text>
                     <View style={styles.btnView}>
                         <FormButton onPress={cancelPress} color={colors.black} fontSize={fontPixel(15)} buttonTitle={"Cancel"} borderColor={colors.black} borderWidth={1} borderRadius={12} backgroundColor={colors.white} containerStyle={{ marginBottom: 0, }} width={widthPixel(138)} />
-                        <FormButton onPress={deletePress} fontSize={fontPixel(15)} buttonTitle={"Delete"} containerStyle={{ marginBottom: 0, }} borderRadius={12} width={widthPixel(138)} />
+                        <FormButton onPress={deletePress} fontSize={fontPixel(15)} buttonTitle={rightButtonTitle ? rightButtonTitle : "Delete"} containerStyle={{ marginBottom: 0, }} borderRadius={12} width={widthPixel(138)} />
                     </View>
                 </View>
             </View>

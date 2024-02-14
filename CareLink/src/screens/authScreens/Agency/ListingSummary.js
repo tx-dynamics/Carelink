@@ -29,13 +29,12 @@ const ListingSummary = ({ navigation }) => {
             <AppStatusbar />
             <IconHeaderComp
                 title={"Summary"}
-                heading={"Listing Summary"}
+                // heading={"Listing Summary"}
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
             <KeyboardAwareScrollView >
                 <ServiceProviderInfo
-                    attachBath
                     days={"20"}
                     floor={"2nd"}
                     availableOn={"November 15"}
