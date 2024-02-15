@@ -279,10 +279,12 @@ const ServiceMessages = ({ navigation }) => {
     let DATA = usertype == "ServiceSide" ? DATAService : DATAAgency
     return (
         <View style={styles.container}>
-            <Header headerLabel={"Inbox"} isBack leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
-                leftImgName={appIcons.leftArrow}
-                // onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                onPressLeft={() => navigation.goBack()}
+            <Header
+                headerLabel={"Inbox"}
+                rightImg={usertype == "ServiceSide" ? appIcons.thirdTab : false}
+                leftImgStyle={styles.leftImgStyle}
+                leftImgName={usertype == "ServiceSide" ? appIcons.drawerIcon : appIcons.leftArrow}
+                onPressLeft={() => usertype == "ServiceSide" ? navigation.dispatch(DrawerActions.toggleDrawer()) : navigation.goBack()}
             />
             <KeyboardAwareScrollView>
                 <SearchComponent onChangeText={(item) => setSearch(item)} />

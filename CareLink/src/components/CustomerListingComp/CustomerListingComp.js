@@ -5,12 +5,12 @@ import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityComp'
 import { appIcons } from '../../Constants/Utilities/assets'
-const CustomerListingComp = ({ onPress, title, rightIcon, duration, facilityData, posted }) => {
+const CustomerListingComp = ({ onPress, title, rightIcon, rightPress, duration, facilityData, posted }) => {
     return (
         <Pressable onPress={onPress} style={styles.container}>
             <View style={styles.subView}>
                 <Text style={styles.titleText}>{title}</Text>
-                {rightIcon && <TouchableOpacity>
+                {rightIcon && <TouchableOpacity onPress={rightPress}>
                     <Image resizeMode='contain' source={rightIcon} style={styles.rightIconStyle} />
                 </TouchableOpacity>
                 }

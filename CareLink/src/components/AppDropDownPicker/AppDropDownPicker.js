@@ -19,6 +19,7 @@ const AppDropDownPicker = ({
     selectedItemLabStyle,
     title,
     mainViewStyle,
+    onSelectItem
 }) => {
     // const [items, setItems] = useState([
     //     {
@@ -38,7 +39,7 @@ const AppDropDownPicker = ({
                 <View style={styles.topView}>
                     <Text style={styles.titleText}>{title}</Text>
                 </View>}
-            <DropDownPicker
+            <DropDownPicker onSelectItem={onSelectItem}
                 listMode='MODAL'
                 onChangeValue={onChangeValue}
                 open={open}
@@ -87,12 +88,13 @@ const styles = StyleSheet.create({
         height: heightPixel(48),
         borderColor: colors.black,
         borderRadius: 10,
+        // backgroundColor: "red"
     },
     dropDownContainerStyle: {
         alignSelf: "center",
         borderRadius: widthPixel(10),
+        // backgroundColor: "red",
         // backgroundColor: colors.white,
-        backgroundColor: colors.white,
         borderWidth: 1,
         width: widthPixel(374),
         // left: -11,

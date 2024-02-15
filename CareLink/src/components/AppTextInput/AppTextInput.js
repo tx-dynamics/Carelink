@@ -1,22 +1,24 @@
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 import { appIcons } from '../../Constants/Utilities/assets'
 
-const AppTextInput = ({ mainViewStyle, title, maxLength, placeholder, value, onChangeText, secureTextEntry, keyboardType = 'default', left, right, rightPress, multiline, containerStyle }) => {
+const AppTextInput = ({ mainViewStyle, title, defaultValue, editable, maxLength, onPress, placeholder, value, onChangeText, secureTextEntry, keyboardType = 'default', left, right, rightPress, multiline, containerStyle }) => {
     return (
         <View style={[styles.mainView, mainViewStyle]}>
             {title &&
                 <View style={styles.topView}>
                     <Text style={styles.titleText}>{title}</Text>
                 </View>}
-            <View style={[styles.container, containerStyle]}>
+            <Pressable onPress={onPress} style={[styles.container, containerStyle]}>
                 {left &&
                     <View style={styles.leftView}>
                     </View>}
-                <TextInput maxLength={maxLength}
+                <TextInput defaultValue={defaultValue}
+                    editable={editable}
+                    maxLength={maxLength}
                     value={value}
                     secureTextEntry={secureTextEntry}
                     keyboardType={keyboardType}
@@ -28,7 +30,7 @@ const AppTextInput = ({ mainViewStyle, title, maxLength, placeholder, value, onC
                     <TouchableOpacity onPress={rightPress} style={styles.rightView}>
                         <Image resizeMode='contain' source={right} style={styles.rightImg} />
                     </TouchableOpacity>}
-            </View>
+            </Pressable>
         </View>
     )
 }

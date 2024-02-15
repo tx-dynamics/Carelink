@@ -54,6 +54,8 @@ const appIcons = {
     heartRed: require(`${iconUrl}/heartRed.png`),
     heartBlank: require(`${iconUrl}/heartBlank.png`),
     dummyUser: require(`${iconUrl}/dummyUser.png`),
+    drawerIcon: require(`${iconUrl}/drawerIcon.png`),
+    datePciker: require(`${iconUrl}/datePciker.png`),
 }
 
 export { appImages, appIcons }

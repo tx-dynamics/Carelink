@@ -8,12 +8,15 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
-import { heightPixel, widthPixel } from '../../../../Constants';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
+import { userType } from '../../../../redux/Slices/splashSlice';
+import { useSelector } from 'react-redux';
 
 const ServiceChatDetail = ({ navigation, route }) => {
     const ref = useRef(null)
+    const usertype = useSelector((state) => state.splash.userType)
     const [isMessage, setMessage] = useState("")
     const [DATA, setData] = useState([
         {
@@ -161,13 +164,13 @@ const ServiceChatDetail = ({ navigation, route }) => {
                     leftImgName={require('../../../../../assets/headerBack.png')}
                     onPressLeft={() => navigation.goBack()}
                 />
-                {route?.params?.isContract &&
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate("Received")}
-                        style={styles.RcvdView}>
-                        <Apptext style={styles.cntTxt}>Contracts</Apptext>
-                    </TouchableOpacity>
-                }
+                {/* {!route?.params?.isContract && */}
+                <TouchableOpacity
+                    onPress={() => navigation.navigate(userType == "ServiceSide" ? routes.receivedContracts : routes.createContract)}
+                    style={styles.RcvdView}>
+                    <Apptext style={styles.cntTxt}>Make Contract</Apptext>
+                </TouchableOpacity>
+                {/* } */}
             </View>
             <View style={styles.direView} >
                 <Image
@@ -268,8 +271,11 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.primary
     },
     RcvdView: {
-        height: heightPixel(23),
-        width: wp('25%'),
+        paddingHorizontal: widthPixel(6),
+        paddingVertical: heightPixel(1),
+        justifyContent: "center",
+        alignItems: "center",
+        // width: wp('25%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderRadius: 5,
     },

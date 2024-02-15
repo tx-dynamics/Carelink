@@ -69,6 +69,7 @@ import Terms from "./authScreens/Register/Terms";
 import DeleteAccountPassword from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountPassword";
 import DeleteAccountOTP from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountOTP";
 import CustomerListing from "./appScreens/AgencySide/CustomerListing/CustomerListing";
+import ActiveContracts from "./appScreens/AgencySide/ActiveContracts/ActiveContracts";
 
 
 const Tab = createBottomTabNavigator();
@@ -99,14 +100,15 @@ const WithoutBottomTabnavigator = () => {
             screenOptions={{
                 headerShown: false
             }}>
-            <StackNavigator.Screen name="RoomsProposals" component={RoomsProposals} />
+            <StackNavigator.Screen name={routes.roomProposal} component={RoomsProposals} />
             <StackNavigator.Screen name={routes.roomDetails} component={RoomsDetails} />
             <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
             <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
             <StackNavigator.Screen name={routes.sendProposal} component={SendProposal} />
             <StackNavigator.Screen name={routes.messages} component={ServiceMessages} />
-            <StackNavigator.Screen name="ChatDetail" component={ChatDetail} />
-            <StackNavigator.Screen name="StartContract" component={StartContract} />
+            <StackNavigator.Screen name={routes.chatScreen} component={ChatDetail} />
+            <StackNavigator.Screen name={routes.createContract} component={StartContract} />
+            <StackNavigator.Screen name={routes.activeContracts} component={ActiveContracts} />
             <StackNavigator.Screen name="MakeContract" component={MakeContract} />
             <StackNavigator.Screen name="ContractRead" component={ContractRead} />
             <StackNavigator.Screen name="Read1" component={Read1} />
@@ -114,7 +116,7 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="Read3" component={Read3} />
             <StackNavigator.Screen name="Rates" component={Rates} />
             <StackNavigator.Screen name="ServiceChatDetail" component={ServiceChatDetail} />
-            <StackNavigator.Screen name="Received" component={Received} />
+            <StackNavigator.Screen name={routes.receivedContracts} component={Received} />
             <StackNavigator.Screen name="Help" component={Help} />
             <StackNavigator.Screen name="SavedListing" component={SavedListing} />
             <StackNavigator.Screen name="ReceivedProposal" component={ReceivedProposal} />
@@ -222,7 +224,7 @@ const BellNavigator = () => {
                 headerShown: false
             }}>
             {usertype === "ServiceSide" ?
-                <StackNavigator.Screen name="ServiceMessages" component={ServiceMessages} />
+                <StackNavigator.Screen name={routes.messages} component={ServiceMessages} />
                 :
                 <StackNavigator.Screen name="AgencyNotifications" component={AgencyNotifications} />
             }

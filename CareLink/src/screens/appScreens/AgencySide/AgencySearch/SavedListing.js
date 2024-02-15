@@ -5,35 +5,292 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import SearchComponent from '../../../../components/SearchComponent/SearchComponent';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { fonts } from '../../../../Constants/Fonts';
+import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
+import DeleteModal from '../../../../components/DeleteModal/DeleteModal';
+import { RedSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
 
 
 const SavedListing = ({ navigation }) => {
-
-    const DATA = [
+    const [isSearch, setSearch] = useState("")
+    const [visible, setVisible] = useState(false)
+    const [isIndex, setIndex] = useState(0)
+    const [DATA, setData] = useState([
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "Debit/Credit Card",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
+            id: 1,
+            title: "James Clear",
+            duration: 20,
+            liked: true,
+            posted: "12 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
 
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
         {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "PayPal",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
+            id: 1,
+            title: "James Hype",
+            duration: 23,
+            liked: true,
+            posted: "2 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Terres"
 
+                },
+                {
+                    id: 2,
+                    title: "Wheelchair"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "John Doe",
+            duration: 34,
+            liked: true,
+            posted: "23 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Security"
+
+                },
+                {
+                    id: 2,
+                    title: "Sports Hall"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Camron",
+            duration: 21,
+            liked: true,
+            posted: "29 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Swimming Pool"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Diana Brian",
+            duration: 56,
+            liked: true,
+            posted: "31 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "TV lounge"
+
+                },
+                {
+                    id: 2,
+                    title: "Kitchen"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Jasmine Grey",
+            duration: 24,
+            liked: true,
+            posted: "1 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Zaur",
+            duration: 11,
+            liked: true,
+            posted: "2 hrs ago",
+            facility: [
+
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Tom Hanks",
+            duration: 42,
+            liked: true,
+            posted: "4 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Air Conditioner"
+
+                },
+                {
+                    id: 2,
+                    title: "Terres"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Domenic",
+            duration: 17,
+            liked: true,
+            posted: "4 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "House keeping"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Morgan",
+            duration: 44,
+            liked: true,
+            posted: "10 hr ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Security"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Jason Brown",
+            duration: 43,
+            liked: true,
+            posted: "10 hrs ago",
+            facility: [
+
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Philips Nick",
+            duration: 43,
+            liked: true,
+            posted: "11 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Johnny Gibs",
+            duration: 11,
+            liked: true,
+            posted: "12 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+            ]
+        },
+    ]);
+    const heartPress = (index) => {
+        setIndex(index)
+        setVisible(true)
+    }
+    const onRemovePress = () => {
+        DATA.splice(isIndex, 1)
+        setData([...DATA])
+        RedSnackbar("Listing Removed")
+        setTimeout(() => {
+            setVisible(false)
+        }, 400);
+    }
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/leftArrow.png')}
+                headerLabel={"Saved Listings"}
+                leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
             />
-            <ScrollView>
+            <SearchComponent onChangeText={setSearch} containerStyle={{ marginBottom: heightPixel(15), }} />
+            <KeyboardAwareScrollView>
+                <Apptext style={styles.rms} >Saved Listings</Apptext>
+                <FlatList scrollEnabled={false} data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => <CustomerListingComp
+                        title={item.title}
+                        posted={item.posted}
+                        duration={item.duration}
+                        facilityData={item.facility}
+                        rightIcon={appIcons.heartRed}
+                        rightPress={heartPress}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })}
+                    />} />
+            </KeyboardAwareScrollView>
+            <DeleteModal cancelPress={() => setVisible(false)} deletePress={onRemovePress} rightButtonTitle={"Remove"} visible={visible} title={"Are you sure you want to remove from saved listing"} />
+            {/* <ScrollView>
                 <View style={styles.marginView}>
                     <View style={{ flexDirection: 'row', marginTop: -25, justifyContent: 'space-between' }}>
                         <Apptext style={styles.rms} >Saved Listings</Apptext>
@@ -57,7 +314,7 @@ const SavedListing = ({ navigation }) => {
                         />
                     </View>
                 </View>
-            </ScrollView>
+            </ScrollView> */}
         </View>
     )
 }
@@ -70,37 +327,11 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
     },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
-    },
     rms: {
-        fontFamily: 'Poppins-SemiBold',
-        marginLeft: wp('1%'),
-        fontSize: 20
+        paddingHorizontal: widthPixel(20),
+        fontFamily: fonts.Poppins_Medium,
+        fontSize: fontPixel(17),
+        marginBottom: heightPixel(10)
     },
-    dtls: {
-        color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
-    },
-    marginView: {
-        marginHorizontal: wp('5%'),
-        marginTop: wp('6%')
-    },
-    ltst: {
-        fontSize: 20,
-        fontFamily: 'Poppins-Medium'
-    },
-    searchBar: {
-        height: 47,
-        width: wp('90%'),
-        flexDirection: 'row',
-        alignSelf: 'center',
-        borderRadius: 9,
-        alignItems: 'center',
-        borderWidth: 0.5,
-        borderColor: "gray"
-
-    },
-
 
 });

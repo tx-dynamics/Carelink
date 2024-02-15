@@ -41,6 +41,10 @@ export const routes = {
     roomProposal: "roomProposals",
     sendProposal: "sendProposal",
     messages: "messages",
+    receivedContracts: "receivedContracts",
+    chatScreen: "chatScreen",
+    createContract: "createContract",
+    activeContracts: "activeContracts",
 
 }
 

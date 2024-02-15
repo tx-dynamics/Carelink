@@ -8,20 +8,25 @@ import UserInfoComp from '../../../../components/UserInfoComp/UserInfoComp';
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
 
-const RoomsDetails = ({ navigation }) => {
+const RoomsDetails = ({ navigation, route }) => {
     const [liked, setLiked] = useState(false)
+    const onHeartPress = () => {
+        !liked && SuccessSnackbar("Listing Saved")
+        setLiked(!liked)
+    }
     return (
         <View style={styles.container}>
             <Header
-                headerLabel={"Listing Details"}
+                headerLabel={route?.params?.review ? "Review Details" : "Room Details"}
                 leftImgName={appIcons.headerBack}
-                onPressRight={() => setLiked(!liked)}
+                onPressRight={onHeartPress}
                 rightImgStyle={styles.rightIconStyle}
                 onPressLeft={() => navigation.goBack()}
                 rightImg={liked ? appIcons.heartRed : appIcons.heartBlank} />
             <KeyboardAwareScrollView >
-                <UserInfoComp pic={appIcons.dummyUser} title={"James Clear"} />
+                {!route?.params?.review && <UserInfoComp pic={appIcons.dummyUser} title={"James Clear"} />}
                 <ServiceProviderInfo
                     images
                     days={"20"}
@@ -30,7 +35,7 @@ const RoomsDetails = ({ navigation }) => {
                     location={"ABC Block, New york, USA"}
                     note={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus"} />
             </KeyboardAwareScrollView>
-            <FormButton buttonTitle={"Submit Proposal"} onPress={() => navigation.navigate(routes.sendProposal)} />
+            <FormButton buttonTitle={route?.params?.review ? "Review & Continue" : "Submit Proposal"} onPress={() => navigation.navigate(routes.sendProposal)} />
         </View>
     )
 }

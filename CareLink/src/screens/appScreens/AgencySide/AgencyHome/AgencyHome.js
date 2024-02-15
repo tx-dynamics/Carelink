@@ -5,7 +5,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import { DrawerActions } from '@react-navigation/native'
+import { DrawerActions, useNavigation } from '@react-navigation/native'
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
@@ -68,9 +68,8 @@ export const agencyData = [
         ]
     },
 ];
-const AgencyHome = ({ navigation }) => {
-
-
+const AgencyHome = ({ }) => {
+    const navigation = useNavigation()
     return (
         <View style={styles.container}>
             <AppStatusbar />
