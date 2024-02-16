@@ -8,17 +8,33 @@ import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel, routes } from '../../../Constants';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
+import { SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import { useDispatch, useSelector } from 'react-redux';
+import { fromProfile } from '../../../redux/Slices/appSlice';
 
-const AgencyBasic = ({ navigation }) => {
+const AgencyBasic = ({ navigation, route }) => {
+    const dispatch = useDispatch()
     const [agencyName, setAgencyName] = useState("")
     const [isExperience, setExperience] = useState("")
     const [about, setAbout] = useState("")
+    const isFromProfile = useSelector((state) => state.appSlice.fromProfile)
+
+    const onPressButton = () => {
+        if (isFromProfile) {
+            navigation.goBack()
+            // SuccessFlashMessage("Information Changed")
+            dispatch(fromProfile(false))
+        }
+        else {
+            navigation.navigate(routes.agencyPhotos)
+        }
+    }
     return (
         <View style={styles.container}>
-            <IconHeaderComp title={"Enter Information"}
+            <IconHeaderComp title={isFromProfile ? "About" : "Enter Information"}
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
-                heading={"Enter your agency name and about"} />
+                heading={isFromProfile ? "About Us" : "Enter your agency name and about"} />
             <KeyboardAwareScrollView>
                 <AppTextInput
                     value={agencyName}
@@ -38,8 +54,8 @@ const AgencyBasic = ({ navigation }) => {
                     mainViewStyle={styles.aboutMainStyle} />
             </KeyboardAwareScrollView>
             <FormButton
-                buttonTitle={"Next"}
-                onPress={() => navigation.navigate(routes.agencyPhotos)} />
+                buttonTitle={isFromProfile ? "Change" : "Next"}
+                onPress={onPressButton} />
         </View>
     )
 }

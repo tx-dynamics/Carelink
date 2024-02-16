@@ -47,8 +47,8 @@ export const uploadmageCamState = (setPic, setUpload, setVisible, height) => {
 }
 export const uploadmage = (setPic) => {
     ImageCropPicker.openPicker({
-        width: 400,
-        height: 200,
+        width: 600,
+        height: 600,
         cropping: true,
     }).then(image => {
         setPic(image?.path)

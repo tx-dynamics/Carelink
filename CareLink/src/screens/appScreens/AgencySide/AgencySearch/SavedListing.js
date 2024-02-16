@@ -12,7 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { fonts } from '../../../../Constants/Fonts';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal';
-import { RedSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
+import { RedFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 
 
 const SavedListing = ({ navigation }) => {
@@ -262,10 +262,8 @@ const SavedListing = ({ navigation }) => {
     const onRemovePress = () => {
         DATA.splice(isIndex, 1)
         setData([...DATA])
-        RedSnackbar("Listing Removed")
-        setTimeout(() => {
-            setVisible(false)
-        }, 400);
+        RedFlashMessage("Listing Removed")
+        setVisible(false)
     }
     return (
         <View style={styles.container}>
@@ -282,10 +280,10 @@ const SavedListing = ({ navigation }) => {
                     renderItem={({ item, index }) => <CustomerListingComp
                         title={item.title}
                         posted={item.posted}
+                        rightPress={heartPress}
                         duration={item.duration}
                         facilityData={item.facility}
                         rightIcon={appIcons.heartRed}
-                        rightPress={heartPress}
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })}
                     />} />
             </KeyboardAwareScrollView>

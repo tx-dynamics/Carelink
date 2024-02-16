@@ -1,23 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View, ImageBackground } from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, Image, View, ImageBackground } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { heightPixel, routes } from '../../../Constants';
+import { fromProfile } from '../../../redux/Slices/appSlice';
 
 const AgencyMap = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
+    const isFromProfile = useSelector((state) => state.appSlice.fromProfile)
+    const dispatch = useDispatch()
+
     const onPressNext = () => {
         if (usertype == "ServiceSide") {
             navigation.navigate(routes.listingSummary)
         } if (usertype == "AgencySide") {
-            navigation.navigate("PaymentPlans")
+            if (isFromProfile) {
+                navigation.navigate("ProfileNavigator")
+                dispatch(fromProfile(false))
+            } else {
+                navigation.navigate("PaymentPlans")
+            }
 
         }
     }
@@ -44,12 +52,9 @@ const AgencyMap = ({ navigation }) => {
                 </View>
             </View>
             <FormButton
-                buttonTitle={"Next"}
-                // width={wp('90%')}
+                buttonTitle={isFromProfile ? "Update" : "Next"}
                 onPress={onPressNext}
             />
-
-
         </View>
     )
 }

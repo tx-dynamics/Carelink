@@ -9,7 +9,7 @@ import ServiceListingComp from '../../../../components/ServiceListingComp'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import FormButton from '../../../../components/FormButton'
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo'
-import { RedSnackbar, SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar'
+import { RedFlashMessage, SuccessFlashMessage, } from '../../../../Constants/Utilities/assets/Snakbar'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
 
@@ -17,14 +17,14 @@ const AvailableRoom = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
     const onPressInactive = () => {
         setVisible(true)
-        // SuccessSnackbar("Room has been inactive")
+        // SuccessFlashMessage("Room has been inactive")
         // navigation.navigate("HomeNavigator")
     }
     const onDeletePress = () => {
         setVisible(false)
         navigation.goBack()
         setTimeout(() => {
-            RedSnackbar("Listing Inactivated")
+            RedFlashMessage("Listing Inactivated")
         }, 100);
     }
     const onCancelPress = () => {

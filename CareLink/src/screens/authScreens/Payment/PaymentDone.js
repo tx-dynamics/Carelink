@@ -15,7 +15,6 @@ import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import { fromProfile } from '../../../redux/Slices/appSlice';
-import { SuccessSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
 import { userSave } from '../../../redux/Slices/splashSlice';
 
 const PaymentDone = ({ navigation }) => {

@@ -8,12 +8,12 @@ import UserInfoComp from '../../../../components/UserInfoComp/UserInfoComp';
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
-import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const RoomsDetails = ({ navigation, route }) => {
     const [liked, setLiked] = useState(false)
     const onHeartPress = () => {
-        !liked && SuccessSnackbar("Listing Saved")
+        !liked && SuccessFlashMessage("Listing Saved")
         setLiked(!liked)
     }
     return (

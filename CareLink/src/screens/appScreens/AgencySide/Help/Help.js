@@ -7,13 +7,13 @@ import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
 import { fontPixel, heightPixel } from '../../../../Constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 
 const Help = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
     const onPressSubmit = () => {
-        SuccessSnackbar("Your message has been submitted")
+        SuccessFlashMessage("Your message has been submitted")
         navigation.goBack()
     }
     return (

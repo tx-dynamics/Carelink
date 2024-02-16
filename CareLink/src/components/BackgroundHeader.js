@@ -14,8 +14,6 @@ function BackgroundHeader({
   backgroundColor,
   backImg,
   leftImgName,
-  isBack = true,
-  contentColor = DefaultStyles.colors.secondary,
   onPressLeft,
   onPressRight,
   rightImg,
@@ -36,13 +34,11 @@ function BackgroundHeader({
         <TouchableOpacity
           onPress={onPressLeft}
         >
-          {isBack ? (
-            <Image style={[styles.icons,]} source={leftImgName} />
-          ) : null}
+          {leftImgName && <Image style={[styles.icons,]} source={leftImgName} />}
         </TouchableOpacity>
 
         <TouchableOpacity onPress={onPressRight}>
-          <Image style={[styles.icons,]} source={rightImg} />
+          {rightImg && <Image style={[styles.icons,]} source={rightImg} />}
         </TouchableOpacity>
       </View>
 
@@ -52,7 +48,7 @@ function BackgroundHeader({
 const styles = StyleSheet.create({
 
   container: {
-    height: wp('67%'),
+    height: heightPixel(276),
     width: "100%",
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,

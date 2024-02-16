@@ -10,7 +10,7 @@ import FormButton from '../../../components/FormButton'
 import ImageCropPicker from 'react-native-image-crop-picker'
 import { appIcons } from '../../../Constants/Utilities/assets'
 import ImageUploadModal from '../../../components/ImageUploadModal/ImageUploadModal'
-import { RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar'
+import { RedFlashMessage, RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar'
 
 const AddDocuments = ({ navigation }) => {
     const [isIndex, setIndex] = useState(0)
@@ -61,7 +61,7 @@ const AddDocuments = ({ navigation }) => {
             cropping: true
         }).then(image => {
             setData([...isData, isData[isIndex].media = image.path])
-        }).catch(err => RedSnackbar(err.message))
+        }).catch(err => RedFlashMessage(err.message))
     }
     const openCamera = () => {
         setVisible(false)
@@ -69,7 +69,7 @@ const AddDocuments = ({ navigation }) => {
             width: widthPixel(374),
             height: heightPixel(200),
             cropping: true
-        }).then(image => setData([...isData, isData[isIndex].media = image.path])).catch(err => RedSnackbar(err.message))
+        }).then(image => setData([...isData, isData[isIndex].media = image.path])).catch(err => RedFlashMessage(err.message))
     }
     const removeImage = () => {
         setData([...isData, isData[isIndex].media = null])

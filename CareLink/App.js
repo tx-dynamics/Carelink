@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux'
 import { store } from './src/redux/store';
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
+import FlashMessage from "react-native-flash-message";
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
         <NavigationContainer>
           <PersistGate loading={null} persistor={persistor}>
             <Main />
+            <FlashMessage position="top" />
           </PersistGate>
         </NavigationContainer>
       </Provider>

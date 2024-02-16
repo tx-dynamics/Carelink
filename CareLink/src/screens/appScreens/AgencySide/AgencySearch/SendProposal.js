@@ -10,13 +10,13 @@ import { appIcons } from '../../../../Constants/Utilities/assets';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 import { heightPixel } from '../../../../Constants';
-import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const SendProposal = ({ navigation }) => {
     const [value, setValue] = useState("")
     const onPressSubmit = () => {
         navigation.navigate("AgencyHome")
-        SuccessSnackbar("Your proposal has been submitted")
+        SuccessFlashMessage("Your proposal has been submitted")
     }
     return (
         <View style={styles.container}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, UIManager, LayoutAnimation } from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
 import AuthNavigator from '../screens/authScreens/authNavigator';
 import DefaultStyles from "../config/Styles";
@@ -40,7 +40,7 @@ import Read3 from "./appScreens/AgencySide/Contract/Read3";
 import EditProfile from "./appScreens/ServiceSide/ServiceProfile/EditProfile";
 import Received from "./appScreens/ServiceSide/Contract/Received";
 import Feedback from "./appScreens/ServiceSide/Feedback/Feedback";
-import { routes } from "../Constants";
+import { heightPixel, routes } from "../Constants";
 import AgencyDetail from "./appScreens/ServiceSide/AgencyDetail/AgencyDetail";
 import BookedRooms from "./appScreens/ServiceSide/ServiceRooms/BookedRooms";
 import AvailableRoom from "./appScreens/ServiceSide/ServiceRooms/AvailableRoom";
@@ -70,6 +70,9 @@ import DeleteAccountPassword from "./appScreens/GlobalScreens/DeleteAccount/Dele
 import DeleteAccountOTP from "./appScreens/GlobalScreens/DeleteAccount/DeleteAccountOTP";
 import CustomerListing from "./appScreens/AgencySide/CustomerListing/CustomerListing";
 import ActiveContracts from "./appScreens/AgencySide/ActiveContracts/ActiveContracts";
+import { useFocusEffect } from "@react-navigation/native";
+import BrochureScreen from "./appScreens/AgencySide/AgencyProfile/BrochureScreen";
+import AgencyBasic from "./authScreens/Agency/AgencyBasic";
 
 
 const Tab = createBottomTabNavigator();
@@ -152,7 +155,8 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name={routes.deleteAccountPassword} component={DeleteAccountPassword} />
             <StackNavigator.Screen name={routes.deleteAccountOTP} component={DeleteAccountOTP} />
             <StackNavigator.Screen name={routes.customerListing} component={CustomerListing} />
-
+            <StackNavigator.Screen name={routes.brochureProfile} component={BrochureScreen} />
+            <StackNavigator.Screen name={routes.agencyBasic} component={AgencyBasic} />
         </StackNavigator.Navigator>
     )
 }
@@ -264,7 +268,9 @@ const MyTabs = () => {
                     borderTopWidth: 0,
                     backgroundColor: DefaultStyles.colors.white,
                     border: 0,
+                    position: "absolute",
                     height: wp('18%'),
+                    // height: heightPixel(75),
                 },
                 tabBarLabelStyle: {
                     fontSize: wp('2%'),

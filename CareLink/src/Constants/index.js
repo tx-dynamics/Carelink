@@ -45,6 +45,7 @@ export const routes = {
     chatScreen: "chatScreen",
     createContract: "createContract",
     activeContracts: "activeContracts",
+    brochureProfile: "brochureProfile",
 
 }
 

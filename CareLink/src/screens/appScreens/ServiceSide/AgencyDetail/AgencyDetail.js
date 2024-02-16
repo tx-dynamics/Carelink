@@ -162,10 +162,7 @@ const AgencyDetail = ({ navigation, route }) => {
                             onPress={() => navigation.navigate("ServiceChatDetail")}
                             style={styles.cameraView}>
                             <Image resizeMode='contain'
-                                style={{
-                                    width: widthPixel(23),
-                                    height: heightPixel(26)
-                                }}
+                                style={styles.sendIcon}
                                 source={appIcons.sendMessage}
                             />
                         </TouchableOpacity>
@@ -296,5 +293,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: wp('8%'),
         borderRadius: 15
-    }
+    },
+    sendIcon: {
+        width: widthPixel(23),
+        height: heightPixel(26)
+    },
 });

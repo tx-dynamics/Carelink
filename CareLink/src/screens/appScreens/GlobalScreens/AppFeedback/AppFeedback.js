@@ -9,12 +9,12 @@ import { fontPixel, heightPixel, widthPixel } from '../../../../Constants'
 import { fonts } from '../../../../Constants/Fonts'
 import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput'
 import FormButton from '../../../../components/FormButton'
-import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar'
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
 
 const AppFeedback = ({ navigation, route }) => {
     const onSendPress = () => {
         navigation.goBack()
-        SuccessSnackbar("Feedback has been sent")
+        SuccessFlashMessage("Feedback has been sent")
     }
     return (
         <View style={styles.container}>

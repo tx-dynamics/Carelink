@@ -12,7 +12,7 @@ import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextIn
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import FeedBackCheckBox from '../../../../components/FeedbackCheckBox/FeedBackCheckBox';
 import { appIcons } from '../../../../Constants/Utilities/assets';
-import { SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 
 const Feedback = ({ navigation }) => {
     const [data, setData] = useState([
@@ -41,7 +41,7 @@ const Feedback = ({ navigation }) => {
         setData(updatedDataArray); // Update the state with the modified array
     };
     const onSubmitPress = () => {
-        SuccessSnackbar("Your feedback has been submitted")
+        SuccessFlashMessage("Your feedback has been submitted")
         // navigation.goBack()
         navigation.navigate("HomeNavigator")
     }

@@ -56,6 +56,8 @@ const appIcons = {
     dummyUser: require(`${iconUrl}/dummyUser.png`),
     drawerIcon: require(`${iconUrl}/drawerIcon.png`),
     datePciker: require(`${iconUrl}/datePciker.png`),
+    camera: require(`${iconUrl}/camera.png`),
+    uploadIcon: require(`${iconUrl}/uploadIcon.png`),
 }
 
 export { appImages, appIcons }

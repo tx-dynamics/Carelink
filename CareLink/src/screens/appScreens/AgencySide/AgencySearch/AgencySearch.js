@@ -237,7 +237,7 @@ const AgencySearch = ({ navigation }) => {
         },
         {
             id: 1,
-            title: "Johnny Gibs",
+            title: "Johnny Gibssss",
             duration: 11,
             liked: false,
             posted: "12 mins ago",
@@ -250,7 +250,6 @@ const AgencySearch = ({ navigation }) => {
             ]
         },
     ];
-
     return (
         <View style={styles.container}>
             <Header
@@ -264,8 +263,10 @@ const AgencySearch = ({ navigation }) => {
             <SearchComponent onChangeText={setSearch} containerStyle={{ marginVertical: heightPixel(20), }} />
             <KeyboardAwareScrollView>
                 <Apptext style={styles.rms} >Client Listings</Apptext>
-                {/* <AgentSideListingComp /> */}
-                <FlatList scrollEnabled={false} data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
+                <FlatList
+                    scrollEnabled={false}
+                    data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
+                    ListFooterComponent={() => <View style={{ marginBottom: heightPixel(70) }}></View>}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => <CustomerListingComp
                         title={item.title}
@@ -276,13 +277,11 @@ const AgencySearch = ({ navigation }) => {
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })}
                     />} />
             </KeyboardAwareScrollView>
-
         </View>
     )
 }
 
 export default AgencySearch;
-
 
 const styles = StyleSheet.create({
     container: {

@@ -12,14 +12,14 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import FormButton from '../../../../components/FormButton'
 import { useDispatch } from 'react-redux'
 import { userSave } from '../../../../redux/Slices/splashSlice'
-import { RedSnackbar } from '../../../../Constants/Utilities/assets/Snakbar'
+import { RedFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
 
 const DeleteAccountOTP = ({ navigation, route }) => {
     const [isOTP, setIsOTP] = useState("")
     const dispatch = useDispatch()
     const onDeletePress = () => {
         dispatch(userSave(null))
-        RedSnackbar("Your account has been deleted")
+        RedFlashMessage("Your account has been deleted")
     }
     return (
         <View style={styles.container}>

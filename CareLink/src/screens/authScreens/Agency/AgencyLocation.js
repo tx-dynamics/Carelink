@@ -11,7 +11,7 @@ import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel } from '../../../Constants';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import { RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar';
+import { RedFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 
 const AgencyLocation = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -21,7 +21,7 @@ const AgencyLocation = ({ navigation }) => {
     const [isState, setState] = useState("")
     const onNextPress = () => {
         //APK  // if (street == "" || apartment == "" || zipCode == "" || isState == "") {
-        //     RedSnackbar("Details required")
+        // RedFlashMessage("Details required")
         //     return
         // }
         navigation.navigate("AgencyMap")
@@ -30,7 +30,7 @@ const AgencyLocation = ({ navigation }) => {
         <View style={styles.container}>
             <KeyboardAwareScrollView style={{}}>
                 <IconHeaderComp
-                    title={"Add Location"}
+                    title={"Location"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                     heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}

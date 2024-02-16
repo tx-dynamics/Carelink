@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
     StyleSheet, View
 } from 'react-native';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import FormInput from '../../../../components/FormInput';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { Table, Rows } from 'react-native-table-component';
 import { heightPixel, widthPixel } from '../../../../Constants';
-import DropDownPicker from 'react-native-dropdown-picker';
 import AppDropDownPicker from '../../../../components/AppDropDownPicker/AppDropDownPicker';
 
 const Rates = ({ navigation }) => {
@@ -42,12 +40,6 @@ const Rates = ({ navigation }) => {
             ['Fixed', '$190'],],
         },
     ])
-    const tableData = [
-        ['Hourly', '$000',],
-        ['Start At', '$000'],
-        ['Fixed', '$000'],
-    ]
-
     return (
         <View style={styles.container}>
             <Header headerLabel={"Rates"}
@@ -62,16 +54,16 @@ const Rates = ({ navigation }) => {
                 setItems={setItems}
                 value={value}
                 setValue={setValue}
-                onSelectItem={(v, index) => setIndex(v.id)}
+                onSelectItem={(v) => setIndex(v.id)}
             />
             <View style={styles.container1}>
                 <Table
                     borderStyle={styles.tableStyle}>
                     <Rows data={items[isIndex].rate}
-                        textStyle={styles.text} />
+                        textStyle={styles.text}
+                    />
                 </Table>
             </View>
-
         </View>
     )
 }

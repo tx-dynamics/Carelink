@@ -9,7 +9,7 @@ import ServiceListingComp from '../../../../components/ServiceListingComp'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import FormButton from '../../../../components/FormButton'
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo'
-import { RedSnackbar, SuccessSnackbar } from '../../../../Constants/Utilities/assets/Snakbar'
+import { RedFlashMessage, SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
 import { fonts } from '../../../../Constants/Fonts'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
@@ -17,13 +17,13 @@ import IconHeaderComp from '../../../../components/IconHeaderComp'
 const InactiveRoom = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
     const onPressActive = () => {
-        SuccessSnackbar("Room activated successfully")
+        SuccessFlashMessage("Room activated successfully")
         navigation.goBack()
     }
     const onDeletePress = () => {
         setVisible(false)
         navigation.goBack()
-        RedSnackbar("Listing deleted successfully")
+        RedFlashMessage("Listing deleted successfully")
     }
     const onCancelPress = () => {
         setVisible(false)

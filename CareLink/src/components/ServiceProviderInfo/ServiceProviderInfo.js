@@ -65,7 +65,7 @@ const ServiceProviderInfo = ({ floor, availableOn, location, note, images, days 
         <View style={styles.main}>
             {floor && <Text style={styles.floorText}>Floor: {floor}</Text>}
             <View style={styles.mapView}>
-                {data.map((item, index) => <AvailableFacilityComp title={item.title} />)}
+                {data.map((item, index) => <AvailableFacilityComp key={index} title={item.title} />)}
             </View>
             {availableOn &&
                 <>

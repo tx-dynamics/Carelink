@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, FlatList, View } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, FlatList, View, UIManager, LayoutAnimation } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { DrawerActions, useFocusEffect, useNavigation } from '@react-navigation/native'
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
@@ -105,6 +105,7 @@ const AgencyHome = ({ }) => {
                     </TouchableOpacity>
                 </View>
                 <FlatList scrollEnabled={false}
+                    ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
                     data={agencyData}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({ item, index }) => <CustomerListingComp
