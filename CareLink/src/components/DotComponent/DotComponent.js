@@ -5,11 +5,7 @@ import colors from '../../config/colors'
 
 const DotComponent = ({ key, data, value, isIndex }) => {
     return (
-        <View style={{
-            flexDirection: "row",
-            alignSelf: "center",
-            marginTop: heightPixel(40)
-        }}>
+        <View style={styles.container}>
             {data.map((item, index) => {
                 return (
                     <View key={index} style={{
@@ -29,4 +25,10 @@ const DotComponent = ({ key, data, value, isIndex }) => {
 
 export default DotComponent
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: "row",
+        alignSelf: "center",
+        marginTop: heightPixel(50)
+    }
+})

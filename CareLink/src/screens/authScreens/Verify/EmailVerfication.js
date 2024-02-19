@@ -49,7 +49,7 @@ const EmailVerification = ({ navigation, route }) => {
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView style={{}}>
-                <IconHeaderComp title={"Verify"} heading={"Enter the code we just sent your email"} style={styles.headerTextStyle}
+                <IconHeaderComp title={"Verify"} heading={"Enter the code we just sent to your email"} style={styles.headerTextStyle}
                     onPress={() => { navigation.goBack() }}
                     imgName={iconPath.leftArrow}
                 />

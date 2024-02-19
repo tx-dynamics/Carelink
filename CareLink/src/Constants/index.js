@@ -46,6 +46,7 @@ export const routes = {
     createContract: "createContract",
     activeContracts: "activeContracts",
     brochureProfile: "brochureProfile",
+    clientProfile: "clientProfile",
 
 }
 

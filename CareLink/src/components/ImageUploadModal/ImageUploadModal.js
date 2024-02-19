@@ -5,10 +5,13 @@ import colors from '../../config/colors'
 import { appIcons } from '../../Constants/Utilities/assets'
 import { fonts } from '../../Constants/Fonts'
 
-const ImageUploadModal = ({ visible, cameraPress, mediaPress, onRequestClose }) => {
+const ImageUploadModal = ({ visible, crossPress, cameraPress, mediaPress, onRequestClose }) => {
     return (
         <Modal animationType='fade' visible={visible} transparent onRequestClose={onRequestClose}>
             <View style={styles.container}>
+                <TouchableOpacity onPress={crossPress} style={styles.crossView}>
+                    <Image source={appIcons.cross} style={styles.crossStyle} />
+                </TouchableOpacity>
                 <View style={styles.subView}>
                     <TouchableOpacity onPress={cameraPress} style={styles.pressView}>
                         <Image resizeMode='contain' source={appIcons.openCamera} style={styles.iconImg} />
@@ -32,6 +35,22 @@ const styles = StyleSheet.create({
         backgroundColor: 100,
         justifyContent: "center",
         alignItems: "center",
+    },
+    crossView: {
+        width: widthPixel(30),
+        height: widthPixel(30),
+        backgroundColor: colors.black,
+        borderRadius: widthPixel(20),
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        top: heightPixel(10),
+        right: widthPixel(20)
+    },
+    crossStyle: {
+        width: widthPixel(20),
+        height: widthPixel(20),
+        tintColor: colors.white
     },
     subView: {
         marginTop: heightPixel(50),

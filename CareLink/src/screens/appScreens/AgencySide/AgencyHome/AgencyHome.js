@@ -105,7 +105,7 @@ const AgencyHome = ({ }) => {
                     </TouchableOpacity>
                 </View>
                 <FlatList scrollEnabled={false}
-                    ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
+                    // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
                     data={agencyData}
                     keyExtractor={(item, index) => item.id}
                     renderItem={({ item, index }) => <CustomerListingComp

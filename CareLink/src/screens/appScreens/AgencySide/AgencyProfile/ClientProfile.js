@@ -1,75 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
-import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import SelectBox from '../../../../components/SelectBox';
-
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constants';
+import ProfileTopComp from '../../../../components/ProfileTopComp/ProfileTopComp';
+import ImageViewZoomComp from '../../../../components/ImageViewZoomComp/ImageViewZoomComp';
+import colors from '../../../../config/colors';
 
 const ClientProfile = ({ navigation }) => {
+    const [visible, setVisible] = useState(false)
+    const images = [{
+        // Simplest usage.
+        // url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
 
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "6",
-            plans: "/month",
-            label: "Available Rooms",
-            color:DefaultStyles.colors.primary,
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
+        // width: number
+        // height: number
+        // Optional, if you know the image size, you can set the optimization performance
 
-        {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "11",
-            plans: "/month",
-            color:'#999999',
-            label: "Booked Rooms",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
-    ];
-
+        // You can pass props to <Image />.
+        props: {
+            source: appIcons.homePic
+            // headers: ...
+        }
+    }, {
+        url: '',
+        props: {
+            // Or you can set source directory.
+            source: appIcons.license
+        }
+    }, {
+        url: '',
+        props: {
+            // Or you can set source directory.
+            source: appIcons.certificate
+        }
+    }]
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
-                rightImg={require('../../../../../assets/sendIcon.png')}
+                leftImgName={appIcons.headerBack}
+                rightImg={appIcons.messageIcon}
                 onPressLeft={() => navigation.goBack()}
-                headerLabel={"Client Profile"}
+                headerLabel={"Service Provider Profile"}
+                rightImgStyle={styles.rightImgStyle}
+                onPressRight={() => navigation.navigate(routes.messages)}
             />
-                <TouchableOpacity style={styles.imgView} >
-                    <Image style={{ width: wp('30%'), height: wp('30%') }}
-                        source={require('../../../../../assets/JC.png')} />
-                </TouchableOpacity>
-                <View style={{ alignSelf: 'center' }} >
-                    <Apptext style={styles.jmsTxt} >James Clear</Apptext>
-                    <Apptext style={styles.dcTxt} >Washington, DC</Apptext>
-                </View>
-                <View style={styles.pinkBox}>
-                    <Apptext style={styles.mmbrTxt} >Member since October 2021</Apptext>
-                    <Apptext style={styles.mmbrTxt} >Hired 5 providers</Apptext>
-                </View>
-                <Apptext style={styles.acntTxt}>Account Details</Apptext>
-                <View style={{ marginTop: wp('3%') }}>
-                    <FlatList
-                        data={DATA}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({ item, index }) => (
-                            <SelectBox
-                                leftTitle={item.label}
-                                count={item.count}
-                                backgroundColor={item.color}
-                            />
-
-                        )}
-                    />
-                </View>
+            <ProfileTopComp name={"James Clear"} pic={appIcons.dummyPic1} memberDuration={"October 2023"} />
+            <TouchableOpacity onPress={() => setVisible(true)}>
+                <Text style={{ color: colors.primary, alignSelf: "center", fontSize: fontPixel(14), textDecorationLine: "underline", marginTop: heightPixel(20) }}>View Documents</Text>
+            </TouchableOpacity>
+            <ImageViewZoomComp
+                data={images}
+                visible={visible}
+                onSwipeDown={() => setVisible(false)}
+                onRequestClose={() => setVisible(false)}
+            />
         </View>
     )
 }
 
 export default ClientProfile;
-
 
 const styles = StyleSheet.create({
     container: {
@@ -115,7 +107,15 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         color: DefaultStyles.colors.primary,
         textDecorationLine: 'underline'
-    }
+    },
+    // leftImgStyle: {
+    //     width: widthPixel(23),
+    //     height: heightPixel(16),
+    // },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
+    },
 
 
 

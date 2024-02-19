@@ -85,7 +85,7 @@ const AddDocuments = ({ navigation }) => {
             <FormButton
                 //APK // disabled={isData[isIndex].media == null ? true : false} 
                 backgroundColor={isData[isIndex].media == null ? colors.gray : colors.primary} buttonTitle={"Continue"} onPress={() => isIndex < 4 ? setIndex(isIndex + 1) : navigation.replace(routes.addInformation)} />
-            <ImageUploadModal cameraPress={openCamera} mediaPress={uploadImage} visible={isVisible} />
+            <ImageUploadModal crossPress={() => setVisible(false)} cameraPress={openCamera} mediaPress={uploadImage} visible={isVisible} />
         </View>
     )
 }

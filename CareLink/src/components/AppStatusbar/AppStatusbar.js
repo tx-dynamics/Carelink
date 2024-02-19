@@ -4,7 +4,7 @@ import colors from '../../config/colors'
 
 const AppStatusbar = () => {
     return (
-        <StatusBar backgroundColor={colors.white} barStyle={"dark-content"} />
+        <StatusBar translucent backgroundColor={colors.white} barStyle={"dark-content"} />
     )
 }
 

@@ -73,6 +73,7 @@ const ServiceHome = ({ }) => {
         <View style={styles.container}>
             <AppStatusbar />
             <Header headerLabel={"Home"}
+                rightImgStyle={styles.rightImgStyle}
                 // height={heightPixel(80)} 
                 leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
@@ -231,5 +232,9 @@ const styles = StyleSheet.create({
     leftImgStyle: {
         width: widthPixel(23),
         height: heightPixel(16),
+    },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
     },
 });

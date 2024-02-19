@@ -6,8 +6,8 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import NotificationsComp from '../../../../components/NotificationsComp';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-import { routes } from '../../../../Constants';
-
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { appIcons } from '../../../../Constants/Utilities/assets';
 
 const AgencyNotifications = ({ navigation }) => {
 
@@ -58,13 +58,13 @@ const AgencyNotifications = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/drawerIcon.png')}
-                rightImg={require('../../../../../assets/sendIcon.png')}
                 headerLabel={"Notifications"}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
+                rightImg={appIcons.messageIcon}
+                leftImgStyle={styles.leftImgStyle}
+                rightImgStyle={styles.rightImgStyle}
+                leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-
-            />
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Today</Apptext>
                 <FlatList
@@ -74,10 +74,7 @@ const AgencyNotifications = ({ navigation }) => {
                         <NotificationsComp
                             labelValue={item.label}
                             time={item.time}
-                            color={item.color}
-                        />
-                    )}
-                />
+                            color={item.color} />)} />
             </View>
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Yesterday</Apptext>
@@ -114,7 +111,13 @@ const styles = StyleSheet.create({
         marginBottom: wp('2%'),
         fontSize: 16,
         fontFamily: 'Poppins-Regular'
-    }
-
-
+    },
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
+    },
 });

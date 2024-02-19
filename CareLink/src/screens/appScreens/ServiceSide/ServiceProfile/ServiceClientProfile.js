@@ -13,6 +13,7 @@ import colors from '../../../../config/colors';
 import SubscriptionBox from '../../../../components/SubscriptionBox/SubscriptionBox';
 import { useDispatch } from 'react-redux';
 import { fromProfile } from '../../../../redux/Slices/appSlice';
+import ProfileTopComp from '../../../../components/ProfileTopComp/ProfileTopComp';
 
 const ServiceClientProfile = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -62,18 +63,7 @@ const ServiceClientProfile = ({ navigation }) => {
                         <Apptext style={styles.dtls} >Edit</Apptext>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.imgView} >
-                    <Image style={styles.imgStl}
-                        source={appIcons.dummyPic1} />
-                </TouchableOpacity>
-                <View style={{ alignSelf: 'center' }} >
-                    <Apptext style={styles.jmsTxt} >James Clear</Apptext>
-                    <Apptext style={styles.dcTxt} >Washington, DC</Apptext>
-                </View>
-                <View style={styles.pinkBox}>
-                    <Apptext style={styles.mmbrTxt} >Member since October 2021</Apptext>
-                    {/* <Apptext style={styles.mmbrTxt} >Hired 0 providers</Apptext> */}
-                </View>
+                <ProfileTopComp name={"James Clear"} pic={appIcons.dummyPic1} memberDuration={"October 2023"} />
                 <TouchableOpacity onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })} style={styles.btn}>
                     <Apptext style={styles.acntTxt}>List a room</Apptext>
                 </TouchableOpacity>
@@ -102,45 +92,6 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
     },
-    directionView: {
-        flexDirection: 'row', marginTop: wp('6%'),
-    },
-    imgView: {
-        width: wp('30%'),
-        marginTop: wp('7%'),
-        height: wp('30%'),
-        alignSelf: 'center',
-
-    },
-    upldTxt: {
-        fontSize: 12,
-        fontFamily: 'Poppins-Regular',
-        marginTop: wp('3%'),
-        color: "#407fb9"
-    },
-    jmsTxt: {
-        marginTop: wp('4%'),
-        fontSize: 22,
-        fontFamily: 'Poppins-SemiBold'
-
-    },
-    dcTxt: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 12,
-        alignSelf: 'center'
-    },
-    pinkBox: {
-        width: 200,
-        borderRadius: 10,
-        backgroundColor: DefaultStyles.colors.lightPrimary,
-        alignSelf: 'center',
-        marginTop: wp('3%')
-    },
-    mmbrTxt: {
-        fontSize: 12,
-        alignSelf: 'center',
-        marginTop: wp('1%')
-    },
     btn: {
         backgroundColor: DefaultStyles.colors.primary,
         borderRadius: 30,
@@ -156,8 +107,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         alignSelf: 'center',
         color: DefaultStyles.colors.white,
-    }
-    ,
+    },
     txtView: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -172,11 +122,6 @@ const styles = StyleSheet.create({
     dtls: {
         color: DefaultStyles.colors.black,
         textDecorationLine: 'underline',
-    },
-    imgStl: {
-        width: widthPixel(118),
-        height: widthPixel(118),
-        borderRadius: widthPixel(100)
     },
     leftImgStyle: {
         width: widthPixel(23),

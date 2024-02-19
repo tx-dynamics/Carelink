@@ -26,7 +26,7 @@ const RoomsDetails = ({ navigation, route }) => {
                 onPressLeft={() => navigation.goBack()}
                 rightImg={liked ? appIcons.heartRed : appIcons.heartBlank} />
             <KeyboardAwareScrollView >
-                {!route?.params?.review && <UserInfoComp pic={appIcons.dummyUser} title={"James Clear"} />}
+                {!route?.params?.review && <UserInfoComp onPress={() => navigation.navigate(routes.clientProfile)} pic={appIcons.dummyUser} title={"James Clear"} />}
                 <ServiceProviderInfo
                     images
                     days={"20"}

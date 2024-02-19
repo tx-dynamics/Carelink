@@ -19,10 +19,9 @@ const ListingDetails = ({ navigation }) => {
                 headerLabel={"Listing Details"}
             />
             <ScrollView>
-
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms}> Job Details</Apptext>
-                    <TouchableOpacity onPress={() => navigation.navigate("ClientProfile")}>
+                    <TouchableOpacity onPress={() => navigation.navigate(routes.clientProfile)}>
                         <Apptext style={[styles.rms,
                         {
                             textDecorationLine: 'underline',

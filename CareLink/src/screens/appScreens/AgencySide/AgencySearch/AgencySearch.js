@@ -7,7 +7,6 @@ import { DrawerActions } from '@react-navigation/native'
 import Header from '../../../../components/Header';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constants';
-import AgentSideListingComp from '../../../../components/AgentSideListingComp/AgentSideListingComp';
 import SearchComponent from '../../../../components/SearchComponent/SearchComponent';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -266,7 +265,7 @@ const AgencySearch = ({ navigation }) => {
                 <FlatList
                     scrollEnabled={false}
                     data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
-                    ListFooterComponent={() => <View style={{ marginBottom: heightPixel(70) }}></View>}
+                    // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(70) }}></View>}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => <CustomerListingComp
                         title={item.title}

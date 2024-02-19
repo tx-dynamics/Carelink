@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text, StatusBar } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
@@ -9,9 +9,9 @@ import { fonts } from '../Constants/Fonts';
 import colors from '../config/colors';
 
 
-function IconHeaderComp({ heading, imgName, onPress, title, style, ...rest }) {
+function IconHeaderComp({ containerStyle, heading, imgName, onPress, title, style, ...rest }) {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, containerStyle]}>
             <View style={styles.rowView}>
                 <View style={styles.leftView}>
                     <TouchableOpacity style={styles.subView} onPress={onPress} >
@@ -33,7 +33,7 @@ export default IconHeaderComp;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: getStatusBarHeight(true) + heightPixel(10),
+        marginTop: StatusBar.currentHeight + heightPixel(10),
     },
     rowView: {
         flexDirection: "row",

@@ -26,6 +26,7 @@ const CertifcateDetail = ({ navigation, route }) => {
             </View>
             <FormButton onPress={() => navigation.goBack()} buttonTitle={"Continue"} />
             <ImageUploadModal
+                crossPress={() => setVisible(false)}
                 visible={isVisible}
                 onRequestClose={() => setVisible(false)}
                 cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible, route.params?.item?.id == 1 ? heightPixel(360) : route.params?.item?.id == 2 ? heightPixel(318) : heightPixel(399))}

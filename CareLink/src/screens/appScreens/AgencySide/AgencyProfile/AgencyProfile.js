@@ -152,20 +152,20 @@ const Profile = ({ navigation }) => {
             ]
         },
     ];
-    useFocusEffect(
-        React.useCallback(() => {
-            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-            StatusBar.setTranslucent(true)
-            StatusBar.setBackgroundColor("transparent")
-            return () => {
-                StatusBar.setTranslucent(false)
-                StatusBar.setBackgroundColor(colors.white)
-            };
-        }, []),
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    //         StatusBar.setTranslucent(true)
+    //         StatusBar.setBackgroundColor("transparent")
+    //         return () => {
+    //             StatusBar.setTranslucent(false)
+    //             StatusBar.setBackgroundColor(colors.white)
+    //         };
+    //     }, []),
+    // );
     return (
         <ScrollView style={styles.container}>
-            <StatusBar translucent />
+            <StatusBar translucent backgroundColor={"transparent"} />
             <BackgroundHeader
                 onPressRight={() => uploadmage(setCover)}
                 backImg={isCover == null ? require('../../../../../assets/back.png') : { uri: isCover }}
@@ -213,7 +213,7 @@ const Profile = ({ navigation }) => {
                 </View>
                 <View style={{ marginTop: heightPixel(10) }}>
                     <FlatList scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
-                        ListFooterComponent={() => <View style={{ marginBottom: heightPixel(90) }}></View>}
+                        // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(90) }}></View>}
                         data={DATA}
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (

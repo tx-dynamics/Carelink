@@ -94,6 +94,7 @@ const ServiceRooms = ({ navigation }) => {
             <AppStatusbar />
             <Header headerLabel={"Rooms Details"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
+                rightImgStyle={styles.rightImgStyle}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
             <ScrollView>
@@ -213,5 +214,8 @@ const styles = StyleSheet.create({
         width: widthPixel(23),
         height: heightPixel(16),
     },
-
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
+    },
 });

@@ -55,8 +55,7 @@ function Header({
 const styles = StyleSheet.create({
 
   container: {
-    marginTop: getStatusBarHeight(true) + heightPixel(10),
-    // marginTop: StatusBar.currentHeight,
+    marginTop: StatusBar.currentHeight + heightPixel(10),
     width: "100%",
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,

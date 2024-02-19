@@ -39,7 +39,7 @@ const EditProfile = ({ navigation }) => {
             </KeyboardAwareScrollView>
             <FormButton onPress={() => navigation.goBack()} buttonTitle={"Save Update"}
             />
-            <ImageUploadModal onRequestClose={() => setVisible(false)} visible={isVisible} cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible)} mediaPress={() => uploadmageState(setImg, setUpload, setVisible)} />
+            <ImageUploadModal crossPress={() => setVisible(false)} onRequestClose={() => setVisible(false)} visible={isVisible} cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible)} mediaPress={() => uploadmageState(setImg, setUpload, setVisible)} />
         </View>
     )
 }

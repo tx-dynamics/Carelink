@@ -105,7 +105,7 @@ const WithoutBottomTabnavigator = () => {
             }}>
             <StackNavigator.Screen name={routes.roomProposal} component={RoomsProposals} />
             <StackNavigator.Screen name={routes.roomDetails} component={RoomsDetails} />
-            <StackNavigator.Screen name="ClientProfile" component={ClientProfile} />
+            <StackNavigator.Screen name={routes.clientProfile} component={ClientProfile} />
             <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
             <StackNavigator.Screen name={routes.sendProposal} component={SendProposal} />
             <StackNavigator.Screen name={routes.messages} component={ServiceMessages} />
@@ -268,7 +268,6 @@ const MyTabs = () => {
                     borderTopWidth: 0,
                     backgroundColor: DefaultStyles.colors.white,
                     border: 0,
-                    position: "absolute",
                     height: wp('18%'),
                     // height: heightPixel(75),
                 },

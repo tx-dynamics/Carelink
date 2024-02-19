@@ -283,6 +283,7 @@ const ServiceMessages = ({ navigation }) => {
                 headerLabel={"Inbox"}
                 rightImg={usertype == "ServiceSide" ? appIcons.thirdTab : false}
                 leftImgStyle={styles.leftImgStyle}
+                rightImgStyle={styles.rightImgStyle}
                 leftImgName={usertype == "ServiceSide" ? appIcons.drawerIcon : appIcons.leftArrow}
                 onPressLeft={() => usertype == "ServiceSide" ? navigation.dispatch(DrawerActions.toggleDrawer()) : navigation.goBack()}
             />
@@ -319,44 +320,12 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
     },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
-    },
-    rms: {
-        fontFamily: 'Poppins-SemiBold',
-        fontSize: 16
-    },
-    dtls: {
-        color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
-    },
-    marginView: {
-        marginHorizontal: wp('5%'),
-        marginTop: -5
-    },
-    ltst: {
-        fontSize: 20,
-        fontFamily: 'Poppins-Medium'
-    },
-    searchBar: {
-        height: 47,
-        width: wp('90%'),
-        flexDirection: 'row',
-        alignSelf: 'center',
-        marginTop: wp('4%'),
-        borderRadius: 9,
-        alignItems: 'center',
-        borderWidth: 0.5,
-        borderColor: "gray"
-    },
-    srchImg: {
-        width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20
-    },
-    srchTxt: {
-        color: 'grey', marginLeft: -10, width: wp('70%')
-    },
     leftImgStyle: {
         width: widthPixel(23),
         height: heightPixel(16),
+    },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
     },
 });

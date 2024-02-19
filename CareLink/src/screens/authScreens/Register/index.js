@@ -18,6 +18,7 @@ import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { isSignupValid } from '../../../Constants/Utilities/validations';
+import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
 
 const Register = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -35,12 +36,13 @@ const Register = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
+            <AppStatusbar />
+            <IconHeaderComp title={"Sign Up"}
+                onPress={() => navigation.goBack()}
+                imgName={iconPath.leftArrow}
+                heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
+            />
             <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"}>
-                <IconHeaderComp title={"Sign Up"}
-                    onPress={() => navigation.goBack()}
-                    imgName={iconPath.leftArrow}
-                    heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
-                />
                 <View>
                     <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
                 </View>
@@ -113,7 +115,8 @@ const styles = StyleSheet.create({
     },
     termsTxt: {
         width: wp('90%'), marginTop: 41,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: heightPixel(10)
     },
     hyperLink: {
         fontSize: 13,
