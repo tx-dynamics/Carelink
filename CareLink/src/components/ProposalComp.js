@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
 import { widthPixel } from '../Constants';
+import colors from '../config/colors';
 
 const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
@@ -23,7 +24,7 @@ const ProposalComp = ({ labelValue, when, fors, hourly, placeholderText,
                 <View>
                     <Apptext numberOfLines={1} style={styles.jamesTxt} >{name}</Apptext>
                     {/* <Apptext numberOfLines={1} style={styles.locTxt} >{location}</Apptext> */}
-                    <Apptext numberOfLines={1} style={styles.descTxt} >{description}</Apptext>
+                    <Apptext numberOfLines={1} style={styles.descTxt} >Received: <Text style={{ color: colors.gray }}>{description}</Text></Apptext>
                 </View>
             </View>
         </TouchableOpacity>

@@ -55,7 +55,7 @@ const ServiceClientProfile = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Profile</Apptext>
                     <TouchableOpacity
@@ -67,7 +67,7 @@ const ServiceClientProfile = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })} style={styles.btn}>
                     <Apptext style={styles.acntTxt}>List a room</Apptext>
                 </TouchableOpacity>
-                <FlatList
+                <FlatList scrollEnabled={false} showsVerticalScrollIndicator={false}
                     data={DATA}
                     ListHeaderComponent={() => <View style={{ marginTop: heightPixel(2) }}></View>}
                     renderItem={({ item, index }) =>

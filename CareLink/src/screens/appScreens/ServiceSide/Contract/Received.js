@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, FlatList,View } from 'react-native';
+import { StyleSheet, FlatList, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
@@ -26,35 +26,35 @@ const Received = ({ navigation }) => {
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
+                style={{ width: 61, marginLeft: wp('2%'), height: 61, marginTop: -5 }}
             />
-              <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >Received Contracts</Apptext>
-                </View>
-                <View style={{ marginTop: wp('10%') }} >
+            <View style={styles.txtView}>
+                <Apptext style={styles.rms} >Received Contracts</Apptext>
+            </View>
+            <View style={{ marginTop: wp('10%') }} >
 
-                        <FlatList
-                            data={DATA}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            ListEmptyComponent={() => {
-                                return (
-                                    <Apptext style={styles.noItem}>
-                                        No Item Found
-                                    </Apptext>
-                                );
-                            }}
-                            renderItem={({ item, index }) => (
-                                <SelectBox
-                                leftTitle={item.label}
-                                circle={false}
-                            />
-
-                            )}
+                <FlatList showsVerticalScrollIndicator={false}
+                    data={DATA}
+                    showsVerticalScrollIndicator={false}
+                    keyExtractor={(item) => item.id}
+                    ListEmptyComponent={() => {
+                        return (
+                            <Apptext style={styles.noItem}>
+                                No Item Found
+                            </Apptext>
+                        );
+                    }}
+                    renderItem={({ item, index }) => (
+                        <SelectBox
+                            leftTitle={item.label}
+                            circle={false}
                         />
-                    </View>
-                    
-         
+
+                    )}
+                />
+            </View>
+
+
         </View>
     )
 }
@@ -71,12 +71,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
         marginTop: wp('2%'), marginHorizontal: wp('5%')
     },
-    marginView:{
-        alignSelf:'center'
+    marginView: {
+        alignSelf: 'center'
     },
     rms: {
-        
-        marginLeft:wp('2%'),
+
+        marginLeft: wp('2%'),
         fontFamily: 'Poppins-SemiBold',
         fontSize: 17,
     },
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     },
     PicMainView: {
         marginBottom: wp('2%'),
-        
+
         marginHorizontal: wp('45%')
     },
     msgView: {
@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.primary
     },
-    noItem:{
-        alignSelf: "center", marginTop: 50 
+    noItem: {
+        alignSelf: "center", marginTop: 50
     }
 
 

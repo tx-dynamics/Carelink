@@ -20,7 +20,7 @@ const ListedList = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <LeftSideBoldHeading title={"Listed"} number={ListedData?.length} />
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 style={{
                     paddingVertical: heightPixel(10)
                 }}

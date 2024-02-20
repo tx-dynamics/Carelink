@@ -31,7 +31,7 @@ export default InboxComp;
 const styles = StyleSheet.create({
   container: {
     borderBottomWidth: .5,
-    borderBottomColor: colors.messageBody,
+    borderBottomColor: colors.messageBottomLine,
     marginBottom: heightPixel(10),
     width: widthPixel(374),
     height: heightPixel(85),

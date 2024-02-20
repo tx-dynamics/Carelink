@@ -1,8 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-    StyleSheet, ScrollView, TouchableOpacity,
-    FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View, StatusBar
-} from 'react-native';
+import { StyleSheet, FlatList, Image, View, TouchableOpacity, StatusBar } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
@@ -133,9 +130,7 @@ const ServiceChatDetail = ({ navigation, route }) => {
 
 
     ]);
-    const statusbarAction = () => {
-        StatusBar.setTranslucent(false)
-    }
+
     const onSend = () => {
         let temp = [...DATA]
         temp.unshift({
@@ -147,39 +142,27 @@ const ServiceChatDetail = ({ navigation, route }) => {
         ref.current.scrollToIndex({ animated: false, index: 0 });
         setMessage("")
     }
-    useEffect(() => {
-        statusbarAction()
-    }, [])
     return (
         <View style={styles.container}>
-            <StatusBar translucent={false} backgroundColor={colors.white} />
-            {/* <AppStatusbar /> */}
-            <View style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingRight: widthPixel(20)
-            }}>
-                <Header headerLabel={"Chat"} height={heightPixel(80)} style={{ width: widthPixel(70) }}
-                    leftImgName={require('../../../../../assets/headerBack.png')}
-                    onPressLeft={() => navigation.goBack()}
-                />
-                {/* {!route?.params?.isContract && */}
+            <Header
+                headerLabel={"Chat"}
+                leftImgName={require('../../../../../assets/headerBack.png')}
+                onPressLeft={() => navigation.goBack()}
+            />
+            {!route?.params?.isContract &&
                 <TouchableOpacity
                     onPress={() => navigation.navigate(userType == "ServiceSide" ? routes.receivedContracts : routes.createContract)}
                     style={styles.RcvdView}>
-                    <Apptext style={styles.cntTxt}>Make Contract</Apptext>
-                </TouchableOpacity>
-                {/* } */}
-            </View>
+                    <Apptext style={styles.cntTxt}> {usertype == "ServiceSide" ? "Contracts" : "Make Contract"}</Apptext>
+                </TouchableOpacity>}
             <View style={styles.direView} >
                 <Image
                     style={styles.imgStl}
                     source={require('../../../../../assets/inbox.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
-            </View>
-            <View style={{ marginTop: wp('5%'), flex: 1, }} >
-                <FlatList inverted ref={ref}
+            </View >
+            <View style={{ marginTop: heightPixel(10), flex: 1, }} >
+                <FlatList showsVerticalScrollIndicator={false} inverted ref={ref}
                     // initialScrollIndex={DATA.length - 1} 
                     keyExtractor={(item, index) => item.id}
                     // ItemSeparatorComponent={() => <View style={{ marginBottom: heightPixel(7) }}></View>}
@@ -187,7 +170,7 @@ const ServiceChatDetail = ({ navigation, route }) => {
                     renderItem={({ item, index }) => item?.user == 1 ? <MyMessage msg={item.title} /> : <ChatDetailComp msg={item.title} />} />
             </View>
             <SendMessageComponent disabled={isMessage == "" ? true : false} onChangeText={setMessage} value={isMessage} onPress={onSend} />
-        </View>
+        </View >
     )
 }
 const MyMessage = React.memo(({ msg }) => {
@@ -208,9 +191,12 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
     },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
+    timeTxt: {
+        textAlign: 'left',
+        fontSize: 11,
+        color: DefaultStyles.colors.lightPrimary,
+        marginTop: heightPixel(2),
+        marginLeft: widthPixel(5)
     },
     marginView: {
         alignSelf: 'center'
@@ -220,13 +206,6 @@ const styles = StyleSheet.create({
         marginLeft: wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
-    },
-    labelTxt: {
-
-        fontFamily: 'Poppins-Medium',
-        fontSize: 12,
-        marginTop: wp('1%'),
-        marginHorizontal: wp('3%')
     },
     PicMainView: {
         alignSelf: "flex-end",
@@ -254,28 +233,14 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: DefaultStyles.colors.black
     },
-    timeTxt: {
-        width: wp('20%'),
-        fontSize: 11,
-        color: DefaultStyles.colors.lightPrimary,
-        marginTop: wp('1%'),
-        marginHorizontal: wp('2%')
-    },
-
-    ChatSndMsgBtn: {
-        width: 45, height: 45,
-        borderRadius: 40,
-        marginLeft: -5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: DefaultStyles.colors.primary
-    },
     RcvdView: {
-        paddingHorizontal: widthPixel(6),
+        position: "absolute",
+        top: StatusBar.currentHeight + heightPixel(18),
+        right: widthPixel(20),
+        paddingHorizontal: widthPixel(10),
         paddingVertical: heightPixel(1),
         justifyContent: "center",
         alignItems: "center",
-        // width: wp('25%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderRadius: 5,
     },
@@ -292,7 +257,4 @@ const styles = StyleSheet.create({
         height: widthPixel(63),
         borderRadius: widthPixel(40)
     },
-
-
-
 });

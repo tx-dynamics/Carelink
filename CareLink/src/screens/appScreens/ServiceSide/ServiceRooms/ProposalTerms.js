@@ -15,7 +15,7 @@ const ProposalTerms = ({ navigation }) => {
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.marginView} >
                     <Apptext style={[styles.rms, {
                         fontSize: 24, fontFamily: 'Poppins-Regular'

@@ -53,12 +53,12 @@ const Feedback = ({ navigation }) => {
                 heading={"Submit a feedback to your hired agency"}
                 style={styles.rms}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.txtView}>
                     <Apptext style={[styles.rms1]} >Click to write: </Apptext>
                 </View>
                 <NewAppTextInput multiline />
-                <FlatList scrollEnabled={false} keyExtractor={(item, index) => item.id} data={data} renderItem={({ item, index }) => <FeedBackCheckBox pic={item.check ? appIcons.tick1 : appIcons.untick} title={item.title} onPress={() => onCheckPress(item, index)} />} />
+                <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} keyExtractor={(item, index) => item.id} data={data} renderItem={({ item, index }) => <FeedBackCheckBox pic={item.check ? appIcons.tick1 : appIcons.untick} title={item.title} onPress={() => onCheckPress(item, index)} />} />
             </KeyboardAwareScrollView>
             <FormButton buttonTitle={"Submit"} onPress={onSubmitPress} />
         </View>

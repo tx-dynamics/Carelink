@@ -67,7 +67,7 @@ const AgencyNotifications = ({ navigation }) => {
                 onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Today</Apptext>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
@@ -78,7 +78,7 @@ const AgencyNotifications = ({ navigation }) => {
             </View>
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Yesterday</Apptext>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA1}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (

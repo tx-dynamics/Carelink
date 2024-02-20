@@ -9,7 +9,7 @@ import { iconPath } from '../../../config/icon';
 
 const Terms = ({ navigation }) => {
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}

@@ -37,7 +37,7 @@ Provider also desires to provide care, supervision, support, and assistance serv
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View>
                     <Apptext style={styles.msgTxt} >Read And FIll the General Contract </Apptext>

@@ -40,6 +40,7 @@ export default {
   cardTextColor: "#B4B4B4",
   availableFacilityText: "#0A0A0A",
   messageBody: "#666666",
+  messageBottomLine: "#E5E5E5",
   uploadButtonColor: "#001930",
   green: '#4CC26C',
   welcomeText: "#252323",

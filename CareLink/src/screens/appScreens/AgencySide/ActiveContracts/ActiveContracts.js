@@ -138,7 +138,7 @@ const ActiveContracts = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Header headerLabel={"Active Contracts"} leftImgName={appIcons.headerBack} onPressLeft={() => navigation.goBack()} />
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 ListHeaderComponent={() => <HeaderForSpace />}
                 data={contractData}
                 keyExtractor={(item, index) => index}

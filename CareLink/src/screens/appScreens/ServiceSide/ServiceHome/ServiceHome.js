@@ -79,7 +79,7 @@ const ServiceHome = ({ }) => {
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.txtView}>
                     <Text style={styles.welcomeText} >Welcome</Text>
                     <Apptext style={styles.rms} >James Clear</Apptext>
@@ -104,7 +104,7 @@ const ServiceHome = ({ }) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.marginView} >
-                    <FlatList scrollEnabled={false} style={{ alignSelf: "center" }}
+                    <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} style={{ alignSelf: "center" }}
                         data={DATA}
                         horizontal
                         keyExtractor={(item, index) => index}
@@ -122,7 +122,7 @@ const ServiceHome = ({ }) => {
                         <Apptext style={styles.rms} >Received Proposals</Apptext>
                     </View>
                     <View style={{ marginTop: heightPixel(21) }}>
-                        <FlatList scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                        <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -130,7 +130,7 @@ const ServiceHome = ({ }) => {
                                     showProposals={true}
                                     name={item.name}
                                     location={item.adress}
-                                    description={"Received: " + item.desc}
+                                    description={item.desc}
                                     img={item.img}
                                 />
                             )}
@@ -183,9 +183,9 @@ const styles = StyleSheet.create({
     lilBtn: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 103,
-        height: 28,
-        marginTop: -20,
+        width: widthPixel(103),
+        height: heightPixel(28),
+        marginTop: -15,
         marginLeft: wp('5%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderRadius: 30
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     },
     welcomeText: {
         fontSize: fontPixel(16),
-        fontFamily: 'Poppins-Light',
+        fontFamily: 'Poppins-Regular',
         color: colors.welcomeText
     },
     txtView: {

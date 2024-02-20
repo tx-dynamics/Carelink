@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         borderRadius: widthPixel(10)
     },
     titleText: {
-        fontSize: fontPixel(16),
+        fontSize: fontPixel(17),
         fontFamily: fonts.Poppins_Medium,
         color: colors.smallHeadingBlack,
         marginLeft: widthPixel(20),

@@ -70,7 +70,7 @@ const PaymentMethod = ({ navigation }) => {
                     heading={"Select your Payment Method to Pay for Your Monthly Subscription"}
                 />
                 <View style={{ marginTop: wp('8%') }} >
-                    <FlatList
+                    <FlatList showsVerticalScrollIndicator={false}
                         data={DATA}
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (

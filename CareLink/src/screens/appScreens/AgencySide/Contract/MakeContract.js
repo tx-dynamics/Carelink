@@ -51,7 +51,7 @@ const MakeContract = ({ navigation }) => {
                 <Apptext style={styles.msgTxt} >Make Contract </Apptext>
             </View>
             <View style={{ alignSelf: 'center', marginTop: wp('10%') }}>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     numColumns={2}
                     keyExtractor={(item, index) => index}

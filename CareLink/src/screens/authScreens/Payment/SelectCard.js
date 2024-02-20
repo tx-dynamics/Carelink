@@ -86,7 +86,7 @@ const SelectCard = ({ navigation }) => {
                     <Apptext style={styles.selectTxt}>Select Payment Method</Apptext>
                     <View style={{ marginTop: wp('4%') }} >
 
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}

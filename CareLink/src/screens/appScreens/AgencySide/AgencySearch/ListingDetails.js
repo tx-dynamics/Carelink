@@ -18,7 +18,7 @@ const ListingDetails = ({ navigation }) => {
                 onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
                 headerLabel={"Listing Details"}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms}> Job Details</Apptext>
                     <TouchableOpacity onPress={() => navigation.navigate(routes.clientProfile)}>

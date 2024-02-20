@@ -29,7 +29,7 @@ const Help = ({ navigation }) => {
                     "This is a help center of CARE LINK .Submit your problems here"
                 }
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <AppTextInput title={"Name"} />
                 <AppTextInput title={"Email"} />
                 <AppTextInput multiline mainViewStyle={{ marginBottom: heightPixel(200), }} title={"Your Problem"} containerStyle={styles.descriptionStyle} />

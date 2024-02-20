@@ -260,9 +260,9 @@ const AgencySearch = ({ navigation }) => {
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                 onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
             <SearchComponent onChangeText={setSearch} containerStyle={{ marginVertical: heightPixel(20), }} />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <Apptext style={styles.rms} >Client Listings</Apptext>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     scrollEnabled={false}
                     data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
                     // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(70) }}></View>}

@@ -41,12 +41,12 @@ const RoomsProposals = ({ navigation }) => {
                 onPressRight={() => navigation.navigate(routes.messages)}
                 headerLabel={"Rooms & Proposals"}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms} >Available (3)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -62,7 +62,7 @@ const RoomsProposals = ({ navigation }) => {
                     </View>
                     <Apptext style={styles.rms} >Booked (3)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -78,7 +78,7 @@ const RoomsProposals = ({ navigation }) => {
                     </View>
                     <Apptext style={styles.rms} >Submited Proposal (2)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (

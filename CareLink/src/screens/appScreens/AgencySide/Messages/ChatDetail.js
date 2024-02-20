@@ -42,7 +42,7 @@ const ChatDetail = ({ navigation }) => {
                     source={require('../../../../../assets/JC.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={{ marginTop: wp('5%') }} >
                     <View style={styles.PicMainView}>
@@ -52,7 +52,7 @@ const ChatDetail = ({ navigation }) => {
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
                     </View>
                     <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
@@ -79,7 +79,7 @@ const ChatDetail = ({ navigation }) => {
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
                     </View>
                     <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}

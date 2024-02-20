@@ -97,14 +97,14 @@ const ServiceRooms = ({ navigation }) => {
                 rightImgStyle={styles.rightImgStyle}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.marginView}>
                     {/* <View style={styles.direcView}>
                         <Apptext style={styles.rms} >Rooms Details</Apptext>
                     </View> */}
                     <Apptext style={[styles.rms, { marginTop: wp('6%') }]} >Available ({DATA.length})</Apptext>
                     <View style={{ marginTop: wp('5%'), }}>
-                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                        <FlatList scrollEnabled={false} showsVerticalScrollIndicator={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -129,7 +129,7 @@ const ServiceRooms = ({ navigation }) => {
                     </View>
                     <Apptext style={styles.rms} >Booked ({DATA.length})</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                        <FlatList scrollEnabled={false} showsVerticalScrollIndicator={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -151,7 +151,7 @@ const ServiceRooms = ({ navigation }) => {
                     </View>
                     {/* <Apptext style={styles.rms} >Posted (2)</Apptext> */}
                     {/* <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (

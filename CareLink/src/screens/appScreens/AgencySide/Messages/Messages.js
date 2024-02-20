@@ -54,7 +54,7 @@ const Messages = ({ navigation }) => {
             </TouchableOpacity>
 
             <View style={{ marginTop: wp('2%') }}>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.id}

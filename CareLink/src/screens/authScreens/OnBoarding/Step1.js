@@ -53,7 +53,7 @@ const Step1 = ({ navigation }) => {
             >
                 <Apptext style={styles.skipTxt}>Skip</Apptext>
             </TouchableOpacity>
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <SwiperFlatList
                     ref={(component) => { swiperRef.current._swiper = component }}
                     scrollEnabled={false}
@@ -85,16 +85,16 @@ const Step1 = ({ navigation }) => {
                     strokeCap={"butt"}
                     unfilledColor={colors.dotUnselected}
                 />
+                <TouchableOpacity
+                    onPress={() => {
+                        setProgress(isProgress + .34)
+                        isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
+                    }}
+                    style={styles.box}>
+                    <Image style={styles.boxImg}
+                        source={appIcons.forward} />
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity
-                onPress={() => {
-                    setProgress(isProgress + .34)
-                    isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
-                }}
-                style={styles.box}>
-                <Image style={styles.boxImg}
-                    source={appIcons.forward} />
-            </TouchableOpacity>
         </View>
     )
 }
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     box: {
         position: "absolute",
-        bottom: heightPixel(6),
+        top: heightPixel(10),
         width: widthPixel(83),
         height: widthPixel(83),
         borderRadius: widthPixel(50),

@@ -42,7 +42,7 @@ const Register = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
             />
-            <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"handled"}>
                 <View>
                     <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
                 </View>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         paddingBottom: heightPixel(20)
     },
     createTxt: {
-        marginTop: wp('8%'),
+        marginTop: heightPixel(10),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
         fontSize: wp('6%'),

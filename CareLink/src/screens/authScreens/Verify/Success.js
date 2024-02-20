@@ -44,7 +44,7 @@ const Success = ({ navigation }) => {
                         source={require('../../../../assets/circleProfile.png')} />
                     <Apptext style={styles.smallTxt} >Now complete your agency profile</Apptext>
                 </View>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={listData}
                     keyExtractor={(item, index) => index}
                     ListHeaderComponent={() => <HeaderForSpace />}

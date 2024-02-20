@@ -19,7 +19,7 @@ const CustomerListing = ({ navigation, route }) => {
             <AppStatusbar />
             <Header headerLabel={"Customer Listing"} height={heightPixel(80)} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 data={agencyData}
                 keyExtractor={(item, index) => item.id}
                 renderItem={({ item, index }) => <CustomerListingComp

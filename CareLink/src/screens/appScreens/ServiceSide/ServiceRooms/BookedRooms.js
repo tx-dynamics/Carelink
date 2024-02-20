@@ -18,7 +18,7 @@ const BookedRooms = ({ navigation }) => {
             <AppStatusbar />
             <Header headerLabel={"Booked Room"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <ServiceListingComp containerStyle={{ marginTop: heightPixel(1), marginBottom: 0, }} reviews onPress={() => navigation.navigate(routes.agencyDetail, { isChat: false })} pic={appIcons.dummyPic1}
                     showProposals={true}
                     showTags={false}

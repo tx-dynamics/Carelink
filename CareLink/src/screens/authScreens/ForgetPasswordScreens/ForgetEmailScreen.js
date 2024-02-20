@@ -21,7 +21,7 @@ const ForgetEmailScreen = ({ navigation }) => {
     const [email, setEmail] = useState("")
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Forgot Password"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow} style={{ fontSize: fontPixel(20), fontFamily: fonts.Poppins_Medium }}

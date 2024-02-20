@@ -12,6 +12,7 @@ import SearchComponent from '../../../../components/SearchComponent/SearchCompon
 import colors from '../../../../config/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSelector } from 'react-redux';
+import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 
 
 const ServiceMessages = ({ navigation }) => {
@@ -287,13 +288,12 @@ const ServiceMessages = ({ navigation }) => {
                 leftImgName={usertype == "ServiceSide" ? appIcons.drawerIcon : appIcons.leftArrow}
                 onPressLeft={() => usertype == "ServiceSide" ? navigation.dispatch(DrawerActions.toggleDrawer()) : navigation.goBack()}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <SearchComponent onChangeText={(item) => setSearch(item)} />
                 <View style={{ marginTop: heightPixel(10) }}>
-                    <FlatList scrollEnabled={false}
+                    <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false}
                         ListHeaderComponent={() => <View style={{ marginTop: heightPixel(20) }}></View>}
                         data={DATA?.filter(data => data?.label?.toLowerCase()?.includes(search.toLowerCase()))}
-                        showsVerticalScrollIndicator={false}
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (
                             <InboxComp

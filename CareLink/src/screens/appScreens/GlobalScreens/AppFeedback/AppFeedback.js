@@ -23,7 +23,7 @@ const AppFeedback = ({ navigation, route }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView style={{}}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <Text style={styles.descText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pulvinar bibendum magna Lorem ipsum dolor sit a</Text>
                 <NewAppTextInput
                     multiline

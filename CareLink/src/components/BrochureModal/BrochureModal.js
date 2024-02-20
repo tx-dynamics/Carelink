@@ -8,7 +8,7 @@ import FormButton from '../FormButton'
 import IconHeaderComp from '../IconHeaderComp'
 const BrochureModal = ({ onPress, onRequestClose, visible, downloadPress }) => {
     return (
-        <Modal visible={visible} onRequestClose={onRequestClose}>
+        <Modal statusBarTranslucent={true} visible={visible} onRequestClose={onRequestClose}>
             <View style={styles.container}>
                 <View>
                     <AppStatusbar />

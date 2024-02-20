@@ -82,7 +82,7 @@ const AgencyHome = ({ }) => {
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                 onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Rooms & Proposals</Apptext>
                 </View>
@@ -104,7 +104,7 @@ const AgencyHome = ({ }) => {
                         <Apptext style={styles.dtls} >See All</Apptext>
                     </TouchableOpacity>
                 </View>
-                <FlatList scrollEnabled={false}
+                <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false}
                     // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
                     data={agencyData}
                     keyExtractor={(item, index) => item.id}

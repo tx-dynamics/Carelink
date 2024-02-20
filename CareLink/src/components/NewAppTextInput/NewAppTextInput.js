@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         borderRadius: widthPixel(10),
         borderColor: colors.black,
         borderWidth: 1,
-        width: "90%",
+        width: widthPixel(374),
         color: colors.black,
         paddingHorizontal: widthPixel(20),
         paddingBottom: heightPixel(30),

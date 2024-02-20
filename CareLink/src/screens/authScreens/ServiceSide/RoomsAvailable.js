@@ -53,7 +53,7 @@ const RoomsAvailable = ({ navigation }) => {
                 heading={"When your rooms available for rent?"}
             />
             <View style={{ alignSelf: 'center' }}>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     numColumns={2}
                     keyExtractor={(item, index) => index}

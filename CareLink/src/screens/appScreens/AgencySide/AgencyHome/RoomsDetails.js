@@ -25,7 +25,7 @@ const RoomsDetails = ({ navigation, route }) => {
                 rightImgStyle={styles.rightIconStyle}
                 onPressLeft={() => navigation.goBack()}
                 rightImg={liked ? appIcons.heartRed : appIcons.heartBlank} />
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 {!route?.params?.review && <UserInfoComp onPress={() => navigation.navigate(routes.clientProfile)} pic={appIcons.dummyUser} title={"James Clear"} />}
                 <ServiceProviderInfo
                     images

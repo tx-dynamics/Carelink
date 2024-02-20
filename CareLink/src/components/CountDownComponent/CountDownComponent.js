@@ -34,7 +34,7 @@ const CountDownComponent = ({ onPress }) => {
             <Text style={styles.didntText}>Didn’t get code?
                 <Text onPress={onPress} disabled={duration != 0 ? true : false} style={{
                     marginTop: heightPixel(10),
-                    color: duration != 0 ? colors.gray : colors.primary,
+                    color: duration != 0 ? colors.gray : colors.red,
                     textAlign: "center",
                     fontSize: fontPixel(14),
                     fontFamily: fonts.Poppins_Medium,

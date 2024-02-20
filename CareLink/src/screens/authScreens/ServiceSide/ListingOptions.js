@@ -93,7 +93,7 @@ const ListingOptions = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 heading={"Add Listing Information"}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <AddRoomComponent />
                 <AppDropDownPicker
                     title={"Select Space"}
@@ -115,7 +115,7 @@ const ListingOptions = ({ navigation }) => {
                 />
                 <AddPhotoComponent />
                 <View style={styles.flatlistStyle}>
-                    <FlatList scrollEnabled={false} numColumns={3} data={picData} renderItem={({ item, index }) => item.add ? <AddButtonComponent onPress={() => uploadmageMultiPle(setPicData, picData)} /> : <PhotoComponent pic={item.image} crossPress={() => removePic(index, setPicData, picData)} />} />
+                    <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} numColumns={3} data={picData} renderItem={({ item, index }) => item.add ? <AddButtonComponent onPress={() => uploadmageMultiPle(setPicData, picData)} /> : <PhotoComponent pic={item.image} crossPress={() => removePic(index, setPicData, picData)} />} />
                 </View>
                 <FormButton onPress={() => navigation.navigate("Note")} containerStyle={styles.btnStyle} buttonTitle={"Next"} />
             </KeyboardAwareScrollView>

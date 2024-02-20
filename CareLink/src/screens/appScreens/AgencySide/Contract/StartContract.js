@@ -50,7 +50,7 @@ const StartContract = ({ navigation }) => {
             <Header headerLabel={"Create Contract"}
                 leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <AppTextInput title={"Agency"} />
                 <AppTextInput title={"Provider"} />
                 <AppTextInput right={appIcons.datePciker} value={moment(dateStart).format("DD-mm-yyyy")} editable={false} title={"Start Date"} onPress={onStartOpen} />

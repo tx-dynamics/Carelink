@@ -38,7 +38,7 @@ const AvailableRoom = ({ navigation }) => {
                 imgName={appIcons.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <ServiceProviderInfo
                     days={"20"}
                     floor={"2nd"}

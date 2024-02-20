@@ -12,21 +12,22 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 import ImageUploadModal from '../../../../components/ImageUploadModal/ImageUploadModal';
 import { uploadmageCamState, uploadmageState } from '../../../../Services/HelpingMethods';
-
+import { SuccessFlashMessage } from "../../../../Constants/Utilities/assets/Snakbar"
 const EditProfile = ({ navigation }) => {
     const [isVisible, setVisible] = useState(false)
     const [isUpload, setUpload] = useState(false)
     const [img, setImg] = useState("")
 
+    const onPressSave = () => {
+        SuccessFlashMessage("Profile has been updated")
+        navigation.goBack()
+    }
     return (
         <View style={styles.container}>
-            <Header headerLabel={"Profile"}
+            <Header headerLabel={"Edit Profile"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
-            <KeyboardAwareScrollView keyboardShouldPersistTaps="handled">
-                <View style={styles.txtView}>
-                    <Apptext style={styles.rms} >Edit Profile</Apptext>
-                </View>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
                 <View style={styles.imgView} >
                     <Image style={styles.imgStl}
                         source={!isUpload ? appIcons.dummyPic1 : { uri: img }} />
@@ -37,7 +38,7 @@ const EditProfile = ({ navigation }) => {
                 <AppTextInput mainViewStyle={styles.firstNameStyle} title={"First name"} />
                 <AppTextInput mainViewStyle={styles.lastNameStyle} title={"Last name"} />
             </KeyboardAwareScrollView>
-            <FormButton onPress={() => navigation.goBack()} buttonTitle={"Save Update"}
+            <FormButton onPress={onPressSave} buttonTitle={"Save Update"}
             />
             <ImageUploadModal crossPress={() => setVisible(false)} onRequestClose={() => setVisible(false)} visible={isVisible} cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible)} mediaPress={() => uploadmageState(setImg, setUpload, setVisible)} />
         </View>

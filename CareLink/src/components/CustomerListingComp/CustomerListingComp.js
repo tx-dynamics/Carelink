@@ -16,7 +16,7 @@ const CustomerListingComp = ({ onPress, title, rightIcon, rightPress, duration, 
                 }
             </View>
             <Text style={styles.durationText}>{"for " + duration + " days"}</Text>
-            <FlatList horizontal style={styles.flatListStyle}
+            <FlatList showsVerticalScrollIndicator={false} horizontal style={styles.flatListStyle}
                 data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
             {posted && <Text style={styles.postedText}> Posted {posted}</Text>}
 

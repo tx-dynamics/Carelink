@@ -28,7 +28,7 @@ const DeleteAccountOTP = ({ navigation, route }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <LeftBoldTitle title={"Enter OTP"} titleText={styles.titleText} />
                 <Text style={styles.descText}>Etiam lorem dui, laoreet quis accumsan ut, sagittis vel dui. Pellentesque placerat ac lorem nec lacinia. Lorem ipsum dolor sit amet, </Text>
                 <OTPInputView

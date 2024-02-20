@@ -25,6 +25,8 @@ function Header({
   onPressLeft,
   onPressRight,
   rightImg,
+  leftViewStyle,
+  rightViewStyle,
   style,
 }) {
   return (
@@ -36,7 +38,7 @@ function Header({
       }}>
       <TouchableOpacity
         onPress={onPressLeft}
-        style={styles.leftView}>
+        style={[styles.leftView, leftViewStyle]}>
         {isBack ? (
           <Image resizeMode="contain" style={[styles.leftImgStyle, leftImgStyle]} source={leftImgName} />
         ) : null}
@@ -45,7 +47,7 @@ function Header({
         {centerImg && <Image source={centerImg} />}
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={styles.leftView} onPress={onPressRight}>
+      <TouchableOpacity style={[styles.leftView, rightViewStyle]} onPress={onPressRight}>
         {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
         }
       </TouchableOpacity>

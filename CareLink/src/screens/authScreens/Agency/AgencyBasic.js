@@ -35,7 +35,7 @@ const AgencyBasic = ({ navigation, route }) => {
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
                 heading={isFromProfile ? "About Us" : "Enter your agency name and about"} />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <AppTextInput
                     value={agencyName}
                     title={"Agency name"}

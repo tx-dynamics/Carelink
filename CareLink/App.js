@@ -17,7 +17,7 @@ import { store } from './src/redux/store';
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import FlashMessage from "react-native-flash-message";
-
+import { MenuProvider } from 'react-native-popup-menu';
 class App extends Component {
   render() {
     let persistor = persistStore(store)
@@ -25,7 +25,9 @@ class App extends Component {
       <Provider store={store}>
         <NavigationContainer>
           <PersistGate loading={null} persistor={persistor}>
-            <Main />
+            <MenuProvider>
+              <Main />
+            </MenuProvider>
             <FlashMessage position="top" />
           </PersistGate>
         </NavigationContainer>

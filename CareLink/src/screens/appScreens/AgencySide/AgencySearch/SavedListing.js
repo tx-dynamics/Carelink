@@ -273,9 +273,9 @@ const SavedListing = ({ navigation }) => {
                 onPressLeft={() => navigation.goBack()}
             />
             <SearchComponent onChangeText={setSearch} containerStyle={{ marginBottom: heightPixel(15), }} />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <Apptext style={styles.rms} >Saved Listings</Apptext>
-                <FlatList scrollEnabled={false} data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
+                <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => <CustomerListingComp
                         title={item.title}
@@ -288,13 +288,13 @@ const SavedListing = ({ navigation }) => {
                     />} />
             </KeyboardAwareScrollView>
             <DeleteModal cancelPress={() => setVisible(false)} deletePress={onRemovePress} rightButtonTitle={"Remove"} visible={visible} title={"Are you sure you want to remove from saved listing"} />
-            {/* <ScrollView>
+            {/* <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.marginView}>
                     <View style={{ flexDirection: 'row', marginTop: -25, justifyContent: 'space-between' }}>
                         <Apptext style={styles.rms} >Saved Listings</Apptext>
                     </View>
                     <View style={{ marginTop: 21 }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (

@@ -1,6 +1,7 @@
 import Snackbar from 'react-native-snackbar';
 import colors from '../../../config/colors';
 import { showMessage, hideMessage } from "react-native-flash-message";
+import { StatusBar } from 'react-native';
 export function SuccessSnackbar(text) {
     Snackbar.show({
         text: text,
@@ -25,12 +26,16 @@ export const RedFlashMessage = (message) => {
         message: message,
         type: "danger",
         backgroundColor: "red",
+        floating: true,
+        statusBarHeight: StatusBar.currentHeight
     })
 }
 export const SuccessFlashMessage = (message) => {
     showMessage({
         message: message,
         type: "success",
-        backgroundColor: colors.primary
+        backgroundColor: colors.primary,
+        floating: true,
+        statusBarHeight: StatusBar.currentHeight
     })
 }

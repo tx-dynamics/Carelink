@@ -38,7 +38,7 @@ const CertifcateScreen = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <FlatList ListFooterComponent={() => <View style={{ marginBottom: heightPixel(20) }}></View>}
+            <FlatList showsVerticalScrollIndicator={false} ListFooterComponent={() => <View style={{ marginBottom: heightPixel(20) }}></View>}
                 keyExtractor={(item) => item.id}
                 data={certifcateData}
                 renderItem={({ item, index }) => <UploadDocumentComp

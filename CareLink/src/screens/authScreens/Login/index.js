@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Sign In"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
@@ -44,7 +44,7 @@ const LoginScreen = ({ navigation }) => {
                     <AppTextInput value={isPassword} onChangeText={setPassword} title={"Password"} secureTextEntry={isSecure} right={isSecure ? appIcons.hide : appIcons.show} rightPress={() => setSecure(!isSecure)} />
                     {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
                     {/* <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} /> */}
-                    <Text style={styles.forgetText} onPress={() => navigation.navigate(routes.forgetPasswordEmail)}>Forget password?</Text>
+                    <Text style={styles.forgetText} onPress={() => navigation.navigate(routes.forgetPasswordEmail)}>Forgot password?</Text>
                 </View>
             </KeyboardAwareScrollView>
             <FormButton
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
         paddingBottom: heightPixel(20)
     },
     createTxt: {
-        marginTop: wp('8%'),
+        marginTop: heightPixel(10),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
         fontSize: wp('6%'),

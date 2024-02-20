@@ -12,9 +12,10 @@ import colors from '../../../config/colors';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
-import { RedFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import { RedFlashMessage, SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 import { useSelector } from 'react-redux';
 import { userType } from '../../../redux/Slices/splashSlice';
+import CountDownComponent from '../../../components/CountDownComponent/CountDownComponent';
 
 const EmailVerification = ({ navigation, route }) => {
     const [isOTP, setIsOTP] = useState("")
@@ -29,26 +30,27 @@ const EmailVerification = ({ navigation, route }) => {
         // RedFlashMessage("Please enter a 4 digit OTP")
         //     return
         // }
-        setVisible(true)
-        setTimeout(() => {
-            if (usertype == "ServiceSide") {
-                route.params?.register ? navigation.replace(routes.addDocuments) : navigation.replace(routes.forgetPasswordUpdate)
-            }
-            if (usertype == "AgencySide") {
-                route.params?.register ? navigation.replace(routes.successAgency) : navigation.replace(routes.forgetPasswordUpdate)
-            }
+        // setVisible(true)
+        // setTimeout(() => {
+        SuccessFlashMessage("Email verified successfully")
+        if (usertype == "ServiceSide") {
+            route.params?.register ? navigation.replace(routes.addDocuments) : navigation.replace(routes.forgetPasswordUpdate)
+        }
+        if (usertype == "AgencySide") {
+            route.params?.register ? navigation.replace(routes.successAgency) : navigation.replace(routes.forgetPasswordUpdate)
+        }
 
-        }, 1500);
+        // }, 1500);
     }
-    useEffect(() => {
-        setVisible(false)
-        return (
-            setVisible(false)
-        )
-    }, [])
+    // useEffect(() => {
+    //     // setVisible(false)
+    //     return (
+    //         setVisible(false)
+    //     )
+    // }, [])
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView style={{}}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp title={"Verify"} heading={"Enter the code we just sent to your email"} style={styles.headerTextStyle}
                     onPress={() => { navigation.goBack() }}
                     imgName={iconPath.leftArrow}
@@ -64,7 +66,7 @@ const EmailVerification = ({ navigation, route }) => {
                     keyboardType='number-pad'
                     codeInputHighlightStyle={styles.underlineStyleHighLighted}
                 />
-                <Text style={styles.resendText}>Didn’t get code? -<Text style={{ textDecorationLine: "underline" }}> Resend code</Text></Text>
+                <CountDownComponent />
             </KeyboardAwareScrollView>
             <FormButton onPress={onCountinue} buttonTitle={"Continue"} />
             <EmailVerifiedModal visible={visible} subtitle={"You have successfully verified your email"} title={"Email verified"} />

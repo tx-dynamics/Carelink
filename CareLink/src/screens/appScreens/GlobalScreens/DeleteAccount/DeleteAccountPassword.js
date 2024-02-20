@@ -45,12 +45,12 @@ const DeleteAccountPassword = ({ navigation, route }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.alertView}>
                     <Image resizeMode='contain' source={appIcons.alertRed} style={styles.alertPic} />
                     <Text style={styles.deleteText}>Delete your account will:</Text>
                 </View>
-                <FlatList scrollEnabled={false} data={deleteData}
+                <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} data={deleteData}
                     ListHeaderComponent={() => <View style={styles.headerView}></View>}
                     renderItem={({ item, index }) => <Text style={styles.pointsText}>{item.title}</Text>} />
                 <Text style={styles.afterPointsText}>{"To Delete your Account Confirm your Password"}</Text>

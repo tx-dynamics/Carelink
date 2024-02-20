@@ -22,19 +22,19 @@ const Note = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 heading={"Write your note if you want any?"}
             />
-            <KeyboardAwareScrollView style={{}}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-                <NewAppTextInput />
+                <NewAppTextInput multiline />
             </KeyboardAwareScrollView>
             <FormButton backgroundColor={colors.skipButtonColor}
                 buttonTitle={"Skip"}
                 color={colors.black}
-                width={"90%"}
+                // width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
             <FormButton
                 buttonTitle={"Next"}
-                width={"90%"}
+                // width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
         </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        // marginTop: wp('4%')
+        marginTop: heightPixel(10)
     },
     hyperLink: {
         fontSize: 16,

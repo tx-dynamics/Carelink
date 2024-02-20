@@ -10,19 +10,22 @@ const SendMessageComponent = ({ onPress, value, onChangeText, disabled }) => {
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             style={styles.kbView}  >
-            <View style={styles.ChatMsgView} >
-                <TextInput value={value}
-                    onChangeText={onChangeText}
-                    placeholder="Type a message"
-                    placeholderTextColor={colors.lightgray}
-                    style={{
-                        includeFontPadding: true,
-                        flex: 1,
-                        paddingHorizontal: widthPixel(20),
-                        color: colors.black,
-                    }}
-                />
-            </View>
+            {/* <View
+                style={styles.ChatMsgView}
+            > */}
+            <TextInput value={value}
+                multiline
+                onChangeText={onChangeText}
+                placeholder="Type a message"
+                placeholderTextColor={colors.lightgray}
+                style={[styles.ChatMsgView, {
+                    // includeFontPadding: true,
+                    flex: 1,
+                    paddingHorizontal: widthPixel(20),
+                    color: colors.black,
+                }]}
+            />
+            {/* </View> */}
             <TouchableOpacity disabled={disabled} onPress={onPress} style={styles.ChatSndMsgBtn}>
                 <Image resizeMode='contain' source={appIcons.sendBtn} style={{
                     width: widthPixel(27),
@@ -40,15 +43,14 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: "space-between",
+        paddingRight: widthPixel(10)
     },
     ChatMsgView: {
-        height: heightPixel(51),
-        maxHeight: heightPixel(100),
-        flexDirection: 'row',
+        minHeight: heightPixel(51),
+        maxHeight: heightPixel(150),
         marginTop: heightPixel(10),
-        justifyContent: 'space-between',
         width: widthPixel(310),
-        alignItems: 'center',
         backgroundColor: "#e5e5e5",
         borderRadius: 23,
         marginHorizontal: widthPixel(20),

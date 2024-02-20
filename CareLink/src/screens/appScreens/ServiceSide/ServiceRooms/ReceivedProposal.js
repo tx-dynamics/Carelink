@@ -42,19 +42,19 @@ const ReceivedProposal = ({ navigation }) => {
             title: "Air Condirioner",
         },
         {
-            id: 3,
+            id: 4,
             title: "Security",
         },
         {
-            id: 3,
+            id: 5,
             title: "Attach Bathroom",
         },
         {
-            id: 3,
+            id: 6,
             title: "House Keeping",
         },
         {
-            id: 3,
+            id: 7,
             title: "Community",
         },
     ]
@@ -84,7 +84,7 @@ const ReceivedProposal = ({ navigation }) => {
         <View style={styles.container}>
             <Header headerLabel={"Proposal"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={[styles.txtView, { marginTop: heightPixel(1) }]}>
                     <Apptext style={styles.rms} >Agency Details</Apptext>
                     {/* <TouchableOpacity style={styles.pinkBox}>
@@ -112,23 +112,19 @@ const ReceivedProposal = ({ navigation }) => {
                     <Apptext style={styles.jobsTxt}> Note :    </Apptext>
                     <Apptext style={styles.lrmTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
                 </View>
-                <View style={{
-                    flexWrap: "wrap",
-                    flexDirection: "row",
-                    marginLeft: widthPixel(20)
-                }}>
-                    {availableFacility.map((item, index) => <AvailableFacilityComp title={item.title} />)}
+                <View style={styles.basicsView}>
+                    {availableFacility.map((item, index) => <AvailableFacilityComp key={index} title={item.title} />)}
                 </View>
                 <View style={[styles.txtView, { marginTop: heightPixel(15) }]}>
                     <Apptext style={styles.rms} >Images</Apptext>
                 </View>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     horizontal
                     data={imageData}
                     keyExtractor={(item, index) => index}
                     showsHorizontalScrollIndicator={false}
                     renderItem={({ item, indedx }) => <SimpleImageComponent pic={item.pic} disabled />}
-                    style={{ alignSelf: "flex-start", marginTop: heightPixel(0), marginLeft: widthPixel(20) }} />
+                    style={styles.imgFlatlistStyle} />
                 <View style={[styles.txtView, { marginTop: heightPixel(20) }]}>
                     <Apptext style={styles.rms} >Proposals</Apptext>
                 </View>
@@ -172,6 +168,11 @@ const styles = StyleSheet.create({
     rms: {
         fontFamily: 'Poppins-Medium',
         fontSize: 16
+    },
+    imgFlatlistStyle: {
+        alignSelf: "flex-start",
+        marginTop: heightPixel(0),
+        marginLeft: widthPixel(20)
     },
     pinkBox:
     {
@@ -223,6 +224,11 @@ const styles = StyleSheet.create({
     pinkboxTxt: {
         fontFamily: 'Poppins-Regular',
         fontSize: 10
+    },
+    basicsView: {
+        flexWrap: "wrap",
+        flexDirection: "row",
+        marginLeft: widthPixel(20)
     },
     lrmTxt: {
         width: wp('70%'), marginTop: wp('1%'), fontSize: 12

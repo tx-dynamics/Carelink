@@ -31,7 +31,7 @@ const ActivitySelect = ({ navigation }) => {
             />
             <Apptext style={styles.innerText}>What daily activities does she need help with?</Apptext>
             <View style={{ flex: 1 }}>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     style={{ flex: 1 }}
                     keyExtractor={(item, index) => index}

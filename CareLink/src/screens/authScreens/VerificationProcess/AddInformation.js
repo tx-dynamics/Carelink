@@ -40,17 +40,17 @@ const AddInformation = ({ navigation }) => {
         setTimeout(() => {
             setVisible(false)
             navigation.navigate("PaymentPlans")
-        }, 1500);
+        }, 3000);
         // }
     }
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <IconHeaderComp title={"Verification Process"}
                     onPress={() => { navigation.goBack() }}
                     imgName={iconPath.leftArrow} />
                 <LeftBoldTitle title={"Enter your Information"} />
-                <View style={styles.marginView}>
+                <View >
                     <AppTextInput title={"Your Age"} value={age} onChangeText={setAge} keyboardType='number-pad' />
                 </View>
                 <View style={styles.marginView}>

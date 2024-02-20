@@ -28,7 +28,7 @@ const AgencyLocation = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView style={{}}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp
                     title={"Location"}
                     onPress={() => navigation.goBack()}

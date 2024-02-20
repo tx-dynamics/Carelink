@@ -63,7 +63,7 @@ const ServiceProviderInfo = ({ floor, availableOn, location, note, images, days 
     ]
     return (
         <View style={styles.main}>
-            {floor && <Text style={styles.floorText}>Floor: {floor}</Text>}
+            {floor && <Text style={styles.floorText}>Floor: <Text style={styles.floorSecondText}>{floor}</Text> </Text>}
             <View style={styles.mapView}>
                 {data.map((item, index) => <AvailableFacilityComp key={index} title={item.title} />)}
             </View>
@@ -85,7 +85,7 @@ const ServiceProviderInfo = ({ floor, availableOn, location, note, images, days 
             {images &&
                 <>
                     <Text style={styles.forText}>Images</Text>
-                    <FlatList
+                    <FlatList showsVerticalScrollIndicator={false}
                         showsHorizontalScrollIndicator={false} keyExtractor={(item, index) => index} style={styles.imgFlatlistStyle} horizontal data={image} renderItem={({ item, index }) => <SimpleImageComponent disabled pic={item.pic} />} />
                 </>}
 
@@ -112,10 +112,13 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(20)
     },
     floorText: {
-        fontSize: fontPixel(16),
+        fontSize: fontPixel(20),
         color: colors.black,
         fontFamily: fonts.Poppins_Medium,
         marginTop: heightPixel(20)
+    },
+    floorSecondText: {
+        fontFamily: fonts.Poppins_Regular
     },
     attachBathView: {
         flexDirection: "row",
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
         color: colors.black12
     },
     availableText: {
-        fontSize: fontPixel(14),
+        fontSize: fontPixel(16),
         color: colors.black,
         fontFamily: fonts.Poppins_Medium,
         marginTop: heightPixel(20)
@@ -163,7 +166,7 @@ const styles = StyleSheet.create({
     },
     forText: {
         fontFamily: fonts.Poppins_Medium,
-        fontSize: fontPixel(15),
+        fontSize: fontPixel(16),
         color: colors.black,
         marginTop: heightPixel(20)
     },

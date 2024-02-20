@@ -33,7 +33,7 @@ const ReviewsComp = ({ pic, data, labelValue, when, fors, hourly, placeholderTex
                 </View>
             </View> : null}
             {/* Propsal Ends Here */}
-            <FlatList style={styles.flatlistStyle} horizontal data={data} renderItem={({ item, index }) => <CheckMarkComponent mark={item?.mark && appIcons.circleTick} title={item?.mark && item.title} />} />
+            <FlatList showsVerticalScrollIndicator={false} style={styles.flatlistStyle} horizontal data={data} renderItem={({ item, index }) => <CheckMarkComponent mark={item?.mark && appIcons.circleTick} title={item?.mark && item.title} />} />
             <View style={styles.txtView}>
                 <Apptext style={styles.txtVal}>{labelValue}</Apptext>
             </View>

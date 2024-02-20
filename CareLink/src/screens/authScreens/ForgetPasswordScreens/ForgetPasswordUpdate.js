@@ -18,6 +18,7 @@ import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
+import { SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 
 const ForgetUpdateScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -25,24 +26,20 @@ const ForgetUpdateScreen = ({ navigation }) => {
     const [isPasswordConfirm, setPasswordConfirm] = useState("")
     const [isSecure, setSecure] = useState(true)
     const [isSecureConfirm, setSecureConfirm] = useState(true)
-    const [isVisible, setVisible] = useState(false)
     const onPressUpdate = () => {
-        setVisible(true)
-        setTimeout(() => {
-            setVisible(false)
-            navigation.navigate(routes.loginScreen)
-        }, 1500);
+        SuccessFlashMessage("Password updated successfully")
+        navigation.navigate(routes.loginScreen)
     }
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Update Password"}
                     onPress={() => navigation.goBack()}
                     imgName={iconPath.leftArrow}
                 // heading={"Sign in to continue to the care link"}
                 />
                 <View>
-                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter and confirm new password</Apptext>
+                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter new password</Apptext>
                 </View>
                 <View style={{ marginTop: heightPixel(15) }}>
                     <AppTextInput value={isPassword} onChangeText={setPassword} title={"Password"} secureTextEntry={isSecure} right={isSecure ? appIcons.hide : appIcons.show} rightPress={() => setSecure(!isSecure)} />
@@ -57,7 +54,7 @@ const ForgetUpdateScreen = ({ navigation }) => {
                 onPress={onPressUpdate}
             />
             {/* <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} /> */}
-            <EmailVerifiedModal visible={isVisible} subtitle={"Password Updated"} title={"Password Updated"} />
+            {/* <EmailVerifiedModal visible={isVisible} subtitle={"Password Updated"} title={"Password Updated"} /> */}
         </View>
     )
 }

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     subView: {
         alignSelf: "flex-end",
-        marginBottom: heightPixel(10),
+        marginBottom: heightPixel(15),
         marginHorizontal: widthPixel(20),
         backgroundColor: 230,
         width: widthPixel(80),

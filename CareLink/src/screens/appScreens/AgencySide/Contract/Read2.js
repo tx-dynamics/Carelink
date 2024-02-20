@@ -37,7 +37,7 @@ _______________________________
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
 
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View>
                     <Apptext style={styles.msgTxt} >Read And FIll the General Contract </Apptext>

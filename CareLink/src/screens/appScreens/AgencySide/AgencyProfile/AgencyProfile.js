@@ -164,7 +164,7 @@ const Profile = ({ navigation }) => {
     //     }, []),
     // );
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <StatusBar translucent backgroundColor={"transparent"} />
             <BackgroundHeader
                 onPressRight={() => uploadmage(setCover)}
@@ -212,7 +212,7 @@ const Profile = ({ navigation }) => {
                     <Apptext style={styles.rms} >Reviews</Apptext>
                 </View>
                 <View style={{ marginTop: heightPixel(10) }}>
-                    <FlatList scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                    <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                         // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(90) }}></View>}
                         data={DATA}
                         keyExtractor={(item, index) => index}

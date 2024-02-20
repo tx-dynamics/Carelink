@@ -21,7 +21,7 @@ const BookedList = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <LeftSideBoldHeading title={"Booked"} number={ListedData?.length} />
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 style={{
                     paddingVertical: heightPixel(10)
                 }}

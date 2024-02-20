@@ -22,10 +22,11 @@ export default AvailableComponent
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: widthPixel(20),
+        marginTop: heightPixel(10)
     },
     availableText: {
-        fontSize: fontPixel(15),
-        fontFamily: fonts.Poppins_Regular,
+        fontSize: fontPixel(16),
+        fontFamily: fonts.Poppins_Medium,
         color: colors.black
     },
     subView: {

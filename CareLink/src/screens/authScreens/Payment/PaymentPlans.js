@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
-import { heightPixel } from '../../../Constants';
+import { fontPixel, heightPixel } from '../../../Constants';
 
 const PaymentPlans = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -58,7 +58,7 @@ const PaymentPlans = ({ navigation }) => {
                 <Apptext style={styles.submitTxt} >Subscribe Care Link to submit your rooms listings </Apptext>
                 <Apptext style={[styles.submitTxt, { fontFamily: 'Poppins-Medium' }]}>Choose your plan and get started</Apptext>
             </View>
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 ListFooterComponent={() => <View style={{ marginBottom: heightPixel(20) }}></View>}
                 data={DATA}
                 keyExtractor={(item, index) => index}
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(10)
     },
     submitTxt: {
-        fontSize: 11,
+        fontSize: fontPixel(14),
+        // fontSize: 11,
         textAlign: 'center',
         fontFamily: 'Poppins-Regular',
 

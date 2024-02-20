@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     addPhotoText: {
         fontFamily: fonts.Poppins_Medium,
-        fontSize: fontPixel(16),
+        fontSize: fontPixel(17),
         color: colors.smallHeadingBlack
     },
     photoContainer: {

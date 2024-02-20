@@ -24,7 +24,7 @@ const SendProposal = ({ navigation }) => {
                 leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView style={{}}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
                 <AppTextInput value={value} onChangeText={setValue} title={"Cover Letter"} multiline containerStyle={{ height: null, minHeight: heightPixel(80), maxHeight: heightPixel(220), }} />
 

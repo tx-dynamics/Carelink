@@ -35,7 +35,7 @@ const BasicEntitiesComp = ({ basicData, setBasicData }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.titleText}>Basic Entities</Text>
-            <FlatList scrollEnabled={false} keyExtractor={(item, index) => index} ListFooterComponent={() => <AddMoreComp onPress={() => setVisible(true)} />} data={basicData} renderItem={({ item, index }) => <EntityCheckComponent onPress={() => onCheck(item, index)}
+            <FlatList showsVerticalScrollIndicator={false} scrollEnabled={false} keyExtractor={(item, index) => index} ListFooterComponent={() => <AddMoreComp onPress={() => setVisible(true)} />} data={basicData} renderItem={({ item, index }) => <EntityCheckComponent onPress={() => onCheck(item, index)}
                 icon={item.check == true ? appIcons.tickCheck : appIcons.tickUncheck}
                 title={item.title} />} />
             <AddMoreModal
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(30)
     },
     titleText: {
-        fontSize: fontPixel(16),
+        fontSize: fontPixel(17),
         color: colors.smallHeadingBlack,
         fontFamily: fonts.Poppins_Medium
     },

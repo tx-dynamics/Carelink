@@ -43,7 +43,7 @@ const ServiceListingComp = ({ containerStyle, labelValue, disabled, facilityData
                     </View> */}
                     <View style={styles.bottomView}>
                         <View style={styles.flatListView}>
-                            <FlatList numColumns={2} style={styles.flatListStyle} data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
+                            <FlatList showsVerticalScrollIndicator={false} numColumns={2} style={styles.flatListStyle} data={facilityData} renderItem={({ item, index }) => <AvailableFacilityComp title={item.title} />} />
                         </View>
                         {statusTab &&
                             <View style={[styles.rightBottmView, statusStyle]}>

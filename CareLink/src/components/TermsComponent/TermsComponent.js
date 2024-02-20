@@ -19,7 +19,7 @@ export default TermsComponent
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: heightPixel(20),
+        marginVertical: heightPixel(20),
         flexDirection: "row",
         // alignItems: "flex-start",
         paddingHorizontal: widthPixel(20)

@@ -43,8 +43,8 @@ const SettingScreen = ({ navigation, route }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <LeftSideBoldHeading title={"Settings"} />
-            <FlatList style={{ marginTop: heightPixel(20) }} data={settingData} renderItem={({ item, index }) => <SettingBox
+            {/* <LeftSideBoldHeading title={"Settings"} /> */}
+            <FlatList showsVerticalScrollIndicator={false} style={{ marginTop: heightPixel(20) }} data={settingData} renderItem={({ item, index }) => <SettingBox
                 isOn={isOn}
                 onToggle={(v) => setOn(v)}
                 disable={item.radio}

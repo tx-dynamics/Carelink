@@ -128,7 +128,7 @@ const AvailableList = ({ navigation }) => {
                 onPress={() => navigation.goBack()}
             />
             <LeftSideBoldHeading title={"Available"} number={ListedData?.length} />
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 style={{
                     paddingVertical: heightPixel(10)
                 }}

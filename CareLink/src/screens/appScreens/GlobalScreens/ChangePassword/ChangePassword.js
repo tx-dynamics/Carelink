@@ -33,7 +33,7 @@ const ChangePassword = ({ navigation, route }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <KeyboardAwareScrollView>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <AppTextInput
                     secureTextEntry={oldSecure}
                     right={oldSecure ? appIcons.hide : appIcons.show}

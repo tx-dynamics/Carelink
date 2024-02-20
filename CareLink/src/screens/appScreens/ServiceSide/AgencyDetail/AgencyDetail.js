@@ -18,6 +18,7 @@ import { heightPixel, widthPixel } from '../../../../Constants';
 import { Rating, AirbnbRating } from 'react-native-ratings';
 import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
 import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
+import AgencyMenuPopUp from '../../../../components/AgencyMenuPopUp/AgencyMenuPopUp';
 
 const AgencyDetail = ({ navigation, route }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -146,7 +147,7 @@ const AgencyDetail = ({ navigation, route }) => {
     ];
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <StatusBar translucent backgroundColor={"transparent"} />
             <BackgroundHeader
                 backImg={require('../../../../../assets/back.png')}
@@ -154,6 +155,7 @@ const AgencyDetail = ({ navigation, route }) => {
                 rightImg={appIcons.menu}
                 onPressLeft={() => navigation.goBack()}
             />
+            <AgencyMenuPopUp />
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
@@ -194,7 +196,7 @@ const AgencyDetail = ({ navigation, route }) => {
                     <Apptext style={styles.rms} >Reviews</Apptext>
                 </View>
                 <View style={{ marginTop: heightPixel(10) }}>
-                    <FlatList ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                    <FlatList scrollEnabled={false} showsVerticalScrollIndicator={false} ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
                         data={DATA}
                         keyExtractor={(item, index) => index}
                         renderItem={({ item, index }) => (
