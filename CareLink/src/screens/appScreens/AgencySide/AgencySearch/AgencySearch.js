@@ -261,7 +261,7 @@ const AgencySearch = ({ navigation }) => {
                 onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
             <SearchComponent onChangeText={setSearch} containerStyle={{ marginVertical: heightPixel(20), }} />
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-                <Apptext style={styles.rms} >Client Listings</Apptext>
+                <Apptext style={styles.rms} >Latest Listings</Apptext>
                 <FlatList showsVerticalScrollIndicator={false}
                     scrollEnabled={false}
                     data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
@@ -269,6 +269,7 @@ const AgencySearch = ({ navigation }) => {
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => <CustomerListingComp
                         title={item.title}
+                        rightDisable={true}
                         posted={item.posted}
                         duration={item.duration}
                         facilityData={item.facility}
@@ -290,7 +291,8 @@ const styles = StyleSheet.create({
     rms: {
         paddingHorizontal: widthPixel(20),
         fontFamily: 'Poppins-Medium',
-        fontSize: fontPixel(20)
+        fontSize: fontPixel(20),
+        marginBottom: heightPixel(10)
     },
     searchBar: {
         height: 47,

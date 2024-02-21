@@ -31,11 +31,11 @@ const AgencyBasic = ({ navigation, route }) => {
     }
     return (
         <View style={styles.container}>
-            <IconHeaderComp title={isFromProfile ? "About" : "Enter Information"}
-                onPress={() => { navigation.goBack() }}
-                imgName={iconPath.leftArrow}
-                heading={isFromProfile ? "About Us" : "Enter your agency name and about"} />
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                <IconHeaderComp title={isFromProfile ? "About" : "Enter Information"}
+                    onPress={() => { navigation.goBack() }}
+                    imgName={iconPath.leftArrow}
+                    heading={isFromProfile ? "About Us" : "Enter your agency name and about"} />
                 <AppTextInput
                     value={agencyName}
                     title={"Agency name"}

@@ -142,7 +142,7 @@ const BookedRoomsAgencySide = ({ navigation }) => {
                 data={BookedDataAgency}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => <AgencyListingComp
-                    rightIconPress={() => navigation.navigate(routes.roomDetails)}
+                    rightIconPress={() => navigation.navigate(routes.bookedRoomDetailAgency)}
                     item={item}
                     facilityData={item.facility} />} />
         </View>

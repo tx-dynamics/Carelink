@@ -59,7 +59,7 @@ const AgencyNotifications = ({ navigation }) => {
         <View style={styles.container}>
             <Header
                 headerLabel={"Notifications"}
-                rightImg={appIcons.messageIcon}
+                // rightImg={appIcons.messageIcon}
                 leftImgStyle={styles.leftImgStyle}
                 rightImgStyle={styles.rightImgStyle}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}

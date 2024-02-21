@@ -18,21 +18,21 @@ const Help = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <IconHeaderComp
-                title={"Help Center"}
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                style={usertype === "ServiceSide" ? {} : styles.createTxt}
-                heading={usertype === "ServiceSide" ?
-                    "This is Care Link Help center. Proceed your query with us."
-                    :
-                    "This is a help center of CARE LINK .Submit your problems here"
-                }
-            />
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                <IconHeaderComp
+                    title={"Help Center"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    style={usertype === "ServiceSide" ? {} : styles.createTxt}
+                    heading={usertype === "ServiceSide" ?
+                        "This is Care Link Help center. Proceed your query with us."
+                        :
+                        "This is a help center of CARE LINK .Submit your problems here"
+                    }
+                />
                 <AppTextInput title={"Name"} />
                 <AppTextInput title={"Email"} />
-                <AppTextInput multiline mainViewStyle={{ marginBottom: heightPixel(200), }} title={"Your Problem"} containerStyle={styles.descriptionStyle} />
+                <AppTextInput multiline mainViewStyle={{ marginBottom: heightPixel(50), }} title={"Your Problem"} containerStyle={styles.descriptionStyle} />
             </KeyboardAwareScrollView>
             <FormButton onPress={onPressSubmit}
                 buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
