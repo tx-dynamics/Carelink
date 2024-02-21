@@ -91,7 +91,7 @@ const Step1 = ({ navigation }) => {
                         isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
                     }}
                     style={styles.box}>
-                    <Image style={styles.boxImg}
+                    <Image resizeMode='contain' style={styles.boxImg}
                         source={appIcons.forward} />
                 </TouchableOpacity>
             </View>
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     },
     bottomView: {
         alignSelf: "center",
-        bottom: heightPixel(20),
+        bottom: heightPixel(45),
     },
 
 });

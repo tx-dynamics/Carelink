@@ -184,8 +184,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: widthPixel(103),
-        height: heightPixel(28),
-        marginTop: -15,
+        height: heightPixel(35),
+        marginTop: -20,
         marginLeft: wp('5%'),
         backgroundColor: DefaultStyles.colors.primary,
         borderRadius: 30

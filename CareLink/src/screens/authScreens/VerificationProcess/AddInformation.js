@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import colors from '../../../config/colors'
-import { heightPixel } from '../../../Constants'
+import { heightPixel, widthPixel } from '../../../Constants'
 import IconHeaderComp from '../../../components/IconHeaderComp'
 import { iconPath } from '../../../config/icon'
 import LeftBoldTitle from '../../../components/LeftBoldTitle/LeftBoldTitle'
@@ -39,13 +39,13 @@ const AddInformation = ({ navigation }) => {
         setVisible(true)
         setTimeout(() => {
             setVisible(false)
-            navigation.navigate("PaymentPlans")
+            navigation.replace("PaymentPlans")
         }, 3000);
         // }
     }
     return (
         <View style={styles.container}>
-            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
                 <IconHeaderComp title={"Verification Process"}
                     onPress={() => { navigation.goBack() }}
                     imgName={iconPath.leftArrow} />
@@ -62,10 +62,11 @@ const AddInformation = ({ navigation }) => {
                         setItems={setItems}
                         value={value}
                         setValue={setValue}
+                        mainStyle={styles.dropDownStyle}
                         onChangeValue={(v) => setValue(v)}
                     />
                 </View>
-                <View style={styles.marginView}>
+                <View style={styles.marginVertical}>
                     <AppTextInput
                         value={exp}
                         onChangeText={setExp}
@@ -95,5 +96,12 @@ const styles = StyleSheet.create({
     },
     marginView: {
         marginTop: heightPixel(25)
+    },
+    marginVertical: {
+        marginTop: heightPixel(25),
+        marginBottom: heightPixel(60)
+    },
+    dropDownStyle: {
+        paddingHorizontal: widthPixel(15),
     },
 })

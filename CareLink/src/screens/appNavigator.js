@@ -73,6 +73,9 @@ import ActiveContracts from "./appScreens/AgencySide/ActiveContracts/ActiveContr
 import { useFocusEffect } from "@react-navigation/native";
 import BrochureScreen from "./appScreens/AgencySide/AgencyProfile/BrochureScreen";
 import AgencyBasic from "./authScreens/Agency/AgencyBasic";
+import BookedRoomsAgencySide from "./appScreens/AgencySide/RoomsScreens/BookedRoomsAgencySide";
+import AgencyProposalList from "./appScreens/AgencySide/AgencyProposalList/AgencyProposalList";
+import BookedRoomDetailAgency from "./appScreens/AgencySide/AgencyHome/BookedRoomDetailAgency";
 
 
 const Tab = createBottomTabNavigator();
@@ -129,6 +132,9 @@ const WithoutBottomTabnavigator = () => {
             <StackNavigator.Screen name="EditProfile" component={EditProfile} />
             <StackNavigator.Screen name={routes.agencyDetail} component={AgencyDetail} />
             <StackNavigator.Screen name={routes.bookedRoom} component={BookedRooms} />
+            <StackNavigator.Screen name={routes.bookedRoomAgency} component={BookedRoomsAgencySide} />
+            <StackNavigator.Screen name={routes.bookedRoomDetailAgency} component={BookedRoomDetailAgency} />
+            <StackNavigator.Screen name={routes.agencyProposalList} component={AgencyProposalList} />
             <StackNavigator.Screen name={routes.availableRoom} component={AvailableRoom} />
             <StackNavigator.Screen name={routes.inactiveRoom} component={InactiveRoom} />
             <StackNavigator.Screen name={routes.listingOptions} component={ListingOptions} />

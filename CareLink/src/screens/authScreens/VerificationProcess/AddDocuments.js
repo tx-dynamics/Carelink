@@ -78,7 +78,7 @@ const AddDocuments = ({ navigation }) => {
         <View style={styles.container}>
             <View>
                 <IconHeaderComp title={"Verification Process"} heading={isData[isIndex].heading}
-                    onPress={() => { navigation.goBack() }}
+                    onPress={() => { isIndex > 0 ? setIndex(isIndex - 1) : navigation.goBack() }}
                     imgName={iconPath.leftArrow} />
                 {isData[isIndex].media ? <DocumentComponent onPress={removeImage} pic={isData[isIndex].media} /> : <UploadDocumentComp title={isData[isIndex].title} subTitle={isData[isIndex].subtitle} onPress={() => setVisible(true)} />}
             </View>

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         width: widthPixel(374),
         color: colors.black,
         paddingHorizontal: widthPixel(20),
-        paddingBottom: heightPixel(30),
+        paddingBottom: heightPixel(20),
         marginBottom: heightPixel(20)
     },
 })

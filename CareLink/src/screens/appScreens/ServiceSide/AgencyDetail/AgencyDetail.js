@@ -19,10 +19,12 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
 import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
 import AgencyMenuPopUp from '../../../../components/AgencyMenuPopUp/AgencyMenuPopUp';
-
+import MenuModal, { MenuTextComp } from '../../../../components/MenuModal/MenuModal';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
 const AgencyDetail = ({ navigation, route }) => {
     const usertype = useSelector((state) => state.splash.userType)
     const [isVisible, setVisible] = useState(false)
+    const [menuVisible, setMenuVisible] = useState(false)
     const DATA = [
         {
             id: 1,
@@ -145,7 +147,20 @@ const AgencyDetail = ({ navigation, route }) => {
             ]
         },
     ];
-
+    const menuData = [
+        {
+            id: 1,
+            title: "Report"
+        },
+        {
+            id: 2,
+            title: "Share"
+        },
+    ]
+    const onMenuPress = (index) => {
+        setMenuVisible(false)
+        SuccessFlashMessage(index < 1 ? "Report Journey will be there" : "Share Journey will be there")
+    }
     return (
         <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <StatusBar translucent backgroundColor={"transparent"} />
@@ -153,9 +168,9 @@ const AgencyDetail = ({ navigation, route }) => {
                 backImg={require('../../../../../assets/back.png')}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={appIcons.menu}
-                onPressLeft={() => navigation.goBack()}
+                onPressLeft={() => route?.params?.isChat ? navigation.navigate("HomeNavigator") : navigation.goBack()}
+                onPressRight={() => setMenuVisible(true)}
             />
-            <AgencyMenuPopUp />
             <View style={styles.whiteView}>
                 <View style={styles.imgBox} >
                     <Image source={require('../../../../../assets/photo.png')} />
@@ -170,8 +185,6 @@ const AgencyDetail = ({ navigation, route }) => {
                         </TouchableOpacity>
                     }
                 </View>
-                {/* <AirbnbRating count={11} /> */}
-
                 <Apptext style={styles.imgTxt} >ABC Rental Agency</Apptext>
                 <Apptext style={styles.mngTxt} >Manage 90+ Rental Propoerties in the city</Apptext>
                 <Apptext style={[styles.mngTxt, { marginTop: wp('2%') }]} >5+ Years experience</Apptext>
@@ -211,6 +224,14 @@ const AgencyDetail = ({ navigation, route }) => {
                 </View>
             </View>
             <BrochureModal onPress={() => setVisible(false)} visible={isVisible} onRequestClose={() => setVisible(false)} />
+            <MenuModal
+                data={menuData}
+                visible={menuVisible}
+                onRequestClose={() => setMenuVisible(false)}
+                mainPress={() => setMenuVisible(false)}
+                renderItem={({ item, index }) => <MenuTextComp
+                    title={item.title}
+                    onPress={() => onMenuPress(index)} />} />
         </ScrollView>
     )
 }

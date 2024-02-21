@@ -11,9 +11,9 @@ import {
 const AgencyMenuPopUp = () => {
     return (
         <View>
-            <View style={{ backgroundColor: "red" }}>
+            <View style={{}}>
                 <Text style={{ color: "red" }}>Hello world!</Text>
-                <Menu>
+                <Menu style={{ backgroundColor: "blue" }}>
                     <MenuTrigger text='Select action' />
                     <MenuOptions>
                         <MenuOption onSelect={() => alert(`Save`)} text='Save' />

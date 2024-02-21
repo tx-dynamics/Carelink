@@ -38,7 +38,7 @@ const CountDownComponent = ({ onPress }) => {
                     textAlign: "center",
                     fontSize: fontPixel(14),
                     fontFamily: fonts.Poppins_Medium,
-                }}> Send again</Text>
+                }}> Resend Code</Text>
             </Text>
         </View>
     )

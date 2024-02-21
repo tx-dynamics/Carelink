@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: heightPixel(20),
         flexDirection: "row",
-        // alignItems: "flex-start",
-        paddingHorizontal: widthPixel(20)
+        paddingLeft: widthPixel(20),
+        paddingRight: widthPixel(10),
     },
     pressView: {
         width: widthPixel(25),

@@ -16,25 +16,23 @@ const Note = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <IconHeaderComp
-                title={"Write Note"}
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={"Write your note if you want any?"}
-            />
-            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
+            <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"} showsVerticalScrollIndicator={false} style={{}}>
+                <IconHeaderComp
+                    title={"Write Note"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={"Write your note if you want any?"}
+                />
                 <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-                <NewAppTextInput multiline />
+                <NewAppTextInput multiline inputStyle={{ marginBottom: heightPixel(30), }} />
             </KeyboardAwareScrollView>
             <FormButton backgroundColor={colors.skipButtonColor}
                 buttonTitle={"Skip"}
                 color={colors.black}
-                // width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
             <FormButton
                 buttonTitle={"Next"}
-                // width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
         </View>

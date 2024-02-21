@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     },
     descTxt: {
         // marginLeft: wp('32%'),
-        fontSize: 16, color: "lightgray"
+        fontSize: 16,
+        color: colors.gray
     }
 });

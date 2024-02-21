@@ -16,6 +16,7 @@ import { appIcons } from '../../../Constants/Utilities/assets';
 import { fonts } from '../../../Constants/Fonts';
 import { fromProfile } from '../../../redux/Slices/appSlice';
 import { userSave } from '../../../redux/Slices/splashSlice';
+import { CommonActions } from '@react-navigation/native';
 
 const PaymentDone = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -31,7 +32,12 @@ const PaymentDone = ({ navigation }) => {
             if (usertype == "AgencySide") {
                 dispatch(userSave(true))
             }
-            else { navigation.navigate(routes.listingOptions) }
+            else {
+                navigation.dispatch(CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: routes.listingOptions }]
+                }))
+            }
         }
     }
     return (

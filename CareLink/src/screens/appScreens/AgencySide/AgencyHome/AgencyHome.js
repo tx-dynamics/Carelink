@@ -86,16 +86,17 @@ const AgencyHome = ({ }) => {
                 <View style={styles.txtView}>
                     <Apptext style={styles.rms} >Rooms & Proposals</Apptext>
                 </View>
-                <AgencyHomeComp
+                <AgencyHomeComp onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.bookedRoomAgency })}
                     labelValue={"Rooms"}
-                    BookedRooms={"3"}
+                    BookedRooms={"7"}
                     scndTxt={"Booked"}
                 />
                 <AgencyHomeComp
+                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.agencyProposalList })}
                     labelValue={"Proposals"}
-                    BookedRooms={"3"}
-                    scndTxt={"Booked"}
-                    AvailableRooms={"1"}
+                    BookedRooms={"4"}
+                    scndTxt={"Submitted"}
+                    AvailableRooms={"3"}
                     firstTxt={"Accepted"}
                 />
                 <View style={styles.listingView}>
@@ -145,7 +146,8 @@ const styles = StyleSheet.create({
     listingView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: widthPixel(20)
+        paddingHorizontal: widthPixel(20),
+        marginVertical: heightPixel(10)
     },
     rms: {
         fontFamily: 'Poppins-Medium',

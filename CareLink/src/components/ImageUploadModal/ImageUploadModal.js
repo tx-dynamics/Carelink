@@ -9,10 +9,11 @@ const ImageUploadModal = ({ visible, crossPress, cameraPress, mediaPress, onRequ
     return (
         <Modal animationType='fade' visible={visible} transparent onRequestClose={onRequestClose}>
             <View style={styles.container}>
-                <TouchableOpacity onPress={crossPress} style={styles.crossView}>
-                    <Image source={appIcons.cross} style={styles.crossStyle} />
-                </TouchableOpacity>
+
                 <View style={styles.subView}>
+                    <TouchableOpacity onPress={crossPress} style={styles.crossView}>
+                        <Image source={appIcons.cross} style={styles.crossStyle} />
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={cameraPress} style={styles.pressView}>
                         <Image resizeMode='contain' source={appIcons.openCamera} style={styles.iconImg} />
                         <Text style={styles.iconText}>Camera</Text>
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         position: "absolute",
         top: heightPixel(10),
-        right: widthPixel(20)
+        right: widthPixel(10)
     },
     crossStyle: {
         width: widthPixel(20),

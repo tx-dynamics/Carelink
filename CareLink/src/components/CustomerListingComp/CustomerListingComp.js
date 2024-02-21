@@ -29,7 +29,7 @@ export default CustomerListingComp
 const styles = StyleSheet.create({
     container: {
         marginTop: heightPixel(1),
-        marginBottom: heightPixel(15),
+        marginBottom: heightPixel(20),
         alignSelf: "center",
         backgroundColor: colors.white,
         width: widthPixel(374),
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     flatListStyle: {
         marginTop: heightPixel(5),
         paddingLeft: widthPixel(20),
-        marginBottom: heightPixel(10)
+        marginBottom: heightPixel(10),
+        paddingBottom: heightPixel(4)
     },
     subView: {
         flexDirection: "row",

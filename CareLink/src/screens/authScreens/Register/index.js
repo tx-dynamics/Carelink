@@ -37,12 +37,12 @@ const Register = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <AppStatusbar />
-            <IconHeaderComp title={"Sign Up"}
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
-            />
-            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"handled"}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"never"}>
+                <IconHeaderComp title={"Sign Up"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={usertype === "ServiceSide" ? "Create a free account to see your best match" : "Create a free account to start your agency"}
+                />
                 <View>
                     <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your Information: </Apptext>
                 </View>
@@ -66,10 +66,6 @@ const Register = ({ navigation }) => {
                         right={isSecureConfirm ? appIcons.hide : appIcons.show}
                         rightPress={() => setSecureConfirm(!isSecureConfirm)}
                     />
-                    {/* <NewSimpleTextinput onChangeText={setFirstName} value={firstName} title={"First name"} /> */}
-                    {/* <NewSimpleTextinput onChangeText={setLastName} value={lastName} title={"Last name"} /> */}
-                    {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
-                    {/* <NewSimpleTextinput inputStyle={{}} title={"Password"} secureTextEntry={isSecure} rightPress={() => setSecure(!isSecure)} right={isSecure ? appIcons.hide : appIcons.show} /> */}
                 </View>
                 <View style={styles.termsTxt} >
                     <Apptext style={styles.createTxt1} >By clicking “ Join now,”you agree to our
@@ -116,7 +112,7 @@ const styles = StyleSheet.create({
     termsTxt: {
         width: wp('90%'), marginTop: 41,
         alignSelf: 'center',
-        marginBottom: heightPixel(10)
+        marginBottom: heightPixel(20)
     },
     hyperLink: {
         fontSize: 13,

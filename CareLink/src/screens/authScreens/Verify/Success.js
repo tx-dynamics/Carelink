@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     },
     smallTxt: {
         marginTop: wp('7%'),
-        fontSize: 16
+        fontSize: fontPixel(19)
     },
     smallTxt2: {
         marginTop: heightPixel(10),
-        fontSize: fontPixel(11),
+        fontSize: fontPixel(13),
         fontFamily: fonts.Poppins_Regular,
         color: colors.black
     },
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         marginBottom: heightPixel(20)
     },
     listPic: {
-        width: widthPixel(30),
-        height: widthPixel(30),
+        width: widthPixel(35),
+        height: widthPixel(35),
     },
 });
