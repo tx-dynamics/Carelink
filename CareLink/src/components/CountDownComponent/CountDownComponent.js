@@ -31,14 +31,14 @@ const CountDownComponent = ({ onPress }) => {
                 {/* {"00:" + duration > 9 ? duration : "00:" + `0${duration}`} */}
                 {duration > 9 ? `00:${duration}` : `00:0${duration}`}
             </Text>
-            <Text style={styles.didntText}>Didn’t get code?
-                <Text onPress={onPress} disabled={duration != 0 ? true : false} style={{
-                    marginTop: heightPixel(10),
-                    color: duration != 0 ? colors.gray : colors.red,
-                    textAlign: "center",
-                    fontSize: fontPixel(14),
-                    fontFamily: fonts.Poppins_Medium,
-                }}> Resend Code</Text>
+            <Text style={styles.didntText}>Didn’t get code? <Text onPress={onPress} disabled={duration != 0 ? true : false} style={{
+                marginTop: heightPixel(10),
+                color: duration != 0 ? colors.gray : colors.red,
+                textAlign: "center",
+                fontSize: fontPixel(14),
+                fontFamily: fonts.Poppins_Medium,
+                textDecorationLine: "underline",
+            }}>Resend Code</Text>
             </Text>
         </View>
     )

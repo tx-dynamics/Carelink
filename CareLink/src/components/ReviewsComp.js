@@ -47,7 +47,8 @@ export default ReviewsComp;
 
 const styles = StyleSheet.create({
     direcView: {
-        flexDirection: 'row', marginTop: wp('1%')
+        flexDirection: 'row',
+        marginTop: wp('1%')
     },
     jcImg: {
         width: widthPixel(55),
@@ -67,7 +68,8 @@ const styles = StyleSheet.create({
     },
     imgView: {
         width: 51,
-        marginHorizontal: wp('4%'),
+        // paddingLeft: widthPixel(10),
+        marginLeft: widthPixel(7),
         borderRadius: 30,
         height: 51,
     },

@@ -97,7 +97,9 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(10),
         fontSize: fontPixel(13),
         fontFamily: fonts.Poppins_Regular,
-        color: colors.black
+        color: colors.black,
+        textAlign: "center",
+
     },
     divider: {
         marginTop: 13,
@@ -112,7 +114,8 @@ const styles = StyleSheet.create({
     },
     listContainer: {
         alignItems: "center",
-        marginBottom: heightPixel(20)
+        marginBottom: heightPixel(20),
+        paddingHorizontal: widthPixel(20)
     },
     listPic: {
         width: widthPixel(35),

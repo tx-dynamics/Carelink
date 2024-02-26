@@ -76,7 +76,19 @@ const Step1 = ({ navigation }) => {
                 />
             </KeyboardAwareScrollView>
             <View style={styles.bottomView}>
-                <Progress.Circle
+                <Progress.Circle style={{
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}
+                    children={<TouchableOpacity
+                        onPress={() => {
+                            setProgress(isProgress + .34)
+                            isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
+                        }}
+                        style={styles.box}>
+                        <Image resizeMode='contain' style={styles.boxImg}
+                            source={appIcons.forward} />
+                    </TouchableOpacity>}
                     thickness={2}
                     borderWidth={0}
                     progress={isProgress}
@@ -85,15 +97,7 @@ const Step1 = ({ navigation }) => {
                     strokeCap={"butt"}
                     unfilledColor={colors.dotUnselected}
                 />
-                <TouchableOpacity
-                    onPress={() => {
-                        setProgress(isProgress + .34)
-                        isIndex != 2 ? swiperRef.current._swiper.scrollToIndex({ index: isIndex + 1 }) : onPressButton()
-                    }}
-                    style={styles.box}>
-                    <Image resizeMode='contain' style={styles.boxImg}
-                        source={appIcons.forward} />
-                </TouchableOpacity>
+
             </View>
         </View>
     )
@@ -149,12 +153,10 @@ const styles = StyleSheet.create({
     },
     box: {
         position: "absolute",
-        top: heightPixel(10),
         width: widthPixel(83),
         height: widthPixel(83),
         borderRadius: widthPixel(50),
         backgroundColor: colors.primary,
-        marginBottom: heightPixel(25),
         alignSelf: 'center',
         alignItems: "center",
         justifyContent: "center",
