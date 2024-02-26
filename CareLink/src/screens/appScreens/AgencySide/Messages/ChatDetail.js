@@ -8,7 +8,7 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
-import { routes } from '../../../../Constants';
+import { heightPixel, routes } from '../../../../Constants';
 
 const ChatDetail = ({ navigation }) => {
 
@@ -54,7 +54,6 @@ const ChatDetail = ({ navigation }) => {
                     <View style={{ marginVertical: wp('5%') }}>
                         <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
-                            showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
@@ -81,7 +80,6 @@ const ChatDetail = ({ navigation }) => {
                     <View style={{ marginVertical: wp('5%') }}>
                         <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
-                            showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
@@ -188,7 +186,7 @@ const styles = StyleSheet.create({
         width: wp('20%'),
         fontSize: 11,
         color: DefaultStyles.colors.lightPrimary,
-        marginTop: wp('1%'),
+        marginTop: heightPixel(10),
         marginHorizontal: wp('2%')
     },
     ChatMsgView: {

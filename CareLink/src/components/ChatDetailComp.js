@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
         textAlign: 'right',
         fontSize: 11,
         color: DefaultStyles.colors.lightPrimary,
-        marginTop: heightPixel(2),
-        marginRight: widthPixel(5)
+        marginTop: heightPixel(5),
+        marginRight: widthPixel(10)
     },
     ChatCallingView: {
         width: 35,

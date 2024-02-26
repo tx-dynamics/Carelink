@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         fontSize: 11,
         color: DefaultStyles.colors.lightPrimary,
-        marginTop: heightPixel(2),
+        marginTop: heightPixel(5),
         marginLeft: widthPixel(5)
     },
     marginView: {

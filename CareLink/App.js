@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -26,7 +27,14 @@ class App extends Component {
         <NavigationContainer>
           <PersistGate loading={null} persistor={persistor}>
             <MenuProvider>
+              {Platform.OS==="ios" ?
+              <SafeAreaView style={{flex:1}}>
               <Main />
+              </SafeAreaView>:
+              <View style={{flex:1}}>
+              <Main />
+              </View> 
+              }
             </MenuProvider>
             <FlashMessage position="top" />
           </PersistGate>

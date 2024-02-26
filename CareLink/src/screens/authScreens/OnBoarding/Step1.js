@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, SafeAreaView, ActivityIndicator, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, Image, SafeAreaView, ActivityIndicator, Text, View, StatusBar, Platform } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
@@ -45,7 +45,6 @@ const Step1 = ({ navigation }) => {
         navigation.replace("AskRegister")
     }
     return (
-        console.log(user),
         <View style={styles.container}>
             <AppStatusbar />
             <TouchableOpacity style={styles.skipDirection}
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
-        // paddingBottom: heightPixel(10)
+        // paddingBottom: heightPixel(20)
     },
     skipDirection: {
         flexDirection: 'row',
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
     },
     bottomView: {
         alignSelf: "center",
-        bottom: heightPixel(45),
+        // bottom: heightPixel(45),
     },
 
 });

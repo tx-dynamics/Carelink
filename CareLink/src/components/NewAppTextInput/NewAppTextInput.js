@@ -21,6 +21,7 @@ export default NewAppTextInput
 
 const styles = StyleSheet.create({
     container: {
+        minHeight: heightPixel(70),
         maxHeight: heightPixel(200),
         alignSelf: "center",
         borderRadius: widthPixel(10),
