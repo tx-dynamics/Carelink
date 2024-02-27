@@ -6,6 +6,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import InboxComp from '../../../../components/InboxComp';
 import { routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const Messages = ({ navigation }) => {
@@ -34,7 +35,7 @@ const Messages = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -56,7 +57,6 @@ const Messages = ({ navigation }) => {
             <View style={{ marginTop: wp('2%') }}>
                 <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
-                    showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.id}
                     ListEmptyComponent={() => {
                         return (
@@ -77,7 +77,7 @@ const Messages = ({ navigation }) => {
                 />
 
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -9,14 +9,14 @@ import { appIcons } from '../../../../Constants/Utilities/assets'
 import CertificateComp from '../../../../components/CertificateComp/CertificateComp'
 import ImageUploadModal from '../../../../components/ImageUploadModal/ImageUploadModal'
 import { uploadmageCamState, uploadmageState } from '../../../../Services/HelpingMethods'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const CertifcateDetail = ({ navigation, route }) => {
     const [isUpload, setUpload] = useState(false)
     const [img, setImg] = useState("")
     const [isVisible, setVisible] = useState(false)
     return (
-        console.log(route.params?.item),
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp title={route?.params?.item?.title} imgName={iconPath.leftArrow} onPress={() => navigation.goBack()} />
             <View>
                 <CertificateComp
@@ -31,7 +31,7 @@ const CertifcateDetail = ({ navigation, route }) => {
                 onRequestClose={() => setVisible(false)}
                 cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible, route.params?.item?.id == 1 ? heightPixel(360) : route.params?.item?.id == 2 ? heightPixel(318) : heightPixel(399))}
                 mediaPress={() => uploadmageState(setImg, setUpload, setVisible, route.params?.item?.id == 1 ? heightPixel(360) : route.params?.item?.id == 2 ? heightPixel(318) : heightPixel(399))} />
-        </View>
+        </AppGLobalView>
     )
 }
 

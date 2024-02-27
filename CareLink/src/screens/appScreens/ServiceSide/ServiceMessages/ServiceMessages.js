@@ -13,6 +13,7 @@ import colors from '../../../../config/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSelector } from 'react-redux';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const ServiceMessages = ({ navigation }) => {
@@ -279,7 +280,7 @@ const ServiceMessages = ({ navigation }) => {
     ];
     let DATA = usertype == "ServiceSide" ? DATAService : DATAAgency
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 headerLabel={"Inbox"}
                 rightImg={usertype == "ServiceSide" ? appIcons.thirdTab : false}
@@ -309,7 +310,7 @@ const ServiceMessages = ({ navigation }) => {
                     />
                 </View>
             </KeyboardAwareScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

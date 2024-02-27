@@ -7,6 +7,7 @@ import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/Left
 import { appIcons } from '../../../../Constants/Utilities/assets'
 import { heightPixel, routes } from '../../../../Constants'
 import ServiceListingComp from '../../../../components/ServiceListingComp'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 
 export const ListedData = [
@@ -118,10 +119,7 @@ export const ListedData = [
 const AvailableList = ({ navigation }) => {
 
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: colors.white,
-        }}>
+        <AppGLobalView >
             <IconHeaderComp
                 title={"Available"}
                 imgName={iconPath.leftArrow}
@@ -150,7 +148,7 @@ const AvailableList = ({ navigation }) => {
                     />
                 )}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

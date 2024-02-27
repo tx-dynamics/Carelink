@@ -9,6 +9,7 @@ import { fontPixel, heightPixel } from '../../../../Constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const Help = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -17,7 +18,7 @@ const Help = ({ navigation }) => {
         navigation.goBack()
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <IconHeaderComp
                     title={"Help Center"}
@@ -37,7 +38,7 @@ const Help = ({ navigation }) => {
             <FormButton onPress={onPressSubmit}
                 buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -5,6 +5,7 @@ import Header from '../../../../components/Header'
 import { appIcons } from '../../../../Constants/Utilities/assets'
 import ActiveContractCard from '../../../../components/ActiveContractCard/ActiveContractCard'
 import HeaderForSpace from '../../../../components/HeaderForSpace/HeaderForSpace'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const ActiveContracts = ({ navigation }) => {
     const contractData = [
@@ -136,7 +137,7 @@ const ActiveContracts = ({ navigation }) => {
         },
     ]
     return (
-        <View style={styles.container}>
+         <AppGLobalView style={styles.container}>
             <Header headerLabel={"Active Contracts"} leftImgName={appIcons.headerBack} onPressLeft={() => navigation.goBack()} />
             <FlatList showsVerticalScrollIndicator={false}
                 ListHeaderComponent={() => <HeaderForSpace />}
@@ -149,7 +150,7 @@ const ActiveContracts = ({ navigation }) => {
                     provider={item.provider}
                 />} />
 
-        </View>
+        </AppGLobalView>
     )
 }
 

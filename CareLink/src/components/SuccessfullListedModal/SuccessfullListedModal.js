@@ -5,11 +5,12 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import FormButton from '../FormButton'
 import { fonts } from '../../Constants/Fonts'
 import colors from '../../config/colors'
+import AppGLobalView from '../AppGlobalView/AppGLobalView'
 
 const SuccessfullListedModal = ({ visible, onPress, }) => {
     return (
         <Modal visible={visible} animationType='fade'>
-            <View style={styles.container}>
+            <AppGLobalView style={styles.container}>
                 <View style={styles.subView}>
                     <Image resizeMode='contain' source={appIcons.successTick} style={styles.imageStyle} />
                     <Text style={styles.successTitle}>Successfully Listed</Text>
@@ -17,7 +18,7 @@ const SuccessfullListedModal = ({ visible, onPress, }) => {
                     <Text style={styles.location}>Oakwood Heights</Text>
                 </View>
                 <FormButton buttonTitle={"Go to Home"} onPress={onPress} />
-            </View>
+            </AppGLobalView>
         </Modal>
     )
 }

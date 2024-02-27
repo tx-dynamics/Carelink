@@ -10,6 +10,7 @@ import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 export const agencyData = [
     {
@@ -71,7 +72,7 @@ export const agencyData = [
 const AgencyHome = ({ }) => {
     const navigation = useNavigation()
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <Header
                 headerLabel={"Home"}
@@ -115,7 +116,7 @@ const AgencyHome = ({ }) => {
                         duration={item.duation}
                         facilityData={item.facility} />} />
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

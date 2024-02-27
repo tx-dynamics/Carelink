@@ -11,6 +11,7 @@ import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 import DatePicker from 'react-native-date-picker';
 import moment from 'moment';
 import AppDropDownPicker from '../../../../components/AppDropDownPicker/AppDropDownPicker';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 const StartContract = ({ navigation }) => {
     const [agency, setAgency] = useState("Agency Name")
     const [provider, setProviderName] = useState("Provider Name")
@@ -46,7 +47,7 @@ const StartContract = ({ navigation }) => {
         setStart(false)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Create Contract"}
                 leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
@@ -82,7 +83,7 @@ const StartContract = ({ navigation }) => {
                 }}
                 onCancel={() => { setOpen(false) }}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -11,11 +11,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput';
 import colors from '../../../../config/colors';
 import { heightPixel } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const Note = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"} showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp
                     title={"Write Note"}
@@ -35,7 +36,7 @@ const Note = ({ navigation }) => {
                 buttonTitle={"Next"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

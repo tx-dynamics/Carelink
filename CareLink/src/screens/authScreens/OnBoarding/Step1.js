@@ -13,6 +13,7 @@ import DotComponent from '../../../components/DotComponent/DotComponent';
 import * as Progress from 'react-native-progress';
 import { useDispatch, useSelector } from 'react-redux';
 import { userType } from '../../../redux/Slices/splashSlice'
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 const Step1 = ({ navigation }) => {
     const swiperRef = useRef({});
     const user = useSelector((state) => state.splash.value)
@@ -45,7 +46,7 @@ const Step1 = ({ navigation }) => {
         navigation.replace("AskRegister")
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <TouchableOpacity style={styles.skipDirection}
                 onPress={() => navigation.replace("AskRegister")}
@@ -98,7 +99,7 @@ const Step1 = ({ navigation }) => {
                 />
 
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

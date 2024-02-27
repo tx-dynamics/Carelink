@@ -13,6 +13,7 @@ import FormButton from '../../../../components/FormButton'
 import { useDispatch } from 'react-redux'
 import { userSave } from '../../../../redux/Slices/splashSlice'
 import { RedFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const DeleteAccountOTP = ({ navigation, route }) => {
     const [isOTP, setIsOTP] = useState("")
@@ -22,7 +23,7 @@ const DeleteAccountOTP = ({ navigation, route }) => {
         RedFlashMessage("Your account has been deleted")
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Delete Account"}
                 imgName={iconPath.leftArrow}
@@ -44,7 +45,7 @@ const DeleteAccountOTP = ({ navigation, route }) => {
                 <CountDownComponent />
             </KeyboardAwareScrollView>
             <FormButton buttonTitle={"Delete Account"} onPress={onDeletePress} />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -5,11 +5,12 @@ import DefaultStyles from "../../../config/Styles";
 import Apptext from '../../../components/Apptext';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const Policy = ({ navigation }) => {
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <AppGLobalView showsVerticalScrollIndicator={false} style={styles.container}>
       <IconHeaderComp
         onPress={() => { navigation.goBack() }}
         imgName={iconPath.leftArrow}
@@ -22,7 +23,7 @@ const Policy = ({ navigation }) => {
         sem nibh enim, ultricies duis arcu. Praesent vitae ultrices cursus integer egestas lobortis feugiat ut leo. Semper tempor, eu ornare et, tempus scelerisque quisque eget duis.
         Metus amet, aliquet cursus at in et amet. Sem mauris aliquam ac sed orci mauris senectus. Purus eget faucibus dui nulla felis, vulputate sapien quis. Egestas vel, sed faucibus enim. Imperdiet nibh nibh elit a porttitor. Consectetur lacinia consectetur pellentesque felis. Consequat proin nec tincidunt viverra nulla convallis urna.
       </Apptext>
-    </ScrollView>
+    </AppGLobalView>
   )
 }
 

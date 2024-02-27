@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, ImageBackground, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, ImageBackground, TouchableOpacity, SafeAreaView } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -26,7 +26,7 @@ function BackgroundHeader({
       style={{
         ...styles.container,
         backgroundColor: backgroundColor,
-        marginTop: getStatusBarHeight(true),
+        // marginTop: getStatusBarHeight(true),
         ...style,
       }}
     >
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
-    marginTop: heightPixel(20)
+    marginTop: getStatusBarHeight(true)+ heightPixel(20)
   }
 });
 

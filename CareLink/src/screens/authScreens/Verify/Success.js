@@ -11,6 +11,7 @@ import { fonts } from '../../../Constants/Fonts';
 import colors from '../../../config/colors';
 import { appIcons } from '../../../Constants/Utilities/assets';
 import HeaderForSpace from '../../../components/HeaderForSpace/HeaderForSpace';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const Success = ({ navigation }) => {
     const listData = [
@@ -31,7 +32,7 @@ const Success = ({ navigation }) => {
         },
     ]
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp
                     onPress={() => { navigation.goBack() }}
@@ -54,7 +55,7 @@ const Success = ({ navigation }) => {
                 buttonTitle={"Start Now"}
                 onPress={() => { navigation.navigate(routes.agencyBasic) }}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 const List = ({ pic, title }) => {

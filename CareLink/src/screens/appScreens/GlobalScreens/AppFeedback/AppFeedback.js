@@ -10,6 +10,7 @@ import { fonts } from '../../../../Constants/Fonts'
 import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput'
 import FormButton from '../../../../components/FormButton'
 import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const AppFeedback = ({ navigation, route }) => {
     const onSendPress = () => {
@@ -17,7 +18,7 @@ const AppFeedback = ({ navigation, route }) => {
         SuccessFlashMessage("Feedback has been sent")
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Feedback"}
                 imgName={iconPath.leftArrow}
@@ -31,7 +32,7 @@ const AppFeedback = ({ navigation, route }) => {
                     inputStyle={styles.inputStyle} />
             </KeyboardAwareScrollView>
             <FormButton buttonTitle={"Send"} onPress={onSendPress} />
-        </View>
+        </AppGLobalView>
     )
 }
 

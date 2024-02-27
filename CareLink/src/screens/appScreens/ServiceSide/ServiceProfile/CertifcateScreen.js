@@ -6,6 +6,7 @@ import { iconPath } from '../../../../config/icon'
 import UploadDocumentComp from '../../../../components/UploadDocumentComp/UploadDocumentComp'
 import { heightPixel, routes } from '../../../../Constants'
 import { appIcons } from '../../../../Constants/Utilities/assets'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const CertifcateScreen = ({ navigation }) => {
     const certifcateData = [
@@ -29,10 +30,7 @@ const CertifcateScreen = ({ navigation }) => {
         },
     ]
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: colors.white,
-        }}>
+        <AppGLobalView>
             <IconHeaderComp
                 title={"Certificates"}
                 imgName={iconPath.leftArrow}
@@ -48,7 +46,7 @@ const CertifcateScreen = ({ navigation }) => {
                     subTitle={item.subtitle}
                 />} />
 
-        </View>
+        </AppGLobalView>
     )
 }
 

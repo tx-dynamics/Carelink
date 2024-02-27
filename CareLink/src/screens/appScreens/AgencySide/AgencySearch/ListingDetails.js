@@ -6,11 +6,12 @@ import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
 import { routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ListingDetails = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
@@ -105,7 +106,7 @@ const ListingDetails = ({ navigation }) => {
                     </View>
                 </View>
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -10,6 +10,7 @@ import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constant
 import SearchComponent from '../../../../components/SearchComponent/SearchComponent';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const AgencySearch = ({ navigation }) => {
     const [isSearch, setSearch] = useState("")
@@ -250,7 +251,7 @@ const AgencySearch = ({ navigation }) => {
         },
     ];
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 headerLabel={"Find Listing"}
                 rightImg={appIcons.messageIcon}
@@ -277,7 +278,7 @@ const AgencySearch = ({ navigation }) => {
                         onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })}
                     />} />
             </KeyboardAwareScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

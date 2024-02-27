@@ -23,6 +23,7 @@ import AddPhotoComponent, { AddButtonComponent, PhotoComponent } from '../../../
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { removePic, uploadmageMultiPle } from '../../../Services/HelpingMethods';
 import AppDropDownPicker from '../../../components/AppDropDownPicker/AppDropDownPicker';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 
 const ListingOptions = ({ navigation }) => {
@@ -85,7 +86,7 @@ const ListingOptions = ({ navigation }) => {
         }
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp
                 title={"Add Listing"}
@@ -119,7 +120,7 @@ const ListingOptions = ({ navigation }) => {
                 </View>
                 <FormButton onPress={() => navigation.navigate("Note")} containerStyle={styles.btnStyle} buttonTitle={"Next"} />
             </KeyboardAwareScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

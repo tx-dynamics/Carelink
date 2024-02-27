@@ -8,6 +8,7 @@ import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constant
 import ProfileTopComp from '../../../../components/ProfileTopComp/ProfileTopComp';
 import ImageViewZoomComp from '../../../../components/ImageViewZoomComp/ImageViewZoomComp';
 import colors from '../../../../config/colors';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ClientProfile = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
@@ -38,7 +39,7 @@ const ClientProfile = ({ navigation }) => {
         }
     }]
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={appIcons.headerBack}
                 rightImg={appIcons.messageIcon}
@@ -57,7 +58,7 @@ const ClientProfile = ({ navigation }) => {
                 onSwipeDown={() => setVisible(false)}
                 onRequestClose={() => setVisible(false)}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -13,6 +13,7 @@ import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 import ImageUploadModal from '../../../../components/ImageUploadModal/ImageUploadModal';
 import { uploadmageCamState, uploadmageState } from '../../../../Services/HelpingMethods';
 import { SuccessFlashMessage } from "../../../../Constants/Utilities/assets/Snakbar"
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 const EditProfile = ({ navigation }) => {
     const [isVisible, setVisible] = useState(false)
     const [isUpload, setUpload] = useState(false)
@@ -23,7 +24,7 @@ const EditProfile = ({ navigation }) => {
         navigation.goBack()
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Edit Profile"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -41,7 +42,7 @@ const EditProfile = ({ navigation }) => {
             <FormButton onPress={onPressSave} buttonTitle={"Save Update"}
             />
             <ImageUploadModal crossPress={() => setVisible(false)} onRequestClose={() => setVisible(false)} visible={isVisible} cameraPress={() => uploadmageCamState(setImg, setUpload, setVisible)} mediaPress={() => uploadmageState(setImg, setUpload, setVisible)} />
-        </View>
+        </AppGLobalView>
     )
 }
 

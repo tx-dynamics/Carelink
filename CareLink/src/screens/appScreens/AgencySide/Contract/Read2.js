@@ -9,6 +9,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const Read2 = ({ navigation }) => {
@@ -32,7 +33,7 @@ _______________________________
 
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -59,7 +60,7 @@ _______________________________
                 </View>
 
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

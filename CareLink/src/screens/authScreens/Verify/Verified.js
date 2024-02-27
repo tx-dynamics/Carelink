@@ -6,10 +6,11 @@ import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const Verified = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 onPress={() => { navigation.goBack() }}
                 imgName={iconPath.leftArrow}
@@ -26,7 +27,7 @@ const Verified = ({ navigation }) => {
                     onPress={() => navigation.navigate("Success") }
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

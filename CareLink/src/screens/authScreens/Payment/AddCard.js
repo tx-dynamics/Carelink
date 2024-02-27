@@ -10,11 +10,12 @@ import PaymentMethodComp from '../../../components/PaymentMethodComp';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AddCard = ({ navigation }) => {
     const [isTick, setTick] = useState(false);
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -77,7 +78,7 @@ const AddCard = ({ navigation }) => {
                     }}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

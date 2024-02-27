@@ -8,7 +8,7 @@ const SendMessageComponent = ({ onPress, value, onChangeText, disabled }) => {
     return (
         <View
             behavior={Platform.OS == "ios" ? "padding" : "height"}
-            keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
+            // keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
             style={styles.kbView}  >
             {/* <View
                 style={styles.ChatMsgView}

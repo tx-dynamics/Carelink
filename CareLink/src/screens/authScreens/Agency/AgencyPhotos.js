@@ -11,12 +11,13 @@ import { iconPath } from '../../../config/icon';
 import AddAgencyPhotoComp from '../../../components/AddAgencyPhotoComp/AddAgencyPhotoComp';
 import AddAgencyProfilePhoto from '../../../components/AddAgencyProfilePhoto/AddAgencyProfilePhoto';
 import { fontPixel, heightPixel } from '../../../Constants';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyPhotos = ({ navigation }) => {
     const [agencyImg, setAgencyImg] = useState(null)
     const [profileImg, setProfileImg] = useState(null)
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp
                     title={"Add Photo"}
@@ -36,7 +37,7 @@ const AgencyPhotos = ({ navigation }) => {
                     <Apptext style={styles.skipTxt} >Skip for now</Apptext>
                 </TouchableOpacity >
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

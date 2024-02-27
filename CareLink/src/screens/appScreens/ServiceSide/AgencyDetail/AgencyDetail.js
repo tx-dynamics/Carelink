@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
     View, TouchableOpacity, FlatList, ActivityIndicator,
-    TextInput, Alert, Image, StyleSheet, ScrollView, StatusBar,
+    TextInput, Alert, Image, StyleSheet, ScrollView, StatusBar, SafeAreaView,
 }
     from 'react-native';
 import {

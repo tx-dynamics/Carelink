@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { fontPixel, heightPixel } from '../../../Constants';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const PaymentPlans = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -47,7 +48,7 @@ const PaymentPlans = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Subscription"}
                 onPress={() => navigation.goBack()}
@@ -72,7 +73,7 @@ const PaymentPlans = ({ navigation }) => {
                     />
                 )}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

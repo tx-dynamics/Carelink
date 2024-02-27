@@ -9,6 +9,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
 import { heightPixel, routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ChatDetail = ({ navigation }) => {
 
@@ -26,7 +27,7 @@ const ChatDetail = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
@@ -125,7 +126,7 @@ const ChatDetail = ({ navigation }) => {
                     <Image source={require('../../../../../assets/sendBtn.png')} />
                 </TouchableOpacity>
             </KeyboardAvoidingView>
-        </View>
+        </AppGLobalView>
     )
 }
 

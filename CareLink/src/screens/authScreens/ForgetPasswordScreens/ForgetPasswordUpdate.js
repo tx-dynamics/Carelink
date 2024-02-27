@@ -19,6 +19,7 @@ import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import EmailVerifiedModal from '../../../components/EmailVerifiedModal/EmailVerifiedModal';
 import { SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const ForgetUpdateScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -31,7 +32,7 @@ const ForgetUpdateScreen = ({ navigation }) => {
         navigation.navigate(routes.loginScreen)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Update Password"}
                     onPress={() => navigation.goBack()}
@@ -55,7 +56,7 @@ const ForgetUpdateScreen = ({ navigation }) => {
             />
             {/* <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} /> */}
             {/* <EmailVerifiedModal visible={isVisible} subtitle={"Password Updated"} title={"Password Updated"} /> */}
-        </View>
+        </AppGLobalView>
     )
 }
 

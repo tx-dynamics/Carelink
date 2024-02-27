@@ -8,6 +8,7 @@ import CustomerListingComp from '../../../../components/CustomerListingComp/Cust
 import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constants'
 import { fonts } from '../../../../Constants/Fonts'
 import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/LeftSideBoldHeading'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const AgencyProposalList = ({ navigation }) => {
     // const proposalData = [
@@ -33,7 +34,7 @@ const AgencyProposalList = ({ navigation }) => {
         },
     ];
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Proposal"}
                 imgName={iconPath.leftArrow}
@@ -51,7 +52,7 @@ const AgencyProposalList = ({ navigation }) => {
                     <LeftSideBoldHeading mainStyle={styles.sectionTitleText} title={title} number={data.length} />
                 )}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

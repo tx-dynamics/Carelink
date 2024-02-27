@@ -11,6 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
 import { heightPixel } from '../../../../Constants';
 import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const SendProposal = ({ navigation }) => {
     const [value, setValue] = useState("")
@@ -19,7 +20,7 @@ const SendProposal = ({ navigation }) => {
         SuccessFlashMessage("Your proposal has been submitted")
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Submit Proposal"}
                 leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
@@ -33,7 +34,7 @@ const SendProposal = ({ navigation }) => {
                 buttonTitle={"Submit Now"}
                 onPress={onPressSubmit}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

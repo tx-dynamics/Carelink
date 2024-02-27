@@ -28,9 +28,9 @@ class App extends Component {
           <PersistGate loading={null} persistor={persistor}>
             <MenuProvider>
               {Platform.OS==="ios" ?
-              <SafeAreaView style={{flex:1}}>
+              <View style={{flex:1}}>
               <Main />
-              </SafeAreaView>:
+              </View>:
               <View style={{flex:1}}>
               <Main />
               </View> 

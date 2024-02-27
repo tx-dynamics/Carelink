@@ -7,6 +7,7 @@ import { heightPixel, routes } from '../../../../Constants'
 import colors from '../../../../config/colors'
 import AgencyListingComp from '../../../../components/AgencyListingComp/AgencyListingComp'
 import { appIcons } from '../../../../Constants/Utilities/assets'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 export const BookedDataAgency = [
     {
@@ -127,10 +128,7 @@ export const BookedDataAgency = [
 const BookedRoomsAgencySide = ({ navigation }) => {
 
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: colors.white,
-        }}>
+        <AppGLobalView >
             <IconHeaderComp
                 title={"Rooms"}
                 imgName={iconPath.leftArrow}
@@ -145,7 +143,7 @@ const BookedRoomsAgencySide = ({ navigation }) => {
                     rightIconPress={() => navigation.navigate(routes.bookedRoomDetailAgency)}
                     item={item}
                     facilityData={item.facility} />} />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -11,10 +11,11 @@ import FormButton from '../../../../components/FormButton'
 import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
 import { iconPath } from '../../../../config/icon'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const BookedRooms = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <Header headerLabel={"Booked Room"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
@@ -36,7 +37,7 @@ const BookedRooms = ({ navigation }) => {
             <FormButton
                 onPress={() => navigation.navigate(routes.feedback)}
                 buttonTitle={"Mark to Complete"} />
-        </View>
+        </AppGLobalView>
     )
 }
 

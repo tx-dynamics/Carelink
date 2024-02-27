@@ -15,12 +15,13 @@ import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import { fonts } from '../../../Constants/Fonts';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const ForgetEmailScreen = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
     const [email, setEmail] = useState("")
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Forgot Password"}
                     onPress={() => navigation.goBack()}
@@ -37,7 +38,7 @@ const ForgetEmailScreen = ({ navigation }) => {
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
                 onPress={() => navigation.navigate("EmailVerification")}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

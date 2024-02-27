@@ -11,6 +11,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import FormButton from '../../../components/FormButton'
 import VerificationModal from '../../../components/VerificationModal/VerificationModal'
 import { validInfo } from '../../../Constants/Utilities/validations'
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView'
 const AddInformation = ({ navigation }) => {
     const [value, setValue] = useState("")
     const [open, setOpen] = useState(false)
@@ -44,7 +45,7 @@ const AddInformation = ({ navigation }) => {
         // }
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
                 <IconHeaderComp title={"Verification Process"}
                     onPress={() => { navigation.goBack() }}
@@ -81,7 +82,7 @@ const AddInformation = ({ navigation }) => {
                 midText={"Your are successfully submitted your verification"}
                 subtitle={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus."}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

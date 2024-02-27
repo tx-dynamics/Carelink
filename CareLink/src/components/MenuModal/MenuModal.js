@@ -1,4 +1,4 @@
-import { FlatList, Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Modal, Platform, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import colors from '../../config/colors'
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         height: heightPixel(79),
         borderRadius: widthPixel(10),
         backgroundColor: colors.white,
-        marginTop: heightPixel(35),
+        marginTop: Platform.OS==="android"? heightPixel(35):heightPixel(90),
         alignSelf: "flex-end",
         marginHorizontal: widthPixel(25)
     },

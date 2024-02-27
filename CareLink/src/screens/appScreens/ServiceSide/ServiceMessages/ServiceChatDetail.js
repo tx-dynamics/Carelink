@@ -10,6 +10,8 @@ import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
 import { userType } from '../../../../redux/Slices/splashSlice';
 import { useSelector } from 'react-redux';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import ChatHeader from '../../../../components/ChatHeader';
 
 const ServiceChatDetail = ({ navigation, route }) => {
     const ref = useRef(null)
@@ -143,18 +145,16 @@ const ServiceChatDetail = ({ navigation, route }) => {
         setMessage("")
     }
     return (
-        <View style={styles.container}>
-            <Header
+        <AppGLobalView style={styles.container}>
+            <ChatHeader
+rightView={!route?.params?.isContract}
+            onPressRight={() => navigation.navigate(userType == "ServiceSide" ? routes.receivedContracts : routes.createContract)}
+            rightText={usertype == "ServiceSide" ? "Contracts" : "Make Contract"}
                 headerLabel={"Chat"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
             />
-            {!route?.params?.isContract &&
-                <TouchableOpacity
-                    onPress={() => navigation.navigate(userType == "ServiceSide" ? routes.receivedContracts : routes.createContract)}
-                    style={styles.RcvdView}>
-                    <Apptext style={styles.cntTxt}> {usertype == "ServiceSide" ? "Contracts" : "Make Contract"}</Apptext>
-                </TouchableOpacity>}
+            
             <View style={styles.direView} >
                 <Image
                     style={styles.imgStl}
@@ -170,7 +170,7 @@ const ServiceChatDetail = ({ navigation, route }) => {
                     renderItem={({ item, index }) => item?.user == 1 ? <MyMessage msg={item.title} /> : <ChatDetailComp msg={item.title} />} />
             </View>
             <SendMessageComponent disabled={isMessage == "" ? true : false} onChangeText={setMessage} value={isMessage} onPress={onSend} />
-        </View >
+        </AppGLobalView >
     )
 }
 const MyMessage = React.memo(({ msg }) => {
@@ -233,19 +233,9 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: DefaultStyles.colors.black
     },
-    RcvdView: {
+    contractButtonView:{
         position: "absolute",
-        top: StatusBar.currentHeight + heightPixel(18),
         right: widthPixel(20),
-        paddingHorizontal: widthPixel(10),
-        paddingVertical: heightPixel(1),
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: DefaultStyles.colors.primary,
-        borderRadius: 5,
-    },
-    cntTxt: {
-        fontSize: 12, color: DefaultStyles.colors.white, textAlign: 'center'
     },
     direView: {
         alignItems: "center",

@@ -12,6 +12,7 @@ import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/Serv
 import { RedFlashMessage, SuccessFlashMessage, } from '../../../../Constants/Utilities/assets/Snakbar'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const AvailableRoom = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
@@ -31,7 +32,7 @@ const AvailableRoom = ({ navigation }) => {
         setVisible(false)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp
                 title={"Available Room"}
@@ -50,7 +51,7 @@ const AvailableRoom = ({ navigation }) => {
                 onPress={onPressInactive}
                 buttonTitle={"Inactive"} />
             <DeleteModal title={"Are you sure you want to inactive the room?"} rightButtonTitle={"Inactive"} visible={visible} cancelPress={onCancelPress} deletePress={onDeletePress} />
-        </View>
+        </AppGLobalView>
     )
 }
 

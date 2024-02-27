@@ -11,11 +11,12 @@ import { fonts } from '../../../Constants/Fonts';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
 // import { userType } from '../../../../android/app/src/redux/Slices/splashSlice';
 import { userType } from '../../../redux/Slices/splashSlice';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AskRegister = ({ navigation }) => {
     let dispatch = useDispatch();
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp title={"Choose User Type"} heading={"Let’s get started. Choose an option"} />
             <View style={styles.pinkBox}>
@@ -59,7 +60,7 @@ const AskRegister = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
 
-        </View>
+        </AppGLobalView>
     )
 }
 

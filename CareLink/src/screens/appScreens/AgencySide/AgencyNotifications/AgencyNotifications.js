@@ -8,6 +8,7 @@ import NotificationsComp from '../../../../components/NotificationsComp';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyNotifications = ({ navigation }) => {
 
@@ -56,7 +57,7 @@ const AgencyNotifications = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 headerLabel={"Notifications"}
                 // rightImg={appIcons.messageIcon}
@@ -90,7 +91,7 @@ const AgencyNotifications = ({ navigation }) => {
                     )}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

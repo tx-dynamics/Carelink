@@ -7,13 +7,11 @@ import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/Left
 import { heightPixel, routes } from '../../../../Constants'
 import ServiceListingComp from '../../../../components/ServiceListingComp'
 import { ListedData } from './AvailableList'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const ListedList = ({ navigation }) => {
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: colors.white,
-        }}>
+        <AppGLobalView >
             <IconHeaderComp
                 title={"Listed"}
                 imgName={iconPath.leftArrow}
@@ -44,7 +42,7 @@ const ListedList = ({ navigation }) => {
                     />
                 )}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

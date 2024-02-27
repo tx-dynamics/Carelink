@@ -16,6 +16,7 @@ import { RedFlashMessage, SuccessFlashMessage } from '../../../Constants/Utiliti
 import { useSelector } from 'react-redux';
 import { userType } from '../../../redux/Slices/splashSlice';
 import CountDownComponent from '../../../components/CountDownComponent/CountDownComponent';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const EmailVerification = ({ navigation, route }) => {
     const [isOTP, setIsOTP] = useState("")
@@ -49,7 +50,7 @@ const EmailVerification = ({ navigation, route }) => {
     //     )
     // }, [])
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp title={"Verify"} heading={"Enter the code we just sent to your email"} style={styles.headerTextStyle}
                     onPress={() => { navigation.goBack() }}
@@ -70,7 +71,7 @@ const EmailVerification = ({ navigation, route }) => {
             </KeyboardAwareScrollView>
             <FormButton onPress={onCountinue} buttonTitle={"Continue"} />
             <EmailVerifiedModal visible={visible} subtitle={"You have successfully verified your email"} title={"Email verified"} />
-        </View>
+        </AppGLobalView>
     )
 }
 

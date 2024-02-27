@@ -5,11 +5,12 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import { appIcons } from '../../Constants/Utilities/assets'
 import { fonts } from '../../Constants/Fonts'
 import FormButton from '../FormButton'
+import AppGLobalView from '../AppGlobalView/AppGLobalView'
 
 const DeleteModal = ({ visible, title, deletePress, cancelPress, rightButtonTitle }) => {
     return (
         <Modal visible={visible} transparent animationType='fade'>
-            <View style={styles.container}>
+            <AppGLobalView style={styles.container}>
                 <View style={styles.subView}>
                     <Image resizeMode='contain' source={appIcons.alertBlack} style={styles.alrtPic} />
                     <Text style={styles.titleText}>{title ? title : "Are you sure you want to delete this listing"}</Text>
@@ -18,7 +19,7 @@ const DeleteModal = ({ visible, title, deletePress, cancelPress, rightButtonTitl
                         <FormButton onPress={deletePress} fontSize={fontPixel(15)} buttonTitle={rightButtonTitle ? rightButtonTitle : "Delete"} containerStyle={{ marginBottom: 0, }} borderRadius={12} width={widthPixel(138)} />
                     </View>
                 </View>
-            </View>
+            </AppGLobalView>
         </Modal>
     )
 }

@@ -14,6 +14,7 @@ import SubscriptionBox from '../../../../components/SubscriptionBox/Subscription
 import { useDispatch } from 'react-redux';
 import { fromProfile } from '../../../../redux/Slices/appSlice';
 import ProfileTopComp from '../../../../components/ProfileTopComp/ProfileTopComp';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ServiceClientProfile = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ const ServiceClientProfile = ({ navigation }) => {
         navigation.navigate("withoutBottomTabnavigator", { screen: "PaymentPlans" })
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header isBack headerLabel={"Profile"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.setting} rightImgStyle={{
                 width: widthPixel(40),
                 height: widthPixel(25),
@@ -80,7 +81,7 @@ const ServiceClientProfile = ({ navigation }) => {
                         />} />
                 <SubscriptionBox onPress={onSubscriptionPress} title={"Subscription"} count={"20"} subtitle={"Listings Monthly"} rightText={"Upgrade"} />
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

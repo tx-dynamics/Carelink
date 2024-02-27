@@ -19,6 +19,7 @@ import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { isSignupValid } from '../../../Constants/Utilities/validations';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const Register = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -35,7 +36,7 @@ const Register = ({ navigation }) => {
         navigation.navigate("EmailVerification", { register: true })
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"never"}>
                 <IconHeaderComp title={"Sign Up"}
@@ -88,7 +89,7 @@ const Register = ({ navigation }) => {
                 onPress={onSignUp}
             />
             <AlreadyText title={"Already Have an Account"} subtitle={" Sign In"} onPress={() => navigation.navigate(routes.loginScreen)} />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -9,6 +9,7 @@ import ServiceListingComp from '../../../../components/ServiceListingComp';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const ServiceRooms = ({ navigation }) => {
@@ -90,7 +91,7 @@ const ServiceRooms = ({ navigation }) => {
         },
     ];
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <Header headerLabel={"Rooms Details"} height={heightPixel(80)} leftImgStyle={styles.leftImgStyle} rightImg={appIcons.thirdTab}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
@@ -166,7 +167,7 @@ const ServiceRooms = ({ navigation }) => {
                     </View> */}
                 </View>
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

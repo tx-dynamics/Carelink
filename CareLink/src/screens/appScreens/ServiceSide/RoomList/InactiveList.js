@@ -8,14 +8,12 @@ import { appIcons } from '../../../../Constants/Utilities/assets'
 import { heightPixel, routes } from '../../../../Constants'
 import ServiceListingComp from '../../../../components/ServiceListingComp'
 import { ListedData } from './AvailableList'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const InactiveList = ({ navigation }) => {
 
     return (
-        <View style={{
-            flex: 1,
-            backgroundColor: colors.white,
-        }}>
+        <AppGLobalView >
             <IconHeaderComp
                 title={"Inactive"}
                 imgName={iconPath.leftArrow}
@@ -42,7 +40,7 @@ const InactiveList = ({ navigation }) => {
                     />
                 )}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

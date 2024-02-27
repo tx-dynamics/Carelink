@@ -10,6 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import FormButton from '../../../../components/FormButton'
 import VerificationModal from '../../../../components/VerificationModal/VerificationModal'
 import { appIcons } from '../../../../Constants/Utilities/assets'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const ChangePassword = ({ navigation, route }) => {
     const [isVisible, setVisible] = useState(false)
@@ -27,7 +28,7 @@ const ChangePassword = ({ navigation, route }) => {
         }, 1500);
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Change Password"}
                 imgName={iconPath.leftArrow}
@@ -54,7 +55,7 @@ const ChangePassword = ({ navigation, route }) => {
             </KeyboardAwareScrollView>
             <FormButton onPress={onPressUpdate} buttonTitle={"Update"} />
             <VerificationModal visible={isVisible} title={"Password Updated"} subtitle={"You have successfully update  your password"} />
-        </View>
+        </AppGLobalView>
     )
 }
 

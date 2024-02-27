@@ -9,6 +9,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { Table, Rows } from 'react-native-table-component';
 import { heightPixel, widthPixel } from '../../../../Constants';
 import AppDropDownPicker from '../../../../components/AppDropDownPicker/AppDropDownPicker';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const Rates = ({ navigation }) => {
     const [open, setOpen] = useState(false)
@@ -41,7 +42,7 @@ const Rates = ({ navigation }) => {
         },
     ])
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Rates"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -64,7 +65,7 @@ const Rates = ({ navigation }) => {
                     />
                 </Table>
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 

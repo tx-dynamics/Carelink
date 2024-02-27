@@ -10,6 +10,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { heightPixel, routes } from '../../../Constants';
 import { fromProfile } from '../../../redux/Slices/appSlice';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyMap = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -30,7 +31,7 @@ const AgencyMap = ({ navigation }) => {
         }
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp
                     title={"Pin Location"}
@@ -55,7 +56,7 @@ const AgencyMap = ({ navigation }) => {
                 buttonTitle={isFromProfile ? "Update" : "Next"}
                 onPress={onPressNext}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

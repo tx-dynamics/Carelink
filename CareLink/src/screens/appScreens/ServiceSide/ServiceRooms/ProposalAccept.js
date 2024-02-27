@@ -6,11 +6,12 @@ import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ProposalAccept = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <View style={styles.centerView}>
                     <Image resizeMode='contain'
@@ -34,7 +35,7 @@ const ProposalAccept = ({ navigation }) => {
                 onPress={() => navigation.navigate(routes.agencyDetail, { isChat: true })}
                 buttonTitle={"Continue"}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

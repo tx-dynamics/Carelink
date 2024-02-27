@@ -10,13 +10,14 @@ import { userSave } from "../../redux/Slices/splashSlice";
 import { heightPixel, routes, widthPixel } from "../../Constants";
 import Header from "../../components/Header";
 import colors from "../../config/colors";
+import AppGLobalView from "../../components/AppGlobalView/AppGLobalView";
 
 
 function DrawerContent({ navigation, userImg, username, userEmail }) {
     const usertype = useSelector((state) => state.splash.userType)
     const dispatch = useDispatch()
     return (
-        <View style={styles.container} >
+        <AppGLobalView style={styles.container} >
             <View style={styles.DirectionView}>
                 <Header headerLabel={"Side Menu"}
                     onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
@@ -86,7 +87,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                     borderWidth={1}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     );
 }
 

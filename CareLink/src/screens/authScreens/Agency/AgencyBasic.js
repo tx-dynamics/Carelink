@@ -11,6 +11,7 @@ import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromProfile } from '../../../redux/Slices/appSlice';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyBasic = ({ navigation, route }) => {
     const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const AgencyBasic = ({ navigation, route }) => {
         }
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <IconHeaderComp title={isFromProfile ? "About" : "Enter Information"}
                     onPress={() => { navigation.goBack() }}
@@ -56,7 +57,7 @@ const AgencyBasic = ({ navigation, route }) => {
             <FormButton
                 buttonTitle={isFromProfile ? "Change" : "Next"}
                 onPress={onPressButton} />
-        </View>
+        </AppGLobalView>
     )
 }
 

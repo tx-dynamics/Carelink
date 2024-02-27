@@ -18,6 +18,7 @@ import { fonts } from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { userSave } from '../../../redux/Slices/splashSlice';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -29,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
         dispatch(userSave(true))
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
                 <IconHeaderComp title={"Sign In"}
                     onPress={() => navigation.goBack()}
@@ -53,7 +54,7 @@ const LoginScreen = ({ navigation }) => {
                 onPress={onPressLogin}
             />
             <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -14,28 +14,21 @@ import { fontPixel, heightPixel, widthPixel } from "../Constants";
 import Styles from "../config/Styles";
 
 
-function Header({
+function ChatHeader({
   headerLabel,
   backgroundColor,
   leftImgName,
   leftImgStyle,
-  rightImgStyle,
-  centerImg,
   isBack = true,
   onPressLeft,
   onPressRight,
-  rightImg,
+  rightText,
+  rightView,
   leftViewStyle,
-  rightViewStyle,
-  style,
 }) {
   return (
-    <View
-      style={{
-        ...styles.container,
-        backgroundColor: backgroundColor,
-        ...style,
-      }}>
+    <View style={[styles.container,]}>
+        <View style={{width:widthPixel(140)}}>
       <TouchableOpacity
         onPress={onPressLeft}
         style={[styles.leftView, leftViewStyle]}>
@@ -43,14 +36,16 @@ function Header({
           <Image resizeMode="contain" style={[styles.leftImgStyle, leftImgStyle]} source={leftImgName} />
         ) : null}
       </TouchableOpacity>
+        </View>
       <View style={styles.hdrView}>
-        {centerImg && <Image source={centerImg} />}
         <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={[styles.leftView, rightViewStyle]} onPress={onPressRight}>
-        {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
-        }
+      <View style={styles.rightView}>{rightView &&
+      <TouchableOpacity onPress={onPressRight} style={styles.RcvdView}>
+                    <Apptext style={styles.cntTxt}> {rightText}</Apptext>
       </TouchableOpacity>
+      }
+      </View>
     </View>
   );
 }
@@ -76,7 +71,7 @@ const styles = StyleSheet.create({
   },
   hdrView: {
     alignItems: 'center',
-    width: widthPixel(270),
+    // width: widthPixel(270),
   },
   leftImgStyle: {
     width: widthPixel(30),
@@ -91,6 +86,23 @@ const styles = StyleSheet.create({
     height: heightPixel(40),
     justifyContent: "center",
   },
+  RcvdView: {
+    // top: StatusBar.currentHeight + heightPixel(18),
+    // position: "absolute",
+    paddingHorizontal: widthPixel(10),
+    paddingVertical: heightPixel(1),
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: DefaultStyles.colors.primary,
+    borderRadius: 5,
+},
+cntTxt: {
+    fontSize: 12, color: DefaultStyles.colors.white, textAlign: 'center'
+},
+rightView:{
+    width:widthPixel(140),
+alignItems:"flex-end"
+},
 });
 
-export default Header;
+export default ChatHeader;

@@ -6,10 +6,11 @@ import { heightPixel, widthPixel } from '../../Constants'
 import { appIcons } from '../../Constants/Utilities/assets'
 import FormButton from '../FormButton'
 import IconHeaderComp from '../IconHeaderComp'
+import AppGLobalView from '../AppGlobalView/AppGLobalView'
 const BrochureModal = ({ onPress, onRequestClose, visible, downloadPress }) => {
     return (
         <Modal statusBarTranslucent={true} visible={visible} onRequestClose={onRequestClose}>
-            <View style={styles.container}>
+            <AppGLobalView style={styles.container}>
                 <View>
                     <AppStatusbar />
                     <IconHeaderComp
@@ -23,7 +24,7 @@ const BrochureModal = ({ onPress, onRequestClose, visible, downloadPress }) => {
                     </View>
                 </View>
                 <FormButton onPress={downloadPress} pic={appIcons.download} buttonTitle={"Download"} />
-            </View>
+            </AppGLobalView>
         </Modal>
     )
 }

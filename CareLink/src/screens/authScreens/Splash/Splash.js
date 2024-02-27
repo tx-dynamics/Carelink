@@ -3,6 +3,7 @@ import { StyleSheet, Image, ActivityIndicator, Text, View, StatusBar } from 'rea
 import DefaultStyles from "../../../config/Styles";
 import { widthPixel } from '../../../Constants';
 import colors from '../../../config/colors';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const Splash = ({ navigation }) => {
     useEffect(() => {
@@ -12,13 +13,13 @@ const Splash = ({ navigation }) => {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <StatusBar backgroundColor={colors.white} barStyle={"dark-content"} />
             <Image resizeMode='contain' source={require('../../../../assets/Care_Link_Logo.png')} style={{
                 width: widthPixel(120),
                 height: widthPixel(120)
             }} />
-        </View>
+        </AppGLobalView>
     )
 }
 

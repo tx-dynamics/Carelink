@@ -10,6 +10,7 @@ import AgencyHomeComp from '../../../../components/AgencyHomeComp';
 import FvrtComp from '../../../../components/FvrtComp';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
 import { routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const RoomsProposals = ({ navigation }) => {
@@ -33,7 +34,7 @@ const RoomsProposals = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
@@ -93,7 +94,7 @@ const RoomsProposals = ({ navigation }) => {
                     </View>
                 </View>
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

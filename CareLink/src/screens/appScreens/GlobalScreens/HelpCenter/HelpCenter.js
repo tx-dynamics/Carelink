@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const HelpCenter = ({ navigation, route }) => {
     return (
-        <View>
+        <AppGLobalView>
             <Text>HelpCenter</Text>
-        </View>
+        </AppGLobalView>
     )
 }
 

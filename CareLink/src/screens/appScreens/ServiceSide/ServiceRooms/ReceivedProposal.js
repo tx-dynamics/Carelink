@@ -11,6 +11,7 @@ import AvailableFacilityComp from '../../../../components/AvaialableFacilityComp
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import SimpleImageComponent from '../../../../components/SimpleImageComponent/SimpleImageComponent';
 import DetailTextComp from '../../../../components/DetailTextComp/DetailTextComp';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const ReceivedProposal = ({ navigation }) => {
@@ -81,7 +82,7 @@ const ReceivedProposal = ({ navigation }) => {
         },
     ]
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Proposal"} leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -148,7 +149,7 @@ const ReceivedProposal = ({ navigation }) => {
                     onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ProposalTerms" })}
                 />
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

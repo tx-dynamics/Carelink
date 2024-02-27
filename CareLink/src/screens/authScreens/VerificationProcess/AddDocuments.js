@@ -11,6 +11,7 @@ import ImageCropPicker from 'react-native-image-crop-picker'
 import { appIcons } from '../../../Constants/Utilities/assets'
 import ImageUploadModal from '../../../components/ImageUploadModal/ImageUploadModal'
 import { RedFlashMessage, RedSnackbar } from '../../../Constants/Utilities/assets/Snakbar'
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView'
 
 const AddDocuments = ({ navigation }) => {
     const [isIndex, setIndex] = useState(0)
@@ -75,7 +76,7 @@ const AddDocuments = ({ navigation }) => {
         setData([...isData, isData[isIndex].media = null])
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp title={"Verification Process"} heading={isData[isIndex].heading}
                     onPress={() => { isIndex > 0 ? setIndex(isIndex - 1) : navigation.goBack() }}
@@ -86,7 +87,7 @@ const AddDocuments = ({ navigation }) => {
                 //APK // disabled={isData[isIndex].media == null ? true : false} 
                 backgroundColor={isData[isIndex].media == null ? colors.gray : colors.primary} buttonTitle={"Continue"} onPress={() => isIndex < 4 ? setIndex(isIndex + 1) : navigation.replace(routes.addInformation)} />
             <ImageUploadModal crossPress={() => setVisible(false)} cameraPress={openCamera} mediaPress={uploadImage} visible={isVisible} />
-        </View>
+        </AppGLobalView>
     )
 }
 

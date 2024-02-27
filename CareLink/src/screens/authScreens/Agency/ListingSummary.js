@@ -11,6 +11,7 @@ import FormButton from '../../../components/FormButton'
 import SuccessfullListedModal from '../../../components/SuccessfullListedModal/SuccessfullListedModal'
 import { useDispatch } from 'react-redux'
 import { userSave } from '../../../redux/Slices/splashSlice'
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView'
 
 const ListingSummary = ({ navigation }) => {
     const [isVisible, setVisible] = useState(false)
@@ -25,7 +26,7 @@ const ListingSummary = ({ navigation }) => {
         setVisible(true)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp
                 title={"Summary"}
@@ -46,7 +47,7 @@ const ListingSummary = ({ navigation }) => {
                 onPress={onPressListNow}
             />
             <SuccessfullListedModal visible={isVisible} onPress={onPressGoTo} />
-        </View>
+        </AppGLobalView>
     )
 }
 

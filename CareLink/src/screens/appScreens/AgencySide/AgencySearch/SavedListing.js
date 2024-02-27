@@ -13,6 +13,7 @@ import { fonts } from '../../../../Constants/Fonts';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal';
 import { RedFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const SavedListing = ({ navigation }) => {
@@ -266,7 +267,7 @@ const SavedListing = ({ navigation }) => {
         setVisible(false)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 headerLabel={"Saved Listings"}
                 leftImgName={appIcons.headerBack}
@@ -313,7 +314,7 @@ const SavedListing = ({ navigation }) => {
                     </View>
                 </View>
             </ScrollView> */}
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -17,6 +17,7 @@ import { fonts } from '../../../Constants/Fonts';
 import { fromProfile } from '../../../redux/Slices/appSlice';
 import { userSave } from '../../../redux/Slices/splashSlice';
 import { CommonActions } from '@react-navigation/native';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const PaymentDone = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ const PaymentDone = ({ navigation }) => {
         }
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View style={{
                 flex: 1,
                 justifyContent: "center"
@@ -71,7 +72,7 @@ const PaymentDone = ({ navigation }) => {
                 buttonTitle={"Continue"}
                 onPress={onPressContinue}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

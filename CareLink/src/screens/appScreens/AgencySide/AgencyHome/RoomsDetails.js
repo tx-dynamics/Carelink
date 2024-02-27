@@ -9,6 +9,7 @@ import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/Serv
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const RoomsDetails = ({ navigation, route }) => {
     const [liked, setLiked] = useState(false)
@@ -17,7 +18,7 @@ const RoomsDetails = ({ navigation, route }) => {
         setLiked(!liked)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 headerLabel={route?.params?.review ? "Review Details" : "Room Details"}
                 leftImgName={appIcons.headerBack}
@@ -36,7 +37,7 @@ const RoomsDetails = ({ navigation, route }) => {
                     note={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus"} />
             </KeyboardAwareScrollView>
             <FormButton buttonTitle={route?.params?.review ? "Review & Continue" : "Submit Proposal"} onPress={() => navigation.navigate(routes.sendProposal)} />
-        </View>
+        </AppGLobalView>
     )
 }
 

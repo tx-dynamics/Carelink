@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View } from 'react-native';
+import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View, SafeAreaView } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
@@ -12,6 +12,7 @@ import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import { appIcons } from '../../../../Constants/Utilities/assets';
 import { fontPixel, heightPixel, widthPixel, fonts, routes } from '../../../../Constants';
 import colors from '../../../../config/colors';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 const ServiceHome = ({ }) => {
     const DATA = [
         {
@@ -70,7 +71,7 @@ const ServiceHome = ({ }) => {
     ];
     const navigation = useNavigation()
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <Header headerLabel={"Home"}
                 rightImgStyle={styles.rightImgStyle}
@@ -138,7 +139,7 @@ const ServiceHome = ({ }) => {
                     </View>
                 </View>
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

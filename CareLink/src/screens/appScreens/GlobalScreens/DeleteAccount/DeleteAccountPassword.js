@@ -11,6 +11,7 @@ import { appIcons } from '../../../../Constants/Utilities/assets'
 import { fonts } from '../../../../Constants/Fonts'
 import AppTextInput from '../../../../components/AppTextInput/AppTextInput'
 import TermsComponent from '../../../../components/TermsComponent/TermsComponent'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const DeleteAccountPassword = ({ navigation, route }) => {
     const [isSecure, setSecure] = useState(true)
@@ -39,7 +40,7 @@ const DeleteAccountPassword = ({ navigation, route }) => {
         },
     ]
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Delete Account"}
                 imgName={iconPath.leftArrow}
@@ -63,7 +64,7 @@ const DeleteAccountPassword = ({ navigation, route }) => {
                 />
             </KeyboardAwareScrollView>
             <FormButton buttonTitle={"Continue"} onPress={() => navigation.navigate(routes.deleteAccountOTP)} />
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -9,6 +9,7 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const Read3 = ({ navigation }) => {
@@ -60,7 +61,7 @@ h.	The provided services shall meet all requirements as set forth in UPLIFT LLCâ
 
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -87,7 +88,7 @@ h.	The provided services shall meet all requirements as set forth in UPLIFT LLCâ
                 </View>
 
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

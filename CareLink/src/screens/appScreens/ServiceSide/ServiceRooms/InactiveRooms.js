@@ -13,6 +13,7 @@ import { RedFlashMessage, SuccessFlashMessage } from '../../../../Constants/Util
 import { fonts } from '../../../../Constants/Fonts'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
 import IconHeaderComp from '../../../../components/IconHeaderComp'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const InactiveRoom = ({ navigation }) => {
     const [visible, setVisible] = useState(false)
@@ -29,7 +30,7 @@ const InactiveRoom = ({ navigation }) => {
         setVisible(false)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <AppStatusbar />
             <IconHeaderComp title={"Inactive Room"} imgName={appIcons.leftArrow} onPress={() => navigation.goBack()} />
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
@@ -45,7 +46,7 @@ const InactiveRoom = ({ navigation }) => {
                 onPress={onPressActive}
                 buttonTitle={"Active"} />
             <DeleteModal visible={visible} cancelPress={onCancelPress} deletePress={onDeletePress} />
-        </View>
+        </AppGLobalView>
     )
 }
 

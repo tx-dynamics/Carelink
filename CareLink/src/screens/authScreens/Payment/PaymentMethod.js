@@ -11,6 +11,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { heightPixel } from '../../../Constants';
 import { appIcons } from '../../../Constants/Utilities/assets';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 
 const PaymentMethod = ({ navigation }) => {
@@ -62,7 +63,7 @@ const PaymentMethod = ({ navigation }) => {
         console.log(isItem)
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp title={"Payment Method"}
                     onPress={() => navigation.goBack()}
@@ -92,7 +93,7 @@ const PaymentMethod = ({ navigation }) => {
                 buttonTitle={"Next"}
                 onPress={() => { navigation.navigate("SelectCard") }}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 export default PaymentMethod;

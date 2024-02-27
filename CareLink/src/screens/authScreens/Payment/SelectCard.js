@@ -11,6 +11,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { heightPixel, widthPixel } from '../../../Constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const SelectCard = ({ navigation }) => {
     const [img, setImg] = useState(false);
@@ -62,7 +63,7 @@ const SelectCard = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <View>
                 <IconHeaderComp
                     title={"Select Card"}
@@ -110,7 +111,7 @@ const SelectCard = ({ navigation }) => {
             <FormButton
                 buttonTitle={"Continue"}
                 onPress={() => navigation.navigate("PaymentDone")} />
-        </View>
+        </AppGLobalView>
     )
 }
 

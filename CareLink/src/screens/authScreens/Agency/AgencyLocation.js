@@ -12,6 +12,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { heightPixel } from '../../../Constants';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { RedFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyLocation = ({ navigation }) => {
     const usertype = useSelector((state) => state.splash.userType)
@@ -27,7 +28,7 @@ const AgencyLocation = ({ navigation }) => {
         navigation.navigate("AgencyMap")
     }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp
                     title={"Location"}
@@ -49,7 +50,7 @@ const AgencyLocation = ({ navigation }) => {
                 buttonTitle={"Next"}
                 onPress={onNextPress}
             />
-        </View>
+        </AppGLobalView>
     )
 }
 

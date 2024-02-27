@@ -5,12 +5,13 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const ProposalTerms = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header headerLabel={"Terms & Conditions"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()} />
@@ -47,7 +48,7 @@ const ProposalTerms = ({ navigation }) => {
                 </View>
 
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text, StatusBar } from 'react-native';
+import { View, TextInput, StyleSheet, Image, TouchableOpacity, Text, StatusBar, Platform } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
@@ -33,7 +33,7 @@ export default IconHeaderComp;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: StatusBar.currentHeight + heightPixel(10),
+        marginTop: Platform.OS==="android"? StatusBar.currentHeight + heightPixel(10):null,
     },
     rowView: {
         flexDirection: "row",

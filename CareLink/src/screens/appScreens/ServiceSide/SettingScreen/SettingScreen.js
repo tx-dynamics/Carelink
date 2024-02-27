@@ -6,6 +6,7 @@ import { iconPath } from '../../../../config/icon'
 import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/LeftSideBoldHeading'
 import SettingBox from '../../../../components/SettingBox/SettingBox'
 import { heightPixel, routes } from '../../../../Constants'
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
 
 const SettingScreen = ({ navigation, route }) => {
     const [isOn, setOn] = useState(false)
@@ -37,7 +38,7 @@ const SettingScreen = ({ navigation, route }) => {
         },
     ]
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 title={"Settings"}
                 imgName={iconPath.leftArrow}
@@ -53,7 +54,7 @@ const SettingScreen = ({ navigation, route }) => {
                 onPress={() => item.route && navigation.navigate(item.route)}
             />} />
 
-        </View>
+        </AppGLobalView>
     )
 }
 
