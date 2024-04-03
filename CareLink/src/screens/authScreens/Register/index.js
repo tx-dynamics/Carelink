@@ -82,13 +82,13 @@ const Register = ({ navigation }) => {
                         <Apptext style={styles.createTxt1}>.</Apptext>
                     </View>
                 </View>
-            </KeyboardAwareScrollView>
             <FormButton
                 buttonTitle={"Join Now"}
                 // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
                 onPress={onSignUp}
             />
             <AlreadyText title={"Already Have an Account"} subtitle={" Sign In"} onPress={() => navigation.navigate(routes.loginScreen)} />
+            </KeyboardAwareScrollView>
         </AppGLobalView>
     )
 }

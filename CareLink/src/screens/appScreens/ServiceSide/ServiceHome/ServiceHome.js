@@ -179,7 +179,8 @@ const styles = StyleSheet.create({
         width: wp('55%'),
         fontFamily: 'Poppins-Medium',
         fontSize: 17,
-        color: DefaultStyles.colors.black
+        color: DefaultStyles.colors.black,
+        fontWeight:'400'
     },
     lilBtn: {
         alignItems: 'center',

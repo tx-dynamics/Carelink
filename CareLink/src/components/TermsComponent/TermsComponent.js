@@ -10,7 +10,7 @@ const TermsComponent = ({ boxPress, box, termsPress, privacyPress }) => {
             <TouchableOpacity onPress={boxPress} style={styles.pressView}>
                 <Image resizeMode='contain' source={box} style={styles.imgStyle} />
             </TouchableOpacity>
-            <Text style={styles.mainText}>By tapping confirm, you agree to the <Text onPress={termsPress} style={styles.blueText}>terms of service</Text> and<Text onPress={privacyPress} style={styles.blueText}> privacy policy</Text> of app name</Text>
+            <Text style={styles.mainText} numberOfLines={2}>By tapping confirm, you agree to the <Text onPress={termsPress} style={styles.blueText}>terms of service</Text> and<Text onPress={privacyPress} style={styles.blueText}> privacy policy</Text> of app name</Text>
         </View>
     )
 }
@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     mainText: {
         fontSize: fontPixel(15),
         fontFamily: fonts.Poppins_Regular,
-        color: colors.messageBody
+        color: colors.messageBody,
+        width:widthPixel(350)
     },
     blueText: {
         color: colors.primary,

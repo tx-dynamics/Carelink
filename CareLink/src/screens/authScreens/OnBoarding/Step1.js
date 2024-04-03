@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
         height: heightPixel(24),
     },
     bottomView: {
-        alignSelf: "center",
-        // bottom: heightPixel(45),
+        // alignSelf: "center",
+        marginBottom: heightPixel(25),
     },
 
 });
