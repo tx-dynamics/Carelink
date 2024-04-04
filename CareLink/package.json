@@ -27,6 +27,7 @@
     "react-native-calendar-picker": "^8.0.0",
     "react-native-calendars": "^1.1303.0",
     "react-native-date-picker": "^4.3.5",
+    "react-native-device-info": "^10.13.1",
     "react-native-dropdown-picker": "^5.3.0",
     "react-native-flash-message": "^0.4.2",
     "react-native-gesture-handler": "^2.2.0",
