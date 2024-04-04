@@ -1,5 +1,6 @@
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {heightPixel, widthPixel} from '../Constants';
+import messaging from '@react-native-firebase/messaging';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -65,6 +66,7 @@ export const uploadmage = setPic => {
 
 export const getFCMToken = async () => {
   const fcmToken = await messaging().getToken();
+  console.log('Fcm is', fcmToken);
   if (fcmToken) {
     return fcmToken;
   } else {
