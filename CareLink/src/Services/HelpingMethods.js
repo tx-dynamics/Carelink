@@ -1,6 +1,9 @@
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {heightPixel, widthPixel} from '../Constants';
 import messaging from '@react-native-firebase/messaging';
+import DeviceInfo from 'react-native-device-info';
+import { store } from '../redux/store';
+import { deviceToken,fcmToken } from '../redux/Slices/userDataSlice';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -66,10 +69,23 @@ export const uploadmage = setPic => {
 
 export const getFCMToken = async () => {
   const fcmToken = await messaging().getToken();
-  console.log('Fcm is', fcmToken);
+//   console.log('Fcm is', fcmToken);
   if (fcmToken) {
+    store.dispatch(fcmToken(fcmToken))
     return fcmToken;
   } else {
     return null;
   }
 };
+
+// get device
+export const getDeviceId = async () => {
+    const deviceToken = DeviceInfo.getDeviceId();
+    // console.log("deviceToken ", deviceToken)
+    if (deviceToken) {
+        store.dispatch(deviceToken(deviceToken))
+      return deviceToken;
+    } else {
+      return null;
+    }
+  };
