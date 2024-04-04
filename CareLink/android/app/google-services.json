@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "859508750588",
+    "project_id": "carelink-a6a1f",
+    "storage_bucket": "carelink-a6a1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859508750588:android:2b3ce71da215be01a53f79",
+        "android_client_info": {
+          "package_name": "com.carelink"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyx9fFppanhgtX8v8BjxGAi91XHZ7gPzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
