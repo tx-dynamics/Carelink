@@ -41,11 +41,7 @@ const EmailVerification = ({navigation, route}) => {
   const userEmail = useSelector(state => state.userData?.userData?.email);
 
   const onCountinue = async () => {
-    //APK //
     console.log('userEmail', userEmail);
-    // setVisible(true)
-    // setTimeout(() => {
-
     // hitting otp api
     try {
       if (isOTP == '') {
@@ -63,9 +59,7 @@ const EmailVerification = ({navigation, route}) => {
       };
       console.log('bodyParams ', bodyParams);
       const onSuccess = result => {
-        console.log('user is signup => ', JSON.stringify(result, ' ', 2));
-        // console.log('');
-        // SuccessFlashMessage(result?.message);
+        // console.log('user is signup => ', JSON.stringify(result, ' ', 2));
         SuccessFlashMessage('Email verified successfully');
         if (usertype == 'ServiceSide') {
           route.params?.register
@@ -77,8 +71,6 @@ const EmailVerification = ({navigation, route}) => {
             ? navigation.replace(routes.successAgency)
             : navigation.replace(routes.forgetPasswordUpdate);
         }
-        // clearForm();
-        // navigation.navigate('EmailVerification', {register: true});
       };
       const onError = error => {
         if (error) {
@@ -96,6 +88,11 @@ const EmailVerification = ({navigation, route}) => {
       console.log('error while hitting sign up api ', error);
     }
   };
+
+  const goback = () => {
+    setIsOTP('');
+    navigation.goBack();
+  };
   return (
     <AppGLobalView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
@@ -103,13 +100,11 @@ const EmailVerification = ({navigation, route}) => {
           title={'Verify'}
           heading={'Enter the code we just sent to your email'}
           style={styles.headerTextStyle}
-          onPress={() => {
-            navigation.goBack();
-          }}
+          onPress={goback}
           imgName={iconPath.leftArrow}
         />
         <Text numberOfLines={1} style={styles.mailText}>
-          myemail@gmail.com
+          {userEmail}
         </Text>
         <OTPInputView
           pinCount={4}
