@@ -8,6 +8,7 @@ import {
   Text,
   View,
   SafeAreaView,
+  Keyboard,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
@@ -66,6 +67,7 @@ const Register = ({navigation}) => {
   }, []);
 
   const onSignUp = async () => {
+    Keyboard.dismiss();
     try {
       if (
         !isSignupValid(
@@ -85,7 +87,7 @@ const Register = ({navigation}) => {
         userType: usertype,
         device: {id: deviceId, deviceToken: fcmToken},
       };
-      console.log('bodyParams ', bodyParams);
+      // console.log('bodyParams ', bodyParams);
       const onSuccess = result => {
         // console.log('user is signup => ', JSON.stringify(result, ' ', 2));
         store.dispatch(accessToken(result?.data?.token));
