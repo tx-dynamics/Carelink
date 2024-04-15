@@ -44,6 +44,7 @@ import {
   refreshToken,
   setUserData,
 } from '../../../redux/Slices/userDataSlice';
+import { userSave } from '../../../redux/Slices/splashSlice';
 
 const Register = ({navigation}) => {
   const usertype = useSelector(state => state.splash.userType);
@@ -81,18 +82,20 @@ const Register = ({navigation}) => {
         return true;
       }
       const bodyParams = {
-        name: firstName + lastName,
+        name: firstName +" "+ lastName,
         email: email,
         password: isPassword,
         userType: usertype,
         device: {id: deviceId, deviceToken: fcmToken},
       };
-      // console.log('bodyParams ', bodyParams);
+      console.log('bodyParams ', bodyParams);
       const onSuccess = result => {
-        // console.log('user is signup => ', JSON.stringify(result, ' ', 2));
+        console.log('user is signing up => ', JSON.stringify(result, ' ', 2));
         store.dispatch(accessToken(result?.data?.token));
         store.dispatch(refreshToken(result?.data?.refreshToken));
         store.dispatch(setUserData(result?.data?.user));
+        // userSave is using for smooth logging
+        store.dispatch(userSave(true));
         // console.log('')
         SuccessFlashMessage(result?.message);
         clearForm();

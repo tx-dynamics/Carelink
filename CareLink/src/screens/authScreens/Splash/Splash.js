@@ -4,10 +4,13 @@ import DefaultStyles from "../../../config/Styles";
 import { widthPixel } from '../../../Constants';
 import colors from '../../../config/colors';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
-
+import { useSelector } from 'react-redux';
 const Splash = ({ navigation }) => {
+    // onbaording data 
+    const onBoardingData=useSelector(state=>state?.splash)
     useEffect(() => {
         setTimeout(() => {
+            // if()
             navigation.replace("Step1")
         }, 2000);
     }, []);

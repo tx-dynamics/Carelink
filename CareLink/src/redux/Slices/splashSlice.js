@@ -4,6 +4,7 @@ const initialState = {
     value: null,
     isNewUser: true,
     userType: "",
+    onBoarding:false,
 }
 
 export const splashSlice = createSlice({
@@ -19,10 +20,13 @@ export const splashSlice = createSlice({
         userType: (state, action) => {
             state.userType = action.payload;
         },
+        onBoarding:(state,action)=>{
+            state.onBoarding=action.payload;
+        }
 
     },
 })
 
-export const { userSave, isNewUser, userType } = splashSlice.actions
+export const { userSave, isNewUser, userType, onBoarding } = splashSlice.actions
 
 export default splashSlice.reducer

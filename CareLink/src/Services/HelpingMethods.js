@@ -68,10 +68,10 @@ export const uploadmage = setPic => {
 };
 
 export const getFCMToken = async () => {
-  const fcmToken = await messaging().getToken();
+  const fcmtoken = await messaging().getToken();
 //   console.log('Fcm is', fcmToken);
   if (fcmToken) {
-    store.dispatch(fcmToken(fcmToken))
+    store.dispatch(fcmToken(fcmtoken))
     return fcmToken;
   } else {
     return null;
@@ -80,10 +80,10 @@ export const getFCMToken = async () => {
 
 // get device
 export const getDeviceId = async () => {
-    const deviceToken = DeviceInfo.getDeviceId();
+    const devtoken = DeviceInfo.getDeviceId();
     // console.log("deviceToken ", deviceToken)
     if (deviceToken) {
-        store.dispatch(deviceToken(deviceToken))
+        store.dispatch(deviceToken(devtoken))
       return deviceToken;
     } else {
       return null;
