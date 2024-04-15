@@ -1,13 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
   ActivityIndicator,
   Text,
   View,
-  SafeAreaView,
   Keyboard,
   Alert,
 } from 'react-native';
@@ -17,7 +13,6 @@ import Apptext from '../../../components/Apptext';
 import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import {useDispatch, useSelector} from 'react-redux';
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -34,6 +29,12 @@ import {api} from '../../../network/Environment';
 import {getDeviceId} from 'react-native-device-info';
 import {getFCMToken} from '../../../Services/HelpingMethods';
 import {useNavigation} from '@react-navigation/native';
+import {
+  accessToken,
+  refreshToken,
+  setUserData,
+} from '../../../redux/Slices/userDataSlice';
+import {Method, callApi} from '../../../network/NetworkManger';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -42,60 +43,62 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [isPassword, setPassword] = useState('');
   const [isSecure, setSecure] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const onPressLogin = () => {
     dispatch(userSave(true));
   };
 
   const handleSubmit = async () => {
-    console.log('Hiit');
     let fcm = await getFCMToken();
-    console.log('Fcm token', fcm);
-    //     Keyboard.dismiss();
-    //     if (!email) {
-    //       //   FlashAlert('E', 'Failed', 'Email is required!');
-    //       Alert.alert('Email is required');
-    //     } else if (!isPassword) {
-    //       //   FlashAlert('E', 'Failed', 'Password is required!');
-    //       Alert.alert('Password is required');
-    //     } else {
-    //       try {
-    //         setIsLoading(true);
-    //         const endPoint = api.login;
-    //         const data = {
-    //           email: email.toLowerCase(),
-    //           password: isPassword,
-    //           device: {id: getDeviceId(), deviceToken: fcm},
-    //         };
+    Keyboard.dismiss();
+    if (!email) {
+      //   FlashAlert('E', 'Failed', 'Email is required!');
+      Alert.alert('Email is required');
+    } else if (!isPassword) {
+      //   FlashAlert('E', 'Failed', 'Password is required!');
+      Alert.alert('Password is required');
+    } else {
+      try {
+        setIsLoading(true);
+        const endPoint = api.login;
+        const data = {
+          email: email.toLowerCase(),
+          password: isPassword,
+          device: {id: getDeviceId(), deviceToken: fcm},
+        };
 
-    //         await callApi(
-    //           Method.POST,
-    //           endPoint,
-    //           data,
-    //           res => {
-    //             if (res?.status === 200 || res?.status === 201) {
-    //               dispatch(refreshToken(res?.data?.refreshToken));
-    //               dispatch(accessToken(res?.data?.token));
-    //               dispatch(setUserData(res?.data?.user));
-    //               setIsLoading(false);
-    //               FlashAlert('S', 'Success', res?.message);
-    //               navigation.replace(routes.tab);
-    //             } else {
-    //               setIsLoading(false);
-    //               FlashAlert('E', 'Failed', 'Invalid Credentials!');
-    //             }
-    //           },
-    //           err => {
-    //             setIsLoading(false);
-    //             FlashAlert('E', 'Failed', err);
-    //           },
-    //         );
-    //       } catch (error) {
-    //         setIsLoading(false);
-    //         FlashAlert('E', 'Failed', error);
-    //       } finally {
-    //         setIsLoading(false);
-    //       }
-    //     }
+        await callApi(
+          Method.POST,
+          endPoint,
+          data,
+          res => {
+            if (res?.status === 200 || res?.status === 201) {
+              console.log('Response is', res?.data);
+              dispatch(refreshToken(res?.data?.refreshToken));
+              dispatch(accessToken(res?.data?.token));
+              dispatch(setUserData(res?.data?.user));
+              navigation.navigate(routes.addDocuments);
+              setIsLoading(false);
+              //   FlashAlert('S', 'Success', res?.message);
+              //   navigation.replace(routes.tab);
+            } else {
+              setIsLoading(false);
+              // FlashAlert('E', 'Failed', 'Invalid Credentials!');
+            }
+          },
+          err => {
+            setIsLoading(false);
+            FlashAlert('E', 'Failed', err);
+          },
+        );
+      } catch (error) {
+        setIsLoading(false);
+        console.log('Error on catch', error);
+        // FlashAlert1('E', 'Failed', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   return (
@@ -142,6 +145,7 @@ const LoginScreen = () => {
         title={'I don’t have Account.'}
         subtitle={' Sign Up'}
       />
+      {isLoading && <ActivityIndicator size={'large'} color={'red'} />}
     </AppGLobalView>
   );
 };

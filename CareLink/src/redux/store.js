@@ -22,7 +22,7 @@ const persistConfig = {
 const reducer = combineReducers({
   splash: splashReducer,
   appSlice: appSlice,
-  userData:userDataSlice
+  userDataSlice: userDataSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

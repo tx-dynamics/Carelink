@@ -31,6 +31,7 @@ import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
 import {store} from '../../../redux/store';
+import Loader from '../../../components/Loader';
 
 const EmailVerification = ({navigation, route}) => {
   const [isOTP, setIsOTP] = useState('');
@@ -100,11 +101,13 @@ const EmailVerification = ({navigation, route}) => {
           title={'Verify'}
           heading={'Enter the code we just sent to your email'}
           style={styles.headerTextStyle}
-          onPress={goback}
+          onPress={() => {
+            navigation.goBack();
+          }}
           imgName={iconPath.leftArrow}
         />
         <Text numberOfLines={1} style={styles.mailText}>
-          {userEmail}
+          {params?.params?.email}
         </Text>
         <OTPInputView
           pinCount={4}
@@ -116,14 +119,15 @@ const EmailVerification = ({navigation, route}) => {
           keyboardType="number-pad"
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
         />
-        <CountDownComponent />
+        <CountDownComponent email={params?.params?.email} setIsOTP={setIsOTP} />
       </KeyboardAwareScrollView>
-      <FormButton onPress={onCountinue} buttonTitle={'Continue'} />
+      <FormButton onPress={handleSubmit} buttonTitle={'Continue'} />
       <EmailVerifiedModal
         visible={visible}
         subtitle={'You have successfully verified your email'}
         title={'Email verified'}
       />
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };
