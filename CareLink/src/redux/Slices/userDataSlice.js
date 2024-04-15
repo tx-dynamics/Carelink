@@ -5,6 +5,8 @@ const initialState = {
   accessToken: '',
   refreshToken: '',
   completeProfile: false,
+  deviceToken: '',
+  fcmToken: '',
 };
 
 const userDataSlice = createSlice({
@@ -20,12 +22,24 @@ const userDataSlice = createSlice({
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
-    setCompleteProfile: (state, action) => {
+    setcompleteProfile: (state, action) => {
       state.completeProfile = action.payload;
+    },
+    setDeviceToken: (state, action) => {
+      state.deviceToken = action.payload;
+    },
+    setFcmToken: (state, action) => {
+      state.fcmToken = action.payload;
     },
   },
 });
 
-export const {setUserData, accessToken, refreshToken, setCompleteProfile} =
-  userDataSlice.actions;
+export const {
+  setUserData,
+  accessToken,
+  refreshToken,
+  setCompleteProfile,
+  setDeviceToken,
+  setFcmToken,
+} = userDataSlice.actions;
 export default userDataSlice.reducer;

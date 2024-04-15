@@ -1,6 +1,18 @@
 import ImageCropPicker from 'react-native-image-crop-picker';
 import {heightPixel, widthPixel} from '../Constants';
 import messaging from '@react-native-firebase/messaging';
+import {decode} from 'base64-arraybuffer';
+import {S3} from 'aws-sdk';
+var fs = require('react-native-fs');
+import {store} from '../redux/store';
+import {setFcmToken} from '../redux/Slices/userDataSlice';
+import {
+  ACCESS_KEY_ID,
+  BUCKET_NAME,
+  BUCKET_REGION,
+  SECRET_ACCESS_KEY,
+  signatureVersion,
+} from './constants';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -65,11 +77,45 @@ export const uploadmage = setPic => {
 };
 
 export const getFCMToken = async () => {
-  const fcmToken = await messaging().getToken();
-  console.log('Fcm is', fcmToken);
-  if (fcmToken) {
-    return fcmToken;
+  const fcmtoken = await messaging().getToken();
+  //   console.log('Fcm is', fcmToken);
+  // const fcmToken = await messaging().getToken();
+  if (fcmtoken) {
+    store.dispatch(setFcmToken(fcmtoken));
+    return fcmtoken;
   } else {
     return null;
   }
+};
+
+export const uploadImageOnS3 = async (file, successPath) => {
+  const s3bucket = new S3({
+    region: BUCKET_REGION,
+    accessKeyId: ACCESS_KEY_ID,
+    secretAccessKey: SECRET_ACCESS_KEY,
+    Bucket: BUCKET_NAME,
+    signatureVersion: signatureVersion,
+  });
+  let contentType = 'image/jpeg';
+  let contentDeposition = 'inline;filename="' + file.name + '"';
+  const base64 = await fs.readFile(file.path, 'base64');
+  const arrayBuffer = decode(base64);
+  s3bucket.createBucket(async () => {
+    const params = {
+      Bucket: BUCKET_NAME,
+      Key: file.name,
+      Body: arrayBuffer,
+      ContentDisposition: contentDeposition,
+      ContentType: contentType,
+    };
+    await s3bucket
+      .upload(params)
+      .promise()
+      .then(data => {
+        successPath(data.Location);
+      })
+      .catch(err => {
+        console.log('Upload on S3 error', err);
+      });
+  });
 };
