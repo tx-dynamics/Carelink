@@ -136,9 +136,13 @@ const LoginScreen = () => {
       </KeyboardAwareScrollView>
       <FormButton
         buttonTitle={'Sign In'}
-        onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+        // onPress={() =>
+        //   usertype === 'ServiceSide'
+        //     ? navigation.navigate('PaymentPlans')
+        //     : navigation.navigate('EmailVerification')
+        // }
         // onPress={onPressLogin}
-        // onPress={handleSubmit}
+        onPress={handleSubmit}
       />
       <AlreadyText
         onPress={() => navigation.navigate('Register')}
