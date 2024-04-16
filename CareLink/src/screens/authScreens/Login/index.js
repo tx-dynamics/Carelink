@@ -79,7 +79,8 @@ const LoginScreen = () => {
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
-              navigation.replace(routes.addDocuments);
+              usertype=='ServiceSide'?
+              navigation.replace(routes.addDocuments):navigation.replace(routes.agencyBasic)
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
             } else {

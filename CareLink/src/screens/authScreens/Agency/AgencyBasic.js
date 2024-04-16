@@ -8,7 +8,7 @@ import { iconPath } from '../../../config/icon';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { heightPixel, routes } from '../../../Constants';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import { SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import { RedFlashMessage, SuccessFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { fromProfile } from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
@@ -30,6 +30,43 @@ const AgencyBasic = ({ navigation, route }) => {
             navigation.navigate(routes.agencyPhotos)
         }
     }
+
+
+    // checking agency basics
+    const checkBasics = () => {
+        try {
+          if (!agencyName.trim()) {
+            RedFlashMessage('Agency Name is required.');
+            return false;
+          } else if (agencyName.length < 3) {
+            RedFlashMessage('Agency Name should be at least 3 characters long.');
+            return false;
+          }
+      
+          if (!isExperience.trim()) {
+            RedFlashMessage('Experience is required.');
+            return false;
+          } else if (isExperience.length < 5) {
+            RedFlashMessage('Experience should be at least 5 characters long.');
+            return false;
+          }
+      
+          if (!about.trim()) {
+            RedFlashMessage('About is required.');
+            return false;
+          } else if (about.length < 10) {
+            RedFlashMessage('About should be at least 10 characters long.');
+            return false;
+          }
+      
+          return true; // All checks passed
+        } catch (error) {
+          console.error("Error while checking data in agency basics:", error);
+        //   RedFlashMessage('An error occurred while checking agency basics. Please try again later.');
+          return false;
+        }
+      };
+      
     return (
         <AppGLobalView style={styles.container}>
             <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
