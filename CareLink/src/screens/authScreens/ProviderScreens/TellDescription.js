@@ -7,6 +7,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const TellDescription = ({ navigation }) => {
 
@@ -22,7 +23,7 @@ const TellDescription = ({ navigation }) => {
     ]);
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -53,7 +54,7 @@ const TellDescription = ({ navigation }) => {
                     onPress={() => navigation.navigate("Schedule")}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 export default TellDescription;

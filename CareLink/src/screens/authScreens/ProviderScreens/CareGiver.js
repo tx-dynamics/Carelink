@@ -86,7 +86,7 @@ const CareGiver = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -94,7 +94,7 @@ const CareGiver = ({ navigation }) => {
             />
             <Apptext style={styles.innerText}>Our caregiver is...</Apptext>
 
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 data={DATA}
                 style={{ flex: 1 }}
                 keyExtractor={(item, index) => index}
@@ -106,17 +106,17 @@ const CareGiver = ({ navigation }) => {
                 )}
             />
             <Apptext style={[styles.innerText, { marginTop: 20 }]}>She would be living...</Apptext>
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 data={DATA1}
                 style={{ flex: 1 }}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity 
-                    onPress={() => { addCategories1(item), setTickName1(item?.label) }}
-                    style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
-                      <Image source={isItem1.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
-                      <Apptext style={[styles.checkBoxText]}>{item?.label}</Apptext>
-                    </TouchableOpacity> 
+                    <TouchableOpacity
+                        onPress={() => { addCategories1(item), setTickName1(item?.label) }}
+                        style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
+                        <Image source={isItem1.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
+                        <Apptext style={[styles.checkBoxText]}>{item?.label}</Apptext>
+                    </TouchableOpacity>
                 )}
             />
             <Apptext style={[styles.innerText, { marginTop: 24 }]}>Our caregiver speaks these languages...</Apptext>
@@ -133,14 +133,14 @@ const CareGiver = ({ navigation }) => {
             />
 
             <Apptext style={[styles.innerText, { marginTop: 22 }]}>We plan to payour caregiver through...</Apptext>
-            <FlatList
+            <FlatList showsVerticalScrollIndicator={false}
                 data={DATA2}
                 style={{ flex: 1 }}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => (
-                    <TouchableOpacity 
-                    onPress={() => { addCategories2(item), setTickName2(item?.label) }}
-                    style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
+                    <TouchableOpacity
+                        onPress={() => { addCategories2(item), setTickName2(item?.label) }}
+                        style={{ flexDirection: "row", alignItems: "center", marginTop: 20, marginLeft: wp(5) }}>
                         <Image source={isItem2.includes(item.id) ? iconPath.Check_box : iconPath.check_blank} style={{ width: wp(6.3), height: wp(6.3), resizeMode: "contain" }} />
                         <Apptext style={[styles.checkBoxText]}>{item?.label}</Apptext>
                     </TouchableOpacity>

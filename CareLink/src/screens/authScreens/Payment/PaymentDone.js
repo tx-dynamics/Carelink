@@ -11,45 +11,68 @@ import { useDispatch } from "react-redux";
 import { setUser } from '../../../redux/actions/authAction';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../Constants';
+import { appIcons } from '../../../Constants/Utilities/assets';
+import { fonts } from '../../../Constants/Fonts';
+import { fromProfile } from '../../../redux/Slices/appSlice';
+import { userSave } from '../../../redux/Slices/splashSlice';
+import { CommonActions } from '@react-navigation/native';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const PaymentDone = ({ navigation }) => {
-    let dispatch = useDispatch()
-    const usertype = useSelector((state) => state.auth.usertype)
-    const user = useSelector((state) => state.auth.user)
-    return (
-        <View style={styles.container}>
-
-            <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-            />
-            <View style={styles.centerView}>
-                <Image
-                    style={{ tintColor: DefaultStyles.colors.primary }}
-                    source={require('../../../../assets/bigCircleTick.png')} />
-                <Apptext style={styles.doneTxt}>Payment done</Apptext>
-            </View>
-            {usertype === "ServiceSide" ?
-                <View style={[styles.txtView, { marginTop: wp('4%') }]} >
-                    <Apptext style={styles.roomsTxt}> Your Rooms  </Apptext>
-                    <Apptext style={styles.roomsTxt}> Successfully Registerd </Apptext>
-                </View> :
-                <View style={[styles.txtView, { marginTop: wp('4%') }]} >
-                    <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
-                    <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
-                </View>
+    const dispatch = useDispatch()
+    const usertype = useSelector((state) => state.splash.userType)
+    const user = useSelector((state) => state.splash.value)
+    const isFromProfile = useSelector((state) => state.appSlice.fromProfile)
+    const onPressContinue = () => {
+        if (isFromProfile) {
+            navigation.navigate("GeneralNavigator")
+            dispatch(fromProfile(false))
+        }
+        else {
+            if (usertype == "AgencySide") {
+                dispatch(userSave(true))
             }
-            <View style={styles.txtView} >
-                <Apptext style={styles.submitTxt}> This is Sample Text. Please Provide Original Text to be pasted here  </Apptext>
+            else {
+                navigation.dispatch(CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: routes.listingOptions }]
+                }))
+            }
+        }
+    }
+    return (
+        <AppGLobalView style={styles.container}>
+            <View style={{
+                flex: 1,
+                justifyContent: "center"
+            }}>
+                <View style={styles.centerView}>
+                    <Image resizeMode='contain'
+                        style={{
+                            width: widthPixel(96),
+                            height: widthPixel(96),
+                        }}
+                        source={appIcons.successTick} />
+                    <Apptext style={styles.doneTxt}>Payment done</Apptext>
+                </View>
+                {usertype === "ServiceSide" ?
+                    <View style={[styles.txtView, { marginTop: heightPixel(12) }]} >
+                    </View> :
+                    <View style={[styles.txtView, { marginTop: wp('4%'), alignItems: "center" }]} >
+                        <Apptext style={styles.roomsTxt}> Congratulations </Apptext>
+                        <Apptext style={styles.roomsTxt}> You’re All Set </Apptext>
+                    </View>
+                }
+                <View style={styles.txtView} >
+                    <Apptext style={styles.submitTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Felis mauris at at nullam. Risus enim tellus pretium faucibus.</Apptext>
+                </View>
             </View>
-            <View style={{ marginTop: wp('35%') }} >
-                <FormButton
-                    buttonTitle={"Get Started"}
-                    width={'88%'}
-                    onPress={() => dispatch(setUser(true))}
-                />
-            </View>
-        </View>
+            <FormButton
+                buttonTitle={"Continue"}
+                onPress={onPressContinue}
+            />
+        </AppGLobalView>
     )
 }
 
@@ -60,11 +83,13 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20),
     },
     doneTxt: {
         fontSize: 20,
         fontFamily: 'Poppins-Regular',
-        marginTop: wp('2%'),
+        marginTop: heightPixel(20),
         color: '#00da09'
     },
     centerView: {
@@ -72,19 +97,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     txtView: {
-        width: wp('90%'),
-        alignSelf: 'center',
-        marginTop: wp('5%'),
-        alignItems: 'center'
+        paddingHorizontal: widthPixel(20),
     },
     roomsTxt: {
         fontFamily: 'Poppins-Regular',
         fontSize: 24
     },
     submitTxt: {
-        fontSize: 14,
+        fontSize: fontPixel(14),
         textAlign: 'center',
-        fontFamily: 'Poppins-Regular',
+        fontFamily: fonts.Poppins_Regular,
 
     },
     marginView: {

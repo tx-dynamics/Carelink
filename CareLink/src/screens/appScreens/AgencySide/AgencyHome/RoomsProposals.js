@@ -9,6 +9,8 @@ import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
 import FvrtComp from '../../../../components/FvrtComp';
 import LatestListingsComp from '../../../../components/LatestListingsComp';
+import { routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const RoomsProposals = ({ navigation }) => {
@@ -32,20 +34,20 @@ const RoomsProposals = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 rightImg={require('../../../../../assets/sendIcon.png')}
                 onPressLeft={() => navigation.goBack()}
-                onPressRight={() => navigation.navigate("Messages")}
+                onPressRight={() => navigation.navigate(routes.messages)}
                 headerLabel={"Rooms & Proposals"}
             />
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={styles.marginView} >
                     <Apptext style={styles.rms} >Available (3)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -54,14 +56,14 @@ const RoomsProposals = ({ navigation }) => {
                                     labelValue={"3 Room on 2nd Floor"}
                                     name={"James Clear"}
                                     location={"Location : abc Town , Washington, DC"}
-                                    onPress={() => navigation.navigate("RoomsDetails")}
+                                    onPress={() => navigation.navigate(routes.roomDetails)}
                                 />
                             )}
                         />
                     </View>
                     <Apptext style={styles.rms} >Booked (3)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -77,7 +79,7 @@ const RoomsProposals = ({ navigation }) => {
                     </View>
                     <Apptext style={styles.rms} >Submited Proposal (2)</Apptext>
                     <View style={{ marginTop: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
                             keyExtractor={(item, index) => index}
                             renderItem={({ item, index }) => (
@@ -92,7 +94,7 @@ const RoomsProposals = ({ navigation }) => {
                     </View>
                 </View>
             </ScrollView>
-        </View>
+        </AppGLobalView>
     )
 }
 

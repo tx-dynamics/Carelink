@@ -6,6 +6,7 @@ import DefaultStyles from "../../../config/Styles";
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const DATA = [
     { id: 1, img: iconPath.bathtub, title: "Bathing" },
@@ -23,7 +24,7 @@ const DATA = [
 
 const ActivitySelect = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -31,7 +32,7 @@ const ActivitySelect = ({ navigation }) => {
             />
             <Apptext style={styles.innerText}>What daily activities does she need help with?</Apptext>
             <View style={{ flex: 1 }}>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     style={{ flex: 1 }}
                     keyExtractor={(item, index) => index}
@@ -52,7 +53,7 @@ const ActivitySelect = ({ navigation }) => {
                     />
                 </View>
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 export default ActivitySelect;

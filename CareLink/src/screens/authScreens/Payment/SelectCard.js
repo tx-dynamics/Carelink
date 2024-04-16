@@ -9,6 +9,9 @@ import SelectCardComp from '../../../components/SelectCardComp';
 
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { heightPixel, widthPixel } from '../../../Constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const SelectCard = ({ navigation }) => {
     const [img, setImg] = useState(false);
@@ -21,7 +24,7 @@ const SelectCard = ({ navigation }) => {
             label: "*** ***  *5695",
             leftImg: require('../../../../assets/Bvisa.png'),
             rightImg: require('../../../../assets/roundTick.png'),
-
+            cardName: "Visa",
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
 
@@ -32,6 +35,7 @@ const SelectCard = ({ navigation }) => {
             label: "*** ***  *8569",
             leftImg: require('../../../../assets/master1.png'),
             rightImg: require('../../../../assets/roundTick.png'),
+            cardName: "Master Card",
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
 
@@ -42,6 +46,7 @@ const SelectCard = ({ navigation }) => {
             label: "*** *** *5869",
             leftImg: require('../../../../assets/card.png'),
             rightImg: require('../../../../assets/roundTick.png'),
+            cardName: "Debit Card",
             description: `You will get 20 listing to post in a month with this monthly plan`
         },
     ];
@@ -58,54 +63,55 @@ const SelectCard = ({ navigation }) => {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={"Add/Select your card for payments"}
-            />
-            <View style={styles.txtView} >
-                <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
-            </View>
-            <View style={{ marginTop: wp('8%') }}>
-                <FormButton
-                    buttonTitle={"+ Add"}
-                    width={wp('45%')}
-                    borderRadius={10}
-                    fontSize={15}
-                    onPress={() => navigation.navigate("AddCard")}
+        <AppGLobalView style={styles.container}>
+            <View>
+                <IconHeaderComp
+                    title={"Select Card"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={"Add/Select your card for payments"}
                 />
-            </View>
-            <View style={styles.marginView}>
-                <Apptext style={styles.selectTxt}>Select Payment Method</Apptext>
-                <View style={{ marginTop: wp('4%') }} >
-                    <FlatList
-                        data={DATA}
-                        keyExtractor={(item, index) => index}
-                        renderItem={({ item, index }) => (
-                            <SelectCardComp
-                                leftImgName={item.leftImg}
-                                labelValue={item.label}
-                                rightImgName={item.rightImg}
-                                onPress={() => {
-                                    addCategories(item)
-                                    setImg(!img)
-                                }}
-                                myStl={isItem.includes(item.id) ? true : false}
-                            />
-                        )}
+                {/* <View style={styles.txtView} >
+                    <Apptext style={styles.submitTxt}>Here you can add multiple payment methods and select your main payment method to use at when checking out.   </Apptext>
+                </View> */}
+                {/* <View style={{ marginTop: wp('8%') }}>
+                    <FormButton
+                        buttonTitle={"+ Add"}
+                        width={wp('45%')}
+                        borderRadius={10}
+                        fontSize={15}
+                        onPress={() => navigation.navigate("AddCard")}
                     />
+                </View> */}
+                <View style={styles.marginView}>
+                    <Apptext style={styles.selectTxt}>Select Payment Method</Apptext>
+                    <View style={{ marginTop: wp('4%') }} >
+
+                        <FlatList showsVerticalScrollIndicator={false}
+                            ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
+                            data={DATA}
+                            keyExtractor={(item, index) => index}
+                            renderItem={({ item, index }) => (
+                                <SelectCardComp cardName={item.cardName}
+                                    leftImgName={item.leftImg}
+                                    labelValue={item.label}
+                                    rightImgName={item.rightImg}
+                                    onPress={() => {
+                                        addCategories(item)
+                                        setImg(!img)
+                                    }}
+                                    myStl={isItem.includes(item.id) ? true : false}
+                                />
+                            )}
+                        />
+                    </View>
+
                 </View>
             </View>
-
-            <View style={{ marginTop: wp('33%') }} >
-                <FormButton
-                    buttonTitle={"Continue"}
-                    width={'88%'}
-                    onPress={() => navigation.navigate("PaymentDone")}
-                />
-            </View>
-        </ScrollView>
+            <FormButton
+                buttonTitle={"Continue"}
+                onPress={() => navigation.navigate("PaymentDone")} />
+        </AppGLobalView>
     )
 }
 
@@ -116,6 +122,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        justifyContent: "space-between",
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -140,7 +148,7 @@ const styles = StyleSheet.create({
     },
     selectTxt: {
         marginTop: wp('5%'),
-        marginHorizontal: wp('1%'),
+        marginHorizontal: widthPixel(15),
         color: DefaultStyles.colors.lightgray,
         fontSize: 12,
         fontFamily: 'Poppins-Regular'

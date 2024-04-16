@@ -6,7 +6,9 @@ import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import NotificationsComp from '../../../../components/NotificationsComp';
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyNotifications = ({ navigation }) => {
 
@@ -55,32 +57,29 @@ const AgencyNotifications = ({ navigation }) => {
     ];
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/drawerIcon.png')}
-                rightImg={require('../../../../../assets/sendIcon.png')}
                 headerLabel={"Notifications"}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
+                // rightImg={appIcons.messageIcon}
+                leftImgStyle={styles.leftImgStyle}
+                rightImgStyle={styles.rightImgStyle}
+                leftImgName={require('../../../../../assets/drawerIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-
-            />
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Today</Apptext>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
                         <NotificationsComp
                             labelValue={item.label}
                             time={item.time}
-                            color={item.color}
-                        />
-                    )}
-                />
+                            color={item.color} />)} />
             </View>
             <View style={{ marginTop: wp('6%') }}>
                 <Apptext style={styles.headTxt}>Yesterday</Apptext>
-                <FlatList
+                <FlatList showsVerticalScrollIndicator={false}
                     data={DATA1}
                     keyExtractor={(item, index) => index}
                     renderItem={({ item, index }) => (
@@ -92,7 +91,7 @@ const AgencyNotifications = ({ navigation }) => {
                     )}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 
@@ -113,7 +112,13 @@ const styles = StyleSheet.create({
         marginBottom: wp('2%'),
         fontSize: 16,
         fontFamily: 'Poppins-Regular'
-    }
-
-
+    },
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
+    },
 });

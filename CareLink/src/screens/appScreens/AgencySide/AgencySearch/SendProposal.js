@@ -6,34 +6,35 @@ import Apptext from '../../../../components/Apptext';
 import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
+import { heightPixel } from '../../../../Constants';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const SendProposal = ({ navigation }) => {
-
+    const [value, setValue] = useState("")
+    const onPressSubmit = () => {
+        navigation.navigate("AgencyHome")
+        SuccessFlashMessage("Your proposal has been submitted")
+    }
     return (
-        <View style={styles.container}>
-            <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
+        <AppGLobalView style={styles.container}>
+            <Header headerLabel={"Submit Proposal"}
+                leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()}
             />
-            <View style={styles.marginView} >
-                <Apptext style={styles.rms}> Submit a Proposal</Apptext>
-            </View>
-            <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
-            <View >
-                <FormInput
-                    title={"Cover Letter"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-            </View>
-            <View style={{ marginTop: wp('65%') }}>
-                <FormButton
-                    width={wp('90%')}
-                    buttonTitle={"Submit Now"}
-                    onPress={() => navigation.navigate("AgencyHome")}
-                />
-            </View>
-        </View>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
+                <Apptext style={styles.dtlsTxt}>Write Your Effective Proposal or cover letter to win this Listing</Apptext>
+                <AppTextInput value={value} onChangeText={setValue} title={"Cover Letter"} multiline containerStyle={{ height: null, minHeight: heightPixel(80), maxHeight: heightPixel(220), }} />
+
+            </KeyboardAwareScrollView>
+            <FormButton
+                buttonTitle={"Submit Now"}
+                onPress={onPressSubmit}
+            />
+        </AppGLobalView>
     )
 }
 
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         fontSize: 15,
         marginHorizontal: wp('5%'),
-        marginTop: wp('5%'),
+        // marginTop: wp('5%'),
 
     },
     jobsTxt: {

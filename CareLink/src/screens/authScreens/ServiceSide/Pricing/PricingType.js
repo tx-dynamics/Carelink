@@ -19,7 +19,7 @@ const PricingType = ({ navigation }) => {
 
     ]);
     return (
-        <ScrollView style={styles.container}>
+        <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
             <TouchableOpacity onPress={() => navigation.goBack()} >
                 <Image style={{ marginHorizontal: wp('5%'), marginTop: 18 }}
                     source={require('../../../../../assets/leftArrow.png')} />
@@ -29,16 +29,16 @@ const PricingType = ({ navigation }) => {
             </View>
             <Apptext style={styles.bkTxt} >Price Type:</Apptext>
             <DropDownPicker
-                        open={open}
-                        value={value}
-                        items={items}
-                        placeholder="Price Type"
-                        containerStyle={{width:wp('90%'),marginTop:wp('7%'), alignSelf:'center'}}
-                        style={{width:wp('90%'), alignSelf:'center'}}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems}
-                    />
+                open={open}
+                value={value}
+                items={items}
+                placeholder="Price Type"
+                containerStyle={{ width: wp('90%'), marginTop: wp('7%'), alignSelf: 'center' }}
+                style={{ width: wp('90%'), alignSelf: 'center' }}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+            />
 
             <View style={{ marginTop: wp('80%') }}>
                 <FormButton

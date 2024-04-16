@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity, StatusBar, SafeAreaView, Platform } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -10,72 +10,88 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Apptext from "./Apptext";
 import DefaultStyles from "../config/Styles";
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { fontPixel, heightPixel, widthPixel } from "../Constants";
+import Styles from "../config/Styles";
 
 
 function Header({
   headerLabel,
   backgroundColor,
   leftImgName,
+  leftImgStyle,
+  rightImgStyle,
   centerImg,
   isBack = true,
-  height = wp("23%"),
-  contentColor = DefaultStyles.colors.secondary,
   onPressLeft,
   onPressRight,
   rightImg,
-  rightstyle,
+  leftViewStyle,
+  rightViewStyle,
   style,
 }) {
   return (
     <View
       style={{
         ...styles.container,
-        height:height,
-        marginTop:getStatusBarHeight(true),
         backgroundColor: backgroundColor,
         ...style,
       }}>
-      <TouchableOpacity 
-      onPress={onPressLeft} 
-      style={{width:wp('6%')}}>
-      {isBack ? (
-        <Image source={leftImgName} />
-      ) : null}
+      <TouchableOpacity
+        onPress={onPressLeft}
+        style={[styles.leftView, leftViewStyle]}>
+        {isBack ? (
+          <Image resizeMode="contain" style={[styles.leftImgStyle, leftImgStyle]} source={leftImgName} />
+        ) : null}
       </TouchableOpacity>
       <View style={styles.hdrView}>
-      <Image source={centerImg} />
-      <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
+        {centerImg && <Image source={centerImg} />}
+        <Apptext style={styles.headerLabel} >{headerLabel}</Apptext>
       </View>
-      <TouchableOpacity style={{width:wp('6%')}} onPress={onPressRight}>
-        <Image source={rightImg} />
+      <TouchableOpacity style={[styles.leftView, rightViewStyle]} onPress={onPressRight}>
+        {rightImg && <Image resizeMode="contain" source={rightImg} style={[styles.rightImgStyle, rightImgStyle]} />
+        }
       </TouchableOpacity>
-
-
     </View>
   );
 }
 const styles = StyleSheet.create({
- 
+
   container: {
-    width: wp("100%"),
+    marginTop: Platform.OS==="android"? StatusBar.currentHeight + heightPixel(10): null,
+    width: "100%",
     borderBottomRightRadius: 1,
     borderBottomLeftRadius: 1,
     alignItems: "center",
     justifyContent: "space-between",
     flexDirection: "row",
-    padding: wp('6%'),
-    marginTop:-5
+    paddingHorizontal: widthPixel(20),
+    marginBottom: heightPixel(20)
   },
-  headerLabel:{
-    fontFamily:'Poppins-SemiBold',
-    color:DefaultStyles.colors.secondary,
-    height:30,
-    marginTop:-7,
-    fontSize:wp('6%'),
+  headerLabel: {
+    fontFamily: 'Poppins-SemiBold',
+    color: DefaultStyles.colors.secondary,
+    fontWeight:'600',
+    // height: 30,
+    // marginTop: -7,
+    fontSize: fontPixel(22),
   },
-  hdrView:{
-    alignItems:'center', width:wp('70%'), height:wp('5%')
-  }
+  hdrView: {
+    alignItems: 'center',
+    width: widthPixel(270),
+  },
+  leftImgStyle: {
+    width: widthPixel(30),
+    height: widthPixel(30),
+  },
+  rightImgStyle: {
+    width: widthPixel(38),
+    height: widthPixel(38),
+  },
+  leftView: {
+    width: widthPixel(40),
+    height: heightPixel(40),
+    justifyContent: "center",
+  },
 });
 
 export default Header;

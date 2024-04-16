@@ -8,6 +8,8 @@ import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
+import { heightPixel, routes } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const ChatDetail = ({ navigation }) => {
 
@@ -25,24 +27,23 @@ const ChatDetail = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
             />
-               <TouchableOpacity 
-                onPress={() => navigation.navigate("StartContract")}
+            <TouchableOpacity
+                onPress={() => navigation.navigate(routes.createContract)}
                 style={styles.scView}  >
                 <Apptext style={styles.dtls} >Make contract</Apptext>
-                </TouchableOpacity>
-        
+            </TouchableOpacity>
             <View style={styles.direcView} >
                 <Image
-                style={styles.jcImg}
-                source={require('../../../../../assets/JC.png')} />
+                    style={styles.jcImg}
+                    source={require('../../../../../assets/JC.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
             </View>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
 
                 <View style={{ marginTop: wp('5%') }} >
                     <View style={styles.PicMainView}>
@@ -52,9 +53,8 @@ const ChatDetail = ({ navigation }) => {
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
                     </View>
                     <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
-                            showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
@@ -71,17 +71,16 @@ const ChatDetail = ({ navigation }) => {
                             )}
                         />
                     </View>
-                    
-                    <View style={[styles.PicMainView, {marginTop:-10}]}>
+
+                    <View style={[styles.PicMainView, { marginTop: -10 }]}>
                         <View style={styles.msgView}>
                             <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
                         </View>
                         <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
                     </View>
                     <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
+                        <FlatList showsVerticalScrollIndicator={false}
                             data={DATA}
-                            showsVerticalScrollIndicator={false}
                             keyExtractor={(item) => item.id}
                             ListEmptyComponent={() => {
                                 return (
@@ -98,7 +97,7 @@ const ChatDetail = ({ navigation }) => {
                             )}
                         />
                     </View>
-                    <View style={[styles.PicMainView, {marginTop:-10}]}>
+                    <View style={[styles.PicMainView, { marginTop: -10 }]}>
 
                         <View style={styles.msgView}>
                             <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
@@ -127,7 +126,7 @@ const ChatDetail = ({ navigation }) => {
                     <Image source={require('../../../../../assets/sendBtn.png')} />
                 </TouchableOpacity>
             </KeyboardAvoidingView>
-        </View>
+        </AppGLobalView>
     )
 }
 
@@ -143,12 +142,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
         marginTop: wp('5%'), marginHorizontal: wp('5%')
     },
-    marginView:{
-        alignSelf:'center'
+    marginView: {
+        alignSelf: 'center'
     },
     rms: {
-        marginTop:wp('15%'),
-        marginLeft:wp('2%'),
+        marginTop: wp('15%'),
+        marginLeft: wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
     },
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
     },
     PicMainView: {
         marginBottom: wp('2%'),
-        
+
         marginHorizontal: wp('45%')
     },
     msgView: {
@@ -188,7 +187,7 @@ const styles = StyleSheet.create({
         width: wp('20%'),
         fontSize: 11,
         color: DefaultStyles.colors.lightPrimary,
-        marginTop: wp('1%'),
+        marginTop: heightPixel(10),
         marginHorizontal: wp('2%')
     },
     ChatMsgView: {
@@ -212,29 +211,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: DefaultStyles.colors.primary
     },
-    dtls:{
-        color:DefaultStyles.colors.primary,
-        fontSize:16,
-        textDecorationLine: 'underline', 
+    dtls: {
+        color: DefaultStyles.colors.primary,
+        fontSize: 16,
+        textDecorationLine: 'underline',
     },
-    scView:{
-        width:wp('40%'),
-        borderRadius:5,
-        flexDirection:'row',
-        justifyContent:'center',
-        marginHorizontal:wp('60%'),
-        marginTop:-55
+    scView: {
+        width: wp('40%'),
+        borderRadius: 5,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginHorizontal: wp('60%'),
+        marginTop: -55
     },
-    direcView:{
-        flexDirection:'row',marginHorizontal:wp('7%')
+    direcView: {
+        flexDirection: 'row', marginHorizontal: wp('7%')
     },
-    jcImg:{
-        width:61, height:61, marginTop:wp('10%')
+    jcImg: {
+        width: 61, height: 61, marginTop: wp('10%')
     },
-    noItem:{
+    noItem: {
         alignSelf: "center", marginTop: 50
     },
-    kbView:{
+    kbView: {
         width: '100%', flexDirection: 'row', alignItems: 'center',
         borderTopColor: '#F5F5F5', borderTopWidth: 1
     }

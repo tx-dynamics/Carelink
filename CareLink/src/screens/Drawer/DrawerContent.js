@@ -1,105 +1,105 @@
 import React from "react";
-import {
-    View,
-    StyleSheet,
-    Image,
-    TouchableOpacity,
-} from "react-native";
+import { View, StyleSheet, TouchableOpacity, } from "react-native";
 import DefaultStyles from "../../config/Styles";
-import {
-    widthPercentageToDP as wp,
-    heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import { widthPercentageToDP as wp, } from "react-native-responsive-screen";
 import Apptext from "../../components/Apptext";
 import FormButton from "../../components/FormButton";
-import { DrawerActions} from '@react-navigation/native'
-import { useSelector } from 'react-redux';
+import { DrawerActions } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux';
+import { userSave } from "../../redux/Slices/splashSlice";
+import { heightPixel, routes, widthPixel } from "../../Constants";
+import Header from "../../components/Header";
+import colors from "../../config/colors";
+import AppGLobalView from "../../components/AppGlobalView/AppGLobalView";
 
 
 function DrawerContent({ navigation, userImg, username, userEmail }) {
-    const backimg = require("../../../assets/cross.png");
-    const usertype = useSelector((state) => state.auth.usertype)
-
+    const usertype = useSelector((state) => state.splash.userType)
+    const dispatch = useDispatch()
     return (
-        <View style={styles.container} >
+        <AppGLobalView style={styles.container} >
             <View style={styles.DirectionView}>
-                <TouchableOpacity
-                    onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                    style={styles.bck}>
-                    <Image style={{ tintColor: "black", width: 16, height: 16 }} source={backimg} />
-                </TouchableOpacity>
-
-                <View style={{ marginTop: wp('5%') }} >
+                <Header headerLabel={"Side Menu"}
+                    onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+                    leftImgStyle={styles.leftIconStyle} leftImgName={require("../../../assets/cross.png")} />
+                <View style={{ }} >
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
+                    <TouchableOpacity onPress={() => navigation.navigate("ProfileNavigator")} style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Profile</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
                     {
-                    usertype === "ServiceSide" ?
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Feedback"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
-                    </TouchableOpacity>
-                    :     
-                    <View>
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"RoomsProposals"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>My Jobs</Apptext>
-                    </TouchableOpacity>
-                    
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"SavedListing"})}
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
-                    </TouchableOpacity>
-                   
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Rates"})}
-                    
-                    style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Rates</Apptext>
-                    </TouchableOpacity>
-                    </View>
+                        usertype === "ServiceSide" ?
+                            <TouchableOpacity
+                                onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.setting })}
+                                style={styles.items}>
+                                <Apptext style={styles.itemsTxt}>Settings & Privacy</Apptext>
+                            </TouchableOpacity>
+                            :
+                            <View>
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.activeContracts })}
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>Active Contracts</Apptext>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "SavedListing" })}
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>Saved Listings</Apptext>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Rates" })}
+
+                                    style={styles.items}>
+                                    <Apptext style={styles.itemsTxt}>Rates</Apptext>
+                                </TouchableOpacity>
+                            </View>
                     }
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity style={styles.items}>
-                        <Apptext style={styles.itemsTxt}>Articles & Guides</Apptext>
-                    </TouchableOpacity>
+
                     {/* ITEMS ENDS HERE */}
 
                     {/* Single Item */}
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("withoutBottomTabnavigator",{screen:"Help"})}
-                    style={styles.items}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Help" })}
+                        style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Help</Apptext>
                     </TouchableOpacity>
                     {/* ITEMS ENDS HERE */}
                 </View>
             </View>
+            <TouchableOpacity style={styles.items} onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.deleteAccountPassword })}>
+                <Apptext style={styles.itemsTxt}>Delete Account</Apptext>
+            </TouchableOpacity>
             <View style={{ marginTop: wp('12%') }}>
-                <FormButton
+                <FormButton onPress={() => dispatch(userSave(null))}
                     buttonTitle={"Log out"}
-                    width={wp('70%')}
+                    width={widthPixel(357)}
                     backgroundColor={DefaultStyles.colors.white}
                     color={"black"}
                     borderColor="black"
                     borderWidth={1}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
+        width: "100%"
+    },
+    leftIconStyle: {
+        width: widthPixel(25),
+        height: widthPixel(25),
+        tintColor: colors.black
     },
     bck: {
         marginTop: wp('10%'),
@@ -107,11 +107,12 @@ const styles = StyleSheet.create({
     },
     items: {
         alignSelf: 'center',
-        marginTop: wp('10%')
+        marginTop: heightPixel(30)
     },
     itemsTxt: {
         fontSize: 17,
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Poppins-SemiBold',
+        fontWeight:"600"
     }
 
 });

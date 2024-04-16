@@ -6,6 +6,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import DefaultStyles from "../config/Styles";
 import Apptext from './Apptext';
 import { TextInput } from 'react-native-paper';
+import { heightPixel, widthPixel } from '../Constants';
+import colors from '../config/colors';
 
 const FormInput = ({ labelValue, placeholderText,
     iconType, leftIconType, leftImgName, rightImgName,
@@ -17,16 +19,19 @@ const FormInput = ({ labelValue, placeholderText,
     borderBottomColor = borderBottomColor,
     backgroundColor = DefaultStyles.colors.white,
     numberOfLines = 1,
-    height = wp('13%'),
-    width = wp('95%'),
+    height = heightPixel(48),
+    width = widthPixel(357),
     marginTop = marginTop,
+    onChangeText,
+    multiline,
     rightIconType, ...rest }) => {
     return (
-        <View style={{ flexDirection: 'row' }}>
-
-            <View style={{ justifyContent: 'center' }} >
-                <Image source={leftImgName} />
-            </View>
+        <View style={{ flexDirection: 'row', alignSelf: "center", }}>
+            {leftImgName &&
+                <View style={{ justifyContent: 'center' }} >
+                    <Image source={leftImgName} />
+                </View>
+            }
             <View style={[styles.inputContainer,
             {
                 backgroundColor: backgroundColor,
@@ -35,28 +40,30 @@ const FormInput = ({ labelValue, placeholderText,
                 borderBottomColor: borderBottomColor,
             }]}>
                 <TextInput
+                    multiline={multiline}
                     label={title}
+                    // dense={true}
                     value={labelValue}
                     mode='outlined'
                     underlineColor={"transparent"}
                     activeUnderlineColor={"transparent"}
-                    activeOutlineColor={borderColor}
+                    activeOutlineColor={colors.black}
+                    onChangeText={onChangeText}
                     numberOfLines={1}
-                    placeholder={title}
-
-                    style={{ backgroundColor: "white", }}
+                    // placeholder={title}
+                    style={{ backgroundColor: "white" }}
                     placeholderTextColor={placeholderTextColor}
                     {...rest}
                 />
-
-                <TouchableOpacity onPress={onPress}>
-                    <Image style={{
-                        position: "absolute", right: 0, marginHorizontal: wp('5%'),
-                        marginTop: wp(-11),
-                        tintColor: "gray",
-                    }} source={rightImgName} />
-                </TouchableOpacity>
-
+                {rightImgName &&
+                    <TouchableOpacity onPress={onPress}>
+                        <Image style={{
+                            position: "absolute", right: 0, marginHorizontal: wp('5%'),
+                            marginTop: wp(-11),
+                            tintColor: "gray",
+                        }} source={rightImgName} />
+                    </TouchableOpacity>
+                }
             </View>
         </View>
 
@@ -73,13 +80,13 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         marginTop: wp('11%'),
-        paddingLeft: wp('3%'),
+        // paddingLeft: wp('3%'),
         justifyContent: 'center',
-        borderRadius: 10,
+        // borderRadius: 10,
     },
     titleView: {
         alignSelf: 'flex-start',
-        marginTop: -10
+        // marginTop: -10
 
     },
     titleTxt: {

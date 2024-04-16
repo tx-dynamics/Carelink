@@ -1,86 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator, Text, View } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import DefaultStyles from "../../../../config/Styles";
-import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import { useSelector } from 'react-redux';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
+import { fontPixel, heightPixel } from '../../../../Constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const Help = ({ navigation }) => {
-
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
+    const onPressSubmit = () => {
+        SuccessFlashMessage("Your message has been submitted")
+        navigation.goBack()
+    }
     return (
-        <View style={styles.container}>
-            <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={usertype === "ServiceSide" ? 
-                "This is Care Link Help center. Proceed your query with us."
-                 :
-                 "This is a help center of CARE LINK .Submit your problems here"
-                 
-                }
-                style={usertype === "ServiceSide" ? {} : styles.createTxt}
+        <AppGLobalView style={styles.container}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                <IconHeaderComp
+                    title={"Help Center"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    style={usertype === "ServiceSide" ? {} : styles.createTxt}
+                    heading={usertype === "ServiceSide" ?
+                        "This is Care Link Help center. Proceed your query with us."
+                        :
+                        "This is a help center of CARE LINK .Submit your problems here"
+                    }
+                />
+                <AppTextInput title={"Name"} />
+                <AppTextInput title={"Email"} />
+                <AppTextInput multiline mainViewStyle={{ marginBottom: heightPixel(50), }} title={"Your Problem"} containerStyle={styles.descriptionStyle} />
+            </KeyboardAwareScrollView>
+            <FormButton onPress={onPressSubmit}
+                buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
             />
-
-            <View>
-                <FormInput
-                    title={"Name"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    title={"Email"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                    title={"Your Problem"}
-                />
-            </View>
-            <View style={{ marginTop: wp('40%') }}>
-                <FormButton
-                    buttonTitle={usertype === "ServiceSide" ? "Submit " : "Submit Now"}
-                    width={usertype === "ServiceSide" ? wp('45%') : wp('90%')}
-                    height={wp('13%')}
-                    fontSize={usertype === "ServiceSide" ? 17 : 21}
-                    borderRadius={usertype === "ServiceSide" ? 10 : 30}
-                />
-            </View>
-        </View>
+        </AppGLobalView>
     )
 }
 
 export default Help;
 
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
-        marginTop: wp('7%'),
+        marginTop: heightPixel(20),
         color: DefaultStyles.colors.black,
         fontFamily: 'Poppins-Regular',
-        fontSize: 15,
-        marginHorizontal: wp('5%')
+        fontSize: fontPixel(15),
     },
-    createTxt1: {
-        alignSelf: 'center', fontSize: 13, fontFamily: 'Poppins-Regular'
+    descriptionStyle: {
+        height: null,
+        minHeight: heightPixel(90),
+        maxHeight: heightPixel(210),
     },
-    termsTxt: {
-        width: wp('90%'), marginTop: 41,
-        alignSelf: 'center'
-    },
-    hyperLink: {
-        fontSize: 13,
-        fontFamily: 'Poppins-Regular',
-        textDecorationLine: 'underline',
-        color: "#004cbe"
-    }
 });

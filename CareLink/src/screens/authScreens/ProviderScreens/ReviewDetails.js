@@ -10,6 +10,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { ScrollView } from 'react-native-gesture-handler';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 export default function ReviewDetails({ navigation }) {
 
@@ -17,7 +18,7 @@ export default function ReviewDetails({ navigation }) {
     const [descValue, setDescValue] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget orci eget turpis ornare. Montes, elementum tincidunt eu malesuada scelerisque eget egestas dictum ut. Aliquam volutpat morbi sed ac ac non duis aliquet. Aliquam sollicitudin magna felis posuere elementum. Vel eget aliquet enim augue ac habitant quam montes. Bibendum du")
 
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <IconHeaderComp
                 onPress={() => navigation.goBack()}
                 imgName={iconPath.leftArrow}
@@ -51,7 +52,7 @@ export default function ReviewDetails({ navigation }) {
                     onPress={() => navigation.navigate("PaymentPlans")}
                 />
             </View>
-        </View>
+        </AppGLobalView>
     )
 }
 const styles = StyleSheet.create({

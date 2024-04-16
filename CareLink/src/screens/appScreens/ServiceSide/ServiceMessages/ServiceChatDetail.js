@@ -1,141 +1,188 @@
-import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet, ScrollView, TouchableOpacity,
-    FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View
-} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, FlatList, Image, View, TouchableOpacity, StatusBar } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import colors from '../../../../config/colors';
+import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
+import { userType } from '../../../../redux/Slices/splashSlice';
+import { useSelector } from 'react-redux';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import ChatHeader from '../../../../components/ChatHeader';
 
-const ServiceChatDetail = ({ navigation }) => {
-    const DATA = [
+const ServiceChatDetail = ({ navigation, route }) => {
+    const ref = useRef(null)
+    const usertype = useSelector((state) => state.splash.userType)
+    const [isMessage, setMessage] = useState("")
+    const [DATA, setData] = useState([
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            count: "+5",
-            label: "James Clear",
-            msg: "Hi Jackson, can you tell …",
-            Img: require("../../../../../assets/JC.png"),
-            dt: "5 minutes ago",
-            move: "Detail"
+            id: 1,
+            user: 1,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 2,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 3,
+            user: 1,
+            title: "try this testing chat"
+        },
+        {
+            id: 4,
+            user: 1,
+            title: "again testing with long message Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."
+        },
+        {
+            id: 40,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 5,
+            user: 1,
+            title: "Lorum ipsum dolor emet Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."
+        },
+        {
+            id: 6,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 7,
+            user: 1,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 8,
+            user: 1,
+            title: "Lorum ipsum dolor emet Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. "
+        },
+        {
+            id: 9,
+            user: 2,
+            title: "Lol"
+        },
+        {
+            id: 10,
+            user: 1,
+            title: "Lorum ipsum dolor emet Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor."
+        },
+        {
+            id: 11,
+            user: 1,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 12,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 13,
+            user: 2,
+            title: "Lorum ipsum dolor emet Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod"
+        },
+        {
+            id: 14,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 15,
+            user: 1,
+            title: "Lorum ipsum  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcudolor emet"
+        },
+        {
+            id: 16,
+            user: 2,
+            title: "Lorum ipsumLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor. dolor emet"
+        },
+        {
+            id: 17,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 18,
+            user: 1,
+            title: "Lorum Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.ipsum dolor emet"
+        },
+        {
+            id: 19,
+            user: 1,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 20,
+            user: 2,
+            title: "Lorum ipsum dolor emet"
+        },
+        {
+            id: 21,
+            user: 2,
+            title: "Lorum iLorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.psum dolor emet"
         },
 
 
 
-    ];
+    ]);
+
+    const onSend = () => {
+        let temp = [...DATA]
+        temp.unshift({
+            id: temp.length + 1,
+            user: 1,
+            title: isMessage,
+        })
+        setData(temp)
+        ref.current.scrollToIndex({ animated: false, index: 0 });
+        setMessage("")
+    }
     return (
-        <View style={styles.container}>
-            <Header
+        <AppGLobalView style={styles.container}>
+            <ChatHeader
+rightView={!route?.params?.isContract}
+            onPressRight={() => navigation.navigate(userType == "ServiceSide" ? routes.receivedContracts : routes.createContract)}
+            rightText={usertype == "ServiceSide" ? "Contracts" : "Make Contract"}
+                headerLabel={"Chat"}
                 leftImgName={require('../../../../../assets/headerBack.png')}
                 onPressLeft={() => navigation.goBack()}
-                style={{width:61,marginLeft:wp('2%'), height:61, marginTop:-5}} 
             />
-             <TouchableOpacity 
-                onPress={() => navigation.navigate("Received")}
-                style={styles.RcvdView}>
-                <Apptext style={styles.cntTxt}>Contracts</Apptext>
-                </TouchableOpacity>
-
-             <View style={styles.direView} >
+            
+            <View style={styles.direView} >
                 <Image
-                style={styles.imgStl}
-                source={require('../../../../../assets/inbox.png')} />
+                    style={styles.imgStl}
+                    source={require('../../../../../assets/inbox.png')} />
                 <Apptext style={styles.rms} >James Clear</Apptext>
+            </View >
+            <View style={{ marginTop: heightPixel(10), flex: 1, }} >
+                <FlatList showsVerticalScrollIndicator={false} inverted ref={ref}
+                    // initialScrollIndex={DATA.length - 1} 
+                    keyExtractor={(item, index) => item.id}
+                    // ItemSeparatorComponent={() => <View style={{ marginBottom: heightPixel(7) }}></View>}
+                    data={DATA}
+                    renderItem={({ item, index }) => item?.user == 1 ? <MyMessage msg={item.title} /> : <ChatDetailComp msg={item.title} />} />
             </View>
-
-            <ScrollView>
-
-                <View style={{ marginTop: wp('5%') }} >
-
-                    <View style={styles.PicMainView}>
-
-                        <View style={styles.msgView}>
-                            <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
-                        </View>
-                        <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
-
-                    </View>
-                    <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
-                            data={DATA}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            ListEmptyComponent={() => {
-                                return (
-                                    <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
-                                        No Item Found
-                                    </Apptext>
-                                );
-                            }}
-                            renderItem={({ item, index }) => (
-                                <ChatDetailComp
-                                    msg={"Lorum ipsum dolor emet"}
-                                />
-
-                            )}
-                        />
-                    </View>
-                    
-                    <View style={[styles.PicMainView, {marginTop:-10}]}>
-                        <View style={styles.msgView}>
-                            <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
-                        </View>
-                        <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
-                    </View>
-                    <View style={{ marginVertical: wp('5%') }}>
-                        <FlatList
-                            data={DATA}
-                            showsVerticalScrollIndicator={false}
-                            keyExtractor={(item) => item.id}
-                            ListEmptyComponent={() => {
-                                return (
-                                    <Apptext style={{ alignSelf: "center", marginTop: 50 }}>
-                                        No Item Found
-                                    </Apptext>
-                                );
-                            }}
-                            renderItem={({ item, index }) => (
-                                <ChatDetailComp
-                                    msg={"Lorum ipsum dolor emet"}
-                                />
-
-                            )}
-                        />
-                    </View>
-                    <View style={[styles.PicMainView, {marginTop:-10}]}>
-
-                        <View style={styles.msgView}>
-                            <Apptext style={styles.msgTxt} >Lorum ipsum dolor emet </Apptext>
-                        </View>
-                        <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
-
-                    </View>
-                </View>
-            </ScrollView>
-            <KeyboardAvoidingView
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-                keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
-                style={styles.kbView}  >
-                <View style={styles.ChatMsgView} >
-                    <TextInput
-                        onChangeText={(val) => console.log(val)}
-                        placeholder="Type a message"
-                        placeholderTextColor={DefaultStyles.colors.lightgray}
-                        style={{
-                            height: wp('14%'),
-                            paddingLeft: wp('5%')
-                        }}
-                    />
-                </View>
-                <TouchableOpacity style={styles.ChatSndMsgBtn}>
-                    <Image source={require('../../../../../assets/sendBtn.png')} />
-                </TouchableOpacity>
-            </KeyboardAvoidingView>
-        </View>
+            <SendMessageComponent disabled={isMessage == "" ? true : false} onChangeText={setMessage} value={isMessage} onPress={onSend} />
+        </AppGLobalView >
     )
 }
-
+const MyMessage = React.memo(({ msg }) => {
+    return (
+        <View style={styles.PicMainView}>
+            <View style={styles.msgView}>
+                <Apptext style={styles.msgTxt} >{msg}</Apptext>
+            </View>
+            <Apptext style={styles.timeTxt} >04:30 PM</Apptext>
+        </View>
+    )
+})
 export default ServiceChatDetail;
 
 
@@ -144,37 +191,33 @@ const styles = StyleSheet.create({
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
     },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
+    timeTxt: {
+        textAlign: 'left',
+        fontSize: 11,
+        color: DefaultStyles.colors.lightPrimary,
+        marginTop: heightPixel(5),
+        marginLeft: widthPixel(5)
     },
-    marginView:{
-        alignSelf:'center'
+    marginView: {
+        alignSelf: 'center'
     },
     rms: {
-        marginTop:wp('10%'),
-        marginLeft:wp('2%'),
+        // marginTop: wp('10%'),
+        marginLeft: wp('2%'),
         fontFamily: 'Poppins-Regular',
         fontSize: 19,
     },
-    labelTxt: {
-
-        fontFamily: 'Poppins-Medium',
-        fontSize: 12,
-        marginTop: wp('1%'),
-        marginHorizontal: wp('3%')
-    },
     PicMainView: {
-        marginBottom: wp('2%'),
-        
-        marginHorizontal: wp('45%')
+        alignSelf: "flex-end",
+        marginRight: widthPixel(15),
+        marginBottom: heightPixel(10),
     },
     msgView: {
-        width: wp('50%'),
-        borderRadius: 13,
+        maxWidth: widthPixel(330),
+        borderRadius: widthPixel(30),
+        paddingVertical: heightPixel(10),
+        paddingHorizontal: widthPixel(20),
         backgroundColor: "#e5e5e5",
-        padding: 10,
-        borderRadius: 60,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -185,60 +228,23 @@ const styles = StyleSheet.create({
         elevation: 3,
     },
     msgTxt: {
+        textAlign: "left",
         fontFamily: 'Poppins-Regular',
         fontSize: 13,
         color: DefaultStyles.colors.black
     },
-    timeTxt: {
-        width: wp('20%'),
-        fontSize: 11,
-        color: DefaultStyles.colors.lightPrimary,
-        marginTop: wp('1%'),
-        marginHorizontal: wp('2%')
+    contractButtonView:{
+        position: "absolute",
+        right: widthPixel(20),
     },
-    ChatMsgView: {
+    direView: {
+        alignItems: "center",
         flexDirection: 'row',
-        height: wp('12%'),
-        marginTop: wp('4%'),
-        justifyContent: 'space-between',
-        width: wp('75%'),
-        alignItems: 'center',
-        backgroundColor: "#e5e5e5",
-        borderRadius: 23,
-        marginHorizontal: '5%',
-        alignSelf: 'center',
-        marginBottom: 10
+        marginHorizontal: wp('7%')
     },
-    ChatSndMsgBtn: {
-        width: 45, height: 45,
-        borderRadius: 40,
-        marginLeft: -5,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: DefaultStyles.colors.primary
+    imgStl: {
+        width: widthPixel(63),
+        height: widthPixel(63),
+        borderRadius: widthPixel(40)
     },
-    RcvdView:{
-        width:wp('25%'),
-        backgroundColor:DefaultStyles.colors.primary,
-        borderRadius:5,
-        flexDirection:'row',
-        justifyContent:'center',
-        marginHorizontal:wp('70%'),
-        marginTop:-40
-    },
-    cntTxt:{
-        fontSize:12,color:DefaultStyles.colors.white, textAlign:'center'
-    },
-    direView:{
-        flexDirection:'row',marginHorizontal:wp('7%')
-    },
-    imgStl:{
-        width:61, height:61, marginTop:wp('5%')
-    },
-    kbView:{
-        width: '100%', flexDirection: 'row', alignItems: 'center',
-        borderTopColor: '#F5F5F5', borderTopWidth: 1
-    }
-
-
 });

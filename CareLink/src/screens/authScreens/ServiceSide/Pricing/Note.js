@@ -7,42 +7,36 @@ import FormButton from '../../../../components/FormButton';
 import FormInput from '../../../../components/FormInput';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import { iconPath } from '../../../../config/icon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import NewAppTextInput from '../../../../components/NewAppTextInput/NewAppTextInput';
+import colors from '../../../../config/colors';
+import { heightPixel } from '../../../../Constants';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const Note = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
-            <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={"Write your note if you want any?"}
-            />
-            <Apptext style={styles.bkTxt} >Click to write:</Apptext>
-            <View style={{ marginTop: -20 }}>
-                <FormInput
-                    title={"Write a Note"}
-                    numberOfLines={5}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}  
+        <AppGLobalView style={styles.container}>
+            <KeyboardAwareScrollView keyboardShouldPersistTaps={"handled"} showsVerticalScrollIndicator={false} style={{}}>
+                <IconHeaderComp
+                    title={"Write Note"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={"Write your note if you want any?"}
                 />
-            </View>
-            <View style={{marginTop:wp('50%')}}>
-            <FormButton
+                <Apptext style={styles.bkTxt} >Click to write:</Apptext>
+                <NewAppTextInput multiline inputStyle={{ marginBottom: heightPixel(30), }} />
+            </KeyboardAwareScrollView>
+            <FormButton backgroundColor={colors.skipButtonColor}
                 buttonTitle={"Skip"}
-                width={"90%"}
-                color={DefaultStyles.colors.black}
-                backgroundColor={'#e6e6e6'}
+                color={colors.black}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
-            <View style={{marginTop:-8}}>
             <FormButton
                 buttonTitle={"Next"}
-                width={"90%"}
                 onPress={() => navigation.navigate("AgencyLocation")}
             />
-            </View>
-            </View>
-        </View>
+        </AppGLobalView>
     )
 }
 
@@ -53,6 +47,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),
@@ -65,7 +60,7 @@ const styles = StyleSheet.create({
         fontSize: 23,
         fontFamily: 'Poppins-Medium',
         marginHorizontal: wp('5%'),
-        marginTop: wp('4%')
+        marginTop: heightPixel(10)
     },
     hyperLink: {
         fontSize: 16,

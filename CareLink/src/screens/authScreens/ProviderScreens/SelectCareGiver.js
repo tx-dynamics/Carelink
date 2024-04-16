@@ -7,10 +7,11 @@ import DefaultStyles from "../../../config/Styles";
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const SelectCareGiver = ({ navigation }) => {
   return (
-    <View style={styles.container}>
+    <AppGLobalView style={styles.container}>
       <IconHeaderComp
         onPress={() => navigation.goBack()}
         imgName={iconPath.leftArrow}
@@ -43,7 +44,7 @@ const SelectCareGiver = ({ navigation }) => {
           onPress={() => navigation.navigate("ActivitySelect")}
         />
       </View>
-    </View>
+    </AppGLobalView>
   )
 }
 export default SelectCareGiver;

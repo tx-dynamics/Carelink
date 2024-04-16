@@ -1,132 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import {
-    StyleSheet, ScrollView, TouchableOpacity,
-    FlatList, Image, TextInput, KeyboardAvoidingView, ActivityIndicator, Text, View
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import DefaultStyles from "../../../../config/Styles";
-import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
-import FormInput from '../../../../components/FormInput';
-import { widthPercentageToDP as wp , heightPercentageToDP as hp} from 'react-native-responsive-screen';
-
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppTextInput from '../../../../components/AppTextInput/AppTextInput';
+import DatePicker from 'react-native-date-picker';
+import moment from 'moment';
+import AppDropDownPicker from '../../../../components/AppDropDownPicker/AppDropDownPicker';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 const StartContract = ({ navigation }) => {
-
-    const [isKitchen, setKitchen] = useState(false)
-    const [isParking, setParking] = useState(false)
-
+    const [agency, setAgency] = useState("Agency Name")
+    const [provider, setProviderName] = useState("Provider Name")
+    const [open, setOpen] = useState(false)
+    const [dateStart, setDateStart] = useState(new Date())
+    const [dateEnd, setDateEnd] = useState(new Date())
+    const [isStart, setStart] = useState(true)
+    const [openType, setOpenType] = useState(false)
+    const [value, setValue] = useState("")
+    const [items, setItems] = useState([
+        {
+            id: 0,
+            label: "General",
+            value: "General"
+        },
+        {
+            id: 1,
+            label: "Primary",
+            value: "Primary"
+        },
+        {
+            id: 2,
+            label: "XYZ Contract",
+            value: "XYZ Contract"
+        },
+    ])
+    const onStartOpen = () => {
+        setOpen(true)
+        setStart(true)
+    }
+    const onEndOpen = () => {
+        setOpen(true)
+        setStart(false)
+    }
     return (
-        <View style={styles.container}>
-            <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
+        <AppGLobalView style={styles.container}>
+            <Header headerLabel={"Create Contract"}
+                leftImgName={appIcons.headerBack}
                 onPressLeft={() => navigation.goBack()} />
-                <View>
-                    <Apptext style={styles.msgTxt} >Choose What you want Extras </Apptext>
-                </View>
-                <View style={styles.DirectionView}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setKitchen(!isKitchen)
-                        }}
-                        style={styles.radioBtn}>
-                        {isKitchen ?
-                            <Image style={[styles.radioBtn,{
-                                marginTop:0,
-                                borderRadius:4,
-                                borderColor:DefaultStyles.colors.primary,
-                                tintColor: DefaultStyles.colors.primary }]} 
-
-                            source={require('../../../../../assets/tickBox.png')} />
-                            : null}
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => {
-                            setParking(!isParking)
-                        }}
-                        style={styles.radioBtn}>
-                        {isParking ?
-                            <Image 
-                            style={[styles.radioBtn,{
-                                marginTop:0,
-                                borderRadius:4,
-                                borderColor:DefaultStyles.colors.primary,
-                                tintColor: DefaultStyles.colors.primary }]}
-                             source={require('../../../../../assets/tickBox.png')} />
-                            : null}
-                    </TouchableOpacity>
-                </View>
-                <View style={[styles.DirectionView, { marginTop: wp('3%') }]}>
-                    <Apptext style={styles.descTxt}>Car Parking </Apptext>
-                    <Apptext style={[styles.descTxt, { marginHorizontal: wp('5%') }]}>Wheelchair</Apptext>
-                </View>
-
-                <View>
-                    <Apptext style={[styles.msgTxt, {marginTop:wp('20%') }]} >Choose State </Apptext>
-                </View>
-                <View>
-                <FormInput
-                    title={"State"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                    placeholderText={"ABC State"}
-                    placeholderTextColor={DefaultStyles.colors.textColor}
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                <AppTextInput title={"Agency"} />
+                <AppTextInput title={"Provider"} />
+                <AppTextInput right={appIcons.datePciker} value={moment(dateStart).format("DD-mm-yyyy")} editable={false} title={"Start Date"} onPress={onStartOpen} />
+                <AppTextInput right={appIcons.datePciker} value={moment(dateEnd).format("DD-mm-yyyy")} editable={false} title={"End Date"} onPress={onEndOpen} />
+                <AppDropDownPicker mainViewStyle={styles.dropDownStyle} mainStyle={styles.dropDownMainStyle}
+                    title={"Contract Type"}
+                    open={openType}
+                    setOpen={setOpenType}
+                    items={items}
+                    setItems={setItems}
+                    value={value}
+                    setValue={setValue}
+                    onChangeValue={(v) => setValue(v)}
                 />
-                </View>
-                <View style={styles.lwrTxt}>
-                    <Apptext style={styles.lTxt}>Price start In  ABC State is $500 with Extras you should pay $650</Apptext>
-                </View>
-
-                <View style={{ marginTop:  wp('5%') }}>
-                <FormButton
-                    buttonTitle={"Start Contract"}
-                    width={wp('88%')}
-                    onPress={() => navigation.navigate("MakeContract")}
-             />
-            </View>
-        </View>
+            </KeyboardAwareScrollView>
+            <FormButton buttonTitle={"Continue"}
+                // onPress={() => navigation.navigate(routes.roomDetails, { review: true })} 
+                onPress={() => navigation.navigate("Read1")}
+            />
+            <DatePicker
+                minimumDate={moment(Date.now())}
+                mode='date'
+                modal
+                open={open}
+                date={isStart ? dateStart : dateEnd}
+                onConfirm={(date) => {
+                    setOpen(false)
+                    isStart ? setDateStart(date) : setDateEnd(date)
+                }}
+                onCancel={() => { setOpen(false) }}
+            />
+        </AppGLobalView>
     )
 }
 
 export default StartContract;
-
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
-    msgTxt: {
-        fontFamily: 'Poppins-SemiBold',
-        fontSize: 17,
-        color: DefaultStyles.colors.black,
-        marginHorizontal: wp('5%')
+    dropDownStyle: {
+        marginVertical: heightPixel(20),
     },
-    DirectionView: {
-        flexDirection: 'row', justifyContent: 'space-around'
-    },
-    descTxt: {
-        fontFamily: 'Poppins-Regular',
-        fontSize: 16,
-        marginHorizontal:wp('6%')
-    },
-    radioBtn:{
-        marginTop:wp('20%'),
-        width:30,
-        height:30,
-        borderRadius:6,
-        borderColor:"lightgray",
-        borderWidth:1
-    },
-    lwrTxt:{
-        width:wp('90%'),
-        alignSelf:'center',
-        marginTop:26 
-    },
-    lTxt:{
-        fontFamily:'Poppins-Regular',
-        fontSize:15,
-        color:DefaultStyles.colors.textColor
-    }
+    dropDownMainStyle: { paddingLeft: widthPixel(20), },
 
 });

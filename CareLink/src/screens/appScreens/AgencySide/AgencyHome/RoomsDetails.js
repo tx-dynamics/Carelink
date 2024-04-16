@@ -1,137 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import DefaultStyles from "../../../../config/Styles";
-import Apptext from '../../../../components/Apptext';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import UserInfoComp from '../../../../components/UserInfoComp/UserInfoComp';
+import ServiceProviderInfo from '../../../../components/ServiceProviderInfo/ServiceProviderInfo';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { heightPixel, routes, widthPixel } from '../../../../Constants';
+import { SuccessFlashMessage } from '../../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
-const RoomsDetails = ({ navigation }) => {
-
+const RoomsDetails = ({ navigation, route }) => {
+    const [liked, setLiked] = useState(false)
+    const onHeartPress = () => {
+        !liked && SuccessFlashMessage("Listing Saved")
+        setLiked(!liked)
+    }
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
-                leftImgName={require('../../../../../assets/headerBack.png')}
-                rightImg={require('../../../../../assets/sendIcon.png')}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", {screen: "Messages"}) }
+                headerLabel={route?.params?.review ? "Review Details" : "Room Details"}
+                leftImgName={appIcons.headerBack}
+                onPressRight={onHeartPress}
+                rightImgStyle={styles.rightIconStyle}
                 onPressLeft={() => navigation.goBack()}
-                headerLabel={"Room Details"}
-            />
-            <ScrollView>
-
-                <View style={styles.marginView} >
-                    <Apptext style={styles.rms}> Job Details</Apptext>
-                    <TouchableOpacity onPress={() => navigation.navigate("ClientProfile")}>
-                        <Apptext style={[styles.rms,
-                        {
-                            textDecorationLine: 'underline',
-                            color: DefaultStyles.colors.primary,
-                            fontFamily: 'Poppins-Regular'
-                        }]}>
-                            Client's Profile</Apptext>
-                    </TouchableOpacity>
-                </View>
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Rooms : </Apptext>
-                    <Apptext> 3 Rooms</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Floor : </Apptext>
-                    <Apptext> 3rd</Apptext>
-                </View>
-                {/* Section Ends Here */}
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> When : </Apptext>
-                    <Apptext> Right Now</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> For : </Apptext>
-                    <Apptext> 20 Days</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Price : </Apptext>
-                    <Apptext> $20-70 Hourly</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Location  : </Apptext>
-                    <Apptext>  abc Town , Washington, DC</Apptext>
-                </View>
-                {/* Section Ends Here */}
-
-                {/* Section */}
-                <View style={styles.directionView}>
-                    <Apptext style={styles.jobsTxt}> Note :    </Apptext>
-                    <Apptext style={styles.loremTxt}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed malesuada diam nibh porta ante.</Apptext>
-                </View>
-                {/* Section Ends Here */}
-                <View style={{ marginTop: wp('45%') }}>
-                    <FormButton
-                        width={wp('90%')}
-                        buttonTitle={"Mark to Book"}
-                        onPress={() => navigation.navigate("AgencyHome")}
-                    />
-                </View>
-            </ScrollView>
-        </View>
+                rightImg={liked ? appIcons.heartRed : appIcons.heartBlank} />
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
+                {!route?.params?.review && <UserInfoComp onPress={() => navigation.navigate(routes.clientProfile)} pic={appIcons.dummyUser} title={"James Clear"} />}
+                <ServiceProviderInfo
+                    images
+                    days={"20"}
+                    floor={"2nd"}
+                    availableOn={"November 15"}
+                    location={"ABC Block, New york, USA"}
+                    note={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat purus"} />
+            </KeyboardAwareScrollView>
+            <FormButton buttonTitle={route?.params?.review ? "Review & Continue" : "Submit Proposal"} onPress={() => navigation.navigate(routes.sendProposal)} />
+        </AppGLobalView>
     )
 }
 
 export default RoomsDetails;
 
-
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
+    rightIconStyle: {
+        width: widthPixel(30),
+        height: widthPixel(30),
     },
-    directionView: {
-        flexDirection: 'row', marginTop: wp('6%'),
-    },
-    rms: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 16
-    },
-    jobsTxt: {
-        fontFamily: 'Poppins-Medium',
-        fontSize: 15,
-        marginLeft:wp('5%')
-    },
-    dtls: {
-        color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
-    },
-    marginView: {
-        marginHorizontal: wp('5%'),
-        marginTop: wp('6%'),
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    ltst: {
-        fontSize: 20,
-        fontFamily: 'Poppins-Medium'
-    },
-    loremTxt:{
-        width: wp('70%'),marginTop:wp('1%'), fontSize: 12 
-    }
-
-
-
 });

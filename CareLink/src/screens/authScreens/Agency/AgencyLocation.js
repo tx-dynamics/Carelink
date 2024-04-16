@@ -8,60 +8,60 @@ import FormButton from '../../../components/FormButton';
 import { useSelector } from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import { iconPath } from '../../../config/icon';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { heightPixel } from '../../../Constants';
+import AppTextInput from '../../../components/AppTextInput/AppTextInput';
+import { RedFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
+import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const AgencyLocation = ({ navigation }) => {
-    const usertype = useSelector((state) => state.auth.usertype)
+    const usertype = useSelector((state) => state.splash.userType)
+    const [street, setStreet] = useState("")
+    const [apartment, setApartment] = useState("")
+    const [zipCode, setZipCode] = useState("")
+    const [isState, setState] = useState("")
+    const onNextPress = () => {
+        //APK  // if (street == "" || apartment == "" || zipCode == "" || isState == "") {
+        // RedFlashMessage("Details required")
+        //     return
+        // }
+        navigation.navigate("AgencyMap")
+    }
     return (
-        <ScrollView style={styles.container}> 
+        <AppGLobalView style={styles.container}>
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>
                 <IconHeaderComp
-                onPress={() => navigation.goBack()}
-                imgName={iconPath.leftArrow}
-                heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}
+                    title={"Location"}
+                    onPress={() => navigation.goBack()}
+                    imgName={iconPath.leftArrow}
+                    heading={usertype === "ServiceSide" ? "Your location where your listed rooms located?" : "Your location where your agency located?"}
+                />
+                <View>
+                    <Apptext style={[styles.createTxt, { fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
+                </View>
+                <View style={{ marginBottom: heightPixel(50) }} >
+                    <AppTextInput value={street} onChangeText={setStreet} title={"Street Address"} />
+                    <AppTextInput value={apartment} onChangeText={setApartment} title={"Aparment Number"} />
+                    <AppTextInput value={zipCode} onChangeText={setZipCode} title={"Zip Code"} />
+                    <AppTextInput value={isState} onChangeText={setState} title={"State"} />
+                </View>
+            </KeyboardAwareScrollView>
+            <FormButton
+                buttonTitle={"Next"}
+                onPress={onNextPress}
             />
-            <View>
-                <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium', }]}>Enter your location: </Apptext>
-            </View>
-            <View style={{marginTop:-15}} >
-                <FormInput
-                    title={"Street Address"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                <FormInput
-                    title={"Apartment Number"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                  <FormInput
-                    title={"ZIP Code"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-                  <FormInput
-                    title={"State"}
-                    borderColor={DefaultStyles.colors.black}
-                    borderWidth={1}
-                />
-            </View>
-            <View style={{ marginTop: wp('26%') }}>
-                <FormButton
-                    buttonTitle={"Next"}
-                    width={wp('90%')}
-                    height={wp('15%')}
-                    onPress={() => navigation.navigate(usertype === "ServiceSide" ? "AgencyMap" : "PaymentPlans")}
-                />
-            </View>
-        </ScrollView>
+        </AppGLobalView>
     )
 }
 
-export default AgencyLocation ;
+export default AgencyLocation;
 
 
 const styles = StyleSheet.create({
     container: {
         backgroundColor: DefaultStyles.colors.white,
         flex: 1,
+        paddingBottom: heightPixel(20)
     },
     createTxt: {
         marginTop: wp('8%'),

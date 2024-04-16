@@ -1,106 +1,299 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, TextInput, ActivityIndicator, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, View } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
-import FormButton from '../../../../components/FormButton';
+import { DrawerActions } from '@react-navigation/native'
 import Header from '../../../../components/Header';
-import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import FvrtComp from '../../../../components/FvrtComp';
-import LatestListingsComp from '../../../../components/LatestListingsComp';
-import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { appIcons } from '../../../../Constants/Utilities/assets';
+import { fontPixel, heightPixel, routes, widthPixel } from '../../../../Constants';
+import SearchComponent from '../../../../components/SearchComponent/SearchComponent';
+import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 const AgencySearch = ({ navigation }) => {
-
+    const [isSearch, setSearch] = useState("")
     const DATA = [
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "Debit/Credit Card",
-            description: `You will get 20 listing to post in a month with this monthly plan`
-        },
+            id: 1,
+            title: "James Clear",
+            duration: 20,
+            liked: true,
+            posted: "12 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
 
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
         {
-            id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-            price: "$29.99",
-            plans: "/month",
-            label: "PayPal",
-            description: `You will get 20 listing to post in a month with this monthly plan`
+            id: 1,
+            title: "James Hype",
+            duration: 23,
+            liked: false,
+            posted: "2 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Terres"
+
+                },
+                {
+                    id: 2,
+                    title: "Wheelchair"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "John Doe",
+            duration: 34,
+            liked: true,
+            posted: "23 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Security"
+
+                },
+                {
+                    id: 2,
+                    title: "Sports Hall"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Camron",
+            duration: 21,
+            liked: true,
+            posted: "29 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Swimming Pool"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Diana Brian",
+            duration: 56,
+            liked: false,
+            posted: "31 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "TV lounge"
+
+                },
+                {
+                    id: 2,
+                    title: "Kitchen"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Jasmine Grey",
+            duration: 24,
+            liked: true,
+            posted: "1 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Zaur",
+            duration: 11,
+            liked: true,
+            posted: "2 hrs ago",
+            facility: [
+
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Tom Hanks",
+            duration: 42,
+            liked: false,
+            posted: "4 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Air Conditioner"
+
+                },
+                {
+                    id: 2,
+                    title: "Terres"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Domenic",
+            duration: 17,
+            liked: true,
+            posted: "4 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "House keeping"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Morgan",
+            duration: 44,
+            liked: true,
+            posted: "10 hr ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Security"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Jason Brown",
+            duration: 43,
+            liked: true,
+            posted: "10 hrs ago",
+            facility: [
+
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Philips Nick",
+            duration: 43,
+            liked: true,
+            posted: "11 hrs ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+                {
+                    id: 2,
+                    title: "Attach bathroom"
+
+                },
+            ]
+        },
+        {
+            id: 1,
+            title: "Johnny Gibssss",
+            duration: 11,
+            liked: false,
+            posted: "12 mins ago",
+            facility: [
+                {
+                    id: 1,
+                    title: "Wheelchair"
+
+                },
+            ]
         },
     ];
-
     return (
-        <View style={styles.container}>
+        <AppGLobalView style={styles.container}>
             <Header
+                headerLabel={"Find Listing"}
+                rightImg={appIcons.messageIcon}
+                leftImgStyle={styles.leftImgStyle}
+                rightImgStyle={styles.rightImgStyle}
                 leftImgName={require('../../../../../assets/drawerIcon.png')}
-                rightImg={require('../../../../../assets/sendIcon.png')}
                 onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: "Messages" })}
-                headerLabel={"Find Listings"}
-            />
-            <ScrollView>
-                <View style={styles.marginView} >
-                    <TouchableOpacity style={styles.searchBar}>
-                        <Image style={{ width: 15, height: 15, tintColor: "lightgray", marginHorizontal: 20 }}
-                            source={require('../../../../../assets/search.png')} />
-                        <TextInput
-                            style={{ color: 'grey', marginLeft: -10, width: wp('70%') }}
-                            placeholder='Search'
-                            onChangeText={(val) => console.log(val)}
-                        />
-                    </TouchableOpacity>
-                    <View style={{ flexDirection: 'row', marginTop: wp('8%'), justifyContent: 'space-between' }}>
-                        <Apptext style={styles.rms} >Latest Listings</Apptext>
-                    </View>
-                    <View style={{ marginTop: 21 }}>
-                        <FlatList
-                            data={DATA}
-                            keyExtractor={(item, index) => index}
-                            renderItem={({ item, index }) => (
-                                <LatestListingsComp
-                                    labelValue={"3 Room on 2nd Floor"}
-                                    when={"Right Now"}
-                                    showHrt={true}
-                                    fors={"For 20 days"}
-                                    hourly={"$20 - 70 Hourly"}
-                                    onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ListingDetails" })}
-                                />
-                            )}
-                        />
-                    </View>
-                </View>
-            </ScrollView>
-        </View>
+                onPressRight={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.messages })} />
+            <SearchComponent onChangeText={setSearch} containerStyle={{ marginVertical: heightPixel(20), }} />
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+                <Apptext style={styles.rms} >Latest Listings</Apptext>
+                <FlatList showsVerticalScrollIndicator={false}
+                    scrollEnabled={false}
+                    data={DATA?.filter(data => data?.title?.toLowerCase()?.includes(isSearch.toLowerCase()))}
+                    // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(70) }}></View>}
+                    keyExtractor={(item, index) => index}
+                    renderItem={({ item, index }) => <CustomerListingComp
+                        title={item.title}
+                        rightDisable={true}
+                        posted={item.posted}
+                        duration={item.duration}
+                        facilityData={item.facility}
+                        rightIcon={item.liked ? appIcons.heartRed : appIcons.heartBlank}
+                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.roomDetails })}
+                    />} />
+            </KeyboardAwareScrollView>
+        </AppGLobalView>
     )
 }
 
 export default AgencySearch;
 
-
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: DefaultStyles.colors.white,
         flex: 1,
-    },
-    txtView: {
-        flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-        marginTop: wp('5%'), marginHorizontal: wp('5%')
+        backgroundColor: DefaultStyles.colors.white,
     },
     rms: {
-        fontFamily: 'Poppins-Medium', fontSize: 20
-    },
-    dtls: {
-        color: DefaultStyles.colors.primary, textDecorationLine: 'underline',
-    },
-    marginView: {
-        marginHorizontal: wp('5%'),
-        marginTop: wp('6%')
-    },
-    ltst: {
-        fontSize: 20,
-        fontFamily: 'Poppins-Medium'
+        paddingHorizontal: widthPixel(20),
+        fontFamily: 'Poppins-Medium',
+        fontSize: fontPixel(20),
+        marginBottom: heightPixel(10)
     },
     searchBar: {
         height: 47,
@@ -111,8 +304,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 0.5,
         borderColor: "gray"
-
     },
-
-
+    leftImgStyle: {
+        width: widthPixel(23),
+        height: heightPixel(16),
+    },
+    rightImgStyle: {
+        width: widthPixel(32),
+        height: widthPixel(32),
+    },
 });
