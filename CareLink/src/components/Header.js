@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   headerLabel: {
     fontFamily: 'Poppins-SemiBold',
     color: DefaultStyles.colors.secondary,
+    fontWeight:'600',
     // height: 30,
     // marginTop: -7,
     fontSize: fontPixel(22),

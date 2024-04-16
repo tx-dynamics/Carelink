@@ -33,14 +33,14 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-    <string>$(PRODUCT_NAME) uses location, without location you will not be able to use all features </string>
 	<key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) would like to use your camera for profile picture</string>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>$(PRODUCT_NAME) uses location, without location you will not be able to use all features</string>
-    <key>NSPhotoLibraryUsageDescription</key>
-    <string>$(PRODUCT_NAME) uses photo library, without photo library you will not be able to use all features</string>
+	<string>$(PRODUCT_NAME) would like to use your camera for profile picture</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses location, without location you will not be able to use all features </string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses location, without location you will not be able to use all features</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses photo library, without photo library you will not be able to use all features</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
