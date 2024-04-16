@@ -14,7 +14,8 @@ import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import { RedFlashMessage } from '../../../Constants/Utilities/assets/Snakbar';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
-const AgencyLocation = ({ navigation }) => {
+const AgencyLocation = ({ navigation,route }) => {
+    console.log("agency location ", JSON.stringify(route?.params))
     const usertype = useSelector((state) => state.splash.userType)
     const [street, setStreet] = useState("")
     const [apartment, setApartment] = useState("")

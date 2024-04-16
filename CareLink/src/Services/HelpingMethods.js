@@ -88,6 +88,17 @@ export const getFCMToken = async () => {
   }
 };
 
+export const getDeviceId = async () => {
+  const devtoken = DeviceInfo.getDeviceId();
+  // console.log("deviceToken ", deviceToken)
+  if (devtoken) {
+      store.dispatch(deviceToken(devtoken))
+    return devtoken;
+  } else {
+    return null;
+  }
+}
+
 export const uploadImageOnS3 = async (file, successPath) => {
   const s3bucket = new S3({
     region: BUCKET_REGION,
