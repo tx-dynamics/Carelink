@@ -31,9 +31,19 @@ const Register = ({ navigation }) => {
     const [isSecure, setSecure] = useState(true)
     const [isSecureConfirm, setSecureConfirm] = useState(true)
     const onSignUp = () => {
+
         //APK // if (isSignupValid(firstName, lastName, email, isPassword, isPasswordConfirm))
         //     navigation.navigate("EmailVerification", { register: true })
-        navigation.navigate("EmailVerification", { register: true })
+        // navigation.navigate("EmailVerification", { register: true })
+
+        try {
+            
+        } catch (error) {
+            
+        }
+
+
+
     }
     return (
         <AppGLobalView style={styles.container}>

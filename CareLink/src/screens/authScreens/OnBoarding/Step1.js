@@ -23,18 +23,12 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import DotComponent from '../../../components/DotComponent/DotComponent';
 import * as Progress from 'react-native-progress';
 import {useDispatch, useSelector} from 'react-redux';
-<<<<<<< HEAD
-import {userType} from '../../../redux/Slices/splashSlice';
-import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
-
-=======
 import {
   onBoarding,
   onboarding,
   userType,
 } from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
->>>>>>> f2efb55358f3c433c54fdd083d9ff1f21f57beae
 const Step1 = ({navigation}) => {
   const swiperRef = useRef({});
   const user = useSelector(state => state.splash.value);
