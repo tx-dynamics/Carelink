@@ -5,7 +5,7 @@ import {decode} from 'base64-arraybuffer';
 import {S3} from 'aws-sdk';
 var fs = require('react-native-fs');
 import {store} from '../redux/store';
-import {setFcmToken} from '../redux/Slices/userDataSlice';
+import {setDeviceToken, setFcmToken} from '../redux/Slices/userDataSlice';
 import {
   ACCESS_KEY_ID,
   BUCKET_NAME,
@@ -92,7 +92,7 @@ export const getDeviceId = async () => {
   const devtoken = DeviceInfo.getDeviceId();
   // console.log("deviceToken ", deviceToken)
   if (devtoken) {
-      store.dispatch(deviceToken(devtoken))
+      store.dispatch(setDeviceToken(devtoken))
     return devtoken;
   } else {
     return null;
