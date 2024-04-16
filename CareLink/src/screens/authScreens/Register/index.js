@@ -102,6 +102,7 @@ const Register = () => {
                 register: true,
                 email: email,
               });
+              console.log('Response is', res?.data);
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

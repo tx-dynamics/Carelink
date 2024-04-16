@@ -13,19 +13,80 @@ import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import {SuccessFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
+import {
+  RedFlashMessage,
+  SuccessFlashMessage,
+} from '../../../Constants/Utilities/assets/Snakbar';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import {api} from '../../../network/Environment';
+import {Method, callApi} from '../../../network/NetworkManger';
+import {useRoute} from '@react-navigation/native';
+import Loader from '../../../components/Loader';
+import {getFCMToken} from '../../../Services/HelpingMethods';
+import {getDeviceId} from 'react-native-device-info';
 
 const ForgetUpdateScreen = ({navigation}) => {
+  const params = useRoute();
+  console.log('Params are', params);
   const usertype = useSelector(state => state.splash.userType);
   const [isPassword, setPassword] = useState('');
   const [isPasswordConfirm, setPasswordConfirm] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isSecureConfirm, setSecureConfirm] = useState(true);
-  const onPressUpdate = () => {
-    SuccessFlashMessage('Password updated successfully');
-    navigation.navigate(routes.loginScreen);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleResetPassowrd = async () => {
+    let fcm = await getFCMToken();
+    if (!isPassword) {
+      RedFlashMessage('Password is required');
+    } else if (!isPasswordConfirm) {
+      RedFlashMessage('Confirm Password is required');
+    } else if (isPassword !== isPasswordConfirm) {
+      RedFlashMessage('Password does not match');
+    } else {
+      try {
+        setIsLoading(true);
+        const endPoint = api.forgetResetPassword;
+        const data = {
+          email: params?.params?.email?.toLowerCase(),
+          password: isPassword,
+          otp: params?.params?.otp,
+          device: {id: getDeviceId(), deviceToken: fcm},
+        };
+
+        await callApi(
+          Method.PATCH,
+          endPoint,
+          data,
+          res => {
+            if (res?.status === 200 || res?.status === 201) {
+              setIsLoading(false);
+              SuccessFlashMessage(res?.message);
+              navigation.reset({
+                index: 0,
+                routes: [{name: routes.loginScreen}],
+              });
+            } else {
+              setIsLoading(false);
+              RedFlashMessage(res?.message);
+            }
+          },
+          err => {
+            setIsLoading(false);
+            RedFlashMessage(err);
+            console.log('2');
+          },
+        );
+      } catch (error) {
+        setIsLoading(false);
+        RedFlashMessage(error);
+        console.log('3');
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
+
   return (
     <AppGLobalView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
@@ -64,10 +125,11 @@ const ForgetUpdateScreen = ({navigation}) => {
       <FormButton
         buttonTitle={'Update Password'}
         // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
-        onPress={onPressUpdate}
+        onPress={handleResetPassowrd}
       />
       {/* <AlreadyText onPress={() => navigation.navigate("Register")} title={"I don’t have Account."} subtitle={" Sign Up"} /> */}
       {/* <EmailVerifiedModal visible={isVisible} subtitle={"Password Updated"} title={"Password Updated"} /> */}
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };
