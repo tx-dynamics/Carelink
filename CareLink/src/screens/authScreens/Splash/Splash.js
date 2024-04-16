@@ -15,6 +15,8 @@ import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
   const onboarding = useSelector(store => store.splash?.onboarding);
+  const userData = useSelector(store => store?.userDataSlice);
+  console.log('User data is ', userData);
   useEffect(() => {
     setTimeout(() => {
       if (onboarding) {
