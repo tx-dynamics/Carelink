@@ -22,7 +22,7 @@ function DrawerContent({ navigation, userImg, username, userEmail }) {
                 <Header headerLabel={"Side Menu"}
                     onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
                     leftImgStyle={styles.leftIconStyle} leftImgName={require("../../../assets/cross.png")} />
-                <View style={{ marginTop: wp('5%') }} >
+                <View style={{ }} >
                     {/* Single Item */}
                     <TouchableOpacity onPress={() => navigation.navigate("ProfileNavigator")} style={styles.items}>
                         <Apptext style={styles.itemsTxt}>Profile</Apptext>
@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     },
     itemsTxt: {
         fontSize: 17,
-        fontFamily: 'Poppins-SemiBold'
+        fontFamily: 'Poppins-SemiBold',
+        fontWeight:"600"
     }
 
 });
