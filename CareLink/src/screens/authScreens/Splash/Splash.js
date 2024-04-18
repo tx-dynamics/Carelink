@@ -10,19 +10,35 @@ const Splash = ({navigation}) => {
   const onboarding = useSelector(store => store.splash?.onboarding);
   const userData = useSelector(store => store?.userDataSlice);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
+  const userType = userData?.userData?.userType;
+  console.log('User data of splash screen', userData?.userData?.userType);
 
   useEffect(() => {
     setTimeout(() => {
-      if (onboarding && userData?.accessToken && signUpOTP) {
-        navigation.replace('EmailVerification', {
-          setTimer: true,
-        });
-      } else if (onboarding && userData?.accessToken) {
-        navigation.replace(routes.addDocuments);
-      } else if (onboarding) {
-        navigation.replace('AskRegister');
+      if (userType == 'ServiceType') {
+        if (onboarding && userData?.accessToken && signUpOTP) {
+          navigation.replace('EmailVerification', {
+            setTimer: true,
+          });
+        } else if (onboarding && userData?.accessToken) {
+          navigation.replace(routes.addDocuments);
+        } else if (onboarding) {
+          navigation.replace('AskRegister');
+        } else {
+          navigation.replace('Step1');
+        }
       } else {
-        navigation.replace('Step1');
+        if (onboarding && userData?.accessToken && signUpOTP) {
+          navigation.replace('EmailVerification', {
+            setTimer: true,
+          });
+        } else if (onboarding && userData?.accessToken) {
+          navigation.replace(routes.successAgency);
+        } else if (onboarding) {
+          navigation.replace('AskRegister');
+        } else {
+          navigation.replace('Step1');
+        }
       }
     }, 2000);
   }, []);
