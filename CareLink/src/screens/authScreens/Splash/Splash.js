@@ -1,14 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-  StatusBar,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Image, StatusBar} from 'react-native';
 import DefaultStyles from '../../../config/Styles';
-import {widthPixel} from '../../../Constants';
+import {routes, widthPixel} from '../../../Constants';
 import colors from '../../../config/colors';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {useSelector} from 'react-redux';
@@ -16,10 +9,17 @@ import {useSelector} from 'react-redux';
 const Splash = ({navigation}) => {
   const onboarding = useSelector(store => store.splash?.onboarding);
   const userData = useSelector(store => store?.userDataSlice);
-  console.log('User data is ', userData);
+  const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
+
   useEffect(() => {
     setTimeout(() => {
-      if (onboarding) {
+      if (onboarding && userData?.accessToken && signUpOTP) {
+        navigation.replace('EmailVerification', {
+          setTimer: true,
+        });
+      } else if (onboarding && userData?.accessToken) {
+        navigation.replace(routes.addDocuments);
+      } else if (onboarding) {
         navigation.replace('AskRegister');
       } else {
         navigation.replace('Step1');
