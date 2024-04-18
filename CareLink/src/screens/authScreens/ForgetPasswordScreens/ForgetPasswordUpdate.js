@@ -9,7 +9,13 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
+import {
+  fontPixel,
+  heightPixel,
+  hp,
+  routes,
+  widthPixel,
+} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';

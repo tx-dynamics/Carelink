@@ -14,7 +14,6 @@ import {
 import Loader from '../Loader';
 
 const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
-  console.log('From forgot password', fromForgotPassword);
   const [duration, setDuration] = useState(59);
   const [paused, setPaused] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +40,7 @@ const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
       setIsLoading(true);
       const endPoint = api.resendOTP;
       const data = {
-        email: email,
+        email: email?.toLowerCase(),
         device: {id: getDeviceId(), deviceToken: fcm},
       };
 
