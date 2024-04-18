@@ -1,6 +1,16 @@
-import React, {useState} from 'react';
-import {Keyboard, StyleSheet, Text} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  ActivityIndicator,
+  Text,
+  View,
+} from 'react-native';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
+import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
@@ -17,11 +27,9 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import CountDownComponent from '../../../components/CountDownComponent/CountDownComponent';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
-import {useRoute} from '@react-navigation/native';
 import {api} from '../../../network/Environment';
-import {Method, callApi} from '../../../network/NetworkManger';
-import {getDeviceId} from 'react-native-device-info';
-import {getFCMToken} from '../../../Services/HelpingMethods';
+import {callApi, Method} from '../../../network/NetworkManger';
+import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
 import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
 
@@ -166,6 +174,10 @@ const EmailVerification = ({navigation, route}) => {
     }
   };
 
+  const goback = () => {
+    setIsOTP('');
+    navigation.goBack();
+  };
   return (
     <AppGLobalView style={styles.container}>
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{}}>

@@ -100,6 +100,7 @@ const Register = () => {
               });
               dispatch(signUpOTPCheck(true));
               console.log('Response on signup', res?.data);
+
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

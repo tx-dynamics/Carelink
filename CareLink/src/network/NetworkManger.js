@@ -1,7 +1,7 @@
 import {BASE_URL} from './Environment';
 import {getDeviceId} from 'react-native-device-info';
 import {store} from '../redux/store';
-import {accessToken, refreshToken} from '../redux/Slices/userDataSlice';
+import {accessToken} from '../redux/Slices/userDataSlice';
 
 export const AUTHORIZE = 'AUTHORIZE';
 export const NETWORK_ERROR = 'NETWORK ERROR';
@@ -35,8 +35,8 @@ export const callApi = async (
   count = 0,
   multipart,
 ) => {
-  let token = store?.getState()?.userDataSlice?.accessToken ?? false;
-  let refreshToken = store?.getState()?.userDataSlice?.refreshToken ?? false;
+  let token = store.getState()?.userDataSlice?.accessToken ?? false;
+  let refreshToken = store.getState()?.userDataSlice?.refreshToken ?? false;
   let url = BASE_URL + Url;
   if (multipart) {
     defaultHeaders['Content-Type'] = 'multipart/form-data';
