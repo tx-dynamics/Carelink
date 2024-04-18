@@ -88,7 +88,20 @@ export const getFCMToken = async () => {
   }
 };
 
+export const getDeviceId = async () => {
+  const devtoken = DeviceInfo.getDeviceId();
+  // console.log("deviceToken ", deviceToken)
+  if (devtoken) {
+      store.dispatch(deviceToken(devtoken))
+    return devtoken;
+  } else {
+    return null;
+  }
+}
+
 export const uploadImageOnS3 = async (file, successPath) => {
+  console.log('File is', file);
+  console.log('Success path', successPath);
   const s3bucket = new S3({
     region: BUCKET_REGION,
     accessKeyId: ACCESS_KEY_ID,
@@ -112,7 +125,7 @@ export const uploadImageOnS3 = async (file, successPath) => {
       .upload(params)
       .promise()
       .then(data => {
-        successPath(data.Location);
+        successPath(data?.Location);
       })
       .catch(err => {
         console.log('Upload on S3 error', err);

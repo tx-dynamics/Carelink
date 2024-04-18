@@ -30,6 +30,7 @@ const AppTextInput = ({
   rightPress,
   multiline,
   containerStyle,
+  autoCapitalize,
 }) => {
   return (
     <View style={[styles.mainView, mainViewStyle]}>
@@ -51,6 +52,7 @@ const AppTextInput = ({
           placeholder={placeholder}
           multiline={multiline}
           style={styles.inputStyle}
+          autoCapitalize={autoCapitalize}
         />
         {right && (
           <TouchableOpacity onPress={rightPress} style={styles.rightView}>

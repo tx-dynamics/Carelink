@@ -1,34 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-  SafeAreaView,
-  Keyboard,
-  Alert,
-} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, TouchableOpacity, View, Keyboard} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import {useDispatch, useSelector} from 'react-redux';
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, routes} from '../../../Constants';
-import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
+import {heightPixel, hp, routes} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
-import {fonts} from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import {isSignupValid} from '../../../Constants/Utilities/validations';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
@@ -46,6 +30,7 @@ import {
   SuccessFlashMessage,
 } from '../../../Constants/Utilities/assets/Snakbar';
 import Loader from '../../../components/Loader';
+import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -62,15 +47,26 @@ const Register = () => {
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
+    var emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var alphabetRegex = /^[a-zA-Z]+$/;
     Keyboard.dismiss();
     if (!firstName) {
-      RedFlashMessage('Firstname is required');
-    } else if (!isPassword) {
-      RedFlashMessage('LastName is required');
+      RedFlashMessage('First name is required');
+    } else if (!alphabetRegex.test(firstName)) {
+      RedFlashMessage('First name is not valid');
+    } else if (!lastName) {
+      RedFlashMessage('Last Name is required');
+    } else if (!alphabetRegex.test(lastName)) {
+      RedFlashMessage('First name is not valid');
     } else if (!email) {
       RedFlashMessage('Email is required');
-    } else if (!isPasswordConfirm) {
+    } else if (!emailRegex.test(email)) {
+      RedFlashMessage('Email is not valid');
+    } else if (!isPassword) {
       RedFlashMessage('Password is required');
+    } else if (isPassword.length < 8) {
+      RedFlashMessage('Password must be at least 8 characters');
     } else if (!isPasswordConfirm) {
       RedFlashMessage('Confirm Password is required');
     } else if (isPassword !== isPasswordConfirm) {
@@ -81,7 +77,7 @@ const Register = () => {
         const endPoint = api.signUp;
         const data = {
           name: firstName + ' ' + lastName,
-          email: email,
+          email: email?.toLowerCase(),
           password: isPassword,
           userType: usertype,
           device: {id: getDeviceId(), deviceToken: fcm},
@@ -100,9 +96,11 @@ const Register = () => {
               SuccessFlashMessage(res?.message);
               navigation.navigate('EmailVerification', {
                 register: true,
-                email: email,
+                email: email?.toLowerCase(),
               });
-              console.log('Response is', res?.data);
+              dispatch(signUpOTPCheck(true));
+              console.log('Response on signup', res?.data);
+
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);
@@ -148,18 +146,21 @@ const Register = () => {
             value={firstName}
             onChangeText={setFirstName}
             title={'First name'}
+            maxLength={30}
           />
           <AppTextInput
             mainViewStyle={styles.marginView}
             value={lastName}
             onChangeText={setLastName}
             title={'Last name'}
+            maxLength={30}
           />
           <AppTextInput
             mainViewStyle={styles.marginView}
             value={email}
             onChangeText={setEmail}
             title={'Email'}
+            autoCapitalize={'none'}
           />
           <AppTextInput
             mainViewStyle={styles.marginView}

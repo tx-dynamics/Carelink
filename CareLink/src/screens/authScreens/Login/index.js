@@ -17,7 +17,13 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
+import {
+  fontPixel,
+  heightPixel,
+  hp,
+  routes,
+  widthPixel,
+} from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
@@ -79,8 +85,16 @@ const LoginScreen = () => {
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
-              usertype=='ServiceSide'?
-              navigation.replace(routes.addDocuments):navigation.replace(routes.agencyBasic)
+              if (res?.data?.user?.userType === 'ServiceSide') {
+                // navigation.replace(routes.addDocuments);
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: routes?.addDocuments}],
+                });
+              }
+              // navigation.replace(routes.verificationProcess);
+
+              console.log('res?.data?.user', res?.data?.user);
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
             } else {
@@ -137,7 +151,11 @@ const LoginScreen = () => {
       </KeyboardAwareScrollView>
       <FormButton
         buttonTitle={'Sign In'}
-        // onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+        // onPress={() =>
+        //   usertype === 'ServiceSide'
+        //     ? navigation.navigate('PaymentPlans')
+        //     : navigation.navigate('EmailVerification')
+        // }
         // onPress={onPressLogin}
         onPress={handleSubmit}
       />
