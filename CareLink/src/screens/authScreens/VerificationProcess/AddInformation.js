@@ -1,7 +1,7 @@
 import {Keyboard, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import colors from '../../../config/colors';
-import {heightPixel, widthPixel} from '../../../Constants';
+import {heightPixel, routes, widthPixel} from '../../../Constants';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import LeftBoldTitle from '../../../components/LeftBoldTitle/LeftBoldTitle';
@@ -19,9 +19,12 @@ import {
 import {Method, callApi} from '../../../network/NetworkManger';
 import {api} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
+import {useDispatch} from 'react-redux';
+import {setUserData} from '../../../redux/Slices/userDataSlice';
 
 const AddInformation = ({navigation}) => {
   const params = useRoute();
+  const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
   const [age, setAge] = useState('');
@@ -45,8 +48,6 @@ const AddInformation = ({navigation}) => {
       value: 'Divorced',
     },
   ]);
-
-  //   navigation.replace('PaymentPlans');
 
   const handleSubmit = async () => {
     Keyboard.dismiss();
@@ -76,8 +77,10 @@ const AddInformation = ({navigation}) => {
           res => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
+              console.log('Updated User data ', res?.data);
+              dispatch(setUserData(res?.data?.user));
               SuccessFlashMessage(res?.message);
-              console.log('Response on verification', res?.data);
+              navigation.navigate(routes.listingOptions);
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

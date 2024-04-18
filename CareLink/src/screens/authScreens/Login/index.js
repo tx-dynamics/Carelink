@@ -86,15 +86,16 @@ const LoginScreen = () => {
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
               if (res?.data?.user?.userType === 'ServiceSide') {
-                // navigation.replace(routes.addDocuments);
                 navigation.reset({
                   index: 0,
                   routes: [{name: routes?.addDocuments}],
                 });
+              } else {
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: routes.successAgency}],
+                });
               }
-              // navigation.replace(routes.verificationProcess);
-
-              console.log('res?.data?.user', res?.data?.user);
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
             } else {
