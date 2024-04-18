@@ -17,7 +17,13 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
+import {
+  fontPixel,
+  heightPixel,
+  hp,
+  routes,
+  widthPixel,
+} from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
@@ -35,6 +41,11 @@ import {
   setUserData,
 } from '../../../redux/Slices/userDataSlice';
 import {Method, callApi} from '../../../network/NetworkManger';
+import {
+  RedFlashMessage,
+  SuccessFlashMessage,
+} from '../../../Constants/Utilities/assets/Snakbar';
+import Loader from '../../../components/Loader';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
@@ -52,11 +63,9 @@ const LoginScreen = () => {
     let fcm = await getFCMToken();
     Keyboard.dismiss();
     if (!email) {
-      //   FlashAlert('E', 'Failed', 'Email is required!');
-      Alert.alert('Email is required');
+      RedFlashMessage('Email is required');
     } else if (!isPassword) {
-      //   FlashAlert('E', 'Failed', 'Password is required!');
-      Alert.alert('Password is required');
+      RedFlashMessage('Password is required');
     } else {
       try {
         setIsLoading(true);
@@ -73,28 +82,35 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              console.log('Response is', res?.data);
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
-              navigation.navigate(routes.addDocuments);
+              if (res?.data?.user?.userType === 'ServiceSide') {
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: routes?.addDocuments}],
+                });
+              } else {
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: routes.successAgency}],
+                });
+              }
+              SuccessFlashMessage(res?.message);
               setIsLoading(false);
-              //   FlashAlert('S', 'Success', res?.message);
-              //   navigation.replace(routes.tab);
             } else {
               setIsLoading(false);
-              // FlashAlert('E', 'Failed', 'Invalid Credentials!');
+              RedFlashMessage(res?.message);
             }
           },
           err => {
             setIsLoading(false);
-            FlashAlert('E', 'Failed', err);
+            RedFlashMessage(err);
           },
         );
       } catch (error) {
         setIsLoading(false);
-        console.log('Error on catch', error);
-        // FlashAlert1('E', 'Failed', error);
+        RedFlashMessage(error);
       } finally {
         setIsLoading(false);
       }
@@ -136,16 +152,20 @@ const LoginScreen = () => {
       </KeyboardAwareScrollView>
       <FormButton
         buttonTitle={'Sign In'}
-        onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+        // onPress={() =>
+        //   usertype === 'ServiceSide'
+        //     ? navigation.navigate('PaymentPlans')
+        //     : navigation.navigate('EmailVerification')
+        // }
         // onPress={onPressLogin}
-        // onPress={handleSubmit}
+        onPress={handleSubmit}
       />
       <AlreadyText
         onPress={() => navigation.navigate('Register')}
         title={'I don’t have Account.'}
         subtitle={' Sign Up'}
       />
-      {isLoading && <ActivityIndicator size={'large'} color={'red'} />}
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

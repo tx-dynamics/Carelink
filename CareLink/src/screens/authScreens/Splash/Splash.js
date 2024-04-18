@@ -1,26 +1,44 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-  StatusBar,
-} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet, Image, StatusBar} from 'react-native';
 import DefaultStyles from '../../../config/Styles';
-import {widthPixel} from '../../../Constants';
+import {routes, widthPixel} from '../../../Constants';
 import colors from '../../../config/colors';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {useSelector} from 'react-redux';
 
 const Splash = ({navigation}) => {
   const onboarding = useSelector(store => store.splash?.onboarding);
+  const userData = useSelector(store => store?.userDataSlice);
+  const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
+  const userType = userData?.userData?.userType;
+  console.log('User data of splash screen', userData?.userData?.userType);
+
   useEffect(() => {
     setTimeout(() => {
-      if (onboarding) {
-        navigation.replace('AskRegister');
+      if (userType == 'ServiceType') {
+        if (onboarding && userData?.accessToken && signUpOTP) {
+          navigation.replace('EmailVerification', {
+            setTimer: true,
+          });
+        } else if (onboarding && userData?.accessToken) {
+          navigation.replace(routes.addDocuments);
+        } else if (onboarding) {
+          navigation.replace('AskRegister');
+        } else {
+          navigation.replace('Step1');
+        }
       } else {
-        navigation.replace('Step1');
+        if (onboarding && userData?.accessToken && signUpOTP) {
+          navigation.replace('EmailVerification', {
+            setTimer: true,
+          });
+        } else if (onboarding && userData?.accessToken) {
+          navigation.replace(routes.successAgency);
+        } else if (onboarding) {
+          navigation.replace('AskRegister');
+        } else {
+          navigation.replace('Step1');
+        }
       }
     }, 2000);
   }, []);

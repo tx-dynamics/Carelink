@@ -13,7 +13,7 @@ import {
 } from '../../Constants/Utilities/assets/Snakbar';
 import Loader from '../Loader';
 
-const CountDownComponent = ({email, setIsOTP}) => {
+const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
   const [duration, setDuration] = useState(59);
   const [paused, setPaused] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,8 +40,44 @@ const CountDownComponent = ({email, setIsOTP}) => {
       setIsLoading(true);
       const endPoint = api.resendOTP;
       const data = {
-        email: email,
+        email: email?.toLowerCase(),
         device: {id: getDeviceId(), deviceToken: fcm},
+      };
+
+      await callApi(
+        Method.POST,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            setIsLoading(false);
+            setIsOTP('');
+            setDuration(59);
+            SuccessFlashMessage(res?.message);
+          } else {
+            setIsLoading(false);
+            RedFlashMessage(res?.message);
+          }
+        },
+        err => {
+          setIsLoading(false);
+          RedFlashMessage(err);
+        },
+      );
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResendOTP = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.forgotPassword;
+      const data = {
+        email: email.toLowerCase(),
       };
 
       await callApi(
@@ -81,7 +117,7 @@ const CountDownComponent = ({email, setIsOTP}) => {
       <Text style={styles.didntText}>
         Didn’t get code?{' '}
         <Text
-          onPress={handleSubmit}
+          onPress={fromForgotPassword ? handleResendOTP : handleSubmit}
           disabled={duration != 0 ? true : false}
           style={{
             marginTop: heightPixel(10),

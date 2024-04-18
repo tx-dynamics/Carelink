@@ -20,5 +20,8 @@ export const api = {
   verifySignUpOTP: 'api/v1/user/verify',
   verifyOTP: 'api/v1/user/verifyOTPResetPassword',
   resendOTP: 'api/v1/user/sendOTP',
+  verifyForgotPasswordOTP: 'api/v1/user/verifyOTPResetPassword',
+  forgetResetPassword: 'api/v1/user/resetPassword',
+  updateProfile: 'api/v1/user/updateProfile',
   // privacyPolicy: 'api/v1/privacy',
 };
