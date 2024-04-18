@@ -85,6 +85,7 @@ const LoginScreen = () => {
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
+              // Handling User Type
               if (res?.data?.user?.userType === 'ServiceSide') {
                 navigation.reset({
                   index: 0,
