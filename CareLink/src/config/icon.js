@@ -14,6 +14,8 @@ const calendar = require('../Assets/Images/calendar.png');
 const check_blank = require('../Assets/Images/check_blank.png');
 const Check_box = require('../Assets/Images/Check_box.png');
 const loader = require('../Assets/Images/loader.json');
+const mapLocator =require("../Assets/Images/rectangle.png");
+const mapPin =require("../../assets/pin.png");
 
 export const iconPath = {
   leftArrow,
@@ -32,4 +34,6 @@ export const iconPath = {
   check_blank,
   Check_box,
   loader,
+  mapLocator,
+  mapPin
 };

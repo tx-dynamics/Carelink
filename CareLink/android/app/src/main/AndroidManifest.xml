@@ -31,6 +31,6 @@
       </activity>
       <meta-data
           android:name="com.google.android.geo.API_KEY"
-          android:value="AIzaSyAKxDFZP8N395fl0cp57W_w5HdCGXEDVss"/>
+          android:value="AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis"/>
     </application>
 </manifest>

@@ -32,6 +32,8 @@ import {callApi, Method} from '../../../network/NetworkManger';
 import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
 import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
+import { useRoute } from '@react-navigation/native';
+
 
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
@@ -41,7 +43,7 @@ const EmailVerification = ({navigation, route}) => {
   const usertype = useSelector(state => state?.splash?.userType);
   const [isLoading, setIsLoading] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
-  console.log('User data', userData);
+  // console.log('User data', userData);
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
@@ -70,7 +72,7 @@ const EmailVerification = ({navigation, route}) => {
               setIsLoading(false);
               dispatch(signUpOTPCheck(false));
               if (usertype == 'ServiceSide') {
-                console.log('Inside service side');
+                // console.log('Inside service side');
                 params.params?.register
                   ? navigation.reset({
                       index: 0,
@@ -82,7 +84,7 @@ const EmailVerification = ({navigation, route}) => {
                     });
               }
               if (usertype == 'AgencySide') {
-                console.log('Inside agency side');
+                // console.log('Inside agency side');
                 params.params?.register
                   ? navigation.reset({
                       index: 0,

@@ -41,6 +41,7 @@ const priceIcon =require("../Assets/Images/price.png");
 const mapIcon =require("../Assets/Images/map.png");
 
 
+
 export const iconPath = {
   Logo,bed,wash,dens,hlogo,paypal,stripe,mc,card,congo,cc,
   fb,hint,paylock,tick,
