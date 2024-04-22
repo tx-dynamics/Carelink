@@ -1,33 +1,76 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
   Image,
   View,
   ImageBackground,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import {useDispatch, useSelector} from 'react-redux';
-
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
-import {heightPixel, routes} from '../../../Constants';
+import {heightPixel, hp, routes} from '../../../Constants';
 import {fromProfile} from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import Geolocation from 'react-native-geolocation-service';
+import MapView, {Marker} from 'react-native-maps';
+import {GOOGLE_API_KEY} from '../../../network/Environment';
+import Loader from '../../../components/Loader';
+import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
+import {appIcons} from '../../../Constants/Utilities/assets';
 
-import MapView from 'react-native-maps';
-
-const AgencyMap = ({navigation}) => {
+const AgencyMap = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const usertype = useSelector(state => state.splash.userType);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
-  const dispatch = useDispatch();
+  const [location, setLocation] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [address, setAddress] = useState('');
+  const mapRef = useRef();
+
+  // states
+  const [coordinates, setCoordinates] = useState({
+    latitude: location?.latitude ? location?.latitude : 37.78825,
+    longitude: location?.longitude ? location?.longitude : -122.4324,
+    latitudeDelta: 0.123,
+    longitudeDelta: 0.32,
+  });
+  const [myUserLocation, setMyUserLocation] = useState({});
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
+  const requestLocationPermission = async () => {
+    try {
+      if (Platform.OS == 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Hit get Location');
+          getLocation();
+        } else {
+        }
+      } else {
+        getLocation();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const onPressNext = () => {
     if (usertype == 'ServiceSide') {
-      navigation.navigate(routes.listingSummary);
+      navigation.navigate(routes.listingSummary, {
+        data: route?.params,
+      });
     }
     if (usertype == 'AgencySide') {
       if (isFromProfile) {
@@ -38,6 +81,46 @@ const AgencyMap = ({navigation}) => {
       }
     }
   };
+
+  const getLocation = async () => {
+    setIsLoading(true);
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setLocation({latitude, longitude});
+        setIsLoading(false);
+      },
+      error => {
+        console.error(error);
+      },
+      {enableHighAccuracy: true, timeout: 15000},
+    );
+  };
+
+  const getAddressFromCoordinates = (latitude, longitude) => {
+    return new Promise((resolve, reject) => {
+      fetch(
+        'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+          latitude +
+          ',' +
+          longitude +
+          '&key=' +
+          GOOGLE_API_KEY,
+      )
+        .then(response => response.json())
+        .then(responseJson => {
+          if (responseJson.status === 'OK') {
+            setAddress(responseJson?.results[3]?.formatted_address);
+          } else {
+            RedFlashMessage('Not Found');
+          }
+        })
+        .catch(error => {
+          Alert.alert('Location Not Found');
+        });
+    });
+  };
+
   return (
     <AppGLobalView style={styles.container}>
       <View>
@@ -47,28 +130,65 @@ const AgencyMap = ({navigation}) => {
           imgName={iconPath.leftArrow}
           heading={'Pin your listed room location on the map'}
         />
-        <MapView
+        {/* <MapView
           initialRegion={{
             latitude: 37.78825,
             longitude: -122.4324,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
-        />
-        {/* <ImageBackground
-                    style={styles.imgView}
-                    source={require('../../../../assets/map.png')}>
-                    <Image style={{ marginTop: wp('18%') }} source={require('../../../../assets/pin-fill.png')} />
-                    <TouchableOpacity style={styles.pinkBox} >
-                        <Image source={require('../../../../assets/zoom.png')} />
-                    </TouchableOpacity>
-                </ImageBackground> */}
+          style={{width: wp('100%'), height: wp('100%')}}
+        /> */}
+        {location !== null ? (
+          <MapView
+            style={{width: wp('100%'), height: wp('100%')}}
+            zoomEnabled={true}
+            showsUserLocation={true}
+            showsPointsOfInterest={true}
+            followsUserLocation={true}
+            userLocationPriority="high"
+            initialRegion={coordinates}>
+            <Marker
+              draggable
+              coordinate={{
+                latitude: location?.latitude,
+                longitude: location?.longitude,
+                latitudeDelta: 0.123,
+                longitudeDelta: 0.32,
+              }}
+              onDragEnd={values => {
+                getAddressFromCoordinates(
+                  values.nativeEvent.coordinate.latitude,
+                  values.nativeEvent.coordinate.longitude,
+                );
+                setCoordinates({
+                  latitude: values.nativeEvent.coordinate.latitude,
+                  longitude: values.nativeEvent.coordinate.longitude,
+                });
+              }}
+              pointerEvents="auto"
+              style={{backgroundColor: 'yellow', width: wp(30), height: wp(30)}}
+              icon={iconPath.mapPin}
+            />
+          </MapView>
+        ) : (
+          <Loader isVisible={isLoading} />
+        )}
+
         <View>
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
             Address
           </Apptext>
           <Apptext style={[styles.adrs]}>
-            123 street, 11 apartment ,USA,11221
+            {address
+              ? address
+              : route?.params?.street +
+                ', ' +
+                route?.params?.apartment +
+                ', ' +
+                route?.params?.zipCode +
+                ', ' +
+                route?.params?.isState}
           </Apptext>
         </View>
       </View>
@@ -76,6 +196,7 @@ const AgencyMap = ({navigation}) => {
         buttonTitle={isFromProfile ? 'Update' : 'Next'}
         onPress={onPressNext}
       />
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

@@ -92,12 +92,12 @@ export const getDeviceId = async () => {
   const devtoken = DeviceInfo.getDeviceId();
   // console.log("deviceToken ", deviceToken)
   if (devtoken) {
-      store.dispatch(deviceToken(devtoken))
+    store.dispatch(deviceToken(devtoken));
     return devtoken;
   } else {
     return null;
   }
-}
+};
 
 export const uploadImageOnS3 = async (file, successPath) => {
   console.log('File is', file);

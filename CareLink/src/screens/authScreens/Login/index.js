@@ -55,9 +55,6 @@ const LoginScreen = () => {
   const [isPassword, setPassword] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const onPressLogin = () => {
-    dispatch(userSave(true));
-  };
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
@@ -87,10 +84,23 @@ const LoginScreen = () => {
               dispatch(setUserData(res?.data?.user));
               // Handling User Type
               if (res?.data?.user?.userType === 'ServiceSide') {
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: routes?.addDocuments}],
-                });
+                if (
+                  res?.data?.user?.certificates[0] &&
+                  res?.data?.user?.drivingAbstract &&
+                  res?.data?.user?.selfie &&
+                  res?.data?.user?.drivingLicense &&
+                  res?.data?.user?.homePhoto
+                ) {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes.listingOptions}],
+                  });
+                } else {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes?.addDocuments}],
+                  });
+                }
               } else {
                 navigation.reset({
                   index: 0,

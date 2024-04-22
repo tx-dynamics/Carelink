@@ -11,12 +11,21 @@ const Splash = ({navigation}) => {
   const userData = useSelector(store => store?.userDataSlice);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
   const userType = userData?.userData?.userType;
-  console.log('User data of splash screen', userData?.userData?.userType);
 
   useEffect(() => {
     setTimeout(() => {
-      if (userType == 'ServiceType') {
-        if (onboarding && userData?.accessToken && signUpOTP) {
+      if (userType == 'ServiceSide') {
+        if (
+          userData?.userData?.certificates[0] &&
+          userData?.userData?.drivingAbstract &&
+          userData?.userData?.drivingLicense &&
+          userData?.userData?.homePhoto &&
+          userData?.userData?.selfie &&
+          onboarding &&
+          userData?.accessToken
+        ) {
+          navigation.navigate(routes.listingOptions);
+        } else if (onboarding && userData?.accessToken && signUpOTP) {
           navigation.replace('EmailVerification', {
             setTimer: true,
           });

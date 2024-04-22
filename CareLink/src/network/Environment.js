@@ -1,5 +1,5 @@
 export const IMAGE_BASE_URL = '';
-// export const GOOGLE_API_KEY = 'AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis';
+export const GOOGLE_API_KEY = 'AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis';
 // export const STRIPE_KEY =
 //   'pk_test_51Mg25SGfCxzesgsTMSuQZfFwlApi3FIFXIXAoxXjRzLti3SMkbP9Q5UqOp7imDx0LeJ187CqT4DDxN6aXaTF7axP00a9dO6bVp';
 export const STRIPE_SECRET_KEY = '';
@@ -23,5 +23,6 @@ export const api = {
   verifyForgotPasswordOTP: 'api/v1/user/verifyOTPResetPassword',
   forgetResetPassword: 'api/v1/user/resetPassword',
   updateProfile: 'api/v1/user/updateProfile',
+  listing: 'api/v1/listing',
   // privacyPolicy: 'api/v1/privacy',
 };
