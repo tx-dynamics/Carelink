@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Text,
   View,
+  Keyboard,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
@@ -32,8 +33,8 @@ import {callApi, Method} from '../../../network/NetworkManger';
 import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
 import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
-import { useRoute } from '@react-navigation/native';
-
+import {useRoute} from '@react-navigation/native';
+import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
 
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
@@ -42,8 +43,10 @@ const EmailVerification = ({navigation, route}) => {
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const [isLoading, setIsLoading] = useState(false);
+  const [clearOtp,setClearedOtp]=useState(false);
   const userData = useSelector(store => store?.userDataSlice);
-  // console.log('User data', userData);
+
+  console.log('User data', userData);
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
@@ -70,7 +73,7 @@ const EmailVerification = ({navigation, route}) => {
             if (res?.status === 200 || res?.status === 201) {
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
-              dispatch(signUpOTPCheck(false));
+              dispatch(signUpOTPCheck(true));
               if (usertype == 'ServiceSide') {
                 // console.log('Inside service side');
                 params.params?.register
@@ -106,7 +109,7 @@ const EmailVerification = ({navigation, route}) => {
         );
       } catch (error) {
         setIsLoading(false);
-        RedFlashMessage();
+        RedFlashMessage('Your Time is Expired');
       } finally {
         setIsLoading(false);
       }
@@ -116,17 +119,19 @@ const EmailVerification = ({navigation, route}) => {
   const handleVerifyForgetOTP = async () => {
     let fcm = await getFCMToken();
     Keyboard.dismiss();
-    if (!isOTP) {
+    if (isOTP === '') {
       RedFlashMessage('Please enter OTP');
+      return;
     } else {
       try {
         setIsLoading(true);
-        const endPoint = api.verifyForgotPasswordOTP;
         const data = {
           email: params?.params?.email?.toLowerCase(),
           otp: isOTP,
           device: {id: getDeviceId(), deviceToken: fcm},
         };
+        console.log('data ', data);
+        const endPoint = api.verifyForgotPasswordOTP;
 
         await callApi(
           Method.POST,
@@ -164,12 +169,15 @@ const EmailVerification = ({navigation, route}) => {
           },
           err => {
             setIsLoading(false);
+            setIsOTP('');
+            setClearedOtp(true)
             RedFlashMessage(err);
           },
         );
       } catch (error) {
         setIsLoading(false);
-        RedFlashMessage();
+        setClearedOtp
+        RedFlashMessage('Otp Expired');
       } finally {
         setIsLoading(false);
       }
@@ -188,7 +196,7 @@ const EmailVerification = ({navigation, route}) => {
           heading={'Enter the code we just sent to your email'}
           style={styles.headerTextStyle}
           onPress={() => {
-            navigation.goBack();
+            goback();
           }}
           imgName={iconPath.leftArrow}
         />
@@ -200,6 +208,7 @@ const EmailVerification = ({navigation, route}) => {
         <OTPInputView
           pinCount={4}
           autoFocusOnLoad={false}
+          clearInputs={clearOtp}
           style={styles.OTPView}
           onCodeChanged={setIsOTP}
           selectionColor={colors.primary}
@@ -214,6 +223,7 @@ const EmailVerification = ({navigation, route}) => {
               : userData?.userData?.email?.toLowerCase()
           }
           setIsOTP={setIsOTP}
+          isOTP={isOTP}
           fromForgotPassword={params?.params?.fromForgotPassword}
         />
       </KeyboardAwareScrollView>

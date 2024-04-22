@@ -98,9 +98,8 @@ const Register = () => {
                 register: true,
                 email: email?.toLowerCase(),
               });
-              dispatch(signUpOTPCheck(true));
-              console.log('Response on signup', res?.data);
-
+              // dispatch(signUpOTPCheck(true));
+              // console.log('Response on signup', res?.data);
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

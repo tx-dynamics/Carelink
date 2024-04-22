@@ -4,40 +4,57 @@ import DefaultStyles from '../../../config/Styles';
 import {routes, widthPixel} from '../../../Constants';
 import colors from '../../../config/colors';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {userSave} from '../../../redux/Slices/splashSlice';
 
 const Splash = ({navigation}) => {
+  // hooks
+  const dispatch = useDispatch();
   const onboarding = useSelector(store => store.splash?.onboarding);
   const userData = useSelector(store => store?.userDataSlice);
+  const userType = useSelector(store => store?.appSlice?.userType);
+  const isNewUser = useSelector(store => store?.appSlice?.isNewUser);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
-  const userType = userData?.userData?.userType;
-  console.log('User data of splash screen', userData?.userData?.userType);
+  // const userType = userData?.userData?.userType;
+  console.log('User data of splash screen', userType);
 
   useEffect(() => {
     setTimeout(() => {
       if (userType == 'ServiceType') {
-        if (onboarding && userData?.accessToken && signUpOTP) {
-          navigation.replace('EmailVerification', {
-            setTimer: true,
-          });
-        } else if (onboarding && userData?.accessToken) {
-          navigation.replace(routes.addDocuments);
-        } else if (onboarding) {
-          navigation.replace('AskRegister');
+        if (!isNewUser) {
+          navigation.replace(routes.loginScreen);
         } else {
-          navigation.replace('Step1');
+          if (onboarding && userData?.accessToken && signUpOTP) {
+            dispatch(userSave(true));
+          } else if (onboarding && userData?.accessToken && !signUpOTP) {
+            navigation.replace('EmailVerification', {
+              setTimer: true,
+            });
+          } else if (onboarding && userData?.accessToken) {
+            navigation.replace(routes.addDocuments);
+          } else if (onboarding) {
+            navigation.replace('AskRegister');
+          } else {
+            navigation.replace('Step1');
+          }
         }
       } else {
-        if (onboarding && userData?.accessToken && signUpOTP) {
-          navigation.replace('EmailVerification', {
-            setTimer: true,
-          });
-        } else if (onboarding && userData?.accessToken) {
-          navigation.replace(routes.successAgency);
-        } else if (onboarding) {
-          navigation.replace('AskRegister');
+        if (!isNewUser) {
+          navigation.replace(routes.loginScreen);
         } else {
-          navigation.replace('Step1');
+          if (onboarding && userData?.accessToken && signUpOTP) {
+            dispatch(userSave(true));
+          } else if (onboarding && userData?.accessToken && !signUpOTP) {
+            navigation.replace('EmailVerification', {
+              setTimer: true,
+            });
+          } else if (onboarding && userData?.accessToken) {
+            navigation.replace(routes.successAgency);
+          } else if (onboarding) {
+            navigation.replace('AskRegister');
+          } else {
+            navigation.replace('Step1');
+          }
         }
       }
     }, 2000);

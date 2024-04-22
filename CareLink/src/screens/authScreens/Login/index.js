@@ -29,7 +29,7 @@ import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import {userSave} from '../../../redux/Slices/splashSlice';
+import {isNewUser, userSave} from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {getDeviceId} from 'react-native-device-info';
@@ -48,13 +48,18 @@ import {
 import Loader from '../../../components/Loader';
 
 const LoginScreen = () => {
+  // hooks
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const usertype = useSelector(state => state.splash.userType);
+  const usertype = useSelector(state => state?.splash?.userType);
+  const isNewUser = useSelector(state => state?.splash?.isNewUser);
+
+  // states
   const [email, setEmail] = useState('');
   const [isPassword, setPassword] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
   const onPressLogin = () => {
     dispatch(userSave(true));
   };
@@ -82,20 +87,36 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
+              // console.log('login data => ', JSON.stringify(res, ' ', 2));
+
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
+
               // Handling User Type
-              if (res?.data?.user?.userType === 'ServiceSide') {
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: routes?.addDocuments}],
-                });
+              if (res?.data?.user?.profileCompleted) {
+                if (res?.data?.user?.userType == 'AgencySide') {
+                  dispatch(userSave(true));
+                } else {
+                  navigation.dispatch(
+                    CommonActions.reset({
+                      index: 0,
+                      routes: [{name: routes.listingOptions}],
+                    }),
+                  );
+                }
               } else {
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: routes.successAgency}],
-                });
+                if (res?.data?.user?.userType === 'ServiceSide') {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes?.addDocuments}],
+                  });
+                } else {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes.successAgency}],
+                  });
+                }
               }
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
@@ -123,8 +144,8 @@ const LoginScreen = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <IconHeaderComp
           title={'Sign In'}
-          onPress={() => navigation.goBack()}
-          imgName={iconPath.leftArrow}
+          onPress={() => isNewUser && navigation.goBack()}
+          imgName={isNewUser && iconPath.leftArrow}
           heading={'Sign in to continue to the care link'}
         />
         <View>
@@ -133,7 +154,12 @@ const LoginScreen = () => {
           </Apptext>
         </View>
         <View style={{marginTop: heightPixel(1)}}>
-          <AppTextInput value={email} onChangeText={setEmail} title={'Email'} />
+          <AppTextInput
+            value={email}
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            title={'Email'}
+          />
           <AppTextInput
             value={isPassword}
             onChangeText={text => setPassword(text)}

@@ -5,7 +5,7 @@ import {decode} from 'base64-arraybuffer';
 import {S3} from 'aws-sdk';
 var fs = require('react-native-fs');
 import {store} from '../redux/store';
-import {setFcmToken} from '../redux/Slices/userDataSlice';
+import {setFcmToken, setDeviceToken} from '../redux/Slices/userDataSlice';
 import {
   ACCESS_KEY_ID,
   BUCKET_NAME,
@@ -13,6 +13,7 @@ import {
   SECRET_ACCESS_KEY,
   signatureVersion,
 } from './constants';
+import DeviceInfo from 'react-native-device-info';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -92,16 +93,16 @@ export const getDeviceId = async () => {
   const devtoken = DeviceInfo.getDeviceId();
   // console.log("deviceToken ", deviceToken)
   if (devtoken) {
-      store.dispatch(deviceToken(devtoken))
+    store.dispatch(setDeviceToken(devtoken));
     return devtoken;
   } else {
     return null;
   }
-}
+};
 
 export const uploadImageOnS3 = async (file, successPath) => {
   console.log('File is', file);
-  console.log('Success path', successPath);
+  // console.log('Success path', successPath);
   const s3bucket = new S3({
     region: BUCKET_REGION,
     accessKeyId: ACCESS_KEY_ID,
@@ -111,6 +112,8 @@ export const uploadImageOnS3 = async (file, successPath) => {
   });
   let contentType = 'image/jpeg';
   let contentDeposition = 'inline;filename="' + file.name + '"';
+
+  // console.log("contesc a", contentDeposition)
   const base64 = await fs.readFile(file.path, 'base64');
   const arrayBuffer = decode(base64);
   s3bucket.createBucket(async () => {
@@ -128,7 +131,7 @@ export const uploadImageOnS3 = async (file, successPath) => {
         successPath(data?.Location);
       })
       .catch(err => {
-        console.log('Upload on S3 error', err);
+        console.log('Error While Uploading Image', err);
       });
   });
 };
