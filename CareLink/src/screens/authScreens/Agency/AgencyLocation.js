@@ -34,7 +34,7 @@ import {userSave} from '../../../redux/Slices/splashSlice';
 const AgencyLocation = ({navigation, route}) => {
   // const {myUserLocation}=useRoute();
   const {myUserLocation, agencyData} = route?.params;
-    // console.log('agency location ', agencyData);
+  // console.log('agency location ', myUserLocation);
 
   // states
   const usertype = useSelector(state => state.splash.userType);
@@ -47,19 +47,36 @@ const AgencyLocation = ({navigation, route}) => {
   // hooks
   const dispatch = useDispatch();
   useEffect(() => {
-    setStreet(myUserLocation.streetAddress);
+    setStreet(myUserLocation?.streetAddress);
     setZipCode(myUserLocation?.zipCode);
     setState(myUserLocation?.stateName);
   }, []);
 
   // functions
   const onNextPress = async () => {
+    console.log('street ', street, typeof street);
     Keyboard.dismiss();
-    if (apartment == '') {
+    if (street === '' || street === null) {
+      RedFlashMessage('Please Enter Street Address');
+      setIsLoading(false);
+      return;
+    }
+    if (apartment === '' || apartment === null) {
       RedFlashMessage('Please Enter Apartement Number');
       setIsLoading(false);
       return;
     }
+    if (zipCode === '' || zipCode === null) {
+      RedFlashMessage('Please Enter ZipCode');
+      setIsLoading(false);
+      return;
+    }
+    if (isState === '' || isState === null) {
+      RedFlashMessage('Please Enter State Name');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       setIsLoading(true);
       const endPoint = api.userProfile;
@@ -128,18 +145,48 @@ const AgencyLocation = ({navigation, route}) => {
           </Apptext>
         </View>
         <View style={{marginBottom: heightPixel(50)}}>
-          <AppTextInput
-            value={street}
-            editable={false}
-            title={'Street Address'}
-          />
+          {myUserLocation?.streetAddress == null ? (
+            <AppTextInput
+              value={street}
+              onChangeText={setStreet}
+              title={'Street Address'}
+            />
+          ) : (
+            <AppTextInput
+              value={street}
+              // onChangeText={setStreet}
+              editable={false}
+              title={'Street Address'}
+            />
+          )}
           <AppTextInput
             value={apartment}
             onChangeText={setApartment}
             title={'Aparment Number'}
           />
-          <AppTextInput value={zipCode} editable={false} title={'Zip Code'} />
-          <AppTextInput value={isState} editable={false} title={'State'} />
+          {myUserLocation?.zipCode == null ? (
+            <AppTextInput
+              value={zipCode}
+              onChangeText={setZipCode}
+              title={'Zip Code'}
+            />
+          ) : (
+            <AppTextInput
+              value={zipCode}
+              // onChangeText={setZipCode}
+              editable={false}
+              title={'Zip Code'}
+            />
+          )}
+          {myUserLocation?.country == null ? (
+            <AppTextInput
+              value={isState}
+              onChangeText={setState}
+              title={'State'}
+            />
+          ) : (
+            <AppTextInput value={isState} editable={false} title={'State'} />
+          )}
         </View>
       </KeyboardAwareScrollView>
       <FormButton buttonTitle={'Next'} onPress={onNextPress} />

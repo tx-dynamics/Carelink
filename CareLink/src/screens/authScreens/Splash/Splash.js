@@ -12,14 +12,17 @@ const Splash = ({navigation}) => {
   const dispatch = useDispatch();
   const onboarding = useSelector(store => store.splash?.onboarding);
   const userData = useSelector(store => store?.userDataSlice);
-  const userType = useSelector(store => store?.appSlice?.userType);
+  // const userType = useSelector(store => store?.appSlice?.userType);
   const isNewUser = useSelector(store => store?.appSlice?.isNewUser);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
-  // const userType = userData?.userData?.userType;
+  const userType = userData?.userData?.userType;
   console.log('userType', userType, isNewUser, signUpOTP, onboarding);
 
   useEffect(() => {
     setTimeout(() => {
+      if (userType == undefined) {
+        navigation.replace('AskRegister');
+      }
       if (userType == 'ServiceSide') {
         if (isNewUser == false) {
           navigation.replace(routes.loginScreen);
@@ -35,13 +38,11 @@ const Splash = ({navigation}) => {
             signUpOTP
           ) {
             navigation.navigate(routes.listingOptions);
-          }
-          //  else if (onboarding && userData?.accessToken && !signUpOTP) {
-          //   navigation.replace('EmailVerification', {
-          //     setTimer: true,
-          //   });
-          // }
-          else if (onboarding && userData?.accessToken) {
+          } else if (onboarding && userData?.accessToken && !signUpOTP) {
+            navigation.replace('EmailVerification', {
+              setTimer: true,
+            });
+          } else if (onboarding && userData?.accessToken) {
             navigation.replace(routes.addDocuments);
           } else if (onboarding) {
             navigation.replace('AskRegister');
@@ -55,13 +56,11 @@ const Splash = ({navigation}) => {
             navigation.replace(routes.successAgency);
           } else if (onboarding && userData?.accessToken && signUpOTP) {
             dispatch(userSave(true));
-          }
-          //  else if (onboarding && !signUpOTP) {
-          //   navigation.replace('EmailVerification', {
-          //     setTimer: true,
-          //   });
-          // }
-          else if (onboarding) {
+          } else if (onboarding && !signUpOTP) {
+            navigation.replace('EmailVerification', {
+              setTimer: true,
+            });
+          } else if (onboarding) {
             navigation.replace('AskRegister');
           } else {
             navigation.replace('Step1');

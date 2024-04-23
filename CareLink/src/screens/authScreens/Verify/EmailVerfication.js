@@ -32,7 +32,7 @@ import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
 import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
-import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
+import {signUpOTPCheck, userType} from '../../../redux/Slices/splashSlice';
 import {useRoute} from '@react-navigation/native';
 import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
 
@@ -77,8 +77,8 @@ const EmailVerification = ({navigation, route}) => {
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
               dispatch(signUpOTPCheck(true));
-              // dispatch(usertype)
               if (usertype == 'ServiceSide') {
+                dispatch(userType('ServiceSide'));
                 // console.log('Inside service side');
                 params.params?.register
                   ? navigation.reset({
@@ -91,6 +91,7 @@ const EmailVerification = ({navigation, route}) => {
                     });
               }
               if (usertype == 'AgencySide') {
+                dispatch(userType('AgencySide'));
                 // console.log('Inside agency side');
                 params.params?.register
                   ? navigation.reset({

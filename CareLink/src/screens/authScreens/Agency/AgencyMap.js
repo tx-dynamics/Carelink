@@ -46,10 +46,16 @@ const AgencyMap = ({navigation, route}) => {
 
   // states
   const [coordinates, setCoordinates] = useState(currentLocation);
-  const [myUserLocation, setMyUserLocation] = useState(null);
+  const [myUserLocation, setMyUserLocation] = useState({
+    streetAddress: '',
+    apartmentNumber: '',
+    zipCode: '',
+    stateName: '',
+    country: '',
+  });
 
   useEffect(() => {
-    // requestLocationPermission();
+    requestLocationPermission();
   }, []);
 
   const requestLocationPermission = async () => {
@@ -73,17 +79,20 @@ const AgencyMap = ({navigation, route}) => {
 
   const onPressNext = () => {
     // console.log('setMyUserLocation', myUserLocation, usertype, isFromProfile);
+
     if (usertype == 'ServiceSide') {
-      navigation.navigate(routes.listingSummary, {
-        data: route?.params,
-      });
+      
+      
+      // navigation.navigate(routes.listingSummary, {
+      //   data: route?.params,
+      // });
     }
     if (usertype == 'AgencySide') {
       if (isFromProfile) {
         navigation.navigate('ProfileNavigator');
         dispatch(fromProfile(false));
       } else {
-        if (Object.keys(myUserLocation).length > 0) {
+        if (myUserLocation.country!=='') {
           // console.log(myUserLocation, route?.params);
           navigation.navigate('AgencyLocation', {
             myUserLocation,
@@ -142,19 +151,21 @@ const AgencyMap = ({navigation, route}) => {
         .then(responseJson => {
           if (responseJson.status === 'OK') {
             setIsLoading(true);
-            // console.log(
-            //   '=> ',
-            //   JSON.stringify(responseJson?.results[3], ' ', 2),
-            // );
-            responseJson?.results[3].address_components.forEach(item => {
+            console.log(
+              '=> ',
+              JSON.stringify(responseJson?.results[0], ' ', 2),
+            );
+            responseJson?.results[0].address_components.forEach(item => {
               switch (item.types[0]) {
                 case 'street_number': // street number
                   userLocation.streetNumber = item.long_name;
                   break;
                 case 'route': // street name
-                  console.log('streetNumber', item.long_name);
-                  userLocation.streetAddress =
-                    userLocation.streetNumber + ' ' + item.long_name;
+                  // console.log('streetNumber', item.long_name);
+                  item.long_name?.length > 0 &&
+                    (userLocation.streetAddress = userLocation.streetNumber
+                      ? userLocation.streetNumber
+                      : '' + ' ' + item.long_name);
                   break;
                 case 'administrative_area_level_1': // state name
                   userLocation.stateName = item.long_name;
@@ -166,14 +177,22 @@ const AgencyMap = ({navigation, route}) => {
                   userLocation.country = item.short_name;
                   break;
               }
+              // 9, Block C Revenue Employees Cooperative Housing Society, Lahore, Punjab 54770, Pakistan
             });
             setIsLoading(false);
-
-            // setMyUserLocation({userLocation});
-            console.log('my user data ', userLocation);
+            setMyUserLocation({
+              streetAddress: userLocation?.streetAddress
+                ? userLocation?.streetAddress
+                : null,
+              apartmentNumber: null,
+              stateName: userLocation?.stateName
+                ? userLocation?.stateName
+                : null,
+              zipCode: userLocation?.zipCode ? userLocation?.zipCode : null,
+              country: userLocation?.country ? userLocation?.country : null,
+            });
+            // setMyUserLocation(responseJson?.results[0].formatted_address);
             // setAddress(responseJson?.results[3]?.formatted_address);
-
-            // resolve(responseJson?.results?.[3]?.formatted_address);
           } else {
             console.log('not found');
             RedFlashMessage('Not Found');
@@ -224,6 +243,9 @@ const AgencyMap = ({navigation, route}) => {
               onDragEnd={values => {
                 onDragMapValues(values);
               }}
+              onPress={values => {
+                onDragMapValues(values);
+              }}
               pointerEvents="auto"
               style={{
                 // backgroundColor: 'yellow',
@@ -239,10 +261,15 @@ const AgencyMap = ({navigation, route}) => {
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
             Address
           </Apptext>
-          {myUserLocation !== null && (
+          {myUserLocation.country !== '' && (
             <Apptext style={[styles.adrs]}>
-              {/* {myUserLocation['streetAddress']}, {myUserLocation['stateName']},{' '}
-              {myUserLocation['country']}, {myUserLocation['zipCode']} */}
+              {myUserLocation['streetAddress'] !== null &&
+                myUserLocation['streetAddress'] + ' ,'}{' '}
+              {myUserLocation['stateName'] !== null &&
+                myUserLocation['stateName'] + ', '}
+              {myUserLocation['country'] !== null &&
+                myUserLocation['country'] + ', '}
+              {myUserLocation['zipCode'] !== null && myUserLocation['zipCode']}
             </Apptext>
           )}
         </View>

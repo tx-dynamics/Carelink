@@ -58,7 +58,7 @@ const AddInformation = ({navigation}) => {
     } else {
       try {
         setIsLoading(true);
-        const endPoint = api.updateProfile;
+        const endPoint = api.userProfile;
         const data = {
           certificates: params?.params?.imagesData[0],
           drivingAbstract: params?.params?.imagesData[1],
@@ -68,6 +68,7 @@ const AddInformation = ({navigation}) => {
           age: age,
           maritalStatus: value,
           experience: exp || '',
+          profileCompleted: true,
         };
 
         await callApi(
@@ -77,7 +78,10 @@ const AddInformation = ({navigation}) => {
           res => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
-              console.log('Updated User data ', res?.data);
+              console.log(
+                'Updated User data ',
+                JSON.stringify(res?.data, ' ', 2),
+              );
               dispatch(setUserData(res?.data?.user));
               SuccessFlashMessage(res?.message);
               navigation.navigate(routes.listingOptions);

@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
         marginTop: heightPixel(10),
         alignItems: "center",
         justifyContent: "center",
+        paddingHorizontal: widthPixel(20),
     },
     addMoreText: {
         top: heightPixel(1),

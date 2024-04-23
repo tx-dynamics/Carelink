@@ -90,7 +90,8 @@ const AddDocuments = ({navigation}) => {
 
   const uploadImageData = async () => {
     setIsLoading(true);
-    const str = isData[isIndex]?.media;
+    if (isData[isIndex]?.media){
+      const str = isData[isIndex]?.media;
     const imageObj = {
       path: str,
       name: str?.substring(str?.lastIndexOf('/')),
@@ -105,6 +106,11 @@ const AddDocuments = ({navigation}) => {
         imagesData: mediaValues,
       });
     }
+    }else{
+      setIsLoading(false);
+      RedFlashMessage(`${isData[isIndex].title} is Required`)
+    }
+    
   };
 
   return (

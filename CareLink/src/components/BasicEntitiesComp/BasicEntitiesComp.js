@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  Keyboard,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -19,6 +20,7 @@ const BasicEntitiesComp = ({basicData, setBasicData}) => {
   const [add, setAdd] = useState('');
   const [isVisible, setVisible] = useState(false);
   const addMorePress = () => {
+    Keyboard.dismiss();
     let data = {
       id: basicData?.length,
       name: add,
@@ -60,6 +62,7 @@ const BasicEntitiesComp = ({basicData, setBasicData}) => {
       />
       <AddMoreModal
         onRequestClose={() => setVisible(false)}
+        title={'Add Entity'}
         visible={isVisible}
         cancelPress={() => setVisible(false)}
         value={add}
