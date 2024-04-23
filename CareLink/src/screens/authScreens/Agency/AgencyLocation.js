@@ -12,7 +12,6 @@ import {
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
 import {useDispatch, useSelector} from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';

@@ -17,16 +17,25 @@ const Splash = ({navigation}) => {
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
   // const userType = userData?.userData?.userType;
   console.log('User data of splash screen', userType);
+  // const userType = userData?.userData?.userType;
 
   useEffect(() => {
     setTimeout(() => {
-      if (userType == 'ServiceType') {
-        if (!isNewUser) {
-          navigation.replace(routes.loginScreen);
-        } else {
-          if (onboarding && userData?.accessToken && signUpOTP) {
-            dispatch(userSave(true));
-          } else if (onboarding && userData?.accessToken && !signUpOTP) {
+      if (!isNewUser) {
+        navigation.replace(routes.loginScreen);
+      } else {
+        if (userType == 'ServiceSide') {
+          if (
+            userData?.userData?.certificates[0] &&
+            userData?.userData?.drivingAbstract &&
+            userData?.userData?.drivingLicense &&
+            userData?.userData?.homePhoto &&
+            userData?.userData?.selfie &&
+            onboarding &&
+            userData?.accessToken
+          ) {
+            navigation.navigate(routes.listingOptions);
+          } else if (onboarding && userData?.accessToken && signUpOTP) {
             navigation.replace('EmailVerification', {
               setTimer: true,
             });
@@ -35,25 +44,37 @@ const Splash = ({navigation}) => {
           } else if (onboarding) {
             navigation.replace('AskRegister');
           } else {
-            navigation.replace('Step1');
+            if (onboarding && userData?.accessToken && signUpOTP) {
+              dispatch(userSave(true));
+            } else if (onboarding && userData?.accessToken && !signUpOTP) {
+              navigation.replace('EmailVerification', {
+                setTimer: true,
+              });
+            } else if (onboarding && userData?.accessToken) {
+              navigation.replace(routes.addDocuments);
+            } else if (onboarding) {
+              navigation.replace('AskRegister');
+            } else {
+              navigation.replace('Step1');
+            }
           }
-        }
-      } else {
-        if (!isNewUser) {
-          navigation.replace(routes.loginScreen);
         } else {
-          if (onboarding && userData?.accessToken && signUpOTP) {
-            dispatch(userSave(true));
-          } else if (onboarding && userData?.accessToken && !signUpOTP) {
-            navigation.replace('EmailVerification', {
-              setTimer: true,
-            });
-          } else if (onboarding && userData?.accessToken) {
-            navigation.replace(routes.successAgency);
-          } else if (onboarding) {
-            navigation.replace('AskRegister');
+          if (!isNewUser) {
+            navigation.replace(routes.loginScreen);
           } else {
-            navigation.replace('Step1');
+            if (onboarding && userData?.accessToken && signUpOTP) {
+              dispatch(userSave(true));
+            } else if (onboarding && userData?.accessToken && !signUpOTP) {
+              navigation.replace('EmailVerification', {
+                setTimer: true,
+              });
+            } else if (onboarding && userData?.accessToken) {
+              navigation.replace(routes.successAgency);
+            } else if (onboarding) {
+              navigation.replace('AskRegister');
+            } else {
+              navigation.replace('Step1');
+            }
           }
         }
       }
