@@ -12,7 +12,7 @@ export const BASE_URL =
 export const api = {
   login: 'api/v1/user/login',
   signUp: 'api/v1/user/signup',
-  logout:'api/v1/user/logout',
+  logout: 'api/v1/user/logout',
   verifyUserEmail: 'api/v1/user/verify',
   termsAndConditions: 'api/v1/termsandcondition',
   privacyPolicy: 'api/v1/privacy',
@@ -21,4 +21,7 @@ export const api = {
   resendOTP: 'api/v1/user/sendOTP',
   verifyForgotPasswordOTP: 'api/v1/user/verifyOTPResetPassword',
   forgetResetPassword: 'api/v1/user/resetPassword',
+
+  // listing routes
+  getListing: 'api/v1/listing',
 };
