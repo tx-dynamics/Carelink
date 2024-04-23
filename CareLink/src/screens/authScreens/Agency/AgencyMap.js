@@ -24,27 +24,32 @@ import {GOOGLE_API_KEY} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import {appIcons} from '../../../Constants/Utilities/assets';
+import colors from '../../../config/colors';
 
 const AgencyMap = ({navigation, route}) => {
+  // dummy location points
+  let currentLocation = {
+    latitude: 31.449590774585772,
+    longitude: 74.28036404773593,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+
   const dispatch = useDispatch();
+
   const usertype = useSelector(state => state.splash.userType);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(currentLocation);
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState('');
   const mapRef = useRef();
 
   // states
-  const [coordinates, setCoordinates] = useState({
-    latitude: location?.latitude ? location?.latitude : 37.78825,
-    longitude: location?.longitude ? location?.longitude : -122.4324,
-    latitudeDelta: 0.123,
-    longitudeDelta: 0.32,
-  });
-  const [myUserLocation, setMyUserLocation] = useState({});
+  const [coordinates, setCoordinates] = useState(currentLocation);
+  const [myUserLocation, setMyUserLocation] = useState(null);
 
   useEffect(() => {
-    requestLocationPermission();
+    // requestLocationPermission();
   }, []);
 
   const requestLocationPermission = async () => {
@@ -79,9 +84,10 @@ const AgencyMap = ({navigation, route}) => {
         dispatch(fromProfile(false));
       } else {
         if (Object.keys(myUserLocation).length > 0) {
+          // console.log(myUserLocation, route?.params);
           navigation.navigate('AgencyLocation', {
             myUserLocation,
-            agencyData,
+            agencyData: route?.params,
           });
         } else {
           RedFlashMessage('Please Select Your Address');
@@ -92,18 +98,33 @@ const AgencyMap = ({navigation, route}) => {
   };
 
   const getLocation = async () => {
-    setIsLoading(true);
-    Geolocation.getCurrentPosition(
-      position => {
-        const {latitude, longitude} = position.coords;
-        setLocation({latitude, longitude});
-        setIsLoading(false);
-      },
-      error => {
-        console.error(error);
-      },
-      {enableHighAccuracy: true, timeout: 15000},
-    );
+    try {
+      setIsLoading(true);
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log('locatoin ', position);
+          const {latitude, longitude} = position?.coords;
+          setCoordinates(prevData => ({
+            ...prevData,
+            latitude: latitude,
+            longitude: longitude,
+          }));
+          setIsLoading(false);
+          // mapRef.current?.animateToRegion({
+          //   latitude: latitude,
+          //   longitude: longitude,
+          //   latitudeDelta: 0.123,
+          //   longitudeDelta: 0.32,
+          // });
+        },
+        error => {
+          console.error(error);
+        },
+        {enableHighAccuracy: true, timeout: 15000},
+      );
+    } catch (error) {
+      console.log('error occured while opening map');
+    }
   };
 
   const getAddressFromCoordinates = (latitude, longitude) => {
@@ -123,15 +144,15 @@ const AgencyMap = ({navigation, route}) => {
             setIsLoading(true);
             // console.log(
             //   '=> ',
-            //   JSON.stringify(responseJson?.results[0], ' ', 2),
+            //   JSON.stringify(responseJson?.results[3], ' ', 2),
             // );
-            responseJson?.results[0].address_components.forEach(item => {
+            responseJson?.results[3].address_components.forEach(item => {
               switch (item.types[0]) {
                 case 'street_number': // street number
-                  console.log('streetNumber', item.long_name);
                   userLocation.streetNumber = item.long_name;
                   break;
                 case 'route': // street name
+                  console.log('streetNumber', item.long_name);
                   userLocation.streetAddress =
                     userLocation.streetNumber + ' ' + item.long_name;
                   break;
@@ -147,11 +168,14 @@ const AgencyMap = ({navigation, route}) => {
               }
             });
             setIsLoading(false);
-            // console.log('my user data ', userLocation);
-            setMyUserLocation(prevState => ({...prevState, ...userLocation}));
-            setAddress(responseJson?.results[3]?.formatted_address);
+
+            // setMyUserLocation({userLocation});
+            console.log('my user data ', userLocation);
+            // setAddress(responseJson?.results[3]?.formatted_address);
+
             // resolve(responseJson?.results?.[3]?.formatted_address);
           } else {
+            console.log('not found');
             RedFlashMessage('Not Found');
           }
         })
@@ -183,18 +207,11 @@ const AgencyMap = ({navigation, route}) => {
           imgName={iconPath.leftArrow}
           heading={'Pin your listed room location on the map'}
         />
-        {/* <MapView
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          style={{width: wp('100%'), height: wp('100%')}}
-        /> */}
-        {location !== null ? (
+
+        <View style={styles.mapContainer}>
           <MapView
-            style={{width: wp('100%'), height: wp('100%')}}
+            // ref={mapRef}
+            style={{width: wp('95%'), height: wp('90%')}}
             zoomEnabled={true}
             showsUserLocation={true}
             showsPointsOfInterest={true}
@@ -203,39 +220,29 @@ const AgencyMap = ({navigation, route}) => {
             initialRegion={coordinates}>
             <Marker
               draggable
-              coordinate={{
-                latitude: location?.latitude,
-                longitude: location?.longitude,
-                latitudeDelta: 0.123,
-                longitudeDelta: 0.32,
-              }}
+              coordinate={coordinates}
               onDragEnd={values => {
-                getAddressFromCoordinates(
-                  values.nativeEvent.coordinate.latitude,
-                  values.nativeEvent.coordinate.longitude,
-                );
-                setCoordinates({
-                  latitude: values.nativeEvent.coordinate.latitude,
-                  longitude: values.nativeEvent.coordinate.longitude,
-                });
+                onDragMapValues(values);
               }}
               pointerEvents="auto"
-              style={{backgroundColor: 'yellow', width: wp(30), height: wp(30)}}
+              style={{
+                // backgroundColor: 'yellow',
+                width: wp(30),
+                height: wp(30),
+              }}
               icon={iconPath.mapPin}
             />
           </MapView>
-        ) : (
-          <Loader isVisible={isLoading} />
-        )}
+        </View>
 
         <View>
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
             Address
           </Apptext>
-          {Object.keys(myUserLocation).length > 0 && (
+          {myUserLocation !== null && (
             <Apptext style={[styles.adrs]}>
-              {myUserLocation['streetAddress']}, {myUserLocation['stateName']},{' '}
-              {myUserLocation['country']}, {myUserLocation['zipCode']}
+              {/* {myUserLocation['streetAddress']}, {myUserLocation['stateName']},{' '}
+              {myUserLocation['country']}, {myUserLocation['zipCode']} */}
             </Apptext>
           )}
         </View>
@@ -244,7 +251,7 @@ const AgencyMap = ({navigation, route}) => {
         buttonTitle={isFromProfile ? 'Update' : 'Next'}
         onPress={onPressNext}
       />
-      <Loader isVisible={isLoading} />
+      {/* <Loader isVisible={isLoading} /> */}
     </AppGLobalView>
   );
 };

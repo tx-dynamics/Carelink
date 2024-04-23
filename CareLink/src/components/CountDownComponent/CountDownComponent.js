@@ -24,8 +24,11 @@ const CountDownComponent = ({email, setIsOTP, isOTP, fromForgotPassword}) => {
       setDuration(prev => prev - 1);
     }, 1000);
 
-    if (duration === 0 && isOTP == '') {
+    if (duration === 0 && isOTP === '') {
       // console.log(`Time's up`);
+      RedFlashMessage("Time's Up");
+      clearInterval(timerId);
+    } else if (duration === 0) {
       RedFlashMessage("Time's Up");
       clearInterval(timerId);
     }

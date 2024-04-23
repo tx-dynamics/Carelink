@@ -125,7 +125,7 @@ function DrawerContent({navigation, userImg, username, userEmail}) {
             dispatch(setDeviceToken(''));
             dispatch(setFcmToken(''));
             dispatch(isNewUser(false));
-            dispatch(userSave(null));
+            // dispatch(userSave(null));
             // dispatch(onBoarding(false));
             // dispatch(signUpOTPCheck(false));
             // dispatch(userType(false));

@@ -34,7 +34,7 @@ import {userSave} from '../../../redux/Slices/splashSlice';
 const AgencyLocation = ({navigation, route}) => {
   // const {myUserLocation}=useRoute();
   const {myUserLocation, agencyData} = route?.params;
-  //   console.log('agency location ', agencyData);
+    // console.log('agency location ', agencyData);
 
   // states
   const usertype = useSelector(state => state.splash.userType);

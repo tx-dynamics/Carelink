@@ -38,33 +38,36 @@ import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
 
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
+  console.log('params', params);
   const dispatch = useDispatch();
   const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const [isLoading, setIsLoading] = useState(false);
-  const [clearOtp,setClearedOtp]=useState(false);
+  const [duration, setDuration] = useState(59);
+  const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
 
-  console.log('User data', userData);
+  // console.log('User data', userData);
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
+    let dtk = await getDeviceId();
     Keyboard.dismiss();
     if (!isOTP) {
       RedFlashMessage('Please enter OTP');
     } else {
       try {
         setIsLoading(true);
-        const endPoint = api.verifySignUpOTP;
+        const endPoint = api.verifyUserEmail;
         const data = {
           email: params?.params?.email?.toLowerCase()
             ? params?.params?.email?.toLowerCase()
             : userData?.userData?.email?.toLowerCase(),
           otp: isOTP,
-          device: {id: getDeviceId(), deviceToken: fcm},
+          device: {id: dtk, deviceToken: fcm},
         };
-
+        // console.log('data', data);
         await callApi(
           Method.POST,
           endPoint,
@@ -74,6 +77,7 @@ const EmailVerification = ({navigation, route}) => {
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
               dispatch(signUpOTPCheck(true));
+              // dispatch(usertype)
               if (usertype == 'ServiceSide') {
                 // console.log('Inside service side');
                 params.params?.register
@@ -104,7 +108,9 @@ const EmailVerification = ({navigation, route}) => {
           },
           err => {
             setIsLoading(false);
-            RedFlashMessage(err);
+            // console.log("res => ",)
+
+            RedFlashMessage(err ? err : 'Please enter correct otp');
           },
         );
       } catch (error) {
@@ -169,14 +175,13 @@ const EmailVerification = ({navigation, route}) => {
           },
           err => {
             setIsLoading(false);
-            setIsOTP('');
-            setClearedOtp(true)
+
             RedFlashMessage(err);
           },
         );
       } catch (error) {
         setIsLoading(false);
-        setClearedOtp
+        setClearedOtp;
         RedFlashMessage('Otp Expired');
       } finally {
         setIsLoading(false);
@@ -187,6 +192,49 @@ const EmailVerification = ({navigation, route}) => {
   const goback = () => {
     setIsOTP('');
     navigation.goBack();
+  };
+
+  useEffect(() => {
+    if (params?.params?.setTimer) {
+      handleResendOTP();
+    }
+  }, []);
+
+  // resend email verification process
+  const handleResendOTP = async () => {
+    setIsOTP('');
+    try {
+      setIsLoading(true);
+      const endPoint = api.resendOTP;
+      const data = {
+        email: userData?.userData?.email?.toLowerCase(),
+      };
+
+      await callApi(
+        Method.POST,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            setIsLoading(false);
+
+            SuccessFlashMessage(res?.message);
+          } else {
+            setIsLoading(false);
+            RedFlashMessage(res?.message);
+          }
+        },
+        err => {
+          setIsLoading(false);
+          RedFlashMessage(err);
+        },
+      );
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <AppGLobalView style={styles.container}>
@@ -208,7 +256,6 @@ const EmailVerification = ({navigation, route}) => {
         <OTPInputView
           pinCount={4}
           autoFocusOnLoad={false}
-          clearInputs={clearOtp}
           style={styles.OTPView}
           onCodeChanged={setIsOTP}
           selectionColor={colors.primary}

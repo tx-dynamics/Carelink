@@ -29,7 +29,7 @@ import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import {isNewUser, userSave} from '../../../redux/Slices/splashSlice';
+import {isNewUser, userSave, userType} from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {getDeviceId} from 'react-native-device-info';
@@ -83,37 +83,56 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              // console.log('login data => ', JSON.stringify(res, ' ', 2));
+              console.log('login data => ', JSON.stringify(res, ' ', 2));
 
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
 
               // Handling User Type
-              if (res?.data?.user?.userType === 'ServiceSide') {
-                if (
-                  res?.data?.user?.certificates[0] &&
-                  res?.data?.user?.drivingAbstract &&
-                  res?.data?.user?.selfie &&
-                  res?.data?.user?.drivingLicense &&
-                  res?.data?.user?.homePhoto
-                ) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes.listingOptions}],
-                  });
+              if (res?.data?.user?.profileCompleted) {
+                if (res?.data?.user?.userType === 'ServiceSide') {
+                  dispatch(userType('ServiceSide'));
+                  {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.listingOptions}],
+                    });
+                  }
                 } else {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes?.addDocuments}],
-                  });
+                  dispatch(userType('AgencySide'));
+                  dispatch(userSave(true));
                 }
               } else {
-                navigation.reset({
-                  index: 0,
-                  routes: [{name: routes.successAgency}],
-                });
+                if (res?.data?.user?.userType === 'ServiceSide') {
+                  dispatch(userType('ServiceSide'));
+                  if (
+                    res?.data?.user?.certificates[0] &&
+                    res?.data?.user?.drivingAbstract &&
+                    res?.data?.user?.selfie &&
+                    res?.data?.user?.drivingLicense &&
+                    res?.data?.user?.homePhoto
+                  ) {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.listingOptions}],
+                    });
+                  } else {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes?.addDocuments}],
+                    });
+                  }
+                } else {
+                  dispatch(userType('AgencySide'));
+                  // dispatch(userSave(true));
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes.successAgency}],
+                  });
+                }
               }
+
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
             } else {
