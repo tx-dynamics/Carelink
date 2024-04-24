@@ -33,8 +33,8 @@ import {userSave} from '../../../redux/Slices/splashSlice';
 
 const AgencyLocation = ({navigation, route}) => {
   // const {myUserLocation}=useRoute();
-  const {myUserLocation, agencyData} = route?.params;
-  // console.log('agency location ', myUserLocation);
+  const {myUserLocation, agencyData, ProviderData} = route?.params;
+  // console.log('agency location ', myUserLocation, ProviderData);
 
   // states
   const usertype = useSelector(state => state.splash.userType);
@@ -54,29 +54,25 @@ const AgencyLocation = ({navigation, route}) => {
 
   // functions
   const onNextPress = async () => {
-    console.log('street ', street, typeof street);
+    // console.log('street ', street, typeof street);
     Keyboard.dismiss();
-    if (street === '' || street === null) {
-      RedFlashMessage('Please Enter Street Address');
-      setIsLoading(false);
-      return;
-    }
-    if (apartment === '' || apartment === null) {
-      RedFlashMessage('Please Enter Apartement Number');
-      setIsLoading(false);
-      return;
-    }
-    if (zipCode === '' || zipCode === null) {
-      RedFlashMessage('Please Enter ZipCode');
-      setIsLoading(false);
-      return;
-    }
-    if (isState === '' || isState === null) {
-      RedFlashMessage('Please Enter State Name');
-      setIsLoading(false);
-      return;
+    Keyboard.dismiss();
+    if (CheckLocationInput()) {
+      if (usertype === 'ServiceSide') {
+        MoveDataToListingScreen();
+        clearForm();
+      } else {
+        saveAgencyProfile();
+      }
     }
 
+    // navigation.navigate("AgencyMap")
+    // navigation.navigate("PaymentPlans")
+  };
+
+  // agencySideApiCall
+
+  const saveAgencyProfile = async () => {
     try {
       setIsLoading(true);
       const endPoint = api.userProfile;
@@ -86,10 +82,10 @@ const AgencyLocation = ({navigation, route}) => {
         about: agencyData?.about,
         coverPhoto: agencyData?.agencyImg,
         profilePhoto: agencyData?.profileImg,
-        streetAddress: myUserLocation?.streetAddress,
+        streetAddress: street,
         apartmentNumber: apartment,
-        zipCode: myUserLocation?.zipCode,
-        stateName: myUserLocation?.stateName,
+        zipCode: zipCode,
+        stateName: isState,
         country: myUserLocation?.country,
         profileCompleted: true,
       };
@@ -114,9 +110,21 @@ const AgencyLocation = ({navigation, route}) => {
       setIsLoading(false);
       RedFlashMessage(error);
     }
+  };
 
-    // navigation.navigate("AgencyMap")
-    // navigation.navigate("PaymentPlans")
+  // ProviderSideListingCall
+  const MoveDataToListingScreen = () => {
+    const myLocationData = {
+      streetAddress: street,
+      apartmentNumber: apartment,
+      zipCode: zipCode,
+      stateName: isState,
+      country: myUserLocation?.country,
+    };
+    navigation.navigate(routes.listingSummary, {
+      ProviderData,
+      myLocationData,
+    });
   };
 
   const clearForm = () => {
@@ -124,6 +132,31 @@ const AgencyLocation = ({navigation, route}) => {
     setApartment('');
     setZipCode('');
     setState('');
+  };
+
+  // const checkMyDataBeforeMoviving
+  const CheckLocationInput = () => {
+    if (street === '' || street === null) {
+      RedFlashMessage('Please Enter Street Address');
+      setIsLoading(false);
+      return false;
+    }
+    if (apartment === '' || apartment === null) {
+      RedFlashMessage('Please Enter Apartement Number');
+      setIsLoading(false);
+      return false;
+    }
+    if (zipCode === '' || zipCode === null) {
+      RedFlashMessage('Please Enter ZipCode');
+      setIsLoading(false);
+      return false;
+    }
+    if (isState === '' || isState === null) {
+      RedFlashMessage('Please Enter State Name');
+      setIsLoading(false);
+      return false;
+    }
+    return true;
   };
   return (
     <AppGLobalView style={styles.container}>

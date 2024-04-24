@@ -28,6 +28,12 @@ import {
 } from '../../../../Constants';
 import colors from '../../../../config/colors';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
+import {callApi, Method} from '../../../../network/NetworkManger';
+import {useSelector} from 'react-redux';
+import {api} from '../../../../network/Environment';
+import Loader from '../../../../components/Loader';
+import moment from 'moment';
 const ServiceHome = ({}) => {
   const DATA = [
     {
@@ -85,9 +91,126 @@ const ServiceHome = ({}) => {
     },
   ];
   const navigation = useNavigation();
+
+  // hooks
+  const userData = useSelector(state => state?.userDataSlice?.userData);
+  const usertype = useSelector(
+    state => state?.userDataSlice?.userData?.userType,
+  );
+  // const userData=useSelector(state=>state?.userDataSlice?.userData);
+
+  // states
+  const [isLoading, setLoading] = useState(false);
+  const [ListingData, setListingData] = useState([]);
+  const [availableListing, setAvailableListing] = useState({
+    availableRooms: 0,
+    availableData: [],
+  });
+  const [bookedListing, setBookedListing] = useState([]);
+  const [listedListing, setListedListing] = useState([]);
+  const [inActiveListing, setInActiveListing] = useState([]);
+
+  // api data
+
+  useEffect(() => {
+    // fetch data from get listing
+    listingData();
+    // console.log('userData ', JSON.stringify(userData,' ',2));
+  }, []);
+
+  // counting rooms
+  const availRooms = [];
+  const bookedRooms = [];
+  const listedRooms = [];
+  const inActiveRooms = [];
+
+  //
+  const roomsRoutingData = [
+    {
+      totalRooms: availableListing?.availableRooms,
+      label: 'Rooms',
+      msg: 'Available',
+      width: wp('33%'),
+      route: routes.availableList,
+    },
+    {
+      totalRooms: 0,
+      label: 'Rooms',
+      msg: 'Booked',
+      route: routes.bookedList,
+    },
+    {
+      totalRooms: 0,
+      label: 'Rooms',
+      msg: 'Listed',
+      route: routes.listedList,
+    },
+    {
+      totalRooms: 0,
+      label: 'Rooms',
+      msg: 'Inactive',
+      inactive: true,
+      route: routes.inactiveList,
+    },
+  ];
+
+  // data functions
+  const listingData = async () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const currentDayMilliseconds = moment(today).valueOf();
+    let totalRooms = 0;
+    // console.log('currentDayMilliseconds -=> ', currentDayMilliseconds);
+    try {
+      setLoading(true);
+
+      const bodyParams = {};
+      const endPoint = `${api.getListing}?query=${encodeURIComponent(
+        JSON.stringify({user: userData._id}),
+      )}`;
+
+      console.log('endpint ', endPoint);
+      const onSucess = result => {
+        // console.log(
+        //   'listingData ',
+        //   JSON.stringify(result?.data?.listing, ' ', 2),
+        // );
+        // setListingData(result?.data?.listing);
+        result?.data?.listing?.forEach(element => {
+          if (element?.availabilityStart >= currentDayMilliseconds) {
+            // console.log(
+            //   'element?.availabilityStart  => ',
+            //   element?.availabilityStart,
+            // );
+            totalRooms = totalRooms + 1;
+            availRooms.push(element);
+          }
+        });
+        // console.log('availableRooms ', totalRooms);
+        setAvailableListing({
+          availableRooms: totalRooms,
+          availableData: availRooms,
+        });
+        setLoading(false);
+      };
+      const onError = error => {
+        setLoading(false);
+        RedFlashMessage(error.message);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSucess, onError);
+    } catch (error) {
+      setLoading(false);
+      RedFlashMessage('Error Occured while fetch listing data Service side');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AppGLobalView style={styles.container}>
       <AppStatusbar />
+      <Loader isVisible={isLoading} />
       <Header
         headerLabel={'Home'}
         rightImgStyle={styles.rightImgStyle}
@@ -100,7 +223,7 @@ const ServiceHome = ({}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.txtView}>
           <Text style={styles.welcomeText}>Welcome</Text>
-          <Apptext style={styles.rms}>James Clear</Apptext>
+          <Apptext style={styles.rms}>{userData?.name}</Apptext>
         </View>
         <View style={styles.whiteBox}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -143,7 +266,7 @@ const ServiceHome = ({}) => {
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
             style={{alignSelf: 'center'}}
-            data={DATA}
+            data={roomsRoutingData}
             horizontal
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
@@ -153,8 +276,8 @@ const ServiceHome = ({}) => {
                     screen: item.route,
                   })
                 }
-                labelValue={item.label}
-                AvailableRooms={item.no}
+                // labelValue={item.label}
+                AvailableRooms={item.totalRooms}
                 firstTxt={item.msg}
                 circleStyle={{
                   backgroundColor: item.inactive

@@ -79,20 +79,25 @@ const AgencyMap = ({navigation, route}) => {
 
   const onPressNext = () => {
     // console.log('setMyUserLocation', myUserLocation, usertype, isFromProfile);
+    // const routeData = route?.params;
+    if (myUserLocation.country===''){
+      RedFlashMessage('Pin Your location on Map is Require');
+      return;
+    }
+    // console.log('routedata ', JSON.stringify(routeData, ' ', 2));
 
     if (usertype == 'ServiceSide') {
-      
-      
-      // navigation.navigate(routes.listingSummary, {
-      //   data: route?.params,
-      // });
+      navigation.navigate('AgencyLocation', {
+        ProviderData: route?.params,
+        myUserLocation,
+      });
     }
     if (usertype == 'AgencySide') {
       if (isFromProfile) {
         navigation.navigate('ProfileNavigator');
         dispatch(fromProfile(false));
       } else {
-        if (myUserLocation.country!=='') {
+        if (myUserLocation.country !== '') {
           // console.log(myUserLocation, route?.params);
           navigation.navigate('AgencyLocation', {
             myUserLocation,
@@ -174,7 +179,7 @@ const AgencyMap = ({navigation, route}) => {
                   userLocation.zipCode = item.short_name;
                   break;
                 case 'country': // country
-                  userLocation.country = item.short_name;
+                  userLocation.country = item.long_name;
                   break;
               }
               // 9, Block C Revenue Employees Cooperative Housing Society, Lahore, Punjab 54770, Pakistan

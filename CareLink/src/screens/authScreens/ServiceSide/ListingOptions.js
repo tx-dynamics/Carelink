@@ -28,6 +28,8 @@ import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import AddMoreComp from '../../../components/AddMoreComp/AddMoreComp';
 import AddMoreModal from '../../../components/AddMoreModal/AddMoreModal';
 import Loader from '../../../components/Loader';
+import EntityCheckComponent from '../../../components/EntityCheckComponent/EntityCheckComponent';
+import {appIcons} from '../../../Constants/Utilities/assets';
 
 const ListingOptions = ({navigation}) => {
   const [basicData, setBasicData] = useState([
@@ -58,6 +60,12 @@ const ListingOptions = ({navigation}) => {
   const [isVisible, setVisible] = useState(false);
   const [add, setAdd] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isAtWashRoom, setAttachWashroom] = useState(false);
+  const [WashroomDetail, setWashroomDetails] = useState({
+    id: 0,
+    name: 'Attach Washroom',
+    selected: false,
+  });
   const [items, setItems] = useState([
     {
       id: 0,
@@ -86,16 +94,6 @@ const ListingOptions = ({navigation}) => {
       label: 'Room 1',
       value: 'Room1',
     },
-    {
-      id: 1,
-      label: 'Room 2',
-      value: 'Room2',
-    },
-    {
-      id: 2,
-      label: 'Room 3',
-      value: 'Room3',
-    },
   ]);
   const minDate = new Date();
   const maxDate = new Date(2025, 6, 3);
@@ -120,6 +118,7 @@ const ListingOptions = ({navigation}) => {
       value: add + room?.length,
     };
     setRoom([...room, data]);
+    setRoomValue(data);
     setVisible(false);
     setAdd('');
   };
@@ -131,11 +130,11 @@ const ListingOptions = ({navigation}) => {
       if (checkListingInfo()) {
         const basicDataList = [];
 
-        for (let value of basicData) {
-          if (value.selected) {
-            basicDataList.push(value);
-          }
-        }
+        // for (let value of basicData) {
+        //   if (value.selected) {
+        //     basicDataList.push(value);
+        //   }
+        // }
         if (picData[0]?.image) {
           if (picData.length > 1 && picData.length <= 8) {
             // upload images on S3 then navigate
@@ -144,8 +143,9 @@ const ListingOptions = ({navigation}) => {
             if (listedImagesUrl?.length > 0) {
               navigation.navigate('Note', {
                 rooms: roomValue,
+                washrooom: WashroomDetail,
                 space: value,
-                entitles: basicDataList,
+                entitles: basicData,
                 dateDuration: startDate + ' - ' + endDate,
                 picturesData: listedImagesUrl,
               });
@@ -159,7 +159,7 @@ const ListingOptions = ({navigation}) => {
             space: value,
             entitles: basicDataList,
             dateDuration: startDate + ' - ' + endDate,
-            picturesData: picData,
+            picturesData: [],
           });
         }
       }
@@ -255,13 +255,19 @@ const ListingOptions = ({navigation}) => {
           mainViewStyle={{marginBottom: wp(3)}}
           onChangeValue={v => setRoomValue(v)}
         />
-        <View style={{width: wp(90), alignSelf: 'center'}}>
+        <View
+          style={{
+            width: wp(90),
+            alignSelf: 'center',
+            marginVertical: heightPixel(3),
+          }}>
           <AddMoreComp
             onPress={() => {
               setVisible(true);
             }}
           />
         </View>
+
         <AppDropDownPicker
           title={'Select Space'}
           open={open}
@@ -272,6 +278,26 @@ const ListingOptions = ({navigation}) => {
           setValue={setValue}
           onChangeValue={v => setValue(v)}
         />
+        <View
+          style={{
+            width: wp(90),
+            alignSelf: 'center',
+            marginTop: heightPixel(7),
+          }}>
+          <EntityCheckComponent
+            onPress={() => {
+              setWashroomDetails({
+                ...WashroomDetail,
+                selected: !isAtWashRoom,
+              });
+              setAttachWashroom(!isAtWashRoom);
+            }}
+            icon={
+              isAtWashRoom == true ? appIcons.tickCheck : appIcons.tickUncheck
+            }
+            title={'Attach Washroom'}
+          />
+        </View>
         <BasicEntitiesComp basicData={basicData} setBasicData={setBasicData} />
         <CalendarComponent
           maxDate={maxDate}

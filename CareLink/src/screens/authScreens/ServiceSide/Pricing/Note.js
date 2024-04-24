@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Keyboard, StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import Apptext from '../../../../components/Apptext';
 import DefaultStyles from '../../../../config/Styles';
@@ -17,12 +17,13 @@ import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
 
 const Note = ({navigation}) => {
   const params = useRoute();
-  console.log('params ', JSON.stringify(params, ' ', 2));
+  // console.log('params ', JSON.stringify(params, ' ', 2));
   const [note, setNote] = useState('');
 
   // handling note from provider
   const addNoteInData = buttonAction => {
     //AgencyLocation
+    Keyboard.dismiss();
     try {
       if (buttonAction === 'Skip') {
         navigation.navigate('AgencyMap', {

@@ -24,4 +24,5 @@ export const api = {
 
   // listing routes
   getListing: 'api/v1/listing',
+  createListing:'api/v1/listing'
 };

@@ -136,7 +136,7 @@ const AvailableList = ({ navigation }) => {
                 renderItem={({ item, index }) => (
                     <ServiceListingComp
                         rightTexPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })}
-                        onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
+                        // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
                         facilityData={item.facility}
                         pic={item.pic}
                         rightTxt={"Edit"}
