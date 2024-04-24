@@ -128,6 +128,7 @@ const ServiceHome = ({}) => {
   const roomsRoutingData = [
     {
       totalRooms: availableListing?.availableRooms,
+      roomsData: availableListing?.availableData,
       label: 'Rooms',
       msg: 'Available',
       width: wp('33%'),
@@ -271,11 +272,13 @@ const ServiceHome = ({}) => {
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <ServiceRoomComp
-                onPress={() =>
+                onPress={() => {
+                  let Roomdata = item?.roomsData;
                   navigation.navigate('withoutBottomTabnavigator', {
                     screen: item.route,
-                  })
-                }
+                    params: {Roomdata},
+                  });
+                }}
                 // labelValue={item.label}
                 AvailableRooms={item.totalRooms}
                 firstTxt={item.msg}

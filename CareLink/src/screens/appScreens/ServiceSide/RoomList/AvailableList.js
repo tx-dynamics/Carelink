@@ -8,6 +8,7 @@ import { appIcons } from '../../../../Constants/Utilities/assets'
 import { heightPixel, routes } from '../../../../Constants'
 import ServiceListingComp from '../../../../components/ServiceListingComp'
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView'
+import { useRoute } from '@react-navigation/native'
 
 
 export const ListedData = [
@@ -49,20 +50,6 @@ export const ListedData = [
     {
         id: 'bd7asdaac4bea-c1b1-46c2-aed5-3ad53abb28ba',
         status: "Inactive",
-        description: `You will get 20 listing to post in a month with this monthly plan`,
-        pic: appIcons.dummyPic3,
-        facility: [
-            {
-                id: 1,
-                title: "Wheelchair"
-            },
-
-        ]
-    },
-    {
-        id: 'bd7ac4bhjfgea-c1b1-46c2-aed5-3ad53abb28ba',
-        adress: "Magnolia Meadows",
-        status: "Available",
         description: `You will get 20 listing to post in a month with this monthly plan`,
         pic: appIcons.dummyPic3,
         facility: [
@@ -117,6 +104,11 @@ export const ListedData = [
     },
 ];
 const AvailableList = ({ navigation }) => {
+    // hooks
+    const {Roomdata}=useRoute()?.params;
+    console.log("params ", JSON.stringify(Roomdata,' ',2))
+
+
 
     return (
         <AppGLobalView >
@@ -125,25 +117,25 @@ const AvailableList = ({ navigation }) => {
                 imgName={iconPath.leftArrow}
                 onPress={() => navigation.goBack()}
             />
-            <LeftSideBoldHeading title={"Available"} number={ListedData?.length} />
+            <LeftSideBoldHeading title={"Available"} number={Roomdata?.length} />
             <FlatList showsVerticalScrollIndicator={false}
                 style={{
                     paddingVertical: heightPixel(10)
                 }}
                 ListHeaderComponent={() => <View style={{ marginTop: heightPixel(1) }}></View>}
-                data={ListedData}
+                data={Roomdata}
                 keyExtractor={(item, index) => index}
                 renderItem={({ item, index }) => (
                     <ServiceListingComp
                         rightTexPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.listingOptions })}
                         // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
-                        facilityData={item.facility}
-                        pic={item.pic}
+                        facilityData={item.entities}
+                        pic={item.photos[0]}
                         rightTxt={"Edit"}
-                        detail={"Lorem ipsum dolor sit amet, c amet, c Lorem ipsum dolor sit amet, c "}
+                        detail={item?.notes}
                         showProposals={true}
-                        labelValue={"For 20 days"}
-                        name={"ABC Rental Agency"}
+                        labelValue={[item?.availabilityStart,item?.availabilityEnd]}
+                        name={item?.rooms[0]?.room}
                     // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
                     />
                 )}
