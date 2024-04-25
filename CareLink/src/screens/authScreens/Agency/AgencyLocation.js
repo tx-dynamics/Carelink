@@ -82,11 +82,21 @@ const AgencyLocation = ({navigation, route}) => {
         about: agencyData?.about,
         coverPhoto: agencyData?.agencyImg,
         profilePhoto: agencyData?.profileImg,
-        streetAddress: street,
-        apartmentNumber: apartment,
-        zipCode: zipCode,
-        stateName: isState,
-        country: myUserLocation?.country,
+        location: {
+          type: 'Point',
+          coordinates: [myUserLocation?.latitude, myUserLocation?.longitude],
+          address:
+            street +
+            ' ' +
+            apartment +
+            ' ' +
+            zipCode +
+            ' ' +
+            isState +
+            ' ' +
+            country,
+        },
+
         profileCompleted: true,
       };
       //   console.log('data ', data);
@@ -120,6 +130,8 @@ const AgencyLocation = ({navigation, route}) => {
       zipCode: zipCode,
       stateName: isState,
       country: myUserLocation?.country,
+      latitude: myUserLocation?.latitude,
+      longitude: myUserLocation?.longitude,
     };
     navigation.navigate(routes.listingSummary, {
       ProviderData,

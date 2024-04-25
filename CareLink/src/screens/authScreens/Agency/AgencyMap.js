@@ -7,6 +7,7 @@ import {
   ImageBackground,
   PermissionsAndroid,
   Platform,
+  Alert,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
@@ -52,6 +53,8 @@ const AgencyMap = ({navigation, route}) => {
     zipCode: '',
     stateName: '',
     country: '',
+    latitude: '',
+    longitude: '',
   });
 
   useEffect(() => {
@@ -80,11 +83,11 @@ const AgencyMap = ({navigation, route}) => {
   const onPressNext = () => {
     // console.log('setMyUserLocation', myUserLocation, usertype, isFromProfile);
     // const routeData = route?.params;
-    if (myUserLocation.country===''){
+    if (myUserLocation.country === '') {
       RedFlashMessage('Pin Your location on Map is Require');
       return;
     }
-    // console.log('routedata ', JSON.stringify(routeData, ' ', 2));
+    // console.log('routedata ', JSON.stringify(myUserLocation, ' ', 2));
 
     if (usertype == 'ServiceSide') {
       navigation.navigate('AgencyLocation', {
@@ -143,6 +146,7 @@ const AgencyMap = ({navigation, route}) => {
 
   const getAddressFromCoordinates = (latitude, longitude) => {
     let userLocation = {};
+  
     return new Promise((resolve, reject) => {
       fetch(
         'https://maps.googleapis.com/maps/api/geocode/json?address=' +
@@ -182,6 +186,8 @@ const AgencyMap = ({navigation, route}) => {
                   userLocation.country = item.long_name;
                   break;
               }
+              userLocation.latitude = latitude;
+              userLocation.longitude = longitude;
               // 9, Block C Revenue Employees Cooperative Housing Society, Lahore, Punjab 54770, Pakistan
             });
             setIsLoading(false);
@@ -195,6 +201,8 @@ const AgencyMap = ({navigation, route}) => {
                 : null,
               zipCode: userLocation?.zipCode ? userLocation?.zipCode : null,
               country: userLocation?.country ? userLocation?.country : null,
+              latitude: userLocation?.latitude,
+              longitude: userLocation?.longitude,
             });
             // setMyUserLocation(responseJson?.results[0].formatted_address);
             // setAddress(responseJson?.results[3]?.formatted_address);
@@ -205,6 +213,7 @@ const AgencyMap = ({navigation, route}) => {
         })
         .catch(error => {
           Alert.alert('Location Not Found');
+          RedFlashMessage("Something Went Wrong While Fetching Location")
         });
     });
   };

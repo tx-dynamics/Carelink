@@ -38,30 +38,14 @@ const ServiceListingComp = ({
   statusTab,
   statusStyle,
 }) => {
-  // var duration = moment.duration(labelValue[0], 'milliseconds');
-
-  // var diff = new moment.duration(labelValue[1]);
-  //     console.log(diff.asDays(),   // # of days in the duration
-  //     diff.asHours(),    // # of hours in the duration
-  //     diff.asMinutes());
-  // let today=new Date();
-  // today.setHours(0,0,0,0);
-
-  // var Startduration = today.getTime()
-  // console.log("Startduration ",Startduration)
 
   var Startduration = moment.utc(
     moment.duration(labelValue[0]).asMilliseconds(),
   );
   var Endduration = moment.utc(moment.duration(labelValue[1]).asMilliseconds());
-  // Startduration=moment.utc(Startduration.asMilliseconds()).format("DD MMM YYYY");
-  // var ddd=moment.utc(moment.duration(labelValue[0]).asMilliseconds());
-
-  // const formattedStartDate =Startduration.format("DD MMM YYYY");
-  // const formattedEndDate =Endduration.format("DD MMM YYYY");
 
   const daysDifference = Endduration.diff(Startduration, 'days');
-  console.log('formattedStartDate ', 'daysDifference', daysDifference);
+//   console.log('formattedStartDate ', 'daysDifference', daysDifference);
 
   return (
     <TouchableOpacity

@@ -21,8 +21,16 @@ export const api = {
   resendOTP: 'api/v1/user/sendOTP',
   verifyForgotPasswordOTP: 'api/v1/user/verifyOTPResetPassword',
   forgetResetPassword: 'api/v1/user/resetPassword',
+  getUserProfile: 'api/v1/user',
 
   // listing routes
   getListing: 'api/v1/listing',
-  createListing:'api/v1/listing'
+  createListing: 'api/v1/listing',
+
+  // proposals
+  createProposal: 'api/v1/proposal',
+  getProposal:'api/v1/proposal',
+
+  // liked listings
+  likeList:'api/v1/listingLike',
 };

@@ -106,22 +106,28 @@ const LoginScreen = () => {
               } else {
                 if (res?.data?.user?.userType === 'ServiceSide') {
                   dispatch(userType('ServiceSide'));
-                  if (
-                    res?.data?.user?.certificates[0] &&
-                    res?.data?.user?.drivingAbstract &&
-                    res?.data?.user?.selfie &&
-                    res?.data?.user?.drivingLicense &&
-                    res?.data?.user?.homePhoto
-                  ) {
-                    navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.listingOptions}],
-                    });
+                  if (res?.data?.user?.user1stListing) {
+                    dispatch(userSave(true))
+                    // navigation.replace('Drawer')
+                    
                   } else {
-                    navigation.reset({
-                      index: 0,
-                      routes: [{name: routes?.addDocuments}],
-                    });
+                    if (
+                      res?.data?.user?.certificates[0] &&
+                      res?.data?.user?.drivingAbstract &&
+                      res?.data?.user?.selfie &&
+                      res?.data?.user?.drivingLicense &&
+                      res?.data?.user?.homePhoto
+                    ) {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: routes.listingOptions}],
+                      });
+                    } else {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: routes?.addDocuments}],
+                      });
+                    }
                   }
                 } else {
                   dispatch(userType('AgencySide'));

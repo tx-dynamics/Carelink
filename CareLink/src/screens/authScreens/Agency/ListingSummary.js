@@ -25,10 +25,10 @@ import {uploadImageOnS3} from '../../../Services/HelpingMethods';
 
 const ListingSummary = ({navigation}) => {
   const {ProviderData, myLocationData} = useRoute()?.params;
-  console.log(
-    'Days are',
-    JSON.stringify(ProviderData?.data?.dateDuration, ' ', 2),
-  );
+  // console.log(
+  //   'Days are',
+  //   JSON.stringify(ProviderData?.data?.dateDuration, ' ', 2),
+  // );
   // console.log('Days are', JSON.stringify(myLocationData, ' ', 2));
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
@@ -62,34 +62,37 @@ const ListingSummary = ({navigation}) => {
   }));
   // console.log('filterEntitles', filterEntitles);
 
+  // update profile for the first time when user create his listings
+
+  const updateProfile = async () => {
+    try {
+      setIsLoading(true);
+      const bodyParams = {user1stListing: true};
+      const endPoint = api.userProfile;
+      const onSuccess = result => {
+        setIsLoading(false);
+        setVisible(false);
+        dispatch(userSave(true));
+        navigation.navigate('HomeNavigator');
+      };
+      const onError = error => {
+        RedFlashMessage('Something Went Wrong!', error.message);
+      };
+      await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      console.log('error while updating user profile for the first time');
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const onPressGoTo = () => {
-    setVisible(false);
-    // dispatch(userSave(true));
-    navigation.navigate('HomeNavigator');
+    updateProfile();
   };
   const onPressListNow = () => {
     setVisible(true);
   };
-
-  // const uploadImageData = async () => {
-  //   console.log('hello data ');
-  //   // setIsLoading(true);
-  //   // if (imagesData[0]?.image) {
-  //   //   const str = imagesData[0]?.image;
-  //   //   const imageObj = {
-  //   //     path: str,
-  //   //     name: str?.substring(str?.lastIndexOf('/')),
-  //   //   };
-  //   //   console.log('Image obj', imageObj);
-  //   //   await uploadImageOnS3(imageObj, res => {
-  //   //     console.log('response is', res);
-  //   //   setImage(res);
-  //   //   setIsLoading(false);
-  //   // handleSubmit(res);
-  //   //   });
-  //   // } else {
-  //   // }
-  // };
 
   const handleSubmit = async () => {
     try {
@@ -112,18 +115,26 @@ const ListingSummary = ({navigation}) => {
         entities: entities,
         availabilityStart: startDateMoment,
         availabilityEnd: endDateMoment,
+        washroom:ProviderData?.data?.washrooom,
         photos: ProviderData?.data?.picturesData,
         notes: ProviderData?.note ? ProviderData?.note : '',
         status: 'active',
-        location:
-          myLocationData?.streetAddress +
-          ' ' +
-          myLocationData?.apartmentNumber +
-          ' ' +
-          myLocationData?.zipCode +
-          ' ' +
-          myLocationData?.stateName,
+        location: {
+          type: 'Point',
+          coordinates: [myLocationData?.latitude, myLocationData?.longitude],
+          address:
+            myLocationData?.streetAddress +
+            ', ' +
+            myLocationData?.apartmentNumber +
+            ', ' +
+            myLocationData?.zipCode +
+            ', ' +
+            myLocationData?.stateName +
+            ', ' +
+            myLocationData?.country,
+        },
       };
+      console.log('🚀 ~ handleSubmit ~ data:', JSON.stringify(data, ' ', 2));
 
       await callApi(
         Method.POST,
@@ -132,8 +143,8 @@ const ListingSummary = ({navigation}) => {
         res => {
           if (res?.status === 200 || res?.status === 201) {
             setIsLoading(false);
-            onPressListNow();
             SuccessFlashMessage(res?.message);
+            onPressListNow();
           } else {
             setIsLoading(false);
             RedFlashMessage(res?.message);

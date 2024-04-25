@@ -18,29 +18,6 @@ const ServiceProviderInfo = ({
   days,
   entitlesData,
 }) => {
-  const image = [
-    {
-      id: 1,
-      pic: appIcons.dummyPic1,
-    },
-    {
-      id: 2,
-      pic: appIcons.dummyPic2,
-    },
-    {
-      id: 3,
-      pic: appIcons.dummyPic3,
-    },
-    {
-      id: 4,
-      pic: appIcons.dummyPic3,
-    },
-    {
-      id: 5,
-      pic: appIcons.dummyPic3,
-    },
-  ];
-
   const entitlesFilterData = entitlesData?.filter(item => item.selected);
   // const washroomFacility = washRoom.filter(item => item.selected);
 
@@ -95,7 +72,7 @@ const ServiceProviderInfo = ({
           <Text style={styles.noteText}>{note}</Text>
         </>
       )}
-      {images && (
+      {(images?.length > 0 || images !== null) && (
         <>
           <Text style={styles.forText}>Images</Text>
           <FlatList

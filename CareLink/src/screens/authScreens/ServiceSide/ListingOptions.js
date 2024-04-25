@@ -30,6 +30,7 @@ import AddMoreModal from '../../../components/AddMoreModal/AddMoreModal';
 import Loader from '../../../components/Loader';
 import EntityCheckComponent from '../../../components/EntityCheckComponent/EntityCheckComponent';
 import {appIcons} from '../../../Constants/Utilities/assets';
+import { useSelector } from 'react-redux';
 
 const ListingOptions = ({navigation}) => {
   const [basicData, setBasicData] = useState([
@@ -49,6 +50,12 @@ const ListingOptions = ({navigation}) => {
       selected: false,
     },
   ]);
+
+  const user1stListing=useSelector(state=>state?.userDataSlice?.userData?.user1stListing);
+  // console.log("🚀 ~ ListingOptions ~ userData:", userData)
+  
+
+
   // const [picData, setPicData] = useState([]);
   const [picData, setPicData] = useState([{image: '', add: true}]);
   const [startDate, setStartDate] = useState(null);
@@ -237,8 +244,9 @@ const ListingOptions = ({navigation}) => {
       <Loader isVisible={isLoading} />
       <IconHeaderComp
         title={'Add Listing'}
-        onPress={() => navigation.goBack()}
-        imgName={iconPath.leftArrow}
+        
+        onPress={() => user1stListing==true? navigation.goBack():null}
+        imgName={user1stListing==true? iconPath.leftArrow:null}
         heading={'Add Listing Information'}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>

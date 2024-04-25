@@ -90,12 +90,17 @@ const AgencyHome = ({}) => {
 
   // states
   const [listingDetails, setListingDetails] = useState([]);
+  const [proposalData, setPropsalData] = useState({
+    countsData: {},
+    proposalList: [],
+  });
   const [isLoading, setIsLoading] = useState(false);
 
   // hooks
   const UserId = useSelector(state => state?.userDataSlice?.userData?._id);
-    console.log("UserId ", UserId)
+  // console.log("UserId ", UserId)
   useEffect(() => {
+    // getProposal
     fetchListingDetails();
   }, []);
 
@@ -105,25 +110,53 @@ const AgencyHome = ({}) => {
       setIsLoading(true);
       //   api?query=${encodeURIComponent(JSON.stringify({ user: id }))}
       const endPoint = `${api.getListing}?query=${encodeURIComponent(
-        JSON.stringify({_id: UserId}),
+        JSON.stringify({}),
       )}`;
       const bodyParams = {};
-      console.log('data ', endPoint);
+      //   console.log('data ', endPoint);
       const onSuccess = result => {
         console.log(
-          'home screen listing data ',
+          'home screen listing data asdfa',
           JSON.stringify(result, ' ', 2),
         );
-        setIsLoading(false)
-        //   SuccessFlashMessage(result?.message);
-        //   dispatch(setUserData(result?.data?.user));
-        //   setIsLoading(false);
-        //   dispatch(userSave(true));
-        //   clearForm();
+        setListingDetails(result?.data?.listing);
+        fetchProposalDetails();
       };
 
       const onError = error => {
-        console.log('afasdfasd ', error);
+        console.log('🚀 ~ onError ~ error:', error);
+        setIsLoading(false);
+        RedFlashMessage(error);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    }
+  };
+
+  const fetchProposalDetails = async () => {
+    try {
+      setIsLoading(true);
+      //   api?query=${encodeURIComponent(JSON.stringify({ user: id }))}
+      const endPoint = api.getProposal;
+      const bodyParams = {};
+      //   console.log('data ', endPoint);
+      const onSuccess = result => {
+        // console.log(
+        //   '🚀 ~ onSuccess ~ result:',
+        //   JSON.stringify(result?.data?.counts, ' ', 2),
+        // );
+        setPropsalData({
+          countsData: result?.data?.counts,
+          proposalList: result?.data?.proposal,
+        });
+        setIsLoading(false);
+      };
+
+      const onError = error => {
+        console.log('🚀 ~ onError ~ error:', error);
         setIsLoading(false);
         RedFlashMessage(error);
       };
@@ -171,12 +204,15 @@ const AgencyHome = ({}) => {
           onPress={() =>
             navigation.navigate('withoutBottomTabnavigator', {
               screen: routes.agencyProposalList,
+              params: {
+                proposalData,
+              },
             })
           }
           labelValue={'Proposals'}
-          BookedRooms={'4'}
+          BookedRooms={proposalData?.proposalList?.length}
           scndTxt={'Submitted'}
-          AvailableRooms={'3'}
+          AvailableRooms={proposalData?.countsData?.accepted}
           firstTxt={'Accepted'}
         />
         <View style={styles.listingView}>
@@ -185,6 +221,9 @@ const AgencyHome = ({}) => {
             onPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
                 screen: routes.customerListing,
+                params: {
+                  listingDetails,
+                },
               })
             }>
             <Apptext style={styles.dtls}>See All</Apptext>
@@ -194,18 +233,24 @@ const AgencyHome = ({}) => {
           showsVerticalScrollIndicator={false}
           scrollEnabled={false}
           // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
-          data={agencyData}
-          keyExtractor={(item, index) => item.id}
+          data={listingDetails}
+          keyExtractor={(item, index) => index}
           renderItem={({item, index}) => (
             <CustomerListingComp
               onPress={() =>
                 navigation.navigate('withoutBottomTabnavigator', {
                   screen: routes.roomDetails,
+                  params: {
+                    item,
+                  },
                 })
               }
-              title={item.adress}
-              duration={item.duation}
-              facilityData={item.facility}
+              title={item?.location?.address?.slice(
+                0,
+                item?.location?.address?.indexOf(','),
+              )}
+              durationData={[item?.availabilityStart, item?.availabilityEnd]}
+              facilityData={item?.entities}
             />
           )}
         />

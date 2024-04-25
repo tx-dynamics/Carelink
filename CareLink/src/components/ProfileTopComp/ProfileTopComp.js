@@ -9,11 +9,11 @@ const ProfileTopComp = ({ pic, name, city, memberDuration }) => {
     return (
         <View>
             <TouchableOpacity style={styles.imgView} >
-                <Image style={styles.imgStl} source={pic} />
+                <Image style={styles.imgStl} source={{uri:pic}} />
             </TouchableOpacity>
             <View style={{ alignSelf: 'center' }} >
                 <Apptext style={styles.jmsTxt} >{name}</Apptext>
-                {/* <Apptext style={styles.dcTxt} >{city}</Apptext> */}
+                <Apptext style={styles.dcTxt} >{"city"}</Apptext>
             </View>
             <View style={styles.pinkBox}>
                 <Apptext style={styles.mmbrTxt} >{"Member since " + memberDuration}</Apptext>
