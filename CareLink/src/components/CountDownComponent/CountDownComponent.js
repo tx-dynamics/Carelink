@@ -13,7 +13,7 @@ import {
 } from '../../Constants/Utilities/assets/Snakbar';
 import Loader from '../Loader';
 
-const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
+const CountDownComponent = ({email, setIsOTP, isOTP, fromForgotPassword}) => {
   const [duration, setDuration] = useState(59);
   const [paused, setPaused] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,8 +24,12 @@ const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
       setDuration(prev => prev - 1);
     }, 1000);
 
-    if (duration === 0) {
-      console.log(`Time's up`);
+    if (duration === 0 && isOTP === '') {
+      // console.log(`Time's up`);
+      RedFlashMessage("Time's Up");
+      clearInterval(timerId);
+    } else if (duration === 0) {
+      RedFlashMessage("Time's Up");
       clearInterval(timerId);
     }
 
@@ -73,6 +77,7 @@ const CountDownComponent = ({email, setIsOTP, fromForgotPassword}) => {
   };
 
   const handleResendOTP = async () => {
+    setIsOTP('');
     try {
       setIsLoading(true);
       const endPoint = api.forgotPassword;

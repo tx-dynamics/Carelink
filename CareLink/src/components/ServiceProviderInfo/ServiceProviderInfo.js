@@ -6,9 +6,11 @@ import {fonts} from '../../Constants/Fonts';
 import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityComp';
 import {appIcons} from '../../Constants/Utilities/assets';
 import SimpleImageComponent from '../SimpleImageComponent/SimpleImageComponent';
+import EntityCheckComponent from '../EntityCheckComponent/EntityCheckComponent';
 
 const ServiceProviderInfo = ({
   floor,
+  washRoom,
   availableOn,
   location,
   note,
@@ -16,30 +18,8 @@ const ServiceProviderInfo = ({
   days,
   entitlesData,
 }) => {
-  const image = [
-    {
-      id: 1,
-      pic: appIcons.dummyPic1,
-    },
-    {
-      id: 2,
-      pic: appIcons.dummyPic2,
-    },
-    {
-      id: 3,
-      pic: appIcons.dummyPic3,
-    },
-    {
-      id: 4,
-      pic: appIcons.dummyPic3,
-    },
-    {
-      id: 5,
-      pic: appIcons.dummyPic3,
-    },
-  ];
-
-  const entitlesFilterData = entitlesData.filter(item => item.selected);
+  const entitlesFilterData = entitlesData?.filter(item => item.selected);
+  // const washroomFacility = washRoom.filter(item => item.selected);
 
   return (
     <View style={styles.main}>
@@ -48,8 +28,16 @@ const ServiceProviderInfo = ({
           Floor: <Text style={styles.floorSecondText}>{floor}</Text>{' '}
         </Text>
       )}
+      <EntityCheckComponent
+        disabled={true}
+        icon={
+          washRoom?.selected == true ? appIcons.tickCheck : appIcons.tickUncheck
+        }
+        title={'Attach Washroom'}
+      />
+
       <View style={styles.mapView}>
-        {entitlesFilterData.map((item, index) => (
+        {entitlesFilterData?.map((item, index) => (
           <AvailableFacilityComp key={index} title={item.name} />
         ))}
       </View>
@@ -84,7 +72,7 @@ const ServiceProviderInfo = ({
           <Text style={styles.noteText}>{note}</Text>
         </>
       )}
-      {images && (
+      {(images?.length > 0 || images !== null) && (
         <>
           <Text style={styles.forText}>Images</Text>
           <FlatList
@@ -93,10 +81,10 @@ const ServiceProviderInfo = ({
             keyExtractor={(item, index) => index}
             style={styles.imgFlatlistStyle}
             horizontal
-            data={images.slice(0, -1)}
-            renderItem={({item, index}) => (
-              console.log('Items is', item?.image),
-              (<SimpleImageComponent disabled pic={item?.image} />)
+            data={images}
+            renderItem={({item}) => (
+              // console.log('Items is', item)
+              <SimpleImageComponent disabled pic={item} />
             )}
           />
         </>
@@ -145,6 +133,7 @@ const styles = StyleSheet.create({
   mapView: {
     flexWrap: 'wrap',
     flexDirection: 'row',
+    marginTop: heightPixel(15),
   },
   attachText: {
     fontSize: fontPixel(14),

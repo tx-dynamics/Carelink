@@ -24,15 +24,19 @@ import {
 import {uploadImageOnS3} from '../../../Services/HelpingMethods';
 
 const ListingSummary = ({navigation}) => {
-  const params = useRoute();
-  console.log('Days are', params?.params?.data?.data?.data?.picturesData);
+  const {ProviderData, myLocationData} = useRoute()?.params;
+  // console.log(
+  //   'Days are',
+  //   JSON.stringify(ProviderData?.data?.dateDuration, ' ', 2),
+  // );
+  // console.log('Days are', JSON.stringify(myLocationData, ' ', 2));
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState('');
 
-  const dateSeperator =
-    params?.params?.data?.data?.data?.dateDuration?.split('-');
+  const dateSeperator = ProviderData?.data?.dateDuration?.split('-');
+  console.log('dateSeperator ', dateSeperator);
   const parsedStartDate = moment(
     dateSeperator[0],
     'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ',
@@ -47,8 +51,8 @@ const ListingSummary = ({navigation}) => {
 
   const daysDifference = parsedEndDate.diff(parsedStartDate, 'days');
 
-  const imagesData = params?.params?.data?.data?.data?.picturesData;
-  const filterEntitles = params?.params?.data?.data?.data?.entitles?.filter(
+  // const imagesData = ProviderData?.data?.picturesData;
+  const filterEntitles = ProviderData?.data?.entitles?.filter(
     item => item.selected,
   );
 
@@ -56,59 +60,81 @@ const ListingSummary = ({navigation}) => {
     name: item?.name,
     selected: item?.selected, // Or you can set it to item.selected if needed
   }));
-  console.log('filterEntitles', filterEntitles);
+  // console.log('filterEntitles', filterEntitles);
+
+  // update profile for the first time when user create his listings
+
+  const updateProfile = async () => {
+    try {
+      setIsLoading(true);
+      const bodyParams = {user1stListing: true};
+      const endPoint = api.userProfile;
+      const onSuccess = result => {
+        setIsLoading(false);
+        setVisible(false);
+        dispatch(userSave(true));
+        navigation.navigate('HomeNavigator');
+      };
+      const onError = error => {
+        RedFlashMessage('Something Went Wrong!', error.message);
+      };
+      await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      console.log('error while updating user profile for the first time');
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onPressGoTo = () => {
-    setVisible(false);
-    dispatch(userSave(true));
-    navigation.navigate('HomeNavigator');
+    updateProfile();
   };
   const onPressListNow = () => {
     setVisible(true);
   };
 
-  const uploadImageData = async () => {
-    setIsLoading(true);
-    const str = imagesData[0]?.image;
-    const imageObj = {
-      path: str,
-      name: str?.substring(str?.lastIndexOf('/')),
-    };
-    console.log('Image obj', imageObj);
-    await uploadImageOnS3(imageObj, res => {
-      console.log('response is', res);
-      //   setImage(res);
-      //   setIsLoading(false);
-      handleSubmit(res);
-    });
-  };
-
-  const handleSubmit = async image => {
+  const handleSubmit = async () => {
     try {
+      // Convert formatted dates back to moment objects
+      const startDateMoment = moment(
+        formattedStartDate,
+        'DD MMM YYYY',
+      )?.valueOf();
+      const endDateMoment = moment(formattedEndDate, 'DD MMM YYYY')?.valueOf();
+
       setIsLoading(true);
-      const endPoint = api.listing;
+      const endPoint = api.createListing;
       const data = {
         rooms: [
           {
-            room: 1,
-            floor: params?.params?.data?.data?.data?.space,
+            room: ProviderData?.data?.rooms,
+            floor: ProviderData?.data?.space,
           },
         ],
         entities: entities,
-        availabilityStart: moment(formattedStartDate).milliseconds(),
-        availabilityEnd: moment(formattedEndDate).milliseconds(),
-        photos: [image],
-        notes: params?.params?.data?.data?.note,
+        availabilityStart: startDateMoment,
+        availabilityEnd: endDateMoment,
+        washroom:ProviderData?.data?.washrooom,
+        photos: ProviderData?.data?.picturesData,
+        notes: ProviderData?.note ? ProviderData?.note : '',
         status: 'active',
-        location:
-          params?.params?.data?.street +
-          ' ' +
-          params?.params?.data?.apartment +
-          ', ' +
-          params?.params?.data?.zipCode +
-          ' ' +
-          params?.params?.data?.isState,
+        location: {
+          type: 'Point',
+          coordinates: [myLocationData?.latitude, myLocationData?.longitude],
+          address:
+            myLocationData?.streetAddress +
+            ', ' +
+            myLocationData?.apartmentNumber +
+            ', ' +
+            myLocationData?.zipCode +
+            ', ' +
+            myLocationData?.stateName +
+            ', ' +
+            myLocationData?.country,
+        },
       };
+      console.log('🚀 ~ handleSubmit ~ data:', JSON.stringify(data, ' ', 2));
 
       await callApi(
         Method.POST,
@@ -117,8 +143,8 @@ const ListingSummary = ({navigation}) => {
         res => {
           if (res?.status === 200 || res?.status === 201) {
             setIsLoading(false);
-            onPressListNow();
             SuccessFlashMessage(res?.message);
+            onPressListNow();
           } else {
             setIsLoading(false);
             RedFlashMessage(res?.message);
@@ -144,31 +170,38 @@ const ListingSummary = ({navigation}) => {
       <AppStatusbar />
       <IconHeaderComp
         title={'Summary'}
-        // heading={'Listing Summary'}
+        heading={'Listing Summary'}
         imgName={iconPath.leftArrow}
         onPress={() => navigation.goBack()}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <ServiceProviderInfo
-          entitlesData={params?.params?.data?.data?.data?.entitles}
+          entitlesData={ProviderData?.data?.entitles}
+          washRoom={ProviderData?.data?.washrooom}
           days={daysDifference}
-          floor={params?.params?.data?.data?.data?.space}
+          note={ProviderData?.note}
+          floor={ProviderData?.data?.space}
           availableOn={formattedStartDate + ' - ' + formattedEndDate}
-          images={imagesData}
+          images={ProviderData?.data?.picturesData}
           location={
-            params?.params?.data?.street +
+            myLocationData?.streetAddress +
             ' ' +
-            params?.params?.data?.apartment +
+            myLocationData?.apartmentNumber +
             ', ' +
-            params?.params?.data?.zipCode +
-            ' ' +
-            params?.params?.data?.isState
+            myLocationData?.zipCode +
+            ', ' +
+            myLocationData?.stateName
           }
-          note={params?.params?.data?.data?.note}
         />
       </KeyboardAwareScrollView>
-      <FormButton buttonTitle={'List Now'} onPress={uploadImageData} />
-      <SuccessfullListedModal visible={isVisible} onPress={onPressGoTo} />
+      <FormButton buttonTitle={'List Now'} onPress={handleSubmit} />
+      <SuccessfullListedModal
+        visible={isVisible}
+        onPress={onPressGoTo}
+        locationTitle={
+          myLocationData?.streetAddress + ' ' + myLocationData?.stateName
+        }
+      />
       <Loader isVisible={isLoading} />
     </AppGLobalView>
   );

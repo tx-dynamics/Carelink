@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import DefaultStyles from "../../../../config/Styles";
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { DrawerActions, useNavigation, useRoute } from '@react-navigation/native'
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import { heightPixel, routes, widthPixel } from '../../../../Constants';
 import { appIcons } from '../../../../Constants/Utilities/assets';
@@ -13,6 +13,8 @@ import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
 
 const ServiceRooms = ({ navigation }) => {
+
+
     const DATA = [
         {
             id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',

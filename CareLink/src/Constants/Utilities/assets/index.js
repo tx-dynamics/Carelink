@@ -58,6 +58,7 @@ const appIcons = {
     datePciker: require(`${iconUrl}/datePciker.png`),
     camera: require(`${iconUrl}/camera.png`),
     uploadIcon: require(`${iconUrl}/uploadIcon.png`),
+    CalrightArrow: require(`${iconUrl}/CalrightArrow.png`),
 }
 
 export { appImages, appIcons }

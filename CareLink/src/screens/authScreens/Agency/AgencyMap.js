@@ -7,6 +7,7 @@ import {
   ImageBackground,
   PermissionsAndroid,
   Platform,
+  Alert,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
@@ -24,24 +25,37 @@ import {GOOGLE_API_KEY} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import {appIcons} from '../../../Constants/Utilities/assets';
+import colors from '../../../config/colors';
 
 const AgencyMap = ({navigation, route}) => {
+  // dummy location points
+  let currentLocation = {
+    latitude: 31.449590774585772,
+    longitude: 74.28036404773593,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+
   const dispatch = useDispatch();
+
   const usertype = useSelector(state => state.splash.userType);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(currentLocation);
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState('');
   const mapRef = useRef();
 
   // states
-  const [coordinates, setCoordinates] = useState({
-    latitude: location?.latitude ? location?.latitude : 37.78825,
-    longitude: location?.longitude ? location?.longitude : -122.4324,
-    latitudeDelta: 0.123,
-    longitudeDelta: 0.32,
+  const [coordinates, setCoordinates] = useState(currentLocation);
+  const [myUserLocation, setMyUserLocation] = useState({
+    streetAddress: '',
+    apartmentNumber: '',
+    zipCode: '',
+    stateName: '',
+    country: '',
+    latitude: '',
+    longitude: '',
   });
-  const [myUserLocation, setMyUserLocation] = useState({});
 
   useEffect(() => {
     requestLocationPermission();
@@ -67,9 +81,18 @@ const AgencyMap = ({navigation, route}) => {
   };
 
   const onPressNext = () => {
+    // console.log('setMyUserLocation', myUserLocation, usertype, isFromProfile);
+    // const routeData = route?.params;
+    if (myUserLocation.country === '') {
+      RedFlashMessage('Pin Your location on Map is Require');
+      return;
+    }
+    // console.log('routedata ', JSON.stringify(myUserLocation, ' ', 2));
+
     if (usertype == 'ServiceSide') {
-      navigation.navigate(routes.listingSummary, {
-        data: route?.params,
+      navigation.navigate('AgencyLocation', {
+        ProviderData: route?.params,
+        myUserLocation,
       });
     }
     if (usertype == 'AgencySide') {
@@ -77,27 +100,53 @@ const AgencyMap = ({navigation, route}) => {
         navigation.navigate('ProfileNavigator');
         dispatch(fromProfile(false));
       } else {
-        navigation.navigate('PaymentPlans');
+        if (myUserLocation.country !== '') {
+          // console.log(myUserLocation, route?.params);
+          navigation.navigate('AgencyLocation', {
+            myUserLocation,
+            agencyData: route?.params,
+          });
+        } else {
+          RedFlashMessage('Please Select Your Address');
+        }
+        // navigation.navigate('PaymentPlans');
       }
     }
   };
 
   const getLocation = async () => {
-    setIsLoading(true);
-    Geolocation.getCurrentPosition(
-      position => {
-        const {latitude, longitude} = position.coords;
-        setLocation({latitude, longitude});
-        setIsLoading(false);
-      },
-      error => {
-        console.error(error);
-      },
-      {enableHighAccuracy: true, timeout: 15000},
-    );
+    try {
+      setIsLoading(true);
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log('locatoin ', position);
+          const {latitude, longitude} = position?.coords;
+          setCoordinates(prevData => ({
+            ...prevData,
+            latitude: latitude,
+            longitude: longitude,
+          }));
+          setIsLoading(false);
+          // mapRef.current?.animateToRegion({
+          //   latitude: latitude,
+          //   longitude: longitude,
+          //   latitudeDelta: 0.123,
+          //   longitudeDelta: 0.32,
+          // });
+        },
+        error => {
+          console.error(error);
+        },
+        {enableHighAccuracy: true, timeout: 15000},
+      );
+    } catch (error) {
+      console.log('error occured while opening map');
+    }
   };
 
   const getAddressFromCoordinates = (latitude, longitude) => {
+    let userLocation = {};
+  
     return new Promise((resolve, reject) => {
       fetch(
         'https://maps.googleapis.com/maps/api/geocode/json?address=' +
@@ -110,19 +159,80 @@ const AgencyMap = ({navigation, route}) => {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === 'OK') {
-            setAddress(responseJson?.results[3]?.formatted_address);
+            setIsLoading(true);
+            console.log(
+              '=> ',
+              JSON.stringify(responseJson?.results[0], ' ', 2),
+            );
+            responseJson?.results[0].address_components.forEach(item => {
+              switch (item.types[0]) {
+                case 'street_number': // street number
+                  userLocation.streetNumber = item.long_name;
+                  break;
+                case 'route': // street name
+                  // console.log('streetNumber', item.long_name);
+                  item.long_name?.length > 0 &&
+                    (userLocation.streetAddress = userLocation.streetNumber
+                      ? userLocation.streetNumber
+                      : '' + ' ' + item.long_name);
+                  break;
+                case 'administrative_area_level_1': // state name
+                  userLocation.stateName = item.long_name;
+                  break;
+                case 'postal_code': // zip code
+                  userLocation.zipCode = item.short_name;
+                  break;
+                case 'country': // country
+                  userLocation.country = item.long_name;
+                  break;
+              }
+              userLocation.latitude = latitude;
+              userLocation.longitude = longitude;
+              // 9, Block C Revenue Employees Cooperative Housing Society, Lahore, Punjab 54770, Pakistan
+            });
+            setIsLoading(false);
+            setMyUserLocation({
+              streetAddress: userLocation?.streetAddress
+                ? userLocation?.streetAddress
+                : null,
+              apartmentNumber: null,
+              stateName: userLocation?.stateName
+                ? userLocation?.stateName
+                : null,
+              zipCode: userLocation?.zipCode ? userLocation?.zipCode : null,
+              country: userLocation?.country ? userLocation?.country : null,
+              latitude: userLocation?.latitude,
+              longitude: userLocation?.longitude,
+            });
+            // setMyUserLocation(responseJson?.results[0].formatted_address);
+            // setAddress(responseJson?.results[3]?.formatted_address);
           } else {
+            console.log('not found');
             RedFlashMessage('Not Found');
           }
         })
         .catch(error => {
           Alert.alert('Location Not Found');
+          RedFlashMessage("Something Went Wrong While Fetching Location")
         });
     });
   };
 
+  const onDragMapValues = values => {
+    setCoordinates({
+      latitude: values.nativeEvent.coordinate.latitude,
+      longitude: values.nativeEvent.coordinate.longitude,
+    });
+    setIsLoading(true);
+    getAddressFromCoordinates(
+      values.nativeEvent.coordinate.latitude,
+      values.nativeEvent.coordinate.longitude,
+    );
+  };
+
   return (
     <AppGLobalView style={styles.container}>
+      <Loader isVisible={isLoading} />
       <View>
         <IconHeaderComp
           title={'Pin Location'}
@@ -130,18 +240,11 @@ const AgencyMap = ({navigation, route}) => {
           imgName={iconPath.leftArrow}
           heading={'Pin your listed room location on the map'}
         />
-        {/* <MapView
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-          style={{width: wp('100%'), height: wp('100%')}}
-        /> */}
-        {location !== null ? (
+
+        <View style={styles.mapContainer}>
           <MapView
-            style={{width: wp('100%'), height: wp('100%')}}
+            // ref={mapRef}
+            style={{width: wp('95%'), height: wp('90%')}}
             zoomEnabled={true}
             showsUserLocation={true}
             showsPointsOfInterest={true}
@@ -150,53 +253,46 @@ const AgencyMap = ({navigation, route}) => {
             initialRegion={coordinates}>
             <Marker
               draggable
-              coordinate={{
-                latitude: location?.latitude,
-                longitude: location?.longitude,
-                latitudeDelta: 0.123,
-                longitudeDelta: 0.32,
-              }}
+              coordinate={coordinates}
               onDragEnd={values => {
-                getAddressFromCoordinates(
-                  values.nativeEvent.coordinate.latitude,
-                  values.nativeEvent.coordinate.longitude,
-                );
-                setCoordinates({
-                  latitude: values.nativeEvent.coordinate.latitude,
-                  longitude: values.nativeEvent.coordinate.longitude,
-                });
+                onDragMapValues(values);
+              }}
+              onPress={values => {
+                onDragMapValues(values);
               }}
               pointerEvents="auto"
-              style={{backgroundColor: 'yellow', width: wp(30), height: wp(30)}}
+              style={{
+                // backgroundColor: 'yellow',
+                width: wp(30),
+                height: wp(30),
+              }}
               icon={iconPath.mapPin}
             />
           </MapView>
-        ) : (
-          <Loader isVisible={isLoading} />
-        )}
+        </View>
 
         <View>
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
             Address
           </Apptext>
-          <Apptext style={[styles.adrs]}>
-            {address
-              ? address
-              : route?.params?.street +
-                ', ' +
-                route?.params?.apartment +
-                ', ' +
-                route?.params?.zipCode +
-                ', ' +
-                route?.params?.isState}
-          </Apptext>
+          {myUserLocation.country !== '' && (
+            <Apptext style={[styles.adrs]}>
+              {myUserLocation['streetAddress'] !== null &&
+                myUserLocation['streetAddress'] + ' ,'}{' '}
+              {myUserLocation['stateName'] !== null &&
+                myUserLocation['stateName'] + ', '}
+              {myUserLocation['country'] !== null &&
+                myUserLocation['country'] + ', '}
+              {myUserLocation['zipCode'] !== null && myUserLocation['zipCode']}
+            </Apptext>
+          )}
         </View>
       </View>
       <FormButton
         buttonTitle={isFromProfile ? 'Update' : 'Next'}
         onPress={onPressNext}
       />
-      <Loader isVisible={isLoading} />
+      {/* <Loader isVisible={isLoading} /> */}
     </AppGLobalView>
   );
 };
@@ -217,14 +313,44 @@ const styles = StyleSheet.create({
     fontSize: wp('6%'),
     marginHorizontal: wp('6%'),
   },
-  imgView: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    width: wp('90%'),
-    height: wp('70%'),
-    marginTop: wp('5%'),
+  mapContainer: {
     alignSelf: 'center',
     borderRadius: 10,
+    overflow: 'hidden',
+    marginTop: wp('5%'),
+  },
+  mapView: {
+    // flexDirection: 'row',
+    // justifyContent: 'flex-end',
+    width: wp('90%'),
+    height: wp('70%'),
+  },
+  recenterBox: {
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    height: wp(16),
+    width: wp(16),
+    bottom: 0,
+    right: 0,
+    position: 'absolute',
+    elevation: 5,
+    // alignSelf: "flex-end",
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: heightPixel(16),
+  },
+  recenterIcon: {
+    height: 20,
+    width: 20,
+    // tintColor: colors.black,
+    opacity: 0.7,
+    resizeMode: 'contain',
+  },
+  markerImage: {
+    width: wp(5),
+    height: wp(10),
+    backgroundColor: 'red',
+    // resizeMode: 'cover',
   },
   pinkBox: {
     width: 51,

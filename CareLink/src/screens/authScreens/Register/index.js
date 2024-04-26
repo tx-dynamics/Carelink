@@ -22,15 +22,15 @@ import {
   refreshToken,
   setUserData,
 } from '../../../redux/Slices/userDataSlice';
-import {getFCMToken} from '../../../Services/HelpingMethods';
-import {getDeviceId} from 'react-native-device-info';
+import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
+
 import {useNavigation} from '@react-navigation/native';
 import {
   RedFlashMessage,
   SuccessFlashMessage,
 } from '../../../Constants/Utilities/assets/Snakbar';
 import Loader from '../../../components/Loader';
-import {signUpOTPCheck} from '../../../redux/Slices/splashSlice';
+import {signUpOTPCheck, userSave, userType} from '../../../redux/Slices/splashSlice';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -47,6 +47,7 @@ const Register = () => {
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
+    let dtk = await getDeviceId();
     var emailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var alphabetRegex = /^[a-zA-Z]+$/;
@@ -80,7 +81,7 @@ const Register = () => {
           email: email?.toLowerCase(),
           password: isPassword,
           userType: usertype,
-          device: {id: getDeviceId(), deviceToken: fcm},
+          device: {id: dtk, deviceToken: fcm},
         };
 
         await callApi(
@@ -92,15 +93,16 @@ const Register = () => {
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
+              dispatch(userType(usertype));
+              dispatch(userSave(null))
               setIsLoading(false);
               SuccessFlashMessage(res?.message);
               navigation.navigate('EmailVerification', {
                 register: true,
                 email: email?.toLowerCase(),
               });
-              dispatch(signUpOTPCheck(true));
-              console.log('Response on signup', res?.data);
-
+              // dispatch(signUpOTPCheck(true));
+              // console.log('Response on signup', res?.data);
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);
@@ -158,6 +160,7 @@ const Register = () => {
           <AppTextInput
             mainViewStyle={styles.marginView}
             value={email}
+            keyboardType="email-address"
             onChangeText={setEmail}
             title={'Email'}
             autoCapitalize={'none'}

@@ -5,11 +5,11 @@ import { appIcons } from '../../Constants/Utilities/assets';
 import { heightPixel, widthPixel } from '../../Constants';
 import colors from '../../config/colors';
 const ImageViewZoomComp = ({ visible, onRequestClose, onSwipeDown, data }) => {
-
+    
     return (
         <Modal visible={visible} onRequestClose={onRequestClose}>
-            <ImageViewer
-                imageUrls={data} onSwipeDown={onSwipeDown} enableSwipeDown />
+            <ImageViewer useNativeDriver
+                imageUrls={data} onSwipeDown={onSwipeDown} enableSwipeDown  />
         </Modal>
     )
 }
