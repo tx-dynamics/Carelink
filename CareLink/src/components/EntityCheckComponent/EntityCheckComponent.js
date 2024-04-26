@@ -5,9 +5,9 @@ import { appIcons } from '../../Constants/Utilities/assets'
 import colors from '../../config/colors'
 import { fonts } from '../../Constants/Fonts'
 
-const EntityCheckComponent = ({ onPress, icon, title }) => {
+const EntityCheckComponent = ({disabled, onPress, icon, title }) => {
     return (
-        <TouchableOpacity onPress={onPress} style={{
+        <TouchableOpacity disabled={disabled} onPress={onPress} style={{
             marginTop: heightPixel(20),
             flexDirection: "row",
             alignItems: "center",

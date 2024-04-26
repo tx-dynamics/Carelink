@@ -5,6 +5,7 @@ const initialState = {
   isNewUser: true,
   userType: '',
   onboarding: false,
+  signUpOTP: false,
 };
 
 export const splashSlice = createSlice({
@@ -23,9 +24,13 @@ export const splashSlice = createSlice({
     onBoarding: (state, action) => {
       state.onboarding = action.payload;
     },
+    signUpOTPCheck: (state, action) => {
+      state.signUpOTP = action.payload;
+    },
   },
 });
 
-export const {userSave, isNewUser, userType, onBoarding} = splashSlice.actions;
+export const {userSave, isNewUser, userType, onBoarding, signUpOTPCheck} =
+  splashSlice.actions;
 
 export default splashSlice.reducer;

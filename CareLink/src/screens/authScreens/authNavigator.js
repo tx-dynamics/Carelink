@@ -54,7 +54,7 @@ const SplashNavigator = () => {
       }}>
       <AuthStack.Screen name="Splash" component={Splash} />
       <AuthStack.Screen name="Step1" component={Step1} />
-      <AuthStack.Screen name="Step2" component={Step2} />
+      <AuthStack.Screen name="St;'?ep2" component={Step2} />
       <AuthStack.Screen name="Step3" component={Step3} />
       <AuthStack.Screen name="AskRegister" component={AskRegister} />
       <AuthStack.Screen name="Register" component={Register} />

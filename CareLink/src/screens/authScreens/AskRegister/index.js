@@ -1,25 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
-import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {setUser, setUserType} from '../../../redux/actions/authAction';
 import IconHeaderComp from '../../../components/IconHeaderComp';
-import {fonts} from '../../../Constants/Fonts';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
-// import { userType } from '../../../../android/app/src/redux/Slices/splashSlice';
 import {userType} from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import {hp} from '../../../Constants';
 
 const AskRegister = ({navigation}) => {
   let dispatch = useDispatch();

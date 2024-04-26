@@ -83,11 +83,11 @@ export const callApi = async (
         .catch(err => console.log('error refresh token=> ', err));
     } else if (responseJson?.status < 400) {
       onSuccess(responseJson);
-      if (responseJson?.errorType) {
-        console.log(responseJson?.errorType);
-      } else if (responseJson?.message) {
-        console.log('Eror', responseJson?.message);
-      }
+      // if (responseJson?.errorType) {
+      //   console.log(responseJson?.errorType);
+      // } else if (responseJson?.message) {
+      //   console.log('Eror', responseJson?.message);
+      // }
     } else {
       onError(responseJson?.message);
       if (responseJson?.errorType) {

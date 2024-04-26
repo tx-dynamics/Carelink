@@ -7,7 +7,7 @@ import { fonts } from '../../Constants/Fonts'
 const UserInfoComp = ({ pic, title, onPress }) => {
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
-            <Image resizeMode='contain' style={styles.picStyle} source={pic} />
+            <Image resizeMode='contain' style={styles.picStyle} source={{uri:pic}} />
             <Text numberOfLines={1} style={styles.nameText}>{title}</Text>
         </TouchableOpacity>
     )

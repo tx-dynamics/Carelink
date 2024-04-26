@@ -6,12 +6,12 @@ import { fontPixel, heightPixel, widthPixel } from '../../Constants'
 import FormButton from '../FormButton'
 import AppGLobalView from '../AppGlobalView/AppGLobalView'
 
-const AddMoreModal = ({ value, onChangeText, onRequestClose, visible, cancelPress, continuePress }) => {
+const AddMoreModal = ({ value, onChangeText, onRequestClose, visible, cancelPress, continuePress,title }) => {
     return (
         <Modal animationType='fade' transparent visible={visible} onRequestClose={onRequestClose} >
             <AppGLobalView style={styles.container}>
                 <View style={styles.subView}>
-                    <AppTextInput maxLength={30} value={value} onChangeText={onChangeText} title={"Add Entity"} />
+                    <AppTextInput maxLength={30} value={value} onChangeText={onChangeText} title={title} />
                     <View style={styles.btnView}>
                         <FormButton onPress={cancelPress} fontSize={fontPixel(15)} buttonTitle={"Cancel"} width={widthPixel(150)} />
                         <FormButton onPress={continuePress} fontSize={fontPixel(15)} buttonTitle={"Continue"} width={widthPixel(150)} />

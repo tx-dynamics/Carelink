@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Text,
   View,
+  Keyboard,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
@@ -24,75 +25,217 @@ import {
   RedFlashMessage,
   SuccessFlashMessage,
 } from '../../../Constants/Utilities/assets/Snakbar';
-import {useSelector} from 'react-redux';
-import {userType} from '../../../redux/Slices/splashSlice';
+import {useDispatch, useSelector} from 'react-redux';
 import CountDownComponent from '../../../components/CountDownComponent/CountDownComponent';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
 import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
+import {signUpOTPCheck, userType} from '../../../redux/Slices/splashSlice';
+import {useRoute} from '@react-navigation/native';
+import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
 
 const EmailVerification = ({navigation, route}) => {
+  const params = useRoute();
+  console.log('params', params);
+  const dispatch = useDispatch();
   const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
-  const usertype = useSelector(state => state.splash.userType);
-  const fcmToken = useSelector(state => state.userData?.userData?.fcmToken);
-  const deviceId = useSelector(state => state.userData?.userData?.deviceToken);
-  const userEmail = useSelector(state => state.userData?.userData?.email);
+  const usertype = useSelector(state => state?.splash?.userType);
+  const [isLoading, setIsLoading] = useState(false);
+  const [duration, setDuration] = useState(59);
+  const [clearOtp, setClearedOtp] = useState(false);
+  const userData = useSelector(store => store?.userDataSlice);
 
-  const onCountinue = async () => {
-    console.log('userEmail', userEmail);
-    // hitting otp api
-    try {
-      if (isOTP == '') {
-        RedFlashMessage('Please enter OTP');
-        return;
+  // console.log('User data', userData);
+
+  const handleSubmit = async () => {
+    let fcm = await getFCMToken();
+    let dtk = await getDeviceId();
+    Keyboard.dismiss();
+    if (!isOTP) {
+      RedFlashMessage('Please enter OTP');
+    } else {
+      try {
+        setIsLoading(true);
+        const endPoint = api.verifyUserEmail;
+        const data = {
+          email: params?.params?.email?.toLowerCase()
+            ? params?.params?.email?.toLowerCase()
+            : userData?.userData?.email?.toLowerCase(),
+          otp: isOTP,
+          device: {id: dtk, deviceToken: fcm},
+        };
+        // console.log('data', data);
+        await callApi(
+          Method.POST,
+          endPoint,
+          data,
+          res => {
+            if (res?.status === 200 || res?.status === 201) {
+              SuccessFlashMessage(res?.message);
+              setIsLoading(false);
+              dispatch(signUpOTPCheck(true));
+              if (usertype == 'ServiceSide') {
+                dispatch(userType('ServiceSide'));
+                // console.log('Inside service side');
+                params.params?.register
+                  ? navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.addDocuments}],
+                    })
+                  : navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.forgetPasswordUpdate}],
+                    });
+              }
+              if (usertype == 'AgencySide') {
+                dispatch(userType('AgencySide'));
+                // console.log('Inside agency side');
+                params.params?.register
+                  ? navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.successAgency}],
+                    })
+                  : navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.forgetPasswordUpdate}],
+                    });
+              }
+            } else {
+              setIsLoading(false);
+            }
+          },
+          err => {
+            setIsLoading(false);
+            // console.log("res => ",)
+
+            RedFlashMessage(err ? err : 'Please enter correct otp');
+          },
+        );
+      } catch (error) {
+        setIsLoading(false);
+        RedFlashMessage('Your Time is Expired');
+      } finally {
+        setIsLoading(false);
       }
-      if (isOTP.length < 4) {
-        RedFlashMessage('Please enter a 4 digit OTP');
-        return;
+    }
+  };
+
+  const handleVerifyForgetOTP = async () => {
+    let fcm = await getFCMToken();
+    Keyboard.dismiss();
+    if (isOTP === '') {
+      RedFlashMessage('Please enter OTP');
+      return;
+    } else {
+      try {
+        setIsLoading(true);
+        const data = {
+          email: params?.params?.email?.toLowerCase(),
+          otp: isOTP,
+          device: {id: getDeviceId(), deviceToken: fcm},
+        };
+        console.log('data ', data);
+        const endPoint = api.verifyForgotPasswordOTP;
+
+        await callApi(
+          Method.POST,
+          endPoint,
+          data,
+          res => {
+            if (res?.status === 200 || res?.status === 201) {
+              SuccessFlashMessage(res?.message);
+              setIsLoading(false);
+              if (usertype == 'ServiceSide') {
+                route.params?.register
+                  ? navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.addDocuments}],
+                    })
+                  : navigation.navigate(routes.forgetPasswordUpdate, {
+                      email: params?.params?.email?.toLowerCase(),
+                      otp: isOTP,
+                    });
+              }
+              if (usertype == 'AgencySide') {
+                route.params?.register
+                  ? navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.successAgency}],
+                    })
+                  : navigation.navigate(routes.forgetPasswordUpdate, {
+                      email: params?.params?.email?.toLowerCase(),
+                      otp: isOTP,
+                    });
+              }
+            } else {
+              setIsLoading(false);
+            }
+          },
+          err => {
+            setIsLoading(false);
+
+            RedFlashMessage(err);
+          },
+        );
+      } catch (error) {
+        setIsLoading(false);
+        setClearedOtp;
+        RedFlashMessage('Otp Expired');
+      } finally {
+        setIsLoading(false);
       }
-      const bodyParams = {
-        email: userEmail,
-        otp: isOTP,
-        device: {id: deviceId, deviceToken: fcmToken},
-      };
-      console.log('bodyParams ', bodyParams);
-      const onSuccess = result => {
-        // console.log('user is signup => ', JSON.stringify(result, ' ', 2));
-        SuccessFlashMessage('Email verified successfully');
-        if (usertype == 'ServiceSide') {
-          route.params?.register
-            ? navigation.replace(routes.addDocuments)
-            : navigation.replace(routes.forgetPasswordUpdate);
-        }
-        if (usertype == 'AgencySide') {
-          route.params?.register
-            ? navigation.replace(routes.successAgency)
-            : navigation.replace(routes.forgetPasswordUpdate);
-        }
-      };
-      const onError = error => {
-        if (error) {
-          RedFlashMessage(error);
-        }
-      };
-      await callApi(
-        Method.POST,
-        api.verifyUserEmail,
-        bodyParams,
-        onSuccess,
-        onError,
-      );
-    } catch (error) {
-      console.log('error while hitting sign up api ', error);
     }
   };
 
   const goback = () => {
     setIsOTP('');
     navigation.goBack();
+  };
+
+  useEffect(() => {
+    if (params?.params?.setTimer) {
+      handleResendOTP();
+    }
+  }, []);
+
+  // resend email verification process
+  const handleResendOTP = async () => {
+    setIsOTP('');
+    try {
+      setIsLoading(true);
+      const endPoint = api.resendOTP;
+      const data = {
+        email: userData?.userData?.email?.toLowerCase(),
+      };
+
+      await callApi(
+        Method.POST,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            setIsLoading(false);
+
+            SuccessFlashMessage(res?.message);
+          } else {
+            setIsLoading(false);
+            RedFlashMessage(res?.message);
+          }
+        },
+        err => {
+          setIsLoading(false);
+          RedFlashMessage(err);
+        },
+      );
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <AppGLobalView style={styles.container}>
@@ -102,12 +245,14 @@ const EmailVerification = ({navigation, route}) => {
           heading={'Enter the code we just sent to your email'}
           style={styles.headerTextStyle}
           onPress={() => {
-            navigation.goBack();
+            goback();
           }}
           imgName={iconPath.leftArrow}
         />
         <Text numberOfLines={1} style={styles.mailText}>
-          {params?.params?.email}
+          {params?.params?.email?.toLowerCase()
+            ? params?.params?.email?.toLowerCase()
+            : userData?.userData?.email?.toLowerCase()}
         </Text>
         <OTPInputView
           pinCount={4}
@@ -119,9 +264,25 @@ const EmailVerification = ({navigation, route}) => {
           keyboardType="number-pad"
           codeInputHighlightStyle={styles.underlineStyleHighLighted}
         />
-        <CountDownComponent email={params?.params?.email} setIsOTP={setIsOTP} />
+        <CountDownComponent
+          email={
+            params?.params?.email?.toLowerCase()
+              ? params?.params?.email?.toLowerCase()
+              : userData?.userData?.email?.toLowerCase()
+          }
+          setIsOTP={setIsOTP}
+          isOTP={isOTP}
+          fromForgotPassword={params?.params?.fromForgotPassword}
+        />
       </KeyboardAwareScrollView>
-      <FormButton onPress={handleSubmit} buttonTitle={'Continue'} />
+      <FormButton
+        onPress={
+          params?.params?.fromForgotPassword
+            ? handleVerifyForgetOTP
+            : handleSubmit
+        }
+        buttonTitle={'Continue'}
+      />
       <EmailVerifiedModal
         visible={visible}
         subtitle={'You have successfully verified your email'}

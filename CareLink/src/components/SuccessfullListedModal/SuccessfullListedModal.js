@@ -7,7 +7,7 @@ import { fonts } from '../../Constants/Fonts'
 import colors from '../../config/colors'
 import AppGLobalView from '../AppGlobalView/AppGLobalView'
 
-const SuccessfullListedModal = ({ visible, onPress, }) => {
+const SuccessfullListedModal = ({ visible, onPress,locationTitle }) => {
     return (
         <Modal visible={visible} animationType='fade'>
             <AppGLobalView style={styles.container}>
@@ -15,7 +15,7 @@ const SuccessfullListedModal = ({ visible, onPress, }) => {
                     <Image resizeMode='contain' source={appIcons.successTick} style={styles.imageStyle} />
                     <Text style={styles.successTitle}>Successfully Listed</Text>
                     <Text style={styles.midText}>You have listed Successfully your listing of</Text>
-                    <Text style={styles.location}>Oakwood Heights</Text>
+                    <Text style={styles.location}>{locationTitle}</Text>
                 </View>
                 <FormButton buttonTitle={"Go to Home"} onPress={onPress} />
             </AppGLobalView>

@@ -1,19 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
-    fromProfile: false
-}
+  fromProfile: false,
+};
 
 export const appSlice = createSlice({
-    name: 'splash',
-    initialState,
-    reducers: {
-        fromProfile: (state, action) => {
-            state.fromProfile = action.payload;
-        },
+  name: 'splash',
+  initialState,
+  reducers: {
+    fromProfile: (state, action) => {
+      state.fromProfile = action.payload;
     },
-})
+  },
+});
 
-export const { fromProfile } = appSlice.actions
+export const {fromProfile} = appSlice.actions;
 
-export default appSlice.reducer
+export default appSlice.reducer;

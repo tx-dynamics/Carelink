@@ -8,17 +8,16 @@ import UploadDocumentComp from '../../../components/UploadDocumentComp/UploadDoc
 import DocumentComponent from '../../../components/DocumentComponent/DocumentComponent';
 import FormButton from '../../../components/FormButton';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {appIcons} from '../../../Constants/Utilities/assets';
 import ImageUploadModal from '../../../components/ImageUploadModal/ImageUploadModal';
-import {
-  RedFlashMessage,
-  RedSnackbar,
-} from '../../../Constants/Utilities/assets/Snakbar';
+import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import {uploadImageOnS3} from '../../../Services/HelpingMethods';
+import Loader from '../../../components/Loader';
 
 const AddDocuments = ({navigation}) => {
   const [isIndex, setIndex] = useState(0);
   const [isVisible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isData, setData] = useState([
     {
       id: 0,
@@ -63,8 +62,6 @@ const AddDocuments = ({navigation}) => {
 
   const mediaValues = isData.map(item => item.media).slice(0, 5);
 
-  console.log(mediaValues);
-
   const uploadImage = () => {
     setVisible(false);
     ImageCropPicker.openPicker({
@@ -90,6 +87,32 @@ const AddDocuments = ({navigation}) => {
   const removeImage = () => {
     setData([...isData, (isData[isIndex].media = null)]);
   };
+
+  const uploadImageData = async () => {
+    setIsLoading(true);
+    if (isData[isIndex]?.media){
+      const str = isData[isIndex]?.media;
+    const imageObj = {
+      path: str,
+      name: str?.substring(str?.lastIndexOf('/')),
+    };
+    await uploadImageOnS3(imageObj, res => {
+      setData([...isData, (isData[isIndex].media = res)]);
+      setIndex(isIndex + 1);
+      setIsLoading(false);
+    });
+    if (isIndex == 4) {
+      navigation.navigate(routes.addInformation, {
+        imagesData: mediaValues,
+      });
+    }
+    }else{
+      setIsLoading(false);
+      RedFlashMessage(`${isData[isIndex].title} is Required`)
+    }
+    
+  };
+
   return (
     <AppGLobalView style={styles.container}>
       <View>
@@ -120,11 +143,7 @@ const AddDocuments = ({navigation}) => {
           isData[isIndex].media == null ? colors.gray : colors.primary
         }
         buttonTitle={'Continue'}
-        onPress={() =>
-          isIndex < 4
-            ? setIndex(isIndex + 1)
-            : navigation.replace(routes.addInformation)
-        }
+        onPress={async () => await uploadImageData()}
       />
       <ImageUploadModal
         crossPress={() => setVisible(false)}
@@ -132,6 +151,7 @@ const AddDocuments = ({navigation}) => {
         mediaPress={uploadImage}
         visible={isVisible}
       />
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

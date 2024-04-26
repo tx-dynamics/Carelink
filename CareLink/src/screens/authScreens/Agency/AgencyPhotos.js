@@ -21,20 +21,62 @@ import AddAgencyProfilePhoto from '../../../components/AddAgencyProfilePhoto/Add
 import {fontPixel, heightPixel} from '../../../Constants';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
+import {uploadImageOnS3} from '../../../Services/HelpingMethods';
+import Loader from '../../../components/Loader';
 
 const AgencyPhotos = ({navigation, route}) => {
   // console.log("routes", route?.params)
   const [agencyImg, setAgencyImg] = useState(null);
   const [profileImg, setProfileImg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const submitProfilePhotos = () => {
+  const uploadImagesArray = async () => {
+    try {
+      setIsLoading(true);
+      const tempUrl = [];
+      const str = agencyImg;
+      const agencyObj = {
+        path: str,
+        name: str?.substring(str?.lastIndexOf('/')),
+      };
+      const profileStr = profileImg;
+      const ProfileObj = {
+        path: profileStr,
+        name: profileStr?.substring(profileStr?.lastIndexOf('/')),
+      };
+      const myImageData = [agencyObj, ProfileObj];
+
+      // Create an array of promises using map
+      const uploadPromises = myImageData.map(item => {
+        return new Promise((resolve, reject) => {
+          uploadImageOnS3(item, res => {
+            tempUrl.push(res); // Push the result to the tempUrl array
+            // console.log('res ', res);
+            resolve(res); // Resolve this promise with the result
+          });
+        });
+      });
+      // Wait for all promises to resolve using Promise.all
+      await Promise.all(uploadPromises);
+      setIsLoading(false);
+      // Return the tempUrl array after all promises are resolved
+      return tempUrl;
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      throw error; // Propagate the error
+    }
+  };
+
+  const submitProfilePhotos = async () => {
     try {
       if (checkProfileData()) {
+        const imagesUrl = await uploadImagesArray();
+        setIsLoading(false);
         // AgencyMap   AgencyLocation
         navigation.navigate('AgencyMap', {
           agencyData: route?.params,
-          agencyImg: agencyImg,
-          profileImg: profileImg,
+          agencyImg: imagesUrl[0],
+          profileImg: imagesUrl[1],
         });
       }
     } catch (error) {
@@ -48,8 +90,8 @@ const AgencyPhotos = ({navigation, route}) => {
         agencyName: route?.params?.agencyName,
         agencyExperience: route?.params?.experience,
         agencyAbout: route?.params?.about,
-        agencyImg: agencyImg,
-        profileImg: profileImg,
+        agencyImg: '',
+        profileImg: '',
       });
     } catch (error) {}
   };
@@ -68,6 +110,7 @@ const AgencyPhotos = ({navigation, route}) => {
   };
   return (
     <AppGLobalView style={styles.container}>
+      <Loader isVisible={isLoading} />
       <View>
         <IconHeaderComp
           title={'Add Photo'}

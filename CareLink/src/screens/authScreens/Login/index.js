@@ -17,13 +17,19 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
+import {
+  fontPixel,
+  heightPixel,
+  hp,
+  routes,
+  widthPixel,
+} from '../../../Constants';
 import NewSimpleTextinput from '../../../components/NewSimpleTextinput/NewSimpleTextinput';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
-import {userSave} from '../../../redux/Slices/splashSlice';
+import {isNewUser, userSave, userType} from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {getDeviceId} from 'react-native-device-info';
@@ -35,28 +41,32 @@ import {
   setUserData,
 } from '../../../redux/Slices/userDataSlice';
 import {Method, callApi} from '../../../network/NetworkManger';
+import {
+  RedFlashMessage,
+  SuccessFlashMessage,
+} from '../../../Constants/Utilities/assets/Snakbar';
+import Loader from '../../../components/Loader';
 
 const LoginScreen = () => {
+  // hooks
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const usertype = useSelector(state => state.splash.userType);
+  const usertype = useSelector(state => state?.splash?.userType);
+  const isNewUser = useSelector(state => state?.splash?.isNewUser);
+
+  // states
   const [email, setEmail] = useState('');
   const [isPassword, setPassword] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const onPressLogin = () => {
-    dispatch(userSave(true));
-  };
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
     Keyboard.dismiss();
     if (!email) {
-      //   FlashAlert('E', 'Failed', 'Email is required!');
-      Alert.alert('Email is required');
+      RedFlashMessage('Email is required');
     } else if (!isPassword) {
-      //   FlashAlert('E', 'Failed', 'Password is required!');
-      Alert.alert('Password is required');
+      RedFlashMessage('Password is required');
     } else {
       try {
         setIsLoading(true);
@@ -73,28 +83,77 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              console.log('Response is', res?.data);
+              console.log('login data => ', JSON.stringify(res, ' ', 2));
+
               dispatch(refreshToken(res?.data?.refreshToken));
               dispatch(accessToken(res?.data?.token));
               dispatch(setUserData(res?.data?.user));
-              navigation.navigate(routes.addDocuments);
+
+              // Handling User Type
+              if (res?.data?.user?.profileCompleted) {
+                if (res?.data?.user?.userType === 'ServiceSide') {
+                  dispatch(userType('ServiceSide'));
+                  {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.listingOptions}],
+                    });
+                  }
+                } else {
+                  dispatch(userType('AgencySide'));
+                  dispatch(userSave(true));
+                }
+              } else {
+                if (res?.data?.user?.userType === 'ServiceSide') {
+                  dispatch(userType('ServiceSide'));
+                  if (res?.data?.user?.user1stListing) {
+                    dispatch(userSave(true))
+                    // navigation.replace('Drawer')
+                    
+                  } else {
+                    if (
+                      res?.data?.user?.certificates[0] &&
+                      res?.data?.user?.drivingAbstract &&
+                      res?.data?.user?.selfie &&
+                      res?.data?.user?.drivingLicense &&
+                      res?.data?.user?.homePhoto
+                    ) {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: routes.listingOptions}],
+                      });
+                    } else {
+                      navigation.reset({
+                        index: 0,
+                        routes: [{name: routes?.addDocuments}],
+                      });
+                    }
+                  }
+                } else {
+                  dispatch(userType('AgencySide'));
+                  // dispatch(userSave(true));
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes.successAgency}],
+                  });
+                }
+              }
+
+              SuccessFlashMessage(res?.message);
               setIsLoading(false);
-              //   FlashAlert('S', 'Success', res?.message);
-              //   navigation.replace(routes.tab);
             } else {
               setIsLoading(false);
-              // FlashAlert('E', 'Failed', 'Invalid Credentials!');
+              RedFlashMessage(res?.message);
             }
           },
           err => {
             setIsLoading(false);
-            FlashAlert('E', 'Failed', err);
+            RedFlashMessage(err);
           },
         );
       } catch (error) {
         setIsLoading(false);
-        console.log('Error on catch', error);
-        // FlashAlert1('E', 'Failed', error);
+        RedFlashMessage(error);
       } finally {
         setIsLoading(false);
       }
@@ -106,8 +165,8 @@ const LoginScreen = () => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         <IconHeaderComp
           title={'Sign In'}
-          onPress={() => navigation.goBack()}
-          imgName={iconPath.leftArrow}
+          onPress={() => isNewUser && navigation.goBack()}
+          imgName={isNewUser && iconPath.leftArrow}
           heading={'Sign in to continue to the care link'}
         />
         <View>
@@ -116,7 +175,12 @@ const LoginScreen = () => {
           </Apptext>
         </View>
         <View style={{marginTop: heightPixel(1)}}>
-          <AppTextInput value={email} onChangeText={setEmail} title={'Email'} />
+          <AppTextInput
+            value={email}
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            title={'Email'}
+          />
           <AppTextInput
             value={isPassword}
             onChangeText={text => setPassword(text)}
@@ -136,16 +200,20 @@ const LoginScreen = () => {
       </KeyboardAwareScrollView>
       <FormButton
         buttonTitle={'Sign In'}
-        onPress={() => usertype === "ServiceSide" ? navigation.navigate("PaymentPlans") : navigation.navigate("EmailVerification")}
+        // onPress={() =>
+        //   usertype === 'ServiceSide'
+        //     ? navigation.navigate('PaymentPlans')
+        //     : navigation.navigate('EmailVerification')
+        // }
         // onPress={onPressLogin}
-        // onPress={handleSubmit}
+        onPress={handleSubmit}
       />
       <AlreadyText
         onPress={() => navigation.navigate('Register')}
         title={'I don’t have Account.'}
         subtitle={' Sign Up'}
       />
-      {isLoading && <ActivityIndicator size={'large'} color={'red'} />}
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };
