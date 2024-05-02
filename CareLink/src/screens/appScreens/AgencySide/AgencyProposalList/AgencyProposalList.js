@@ -3,26 +3,19 @@ import React from 'react';
 import colors from '../../../../config/colors';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import {iconPath} from '../../../../config/icon';
-import {agencyData} from '../AgencyHome/AgencyHome';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
-import {
-  fontPixel,
-  heightPixel,
-  routes,
-  widthPixel,
-} from '../../../../Constants';
-import {fonts} from '../../../../Constants/Fonts';
+import {heightPixel} from '../../../../Constants';
 import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/LeftSideBoldHeading';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import {useRoute} from '@react-navigation/native';
 
 const AgencyProposalList = ({navigation}) => {
-  // routes data
   const {proposalData} = useRoute()?.params;
-//   console.log(
-//     '🚀 ~ AgencyProposalList ~ proposalData:',
-//     JSON.stringify(proposalData, ' ', 2),
-//   );
+  console.log('Proposal Data', proposalData);
+  //   console.log(
+  //     '🚀 ~ AgencyProposalList ~ proposalData:',
+  //     JSON.stringify(proposalData, ' ', 2),
+  //   );
 
   // const proposalData = [
   //     {

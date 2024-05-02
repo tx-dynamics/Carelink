@@ -25,6 +25,7 @@ const AskRegister = ({navigation}) => {
           Create your profile and list your rooms now
         </Apptext>
         <TouchableOpacity //for testing using this onPress,
+          activeOpacity={0.5}
           onPress={() => {
             dispatch(userType('ServiceSide'));
             navigation.navigate('Register');
@@ -62,6 +63,7 @@ const AskRegister = ({navigation}) => {
           Create your profile and register your agency now
         </Apptext>
         <TouchableOpacity
+          activeOpacity={0.5}
           onPress={() => {
             dispatch(userType('AgencySide'));
             navigation.navigate('Register');

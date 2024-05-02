@@ -5,19 +5,14 @@ import {
   TouchableOpacity,
   FlatList,
   View,
-  UIManager,
-  LayoutAnimation,
+  RefreshControl,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import {
-  DrawerActions,
-  useFocusEffect,
-  useNavigation,
-} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import {heightPixel, routes, widthPixel} from '../../../../Constants';
 import {appIcons} from '../../../../Constants/Utilities/assets';
@@ -86,15 +81,13 @@ export const agencyData = [
 ];
 
 const AgencyHome = ({}) => {
-  // routes data
-
-  // states
   const [listingDetails, setListingDetails] = useState([]);
   const [proposalData, setPropsalData] = useState({
     countsData: {},
     proposalList: [],
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   // hooks
   const UserId = useSelector(state => state?.userDataSlice?.userData?._id);
@@ -113,12 +106,7 @@ const AgencyHome = ({}) => {
         JSON.stringify({}),
       )}`;
       const bodyParams = {};
-      //   console.log('data ', endPoint);
       const onSuccess = result => {
-        console.log(
-          'home screen listing data asdfa',
-          JSON.stringify(result, ' ', 2),
-        );
         setListingDetails(result?.data?.listing);
         fetchProposalDetails();
       };
@@ -144,10 +132,6 @@ const AgencyHome = ({}) => {
       const bodyParams = {};
       //   console.log('data ', endPoint);
       const onSuccess = result => {
-        // console.log(
-        //   '🚀 ~ onSuccess ~ result:',
-        //   JSON.stringify(result?.data?.counts, ' ', 2),
-        // );
         setPropsalData({
           countsData: result?.data?.counts,
           proposalList: result?.data?.proposal,
@@ -168,6 +152,14 @@ const AgencyHome = ({}) => {
     }
   };
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      fetchListingDetails();
+    }, 2000);
+  }, []);
+
   const navigation = useNavigation();
   return (
     <AppGLobalView style={styles.container}>
@@ -186,7 +178,11 @@ const AgencyHome = ({}) => {
           })
         }
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.txtView}>
           <Apptext style={styles.rms}>Rooms & Proposals</Apptext>
         </View>
@@ -212,7 +208,7 @@ const AgencyHome = ({}) => {
           labelValue={'Proposals'}
           BookedRooms={proposalData?.proposalList?.length}
           scndTxt={'Submitted'}
-          AvailableRooms={proposalData?.countsData?.accepted}
+          AvailableRooms={proposalData?.proposalList?.length}
           firstTxt={'Accepted'}
         />
         <View style={styles.listingView}>

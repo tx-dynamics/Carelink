@@ -102,14 +102,14 @@ const AgencyMap = ({navigation, route}) => {
       } else {
         if (myUserLocation.country !== '') {
           // console.log(myUserLocation, route?.params);
-          navigation.navigate('AgencyLocation', {
-            myUserLocation,
-            agencyData: route?.params,
-          });
+          // navigation.navigate('AgencyLocation', {
+          //   myUserLocation,
+          //   agencyData: route?.params,
+          // });
+          navigation.navigate('PaymentPlans');
         } else {
           RedFlashMessage('Please Select Your Address');
         }
-        // navigation.navigate('PaymentPlans');
       }
     }
   };
@@ -146,7 +146,7 @@ const AgencyMap = ({navigation, route}) => {
 
   const getAddressFromCoordinates = (latitude, longitude) => {
     let userLocation = {};
-  
+
     return new Promise((resolve, reject) => {
       fetch(
         'https://maps.googleapis.com/maps/api/geocode/json?address=' +
@@ -213,7 +213,7 @@ const AgencyMap = ({navigation, route}) => {
         })
         .catch(error => {
           Alert.alert('Location Not Found');
-          RedFlashMessage("Something Went Wrong While Fetching Location")
+          RedFlashMessage('Something Went Wrong While Fetching Location');
         });
     });
   };

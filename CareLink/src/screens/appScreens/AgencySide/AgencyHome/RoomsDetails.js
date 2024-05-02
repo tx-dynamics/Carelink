@@ -47,7 +47,7 @@ const RoomsDetails = ({navigation, route}) => {
   const daysDifference = Endduration.diff(Startduration, 'days');
 
   const [liked, setLiked] = useState(false);
-  
+
   const onHeartPress = async () => {
     try {
       const endPoint = api.likeList;

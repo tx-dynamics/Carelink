@@ -552,8 +552,8 @@ const MyTabs = () => {
 
 const MainNavigator = () => {
   const user = useSelector(state => state.splash.value);
-
-  console.log('chkk', user);
+  const userData = useSelector(state => state?.userDataSlice);
+  console.log('User data', userData);
 
   if (user != null) {
     return <DrawerNavigator />;

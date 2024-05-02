@@ -85,7 +85,7 @@ const SendProposal = ({navigation}) => {
 
   return (
     <AppGLobalView style={styles.container}>
-        <Loader isVisible={isLoading} />
+      <Loader isVisible={isLoading} />
       <Header
         headerLabel={'Submit Proposal'}
         leftImgName={appIcons.headerBack}

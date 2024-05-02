@@ -16,57 +16,103 @@ const Splash = ({navigation}) => {
   const isNewUser = useSelector(store => store?.appSlice?.isNewUser);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
   const userType = userData?.userData?.userType;
-  console.log('userType', userType, isNewUser, signUpOTP, onboarding);
 
   useEffect(() => {
     setTimeout(() => {
       if (userType == undefined) {
         navigation.replace('AskRegister');
-      }
-      if (userType == 'ServiceSide') {
-        if (isNewUser == false) {
-          navigation.replace(routes.loginScreen);
-        } else {
-          if (
-            userData?.userData?.certificates[0] &&
-            userData?.userData?.drivingAbstract &&
-            userData?.userData?.drivingLicense &&
-            userData?.userData?.homePhoto &&
-            userData?.userData?.selfie &&
-            onboarding &&
-            userData?.accessToken &&
-            signUpOTP
-          ) {
-            navigation.navigate(routes.listingOptions);
-          } else if (onboarding && userData?.accessToken && !signUpOTP) {
-            navigation.replace('EmailVerification', {
-              setTimer: true,
-            });
-          } else if (onboarding && userData?.accessToken) {
-            navigation.replace(routes.addDocuments);
-          } else if (onboarding) {
-            navigation.replace('AskRegister');
-          }
-        }
       } else {
-        if (isNewUser == false) {
-          navigation.replace(routes.loginScreen);
-        } else {
-          if (onboarding && userData?.accessToken) {
-            navigation.replace(routes.successAgency);
-          } else if (onboarding && userData?.accessToken && signUpOTP) {
-            dispatch(userSave(true));
-          } else if (onboarding && !signUpOTP) {
-            navigation.replace('EmailVerification', {
-              setTimer: true,
+        if (res?.data?.user?.userType === 'ServiceSide') {
+          dispatch(userType('ServiceSide'));
+          if (res?.data?.user?.profileCompleted == false) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: routes.addDocuments}],
             });
-          } else if (onboarding) {
-            navigation.replace('AskRegister');
+          } else if (
+            res?.data?.user?.certificates[0] &&
+            res?.data?.user?.drivingAbstract &&
+            res?.data?.user?.selfie &&
+            res?.data?.user?.drivingLicense &&
+            res?.data?.user?.homePhoto
+          ) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: routes.listingOptions}],
+            });
+          } else if (res?.data?.user?.subscriptionId == null) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'PaymentPlans'}],
+            });
           } else {
-            navigation.replace('Step1');
+            dispatch(userSave(true));
+          }
+        } else {
+          dispatch(userType('AgencySide'));
+          if (res?.data?.user?.profileCompleted == false) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: routes.successAgency}],
+            });
+          } else if (res?.data?.user?.subscriptionId == null) {
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'PaymentPlans'}],
+            });
+          } else {
+            dispatch(userSave(true));
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Drawer'}],
+            });
           }
         }
       }
+      // if (userType == 'ServiceSide') {
+      //   if (isNewUser == false) {
+      //     navigation.replace(routes.loginScreen);
+      //   } else {
+      //     if (
+      //       userData?.userData?.certificates[0] &&
+      //       userData?.userData?.drivingAbstract &&
+      //       userData?.userData?.drivingLicense &&
+      //       userData?.userData?.homePhoto &&
+      //       userData?.userData?.selfie &&
+      //       onboarding &&
+      //       userData?.accessToken &&
+      //       signUpOTP
+      //     ) {
+      //       navigation.navigate(routes.listingOptions);
+      //     } else if (onboarding && userData?.accessToken && !signUpOTP) {
+      //       navigation.replace('EmailVerification', {
+      //         setTimer: true,
+      //       });
+      //     } else if (onboarding && userData?.accessToken) {
+      //       navigation.replace(routes.addDocuments);
+      //     } else if (onboarding) {
+      //       navigation.replace('AskRegister');
+      //     }
+      //   }
+      // } else {
+      //   if (isNewUser == false) {
+      //     navigation.replace(routes.loginScreen);
+      //   } else {
+      //     if (onboarding && userData?.accessToken) {
+      //       navigation.replace(routes.successAgency);
+      //     } else if (onboarding && userData?.accessToken && signUpOTP) {
+      //       dispatch(userSave(true));
+      //     } else if (onboarding && !signUpOTP) {
+      //       navigation.replace('EmailVerification', {
+      //         setTimer: true,
+      //       });
+      //     } else if (onboarding) {
+      //       navigation.replace('AskRegister');
+      //     } else {
+      //       navigation.replace('Step1');
+      //     }
+      //   }
+      // }
     }, 2000);
   }, []);
 
