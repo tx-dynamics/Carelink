@@ -31,7 +31,9 @@ const AgencyHomeComp = ({
         <View style={styles.availableView}>
           {AvailableRooms && (
             <View style={styles.circle}>
-              <Apptext style={[styles.nmbr]}>{AvailableRooms}</Apptext>
+              <Apptext style={[styles.nmbr]}>
+                {AvailableRooms ? AvailableRooms : 0}
+              </Apptext>
             </View>
           )}
           <Apptext style={[styles.txt]}>{firstTxt ? firstTxt : ''}</Apptext>

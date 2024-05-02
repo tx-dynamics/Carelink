@@ -86,7 +86,6 @@ const RoomsDetails = ({navigation, route}) => {
       const bodyParams = {};
       const endPoint = `${api.getUserProfile}/${item?.user}`;
       const onSuccess = result => {
-        // console.log('🚀 ~ onSuccess ~ result:', JSON.stringify(result, ' ', 3));
         setServiceUserProfile(result?.user);
         setIsLoading(false);
       };

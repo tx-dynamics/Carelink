@@ -33,7 +33,7 @@ const CustomerListingComp = ({
   );
 
   const daysDifference = Endduration.diff(Startduration, 'days');
-//   console.log('formattedStartDate ', 'daysDifference', title);
+  //   console.log('formattedStartDate ', 'daysDifference', title);
 
   return (
     <Pressable onPress={onPress} style={styles.container}>

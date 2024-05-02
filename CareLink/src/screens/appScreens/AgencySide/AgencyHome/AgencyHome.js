@@ -86,8 +86,10 @@ const AgencyHome = ({}) => {
     countsData: {},
     proposalList: [],
   });
+  const [pending, setPending] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
+  console.log('Listing deatails', listingDetails?.length);
 
   // hooks
   const UserId = useSelector(state => state?.userDataSlice?.userData?._id);
@@ -108,6 +110,7 @@ const AgencyHome = ({}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setListingDetails(result?.data?.listing);
+        console.log('Listing count is', result?.data?.listing[0]?.address);
         fetchProposalDetails();
       };
 
@@ -136,6 +139,7 @@ const AgencyHome = ({}) => {
           countsData: result?.data?.counts,
           proposalList: result?.data?.proposal,
         });
+        setPending(result?.data?.counts?.pending);
         setIsLoading(false);
       };
 
@@ -190,10 +194,13 @@ const AgencyHome = ({}) => {
           onPress={() =>
             navigation.navigate('withoutBottomTabnavigator', {
               screen: routes.bookedRoomAgency,
+              params: {
+                listingDetails,
+              },
             })
           }
           labelValue={'Rooms'}
-          BookedRooms={'7'}
+          BookedRooms={listingDetails?.length}
           scndTxt={'Booked'}
         />
         <AgencyHomeComp
@@ -208,7 +215,7 @@ const AgencyHome = ({}) => {
           labelValue={'Proposals'}
           BookedRooms={proposalData?.proposalList?.length}
           scndTxt={'Submitted'}
-          AvailableRooms={proposalData?.proposalList?.length}
+          // AvailableRooms={pending}
           firstTxt={'Accepted'}
         />
         <View style={styles.listingView}>
@@ -241,10 +248,7 @@ const AgencyHome = ({}) => {
                   },
                 })
               }
-              title={item?.location?.address?.slice(
-                0,
-                item?.location?.address?.indexOf(','),
-              )}
+              title={item?.address?.slice(0, item?.address?.indexOf(','))}
               durationData={[item?.availabilityStart, item?.availabilityEnd]}
               facilityData={item?.entities}
             />

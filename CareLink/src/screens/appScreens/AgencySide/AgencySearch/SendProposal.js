@@ -1,19 +1,8 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TextInput,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
 import {appIcons} from '../../../../Constants/Utilities/assets';
@@ -31,10 +20,7 @@ import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
 
 const SendProposal = ({navigation}) => {
-  // hooks
   const {proposalRawData} = useRoute()?.params;
-
-  // states
   const [coverLetter, setCoverLetter] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -49,8 +35,6 @@ const SendProposal = ({navigation}) => {
     }
   };
 
-  // submit proposal
-
   const submitProposalTo = async () => {
     try {
       setIsLoading(true);
@@ -63,7 +47,6 @@ const SendProposal = ({navigation}) => {
         accepted: true,
       };
       const onSuccess = result => {
-        console.log('🚀 ~ onSuccess ~ result:', result);
         setIsLoading(false);
         SuccessFlashMessage('Your proposal has been submitted');
         navigation.navigate('AgencyHome');
