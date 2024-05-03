@@ -12,7 +12,6 @@ import {fontPixel, heightPixel, widthPixel} from '../../Constants';
 import colors from '../../config/colors';
 import {fonts} from '../../Constants/Fonts';
 import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityComp';
-import {appIcons} from '../../Constants/Utilities/assets';
 import moment from 'moment';
 const CustomerListingComp = ({
   onPress,
@@ -20,20 +19,17 @@ const CustomerListingComp = ({
   rightIcon,
   rightPress,
   rightDisable,
-  durationData,
   facilityData,
   posted,
+  durationData,
 }) => {
-  //
   var Startduration = moment.utc(
     moment?.duration(durationData[0]).asMilliseconds(),
   );
   var Endduration = moment.utc(
     moment?.duration(durationData[1]).asMilliseconds(),
   );
-
   const daysDifference = Endduration.diff(Startduration, 'days');
-  //   console.log('formattedStartDate ', 'daysDifference', title);
 
   return (
     <Pressable onPress={onPress} style={styles.container}>
@@ -58,7 +54,7 @@ const CustomerListingComp = ({
         style={styles.flatListStyle}
         data={facilityData}
         renderItem={({item, index}) => (
-          <AvailableFacilityComp title={item.name} />
+          <AvailableFacilityComp title={item?.name} />
         )}
       />
       {posted && <Text style={styles.postedText}> Posted {posted}</Text>}

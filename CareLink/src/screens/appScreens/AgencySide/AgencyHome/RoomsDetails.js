@@ -26,9 +26,9 @@ const RoomsDetails = ({navigation, route}) => {
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
 
   const {item} = useRoute()?.params;
+  console.log('Item on Room Details', item);
   // listing id
 
-  const userName = useSelector(state => state?.userDataSlice?.userData?.name);
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user,
@@ -42,6 +42,7 @@ const RoomsDetails = ({navigation, route}) => {
     moment.duration(item?.availabilityEnd).asMilliseconds(),
   );
   const availableDate = moment(item?.availabilityStart).format('MMMM DD YYYY');
+  const availableEnd = moment(item?.availabilityEnd).format('MMMM DD YYYY');
   //   console.log('availableDate ', availableDate);
 
   const daysDifference = Endduration.diff(Startduration, 'days');
@@ -84,19 +85,23 @@ const RoomsDetails = ({navigation, route}) => {
     try {
       setIsLoading(true);
       const bodyParams = {};
-      const endPoint = `${api.getUserProfile}/${item?.user}`;
+      const endPoint = `${api.getUserProfile}/${item?.user?._id}`;
+      console.log('Endpoint is', endPoint);
       const onSuccess = result => {
         setServiceUserProfile(result?.user);
+        console.log('user details are', result?.user);
         setIsLoading(false);
       };
       const onError = error => {
         setIsLoading(false);
         RedFlashMessage('Something Went Wrong', error);
+        console.log(' 1. Error is ', error);
       };
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setIsLoading(false);
       RedFlashMessage('Something Went Wrong!');
+      console.log(' 2. Error is ', error);
     }
   };
 
@@ -120,7 +125,7 @@ const RoomsDetails = ({navigation, route}) => {
               })
             }
             pic={serviceUserProfile?.image}
-            title={userName}
+            title={serviceUserProfile?.name}
           />
         )}
         <ServiceProviderInfo
@@ -128,7 +133,7 @@ const RoomsDetails = ({navigation, route}) => {
           washRoom={item?.washRoom}
           days={daysDifference}
           floor={item?.rooms[0]?.floor}
-          availableOn={availableDate}
+          availableOn={availableDate + ' - ' + availableEnd}
           location={item?.location?.address}
           note={item?.notes}
         />

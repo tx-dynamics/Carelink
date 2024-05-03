@@ -44,7 +44,7 @@ const SendProposal = ({navigation}) => {
         proposer: proposalRawData?.agencyId,
         proposee: proposalRawData?.serviceProviderId,
         coverLetter: coverLetter,
-        accepted: true,
+        accepted: false,
       };
       const onSuccess = result => {
         setIsLoading(false);

@@ -83,7 +83,6 @@ const ServiceProviderInfo = ({
             horizontal
             data={images}
             renderItem={({item}) => (
-              // console.log('Items is', item)
               <SimpleImageComponent disabled pic={item} />
             )}
           />
