@@ -55,7 +55,6 @@ export const agencyData = [
       },
     ],
   },
-
   {
     id: 'bd7ac4bea-c1b1-46c2-aed5-3567567ad53abb28ba',
     duation: 14,
@@ -82,18 +81,16 @@ export const agencyData = [
 
 const AgencyHome = ({}) => {
   const [listingDetails, setListingDetails] = useState([]);
+  const [pending, setPending] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
   const [proposalData, setPropsalData] = useState({
     countsData: {},
     proposalList: [],
   });
-  const [pending, setPending] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [refreshing, setRefreshing] = React.useState(false);
-  console.log('Listing deatails', listingDetails?.length);
 
   // hooks
   const UserId = useSelector(state => state?.userDataSlice?.userData?._id);
-  // console.log("UserId ", UserId)
   useEffect(() => {
     // getProposal
     fetchListingDetails();
@@ -215,7 +212,7 @@ const AgencyHome = ({}) => {
           labelValue={'Proposals'}
           BookedRooms={proposalData?.proposalList?.length}
           scndTxt={'Submitted'}
-          // AvailableRooms={pending}
+          AvailableRooms={'0'}
           firstTxt={'Accepted'}
         />
         <View style={styles.listingView}>
@@ -235,7 +232,6 @@ const AgencyHome = ({}) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           scrollEnabled={false}
-          // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(80) }}></View>}
           data={listingDetails}
           keyExtractor={(item, index) => index}
           renderItem={({item, index}) => (
@@ -248,9 +244,17 @@ const AgencyHome = ({}) => {
                   },
                 })
               }
-              title={item?.address?.slice(0, item?.address?.indexOf(','))}
+              title={
+                item?.address
+                  ? item?.address?.slice(0, item?.address?.indexOf(','))
+                  : item?.location?.address?.slice(
+                      0,
+                      item?.address?.indexOf(','),
+                    )
+              }
               durationData={[item?.availabilityStart, item?.availabilityEnd]}
               facilityData={item?.entities}
+              allData={item}
             />
           )}
         />

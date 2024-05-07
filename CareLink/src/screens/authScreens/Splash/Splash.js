@@ -22,19 +22,18 @@ const Splash = ({navigation}) => {
       if (userType == undefined) {
         navigation.replace('AskRegister');
       } else {
-        if (res?.data?.user?.userType === 'ServiceSide') {
-          dispatch(userType('ServiceSide'));
+        if (userData?.userType === 'ServiceSide') {
           if (res?.data?.user?.profileCompleted == false) {
             navigation.reset({
               index: 0,
               routes: [{name: routes.addDocuments}],
             });
           } else if (
-            res?.data?.user?.certificates[0] &&
-            res?.data?.user?.drivingAbstract &&
-            res?.data?.user?.selfie &&
-            res?.data?.user?.drivingLicense &&
-            res?.data?.user?.homePhoto
+            userData?.userData?.certificates[0] &&
+            userData?.userData?.drivingAbstract &&
+            userData?.userData?.selfie &&
+            userData?.userData?.drivingLicense &&
+            userData?.userData?.homePhoto
           ) {
             navigation.reset({
               index: 0,
@@ -49,13 +48,12 @@ const Splash = ({navigation}) => {
             dispatch(userSave(true));
           }
         } else {
-          dispatch(userType('AgencySide'));
-          if (res?.data?.user?.profileCompleted == false) {
+          if (userData?.userData?.profileCompleted == false) {
             navigation.reset({
               index: 0,
               routes: [{name: routes.successAgency}],
             });
-          } else if (res?.data?.user?.subscriptionId == null) {
+          } else if (userData?.userData?.subscriptionId == null) {
             navigation.reset({
               index: 0,
               routes: [{name: 'PaymentPlans'}],

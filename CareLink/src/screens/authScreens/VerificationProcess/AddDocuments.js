@@ -90,27 +90,27 @@ const AddDocuments = ({navigation}) => {
 
   const uploadImageData = async () => {
     setIsLoading(true);
-    if (isData[isIndex]?.media){
+    if (isData[isIndex]?.media) {
       const str = isData[isIndex]?.media;
-    const imageObj = {
-      path: str,
-      name: str?.substring(str?.lastIndexOf('/')),
-    };
-    await uploadImageOnS3(imageObj, res => {
-      setData([...isData, (isData[isIndex].media = res)]);
-      setIndex(isIndex + 1);
-      setIsLoading(false);
-    });
-    if (isIndex == 4) {
-      navigation.navigate(routes.addInformation, {
-        imagesData: mediaValues,
+      const imageObj = {
+        path: str,
+        name: str?.substring(str?.lastIndexOf('/')),
+      };
+      await uploadImageOnS3(imageObj, res => {
+        setData([...isData, (isData[isIndex].media = res)]);
+        setIndex(isIndex + 1);
+        setIsLoading(false);
       });
-    }
-    }else{
+      if (isIndex == 4) {
+        navigation.navigate(routes.addInformation, {
+          imagesData: mediaValues,
+        });
+        console.log('OImages data', mediaValues);
+      }
+    } else {
       setIsLoading(false);
-      RedFlashMessage(`${isData[isIndex].title} is Required`)
+      RedFlashMessage(`${isData[isIndex].title} is Required`);
     }
-    
   };
 
   return (

@@ -22,6 +22,7 @@ const CustomerListingComp = ({
   facilityData,
   posted,
   durationData,
+  allData,
 }) => {
   var Startduration = moment.utc(
     moment?.duration(durationData[0]).asMilliseconds(),
@@ -30,6 +31,8 @@ const CustomerListingComp = ({
     moment?.duration(durationData[1]).asMilliseconds(),
   );
   const daysDifference = Endduration.diff(Startduration, 'days');
+
+  console.log('Items of the agency home is', allData?.location?.address);
 
   return (
     <Pressable onPress={onPress} style={styles.container}>
