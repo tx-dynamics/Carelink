@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import {iconPath} from '../../../../config/icon';
@@ -142,8 +142,11 @@ const BookedRoomsAgencySide = ({navigation}) => {
         keyExtractor={(item, index) => index}
         renderItem={({item, index}) => (
           <AgencyListingComp
-            rightIconPress={() =>
-              navigation.navigate(routes.bookedRoomDetailAgency)
+            rightIconPress={
+              () => {}
+              // navigation.navigate(routes.bookedRoomDetailAgency, {
+              //   params: {item},
+              // })
             }
             item={item}
             facilityData={item.entities}

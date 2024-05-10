@@ -17,7 +17,6 @@ const AgencyHomeComp = ({
   scndTxt,
   containerStyle,
 }) => {
-  console.log('Rooms are', AvailableRooms);
   return (
     <TouchableOpacity
       onPress={onPress}

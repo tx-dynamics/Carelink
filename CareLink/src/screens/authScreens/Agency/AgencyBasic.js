@@ -15,19 +15,58 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {fromProfile} from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import {api} from '../../../network/Environment';
+import {Method, callApi} from '../../../network/NetworkManger';
+import {setUserData} from '../../../redux/Slices/userDataSlice';
+import Loader from '../../../components/Loader';
 
 const AgencyBasic = ({navigation, route}) => {
   const dispatch = useDispatch();
   const [agencyName, setAgencyName] = useState('');
   const [isExperience, setExperience] = useState('');
   const [about, setAbout] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
+  const userData = useSelector(store => store?.userDataSlice);
 
   const onPressButton = () => {
     if (isFromProfile) {
-      navigation.goBack();
-      // SuccessFlashMessage("Information Changed")
-      dispatch(fromProfile(false));
+      if (agencyName == '') {
+        RedFlashMessage('Agency Name is Required');
+      } else if (isExperience == '') {
+        RedFlashMessage('Agency Experience is Required');
+      } else if (about == '') {
+        RedFlashMessage('Agency About is Required');
+      } else {
+        try {
+          setIsLoading(true);
+          const endPoint = api.userProfile;
+          const bodyParams = {
+            name: agencyName,
+            experience: isExperience,
+            about: about,
+          };
+          const onSuccess = result => {
+            console.log('Result is ', result?.data);
+            SuccessFlashMessage(result?.message);
+            dispatch(setUserData(result?.data?.user));
+            setIsLoading(false);
+            navigation.goBack();
+          };
+
+          const onError = error => {
+            setIsLoading(false);
+            RedFlashMessage(error.message);
+          };
+
+          callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+        } catch (error) {
+          setIsLoading(false);
+          RedFlashMessage(error);
+        }
+      }
+      // SuccessFlashMessage("Information Changed")else
+      // dispatch(fromProfile(false));
     } else {
       if (isDetailNull()) {
         // console.log('hello');
@@ -102,6 +141,7 @@ const AgencyBasic = ({navigation, route}) => {
         buttonTitle={isFromProfile ? 'Change' : 'Next'}
         onPress={onPressButton}
       />
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

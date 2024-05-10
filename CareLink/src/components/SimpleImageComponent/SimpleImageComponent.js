@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: widthPixel(113),
     height: widthPixel(113),
-    borderRadius:10
+    borderRadius: 10,
   },
 });

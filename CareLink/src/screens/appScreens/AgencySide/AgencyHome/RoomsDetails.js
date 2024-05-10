@@ -26,7 +26,6 @@ const RoomsDetails = ({navigation, route}) => {
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
 
   const {item} = useRoute()?.params;
-  console.log('Item on Room Details', item);
   // listing id
 
   const proposalRawData = {
@@ -50,22 +49,22 @@ const RoomsDetails = ({navigation, route}) => {
   const [liked, setLiked] = useState(false);
 
   const onHeartPress = async () => {
+    console.log('LKiked =====>', item?.liked);
     try {
       const endPoint = api.likeList;
       const bodyParams = {
         listing: item?._id,
       };
       const onSuccess = result => {
-        console.log('🚀 ~ onSuccess ~ result:', result);
         SuccessFlashMessage(result?.message);
+        console.log('Result data', result?.data);
         setLiked(!liked);
       };
       const onError = error => {
-        console.log('🚀 ~ onError ~ error:', error);
+        RedFlashMessage(error.message);
       };
       await callApi(Method.POST, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
-      console.log('🚀 ~ onHeartPress ~ error:', error);
       RedFlashMessage('Listing Not Saved');
     }
   };
@@ -74,7 +73,6 @@ const RoomsDetails = ({navigation, route}) => {
   useEffect(() => {
     setLiked(item?.liked);
     // Room Details
-    // get user profile data when come from agency side.
     if (route?.params?.review !== 'Room Details') {
       getServiceUserData();
     }
@@ -86,22 +84,18 @@ const RoomsDetails = ({navigation, route}) => {
       setIsLoading(true);
       const bodyParams = {};
       const endPoint = `${api.getUserProfile}/${item?.user?._id}`;
-      console.log('Endpoint is', endPoint);
       const onSuccess = result => {
         setServiceUserProfile(result?.user);
-        console.log('user details are', result?.user);
         setIsLoading(false);
       };
       const onError = error => {
         setIsLoading(false);
         RedFlashMessage('Something Went Wrong', error);
-        console.log(' 1. Error is ', error);
       };
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setIsLoading(false);
       RedFlashMessage('Something Went Wrong!');
-      console.log(' 2. Error is ', error);
     }
   };
 

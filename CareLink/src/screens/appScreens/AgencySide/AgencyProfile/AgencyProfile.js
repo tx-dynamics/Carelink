@@ -9,6 +9,7 @@ import {
   StatusBar,
   UIManager,
   Text,
+  PermissionsAndroid,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -32,139 +33,33 @@ import {fonts} from '../../../../Constants/Fonts';
 import {fromProfile} from '../../../../redux/Slices/appSlice';
 import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
+import moment from 'moment';
+import Loader from '../../../../components/Loader';
+import MapView from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+import {useIsFocused} from '@react-navigation/native';
 
 const Profile = ({navigation}) => {
+  let currentLocation = {
+    latitude: 31.449590774585772,
+    longitude: 74.28036404773593,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+  const isFocused = useIsFocused();
   const usertype = useSelector(state => state.splash.userType);
+  const userProfileData = useSelector(store => store?.userDataSlice);
+  console.log('User profile', userProfileData);
   const dispatch = useDispatch();
   const [isCover, setCover] = useState(null);
   const [isProfile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState();
+  const [reviews, setReviews] = useState();
+  const [coordinates, setCoordinates] = useState(currentLocation);
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 
-  const DATA = [
-    {
-      id: 1,
-      name: 'Tebasy C.',
-      date: 'Feb 28th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: true,
-          title: 'Would rehire',
-        },
-        {
-          mark: false,
-          title: 'Punctual',
-        },
-        {
-          mark: true,
-          title: 'Dependable',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'John Doe',
-      date: 'Feb 29th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: true,
-          title: 'Would rehire',
-        },
-        {
-          mark: true,
-          title: 'Punctual',
-        },
-        {
-          mark: true,
-          title: 'Dependable',
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Jack',
-      date: 'Jan 28th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: false,
-          title: 'Would rehire',
-        },
-        {
-          mark: false,
-          title: 'Punctual',
-        },
-        {
-          mark: true,
-          title: 'Dependable',
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Jack',
-      date: 'Jan 28th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: false,
-          title: 'Would rehire',
-        },
-        {
-          mark: true,
-          title: 'Punctual',
-        },
-        {
-          mark: false,
-          title: 'Dependable',
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Jack',
-      date: 'Jan 28th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: true,
-          title: 'Would rehire',
-        },
-        {
-          mark: false,
-          title: 'Punctual',
-        },
-        {
-          mark: false,
-          title: 'Dependable',
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Jack Last',
-      date: 'Jan 28th, 2024',
-      desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta sollicitudin euismod arcu praesent vulputate arcu eget. Elit tempor vitae tellus laoreet ante libero tortor.',
-      checks: [
-        {
-          mark: false,
-          title: 'Would rehire',
-        },
-        {
-          mark: true,
-          title: 'Punctual',
-        },
-        {
-          mark: true,
-          title: 'Dependable',
-        },
-      ],
-    },
-  ];
   // useFocusEffect(
   //     React.useCallback(() => {
   //         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -178,28 +73,102 @@ const Profile = ({navigation}) => {
   // );
 
   // functions
-
   useEffect(() => {
-    fetchUserData();
-  }, []);
+    if (isFocused) {
+      fetchUserData();
+      fetchReview();
+    }
+  }, [isFocused]);
+
   const fetchUserData = async () => {
     try {
       setIsLoading(true);
       const endPoint = api.getAgencyProfile;
       const bodyParams = {};
       const onSuccess = result => {
-        console.log('Success is', result?.user);
         setUserData(result?.user);
+        console.log('User data is', result?.user?.brochure);
+        setIsLoading(false);
       };
 
       const onError = error => {
         setIsLoading(false);
         console.log('error is', error);
+        setIsLoading(false);
       };
 
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setIsLoading(false);
+    }
+  };
+
+  const fetchReview = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = `${api.getReviews}/${userData?._id}`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setReviews(result?.data?.review);
+        setIsLoading(false);
+      };
+
+      const onError = error => {
+        setIsLoading(false);
+        console.log('error is', error);
+        setIsLoading(false);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
+  const requestLocationPermission = async () => {
+    try {
+      if (Platform.OS == 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('Hit get Location');
+          getLocation();
+        } else {
+        }
+      } else {
+        getLocation();
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getLocation = async () => {
+    try {
+      setIsLoading(true);
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log('locatoin ', position);
+          const {latitude, longitude} = position?.coords;
+          setCoordinates(prevData => ({
+            ...prevData,
+            latitude: latitude,
+            longitude: longitude,
+          }));
+          setIsLoading(false);
+        },
+        error => {
+          console.error(error);
+        },
+        {enableHighAccuracy: true, timeout: 15000},
+      );
+    } catch (error) {
+      console.log('error occured while opening map');
     }
   };
 
@@ -226,7 +195,7 @@ const Profile = ({navigation}) => {
           <Image
             style={styles.profileImg}
             source={
-              !userData?.image
+              userData?.image
                 ? {uri: userData?.image}
                 : require('../../../../../assets/photo.png')
             }
@@ -249,7 +218,7 @@ const Profile = ({navigation}) => {
           Manage 90+ Rental Propoerties in the city
         </Apptext>
         <Apptext style={[styles.mngTxt, {marginTop: wp('2%')}]}>
-          5+ Years experience
+          {userData?.experience}
         </Apptext>
         <TouchableOpacity
           onPress={() =>
@@ -272,11 +241,7 @@ const Profile = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.paraView}>
-          <Apptext style={styles.para}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            consequat, erat quis commodo facilisis ultricies. Aliquam semper
-            eget dictumst donec elit in.
-          </Apptext>
+          <Apptext style={styles.para}>{userData?.about}</Apptext>
         </View>
         <View style={styles.txtView}>
           <Apptext style={styles.rms}>Location</Apptext>
@@ -291,13 +256,37 @@ const Profile = ({navigation}) => {
             <Apptext style={styles.dtls}>Edit your Location</Apptext>
           </TouchableOpacity>
         </View>
+
         <View style={styles.paraView}>
           <Apptext style={styles.para}>{userData?.address}</Apptext>
         </View>
-        <Image
-          style={styles.mapImg}
-          source={require('../../../../../assets/profileMao.png')}
-        />
+
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 10,
+            overflow: 'hidden',
+          }}>
+          <MapView
+            style={{
+              width: wp('90%'),
+              height: wp('90%'),
+              overflow: 'hidden',
+            }}
+            zoomEnabled={true}
+            showsUserLocation={true}
+            showsPointsOfInterest={true}
+            followsUserLocation={true}
+            userLocationPriority="high"
+            initialRegion={coordinates}></MapView>
+        </View>
+
+        <View style={styles.txtView}>
+          <Apptext style={styles.rms}>Brochure</Apptext>
+        </View>
+        <Image style={styles.mapImg} source={{uri: userData?.brochure}} />
         <View style={styles.txtView}>
           <Apptext style={styles.rms}>Reviews</Apptext>
         </View>
@@ -309,7 +298,7 @@ const Profile = ({navigation}) => {
               <View style={{marginTop: heightPixel(1)}}></View>
             )}
             // ListFooterComponent={() => <View style={{ marginBottom: heightPixel(90) }}></View>}
-            data={DATA}
+            data={reviews}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <ReviewsComp
@@ -317,13 +306,16 @@ const Profile = ({navigation}) => {
                 data={item.checks}
                 showProposals={true}
                 labelValue={item.desc}
-                name={item.name}
-                location={item.date}
+                name={item.text}
+                location={moment(parseInt(item.createdAt)).format(
+                  'MMM DD,YYYY',
+                )}
               />
             )}
           />
         </View>
       </View>
+      <Loader isVisible={isLoading} />
     </ScrollView>
   );
 };
@@ -429,5 +421,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: wp('8%'),
     borderRadius: 15,
+    height: hp('90%'),
   },
 });

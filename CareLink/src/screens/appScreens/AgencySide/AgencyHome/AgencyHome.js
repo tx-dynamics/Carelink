@@ -90,9 +90,7 @@ const AgencyHome = ({}) => {
   });
 
   // hooks
-  const UserId = useSelector(state => state?.userDataSlice?.userData?._id);
   useEffect(() => {
-    // getProposal
     fetchListingDetails();
   }, []);
 
