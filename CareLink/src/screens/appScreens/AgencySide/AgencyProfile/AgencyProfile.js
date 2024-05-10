@@ -28,7 +28,7 @@ import {
   routes,
   widthPixel,
 } from '../../../../Constants';
-import {uploadmage} from '../../../../Services/HelpingMethods';
+import {uploadImageOnS3, uploadmage} from '../../../../Services/HelpingMethods';
 import {fonts} from '../../../../Constants/Fonts';
 import {fromProfile} from '../../../../redux/Slices/appSlice';
 import {api} from '../../../../network/Environment';
@@ -38,6 +38,7 @@ import Loader from '../../../../components/Loader';
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import {useIsFocused} from '@react-navigation/native';
+import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
 
 const Profile = ({navigation}) => {
   let currentLocation = {
@@ -47,10 +48,8 @@ const Profile = ({navigation}) => {
     longitudeDelta: 0.0421,
   };
   const isFocused = useIsFocused();
-  const usertype = useSelector(state => state.splash.userType);
-  const userProfileData = useSelector(store => store?.userDataSlice);
-  console.log('User profile', userProfileData);
   const dispatch = useDispatch();
+  const usertype = useSelector(state => state.splash.userType);
   const [isCover, setCover] = useState(null);
   const [isProfile, setProfile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -60,17 +59,44 @@ const Profile = ({navigation}) => {
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 
-  // useFocusEffect(
-  //     React.useCallback(() => {
-  //         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  //         StatusBar.setTranslucent(true)
-  //         StatusBar.setBackgroundColor("transparent")
-  //         return () => {
-  //             StatusBar.setTranslucent(false)
-  //             StatusBar.setBackgroundColor(colors.white)
-  //         };
-  //     }, []),
-  // );
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    if (isProfile) {
+      const str = isProfile;
+      const imageObj = {
+        path: str,
+        name: str?.substring(str?.lastIndexOf('/')),
+      };
+      await uploadImageOnS3(imageObj, res => {
+        updateProfile(res);
+      });
+    } else {
+      // await updateProfile();
+      setIsLoading(false);
+      console.log('Else condition');
+    }
+  };
+
+  const updateProfile = async image => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.userProfile;
+      const bodyParams = {image: image};
+      const onSuccess = result => {
+        setIsLoading(false);
+        dispatch(setUserData(result?.data?.user));
+        fetchUserData();
+      };
+      const onError = error => {
+        RedFlashMessage('Something Went Wrong!', error.message);
+      };
+      await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // functions
   useEffect(() => {
@@ -87,13 +113,11 @@ const Profile = ({navigation}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setUserData(result?.user);
-        console.log('User data is', result?.user?.brochure);
+        console.log('User data ---', result?.user);
         setIsLoading(false);
       };
 
       const onError = error => {
-        setIsLoading(false);
-        console.log('error is', error);
         setIsLoading(false);
       };
 
@@ -114,8 +138,6 @@ const Profile = ({navigation}) => {
       };
 
       const onError = error => {
-        setIsLoading(false);
-        console.log('error is', error);
         setIsLoading(false);
       };
 
@@ -153,7 +175,6 @@ const Profile = ({navigation}) => {
       setIsLoading(true);
       Geolocation.getCurrentPosition(
         position => {
-          console.log('locatoin ', position);
           const {latitude, longitude} = position?.coords;
           setCoordinates(prevData => ({
             ...prevData,
@@ -168,7 +189,7 @@ const Profile = ({navigation}) => {
         {enableHighAccuracy: true, timeout: 15000},
       );
     } catch (error) {
-      console.log('error occured while opening map');
+      console.log('Error occured');
     }
   };
 
@@ -201,7 +222,10 @@ const Profile = ({navigation}) => {
             }
           />
           <TouchableOpacity
-            onPress={() => uploadmage(setProfile)}
+            onPress={() => {
+              uploadmage(setProfile);
+              handleSubmit();
+            }}
             style={styles.cameraView}>
             <Image
               style={styles.camStyle}
@@ -248,7 +272,7 @@ const Profile = ({navigation}) => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: 'AgencyLocation',
+                screen: 'AgencyMap',
                 params: {fromProfile: dispatch(fromProfile(true))},
               })
             }>
@@ -282,11 +306,15 @@ const Profile = ({navigation}) => {
             userLocationPriority="high"
             initialRegion={coordinates}></MapView>
         </View>
+        {userData?.brochure && (
+          <>
+            <View style={styles.txtView}>
+              <Apptext style={styles.rms}>Brochure</Apptext>
+            </View>
+            <Image style={styles.mapImg} source={{uri: userData?.brochure}} />
+          </>
+        )}
 
-        <View style={styles.txtView}>
-          <Apptext style={styles.rms}>Brochure</Apptext>
-        </View>
-        <Image style={styles.mapImg} source={{uri: userData?.brochure}} />
         <View style={styles.txtView}>
           <Apptext style={styles.rms}>Reviews</Apptext>
         </View>

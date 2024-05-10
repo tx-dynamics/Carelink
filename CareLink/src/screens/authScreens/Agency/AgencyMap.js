@@ -21,11 +21,12 @@ import {fromProfile} from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import Geolocation from 'react-native-geolocation-service';
 import MapView, {Marker} from 'react-native-maps';
-import {GOOGLE_API_KEY} from '../../../network/Environment';
+import {GOOGLE_API_KEY, api} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import colors from '../../../config/colors';
+import {Method, callApi} from '../../../network/NetworkManger';
 
 const AgencyMap = ({navigation, route}) => {
   // dummy location points
@@ -80,15 +81,11 @@ const AgencyMap = ({navigation, route}) => {
     }
   };
 
-  const onPressNext = () => {
-    // console.log('setMyUserLocation', myUserLocation, usertype, isFromProfile);
-    // const routeData = route?.params;
+  const onPressNext = async () => {
     if (myUserLocation.country === '') {
       RedFlashMessage('Pin Your location on Map is Require');
       return;
     }
-    // console.log('routedata ', JSON.stringify(myUserLocation, ' ', 2));
-
     if (usertype == 'ServiceSide') {
       navigation.navigate('AgencyLocation', {
         ProviderData: route?.params,
@@ -96,16 +93,29 @@ const AgencyMap = ({navigation, route}) => {
       });
     }
     if (usertype == 'AgencySide') {
+      setIsLoading(true);
       if (isFromProfile) {
-        navigation.navigate('ProfileNavigator');
-        dispatch(fromProfile(false));
+        try {
+          const endPoint = api.userProfile;
+          const bodyParams = {
+            address: address,
+          };
+          const onSuccess = result => {
+            setIsLoading(false);
+            navigation.navigate('ProfileNavigator');
+            dispatch(fromProfile(false));
+          };
+          const onError = error => {
+            RedFlashMessage('Something Went Wrong!', error.message);
+          };
+          await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+        } catch (error) {
+          setIsLoading(false);
+        } finally {
+          setIsLoading(false);
+        }
       } else {
         if (myUserLocation.country !== '') {
-          // console.log(myUserLocation, route?.params);
-          // navigation.navigate('AgencyLocation', {
-          //   myUserLocation,
-          //   agencyData: route?.params,
-          // });
           navigation.navigate('PaymentPlans');
         } else {
           RedFlashMessage('Please Select Your Address');
@@ -114,12 +124,13 @@ const AgencyMap = ({navigation, route}) => {
     }
   };
 
+  const updateProfile = async image => {};
+
   const getLocation = async () => {
     try {
       setIsLoading(true);
       Geolocation.getCurrentPosition(
         position => {
-          console.log('locatoin ', position);
           const {latitude, longitude} = position?.coords;
           setCoordinates(prevData => ({
             ...prevData,
@@ -127,12 +138,6 @@ const AgencyMap = ({navigation, route}) => {
             longitude: longitude,
           }));
           setIsLoading(false);
-          // mapRef.current?.animateToRegion({
-          //   latitude: latitude,
-          //   longitude: longitude,
-          //   latitudeDelta: 0.123,
-          //   longitudeDelta: 0.32,
-          // });
         },
         error => {
           console.error(error);
@@ -160,9 +165,10 @@ const AgencyMap = ({navigation, route}) => {
         .then(responseJson => {
           if (responseJson.status === 'OK') {
             setIsLoading(true);
+            setAddress(responseJson?.results[0]?.formatted_address);
             console.log(
-              '=> ',
-              JSON.stringify(responseJson?.results[0], ' ', 2),
+              'responseJson?.results[0]',
+              responseJson?.results[0]?.formatted_address,
             );
             responseJson?.results[0].address_components.forEach(item => {
               switch (item.types[0]) {
@@ -243,7 +249,6 @@ const AgencyMap = ({navigation, route}) => {
 
         <View style={styles.mapContainer}>
           <MapView
-            // ref={mapRef}
             style={{width: wp('95%'), height: wp('90%')}}
             zoomEnabled={true}
             showsUserLocation={true}
@@ -262,7 +267,6 @@ const AgencyMap = ({navigation, route}) => {
               }}
               pointerEvents="auto"
               style={{
-                // backgroundColor: 'yellow',
                 width: wp(30),
                 height: wp(30),
               }}
@@ -275,24 +279,14 @@ const AgencyMap = ({navigation, route}) => {
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
             Address
           </Apptext>
-          {myUserLocation.country !== '' && (
-            <Apptext style={[styles.adrs]}>
-              {myUserLocation['streetAddress'] !== null &&
-                myUserLocation['streetAddress'] + ' ,'}{' '}
-              {myUserLocation['stateName'] !== null &&
-                myUserLocation['stateName'] + ', '}
-              {myUserLocation['country'] !== null &&
-                myUserLocation['country'] + ', '}
-              {myUserLocation['zipCode'] !== null && myUserLocation['zipCode']}
-            </Apptext>
-          )}
+          <Apptext style={[styles.adrs]}>{address}</Apptext>
         </View>
       </View>
       <FormButton
         buttonTitle={isFromProfile ? 'Update' : 'Next'}
         onPress={onPressNext}
       />
-      {/* <Loader isVisible={isLoading} /> */}
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

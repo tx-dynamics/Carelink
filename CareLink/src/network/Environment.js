@@ -26,6 +26,7 @@ export const api = {
   createIntent: 'api/v1/user/subscription',
   getAgencyProfile: 'api/v1/user/me',
   getReviews: 'api/v1/review',
+  deleteAccount: 'api/v1/user/deleteMe',
 
   // listing routes
   getListing: 'api/v1/listing',

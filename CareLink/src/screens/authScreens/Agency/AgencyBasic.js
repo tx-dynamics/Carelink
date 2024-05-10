@@ -27,7 +27,6 @@ const AgencyBasic = ({navigation, route}) => {
   const [about, setAbout] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
-  const userData = useSelector(store => store?.userDataSlice);
 
   const onPressButton = () => {
     if (isFromProfile) {
@@ -45,13 +44,17 @@ const AgencyBasic = ({navigation, route}) => {
             name: agencyName,
             experience: isExperience,
             about: about,
+            profileCompleted: true,
           };
           const onSuccess = result => {
-            console.log('Result is ', result?.data);
             SuccessFlashMessage(result?.message);
             dispatch(setUserData(result?.data?.user));
             setIsLoading(false);
-            navigation.goBack();
+            navigation.navigate(routes.agencyPhotos, {
+              agencyName: agencyName,
+              experience: isExperience,
+              about: about,
+            });
           };
 
           const onError = error => {
@@ -65,8 +68,6 @@ const AgencyBasic = ({navigation, route}) => {
           RedFlashMessage(error);
         }
       }
-      // SuccessFlashMessage("Information Changed")else
-      // dispatch(fromProfile(false));
     } else {
       if (isDetailNull()) {
         // console.log('hello');

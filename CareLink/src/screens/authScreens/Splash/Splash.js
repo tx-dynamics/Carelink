@@ -15,6 +15,7 @@ const Splash = ({navigation}) => {
   // const userType = useSelector(store => store?.appSlice?.userType);
   const isNewUser = useSelector(store => store?.appSlice?.isNewUser);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
+  console.log('SignUp OTP', signUpOTP);
   const userType = userData?.userData?.userType;
 
   useEffect(() => {

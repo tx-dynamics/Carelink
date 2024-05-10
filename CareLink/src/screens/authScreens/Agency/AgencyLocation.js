@@ -32,10 +32,7 @@ import {CommonActions} from '@react-navigation/native';
 import {userSave} from '../../../redux/Slices/splashSlice';
 
 const AgencyLocation = ({navigation, route}) => {
-  // const {myUserLocation}=useRoute();
   const {myUserLocation, agencyData, ProviderData} = route?.params;
-  // console.log('agency location ', myUserLocation, ProviderData);
-
   // states
   const usertype = useSelector(state => state.splash.userType);
   const [street, setStreet] = useState('');
@@ -54,8 +51,6 @@ const AgencyLocation = ({navigation, route}) => {
 
   // functions
   const onNextPress = async () => {
-    // console.log('street ', street, typeof street);
-    Keyboard.dismiss();
     Keyboard.dismiss();
     if (CheckLocationInput()) {
       if (usertype === 'ServiceSide') {
@@ -65,9 +60,6 @@ const AgencyLocation = ({navigation, route}) => {
         saveAgencyProfile();
       }
     }
-
-    // navigation.navigate("AgencyMap")
-    // navigation.navigate("PaymentPlans")
   };
 
   // agencySideApiCall
@@ -85,23 +77,20 @@ const AgencyLocation = ({navigation, route}) => {
         location: {
           type: 'Point',
           coordinates: [myUserLocation?.latitude, myUserLocation?.longitude],
-          address:
-            street +
-            ' ' +
-            apartment +
-            ' ' +
-            zipCode +
-            ' ' +
-            isState +
-            ' ' +
-            country,
         },
-
+        address:
+          street +
+          ' ' +
+          apartment +
+          ' ' +
+          zipCode +
+          ' ' +
+          isState +
+          ' ' +
+          country,
         profileCompleted: true,
       };
-      //   console.log('data ', data);
       const onSuccess = result => {
-        // console.log('result ', JSON.stringify(result," ",2));
         SuccessFlashMessage(result?.message);
         dispatch(setUserData(result?.data?.user));
         setIsLoading(false);
@@ -193,32 +182,32 @@ const AgencyLocation = ({navigation, route}) => {
           {myUserLocation?.streetAddress == null ? (
             <AppTextInput
               value={street}
-              onChangeText={setStreet}
+              onChangeText={text => setStreet(text)}
               title={'Street Address'}
             />
           ) : (
             <AppTextInput
               value={street}
-              // onChangeText={setStreet}
+              onChangeText={text => setStreet(text)}
               editable={false}
               title={'Street Address'}
             />
           )}
           <AppTextInput
             value={apartment}
-            onChangeText={setApartment}
+            onChangeText={text => setApartment(text)}
             title={'Aparment Number'}
           />
           {myUserLocation?.zipCode == null ? (
             <AppTextInput
               value={zipCode}
-              onChangeText={setZipCode}
+              onChangeText={text => setZipCode(text)}
               title={'Zip Code'}
             />
           ) : (
             <AppTextInput
               value={zipCode}
-              // onChangeText={setZipCode}
+              onChangeText={text => setZipCode(text)}
               editable={false}
               title={'Zip Code'}
             />
@@ -226,11 +215,16 @@ const AgencyLocation = ({navigation, route}) => {
           {myUserLocation?.country == null ? (
             <AppTextInput
               value={isState}
-              onChangeText={setState}
               title={'State'}
+              onChangeText={text => setState(text)}
             />
           ) : (
-            <AppTextInput value={isState} editable={false} title={'State'} />
+            <AppTextInput
+              value={isState}
+              editable={false}
+              title={'State'}
+              onChangeText={text => setState(text)}
+            />
           )}
         </View>
       </KeyboardAwareScrollView>

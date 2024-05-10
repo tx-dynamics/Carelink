@@ -115,7 +115,7 @@ const ListingSummary = ({navigation}) => {
         entities: entities,
         availabilityStart: startDateMoment,
         availabilityEnd: endDateMoment,
-        washroom:ProviderData?.data?.washrooom,
+        washroom: ProviderData?.data?.washrooom,
         photos: ProviderData?.data?.picturesData,
         notes: ProviderData?.note ? ProviderData?.note : '',
         status: 'active',

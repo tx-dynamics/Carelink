@@ -54,16 +54,17 @@ const Register = () => {
     let dtk = await getDeviceId();
     var emailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    var alphabetRegex = /^[a-zA-Z]+$/;
+    var alphabetRegex = /^[a-zA-Z\s]+$/;
+    var firstNameRegex = /^[a-zA-Z]+$/;
     Keyboard.dismiss();
     if (!firstName) {
       RedFlashMessage('First name is required');
-    } else if (!alphabetRegex.test(firstName)) {
+    } else if (!firstNameRegex.test(firstName)) {
       RedFlashMessage('First name is not valid');
     } else if (!lastName) {
       RedFlashMessage('Last Name is required');
     } else if (!alphabetRegex.test(lastName)) {
-      RedFlashMessage('First name is not valid');
+      RedFlashMessage('Last name is not valid');
     } else if (!email) {
       RedFlashMessage('Email is required');
     } else if (!emailRegex.test(email)) {
@@ -105,7 +106,7 @@ const Register = () => {
                 register: true,
                 email: email?.toLowerCase(),
               });
-              // dispatch(signUpOTPCheck(true));
+              dispatch(signUpOTPCheck(true));
               // console.log('Response on signup', res?.data);
             } else {
               setIsLoading(false);

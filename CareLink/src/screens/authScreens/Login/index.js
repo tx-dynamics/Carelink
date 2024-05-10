@@ -195,7 +195,7 @@ const LoginScreen = () => {
       />
       <AlreadyText
         onPress={() => navigation.navigate('Register')}
-        title={'I don’t have Account.'}
+        title={'I don’t have Account'}
         subtitle={' Sign Up'}
       />
       <Loader isVisible={isLoading} />
