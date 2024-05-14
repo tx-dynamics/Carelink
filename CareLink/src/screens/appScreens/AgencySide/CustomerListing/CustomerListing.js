@@ -10,7 +10,6 @@ import {useRoute} from '@react-navigation/native';
 
 const CustomerListing = ({navigation, route}) => {
   const {listingDetails} = useRoute()?.params;
-  console.log('my data==========>', listingDetails);
   return (
     <AppGLobalView>
       <AppStatusbar />

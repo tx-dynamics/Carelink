@@ -19,18 +19,26 @@ import {api} from '../../../network/Environment';
 import {Method, callApi} from '../../../network/NetworkManger';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
 import Loader from '../../../components/Loader';
+import {
+  setAgencyAbout,
+  setAgencyExperience,
+  setAgencyName,
+} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyBasic = ({navigation, route}) => {
   const dispatch = useDispatch();
-  const [agencyName, setAgencyName] = useState('');
-  const [isExperience, setExperience] = useState('');
-  const [about, setAbout] = useState('');
+  const userAgencyInfo = useSelector(store => store?.agencyInfoSlice);
+  const [name, setName] = useState(userAgencyInfo?.agencyName || '');
+  const [isExperience, setExperience] = useState(
+    userAgencyInfo?.agencyExperience || '',
+  );
+  const [about, setAbout] = useState(userAgencyInfo?.agencyAbout || '');
   const [isLoading, setIsLoading] = useState(false);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
 
   const onPressButton = () => {
     if (isFromProfile) {
-      if (agencyName == '') {
+      if (name == '') {
         RedFlashMessage('Agency Name is Required');
       } else if (isExperience == '') {
         RedFlashMessage('Agency Experience is Required');
@@ -41,17 +49,16 @@ const AgencyBasic = ({navigation, route}) => {
           setIsLoading(true);
           const endPoint = api.userProfile;
           const bodyParams = {
-            name: agencyName,
+            name: name,
             experience: isExperience,
             about: about,
-            profileCompleted: true,
           };
           const onSuccess = result => {
             SuccessFlashMessage(result?.message);
             dispatch(setUserData(result?.data?.user));
             setIsLoading(false);
             navigation.navigate(routes.agencyPhotos, {
-              agencyName: agencyName,
+              agencyName: name,
               experience: isExperience,
               about: about,
             });
@@ -70,9 +77,11 @@ const AgencyBasic = ({navigation, route}) => {
       }
     } else {
       if (isDetailNull()) {
-        // console.log('hello');
+        dispatch(setAgencyName(name));
+        dispatch(setAgencyExperience(isExperience));
+        dispatch(setAgencyAbout(about));
         navigation.navigate(routes.agencyPhotos, {
-          agencyName: agencyName,
+          agencyName: name,
           experience: isExperience,
           about: about,
         });
@@ -81,10 +90,10 @@ const AgencyBasic = ({navigation, route}) => {
   };
 
   const isDetailNull = () => {
-    if (agencyName == '') {
+    if (name == '') {
       RedFlashMessage('Agency Name is Required');
       return false;
-    } else if (agencyName.length < 3) {
+    } else if (name.length < 3) {
       RedFlashMessage('Agency Name Required 3 Characters');
       return false;
     }
@@ -119,21 +128,21 @@ const AgencyBasic = ({navigation, route}) => {
           }
         />
         <AppTextInput
-          value={agencyName}
+          value={name}
           title={'Agency name'}
-          onChangeText={setAgencyName}
+          onChangeText={text => setName(text)}
           mainViewStyle={styles.agencyStyle}
         />
         <AppTextInput
           value={isExperience}
           title={'Experience'}
-          onChangeText={setExperience}
+          onChangeText={text => setExperience(text)}
         />
         <AppTextInput
           multiline
           value={about}
           title={'About'}
-          onChangeText={setAbout}
+          onChangeText={text => setAbout(text)}
           containerStyle={styles.aboutHeight}
           mainViewStyle={styles.aboutMainStyle}
         />

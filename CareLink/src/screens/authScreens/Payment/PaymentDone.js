@@ -1,39 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  FlatList,
-  View,
-  ImageBackground,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, Image, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
-import FormInput from '../../../components/FormInput';
 import FormButton from '../../../components/FormButton';
-import SelectCardComp from '../../../components/SelectCardComp';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {setUser} from '../../../redux/actions/authAction';
-import IconHeaderComp from '../../../components/IconHeaderComp';
-import {iconPath} from '../../../config/icon';
-import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
+import {fontPixel, heightPixel, widthPixel} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import {fromProfile} from '../../../redux/Slices/appSlice';
 import {userSave} from '../../../redux/Slices/splashSlice';
-import {CommonActions} from '@react-navigation/native';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 
 const PaymentDone = ({navigation}) => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.splash.value);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
   const usertype = useSelector(state => state?.userDataSlice);
-  console.log('IS from', usertype?.userData?.userType);
+
   const onPressContinue = () => {
     if (isFromProfile) {
       navigation.navigate('GeneralNavigator');
@@ -41,16 +25,8 @@ const PaymentDone = ({navigation}) => {
     } else {
       if (usertype?.userData?.userType == 'AgencySide') {
         dispatch(userSave(true));
-        console.log('Hit');
-        // navigation.navigate();
       } else {
-        console.log('Hit 2');
-        // navigation.dispatch(
-        //   CommonActions.reset({
-        //     index: 0,
-        //     routes: [{name: 'withoutBottomTabnavigator'}],
-        //   }),
-        // );
+        dispatch(userSave(true));
       }
     }
   };

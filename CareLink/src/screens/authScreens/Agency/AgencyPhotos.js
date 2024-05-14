@@ -23,9 +23,14 @@ import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import {uploadImageOnS3} from '../../../Services/HelpingMethods';
 import Loader from '../../../components/Loader';
+import {useDispatch} from 'react-redux';
+import {
+  setAgencyCoverPhoto,
+  setAgencyProfileImage,
+} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyPhotos = ({navigation, route}) => {
-  // console.log("routes", route?.params)
+  const dispatch = useDispatch();
   const [agencyImg, setAgencyImg] = useState(null);
   const [profileImg, setProfileImg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +56,6 @@ const AgencyPhotos = ({navigation, route}) => {
         return new Promise((resolve, reject) => {
           uploadImageOnS3(item, res => {
             tempUrl.push(res); // Push the result to the tempUrl array
-            // console.log('res ', res);
             resolve(res); // Resolve this promise with the result
           });
         });
@@ -59,10 +63,8 @@ const AgencyPhotos = ({navigation, route}) => {
       // Wait for all promises to resolve using Promise.all
       await Promise.all(uploadPromises);
       setIsLoading(false);
-      // Return the tempUrl array after all promises are resolved
       return tempUrl;
     } catch (error) {
-      console.error('Error uploading images:', error);
       throw error; // Propagate the error
     }
   };
@@ -78,6 +80,8 @@ const AgencyPhotos = ({navigation, route}) => {
           agencyImg: imagesUrl[0],
           profileImg: imagesUrl[1],
         });
+        dispatch(setAgencyProfileImage(imagesUrl[0]));
+        dispatch(setAgencyCoverPhoto(imagesUrl[1]));
       }
     } catch (error) {
       console.log('error while submitting photos to agency location');

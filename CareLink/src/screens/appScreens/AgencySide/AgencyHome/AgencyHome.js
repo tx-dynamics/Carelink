@@ -22,7 +22,6 @@ import {api} from '../../../../network/Environment';
 import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
 import {callApi, Method} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
-import {useSelector} from 'react-redux';
 
 export const agencyData = [
   {
@@ -106,6 +105,7 @@ const AgencyHome = ({}) => {
       const onSuccess = result => {
         setListingDetails(result?.data?.listing);
         console.log('Listing count is', result?.data?.listing[0]?.address);
+        setIsLoading(false);
         fetchProposalDetails();
       };
 
@@ -134,6 +134,7 @@ const AgencyHome = ({}) => {
           countsData: result?.data?.counts,
           proposalList: result?.data?.proposal,
         });
+        console.log('Proposal details fetch are', result);
         setPending(result?.data?.counts?.pending);
         setIsLoading(false);
       };
@@ -148,6 +149,8 @@ const AgencyHome = ({}) => {
     } catch (error) {
       setIsLoading(false);
       RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

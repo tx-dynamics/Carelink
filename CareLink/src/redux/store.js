@@ -13,6 +13,7 @@ import {
 } from 'redux-persist';
 import appSlice from './Slices/appSlice';
 import userDataSlice from './Slices/userDataSlice';
+import agencyInfoSlice from './Slices/agencyInfoSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const reducer = combineReducers({
   splash: splashReducer,
   appSlice: appSlice,
   userDataSlice: userDataSlice,
+  agencyInfoSlice: agencyInfoSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

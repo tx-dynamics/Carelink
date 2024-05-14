@@ -1,14 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-  Keyboard,
-} from 'react-native';
+import {StyleSheet, View, Keyboard} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
@@ -28,12 +19,13 @@ import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
 import Loader from '../../../components/Loader';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
-import {CommonActions} from '@react-navigation/native';
 import {userSave} from '../../../redux/Slices/splashSlice';
+import {setAgencyApartmentNumber} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyLocation = ({navigation, route}) => {
-  const {myUserLocation, agencyData, ProviderData} = route?.params;
+  const {myUserLocation, agencyData, ProviderData, address} = route?.params;
   // states
+  const agencyProfileData = useSelector(store => store?.agencyInfoSlice);
   const usertype = useSelector(state => state.splash.userType);
   const [street, setStreet] = useState('');
   const [apartment, setApartment] = useState('');
@@ -69,32 +61,28 @@ const AgencyLocation = ({navigation, route}) => {
       setIsLoading(true);
       const endPoint = api.userProfile;
       const bodyParams = {
-        name: agencyData?.agencyName,
-        experience: agencyData?.experience,
-        about: agencyData?.about,
-        coverPhoto: agencyData?.agencyImg,
-        profilePhoto: agencyData?.profileImg,
+        name: agencyProfileData?.agencyName,
+        experience: agencyProfileData?.agencyExperience,
+        about: agencyProfileData?.agencyAbout,
+        coverPhoto: agencyProfileData?.agencyCoverPhoto,
+        image: agencyProfileData?.agencyProfileImage,
         location: {
           type: 'Point',
           coordinates: [myUserLocation?.latitude, myUserLocation?.longitude],
         },
-        address:
-          street +
-          ' ' +
-          apartment +
-          ' ' +
-          zipCode +
-          ' ' +
-          isState +
-          ' ' +
-          country,
+        agencyStreet: street,
+        agencyApartment: apartment,
+        agencyZipCode: zipCode,
+        agencyState: isState + ' ' + myUserLocation?.country,
+        address: address,
         profileCompleted: true,
       };
       const onSuccess = result => {
         SuccessFlashMessage(result?.message);
         dispatch(setUserData(result?.data?.user));
         setIsLoading(false);
-        dispatch(userSave(true));
+        navigation.navigate('PaymentPlans');
+        // dispatch(userSave(true));
         clearForm();
       };
 
@@ -195,7 +183,10 @@ const AgencyLocation = ({navigation, route}) => {
           )}
           <AppTextInput
             value={apartment}
-            onChangeText={text => setApartment(text)}
+            onChangeText={text => {
+              setApartment(text);
+              dispatch(setAgencyApartmentNumber(text));
+            }}
             title={'Aparment Number'}
           />
           {myUserLocation?.zipCode == null ? (

@@ -1,10 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   StyleSheet,
-  TouchableOpacity,
   Image,
   View,
-  ImageBackground,
   PermissionsAndroid,
   Platform,
   Alert,
@@ -24,9 +22,9 @@ import MapView, {Marker} from 'react-native-maps';
 import {GOOGLE_API_KEY, api} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
-import {appIcons} from '../../../Constants/Utilities/assets';
 import colors from '../../../config/colors';
 import {Method, callApi} from '../../../network/NetworkManger';
+import {setAgencyAddress} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyMap = ({navigation, route}) => {
   // dummy location points
@@ -44,6 +42,8 @@ const AgencyMap = ({navigation, route}) => {
   const [location, setLocation] = useState(currentLocation);
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
   const mapRef = useRef();
 
   // states
@@ -57,6 +57,8 @@ const AgencyMap = ({navigation, route}) => {
     latitude: '',
     longitude: '',
   });
+
+  console.log('My Location data is', myUserLocation);
 
   useEffect(() => {
     requestLocationPermission();
@@ -90,15 +92,21 @@ const AgencyMap = ({navigation, route}) => {
       navigation.navigate('AgencyLocation', {
         ProviderData: route?.params,
         myUserLocation,
+        address,
       });
     }
     if (usertype == 'AgencySide') {
+      console.log('Is from Profile', isFromProfile);
       setIsLoading(true);
       if (isFromProfile) {
         try {
           const endPoint = api.userProfile;
           const bodyParams = {
             address: address,
+            location: {
+              type: 'Point',
+              coordinates: [latitude, longitude],
+            },
           };
           const onSuccess = result => {
             setIsLoading(false);
@@ -116,7 +124,11 @@ const AgencyMap = ({navigation, route}) => {
         }
       } else {
         if (myUserLocation.country !== '') {
-          navigation.navigate('PaymentPlans');
+          navigation.navigate('AgencyLocation', {
+            ProviderData: route?.params,
+            myUserLocation,
+            address,
+          });
         } else {
           RedFlashMessage('Please Select Your Address');
         }
@@ -165,15 +177,22 @@ const AgencyMap = ({navigation, route}) => {
         .then(responseJson => {
           if (responseJson.status === 'OK') {
             setIsLoading(true);
-            setAddress(responseJson?.results[0]?.formatted_address);
             console.log(
               'responseJson?.results[0]',
-              responseJson?.results[0]?.formatted_address,
+              JSON.stringify(responseJson?.results[0]?.geometry?.location?.lat),
             );
+            setAddress(responseJson?.results[0]?.formatted_address);
+            setLatitude(responseJson?.results[0]?.geometry?.location?.lat);
+            setLongitude(responseJson?.results[0]?.geometry?.location?.lng);
+
+            dispatch(
+              setAgencyAddress(responseJson?.results[0]?.formatted_address),
+            );
+
             responseJson?.results[0].address_components.forEach(item => {
               switch (item.types[0]) {
                 case 'street_number': // street number
-                  userLocation.streetNumber = item.long_name;
+                  userLocation.streetNumber = item?.long_name;
                   break;
                 case 'route': // street name
                   // console.log('streetNumber', item.long_name);
@@ -220,7 +239,8 @@ const AgencyMap = ({navigation, route}) => {
         .catch(error => {
           Alert.alert('Location Not Found');
           RedFlashMessage('Something Went Wrong While Fetching Location');
-        });
+        })
+        .finally(() => setIsLoading(false));
     });
   };
 
@@ -267,11 +287,15 @@ const AgencyMap = ({navigation, route}) => {
               }}
               pointerEvents="auto"
               style={{
-                width: wp(30),
-                height: wp(30),
-              }}
-              icon={iconPath.mapPin}
-            />
+                width: wp(20),
+                height: wp(20),
+              }}>
+              <Image
+                source={iconPath.mapPin}
+                style={{width: 30, height: 28}}
+                resizeMode="contain"
+              />
+            </Marker>
           </MapView>
         </View>
 

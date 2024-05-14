@@ -44,8 +44,8 @@ const LoginScreen = () => {
   const isNewUser = useSelector(state => state?.splash?.isNewUser);
 
   // states
-  const [email, setEmail] = useState('hasage@yopmail.com');
-  const [isPassword, setPassword] = useState('123@Hello');
+  const [email, setEmail] = useState('carelink@gmail.com');
+  const [isPassword, setPassword] = useState('12345678');
   const [isSecure, setSecure] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 

@@ -16,6 +16,7 @@ import {useStripe} from '@stripe/stripe-react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
 
+let paymentIndentId = '';
 const PaymentPlans = ({navigation}) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
@@ -68,14 +69,18 @@ const PaymentPlans = ({navigation}) => {
     if (isFocused) {
       getSubscriptionDetails();
     }
+    return () => {
+      setIsLoading(false);
+    };
   }, [isFocused]);
 
-  // useEffect(() => {
-  //   fetchPaymentSheetParams(); // You can pass a default `priceId` here if needed
-  // }, []);
+  useEffect(() => {
+    return () => {
+      setIsLoading(false);
+    };
+  }, []);
 
   const fetchPaymentSheetParams = async priceId => {
-    setIsLoading(true);
     try {
       const endPoint = api.createIntent;
       const data = {
@@ -88,13 +93,11 @@ const PaymentPlans = ({navigation}) => {
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
-            console.log('Payment hit 1');
             initializePaymentSheet(
               res?.data?.clientSecret,
               res?.data?.subscriptionId,
             );
-            console.log('Payment hit 2');
-
+            paymentIndentId = res?.data?.subscriptionId;
             setPaymentId(res?.data?.subscriptionId);
             setIsLoading(false);
           } else {
@@ -127,12 +130,11 @@ const PaymentPlans = ({navigation}) => {
       console.log('Error ', error);
     }
   };
+  console.log('Payment intent id', paymentIndentId);
 
   const verifyPaymentSheetParams = async () => {
-    console.log('verifyPaymentSheetParams');
-    setIsLoading(true);
     try {
-      const endPoint = `${api.createIntent}/${paymentId}`;
+      const endPoint = `${api.createIntent}/${paymentIndentId}`;
       const data = {};
 
       await callApi(
@@ -141,8 +143,6 @@ const PaymentPlans = ({navigation}) => {
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
-            console.log('Payment successful');
-            console.log('Response is', res);
             dispatch(setUserData(res?.data?.user));
             navigation.navigate('PaymentDone');
             setIsLoading(false);
@@ -180,7 +180,6 @@ const PaymentPlans = ({navigation}) => {
 
   const getSubscriptionDetails = async () => {
     try {
-      setIsLoading(true);
       const endPoint = api.get_subscription;
       const data = {};
 
@@ -205,8 +204,7 @@ const PaymentPlans = ({navigation}) => {
       );
     } catch (error) {
       setIsLoading(false);
-      // RedFlashMessage(error);
-      console.log('Error ', error);
+      RedFlashMessage(error);
     } finally {
       setIsLoading(false);
     }

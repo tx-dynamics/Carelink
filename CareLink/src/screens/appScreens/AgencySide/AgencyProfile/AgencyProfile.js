@@ -35,10 +35,11 @@ import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
 import moment from 'moment';
 import Loader from '../../../../components/Loader';
-import MapView from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
 import {useIsFocused} from '@react-navigation/native';
 import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
+import {iconPath} from '../../../../config/icon';
 
 const Profile = ({navigation}) => {
   let currentLocation = {
@@ -56,6 +57,7 @@ const Profile = ({navigation}) => {
   const [userData, setUserData] = useState();
   const [reviews, setReviews] = useState();
   const [coordinates, setCoordinates] = useState(currentLocation);
+  const [location, setLocation] = useState({});
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 
@@ -77,11 +79,50 @@ const Profile = ({navigation}) => {
     }
   };
 
+  const handleCoverSubmit = async () => {
+    setIsLoading(true);
+    if (isProfile) {
+      const str = isProfile;
+      const imageObj = {
+        path: str,
+        name: str?.substring(str?.lastIndexOf('/')),
+      };
+      await uploadImageOnS3(imageObj, res => {
+        updateCoverPhoto(res);
+      });
+    } else {
+      // await updateProfile();
+      setIsLoading(false);
+      console.log('Else condition');
+    }
+  };
+
   const updateProfile = async image => {
     try {
       setIsLoading(true);
       const endPoint = api.userProfile;
       const bodyParams = {image: image};
+      const onSuccess = result => {
+        setIsLoading(false);
+        dispatch(setUserData(result?.data?.user));
+        fetchUserData();
+      };
+      const onError = error => {
+        RedFlashMessage('Something Went Wrong!', error.message);
+      };
+      await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const updateCoverPhoto = async image => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.userProfile;
+      const bodyParams = {coverPhoto: image};
       const onSuccess = result => {
         setIsLoading(false);
         dispatch(setUserData(result?.data?.user));
@@ -158,7 +199,6 @@ const Profile = ({navigation}) => {
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('Hit get Location');
           getLocation();
         } else {
         }
@@ -197,11 +237,14 @@ const Profile = ({navigation}) => {
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
       <StatusBar translucent backgroundColor={'transparent'} />
       <BackgroundHeader
-        onPressRight={() => uploadmage(setCover)}
+        onPressRight={() => {
+          uploadmage(setCover);
+          handleCoverSubmit();
+        }}
         backImg={
-          isCover == null
-            ? require('../../../../../assets/back.png')
-            : {uri: isCover}
+          userData?.coverPhoto
+            ? {uri: userData?.coverPhoto}
+            : require('../../../../../assets/photo.png')
         }
         leftImgName={require('../../../../../assets/headerBack.png')}
         rightImg={
@@ -276,7 +319,6 @@ const Profile = ({navigation}) => {
                 params: {fromProfile: dispatch(fromProfile(true))},
               })
             }>
-            {/* // To be continued */}
             <Apptext style={styles.dtls}>Edit your Location</Apptext>
           </TouchableOpacity>
         </View>
@@ -304,14 +346,35 @@ const Profile = ({navigation}) => {
             showsPointsOfInterest={true}
             followsUserLocation={true}
             userLocationPriority="high"
-            initialRegion={coordinates}></MapView>
+            initialRegion={coordinates}>
+            <Marker
+              coordinate={{
+                latitude: userData?.location?.coordinates[1]
+                  ? userData?.location?.coordinates[0]
+                  : 37.78825,
+                longitude: userData?.location?.coordinates[0]
+                  ? userData?.location?.coordinates[1]
+                  : -122.4324,
+              }}>
+              <Image
+                source={iconPath.mapPin}
+                style={{width: 26, height: 28}}
+                resizeMode="contain"
+              />
+            </Marker>
+          </MapView>
         </View>
         {userData?.brochure && (
           <>
             <View style={styles.txtView}>
               <Apptext style={styles.rms}>Brochure</Apptext>
             </View>
-            <Image style={styles.mapImg} source={{uri: userData?.brochure}} />
+            <Image
+              style={styles.mapImg}
+              source={{uri: userData?.brochure}}
+              onLoadStart={() => setIsLoading(true)}
+              onLoadEnd={() => setIsLoading(false)}
+            />
           </>
         )}
 
