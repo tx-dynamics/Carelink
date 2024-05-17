@@ -28,7 +28,6 @@ const SavedListing = ({navigation}) => {
   const [listingDetails, setListingDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
-  console.log('User data is ', userData);
   const [DATA, setData] = useState([
     {
       id: 1,

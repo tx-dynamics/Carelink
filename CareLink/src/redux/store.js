@@ -14,6 +14,7 @@ import {
 import appSlice from './Slices/appSlice';
 import userDataSlice from './Slices/userDataSlice';
 import agencyInfoSlice from './Slices/agencyInfoSlice';
+import proposalSlice from './Slices/proposalSlice';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   appSlice: appSlice,
   userDataSlice: userDataSlice,
   agencyInfoSlice: agencyInfoSlice,
+  proposalSlice: proposalSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

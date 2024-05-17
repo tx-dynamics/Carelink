@@ -1,72 +1,54 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  StyleSheet,
-  FlatList,
-  Image,
-  View,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, FlatList, Image, View, Text} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
-import Header from '../../../../components/Header';
 import ChatDetailComp from '../../../../components/ChatDetailComp';
 import {heightPixel, routes, widthPixel} from '../../../../Constants';
-import colors from '../../../../config/colors';
 import SendMessageComponent from '../../../../components/SendMessageComponent/SendMessageComponent';
 import {userType} from '../../../../redux/Slices/splashSlice';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import ChatHeader from '../../../../components/ChatHeader';
 import io from 'socket.io-client';
+import {BASE_URL} from '../../../../network/Environment';
+import colors from '../../../../config/colors';
+import {
+  setProposalAttender,
+  setProposalUsers,
+} from '../../../../redux/Slices/proposalSlice';
 
+let socket;
 const ServiceChatDetail = ({navigation, route}) => {
+  const partner = route?.params?.item?._id;
   const ref = useRef(null);
+  const dispatch = useDispatch();
+  const propsee = useSelector(store => store?.proposalSlice);
   const usertype = useSelector(state => state.splash.userType);
   const userData = useSelector(store => store?.userDataSlice);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('User data is ', userData);
+  const [messages, setMessages] = useState([]);
   const [isMessage, setMessage] = useState('');
-  const [DATA, setData] = useState([
-    {
-      id: 1,
-      user: 1,
-      title: 'Lorum ipsum dolor emet',
-    },
-    {
-      id: 2,
-      user: 2,
-      title: 'Lorum ipsum dolor emet',
-    },
-  ]);
+  const [propsalData, setProposalData] = useState();
 
   useEffect(() => {
-    socket = io('http://ec2-16-171-135-81.eu-north-1.compute.amazonaws.com/');
+    socket = io(BASE_URL);
     setIsLoading(true);
     let data = {
-      inbox: partner,
-      userId: user?.userData?._id,
-    };
-    let data2 = {
-      userId: user?.userData?._id,
+      userId: userData?.userData?._id,
       inbox: partner,
     };
-    socket.emit('user-enter', {userId: user?.userData?._id});
-    if (CommunityChat == true) {
-      socket.emit('get-messages-of-community', data); // sending
-      socket.on('messages', res => {
-        setMessages(res?.data?.messages);
-        setIsLoading(false);
-      });
-    } else if (CommunityChat == false) {
-      socket.emit('get-messages', data2); // sending
-      socket.on('messages', res => {
-        setMessages(res?.data?.messages);
-        console.log(JSON.stringify(res));
-        setIsLoading(false);
-      });
-    }
+
+    socket.emit('get-messages', data); // sending
+    socket.on('messages', res => {
+      setProposalData(res?.data?.proposals);
+      console.log('messages', res?.data);
+      dispatch(setProposalUsers(res?.data?.proposals));
+      dispatch(setProposalAttender(res?.data?.proposals?.proposee));
+      setMessages(res?.data?.messages);
+      setIsLoading(false);
+    });
+
     socket.on('error', error => {
       console.log(error);
       setIsLoading(false);
@@ -74,28 +56,35 @@ const ServiceChatDetail = ({navigation, route}) => {
     return function cleanup() {
       socket.emit('user-leave', data);
     };
-  }, []);
+  }, [isMessage]);
 
-  const onSend = () => {
-    let temp = [...DATA];
-    temp.unshift({
-      id: temp.length + 1,
-      user: 1,
-      title: isMessage,
-    });
-    setData(temp);
-    ref.current.scrollToIndex({animated: false, index: 0});
+  const onSend = async () => {
+    var singleChatData = {
+      to: partner,
+      userId: userData?.userData?._id,
+      message: isMessage,
+      messageType: 'text',
+      messageTime:
+        new Date().getTime() + new Date().getTimezoneOffset() * 60000,
+    };
+
+    socket.emit('send-message', singleChatData);
     setMessage('');
   };
+
   return (
     <AppGLobalView style={styles.container}>
       <ChatHeader
         rightView={!route?.params?.isContract}
         onPressRight={() =>
           navigation.navigate(
-            userType == 'ServiceSide'
+            userType === 'ServiceSide'
               ? routes.receivedContracts
-              : routes.createContract,
+              : routes.proposalListing,
+            {
+              item: route?.params?.item,
+              proposalData: propsalData,
+            },
           )
         }
         rightText={usertype == 'ServiceSide' ? 'Contracts' : 'Make Contract'}
@@ -103,30 +92,29 @@ const ServiceChatDetail = ({navigation, route}) => {
         leftImgName={require('../../../../../assets/headerBack.png')}
         onPressLeft={() => navigation.goBack()}
       />
-
+      <Text style={{color: 'red'}}>{messages[0]?.message}</Text>
       <View style={styles.direView}>
         <Image
           style={styles.imgStl}
-          source={require('../../../../../assets/inbox.png')}
+          source={{uri: route?.params?.item?.image}}
         />
-        <Apptext style={styles.rms}>James Clear</Apptext>
+        <Apptext style={styles.rms}>{route?.params?.item?.name}</Apptext>
       </View>
-      <View style={{marginTop: heightPixel(10), flex: 1}}>
+      <View style={{flex: 1, marginTop: heightPixel(10)}}>
         <FlatList
           showsVerticalScrollIndicator={false}
           inverted
           ref={ref}
-          // initialScrollIndex={DATA.length - 1}
-          keyExtractor={(item, index) => item.id}
-          // ItemSeparatorComponent={() => <View style={{ marginBottom: heightPixel(7) }}></View>}
-          data={DATA}
-          renderItem={({item, index}) =>
-            item?.user == 1 ? (
-              <MyMessage msg={item.title} />
-            ) : (
-              <ChatDetailComp msg={item.title} />
-            )
-          }
+          keyExtractor={(item, index) => item?._id}
+          data={messages}
+          renderItem={({item, index}) => {
+            console.log(item?.sender, userData?.userData?._id),
+              item?.sender == userData?.userData?._id ? (
+                <MyMessage msg={item?.message} key={index} />
+              ) : (
+                <ChatDetailComp msg={item?.message} key={index} />
+              );
+          }}
         />
       </View>
       <SendMessageComponent

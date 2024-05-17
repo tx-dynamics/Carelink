@@ -10,13 +10,11 @@ import {userSave} from '../../../redux/Slices/splashSlice';
 const Splash = ({navigation}) => {
   // hooks
   const dispatch = useDispatch();
-  const onboarding = useSelector(store => store.splash?.onboarding);
   const userData = useSelector(store => store?.userDataSlice);
-  // const userType = useSelector(store => store?.appSlice?.userType);
-  const isNewUser = useSelector(store => store?.appSlice?.isNewUser);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
+  const userType = useSelector(store => store?.splash?.userType);
   console.log('SignUp OTP', signUpOTP);
-  const userType = userData?.userData?.userType;
+  console.log('User type', userData);
 
   useEffect(() => {
     setTimeout(() => {
@@ -49,21 +47,32 @@ const Splash = ({navigation}) => {
             dispatch(userSave(true));
           }
         } else {
-          if (userData?.userData?.profileCompleted == false) {
+          if (
+            userData?.userData?.profileCompleted &&
+            userData?.userData?.subscriptionId
+          ) {
+            dispatch(userSave(true));
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'Drawer'}],
+            });
+          } else if (userData?.userData?.profileCompleted == false) {
             navigation.reset({
               index: 0,
               routes: [{name: routes.successAgency}],
             });
-          } else if (userData?.userData?.subscriptionId == null) {
+          } else if (
+            !userData?.userData?.subscriptionId &&
+            userData?.userData?.token
+          ) {
             navigation.reset({
               index: 0,
               routes: [{name: 'PaymentPlans'}],
             });
           } else {
-            dispatch(userSave(true));
             navigation.reset({
               index: 0,
-              routes: [{name: 'Drawer'}],
+              routes: [{name: 'AskRegister'}],
             });
           }
         }

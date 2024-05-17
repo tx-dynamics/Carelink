@@ -8,7 +8,6 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
 import {userType} from '../../../redux/Slices/splashSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
-import {hp} from '../../../Constants';
 
 const AskRegister = ({navigation}) => {
   let dispatch = useDispatch();
@@ -30,31 +29,10 @@ const AskRegister = ({navigation}) => {
             dispatch(userType('ServiceSide'));
             navigation.navigate('Register');
           }}
-          // onPress={() => {
-          //     dispatch(setUserType("ServiceSide"))
-          //     navigation.navigate("ListingOptions")
-          // }}
           style={styles.btn}>
           <Apptext>Create</Apptext>
         </TouchableOpacity>
       </View>
-      {/* <View style={[styles.pinkBox, {marginTop: wp('8%')}]}>
-        <Apptext style={[styles.firstTxt]}>
-          I want to find the right Provider
-        </Apptext>
-        <Apptext style={styles.scndTxt}>
-          Fill the details and find the right Provider for your baby,mother &
-          father
-        </Apptext>
-        <TouchableOpacity
-          onPress={() => {
-            dispatch(setUserType('ServiceSide'));
-            navigation.navigate('SelectCareGiver');
-          }}
-          style={styles.btn}>
-          <Apptext>Find Now</Apptext>
-        </TouchableOpacity>
-      </View> */}
       <View style={[styles.pinkBox, {marginTop: wp('8%')}]}>
         <Apptext style={[styles.firstTxt]}>
           I want to register as an agency
@@ -67,6 +45,7 @@ const AskRegister = ({navigation}) => {
           onPress={() => {
             dispatch(userType('AgencySide'));
             navigation.navigate('Register');
+            console.log('Hit', userType);
           }}
           style={styles.btn}>
           <Apptext>Register</Apptext>

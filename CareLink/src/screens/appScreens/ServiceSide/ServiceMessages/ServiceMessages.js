@@ -110,13 +110,10 @@ const ServiceMessages = ({navigation}) => {
       socket.emit('get-inboxes', data); // sending
       socket.on('inboxes', res => {
         setChatUsers(res?.data?.inboxes);
-        if (res?.data?.inboxes) console.log('Inboxes data', res?.data?.inboxes);
         setIsLoading(false);
       });
       socket.emit('get-online-users', data); // sending
-      socket.on('online-users', res => {
-        console.log('Online users', JSON.stringify(res));
-      });
+      socket.on('online-users', res => {});
 
       socket.on('error', error => {
         console.log(error);
@@ -164,12 +161,16 @@ const ServiceMessages = ({navigation}) => {
                 image={item?.image}
                 label={item?.name}
                 message={item?.lastMessage}
-                onPress={() =>
+                onPress={() => {
+                  console.log('Item is', item);
                   navigation.navigate('withoutBottomTabnavigator', {
                     screen: 'ServiceChatDetail',
-                    params: {isContract: false},
-                  })
-                }
+                    params: {
+                      isContract: false,
+                      item,
+                    },
+                  });
+                }}
               />
             )}
           />

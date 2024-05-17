@@ -1,17 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-  Keyboard,
-} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {StyleSheet, Text, Keyboard} from 'react-native';
 import DefaultStyles from '../../../config/Styles';
-import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
@@ -30,25 +19,39 @@ import CountDownComponent from '../../../components/CountDownComponent/CountDown
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
-import {store} from '../../../redux/store';
 import Loader from '../../../components/Loader';
 import {signUpOTPCheck, userType} from '../../../redux/Slices/splashSlice';
 import {useRoute} from '@react-navigation/native';
 import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
+import {
+  accessToken,
+  refreshToken,
+  setUserData,
+} from '../../../redux/Slices/userDataSlice';
 
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
-  console.log('params', params);
+  console.log('Params on email verification aarea', params);
+
   const dispatch = useDispatch();
   const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
+  const emailOnly = useSelector(state => state?.splash?.emailOnly);
   const [isLoading, setIsLoading] = useState(false);
   const [duration, setDuration] = useState(59);
   const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
+  const userEmailAfterSignUp = useSelector(store => store?.splash);
+  console.log('User email,', userEmailAfterSignUp);
 
   // console.log('User data', userData);
+
+  useEffect(() => {
+    if (params?.params == undefined) {
+      handleResendOTP();
+    }
+  }, []);
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
@@ -76,7 +79,7 @@ const EmailVerification = ({navigation, route}) => {
             if (res?.status === 200 || res?.status === 201) {
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
-              dispatch(signUpOTPCheck(true));
+              dispatch(signUpOTPCheck(false));
               if (usertype == 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
                 // console.log('Inside service side');
@@ -93,6 +96,9 @@ const EmailVerification = ({navigation, route}) => {
               if (usertype == 'AgencySide') {
                 dispatch(userType('AgencySide'));
                 // console.log('Inside agency side');
+                dispatch(refreshToken(params?.params?.data?.refreshToken));
+                dispatch(accessToken(params?.params?.data?.token));
+                dispatch(setUserData(params?.params?.data?.user));
                 params.params?.register
                   ? navigation.reset({
                       index: 0,
@@ -176,7 +182,6 @@ const EmailVerification = ({navigation, route}) => {
           },
           err => {
             setIsLoading(false);
-
             RedFlashMessage(err);
           },
         );
@@ -203,12 +208,16 @@ const EmailVerification = ({navigation, route}) => {
 
   // resend email verification process
   const handleResendOTP = async () => {
+    console.log('Hit');
     setIsOTP('');
     try {
       setIsLoading(true);
       const endPoint = api.resendOTP;
       const data = {
-        email: userData?.userData?.email?.toLowerCase(),
+        email:
+          params?.params == undefined
+            ? userEmailAfterSignUp?.emailOnly
+            : userData?.userData?.email?.toLowerCase(),
       };
 
       await callApi(
@@ -218,7 +227,6 @@ const EmailVerification = ({navigation, route}) => {
         res => {
           if (res?.status === 200 || res?.status === 201) {
             setIsLoading(false);
-
             SuccessFlashMessage(res?.message);
           } else {
             setIsLoading(false);
@@ -252,7 +260,9 @@ const EmailVerification = ({navigation, route}) => {
         <Text numberOfLines={1} style={styles.mailText}>
           {params?.params?.email?.toLowerCase()
             ? params?.params?.email?.toLowerCase()
-            : userData?.userData?.email?.toLowerCase()}
+            : userData?.userData?.email?.toLowerCase()
+            ? userData?.userData?.email?.toLowerCase()
+            : emailOnly}
         </Text>
         <OTPInputView
           pinCount={4}

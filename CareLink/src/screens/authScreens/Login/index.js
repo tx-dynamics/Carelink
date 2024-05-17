@@ -40,14 +40,42 @@ const LoginScreen = () => {
   // hooks
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const usertype = useSelector(state => state?.splash?.userType);
   const isNewUser = useSelector(state => state?.splash?.isNewUser);
 
   // states
-  const [email, setEmail] = useState('carelink@gmail.com');
-  const [isPassword, setPassword] = useState('12345678');
+  const [email, setEmail] = useState('');
+  const [isPassword, setPassword] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleResendOTP = async () => {
+    try {
+      const endPoint = api.resendOTP;
+      const data = {
+        email: email?.toLowerCase(),
+      };
+
+      await callApi(
+        Method.POST,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            SuccessFlashMessage(res?.message);
+          } else {
+            RedFlashMessage(res?.message);
+          }
+        },
+        err => {
+          RedFlashMessage(err);
+        },
+      );
+    } catch (error) {
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async () => {
     let fcm = await getFCMToken();
@@ -72,18 +100,32 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              dispatch(refreshToken(res?.data?.refreshToken));
-              dispatch(accessToken(res?.data?.token));
-              dispatch(setUserData(res?.data?.user));
-              dispatch(signUpOTPCheck(false));
-
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
-                if (res?.data?.user?.profileCompleted == false) {
+                if (
+                  res?.data?.user?.verified &&
+                  res?.data?.user?.profileCompleted &&
+                  res?.data?.user?.subscriptionId != null
+                ) {
+                  dispatch(userSave(true));
+                  dispatch(signUpOTPCheck(false));
+                } else if (res?.data?.user?.verified == false) {
+                  navigation.navigate('EmailVerification', {
+                    email: email?.toLowerCase(),
+                    data: res?.data,
+                    register: true,
+                  });
+                  handleResendOTP();
+                  dispatch(setUserData(res?.data?.user));
+                } else if (res?.data?.user?.profileCompleted == false) {
                   navigation.reset({
                     index: 0,
                     routes: [{name: routes.addDocuments}],
                   });
+                  dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
                 } else if (
                   res?.data?.user?.certificates[0] &&
                   res?.data?.user?.drivingAbstract &&
@@ -95,32 +137,61 @@ const LoginScreen = () => {
                     index: 0,
                     routes: [{name: routes.listingOptions}],
                   });
-                } else if (res?.data?.user?.subscriptionId == null) {
+                  dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
+                } else if (!res?.data?.user?.subscriptionId) {
                   navigation.reset({
                     index: 0,
                     routes: [{name: 'PaymentPlans'}],
                   });
-                } else {
-                  dispatch(userSave(true));
+                  dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
                 }
               } else {
                 dispatch(userType('AgencySide'));
-                if (res?.data?.user?.profileCompleted == false) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes.successAgency}],
-                  });
-                } else if (res?.data?.user?.subscriptionId == null) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: 'PaymentPlans'}],
-                  });
-                } else {
+                if (
+                  res?.data?.user?.profileCompleted == false &&
+                  res?.data?.user?.verified &&
+                  res?.data?.user?.subscriptionId
+                ) {
                   dispatch(userSave(true));
                   navigation.reset({
                     index: 0,
                     routes: [{name: 'Drawer'}],
                   });
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
+                  dispatch(signUpOTPCheck(false));
+                } else if (res?.data?.user?.verified == false) {
+                  console.log('Verified false', res?.data?.user?.verified);
+                  navigation.navigate('EmailVerification', {
+                    email: email?.toLowerCase(),
+                    data: res?.data,
+                    register: true,
+                  });
+                } else if (res?.data?.user?.profileCompleted == false) {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: routes.successAgency}],
+                  });
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
+                  dispatch(signUpOTPCheck(false));
+                } else if (!res?.data?.user?.subscriptionId) {
+                  navigation.reset({
+                    index: 0,
+                    routes: [{name: 'PaymentPlans'}],
+                  });
+                  dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
                 }
               }
 

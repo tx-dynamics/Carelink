@@ -38,4 +38,7 @@ export const api = {
 
   // liked listings
   likeList: 'api/v1/listingLike',
+
+  // contract
+  createContract: 'api/v1/contract',
 };

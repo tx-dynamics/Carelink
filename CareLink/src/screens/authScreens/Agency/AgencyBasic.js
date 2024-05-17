@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import FormButton from '../../../components/FormButton';
@@ -13,7 +13,6 @@ import {
   SuccessFlashMessage,
 } from '../../../Constants/Utilities/assets/Snakbar';
 import {useDispatch, useSelector} from 'react-redux';
-import {fromProfile} from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {Method, callApi} from '../../../network/NetworkManger';
@@ -56,12 +55,11 @@ const AgencyBasic = ({navigation, route}) => {
           const onSuccess = result => {
             SuccessFlashMessage(result?.message);
             dispatch(setUserData(result?.data?.user));
+            dispatch(setAgencyName(name));
+            dispatch(setAgencyExperience(isExperience));
+            dispatch(setAgencyAbout(about));
             setIsLoading(false);
-            navigation.navigate(routes.agencyPhotos, {
-              agencyName: name,
-              experience: isExperience,
-              about: about,
-            });
+            navigation.goBack();
           };
 
           const onError = error => {

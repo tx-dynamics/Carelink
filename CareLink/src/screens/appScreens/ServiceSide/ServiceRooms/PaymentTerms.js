@@ -17,7 +17,7 @@ import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 
-const ProposalTerms = ({navigation}) => {
+const PaymentTerms = ({navigation}) => {
   return (
     <AppGLobalView style={styles.container}>
       <Header
@@ -28,7 +28,7 @@ const ProposalTerms = ({navigation}) => {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={[styles.txtView, {marginTop: wp('5%')}]}>
-          <Apptext style={styles.rms}>Additional Terms and Conditions</Apptext>
+          <Apptext style={styles.rms}>Payment Terms and Conditions</Apptext>
         </View>
 
         <Apptext style={styles.dummyTxt}>
@@ -60,7 +60,7 @@ const ProposalTerms = ({navigation}) => {
             color={'white'}
             onPress={() => {
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: 'PaymentTerms',
+                screen: 'ContractCompleteDetails',
               });
             }}
           />
@@ -70,7 +70,7 @@ const ProposalTerms = ({navigation}) => {
   );
 };
 
-export default ProposalTerms;
+export default PaymentTerms;
 
 const styles = StyleSheet.create({
   container: {

@@ -31,6 +31,7 @@ import {
 } from '../../../Constants/Utilities/assets/Snakbar';
 import Loader from '../../../components/Loader';
 import {
+  saveEmailOnlyForSplash,
   signUpOTPCheck,
   userSave,
   userType,
@@ -95,16 +96,15 @@ const Register = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              dispatch(refreshToken(res?.data?.refreshToken));
-              dispatch(accessToken(res?.data?.token));
-              dispatch(setUserData(res?.data?.user));
               dispatch(userType(usertype));
+              dispatch(saveEmailOnlyForSplash(email?.toLowerCase()));
               dispatch(userSave(null));
               setIsLoading(false);
               SuccessFlashMessage(res?.message);
               navigation.navigate('EmailVerification', {
                 register: true,
                 email: email?.toLowerCase(),
+                data: res?.data,
               });
               dispatch(signUpOTPCheck(true));
               // console.log('Response on signup', res?.data);

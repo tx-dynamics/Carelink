@@ -77,6 +77,9 @@ import AgencyBasic from './authScreens/Agency/AgencyBasic';
 import BookedRoomsAgencySide from './appScreens/AgencySide/RoomsScreens/BookedRoomsAgencySide';
 import AgencyProposalList from './appScreens/AgencySide/AgencyProposalList/AgencyProposalList';
 import BookedRoomDetailAgency from './appScreens/AgencySide/AgencyHome/BookedRoomDetailAgency';
+import ProposalListing from './appScreens/AgencySide/Contract/ProposalListing';
+import PaymentTerms from './appScreens/ServiceSide/ServiceRooms/PaymentTerms';
+import ContractCompeleteDetails from './appScreens/AgencySide/Contract/ContractCompleteDetails';
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator();
@@ -145,6 +148,10 @@ const WithoutBottomTabnavigator = () => {
       <StackNavigator.Screen name="Read3" component={Read3} />
       <StackNavigator.Screen name="Rates" component={Rates} />
       <StackNavigator.Screen
+        name={routes?.proposalListing}
+        component={ProposalListing}
+      />
+      <StackNavigator.Screen
         name="ServiceChatDetail"
         component={ServiceChatDetail}
       />
@@ -159,6 +166,11 @@ const WithoutBottomTabnavigator = () => {
         component={ReceivedProposal}
       />
       <StackNavigator.Screen name="ProposalTerms" component={ProposalTerms} />
+      <StackNavigator.Screen name="PaymentTerms" component={PaymentTerms} />
+      <StackNavigator.Screen
+        name="ContractCompleteDetails"
+        component={ContractCompeleteDetails}
+      />
       <StackNavigator.Screen name="ProposalAccept" component={ProposalAccept} />
       <StackNavigator.Screen name={routes.feedback} component={Feedback} />
       <StackNavigator.Screen name="EditProfile" component={EditProfile} />
@@ -554,8 +566,9 @@ const MainNavigator = () => {
   const user = useSelector(state => state.splash.value);
   const userData = useSelector(state => state?.userDataSlice);
   console.log('User data', userData);
+  console.log('USer check', user);
 
-  if (user != null) {
+  if (user != null && userData?.userData?.accessToken != '') {
     return <DrawerNavigator />;
   } else {
     return <AuthNavigator />;
