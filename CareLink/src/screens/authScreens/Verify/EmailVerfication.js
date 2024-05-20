@@ -43,14 +43,10 @@ const EmailVerification = ({navigation, route}) => {
   const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
   const userEmailAfterSignUp = useSelector(store => store?.splash);
-  console.log('User email,', userEmailAfterSignUp);
-
-  // console.log('User data', userData);
+  console.log('User email,', params);
 
   useEffect(() => {
-    if (params?.params == undefined) {
-      handleResendOTP();
-    }
+    handleResendOTP();
   }, []);
 
   const handleSubmit = async () => {
@@ -214,10 +210,9 @@ const EmailVerification = ({navigation, route}) => {
       setIsLoading(true);
       const endPoint = api.resendOTP;
       const data = {
-        email:
-          params?.params == undefined
-            ? userEmailAfterSignUp?.emailOnly
-            : userData?.userData?.email?.toLowerCase(),
+        email: params?.params?.email?.toLowerCase()
+          ? params?.params?.email?.toLowerCase()
+          : userData?.userData?.email?.toLowerCase(),
       };
 
       await callApi(

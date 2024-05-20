@@ -17,13 +17,7 @@ import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {Method, callApi} from '../../../network/NetworkManger';
-import {
-  accessToken,
-  refreshToken,
-  setUserData,
-} from '../../../redux/Slices/userDataSlice';
 import {getDeviceId, getFCMToken} from '../../../Services/HelpingMethods';
-
 import {useNavigation} from '@react-navigation/native';
 import {
   RedFlashMessage,
@@ -56,7 +50,7 @@ const Register = () => {
     var emailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     var alphabetRegex = /^[a-zA-Z\s]+$/;
-    var firstNameRegex = /^[a-zA-Z]+$/;
+    var firstNameRegex = /^[a-zA-Z\s]+$/;
     Keyboard.dismiss();
     if (!firstName) {
       RedFlashMessage('First name is required');
