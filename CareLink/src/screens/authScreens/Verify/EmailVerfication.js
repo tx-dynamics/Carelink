@@ -46,7 +46,9 @@ const EmailVerification = ({navigation, route}) => {
   console.log('User email,', params);
 
   useEffect(() => {
-    handleResendOTP();
+    if (!params?.params?.fromForgotPassword) {
+      handleResendOTP();
+    }
   }, []);
 
   const handleSubmit = async () => {

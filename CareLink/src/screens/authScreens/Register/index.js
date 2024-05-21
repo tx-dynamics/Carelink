@@ -9,7 +9,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {heightPixel, hp, routes} from '../../../Constants';
+import {heightPixel, routes} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import AlreadyText from '../../../components/AlreadyText/AlreadyText';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
@@ -49,8 +49,10 @@ const Register = () => {
     let dtk = await getDeviceId();
     var emailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    var alphabetRegex = /^[a-zA-Z\s]+$/;
-    var firstNameRegex = /^[a-zA-Z\s]+$/;
+    var alphabetRegex = /^(?!\s)[a-zA-Z\s]+$/;
+    var firstNameRegex = /^(?!\s)[a-zA-Z\s]+$/;
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
+
     Keyboard.dismiss();
     if (!firstName) {
       RedFlashMessage('First name is required');
@@ -68,6 +70,10 @@ const Register = () => {
       RedFlashMessage('Password is required');
     } else if (isPassword.length < 8) {
       RedFlashMessage('Password must be at least 8 characters');
+    } else if (!passwordRegex.test(isPassword)) {
+      RedFlashMessage(
+        'Password must contain one lowercase, one uppercase, one number and one special character',
+      );
     } else if (!isPasswordConfirm) {
       RedFlashMessage('Confirm Password is required');
     } else if (isPassword !== isPasswordConfirm) {

@@ -81,7 +81,6 @@ const PaymentPlans = ({navigation}) => {
   }, []);
 
   const fetchPaymentSheetParams = async priceId => {
-    setIsLoading(true);
     try {
       const endPoint = api.createIntent;
       const data = {

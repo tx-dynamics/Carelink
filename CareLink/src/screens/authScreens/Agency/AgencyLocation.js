@@ -194,6 +194,7 @@ const AgencyLocation = ({navigation, route}) => {
               value={zipCode}
               onChangeText={text => setZipCode(text)}
               title={'Zip Code'}
+              keyboardType="numeric"
             />
           ) : (
             <AppTextInput
@@ -201,6 +202,7 @@ const AgencyLocation = ({navigation, route}) => {
               onChangeText={text => setZipCode(text)}
               editable={false}
               title={'Zip Code'}
+              keyboardType="numeric"
             />
           )}
           {myUserLocation?.country == null ? (

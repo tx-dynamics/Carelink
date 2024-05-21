@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Keyboard,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
+import {StyleSheet, View, Keyboard} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import FormButton from '../../../components/FormButton';
@@ -21,10 +15,7 @@ import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../network/Environment';
 import {Method, callApi} from '../../../network/NetworkManger';
 import {useNavigation} from '@react-navigation/native';
-import {
-  RedFlashMessage,
-  SuccessFlashMessage,
-} from '../../../Constants/Utilities/assets/Snakbar';
+import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import Loader from '../../../components/Loader';
 
 const ForgetEmailScreen = () => {
@@ -51,8 +42,6 @@ const ForgetEmailScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              console.log('Response is', res?.data);
-              SuccessFlashMessage(res?.message);
               navigation.navigate('EmailVerification', {
                 fromForgotPassword: true,
                 email: email?.toLowerCase(),

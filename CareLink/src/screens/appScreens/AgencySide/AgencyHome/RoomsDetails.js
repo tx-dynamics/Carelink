@@ -33,7 +33,7 @@ const RoomsDetails = ({navigation, route}) => {
 
   const proposalRawData = {
     listingId: item?._id,
-    serviceProviderId: item?.user,
+    serviceProviderId: item?.user?._id,
     agencyId: useSelector(state => state?.userDataSlice?.userData?._id),
   };
 
@@ -98,7 +98,7 @@ const RoomsDetails = ({navigation, route}) => {
     try {
       setIsLoading(true);
       const bodyParams = {};
-      const endPoint = `${api.getUserProfile}/${item?.user}`;
+      const endPoint = `${api.getUserProfile}/${item?.user?._id}`;
       const onSuccess = result => {
         setServiceUserProfile(result?.user);
         console.log('User data ---', result?.user);
