@@ -100,6 +100,7 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
+              console.log('Response', res?.data);
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
                 if (
@@ -154,21 +155,21 @@ const LoginScreen = () => {
               } else {
                 dispatch(userType('AgencySide'));
                 if (
-                  res?.data?.user?.profileCompleted == false &&
+                  res?.data?.user?.profileCompleted &&
                   res?.data?.user?.verified &&
                   res?.data?.user?.subscriptionId
                 ) {
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
+                  dispatch(signUpOTPCheck(false));
                   dispatch(userSave(true));
                   navigation.reset({
                     index: 0,
                     routes: [{name: 'Drawer'}],
                   });
-                  dispatch(refreshToken(res?.data?.refreshToken));
-                  dispatch(accessToken(res?.data?.token));
-                  dispatch(setUserData(res?.data?.user));
-                  dispatch(signUpOTPCheck(false));
                 } else if (res?.data?.user?.verified == false) {
-                  console.log('Verified false', res?.data?.user?.verified);
+                  console.log('2');
                   navigation.navigate('EmailVerification', {
                     email: email?.toLowerCase(),
                     data: res?.data,
@@ -183,11 +184,13 @@ const LoginScreen = () => {
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
                   dispatch(signUpOTPCheck(false));
+                  console.log('3');
                 } else if (!res?.data?.user?.subscriptionId) {
                   navigation.reset({
                     index: 0,
                     routes: [{name: 'PaymentPlans'}],
                   });
+                  console.log('4');
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
