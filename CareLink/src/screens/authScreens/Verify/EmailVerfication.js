@@ -46,7 +46,7 @@ const EmailVerification = ({navigation, route}) => {
   console.log('User email,', params);
 
   useEffect(() => {
-    if (!params?.params?.fromForgotPassword) {
+    if (!params?.params?.fromForgotPassword && !params?.params?.register) {
       handleResendOTP();
     }
   }, []);

@@ -164,7 +164,9 @@ const PaymentPlans = ({navigation}) => {
 
   const handlePayment = async item => {
     await fetchPaymentSheetParams(item?.priceId);
-    openPaymentSheet();
+    setTimeout(() => {
+      openPaymentSheet();
+    }, 1000);
   };
 
   const openPaymentSheet = async () => {
@@ -179,6 +181,7 @@ const PaymentPlans = ({navigation}) => {
 
   const getSubscriptionDetails = async () => {
     try {
+      setIsLoading(true);
       const endPoint = api.get_subscription;
       const data = {};
 
