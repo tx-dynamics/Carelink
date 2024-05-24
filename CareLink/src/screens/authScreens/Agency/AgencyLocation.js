@@ -19,7 +19,6 @@ import {api} from '../../../network/Environment';
 import {callApi, Method} from '../../../network/NetworkManger';
 import Loader from '../../../components/Loader';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
-import {userSave} from '../../../redux/Slices/splashSlice';
 import {setAgencyApartmentNumber} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyLocation = ({navigation, route}) => {
@@ -39,6 +38,8 @@ const AgencyLocation = ({navigation, route}) => {
     setStreet(myUserLocation?.streetAddress);
     setZipCode(myUserLocation?.zipCode);
     setState(myUserLocation?.stateName);
+
+    return () => setIsLoading(false);
   }, []);
 
   // functions
@@ -82,8 +83,9 @@ const AgencyLocation = ({navigation, route}) => {
         dispatch(setUserData(result?.data?.user));
         setIsLoading(false);
         navigation.navigate('PaymentPlans');
+
         // dispatch(userSave(true));
-        clearForm();
+        // clearForm();
       };
 
       const onError = error => {
@@ -187,7 +189,8 @@ const AgencyLocation = ({navigation, route}) => {
               setApartment(text);
               dispatch(setAgencyApartmentNumber(text));
             }}
-            title={'Aparment Number'}
+            title={'Apartment Number'}
+            keyboardType="numeric"
           />
           {myUserLocation?.zipCode == null ? (
             <AppTextInput
@@ -195,6 +198,7 @@ const AgencyLocation = ({navigation, route}) => {
               onChangeText={text => setZipCode(text)}
               title={'Zip Code'}
               keyboardType="numeric"
+              maxLength={6}
             />
           ) : (
             <AppTextInput
@@ -203,6 +207,7 @@ const AgencyLocation = ({navigation, route}) => {
               editable={false}
               title={'Zip Code'}
               keyboardType="numeric"
+              maxLength={6}
             />
           )}
           {myUserLocation?.country == null ? (

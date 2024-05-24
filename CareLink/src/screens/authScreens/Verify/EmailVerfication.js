@@ -31,8 +31,6 @@ import {
 
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
-  console.log('Params on email verification aarea', params);
-
   const dispatch = useDispatch();
   const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
@@ -43,7 +41,6 @@ const EmailVerification = ({navigation, route}) => {
   const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
   const userEmailAfterSignUp = useSelector(store => store?.splash);
-  console.log('User email,', params);
 
   useEffect(() => {
     if (!params?.params?.fromForgotPassword && !params?.params?.register) {

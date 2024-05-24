@@ -228,6 +228,7 @@ const WithoutBottomTabnavigator = () => {
         name={routes.certificateDetail}
         component={CertifcateDetail}
       />
+      {/* <StackNavigator.Screen name="PaymentStack" component={PaymentStack} /> */}
       <StackNavigator.Screen name="PaymentPlans" component={PaymentPlans} />
       <StackNavigator.Screen name="PaymentMethod" component={PaymentMethod} />
       <StackNavigator.Screen name="SelectCard" component={SelectCard} />
@@ -267,6 +268,21 @@ const WithoutBottomTabnavigator = () => {
         name={routes.agencyBasic}
         component={AgencyBasic}
       />
+    </StackNavigator.Navigator>
+  );
+};
+
+const PaymentStack = () => {
+  return (
+    <StackNavigator.Navigator
+      initialRouteName="PaymentPlans"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <StackNavigator.Screen name="PaymentPlans" component={PaymentPlans} />
+      <StackNavigator.Screen name="PaymentMethod" component={PaymentMethod} />
+      <StackNavigator.Screen name="SelectCard" component={SelectCard} />
+      <StackNavigator.Screen name="PaymentDone" component={PaymentDone} />
     </StackNavigator.Navigator>
   );
 };
@@ -565,8 +581,6 @@ const MyTabs = () => {
 const MainNavigator = () => {
   const user = useSelector(state => state.splash.value);
   const userData = useSelector(state => state?.userDataSlice);
-  console.log('User data', userData);
-  console.log('USer check', user);
 
   if (user != null && userData?.userData?.accessToken != '') {
     return <DrawerNavigator />;

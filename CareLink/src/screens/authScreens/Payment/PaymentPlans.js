@@ -19,12 +19,10 @@ import {setUserData} from '../../../redux/Slices/userDataSlice';
 let paymentIndentId = '';
 const PaymentPlans = ({navigation}) => {
   const dispatch = useDispatch();
-  const isFocused = useIsFocused();
   const usertype = useSelector(state => state.splash.userType);
   const {initPaymentSheet, presentPaymentSheet} = useStripe();
   const [isLoading, setIsLoading] = useState(false);
   const [plansData, setPlansData] = useState([]);
-  const [paymentId, setPaymentId] = useState('');
   const userData = useSelector(state => state?.userDataSlice);
   const [selectedPlan, setSelectedPlan] = useState(
     plansData[0]?.priceId ? plansData[0]?.priceId : 0,
@@ -66,22 +64,57 @@ const PaymentPlans = ({navigation}) => {
   ];
 
   useEffect(() => {
-    if (isFocused) {
-      getSubscriptionDetails();
-    }
-    return () => {
-      setIsLoading(false);
-    };
-  }, [isFocused]);
-
-  useEffect(() => {
-    return () => {
-      setIsLoading(false);
-    };
+    getSubscriptionDetails();
   }, []);
+
+  const getSubscriptionDetails = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.get_subscription;
+      const data = {};
+
+      await callApi(
+        Method.GET,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            setPlansData(res?.data);
+            setIsLoading(false);
+            setSelectedPlan(res?.data[0]?.priceId);
+          } else {
+            setIsLoading(false);
+          }
+        },
+        err => {
+          setIsLoading(false);
+          console.log('Err is', err);
+        },
+      );
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const initializePaymentSheet = async clientSecret => {
+    const {error} = await initPaymentSheet({
+      merchantDisplayName: 'Carelink',
+      paymentIntentClientSecret: clientSecret,
+      defaultBillingDetails: {
+        name: userData?.userData?.name,
+      },
+    });
+    if (!error) {
+      console.log('Error ', error);
+    }
+  };
 
   const fetchPaymentSheetParams = async priceId => {
     try {
+      setIsLoading(true);
       const endPoint = api.createIntent;
       const data = {
         priceId: priceId, // Use the passed priceId or any default value
@@ -98,52 +131,6 @@ const PaymentPlans = ({navigation}) => {
               res?.data?.subscriptionId,
             );
             paymentIndentId = res?.data?.subscriptionId;
-            setPaymentId(res?.data?.subscriptionId);
-            setIsLoading(false);
-          } else {
-            setIsLoading(false);
-          }
-        },
-        err => {
-          setIsLoading(false);
-          FlashAlert('E', 'Error', err?.message);
-        },
-      );
-    } catch (error) {
-      setIsLoading(false);
-      FlashAlert('E', 'Error', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const initializePaymentSheet = async clientSecret => {
-    const {error} = await initPaymentSheet({
-      merchantDisplayName: 'Carelink',
-      paymentIntentClientSecret: clientSecret,
-      defaultBillingDetails: {
-        name: userData?.userData?.name,
-      },
-    });
-    if (!error) {
-      // setIsLoading(true);
-      console.log('Error ', error);
-    }
-  };
-
-  const verifyPaymentSheetParams = async () => {
-    try {
-      const endPoint = `${api.createIntent}/${paymentIndentId}`;
-      const data = {};
-
-      await callApi(
-        Method.POST,
-        endPoint,
-        data,
-        res => {
-          if (res?.status === 200 || res?.status === 201) {
-            dispatch(setUserData(res?.data?.user));
-            navigation.navigate('PaymentDone');
             setIsLoading(false);
           } else {
             setIsLoading(false);
@@ -164,9 +151,7 @@ const PaymentPlans = ({navigation}) => {
 
   const handlePayment = async item => {
     await fetchPaymentSheetParams(item?.priceId);
-    setTimeout(() => {
-      openPaymentSheet();
-    }, 1000);
+    openPaymentSheet();
   };
 
   const openPaymentSheet = async () => {
@@ -179,34 +164,36 @@ const PaymentPlans = ({navigation}) => {
     }
   };
 
-  const getSubscriptionDetails = async () => {
+  const verifyPaymentSheetParams = async () => {
     try {
-      setIsLoading(true);
-      const endPoint = api.get_subscription;
+      const endPoint = `${api.createIntent}/${paymentIndentId}`;
       const data = {};
 
+      console.log('Endpoint is', endPoint);
+
       await callApi(
-        Method.GET,
+        Method.POST,
         endPoint,
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
-            setPlansData(res?.data);
-            setSelectedPlan(res?.data[0]?.priceId);
+            dispatch(setUserData(res?.data?.user));
             setIsLoading(false);
+            setTimeout(() => {
+              navigation.navigate('PaymentDone');
+            }, 1000);
           } else {
             setIsLoading(false);
           }
         },
         err => {
           setIsLoading(false);
-          console.log('Err is', err);
-          // RedFlashMessage(err);
+          FlashAlert('E', 'Error', err?.message);
         },
       );
     } catch (error) {
       setIsLoading(false);
-      RedFlashMessage(error);
+      FlashAlert('E', 'Error', error);
     } finally {
       setIsLoading(false);
     }
@@ -241,7 +228,9 @@ const PaymentPlans = ({navigation}) => {
             price={usertype === 'ServiceSide' ? item.price : item.price1}
             plan={'/month'}
             desc={usertype === 'ServiceSide' ? item.description : item.desc1}
-            onPress={() => handlePayment(item)}
+            onPress={() => {
+              handlePayment(item);
+            }}
           />
         )}
       />

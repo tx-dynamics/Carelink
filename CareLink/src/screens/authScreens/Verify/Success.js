@@ -21,8 +21,19 @@ import colors from '../../../config/colors';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import HeaderForSpace from '../../../components/HeaderForSpace/HeaderForSpace';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
+import {useDispatch} from 'react-redux';
+import {
+  setAgencyAbout,
+  setAgencyAddress,
+  setAgencyApartmentNumber,
+  setAgencyCoverPhoto,
+  setAgencyExperience,
+  setAgencyName,
+  setAgencyProfileImage,
+} from '../../../redux/Slices/agencyInfoSlice';
 
 const Success = ({navigation}) => {
+  const dispatch = useDispatch();
   const listData = [
     {
       id: 1,
@@ -43,13 +54,7 @@ const Success = ({navigation}) => {
   return (
     <AppGLobalView style={styles.container}>
       <View>
-        <IconHeaderComp
-          onPress={() => {
-            navigation.goBack();
-          }}
-          imgName={iconPath.leftArrow}
-          heading={'You have created account successfully!'}
-        />
+        <IconHeaderComp heading={'You have created account successfully!'} />
         <View style={styles.DirectionView}>
           <Image
             style={styles.tntClr}
@@ -72,6 +77,13 @@ const Success = ({navigation}) => {
       <FormButton
         buttonTitle={'Start Now'}
         onPress={() => {
+          dispatch(setAgencyName(''));
+          dispatch(setAgencyAbout(''));
+          dispatch(setAgencyAddress(''));
+          dispatch(setAgencyApartmentNumber(''));
+          dispatch(setAgencyCoverPhoto(''));
+          dispatch(setAgencyExperience(''));
+          dispatch(setAgencyProfileImage(''));
           navigation.navigate(routes.agencyBasic);
         }}
       />

@@ -78,10 +78,6 @@ const AddInformation = ({navigation}) => {
           res => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
-              console.log(
-                'Updated User data ',
-                JSON.stringify(res?.data, ' ', 2),
-              );
               dispatch(setUserData(res?.data?.user));
               SuccessFlashMessage(res?.message);
               navigation.navigate(routes.listingOptions);

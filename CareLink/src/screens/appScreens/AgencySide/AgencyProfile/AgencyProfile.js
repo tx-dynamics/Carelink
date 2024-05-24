@@ -154,7 +154,6 @@ const Profile = ({navigation}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setUserData(result?.user);
-        console.log('User data ---', result?.user);
         setIsLoading(false);
       };
 

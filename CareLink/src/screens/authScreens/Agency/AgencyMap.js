@@ -298,13 +298,14 @@ const AgencyMap = ({navigation, route}) => {
             </Marker>
           </MapView>
         </View>
-
-        <View>
-          <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
-            Address
-          </Apptext>
-          <Apptext style={[styles.adrs]}>{address}</Apptext>
-        </View>
+        {address && (
+          <View>
+            <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
+              Address
+            </Apptext>
+            <Apptext style={[styles.adrs]}>{address}</Apptext>
+          </View>
+        )}
       </View>
       <FormButton
         buttonTitle={isFromProfile ? 'Update' : 'Next'}
