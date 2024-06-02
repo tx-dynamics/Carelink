@@ -8,7 +8,7 @@ import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import colors from '../../../config/colors';
-import {fontPixel, heightPixel, hp, widthPixel} from '../../../Constants';
+import {fontPixel, heightPixel, widthPixel} from '../../../Constants';
 import {fonts} from '../../../Constants/Fonts';
 import AppTextInput from '../../../components/AppTextInput/AppTextInput';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';

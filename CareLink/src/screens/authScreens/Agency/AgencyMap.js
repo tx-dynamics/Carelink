@@ -97,7 +97,7 @@ const AgencyMap = ({navigation, route}) => {
     }
     if (usertype == 'AgencySide') {
       console.log('Is from Profile', isFromProfile);
-      setIsLoading(true);
+      // setIsLoading(true);
       if (isFromProfile) {
         try {
           const endPoint = api.userProfile;
@@ -140,7 +140,7 @@ const AgencyMap = ({navigation, route}) => {
 
   const getLocation = async () => {
     try {
-      setIsLoading(true);
+      // setIsLoading(true);
       Geolocation.getCurrentPosition(
         position => {
           const {latitude, longitude} = position?.coords;
@@ -176,7 +176,7 @@ const AgencyMap = ({navigation, route}) => {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === 'OK') {
-            setIsLoading(true);
+            // setIsLoading(true);
             console.log(
               'responseJson?.results[0]',
               JSON.stringify(responseJson?.results[0]?.geometry?.location?.lat),
@@ -249,7 +249,7 @@ const AgencyMap = ({navigation, route}) => {
       latitude: values.nativeEvent.coordinate.latitude,
       longitude: values.nativeEvent.coordinate.longitude,
     });
-    setIsLoading(true);
+    // setIsLoading(true);
     getAddressFromCoordinates(
       values.nativeEvent.coordinate.latitude,
       values.nativeEvent.coordinate.longitude,

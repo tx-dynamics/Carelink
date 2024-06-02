@@ -22,6 +22,7 @@ import {api} from '../../../../network/Environment';
 import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
 import {callApi, Method} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
+import {useSelector} from 'react-redux';
 
 export const agencyData = [
   {
@@ -79,6 +80,7 @@ export const agencyData = [
 ];
 
 const AgencyHome = ({}) => {
+  const userData = useSelector(store => store?.userDataSlice);
   const [listingDetails, setListingDetails] = useState([]);
   const [pending, setPending] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -125,8 +127,10 @@ const AgencyHome = ({}) => {
   const fetchProposalDetails = async () => {
     try {
       setIsLoading(true);
-      //   api?query=${encodeURIComponent(JSON.stringify({ user: id }))}
-      const endPoint = api.getProposal;
+
+      const endPoint = `${api.getProposal}?query=${encodeURIComponent(
+        JSON.stringify({user: userData?.userData?._id}),
+      )}`;
       const bodyParams = {};
       //   console.log('data ', endPoint);
       const onSuccess = result => {

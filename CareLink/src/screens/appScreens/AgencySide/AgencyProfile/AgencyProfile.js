@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -10,6 +10,9 @@ import {
   UIManager,
   Text,
   PermissionsAndroid,
+  Platform,
+  RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -57,12 +60,11 @@ const Profile = ({navigation}) => {
   const [userData, setUserData] = useState();
   const [reviews, setReviews] = useState();
   const [coordinates, setCoordinates] = useState(currentLocation);
-  const [location, setLocation] = useState({});
+  const [isRefreshing, setIsRefreshing] = useState(false);
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 
   const handleSubmit = async () => {
-    setIsLoading(true);
     if (isProfile) {
       const str = isProfile;
       const imageObj = {
@@ -74,15 +76,14 @@ const Profile = ({navigation}) => {
       });
     } else {
       // await updateProfile();
-      setIsLoading(false);
       console.log('Else condition');
     }
   };
 
   const handleCoverSubmit = async () => {
     setIsLoading(true);
-    if (isProfile) {
-      const str = isProfile;
+    if (isCover) {
+      const str = isCover;
       const imageObj = {
         path: str,
         name: str?.substring(str?.lastIndexOf('/')),
@@ -91,7 +92,7 @@ const Profile = ({navigation}) => {
         updateCoverPhoto(res);
       });
     } else {
-      // await updateProfile();
+      await updateProfile();
       setIsLoading(false);
       console.log('Else condition');
     }
@@ -101,9 +102,12 @@ const Profile = ({navigation}) => {
     try {
       setIsLoading(true);
       const endPoint = api.userProfile;
-      const bodyParams = {image: image};
+      const bodyParams = {
+        image: image,
+      };
       const onSuccess = result => {
         setIsLoading(false);
+        setUserData({...userData, image: image});
         dispatch(setUserData(result?.data?.user));
         fetchUserData();
       };
@@ -125,6 +129,7 @@ const Profile = ({navigation}) => {
       const bodyParams = {coverPhoto: image};
       const onSuccess = result => {
         setIsLoading(false);
+        setUserData({...userData, coverPhoto: image});
         dispatch(setUserData(result?.data?.user));
         fetchUserData();
       };
@@ -232,8 +237,23 @@ const Profile = ({navigation}) => {
     }
   };
 
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  const onRefresh = useCallback(() => {
+    setIsRefreshing(true);
+    fetchUserData();
+    wait(2000).then(() => setIsRefreshing(false));
+  }, []);
+
   return (
-    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+      }>
       <StatusBar translucent backgroundColor={'transparent'} />
       <BackgroundHeader
         onPressRight={() => {
@@ -257,6 +277,8 @@ const Profile = ({navigation}) => {
         <View style={styles.imgBox}>
           <Image
             style={styles.profileImg}
+            onLoad={() => setIsLoading(true)}
+            onLoadEnd={() => setIsLoading(false)}
             source={
               userData?.image
                 ? {uri: userData?.image}
@@ -276,6 +298,8 @@ const Profile = ({navigation}) => {
                   ? require('../../../../../assets/camera.png')
                   : appIcons.camera
               }
+              onLoad={() => setIsLoading(true)}
+              onLoadEnd={() => setIsLoading(false)}
             />
           </TouchableOpacity>
         </View>

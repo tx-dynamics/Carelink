@@ -26,14 +26,12 @@ const CountDownComponent = ({email, setIsOTP, isOTP, fromForgotPassword}) => {
 
     if (duration === 0 && isOTP === '') {
       // console.log(`Time's up`);
-      RedFlashMessage("Time's Up");
       clearInterval(timerId);
     } else if (duration === 0) {
-      RedFlashMessage("Time's Up");
       clearInterval(timerId);
     }
 
-    return function cleanup() {
+    return () => {
       clearInterval(timerId);
     };
   }, [paused, duration]);

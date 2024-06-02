@@ -32,7 +32,7 @@ import {
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
   const dispatch = useDispatch();
-  const [isOTP, setIsOTP] = useState('');
+  const [isOTP, setIsOTP] = useState('1827');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const emailOnly = useSelector(state => state?.splash?.emailOnly);
@@ -40,7 +40,6 @@ const EmailVerification = ({navigation, route}) => {
   const [duration, setDuration] = useState(59);
   const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
-  const userEmailAfterSignUp = useSelector(store => store?.splash);
 
   useEffect(() => {
     if (!params?.params?.fromForgotPassword && !params?.params?.register) {
@@ -72,10 +71,12 @@ const EmailVerification = ({navigation, route}) => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
+              console.log('Response message from ', res?.data);
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
               dispatch(signUpOTPCheck(false));
               if (usertype == 'ServiceSide') {
+                setIsLoading(false);
                 dispatch(userType('ServiceSide'));
                 // console.log('Inside service side');
                 params.params?.register
@@ -89,20 +90,24 @@ const EmailVerification = ({navigation, route}) => {
                     });
               }
               if (usertype == 'AgencySide') {
-                dispatch(userType('AgencySide'));
-                // console.log('Inside agency side');
-                dispatch(refreshToken(params?.params?.data?.refreshToken));
-                dispatch(accessToken(params?.params?.data?.token));
-                dispatch(setUserData(params?.params?.data?.user));
+                setIsLoading(false);
+                console.log('Inside agency side');
+                // setTimeout(() => {
+                dispatch(refreshToken(res?.data?.refreshToken));
+                dispatch(accessToken(res?.data?.token));
+                dispatch(setUserData(res?.data?.user));
                 params.params?.register
-                  ? navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.successAgency}],
-                    })
-                  : navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.forgetPasswordUpdate}],
-                    });
+                  ? navigation.navigate(routes.successAgency)
+                  : // navigation.reset({
+                    //     index: 0,
+                    //     routes: [{name: routes.successAgency}],
+                    //   })
+                    navigation.navigate(routes.forgetPasswordUpdate);
+                // navigation.reset({
+                //     index: 0,
+                //     routes: [{name: routes.forgetPasswordUpdate}],
+                //   });
+                // }, 2000);
               }
             } else {
               setIsLoading(false);
@@ -203,7 +208,6 @@ const EmailVerification = ({navigation, route}) => {
 
   // resend email verification process
   const handleResendOTP = async () => {
-    console.log('Hit');
     setIsOTP('');
     try {
       setIsLoading(true);

@@ -100,7 +100,6 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              console.log('Response', res?.data);
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
                 if (
@@ -119,10 +118,7 @@ const LoginScreen = () => {
                   handleResendOTP();
                   dispatch(setUserData(res?.data?.user));
                 } else if (res?.data?.user?.profileCompleted == false) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes.addDocuments}],
-                  });
+                  navigation.navigate(routes.addDocuments);
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
@@ -134,19 +130,13 @@ const LoginScreen = () => {
                   res?.data?.user?.drivingLicense &&
                   res?.data?.user?.homePhoto
                 ) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes.listingOptions}],
-                  });
+                  navigation.navigate(routes.listingOptions);
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
                 } else if (!res?.data?.user?.subscriptionId) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: 'PaymentPlans'}],
-                  });
+                  navigation.navigate('PaymentPlans');
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
@@ -169,28 +159,19 @@ const LoginScreen = () => {
                     routes: [{name: 'Drawer'}],
                   });
                 } else if (res?.data?.user?.verified == false) {
-                  console.log('2');
                   navigation.navigate('EmailVerification', {
                     email: email?.toLowerCase(),
                     data: res?.data,
                     register: true,
                   });
                 } else if (res?.data?.user?.profileCompleted == false) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: routes.successAgency}],
-                  });
+                  navigation.navigate(routes.successAgency);
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
                   dispatch(signUpOTPCheck(false));
-                  console.log('3');
                 } else if (!res?.data?.user?.subscriptionId) {
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: 'PaymentPlans'}],
-                  });
-                  console.log('4');
+                  navigation.navigate('PaymentPlans');
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));

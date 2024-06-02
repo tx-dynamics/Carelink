@@ -14,6 +14,8 @@ import {
   signatureVersion,
 } from './constants';
 import DeviceInfo from 'react-native-device-info';
+import {Platform} from 'react-native';
+import {PERMISSIONS, RESULTS, check, request} from 'react-native-permissions';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -134,4 +136,22 @@ export const uploadImageOnS3 = async (file, successPath) => {
         console.log('Error While Uploading Image', err);
       });
   });
+};
+
+export const checkLocationPermission = async () => {
+  if (Platform.OS === 'android') {
+    const permission = await check(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+    if (permission === RESULTS.DENIED) {
+      const result = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+      return result;
+    }
+    return permission;
+  } else if (Platform.OS === 'ios') {
+    const permission = await check(PERMISSIONS.IOS.LOCATION_ALWAYS);
+    if (permission === RESULTS.DENIED) {
+      const result = await request(PERMISSIONS.IOS.LOCATION_ALWAYS);
+      return result;
+    }
+    return permission;
+  }
 };

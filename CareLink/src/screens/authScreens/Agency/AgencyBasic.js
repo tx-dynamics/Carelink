@@ -189,9 +189,11 @@ const styles = StyleSheet.create({
     marginTop: heightPixel(40),
   },
   aboutMainStyle: {
+    textAlignVertical: 'top',
     marginBottom: heightPixel(20),
   },
   aboutHeight: {
+    textAlignVertical: 'top',
     height: null,
     maxHeight: heightPixel(300),
     minHeight: heightPixel(80),
