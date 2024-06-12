@@ -88,6 +88,7 @@ const AgencyHome = ({}) => {
   const [proposalData, setPropsalData] = useState({
     countsData: {},
     proposalList: [],
+    acceptedProposals: '',
   });
 
   // hooks
@@ -137,8 +138,8 @@ const AgencyHome = ({}) => {
         setPropsalData({
           countsData: result?.data?.counts,
           proposalList: result?.data?.proposal,
+          acceptedProposals: result?.data?.counts?.accepted,
         });
-        console.log('Proposal details fetch are', result);
         setPending(result?.data?.counts?.pending);
         setIsLoading(false);
       };
@@ -217,7 +218,7 @@ const AgencyHome = ({}) => {
           labelValue={'Proposals'}
           BookedRooms={proposalData?.proposalList?.length}
           scndTxt={'Submitted'}
-          AvailableRooms={'0'}
+          AvailableRooms={proposalData?.acceptedProposals?.toString()}
           firstTxt={'Accepted'}
         />
         <View style={styles.listingView}>

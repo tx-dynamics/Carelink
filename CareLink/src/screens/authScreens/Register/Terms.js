@@ -1,13 +1,5 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React, {useState, useCallback} from 'react';
+import {StyleSheet, ScrollView} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
@@ -18,9 +10,11 @@ import {callApi, Method} from '../../../network/NetworkManger';
 import {api} from '../../../network/Environment';
 import {useFocusEffect} from '@react-navigation/native';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
+import Loader from '../../../components/Loader';
 
 const Terms = ({navigation}) => {
   const [termsData, setTermsData] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useFocusEffect(
     useCallback(() => {
@@ -28,19 +22,17 @@ const Terms = ({navigation}) => {
     }, []),
   );
   const termsAndCondition = async () => {
+    setLoading(true);
     try {
       const bodyParams = {};
-      // console.log('bodyParams ', bodyParams);
       const onSuccess = result => {
-        // console.log(
-        //   'terms and condition data => ',
-        //   JSON.stringify(result, ' ', 2),
-        // );
         setTermsData(result?.data?.data[0]?.data);
+        setLoading(false);
       };
       const onError = error => {
         if (error) {
           RedFlashMessage(error);
+          setLoading(false);
         }
       };
       await callApi(
@@ -51,7 +43,9 @@ const Terms = ({navigation}) => {
         onError,
       );
     } catch (error) {
-      console.log('error while hitting sign up api ', error);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,10 +61,13 @@ const Terms = ({navigation}) => {
           }
         }}
         imgName={iconPath.leftArrow}
-        title={'Terms & Condition'}
+        title={'Terms & Conditions'}
         style={styles.createTxt}
       />
-      <Apptext style={styles.termsTxt}>{termsData}</Apptext>
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <Apptext style={styles.termsTxt}>{termsData}</Apptext>
+      </ScrollView>
+      <Loader isVisible={loading} />
     </AppGLobalView>
   );
 };

@@ -12,7 +12,6 @@ import {
   PermissionsAndroid,
   Platform,
   RefreshControl,
-  ActivityIndicator,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -65,23 +64,24 @@ const Profile = ({navigation}) => {
     UIManager.setLayoutAnimationEnabledExperimental(true);
 
   const handleSubmit = async () => {
+    console.log('Handle submit hit outer');
     if (isProfile) {
       const str = isProfile;
       const imageObj = {
         path: str,
         name: str?.substring(str?.lastIndexOf('/')),
       };
+      console.log('Handle submit hit inner');
       await uploadImageOnS3(imageObj, res => {
         updateProfile(res);
       });
     } else {
-      // await updateProfile();
-      console.log('Else condition');
+      await updateProfile();
+      console.log('Else condition 1');
     }
   };
 
   const handleCoverSubmit = async () => {
-    setIsLoading(true);
     if (isCover) {
       const str = isCover;
       const imageObj = {
@@ -93,12 +93,12 @@ const Profile = ({navigation}) => {
       });
     } else {
       await updateProfile();
-      setIsLoading(false);
       console.log('Else condition');
     }
   };
 
   const updateProfile = async image => {
+    console.log('Update profile hit');
     try {
       setIsLoading(true);
       const endPoint = api.userProfile;
@@ -109,7 +109,6 @@ const Profile = ({navigation}) => {
         setIsLoading(false);
         setUserData({...userData, image: image});
         dispatch(setUserData(result?.data?.user));
-        fetchUserData();
       };
       const onError = error => {
         RedFlashMessage('Something Went Wrong!', error.message);
@@ -131,7 +130,6 @@ const Profile = ({navigation}) => {
         setIsLoading(false);
         setUserData({...userData, coverPhoto: image});
         dispatch(setUserData(result?.data?.user));
-        fetchUserData();
       };
       const onError = error => {
         RedFlashMessage('Something Went Wrong!', error.message);
@@ -159,6 +157,7 @@ const Profile = ({navigation}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setUserData(result?.user);
+        console.log('User data on fetchUserData', result);
         setIsLoading(false);
       };
 

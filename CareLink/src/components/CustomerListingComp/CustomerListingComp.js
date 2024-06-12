@@ -32,8 +32,6 @@ const CustomerListingComp = ({
   );
   const daysDifference = Endduration.diff(Startduration, 'days');
 
-  console.log('Items of the agency home is', allData?.location?.address);
-
   return (
     <Pressable onPress={onPress} style={styles.container}>
       <View style={styles.subView}>

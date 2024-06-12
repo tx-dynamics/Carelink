@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, Keyboard, Alert} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Text, View, Keyboard} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import Apptext from '../../../components/Apptext';
@@ -154,10 +154,12 @@ const LoginScreen = () => {
                   dispatch(setUserData(res?.data?.user));
                   dispatch(signUpOTPCheck(false));
                   dispatch(userSave(true));
-                  navigation.reset({
-                    index: 0,
-                    routes: [{name: 'Drawer'}],
-                  });
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: 'Drawer'}],
+                    });
+                  }, 1000);
                 } else if (res?.data?.user?.verified == false) {
                   navigation.navigate('EmailVerification', {
                     email: email?.toLowerCase(),
@@ -165,13 +167,23 @@ const LoginScreen = () => {
                     register: true,
                   });
                 } else if (res?.data?.user?.profileCompleted == false) {
-                  navigation.navigate(routes.successAgency);
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.successAgency}],
+                    });
+                  }, 1000);
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
                   dispatch(signUpOTPCheck(false));
                 } else if (!res?.data?.user?.subscriptionId) {
-                  navigation.navigate('PaymentPlans');
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: 'PaymentPlans'}],
+                    });
+                  }, 1000);
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
@@ -211,7 +223,7 @@ const LoginScreen = () => {
         />
         <View>
           <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
-            Enter your Informatidon:{' '}
+            Enter your Information:{' '}
           </Apptext>
         </View>
         <View style={{marginTop: heightPixel(1)}}>
@@ -220,6 +232,7 @@ const LoginScreen = () => {
             keyboardType="email-address"
             onChangeText={setEmail}
             title={'Email'}
+            autoCapitalize={'none'}
           />
           <AppTextInput
             value={isPassword}

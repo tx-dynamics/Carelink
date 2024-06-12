@@ -15,7 +15,6 @@ import AvailableFacilityComp from '../AvaialableFacilityComp/AvailableFacilityCo
 import moment from 'moment';
 
 const AgencyListingComp = ({facilityData, item, rightIconPress}) => {
-  console.log('Item is', item);
   var Startduration = moment.utc(
     moment.duration(item?.availabilityStart).asMilliseconds(),
   );
@@ -52,7 +51,7 @@ const AgencyListingComp = ({facilityData, item, rightIconPress}) => {
         }}>
         <Image
           resizeMode="contain"
-          source={appIcons.CalrightArrow}
+          source={{uri: item?.user?.image}}
           style={{
             width: widthPixel(51),
             height: widthPixel(51),
@@ -78,7 +77,6 @@ const AgencyListingComp = ({facilityData, item, rightIconPress}) => {
               numberOfLines={1}
               style={{
                 width: widthPixel(160),
-                // backgroundColor: "red",
                 fontSize: fontPixel(10),
                 fontFamily: fonts.Poppins_Regular,
                 color: colors.black,

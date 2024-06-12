@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
   inputStyle: {
     color: colors.black,
     flex: 1,
+    paddingVertical: 10,
   },
   rightView: {
     justifyContent: 'center',

@@ -4,31 +4,15 @@ import colors from '../../../../config/colors';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
 import {iconPath} from '../../../../config/icon';
 import CustomerListingComp from '../../../../components/CustomerListingComp/CustomerListingComp';
-import {heightPixel} from '../../../../Constants';
+import {heightPixel, routes} from '../../../../Constants';
 import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/LeftSideBoldHeading';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import {useRoute} from '@react-navigation/native';
 
 const AgencyProposalList = ({navigation}) => {
   const {proposalData} = useRoute()?.params;
-  console.log('Proposal Data', proposalData);
-  //   console.log(
-  //     '🚀 ~ AgencyProposalList ~ proposalData:',
-  //     JSON.stringify(proposalData, ' ', 2),
-  //   );
+  console.log('Proposal Data', JSON.stringify(proposalData));
 
-  // const proposalData = [
-  //     {
-  //         id: 1,
-  //         title: "Submitted Proposals",
-  //         data: agencyData
-  //     },
-  //     {
-  //         id: 2,
-  //         title: "Submitted Proposals",
-  //         data: agencyData
-  //     },
-  // ]
   const DATA = [
     {
       title: 'Submitted Proposals',
@@ -38,9 +22,10 @@ const AgencyProposalList = ({navigation}) => {
     {
       title: 'Accepted Proposals',
       data: proposalData?.proposalList,
-      count: proposalData?.countsData?.accepted,
+      count: proposalData?.acceptedProposals,
     },
   ];
+
   return (
     <AppGLobalView style={styles.container}>
       <IconHeaderComp
@@ -51,19 +36,23 @@ const AgencyProposalList = ({navigation}) => {
       <SectionList
         sections={DATA}
         renderItem={({item}) => (
-          <CustomerListingComp
-            title={item?.listing?.rooms[0]?.room}
-            durationData={[
-              item?.listing?.availabilityStart,
-              item?.listing?.availabilityEnd,
-            ]}
-            facilityData={item?.listing?.entities}
-            // onPress={() =>
-            //   navigation.navigate(routes.roomDetails, {
-            //     item: item?.listing,
-            //   })
-            // }
-          />
+          console.log('Itesm is===-----====>', JSON.stringify(item)),
+          (
+            <CustomerListingComp
+              title={item?.listing?.rooms[0]?.room}
+              durationData={[
+                item?.listing?.availabilityStart,
+                item?.listing?.availabilityEnd,
+              ]}
+              facilityData={item?.listing?.entities}
+              onPress={() =>
+                navigation.navigate(routes.roomDetails, {
+                  item: item?.listing,
+                  fromSubmitAcceptProposal: true,
+                })
+              }
+            />
+          )
         )}
         renderSectionHeader={({section: {title, data, count}}) => (
           <LeftSideBoldHeading

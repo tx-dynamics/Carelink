@@ -24,18 +24,19 @@ import {setAgencyApartmentNumber} from '../../../redux/Slices/agencyInfoSlice';
 const AgencyLocation = ({navigation, route}) => {
   const {myUserLocation, agencyData, ProviderData, address} = route?.params;
   // states
+  var streetData = address.split(',');
+  streetData = streetData[0] + ',' + streetData[1];
+  const dispatch = useDispatch();
   const agencyProfileData = useSelector(store => store?.agencyInfoSlice);
   const usertype = useSelector(state => state.splash.userType);
-  const [street, setStreet] = useState('');
+  const [street, setStreet] = useState(streetData);
   const [apartment, setApartment] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [isState, setState] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   // hooks
-  const dispatch = useDispatch();
   useEffect(() => {
-    setStreet(myUserLocation?.streetAddress);
     setZipCode(myUserLocation?.zipCode);
     setState(myUserLocation?.stateName);
 
@@ -127,7 +128,7 @@ const AgencyLocation = ({navigation, route}) => {
 
   // const checkMyDataBeforeMoviving
   const CheckLocationInput = () => {
-    if (street === '' || street === null) {
+    if (street === '') {
       RedFlashMessage('Please Enter Street Address');
       setIsLoading(false);
       return false;
@@ -171,13 +172,13 @@ const AgencyLocation = ({navigation, route}) => {
         <View style={{marginBottom: heightPixel(50)}}>
           {myUserLocation?.streetAddress == null ? (
             <AppTextInput
-              value={street}
+              value={street ? street : streetData}
               onChangeText={text => setStreet(text)}
               title={'Street Address'}
             />
           ) : (
             <AppTextInput
-              value={street}
+              value={street ? street : streetData}
               onChangeText={text => setStreet(text)}
               editable={false}
               title={'Street Address'}

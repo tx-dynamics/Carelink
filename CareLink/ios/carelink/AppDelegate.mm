@@ -1,12 +1,14 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
 #import <React/RCTBundleURLProvider.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   [FIRApp configure];
+  [GMSServices provideAPIKey:@"AIzaSyD3BToDj_z_1ZLuhdDSURQplj3_9IgQSis"];
   self.moduleName = @"carelink";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.

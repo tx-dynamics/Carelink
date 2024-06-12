@@ -11,13 +11,8 @@ import FlashMessage from 'react-native-flash-message';
 import {MenuProvider} from 'react-native-popup-menu';
 import {StripeProvider} from '@stripe/stripe-react-native';
 import {STRIPE_KEY} from './src/network/Environment';
-import {checkLocationPermission} from './src/Services/HelpingMethods';
 
 class App extends Component {
-  componentDidMount() {
-    checkLocationPermission();
-  }
-
   render() {
     let persistor = persistStore(store);
     return (

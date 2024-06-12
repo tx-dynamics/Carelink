@@ -32,12 +32,11 @@ import {
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
   const dispatch = useDispatch();
-  const [isOTP, setIsOTP] = useState('1827');
+  const [isOTP, setIsOTP] = useState('8634');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const emailOnly = useSelector(state => state?.splash?.emailOnly);
   const [isLoading, setIsLoading] = useState(false);
-  const [duration, setDuration] = useState(59);
   const [clearOtp, setClearedOtp] = useState(false);
   const userData = useSelector(store => store?.userDataSlice);
 
@@ -64,50 +63,47 @@ const EmailVerification = ({navigation, route}) => {
           otp: isOTP,
           device: {id: dtk, deviceToken: fcm},
         };
-        // console.log('data', data);
         await callApi(
           Method.POST,
           endPoint,
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
-              console.log('Response message from ', res?.data);
               SuccessFlashMessage(res?.message);
               setIsLoading(false);
               dispatch(signUpOTPCheck(false));
               if (usertype == 'ServiceSide') {
                 setIsLoading(false);
                 dispatch(userType('ServiceSide'));
-                // console.log('Inside service side');
+
                 params.params?.register
-                  ? navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.addDocuments}],
-                    })
-                  : navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.forgetPasswordUpdate}],
-                    });
+                  ? console.log('Hit 1')
+                  : // navigation.reset({
+                    //     index: 1,
+                    //     routes: [{name: routes.addDocuments}],
+                    //   })
+                    console.log('Hit 2');
+                navigation.reset({
+                  index: 1,
+                  routes: [{name: routes.forgetPasswordUpdate}],
+                });
               }
               if (usertype == 'AgencySide') {
                 setIsLoading(false);
-                console.log('Inside agency side');
-                // setTimeout(() => {
                 dispatch(refreshToken(res?.data?.refreshToken));
                 dispatch(accessToken(res?.data?.token));
                 dispatch(setUserData(res?.data?.user));
-                params.params?.register
-                  ? navigation.navigate(routes.successAgency)
-                  : // navigation.reset({
-                    //     index: 0,
-                    //     routes: [{name: routes.successAgency}],
-                    //   })
-                    navigation.navigate(routes.forgetPasswordUpdate);
-                // navigation.reset({
-                //     index: 0,
-                //     routes: [{name: routes.forgetPasswordUpdate}],
-                //   });
-                // }, 2000);
+                setTimeout(() => {
+                  params.params?.register
+                    ? navigation.reset({
+                        index: 1,
+                        routes: [{name: routes.successAgency}],
+                      })
+                    : navigation.reset({
+                        index: 1,
+                        routes: [{name: routes.forgetPasswordUpdate}],
+                      });
+                }, 1000);
               }
             } else {
               setIsLoading(false);
@@ -115,8 +111,6 @@ const EmailVerification = ({navigation, route}) => {
           },
           err => {
             setIsLoading(false);
-            // console.log("res => ",)
-
             RedFlashMessage(err ? err : 'Please enter correct otp');
           },
         );
@@ -143,7 +137,6 @@ const EmailVerification = ({navigation, route}) => {
           otp: isOTP,
           device: {id: getDeviceId(), deviceToken: fcm},
         };
-        console.log('data ', data);
         const endPoint = api.verifyForgotPasswordOTP;
 
         await callApi(
@@ -157,7 +150,7 @@ const EmailVerification = ({navigation, route}) => {
               if (usertype == 'ServiceSide') {
                 route.params?.register
                   ? navigation.reset({
-                      index: 0,
+                      index: 1,
                       routes: [{name: routes.addDocuments}],
                     })
                   : navigation.navigate(routes.forgetPasswordUpdate, {
@@ -166,15 +159,22 @@ const EmailVerification = ({navigation, route}) => {
                     });
               }
               if (usertype == 'AgencySide') {
-                route.params?.register
-                  ? navigation.reset({
-                      index: 0,
-                      routes: [{name: routes.successAgency}],
-                    })
-                  : navigation.navigate(routes.forgetPasswordUpdate, {
-                      email: params?.params?.email?.toLowerCase(),
-                      otp: isOTP,
-                    });
+                setTimeout(() => {
+                  route.params?.register
+                    ? navigation.replace(routes.successAgency)
+                    : navigation.reset({
+                        index: 0,
+                        routes: [
+                          {
+                            name: 'forgetPasswordUpdate',
+                            params: {
+                              email: params?.params?.email?.toLowerCase(),
+                              otp: isOTP,
+                            },
+                          },
+                        ],
+                      });
+                }, 1000);
               }
             } else {
               setIsLoading(false);

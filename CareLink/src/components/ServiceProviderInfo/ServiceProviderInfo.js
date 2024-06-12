@@ -29,7 +29,6 @@ const ServiceProviderInfo = ({
         </Text>
       )}
       <EntityCheckComponent
-        disabled={true}
         icon={
           washRoom?.selected == true ? appIcons.tickCheck : appIcons.tickUncheck
         }

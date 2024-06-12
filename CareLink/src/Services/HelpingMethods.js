@@ -16,6 +16,7 @@ import {
 import DeviceInfo from 'react-native-device-info';
 import {Platform} from 'react-native';
 import {PERMISSIONS, RESULTS, check, request} from 'react-native-permissions';
+import Geolocation from 'react-native-geolocation-service';
 
 export const uploadmageMultiPle = (setPicData, picData) => {
   let temp = [...picData];
@@ -147,11 +148,10 @@ export const checkLocationPermission = async () => {
     }
     return permission;
   } else if (Platform.OS === 'ios') {
-    const permission = await check(PERMISSIONS.IOS.LOCATION_ALWAYS);
-    if (permission === RESULTS.DENIED) {
-      const result = await request(PERMISSIONS.IOS.LOCATION_ALWAYS);
-      return result;
-    }
-    return permission;
+    await Geolocation.requestAuthorization();
+    await Geolocation.setRNConfiguration({
+      skipPermissionRequests: false,
+      authorizationLevel: 'whenInUse',
+    });
   }
 };

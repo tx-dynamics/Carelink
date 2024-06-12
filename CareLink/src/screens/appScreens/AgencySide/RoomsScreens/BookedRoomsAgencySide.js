@@ -121,7 +121,7 @@ export const BookedDataAgency = [
 ];
 const BookedRoomsAgencySide = ({navigation}) => {
   const route = useRoute();
-  console.log('Routse are', JSON.stringify(route?.params?.listingDetails));
+  console.log('Routes are', route?.params?.listingDetails[0]?.user?.image);
 
   return (
     <AppGLobalView>
@@ -142,11 +142,12 @@ const BookedRoomsAgencySide = ({navigation}) => {
         keyExtractor={(item, index) => index}
         renderItem={({item, index}) => (
           <AgencyListingComp
-            rightIconPress={
-              () => {}
-              // navigation.navigate(routes.bookedRoomDetailAgency, {
-              //   params: {item},
-              // })
+            rightIconPress={() =>
+              navigation.navigate(routes.bookedRoomDetailAgency, {
+                params: {
+                  item,
+                },
+              })
             }
             item={item}
             facilityData={item.entities}

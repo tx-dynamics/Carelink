@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
@@ -13,7 +13,7 @@ import {
   SuccessFlashMessage,
 } from '../../../../Constants/Utilities/assets/Snakbar';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
-import {useFocusEffect, useRoute} from '@react-navigation/native';
+import {useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import moment from 'moment';
 import {callApi, Method} from '../../../../network/NetworkManger';
@@ -25,10 +25,9 @@ const RoomsDetails = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
   const proposeeData = useSelector(state => state?.proposalData);
-  console.log('Proposee Data', proposeeData);
 
   const {item} = useRoute()?.params;
-  console.log('Item on Room Details', item?.user);
+  console.log('Routtes are', route?.params?.fromSubmitAcceptProposal);
   // listing id
 
   const proposalRawData = {
@@ -95,16 +94,19 @@ const RoomsDetails = ({navigation, route}) => {
 
   //  service data
   const getServiceUserData = async () => {
+    const id = item?._id ? item?._id : item?.user?._id;
+    console.log('ID is', id);
     try {
       setIsLoading(true);
       const bodyParams = {};
-      const endPoint = `${api.getUserProfile}/${item?.user?._id}`;
+      const endPoint = `${api.getUserProfile}/${id}`;
+      console.log('Hit');
       const onSuccess = result => {
         setServiceUserProfile(result?.user);
         setIsLoading(false);
       };
       const onError = error => {
-        RedFlashMessage(error);
+        // RedFlashMessage(error);
         setIsLoading(false);
       };
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
@@ -126,7 +128,7 @@ const RoomsDetails = ({navigation, route}) => {
         rightImg={liked ? appIcons.heartRed : appIcons.heartBlank}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        {!route?.params?.review && (
+        {!route?.params?.review && serviceUserProfile && (
           <UserInfoComp
             onPress={() =>
               navigation.navigate(routes.clientProfile, {
@@ -147,22 +149,24 @@ const RoomsDetails = ({navigation, route}) => {
           note={item?.notes}
         />
       </KeyboardAwareScrollView>
-      <FormButton
-        buttonTitle={
-          route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
-        }
-        onPress={() => {
-          navigation.navigate(
-            route?.params?.review
-              ? routes?.createContract
-              : routes.sendProposal,
-            {
-              proposalRawData,
-              serviceUserProfile,
-            },
-          );
-        }}
-      />
+      {!route?.params?.fromSubmitAcceptProposal && (
+        <FormButton
+          buttonTitle={
+            route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
+          }
+          onPress={() => {
+            navigation.navigate(
+              route?.params?.review
+                ? routes?.createContract
+                : routes.sendProposal,
+              {
+                proposalRawData,
+                serviceUserProfile,
+              },
+            );
+          }}
+        />
+      )}
     </AppGLobalView>
   );
 };

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Image,
@@ -14,7 +14,7 @@ import FormButton from '../../../components/FormButton';
 import {useDispatch, useSelector} from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
-import {heightPixel, hp, routes} from '../../../Constants';
+import {heightPixel} from '../../../Constants';
 import {fromProfile} from '../../../redux/Slices/appSlice';
 import AppGLobalView from '../../../components/AppGlobalView/AppGLobalView';
 import Geolocation from 'react-native-geolocation-service';
@@ -27,7 +27,7 @@ import {Method, callApi} from '../../../network/NetworkManger';
 import {setAgencyAddress} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyMap = ({navigation, route}) => {
-  // dummy location points
+  console.log('Routes area', route?.params?.fromPhoto);
   let currentLocation = {
     latitude: 31.449590774585772,
     longitude: 74.28036404773593,
@@ -44,7 +44,8 @@ const AgencyMap = ({navigation, route}) => {
   const [address, setAddress] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
-  const mapRef = useRef();
+  const [userData, setUserData] = useState();
+  const [moveLocation, setMoveLocation] = useState(false);
 
   // states
   const [coordinates, setCoordinates] = useState(currentLocation);
@@ -58,10 +59,9 @@ const AgencyMap = ({navigation, route}) => {
     longitude: '',
   });
 
-  console.log('My Location data is', myUserLocation);
-
   useEffect(() => {
     requestLocationPermission();
+    fetchUserData();
   }, []);
 
   const requestLocationPermission = async () => {
@@ -76,18 +76,55 @@ const AgencyMap = ({navigation, route}) => {
         } else {
         }
       } else {
-        getLocation();
+        Geolocation.requestAuthorization('always');
+        Geolocation.getCurrentPosition(
+          position => {
+            setMyUserLocation({
+              latitude: position?.coords?.latitude,
+              longitude: position?.coords?.longitude,
+            });
+            setCoordinates({
+              latitude: position?.coords?.latitude,
+              longitude: position?.coords?.longitude,
+            });
+            setIsLoading(true);
+            getAddressFromCoordinates(
+              position?.coords?.latitude,
+              position?.coords?.longitude,
+            );
+          },
+          error => {
+            console.log(error.code, error.message);
+          },
+          {enableHighAccuracy: true, timeout: 15000},
+        );
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const onPressNext = async () => {
-    if (myUserLocation.country === '') {
-      RedFlashMessage('Pin Your location on Map is Require');
-      return;
+  const fetchUserData = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = api.getAgencyProfile;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setUserData(result?.user);
+        setIsLoading(false);
+      };
+
+      const onError = error => {
+        setIsLoading(false);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
     }
+  };
+
+  const onPressNext = async () => {
     if (usertype == 'ServiceSide') {
       navigation.navigate('AgencyLocation', {
         ProviderData: route?.params,
@@ -96,8 +133,6 @@ const AgencyMap = ({navigation, route}) => {
       });
     }
     if (usertype == 'AgencySide') {
-      console.log('Is from Profile', isFromProfile);
-      // setIsLoading(true);
       if (isFromProfile) {
         try {
           const endPoint = api.userProfile;
@@ -136,15 +171,17 @@ const AgencyMap = ({navigation, route}) => {
     }
   };
 
-  const updateProfile = async image => {};
-
   const getLocation = async () => {
     try {
-      // setIsLoading(true);
       Geolocation.getCurrentPosition(
         position => {
           const {latitude, longitude} = position?.coords;
           setCoordinates(prevData => ({
+            ...prevData,
+            latitude: latitude,
+            longitude: longitude,
+          }));
+          setLocation(prevData => ({
             ...prevData,
             latitude: latitude,
             longitude: longitude,
@@ -176,15 +213,9 @@ const AgencyMap = ({navigation, route}) => {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === 'OK') {
-            // setIsLoading(true);
-            console.log(
-              'responseJson?.results[0]',
-              JSON.stringify(responseJson?.results[0]?.geometry?.location?.lat),
-            );
             setAddress(responseJson?.results[0]?.formatted_address);
             setLatitude(responseJson?.results[0]?.geometry?.location?.lat);
             setLongitude(responseJson?.results[0]?.geometry?.location?.lng);
-
             dispatch(
               setAgencyAddress(responseJson?.results[0]?.formatted_address),
             );
@@ -213,7 +244,6 @@ const AgencyMap = ({navigation, route}) => {
               }
               userLocation.latitude = latitude;
               userLocation.longitude = longitude;
-              // 9, Block C Revenue Employees Cooperative Housing Society, Lahore, Punjab 54770, Pakistan
             });
             setIsLoading(false);
             setMyUserLocation({
@@ -229,10 +259,7 @@ const AgencyMap = ({navigation, route}) => {
               latitude: userLocation?.latitude,
               longitude: userLocation?.longitude,
             });
-            // setMyUserLocation(responseJson?.results[0].formatted_address);
-            // setAddress(responseJson?.results[3]?.formatted_address);
           } else {
-            console.log('not found');
             RedFlashMessage('Not Found');
           }
         })
@@ -245,16 +272,28 @@ const AgencyMap = ({navigation, route}) => {
   };
 
   const onDragMapValues = values => {
+    setMoveLocation(true);
     setCoordinates({
       latitude: values.nativeEvent.coordinate.latitude,
       longitude: values.nativeEvent.coordinate.longitude,
     });
-    // setIsLoading(true);
+    setIsLoading(true);
     getAddressFromCoordinates(
       values.nativeEvent.coordinate.latitude,
       values.nativeEvent.coordinate.longitude,
     );
   };
+
+  const pinLocation = route?.params?.fromPhoto
+    ? coordinates
+    : {
+        latitude: userData?.location?.coordinates[1]
+          ? userData?.location?.coordinates[0]
+          : 37.78825,
+        longitude: userData?.location?.coordinates[0]
+          ? userData?.location?.coordinates[1]
+          : -122.4324,
+      };
 
   return (
     <AppGLobalView style={styles.container}>
@@ -273,12 +312,12 @@ const AgencyMap = ({navigation, route}) => {
             zoomEnabled={true}
             showsUserLocation={true}
             showsPointsOfInterest={true}
-            followsUserLocation={true}
             userLocationPriority="high"
+            moveOnMarkerPress={false}
             initialRegion={coordinates}>
             <Marker
               draggable
-              coordinate={coordinates}
+              coordinate={pinLocation}
               onDragEnd={values => {
                 onDragMapValues(values);
               }}
@@ -303,7 +342,13 @@ const AgencyMap = ({navigation, route}) => {
             <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
               Address
             </Apptext>
-            <Apptext style={[styles.adrs]}>{address}</Apptext>
+            <Apptext style={[styles.adrs]}>
+              {route?.params?.fromPhoto
+                ? address
+                : !moveLocation
+                ? userData?.address
+                : address}
+            </Apptext>
           </View>
         )}
       </View>

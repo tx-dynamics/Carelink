@@ -68,10 +68,12 @@ const ForgetUpdateScreen = ({navigation}) => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
               SuccessFlashMessage(res?.message);
-              navigation.reset({
-                index: 0,
-                routes: [{name: routes.loginScreen}],
-              });
+              setTimeout(() => {
+                navigation.reset({
+                  index: 0,
+                  routes: [{name: routes.loginScreen}],
+                });
+              }, 1000);
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

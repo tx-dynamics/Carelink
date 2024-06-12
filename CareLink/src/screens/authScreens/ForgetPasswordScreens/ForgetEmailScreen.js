@@ -79,7 +79,12 @@ const ForgetEmailScreen = () => {
           }
         />
         <View style={{marginTop: heightPixel(5)}}>
-          <AppTextInput value={email} onChangeText={setEmail} title={'Email'} />
+          <AppTextInput
+            value={email}
+            onChangeText={setEmail}
+            title={'Email'}
+            autoCapitalize={'none'}
+          />
           {/* <NewSimpleTextinput onChangeText={setEmail} value={email} title={"Email"} /> */}
         </View>
       </KeyboardAwareScrollView>

@@ -79,6 +79,7 @@ const AgencyPhotos = ({navigation, route}) => {
           agencyData: route?.params,
           agencyImg: imagesUrl[0],
           profileImg: imagesUrl[1],
+          fromPhoto: true,
         });
         dispatch(setAgencyProfileImage(imagesUrl[0]));
         dispatch(setAgencyCoverPhoto(imagesUrl[1]));
@@ -96,6 +97,7 @@ const AgencyPhotos = ({navigation, route}) => {
         agencyAbout: route?.params?.about,
         agencyImg: '',
         profileImg: '',
+        fromPhoto: true,
       });
     } catch (error) {}
   };
