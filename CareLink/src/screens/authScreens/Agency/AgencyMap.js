@@ -46,6 +46,9 @@ const AgencyMap = ({navigation, route}) => {
   const [longitude, setLongitude] = useState('');
   const [userData, setUserData] = useState();
   const [moveLocation, setMoveLocation] = useState(false);
+  const userSavedData = useSelector(store => store?.userDataSlice);
+  const [dragCheck, setDragCheck] = useState(false);
+  console.log('Saved user data', userSavedData);
 
   // states
   const [coordinates, setCoordinates] = useState(currentLocation);
@@ -134,28 +137,40 @@ const AgencyMap = ({navigation, route}) => {
     }
     if (usertype == 'AgencySide') {
       if (isFromProfile) {
-        try {
-          const endPoint = api.userProfile;
-          const bodyParams = {
-            address: address,
-            location: {
-              type: 'Point',
-              coordinates: [latitude, longitude],
-            },
-          };
-          const onSuccess = result => {
+        if (moveLocation) {
+          try {
+            const endPoint = api.userProfile;
+            const bodyParams = {
+              address: address,
+              location: {
+                type: 'Point',
+                coordinates: [latitude, longitude],
+              },
+            };
+            const onSuccess = result => {
+              console.log('Result is', JSON.stringify(result));
+              dispatch(setAgencyAddress(result?.data?.user?.address));
+              dispatch(fromProfile(false));
+              navigation.navigate('ProfileNavigator');
+              setIsLoading(false);
+            };
+            const onError = error => {
+              RedFlashMessage('Something Went Wrong!', error.message);
+            };
+            await callApi(
+              Method.PATCH,
+              endPoint,
+              bodyParams,
+              onSuccess,
+              onError,
+            );
+          } catch (error) {
             setIsLoading(false);
-            navigation.navigate('ProfileNavigator');
-            dispatch(fromProfile(false));
-          };
-          const onError = error => {
-            RedFlashMessage('Something Went Wrong!', error.message);
-          };
-          await callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
-        } catch (error) {
-          setIsLoading(false);
-        } finally {
-          setIsLoading(false);
+          } finally {
+            setIsLoading(false);
+          }
+        } else {
+          navigation.goBack();
         }
       } else {
         if (myUserLocation.country !== '') {
@@ -273,6 +288,7 @@ const AgencyMap = ({navigation, route}) => {
 
   const onDragMapValues = values => {
     setMoveLocation(true);
+    setDragCheck(true);
     setCoordinates({
       latitude: values.nativeEvent.coordinate.latitude,
       longitude: values.nativeEvent.coordinate.longitude,
@@ -305,7 +321,6 @@ const AgencyMap = ({navigation, route}) => {
           imgName={iconPath.leftArrow}
           heading={'Pin your listed room location on the map'}
         />
-
         <View style={styles.mapContainer}>
           <MapView
             style={{width: wp('95%'), height: wp('90%')}}

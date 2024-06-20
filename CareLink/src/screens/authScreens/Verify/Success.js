@@ -31,6 +31,7 @@ import {
   setAgencyName,
   setAgencyProfileImage,
 } from '../../../redux/Slices/agencyInfoSlice';
+import {fromProfile} from '../../../redux/Slices/appSlice';
 
 const Success = ({navigation}) => {
   const dispatch = useDispatch();
@@ -84,6 +85,7 @@ const Success = ({navigation}) => {
           dispatch(setAgencyCoverPhoto(''));
           dispatch(setAgencyExperience(''));
           dispatch(setAgencyProfileImage(''));
+          dispatch(fromProfile(false));
           navigation.navigate(routes.agencyBasic);
         }}
       />

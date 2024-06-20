@@ -154,7 +154,7 @@ const PaymentPlans = ({navigation}) => {
     await fetchPaymentSheetParams(item?.priceId);
     setTimeout(() => {
       openPaymentSheet();
-    }, 1000);
+    }, 500);
   };
 
   const openPaymentSheet = async () => {
@@ -186,7 +186,7 @@ const PaymentPlans = ({navigation}) => {
                 index: 0,
                 routes: [{name: 'PaymentDone'}],
               });
-            }, 1000);
+            }, 500);
           } else {
             setIsLoading(false);
           }

@@ -18,6 +18,7 @@ import {useRoute} from '@react-navigation/native';
 import {callApi, Method} from '../../../../network/NetworkManger';
 import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
+import colors from '../../../../config/colors';
 
 const SendProposal = ({navigation}) => {
   const {proposalRawData} = useRoute()?.params;
@@ -90,7 +91,11 @@ const SendProposal = ({navigation}) => {
           }}
         />
         <Apptext style={styles.dtlsTxt}>
-          {coverLetter !== '' && coverLetter?.length}
+          Word Count: {coverLetter?.length}
+        </Apptext>
+        <Apptext style={[styles.dtlsTxt, {color: colors.red}]}>
+          {coverLetter?.length < 100 &&
+            'Cover letter should be greater than 100 characters'}
         </Apptext>
       </KeyboardAwareScrollView>
       <FormButton buttonTitle={'Submit Now'} onPress={onPressSubmit} />

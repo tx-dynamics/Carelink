@@ -12,7 +12,11 @@ import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import AgencyHomeComp from '../../../../components/AgencyHomeComp';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {
+  DrawerActions,
+  useIsFocused,
+  useNavigation,
+} from '@react-navigation/native';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import {heightPixel, routes, widthPixel} from '../../../../Constants';
 import {appIcons} from '../../../../Constants/Utilities/assets';
@@ -81,6 +85,7 @@ export const agencyData = [
 
 const AgencyHome = ({}) => {
   const userData = useSelector(store => store?.userDataSlice);
+  const isFocused = useIsFocused();
   const [listingDetails, setListingDetails] = useState([]);
   const [pending, setPending] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -93,8 +98,11 @@ const AgencyHome = ({}) => {
 
   // hooks
   useEffect(() => {
-    fetchListingDetails();
-  }, []);
+    if (isFocused) {
+      fetchListingDetails();
+      fetchProposalDetails();
+    }
+  }, [isFocused]);
 
   // functions
   const fetchListingDetails = async () => {
@@ -164,8 +172,11 @@ const AgencyHome = ({}) => {
     setTimeout(() => {
       setRefreshing(false);
       fetchListingDetails();
+      fetchProposalDetails();
     }, 2000);
   }, []);
+
+  console.log('Proposal', proposalData?.proposalList?.length);
 
   const navigation = useNavigation();
   return (

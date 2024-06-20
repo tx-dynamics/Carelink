@@ -40,7 +40,7 @@ const AgencyHomeComp = ({
         <View style={styles.rightCricleView}>
           <View style={[styles.circle, {backgroundColor: '#999999'}]}>
             <Apptext style={[styles.nmbr, {color: 'white'}]}>
-              {BookedRooms ? BookedRooms : ''}
+              {BookedRooms ? BookedRooms : 0}
             </Apptext>
           </View>
           <Apptext style={[styles.txt, {color: 'white'}]}>
