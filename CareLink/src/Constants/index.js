@@ -50,6 +50,8 @@ export const routes = {
   activeContracts: 'activeContracts',
   brochureProfile: 'brochureProfile',
   clientProfile: 'clientProfile',
+  certificatesListing: 'certificatesListing',
+  certificatesListingView: 'certificatesListingView',
   proposalListing: 'proposalListing',
 };
 

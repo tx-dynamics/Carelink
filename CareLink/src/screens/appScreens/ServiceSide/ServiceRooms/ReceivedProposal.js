@@ -121,7 +121,7 @@ const ReceivedProposal = ({navigation}) => {
           <Apptext style={styles.rms}>Room Details</Apptext>
         </View>
         <View style={{marginLeft: widthPixel(50)}}>
-          <DetailTextComp title={'Roomss'} detail={'3 Rooms'} />
+          <DetailTextComp title={'Rooms'} detail={'3 Rooms'} />
           <DetailTextComp title={'Floor'} detail={'3rd'} />
           <DetailTextComp title={'For'} detail={'20 Days'} />
         </View>

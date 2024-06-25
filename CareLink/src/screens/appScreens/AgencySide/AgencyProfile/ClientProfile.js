@@ -23,36 +23,20 @@ import {Image} from 'react-native';
 const ClientProfile = ({navigation}) => {
   const [visible, setVisible] = useState(false);
   const {serviceUserProfile} = useRoute()?.params;
-//   console.log(
-//     '🚀 ~ ClientProfile ~ profileData:',
-//     JSON.stringify(serviceUserProfile, ' ', 2),
-//   );
-
   const memberSince = moment(serviceUserProfile?.createdAt).format('MMMM YYYY');
 
   const images = [
     {
-      // Simplest usage.
+      id: 1,
       url: serviceUserProfile?.drivingAbstract,
-      // You can pass props to <Image />.
-      //   props: {
-      //     source: appIcons.homePic,
-      //     // headers: ...
-      //   },
     },
     {
+      id: 2,
       url: serviceUserProfile?.certificates[0],
-      //   props: {
-      //     // Or you can set source directory.
-      //     source: appIcons.license,
-      //   },
     },
     {
+      id: 3,
       url: serviceUserProfile?.drivingLicense,
-      //   props: {
-      //     // Or you can set source directory.
-      //     source: appIcons.certificate,
-      //   },
     },
   ];
 
@@ -71,6 +55,7 @@ const ClientProfile = ({navigation}) => {
       id: 3,
       title: 'Certificates',
       count: 8,
+      route: routes.certificatesListing,
     },
   ];
 
@@ -90,18 +75,6 @@ const ClientProfile = ({navigation}) => {
         memberDuration={memberSince}
         city={'serviceUserProfile'}
       />
-      {/* <TouchableOpacity>
-        <Text
-          style={{
-            color: colors.primary,
-            alignSelf: 'center',
-            fontSize: fontPixel(14),
-            textDecorationLine: 'underline',
-            marginTop: heightPixel(20),
-          }}>
-          View Documents
-        </Text>
-      </TouchableOpacity> */}
 
       <FlatList
         data={ProviderData}
@@ -114,7 +87,12 @@ const ClientProfile = ({navigation}) => {
               <TouchableOpacity
                 style={styles.rightCricleView}
                 disabled={item?.id == 3 ? false : true}
-                onPress={() => setVisible(true)}>
+                onPress={() => {
+                  setVisible(true);
+                  navigation.navigate(routes.certificatesListing, {
+                    params: images,
+                  });
+                }}>
                 {item.id == 3 ? (
                   <Image
                     source={appIcons.CalrightArrow}
@@ -135,12 +113,12 @@ const ClientProfile = ({navigation}) => {
         }}
       />
 
-      <ImageViewZoomComp
+      {/* <ImageViewZoomComp
         data={images}
         visible={visible}
         onSwipeDown={() => setVisible(false)}
         onRequestClose={() => setVisible(false)}
-      />
+      /> */}
     </AppGLobalView>
   );
 };

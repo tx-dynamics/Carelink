@@ -51,7 +51,11 @@ const BookedRoomDetailAgency = ({navigation, route}) => {
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
         {!route?.params?.review && (
           <UserInfoComp
-            onPress={() => navigation.navigate(routes.clientProfile)}
+            onPress={() =>
+              navigation.navigate(routes.clientProfile, {
+                serviceUserProfile: route?.params?.params?.item?.user,
+              })
+            }
             pic={route?.params?.params?.item?.user?.image}
             title={route?.params?.params?.item?.user?.name}
           />

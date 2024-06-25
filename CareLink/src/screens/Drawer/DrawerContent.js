@@ -6,13 +6,7 @@ import Apptext from '../../components/Apptext';
 import FormButton from '../../components/FormButton';
 import {DrawerActions} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-  isNewUser,
-  onBoarding,
-  signUpOTPCheck,
-  userSave,
-  userType,
-} from '../../redux/Slices/splashSlice';
+import {isNewUser, userSave} from '../../redux/Slices/splashSlice';
 import {heightPixel, routes, widthPixel} from '../../Constants';
 import Header from '../../components/Header';
 import colors from '../../config/colors';
@@ -25,7 +19,7 @@ import {
   setUserData,
 } from '../../redux/Slices/userDataSlice';
 
-function DrawerContent({navigation, userImg, username, userEmail}) {
+function DrawerContent({navigation}) {
   const usertype = useSelector(state => state.splash.userType);
   const dispatch = useDispatch();
   return (

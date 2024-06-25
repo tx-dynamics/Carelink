@@ -80,6 +80,8 @@ import BookedRoomDetailAgency from './appScreens/AgencySide/AgencyHome/BookedRoo
 import ProposalListing from './appScreens/AgencySide/Contract/ProposalListing';
 import PaymentTerms from './appScreens/ServiceSide/ServiceRooms/PaymentTerms';
 import ContractCompeleteDetails from './appScreens/AgencySide/Contract/ContractCompleteDetails';
+import CertificatesListingScreen from './appScreens/AgencySide/AgencyProfile/CertificatesListingScreen';
+import CertificatesListingView from './appScreens/AgencySide/AgencyProfile/CertificateListingView';
 
 const Tab = createBottomTabNavigator();
 const StackNavigator = createNativeStackNavigator();
@@ -122,6 +124,14 @@ const WithoutBottomTabnavigator = () => {
       <StackNavigator.Screen
         name={routes.clientProfile}
         component={ClientProfile}
+      />
+      <StackNavigator.Screen
+        name={routes.certificatesListing}
+        component={CertificatesListingScreen}
+      />
+      <StackNavigator.Screen
+        name={routes.certificatesListingView}
+        component={CertificatesListingView}
       />
       <StackNavigator.Screen name="ListingDetails" component={ListingDetails} />
       <StackNavigator.Screen
