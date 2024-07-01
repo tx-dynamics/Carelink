@@ -33,20 +33,25 @@ import {getDeviceId} from 'react-native-device-info';
 
 const ForgetUpdateScreen = ({navigation}) => {
   const params = useRoute();
-  console.log('Params are', params);
-  const usertype = useSelector(state => state.splash.userType);
+  const userData = useSelector(store => store?.userDataSlice);
   const [isPassword, setPassword] = useState('');
   const [isPasswordConfirm, setPasswordConfirm] = useState('');
   const [isSecure, setSecure] = useState(true);
   const [isSecureConfirm, setSecureConfirm] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  console.log('User data Response is', userData);
 
   const handleResetPassowrd = async () => {
     let fcm = await getFCMToken();
+    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
     if (!isPassword) {
       RedFlashMessage('Password is required');
-    } else if (!isPasswordConfirm) {
-      RedFlashMessage('Confirm Password is required');
+    } else if (isPassword.length < 8) {
+      RedFlashMessage('Password must be at least 8 characters');
+    } else if (!passwordRegex?.test(isPassword)) {
+      RedFlashMessage(
+        'Password must contain one lowercase, one uppercase, one number and one special character',
+      );
     } else if (isPassword !== isPasswordConfirm) {
       RedFlashMessage('Password does not match');
     } else {
@@ -68,6 +73,7 @@ const ForgetUpdateScreen = ({navigation}) => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
               SuccessFlashMessage(res?.message);
+              console.log('response data', res?.data);
               setTimeout(() => {
                 navigation.reset({
                   index: 0,

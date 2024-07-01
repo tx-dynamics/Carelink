@@ -18,12 +18,12 @@ const AskRegister = ({navigation}) => {
         title={'Choose User Type'}
         heading={'Let’s get started. Choose an option'}
       />
-      {/* <View style={styles.pinkBox}>
+      <View style={styles.pinkBox}>
         <Apptext style={styles.firstTxt}>I want to List my Room</Apptext>
         <Apptext style={styles.scndTxt}>
           Create your profile and list your rooms now
         </Apptext>
-        <TouchableOpacity //for testing using this onPress,
+        <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => {
             dispatch(userType('ServiceSide'));
@@ -32,7 +32,7 @@ const AskRegister = ({navigation}) => {
           style={styles.btn}>
           <Apptext>Create</Apptext>
         </TouchableOpacity>
-      </View> */}
+      </View>
       <View style={[styles.pinkBox, {marginTop: wp('8%')}]}>
         <Apptext style={[styles.firstTxt]}>
           I want to register as an agency

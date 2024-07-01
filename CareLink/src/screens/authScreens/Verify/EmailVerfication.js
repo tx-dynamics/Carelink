@@ -32,7 +32,7 @@ import {
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
   const dispatch = useDispatch();
-  const [isOTP, setIsOTP] = useState('8634');
+  const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const emailOnly = useSelector(state => state?.splash?.emailOnly);
@@ -149,10 +149,12 @@ const EmailVerification = ({navigation, route}) => {
               setIsLoading(false);
               if (usertype == 'ServiceSide') {
                 route.params?.register
-                  ? navigation.reset({
-                      index: 1,
-                      routes: [{name: routes.addDocuments}],
-                    })
+                  ? setTimeout(() => {
+                      navigation.reset({
+                        index: 1,
+                        routes: [{name: routes.addDocuments}],
+                      });
+                    }, 1000)
                   : navigation.navigate(routes.forgetPasswordUpdate, {
                       email: params?.params?.email?.toLowerCase(),
                       otp: isOTP,

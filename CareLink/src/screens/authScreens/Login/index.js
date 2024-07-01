@@ -41,7 +41,6 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const isNewUser = useSelector(state => state?.splash?.isNewUser);
-
   // states
   const [email, setEmail] = useState('');
   const [isPassword, setPassword] = useState('');
@@ -107,6 +106,7 @@ const LoginScreen = () => {
                   res?.data?.user?.profileCompleted &&
                   res?.data?.user?.subscriptionId != null
                 ) {
+                  console.log('1');
                   dispatch(userSave(true));
                   dispatch(signUpOTPCheck(false));
                 } else if (res?.data?.user?.verified == false) {
@@ -116,6 +116,7 @@ const LoginScreen = () => {
                     register: true,
                   });
                   handleResendOTP();
+                  console.log('2');
                   dispatch(setUserData(res?.data?.user));
                 } else if (res?.data?.user?.profileCompleted == false) {
                   navigation.navigate(routes.addDocuments);
@@ -123,6 +124,7 @@ const LoginScreen = () => {
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
+                  console.log('3');
                 } else if (
                   res?.data?.user?.certificates[0] &&
                   res?.data?.user?.drivingAbstract &&
@@ -135,12 +137,14 @@ const LoginScreen = () => {
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
+                  console.log('4');
                 } else if (!res?.data?.user?.subscriptionId) {
                   navigation.navigate('PaymentPlans');
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
+                  console.log('5');
                 }
               } else {
                 dispatch(userType('AgencySide'));

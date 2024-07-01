@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import colors from '../../../config/colors';
 import {heightPixel, routes, widthPixel} from '../../../Constants';
@@ -60,10 +60,9 @@ const AddDocuments = ({navigation}) => {
     },
   ]);
 
-  const mediaValues = isData.map(item => item.media).slice(0, 5);
+  const mediaValues = isData?.map(item => item?.media).slice(0, 5);
 
   const uploadImage = () => {
-    setVisible(false);
     ImageCropPicker.openPicker({
       width: widthPixel(374),
       height: heightPixel(200),
@@ -71,6 +70,7 @@ const AddDocuments = ({navigation}) => {
     })
       .then(image => {
         setData([...isData, (isData[isIndex].media = image.path)]);
+        setVisible(false);
       })
       .catch(err => RedFlashMessage(err.message));
   };
@@ -90,23 +90,46 @@ const AddDocuments = ({navigation}) => {
 
   const uploadImageData = async () => {
     setIsLoading(true);
-    if (isData[isIndex]?.media) {
+
+    if (isData[isIndex]?.media.includes('https') && isIndex != 4) {
+      // Move to the next index
+      setIndex(isIndex + 1);
+      setIsLoading(false);
+    }
+    // Check if the current media is not null
+    else if (isData[isIndex]?.media) {
       const str = isData[isIndex]?.media;
       const imageObj = {
         path: str,
-        name: str?.substring(str?.lastIndexOf('/')),
+        name: str?.substring(str?.lastIndexOf('/') + 1), // Adjusted to get the correct name
       };
+
       await uploadImageOnS3(imageObj, res => {
-        setData([...isData, (isData[isIndex].media = res)]);
+        // Update the media value in the current data object
+        const updatedData = [...isData];
+        updatedData[isIndex].media = res;
+        setData(updatedData);
+
+        // Move to the next index
         setIndex(isIndex + 1);
         setIsLoading(false);
+
+        if (isIndex == 4) {
+          setTimeout(() => {
+            navigation.reset({
+              index: 0,
+              routes: [
+                {
+                  name: routes.addInformation,
+                  params: {
+                    imagesData: mediaValues,
+                  },
+                },
+              ],
+            });
+          }, 600);
+        }
       });
-      if (isIndex == 4) {
-        navigation.navigate(routes.addInformation, {
-          imagesData: mediaValues,
-        });
-        console.log('OImages data', mediaValues);
-      }
     } else {
       setIsLoading(false);
       RedFlashMessage(`${isData[isIndex].title} is Required`);
@@ -138,7 +161,7 @@ const AddDocuments = ({navigation}) => {
         )}
       </View>
       <FormButton
-        //APK // disabled={isData[isIndex].media == null ? true : false}
+        // disabled={isData[isIndex]?.media == null ? true : false}
         backgroundColor={
           isData[isIndex].media == null ? colors.gray : colors.primary
         }
@@ -147,8 +170,8 @@ const AddDocuments = ({navigation}) => {
       />
       <ImageUploadModal
         crossPress={() => setVisible(false)}
-        cameraPress={openCamera}
-        mediaPress={uploadImage}
+        cameraPress={() => openCamera()}
+        mediaPress={() => uploadImage()}
         visible={isVisible}
       />
       <Loader isVisible={isLoading} />

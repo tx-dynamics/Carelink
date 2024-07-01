@@ -3,7 +3,6 @@ import {StyleSheet, View, Keyboard} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../config/Styles';
 import FormButton from '../../../components/FormButton';
-import {useSelector} from 'react-redux';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -20,7 +19,6 @@ import Loader from '../../../components/Loader';
 
 const ForgetEmailScreen = () => {
   const navigation = useNavigation();
-  const usertype = useSelector(state => state.splash.userType);
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 

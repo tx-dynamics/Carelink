@@ -13,7 +13,6 @@ const Splash = ({navigation}) => {
   const userData = useSelector(store => store?.userDataSlice);
   const signUpOTP = useSelector(store => store?.splash?.signUpOTP);
   const userType = useSelector(store => store?.splash?.userType);
-  console.log('SignUp OTP', signUpOTP);
   console.log('User type', userData);
 
   useEffect(() => {
@@ -21,8 +20,8 @@ const Splash = ({navigation}) => {
       if (userType == undefined) {
         navigation.replace('AskRegister');
       } else {
-        if (userData?.userType === 'ServiceSide') {
-          if (res?.data?.user?.profileCompleted == false) {
+        if (userData?.userData?.userType === 'ServiceSide') {
+          if (userData?.userData?.profileCompleted == false) {
             navigation.reset({
               index: 0,
               routes: [{name: routes.addDocuments}],
@@ -38,7 +37,7 @@ const Splash = ({navigation}) => {
               index: 0,
               routes: [{name: routes.listingOptions}],
             });
-          } else if (res?.data?.user?.subscriptionId == null) {
+          } else if (userData?.userData?.subscriptionId == null) {
             navigation.reset({
               index: 0,
               routes: [{name: 'PaymentPlans'}],
