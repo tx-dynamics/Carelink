@@ -230,7 +230,7 @@ const PaymentPlans = ({navigation}) => {
         renderItem={({item, index}) => (
           <PlansComp
             btnTxt={'Subscribe'}
-            price={usertype === 'ServiceSide' ? item.price : item.price1}
+            price={item.price1}
             plan={'/month'}
             desc={usertype === 'ServiceSide' ? item.description : item.desc1}
             onPress={() => {

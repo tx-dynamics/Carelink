@@ -80,7 +80,7 @@ const AddInformation = ({navigation}) => {
               setIsLoading(false);
               dispatch(setUserData(res?.data?.user));
               SuccessFlashMessage(res?.message);
-              navigation.navigate(routes.listingOptions);
+              navigation.navigate('PaymentPlans');
             } else {
               setIsLoading(false);
               RedFlashMessage(res?.message);

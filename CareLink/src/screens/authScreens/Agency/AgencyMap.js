@@ -27,7 +27,7 @@ import {Method, callApi} from '../../../network/NetworkManger';
 import {setAgencyAddress} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyMap = ({navigation, route}) => {
-  console.log('Routes area', route?.params?.fromPhoto);
+  console.log('Routes are', route);
   let currentLocation = {
     latitude: 31.449590774585772,
     longitude: 74.28036404773593,
@@ -36,7 +36,6 @@ const AgencyMap = ({navigation, route}) => {
   };
 
   const dispatch = useDispatch();
-
   const usertype = useSelector(state => state.splash.userType);
   const isFromProfile = useSelector(state => state.appSlice.fromProfile);
   const [location, setLocation] = useState(currentLocation);
@@ -48,7 +47,6 @@ const AgencyMap = ({navigation, route}) => {
   const [moveLocation, setMoveLocation] = useState(false);
   const userSavedData = useSelector(store => store?.userDataSlice);
   const [dragCheck, setDragCheck] = useState(false);
-  console.log('Saved user data', userSavedData);
 
   // states
   const [coordinates, setCoordinates] = useState(currentLocation);
@@ -228,6 +226,7 @@ const AgencyMap = ({navigation, route}) => {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === 'OK') {
+            console.log('Response of getAddressFromCoordinates', address);
             setAddress(responseJson?.results[0]?.formatted_address);
             setLatitude(responseJson?.results[0]?.geometry?.location?.lat);
             setLongitude(responseJson?.results[0]?.geometry?.location?.lng);
@@ -358,7 +357,7 @@ const AgencyMap = ({navigation, route}) => {
               Address
             </Apptext>
             <Apptext style={[styles.adrs]}>
-              {route?.params?.fromPhoto
+              {route?.params?.fromPhoto || route?.params?.fromServiceSide
                 ? address
                 : !moveLocation
                 ? userData?.address

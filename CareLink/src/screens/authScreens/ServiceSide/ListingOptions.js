@@ -5,7 +5,6 @@ import FormButton from '../../../components/FormButton';
 import IconHeaderComp from '../../../components/IconHeaderComp';
 import {iconPath} from '../../../config/icon';
 import AppStatusbar from '../../../components/AppStatusbar/AppStatusbar';
-import AddRoomComponent from '../../../components/AddRoomComponent/AddRoomComponent';
 import BasicEntitiesComp from '../../../components/BasicEntitiesComp/BasicEntitiesComp';
 import colors from '../../../config/colors';
 import {heightPixel, widthPixel, wp} from '../../../Constants';
@@ -30,7 +29,7 @@ import AddMoreModal from '../../../components/AddMoreModal/AddMoreModal';
 import Loader from '../../../components/Loader';
 import EntityCheckComponent from '../../../components/EntityCheckComponent/EntityCheckComponent';
 import {appIcons} from '../../../Constants/Utilities/assets';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const ListingOptions = ({navigation}) => {
   const [basicData, setBasicData] = useState([
@@ -51,10 +50,12 @@ const ListingOptions = ({navigation}) => {
     },
   ]);
 
-  const user1stListing=useSelector(state=>state?.userDataSlice?.userData?.user1stListing);
+  const user1stListing = useSelector(
+    state => state?.userDataSlice?.userData?.user1stListing,
+  );
+  const userData = useSelector(store => store?.userDataSlice);
+  console.log('User data', userData);
   // console.log("🚀 ~ ListingOptions ~ userData:", userData)
-  
-
 
   // const [picData, setPicData] = useState([]);
   const [picData, setPicData] = useState([{image: '', add: true}]);
@@ -132,11 +133,10 @@ const ListingOptions = ({navigation}) => {
 
   // uploading media and navigation on next screen
   const ListingImages = async () => {
-    // console.log("picDataimages lenthg", picData.length)
+    console.log('picDataimages lenthg', picData.splice(-1));
     try {
       if (checkListingInfo()) {
         const basicDataList = [];
-
         // for (let value of basicData) {
         //   if (value.selected) {
         //     basicDataList.push(value);
@@ -244,9 +244,8 @@ const ListingOptions = ({navigation}) => {
       <Loader isVisible={isLoading} />
       <IconHeaderComp
         title={'Add Listing'}
-        
-        onPress={() => user1stListing==true? navigation.goBack():null}
-        imgName={user1stListing==true? iconPath.leftArrow:null}
+        onPress={() => (user1stListing == true ? navigation.goBack() : null)}
+        imgName={user1stListing == true ? iconPath.leftArrow : null}
         heading={'Add Listing Information'}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>

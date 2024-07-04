@@ -105,29 +105,30 @@ const AddDocuments = ({navigation}) => {
       };
 
       await uploadImageOnS3(imageObj, res => {
+        console.log('Response is', res);
         // Update the media value in the current data object
-        const updatedData = [...isData];
-        updatedData[isIndex].media = res;
-        setData(updatedData);
+        if (res) {
+          const updatedData = [...isData];
+          updatedData[isIndex].media = res;
+          setData(updatedData);
+          setIndex(isIndex + 1);
+          setIsLoading(false);
 
-        // Move to the next index
-        setIndex(isIndex + 1);
-        setIsLoading(false);
-
-        if (isIndex == 4) {
-          setTimeout(() => {
-            navigation.reset({
-              index: 0,
-              routes: [
-                {
-                  name: routes.addInformation,
-                  params: {
-                    imagesData: mediaValues,
+          if (isIndex == 4) {
+            setTimeout(() => {
+              navigation.reset({
+                index: 0,
+                routes: [
+                  {
+                    name: routes.addInformation,
+                    params: {
+                      imagesData: mediaValues,
+                    },
                   },
-                },
-              ],
-            });
-          }, 600);
+                ],
+              });
+            }, 600);
+          }
         }
       });
     } else {

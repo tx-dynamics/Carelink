@@ -98,6 +98,7 @@ const LoginScreen = () => {
           endPoint,
           data,
           res => {
+            console.log('res?.data?.user', res?.data?.user);
             if (res?.status === 200 || res?.status === 201) {
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
@@ -106,7 +107,6 @@ const LoginScreen = () => {
                   res?.data?.user?.profileCompleted &&
                   res?.data?.user?.subscriptionId != null
                 ) {
-                  console.log('1');
                   dispatch(userSave(true));
                   dispatch(signUpOTPCheck(false));
                 } else if (res?.data?.user?.verified == false) {
@@ -116,15 +116,29 @@ const LoginScreen = () => {
                     register: true,
                   });
                   handleResendOTP();
-                  console.log('2');
                   dispatch(setUserData(res?.data?.user));
                 } else if (res?.data?.user?.profileCompleted == false) {
-                  navigation.navigate(routes.addDocuments);
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.addDocuments}],
+                    });
+                  }, 1000);
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
-                  console.log('3');
+                } else if (!res?.data?.user?.subscriptionId) {
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: 'PaymentPlans'}],
+                    });
+                  }, 1000);
+                  dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
                 } else if (
                   res?.data?.user?.certificates[0] &&
                   res?.data?.user?.drivingAbstract &&
@@ -132,19 +146,16 @@ const LoginScreen = () => {
                   res?.data?.user?.drivingLicense &&
                   res?.data?.user?.homePhoto
                 ) {
-                  navigation.navigate(routes.listingOptions);
+                  setTimeout(() => {
+                    navigation.reset({
+                      index: 0,
+                      routes: [{name: routes.listingOptions}],
+                    });
+                  }, 1000);
                   dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
-                  console.log('4');
-                } else if (!res?.data?.user?.subscriptionId) {
-                  navigation.navigate('PaymentPlans');
-                  dispatch(signUpOTPCheck(false));
-                  dispatch(refreshToken(res?.data?.refreshToken));
-                  dispatch(accessToken(res?.data?.token));
-                  dispatch(setUserData(res?.data?.user));
-                  console.log('5');
                 }
               } else {
                 dispatch(userType('AgencySide'));

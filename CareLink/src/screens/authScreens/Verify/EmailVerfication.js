@@ -32,7 +32,7 @@ import {
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
   const dispatch = useDispatch();
-  const [isOTP, setIsOTP] = useState('');
+  const [isOTP, setIsOTP] = useState('7042');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const emailOnly = useSelector(state => state?.splash?.emailOnly);
@@ -75,35 +75,41 @@ const EmailVerification = ({navigation, route}) => {
               if (usertype == 'ServiceSide') {
                 setIsLoading(false);
                 dispatch(userType('ServiceSide'));
-
+                dispatch(refreshToken(res?.data?.refreshToken));
+                dispatch(accessToken(res?.data?.token));
+                dispatch(setUserData(res?.data?.user));
                 params.params?.register
-                  ? console.log('Hit 1')
-                  : // navigation.reset({
-                    //     index: 1,
-                    //     routes: [{name: routes.addDocuments}],
-                    //   })
-                    console.log('Hit 2');
-                navigation.reset({
-                  index: 1,
-                  routes: [{name: routes.forgetPasswordUpdate}],
-                });
+                  ? setTimeout(() => {
+                      navigation.reset({
+                        index: 1,
+                        routes: [{name: routes.addDocuments}],
+                      });
+                    }, 1000)
+                  : setTimeout(() => {
+                      navigation.reset({
+                        index: 1,
+                        routes: [{name: routes.forgetPasswordUpdate}],
+                      });
+                    }, 1000);
               }
               if (usertype == 'AgencySide') {
                 setIsLoading(false);
                 dispatch(refreshToken(res?.data?.refreshToken));
                 dispatch(accessToken(res?.data?.token));
                 dispatch(setUserData(res?.data?.user));
-                setTimeout(() => {
-                  params.params?.register
-                    ? navigation.reset({
+                params.params?.register
+                  ? setTimeout(() => {
+                      navigation.reset({
                         index: 1,
                         routes: [{name: routes.successAgency}],
-                      })
-                    : navigation.reset({
+                      });
+                    }, 1000)
+                  : setTimeout(() => {
+                      navigation.reset({
                         index: 1,
                         routes: [{name: routes.forgetPasswordUpdate}],
                       });
-                }, 1000);
+                    }, 1000);
               }
             } else {
               setIsLoading(false);
@@ -132,12 +138,12 @@ const EmailVerification = ({navigation, route}) => {
     } else {
       try {
         setIsLoading(true);
+        const endPoint = api.verifyForgotPasswordOTP;
         const data = {
           email: params?.params?.email?.toLowerCase(),
           otp: isOTP,
           device: {id: getDeviceId(), deviceToken: fcm},
         };
-        const endPoint = api.verifyForgotPasswordOTP;
 
         await callApi(
           Method.POST,

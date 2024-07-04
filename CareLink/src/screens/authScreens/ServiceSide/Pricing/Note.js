@@ -14,11 +14,14 @@ import {heightPixel} from '../../../../Constants';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import {useRoute} from '@react-navigation/native';
 import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
+import {useSelector} from 'react-redux';
 
 const Note = ({navigation}) => {
   const params = useRoute();
   // console.log('params ', JSON.stringify(params, ' ', 2));
   const [note, setNote] = useState('');
+  const userData = useSelector(store => store?.userDataSlice);
+  console.log('User daeta slice', userData);
 
   // handling note from provider
   const addNoteInData = buttonAction => {
@@ -34,11 +37,20 @@ const Note = ({navigation}) => {
         if (note.length == '') {
           RedFlashMessage('Note Required');
         } else {
-          navigation.navigate('AgencyMap', {
-            data: params?.params,
-            note: note,
-            fromSkip: false,
-          });
+          if (userData?.userData?.userType == 'ServiceSide') {
+            navigation.navigate('AgencyMap', {
+              data: params?.params,
+              note: note,
+              fromSkip: false,
+              fromServiceSide: true,
+            });
+          } else {
+            navigation.navigate('AgencyMap', {
+              data: params?.params,
+              note: note,
+              fromSkip: false,
+            });
+          }
         }
       }
     } catch (error) {
@@ -64,7 +76,7 @@ const Note = ({navigation}) => {
         <NewAppTextInput
           multiline
           value={note}
-          inputStyle={{marginBottom: heightPixel(30)}}
+          inputStyle={{marginBottom: heightPixel(30), marginTop: 10}}
           onChangeText={text => setNote(text)}
         />
       </KeyboardAwareScrollView>

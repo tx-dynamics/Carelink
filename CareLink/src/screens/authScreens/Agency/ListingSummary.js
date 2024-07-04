@@ -95,6 +95,7 @@ const ListingSummary = ({navigation}) => {
   };
 
   const handleSubmit = async () => {
+    console.log('Room data== ', myLocationData);
     try {
       // Convert formatted dates back to moment objects
       const startDateMoment = moment(
@@ -108,7 +109,7 @@ const ListingSummary = ({navigation}) => {
       const data = {
         rooms: [
           {
-            room: ProviderData?.data?.rooms,
+            room: ProviderData?.data?.rooms?.label,
             floor: ProviderData?.data?.space,
           },
         ],

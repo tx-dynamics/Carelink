@@ -6,7 +6,7 @@ import Apptext from '../../../components/Apptext';
 import FormButton from '../../../components/FormButton';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
-import {fontPixel, heightPixel, widthPixel} from '../../../Constants';
+import {fontPixel, heightPixel, routes, widthPixel} from '../../../Constants';
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {fonts} from '../../../Constants/Fonts';
 import {fromProfile} from '../../../redux/Slices/appSlice';
@@ -19,6 +19,7 @@ const PaymentDone = ({navigation}) => {
   const usertype = useSelector(state => state?.userDataSlice);
 
   const onPressContinue = () => {
+    console.log('isFromProfile', isFromProfile);
     if (isFromProfile) {
       navigation.navigate('GeneralNavigator');
       dispatch(fromProfile(false));
@@ -26,7 +27,12 @@ const PaymentDone = ({navigation}) => {
       if (usertype?.userData?.userType == 'AgencySide') {
         dispatch(userSave(true));
       } else {
-        dispatch(userSave(true));
+        setTimeout(() => {
+          navigation.reset({
+            index: 0,
+            routes: [{name: routes.listingOptions}],
+          });
+        }, 1000);
       }
     }
   };

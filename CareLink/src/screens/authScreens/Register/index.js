@@ -33,8 +33,8 @@ import {
 
 const Register = () => {
   const dispatch = useDispatch();
-  const usertype = useSelector(state => state.splash.userType);
   const navigation = useNavigation();
+  const usertype = useSelector(state => state.splash.userType);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
