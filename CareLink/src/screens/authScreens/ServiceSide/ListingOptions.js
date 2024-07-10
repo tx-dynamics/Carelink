@@ -50,14 +50,6 @@ const ListingOptions = ({navigation}) => {
     },
   ]);
 
-  const user1stListing = useSelector(
-    state => state?.userDataSlice?.userData?.user1stListing,
-  );
-  const userData = useSelector(store => store?.userDataSlice);
-  console.log('User data', userData);
-  // console.log("🚀 ~ ListingOptions ~ userData:", userData)
-
-  // const [picData, setPicData] = useState([]);
   const [picData, setPicData] = useState([{image: '', add: true}]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -133,15 +125,10 @@ const ListingOptions = ({navigation}) => {
 
   // uploading media and navigation on next screen
   const ListingImages = async () => {
-    console.log('picDataimages lenthg', picData.splice(-1));
     try {
       if (checkListingInfo()) {
         const basicDataList = [];
-        // for (let value of basicData) {
-        //   if (value.selected) {
-        //     basicDataList.push(value);
-        //   }
-        // }
+
         if (picData[0]?.image) {
           if (picData.length > 1 && picData.length <= 8) {
             // upload images on S3 then navigate
@@ -150,7 +137,7 @@ const ListingOptions = ({navigation}) => {
             if (listedImagesUrl?.length > 0) {
               navigation.navigate('Note', {
                 rooms: roomValue,
-                washrooom: WashroomDetail,
+                washrooom: WashroomDetail?.selected,
                 space: value,
                 entitles: basicData,
                 dateDuration: startDate + ' - ' + endDate,
@@ -196,10 +183,8 @@ const ListingOptions = ({navigation}) => {
       // Create an array of promises using map
       const uploadPromises = myImageData.map(item => {
         return new Promise((resolve, reject) => {
-          // console.log("item ", item)
           uploadImageOnS3(item, res => {
             tempUrl.push(res); // Push the result to the tempUrl array
-            // console.log('res ', res);
             resolve(res); // Resolve this promise with the result
           });
         });
@@ -244,13 +229,11 @@ const ListingOptions = ({navigation}) => {
       <Loader isVisible={isLoading} />
       <IconHeaderComp
         title={'Add Listing'}
-        onPress={() => (user1stListing == true ? navigation.goBack() : null)}
-        imgName={user1stListing == true ? iconPath.leftArrow : null}
+        onPress={() => navigation.goBack()}
+        imgName={iconPath.leftArrow}
         heading={'Add Listing Information'}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
-        {/* <AddRoomComponent /> */}
-
         <AppDropDownPicker
           title={'Select Room'}
           open={openRoom}

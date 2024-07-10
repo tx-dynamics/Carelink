@@ -299,16 +299,17 @@ const AgencyMap = ({navigation, route}) => {
     );
   };
 
-  const pinLocation = route?.params?.fromPhoto
-    ? coordinates
-    : {
-        latitude: userData?.location?.coordinates[1]
-          ? userData?.location?.coordinates[0]
-          : 37.78825,
-        longitude: userData?.location?.coordinates[0]
-          ? userData?.location?.coordinates[1]
-          : -122.4324,
-      };
+  const pinLocation =
+    route?.params?.fromPhoto || route?.params?.fromServiceSide
+      ? coordinates
+      : {
+          latitude: userData?.location?.coordinates[1]
+            ? userData?.location?.coordinates[0]
+            : 37.78825,
+          longitude: userData?.location?.coordinates[0]
+            ? userData?.location?.coordinates[1]
+            : -122.4324,
+        };
 
   return (
     <AppGLobalView style={styles.container}>

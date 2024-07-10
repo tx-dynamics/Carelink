@@ -98,7 +98,6 @@ const LoginScreen = () => {
           endPoint,
           data,
           res => {
-            console.log('res?.data?.user', res?.data?.user);
             if (res?.status === 200 || res?.status === 201) {
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
@@ -109,6 +108,9 @@ const LoginScreen = () => {
                 ) {
                   dispatch(userSave(true));
                   dispatch(signUpOTPCheck(false));
+                  dispatch(refreshToken(res?.data?.refreshToken));
+                  dispatch(accessToken(res?.data?.token));
+                  dispatch(setUserData(res?.data?.user));
                 } else if (res?.data?.user?.verified == false) {
                   navigation.navigate('EmailVerification', {
                     email: email?.toLowerCase(),
@@ -237,7 +239,13 @@ const LoginScreen = () => {
           heading={'Sign in to continue to the care link'}
         />
         <View>
-          <Apptext style={[styles.createTxt, {fontFamily: 'Poppins-Medium'}]}>
+          <Apptext
+            style={[
+              styles.createTxt,
+              {
+                fontFamily: 'Poppins-Medium',
+              },
+            ]}>
             Enter your Information:{' '}
           </Apptext>
         </View>

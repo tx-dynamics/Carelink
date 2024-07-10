@@ -162,7 +162,6 @@ const ServiceMessages = ({navigation}) => {
                 label={item?.name}
                 message={item?.lastMessage}
                 onPress={() => {
-                  console.log('Item is', item);
                   navigation.navigate('withoutBottomTabnavigator', {
                     screen: 'ServiceChatDetail',
                     params: {

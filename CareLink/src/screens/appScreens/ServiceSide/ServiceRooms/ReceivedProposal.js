@@ -1,15 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TextInput,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, FlatList, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
@@ -22,73 +12,27 @@ import {appIcons} from '../../../../Constants/Utilities/assets';
 import SimpleImageComponent from '../../../../components/SimpleImageComponent/SimpleImageComponent';
 import DetailTextComp from '../../../../components/DetailTextComp/DetailTextComp';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import moment from 'moment';
 
-const ReceivedProposal = ({navigation}) => {
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      price: '$29.99',
-      plans: '/month',
-      label: 'Debit/Credit Card',
-      description: `You will get 20 listing to post in a month with this monthly plan`,
-    },
-  ];
-  const availableFacility = [
-    {
-      id: 1,
-      title: 'Wheelchair',
-    },
-    {
-      id: 2,
-      title: 'Car Parking available',
-    },
-    {
-      id: 3,
-      title: 'Terrace',
-    },
-    {
-      id: 3,
-      title: 'Air Condirioner',
-    },
-    {
-      id: 4,
-      title: 'Security',
-    },
-    {
-      id: 5,
-      title: 'Attach Bathroom',
-    },
-    {
-      id: 6,
-      title: 'House Keeping',
-    },
-    {
-      id: 7,
-      title: 'Community',
-    },
-  ];
-  const imageData = [
-    {
-      id: 1,
-      pic: appIcons.dummyPic1,
-    },
-    {
-      id: 2,
-      pic: appIcons.dummyPic2,
-    },
-    {
-      id: 3,
-      pic: appIcons.dummyPic3,
-    },
-    {
-      id: 4,
-      pic: appIcons.dummyPic1,
-    },
-    {
-      id: 5,
-      pic: appIcons.dummyPic3,
-    },
-  ];
+const ReceivedProposal = ({navigation, route}) => {
+  console.log('Routes are', JSON.stringify(route?.params?.item));
+
+  var Startduration = moment?.utc(
+    moment
+      ?.duration(route?.params?.item?.listing?.availabilityStart)
+      ?.asMilliseconds(),
+  );
+  var Endduration = moment?.utc(
+    moment
+      ?.duration(route?.params?.item?.listing?.availabilityEnd)
+      ?.asMilliseconds(),
+  );
+
+  console.log('Start duration', Startduration);
+  console.log('End duration', Endduration);
+
+  const daysDifference = Endduration?.diff(Startduration, 'days');
+
   return (
     <AppGLobalView style={styles.container}>
       <Header
@@ -100,8 +44,8 @@ const ReceivedProposal = ({navigation}) => {
         <View style={[styles.txtView, {marginTop: heightPixel(1)}]}>
           <Apptext style={styles.rms}>Agency Details</Apptext>
           {/* <TouchableOpacity style={styles.pinkBox}>
-                        <Apptext style={styles.dtls} >Agency Details</Apptext>
-                    </TouchableOpacity> */}
+            <Apptext style={styles.dtls}>Agency Details</Apptext>
+          </TouchableOpacity> */}
         </View>
         <View style={{marginTop: wp('5%')}}>
           <ServiceListingComp
@@ -109,11 +53,15 @@ const ReceivedProposal = ({navigation}) => {
             onPress={() =>
               navigation.navigate(routes.agencyDetail, {isChat: false})
             }
-            pic={appIcons.dummyPic1}
             showProposals={true}
             showTags={false}
-            name={'ABC Rental Agency'}
-            location={'7+ Year Experience'}
+            labelValue={[
+              route?.params?.item?.listing?.availabilityStart,
+              route?.params?.item?.listing?.availabilityEnd,
+            ]}
+            pic={route?.params?.item?.proposer?.image}
+            name={route?.params?.item?.proposer?.name}
+            location={route?.params?.item?.proposer?.experience}
             rightTxt={''}
           />
         </View>
@@ -121,20 +69,25 @@ const ReceivedProposal = ({navigation}) => {
           <Apptext style={styles.rms}>Room Details</Apptext>
         </View>
         <View style={{marginLeft: widthPixel(50)}}>
-          <DetailTextComp title={'Rooms'} detail={'3 Rooms'} />
-          <DetailTextComp title={'Floor'} detail={'3rd'} />
-          <DetailTextComp title={'For'} detail={'20 Days'} />
+          <DetailTextComp
+            title={'Rooms'}
+            detail={route?.params?.item?.listing?.rooms[0]?.room}
+          />
+          <DetailTextComp
+            title={'Floor'}
+            detail={route?.params?.item?.listing?.rooms[0]?.floor}
+          />
+          <DetailTextComp title={'For'} detail={daysDifference + ' Days'} />
         </View>
         <View style={styles.directionView}>
           <Apptext style={styles.jobsTxt}> Note : </Apptext>
           <Apptext style={styles.lrmTxt}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-            malesuada diam nibh porta ante.
+            {route?.params?.item?.listing?.notes}
           </Apptext>
         </View>
         <View style={styles.basicsView}>
-          {availableFacility.map((item, index) => (
-            <AvailableFacilityComp key={index} title={item.title} />
+          {route?.params?.item?.listing?.entities.map((item, index) => (
+            <AvailableFacilityComp key={index} title={item?.name} />
           ))}
         </View>
         <View style={[styles.txtView, {marginTop: heightPixel(15)}]}>
@@ -143,11 +96,11 @@ const ReceivedProposal = ({navigation}) => {
         <FlatList
           showsVerticalScrollIndicator={false}
           horizontal
-          data={imageData}
+          data={route?.params?.item?.listing?.photos}
           keyExtractor={(item, index) => index}
           showsHorizontalScrollIndicator={false}
-          renderItem={({item, indedx}) => (
-            <SimpleImageComponent pic={item.pic} disabled />
+          renderItem={({item, index}) => (
+            <SimpleImageComponent pic={item} disabled />
           )}
           style={styles.imgFlatlistStyle}
         />
@@ -155,24 +108,9 @@ const ReceivedProposal = ({navigation}) => {
           <Apptext style={styles.rms}>Proposals</Apptext>
         </View>
         <Apptext style={styles.sameTxt}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ac vel in
-          ipsum duis suspendisse. Ut urna, tristique magnis mauris, volutpat
-          purus. Aliquam commodo, sed nunc tincidunt ultrices volutpat sem
-          metus. Est, volutpat elit consectetur fames arcu elit interdum vivamus
-          molestie. In dignissim eleifend massa euismod molestie risus, in.
-          Eleifend volutpat, varius pulvinar purus ultricies sit at consectetur
-          mauris. Ultrices vulputate nam molestie pellentesque lectus. Ut sem
-          leo varius posuere pellentesque.
+          {route?.params?.item?.coverLetter}
         </Apptext>
-        <Apptext style={styles.sameTxt}>
-          A ultrices malesuada consequat metus etiam morbi augue donec praesent.
-          Enim feugiat nisi, tristique sit eget sit nunc. Enim, gravida ut sed
-          tincidunt pellentesque venenatis faucibus arcu. Mauris dui at egestas
-          fringilla est ultrices curabitur at vitae. Nullam vitae quisque ipsum
-          sit sit dolor convallis. Duis non turpis vestibulum id nulla. Mattis
-          est etiam turpis cras sollicitudin. At sed suscipit eros, aliquet
-          gravida eleifend morbi. Eleifend laoreet mauris scelerisque dui.
-        </Apptext>
+
         {/* /////////////////////////////////////// */}
         <View style={{marginTop: heightPixel(20)}}>
           <FormButton
@@ -187,6 +125,10 @@ const ReceivedProposal = ({navigation}) => {
           onPress={() =>
             navigation.navigate('withoutBottomTabnavigator', {
               screen: 'ProposalTerms',
+              params: {
+                fromReceivedProposal: true,
+                item: route?.params?.item,
+              },
             })
           }
         />

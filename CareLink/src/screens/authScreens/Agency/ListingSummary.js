@@ -25,18 +25,12 @@ import {uploadImageOnS3} from '../../../Services/HelpingMethods';
 
 const ListingSummary = ({navigation}) => {
   const {ProviderData, myLocationData} = useRoute()?.params;
-  // console.log(
-  //   'Days are',
-  //   JSON.stringify(ProviderData?.data?.dateDuration, ' ', 2),
-  // );
-  // console.log('Days are', JSON.stringify(myLocationData, ' ', 2));
+  console.log('ProviderData?.data?.rooms?.label', ProviderData?.data?.rooms);
   const dispatch = useDispatch();
   const [isVisible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [image, setImage] = useState('');
 
   const dateSeperator = ProviderData?.data?.dateDuration?.split('-');
-  console.log('dateSeperator ', dateSeperator);
   const parsedStartDate = moment(
     dateSeperator[0],
     'ddd MMM DD YYYY HH:mm:ss [GMT]ZZ',
@@ -58,11 +52,8 @@ const ListingSummary = ({navigation}) => {
 
   const entities = filterEntitles.map(item => ({
     name: item?.name,
-    selected: item?.selected, // Or you can set it to item.selected if needed
+    selected: item?.selected,
   }));
-  // console.log('filterEntitles', filterEntitles);
-
-  // update profile for the first time when user create his listings
 
   const updateProfile = async () => {
     try {
@@ -91,13 +82,13 @@ const ListingSummary = ({navigation}) => {
     updateProfile();
   };
   const onPressListNow = () => {
-    setVisible(true);
+    setTimeout(() => {
+      setVisible(true);
+    }, 1000);
   };
 
   const handleSubmit = async () => {
-    console.log('Room data== ', myLocationData);
     try {
-      // Convert formatted dates back to moment objects
       const startDateMoment = moment(
         formattedStartDate,
         'DD MMM YYYY',
@@ -109,30 +100,30 @@ const ListingSummary = ({navigation}) => {
       const data = {
         rooms: [
           {
-            room: ProviderData?.data?.rooms?.label,
+            room: ProviderData?.data?.rooms,
             floor: ProviderData?.data?.space,
+            washroom: ProviderData?.data?.washrooom,
           },
         ],
         entities: entities,
         availabilityStart: startDateMoment,
         availabilityEnd: endDateMoment,
-        washroom: ProviderData?.data?.washrooom,
         photos: ProviderData?.data?.picturesData,
         notes: ProviderData?.note ? ProviderData?.note : '',
         status: 'active',
+        address:
+          myLocationData?.streetAddress +
+          ', ' +
+          myLocationData?.apartmentNumber +
+          ', ' +
+          myLocationData?.zipCode +
+          ', ' +
+          myLocationData?.stateName +
+          ', ' +
+          myLocationData?.country,
         location: {
           type: 'Point',
-          coordinates: [myLocationData?.latitude, myLocationData?.longitude],
-          address:
-            myLocationData?.streetAddress +
-            ', ' +
-            myLocationData?.apartmentNumber +
-            ', ' +
-            myLocationData?.zipCode +
-            ', ' +
-            myLocationData?.stateName +
-            ', ' +
-            myLocationData?.country,
+          coordinates: [myLocationData?.longitude, myLocationData?.latitude],
         },
       };
       console.log('🚀 ~ handleSubmit ~ data:', JSON.stringify(data, ' ', 2));
@@ -143,6 +134,10 @@ const ListingSummary = ({navigation}) => {
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
+            console.log(
+              'Response of the data on create listing',
+              JSON.stringify(res),
+            );
             setIsLoading(false);
             SuccessFlashMessage(res?.message);
             onPressListNow();

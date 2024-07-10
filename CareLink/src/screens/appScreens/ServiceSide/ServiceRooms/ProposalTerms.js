@@ -1,23 +1,55 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TextInput,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, ScrollView, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
 import FormButton from '../../../../components/FormButton';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import {api} from '../../../../network/Environment';
+import {callApi, Method} from '../../../../network/NetworkManger';
+import Loader from '../../../../components/Loader';
+import {routes} from '../../../../Constants';
 
-const ProposalTerms = ({navigation}) => {
+const ProposalTerms = ({navigation, route}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  console.log('ProposalTerms', route?.params?.item);
+
+  const handleSubmit = () => {
+    if (route?.params?.fromReceivedProposal) {
+      try {
+        setIsLoading(true);
+        const endPoint = `${api.getProposal}/${route?.params?.item?._id}`;
+        const bodyParams = {
+          accepted: true,
+          status: 'approved',
+        };
+        console.log('End poinmt ', endPoint);
+        const onSuccess = result => {
+          console.log('Result is', result);
+          navigation.navigate('ProposalAccept', {
+            agencyName: route?.params?.item?.proposer?.name,
+          });
+          setIsLoading(false);
+        };
+
+        const onError = error => {
+          console.log('Error is', error);
+          setIsLoading(false);
+        };
+
+        callApi(Method.PATCH, endPoint, bodyParams, onSuccess, onError);
+      } catch (error) {
+        setIsLoading(false);
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      navigation.navigate('withoutBottomTabnavigator', {
+        screen: 'PaymentTerms',
+      });
+    }
+  };
   return (
     <AppGLobalView style={styles.container}>
       <Header
@@ -56,16 +88,13 @@ const ProposalTerms = ({navigation}) => {
         <View style={{marginTop: wp('15%')}}>
           <FormButton
             width={wp('90%')}
-            buttonTitle={'Agree & Continue'}
+            buttonTitle={'Agree'}
             color={'white'}
-            onPress={() => {
-              navigation.navigate('withoutBottomTabnavigator', {
-                screen: 'PaymentTerms',
-              });
-            }}
+            onPress={() => handleSubmit()}
           />
         </View>
       </ScrollView>
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

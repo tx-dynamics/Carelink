@@ -29,9 +29,7 @@ const ServiceProviderInfo = ({
         </Text>
       )}
       <EntityCheckComponent
-        icon={
-          washRoom?.selected == true ? appIcons.tickCheck : appIcons.tickUncheck
-        }
+        icon={washRoom == true ? appIcons.tickCheck : appIcons.tickUncheck}
         title={'Attach Washroom'}
       />
 

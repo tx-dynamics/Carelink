@@ -12,7 +12,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import {RedFlashMessage} from '../../../Constants/Utilities/assets/Snakbar';
 import Loader from '../../../components/Loader';
 
-const Terms = ({navigation}) => {
+const Terms = ({navigation, route}) => {
   const [termsData, setTermsData] = useState('');
   const [loading, setLoading] = useState(false);
 

@@ -18,10 +18,9 @@ import {useSelector} from 'react-redux';
 
 const Note = ({navigation}) => {
   const params = useRoute();
-  // console.log('params ', JSON.stringify(params, ' ', 2));
+  console.log('params ', JSON.stringify(params, ' ', 2));
   const [note, setNote] = useState('');
   const userData = useSelector(store => store?.userDataSlice);
-  console.log('User daeta slice', userData);
 
   // handling note from provider
   const addNoteInData = buttonAction => {

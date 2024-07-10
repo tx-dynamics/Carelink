@@ -21,37 +21,28 @@ import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
 
 const RoomsDetails = ({navigation, route}) => {
-  // states
   const [isLoading, setIsLoading] = useState(false);
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
-  const proposeeData = useSelector(state => state?.proposalData);
+  const [liked, setLiked] = useState(false);
 
   const {item} = useRoute()?.params;
-  console.log('Routtes are', route?.params?.fromSubmitAcceptProposal);
-  // listing id
-
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user?._id,
     agencyId: useSelector(state => state?.userDataSlice?.userData?._id),
   };
 
-  var Startduration = moment.utc(
-    moment.duration(item?.availabilityStart).asMilliseconds(),
+  var Startduration = moment?.utc(
+    moment?.duration(item?.availabilityStart)?.asMilliseconds(),
   );
   var Endduration = moment.utc(
-    moment.duration(item?.availabilityEnd).asMilliseconds(),
+    moment?.duration(item?.availabilityEnd)?.asMilliseconds(),
   );
-  const availableDate = moment(item?.availabilityStart).format('MMMM DD YYYY');
-  const availableEnd = moment(item?.availabilityEnd).format('MMMM DD YYYY');
-  //   console.log('availableDate ', availableDate);
-
-  const daysDifference = Endduration.diff(Startduration, 'days');
-
-  const [liked, setLiked] = useState(false);
+  const availableDate = moment(item?.availabilityStart)?.format('MMMM DD YYYY');
+  const availableEnd = moment(item?.availabilityEnd)?.format('MMMM DD YYYY');
+  const daysDifference = Endduration?.diff(Startduration, 'days');
 
   const onHeartPress = async () => {
-    console.log('LKiked =====>', item?.liked);
     try {
       const endPoint = item?.liked
         ? `${api?.likeList / item?._id}`
@@ -62,8 +53,6 @@ const RoomsDetails = ({navigation, route}) => {
             listing: item?._id,
           };
 
-      console.log('Endpoint of like system', endPoint);
-      console.log('Body params of like system', bodyParams);
       const onSuccess = result => {
         SuccessFlashMessage(result?.message);
         setLiked(!liked);
@@ -141,7 +130,7 @@ const RoomsDetails = ({navigation, route}) => {
         )}
         <ServiceProviderInfo
           images={item?.photos}
-          washRoom={item?.washRoom}
+          washRoom={item?.rooms[0]?.washroom}
           days={daysDifference}
           floor={item?.rooms[0]?.floor}
           availableOn={availableDate + ' - ' + availableEnd}

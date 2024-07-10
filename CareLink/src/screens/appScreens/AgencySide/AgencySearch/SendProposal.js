@@ -37,6 +37,11 @@ const SendProposal = ({navigation}) => {
   };
 
   const submitProposalTo = async () => {
+    console.log(
+      'proposalRawData?.serviceProviderId',
+      proposalRawData?.serviceProviderId,
+    );
+    console.log('proposalRawData?.agencyId', proposalRawData?.agencyId);
     try {
       setIsLoading(true);
       const endPoint = api.createProposal;
@@ -46,6 +51,7 @@ const SendProposal = ({navigation}) => {
         proposee: proposalRawData?.serviceProviderId,
         coverLetter: coverLetter,
         accepted: false,
+        createdAt: new Date().getTime(),
       };
       const onSuccess = result => {
         setIsLoading(false);

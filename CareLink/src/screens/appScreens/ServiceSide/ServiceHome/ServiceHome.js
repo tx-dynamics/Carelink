@@ -91,40 +91,41 @@ const ServiceHome = ({}) => {
     },
   ];
   const navigation = useNavigation();
-
-  // hooks
   const userData = useSelector(state => state?.userDataSlice?.userData);
   const usertype = useSelector(
     state => state?.userDataSlice?.userData?.userType,
   );
-  // const userData=useSelector(state=>state?.userDataSlice?.userData);
-
-  // states
   const [isLoading, setLoading] = useState(false);
-  const [ListingData, setListingData] = useState([]);
   const [availableListing, setAvailableListing] = useState({
     availableRooms: 0,
     availableData: [],
   });
-  const [bookedListing, setBookedListing] = useState([]);
-  const [listedListing, setListedListing] = useState([]);
-  const [inActiveListing, setInActiveListing] = useState([]);
+  const [bookedListing, setBookedListing] = useState({
+    bookRooms: 0,
+    bookData: [],
+  });
+  const [listedListing, setListedListing] = useState({
+    listRooms: 0,
+    listData: [],
+  });
+  const [inActiveListing, setInActiveListing] = useState({
+    inactiveRoom: 0,
+    inactiveData: [],
+  });
 
-  // api data
+  const [proposalsData, setProposalData] = useState([]);
 
   useEffect(() => {
-    // fetch data from get listing
     listingData();
-    // console.log('userData ', JSON.stringify(userData,' ',2));
+    getReceivedProposals();
+    fetchRoomDetailsData();
   }, []);
 
-  // counting rooms
   const availRooms = [];
   const bookedRooms = [];
   const listedRooms = [];
   const inActiveRooms = [];
 
-  //
   const roomsRoutingData = [
     {
       totalRooms: availableListing?.availableRooms,
@@ -135,19 +136,22 @@ const ServiceHome = ({}) => {
       route: routes.availableList,
     },
     {
-      totalRooms: 0,
+      totalRooms: bookedListing?.bookRooms,
+      roomsData: bookedListing?.bookData,
       label: 'Rooms',
       msg: 'Booked',
       route: routes.bookedList,
     },
     {
-      totalRooms: 0,
+      totalRooms: listedListing?.listRooms,
+      roomsData: listedListing?.listData,
       label: 'Rooms',
       msg: 'Listed',
       route: routes.listedList,
     },
     {
-      totalRooms: 0,
+      totalRooms: inActiveListing?.inactiveRoom,
+      roomsData: inActiveListing?.inactiveData,
       label: 'Rooms',
       msg: 'Inactive',
       inactive: true,
@@ -155,13 +159,47 @@ const ServiceHome = ({}) => {
     },
   ];
 
-  // data functions
+  const fetchRoomDetailsData = async () => {
+    try {
+      setLoading(true);
+      const endPoint = `${api.listingStatus}?listingCount=true`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setLoading(false);
+        // setInActiveData(result?.data?.data);
+        console.log('Result is on fetchRoomDetailsData', result?.data?.counts);
+        setAvailableListing({
+          availableRooms: result?.data?.counts?.available,
+        });
+        setListedListing({
+          listRooms: result?.data?.counts?.list,
+        });
+        setInActiveListing({
+          inactiveRoom: result?.data?.counts?.inactive,
+        });
+        setBookedListing({
+          bookRooms: result?.data?.counts?.booked,
+        });
+      };
+
+      const onError = error => {
+        setLoading(false);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setLoading(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const listingData = async () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const currentDayMilliseconds = moment(today).valueOf();
     let totalRooms = 0;
-    // console.log('currentDayMilliseconds -=> ', currentDayMilliseconds);
+    let inactiveRooms = 0;
     try {
       setLoading(true);
 
@@ -170,39 +208,58 @@ const ServiceHome = ({}) => {
         JSON.stringify({user: userData._id}),
       )}`;
 
-      console.log('endpint ', endPoint);
       const onSucess = result => {
-        // console.log(
-        //   'listingData ',
-        //   JSON.stringify(result?.data?.listing, ' ', 2),
-        // );
-        // setListingData(result?.data?.listing);
         result?.data?.listing?.forEach(element => {
           if (element?.availabilityStart >= currentDayMilliseconds) {
-            // console.log(
-            //   'element?.availabilityStart  => ',
-            //   element?.availabilityStart,
-            // );
             totalRooms = totalRooms + 1;
             availRooms.push(element);
           }
         });
-        // console.log('availableRooms ', totalRooms);
-        setAvailableListing({
-          availableRooms: totalRooms,
-          availableData: availRooms,
-        });
+
         setLoading(false);
       };
       const onError = error => {
         setLoading(false);
         RedFlashMessage(error.message);
+        console.log('Error', error);
       };
 
       await callApi(Method.GET, endPoint, bodyParams, onSucess, onError);
     } catch (error) {
       setLoading(false);
-      RedFlashMessage('Error Occured while fetch listing data Service side');
+      RedFlashMessage(
+        'Error Occured while fetch listing data Service side',
+        error,
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getReceivedProposals = async () => {
+    try {
+      setLoading(true);
+      const endPoint = `${api.getProposal}?query=${encodeURIComponent(
+        JSON.stringify({user: userData?._id}),
+      )}&userType=proposee`;
+      const bodyParams = {};
+
+      const onSuccess = result => {
+        setProposalData(result?.data?.proposal);
+        setLoading(false);
+      };
+
+      const onError = error => {
+        console.log('🚀 ~ onError ~ error:', error);
+        setLoading(false);
+        RedFlashMessage(error);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setLoading(false);
+
+      RedFlashMessage(error);
     } finally {
       setLoading(false);
     }
@@ -259,7 +316,7 @@ const ServiceHome = ({}) => {
             onPress={() =>
               navigation.navigate('SearchNavigator', {screen: 'ServiceRooms'})
             }>
-            {/* <Apptext style={styles.dtls} >See Details</Apptext> */}
+            {/* <Apptext style={styles.dtls}>See Details</Apptext> */}
           </TouchableOpacity>
         </View>
         <View style={styles.marginView}>
@@ -276,10 +333,11 @@ const ServiceHome = ({}) => {
                   let Roomdata = item?.roomsData;
                   navigation.navigate('withoutBottomTabnavigator', {
                     screen: item.route,
-                    params: {Roomdata},
+                    params: {
+                      Roomdata,
+                    },
                   });
                 }}
-                // labelValue={item.label}
                 AvailableRooms={item.totalRooms}
                 firstTxt={item.msg}
                 circleStyle={{
@@ -301,20 +359,23 @@ const ServiceHome = ({}) => {
               ListHeaderComponent={() => (
                 <View style={{marginTop: heightPixel(1)}}></View>
               )}
-              data={DATA}
+              data={proposalsData}
               keyExtractor={(item, index) => index}
               renderItem={({item, index}) => (
                 <ProposalComp
                   onPress={() =>
                     navigation.navigate('withoutBottomTabnavigator', {
                       screen: 'ReceivedProposal',
+                      params: {
+                        item,
+                      },
                     })
                   }
                   showProposals={true}
-                  name={item.name}
-                  location={item.adress}
-                  description={item.desc}
-                  img={item.img}
+                  name={item?.proposer?.name}
+                  location={item?.address}
+                  description={item?.createdAt}
+                  image={item?.proposer?.image}
                 />
               )}
             />

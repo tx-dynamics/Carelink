@@ -38,14 +38,18 @@ const ServiceListingComp = ({
   statusTab,
   statusStyle,
 }) => {
-
-  var Startduration = moment.utc(
-    moment.duration(labelValue[0]).asMilliseconds(),
+  var Startduration = moment?.utc(
+    moment?.duration(labelValue[0])?.asMilliseconds(),
   );
-  var Endduration = moment.utc(moment.duration(labelValue[1]).asMilliseconds());
+  var Endduration = moment?.utc(
+    moment?.duration(labelValue[1])?.asMilliseconds(),
+  );
 
-  const daysDifference = Endduration.diff(Startduration, 'days');
-//   console.log('formattedStartDate ', 'daysDifference', daysDifference);
+  console.log('Start duration', Startduration);
+  console.log('End duration', Endduration);
+
+  const daysDifference = Endduration?.diff(Startduration, 'days');
+  console.log('formattedStartDate ', 'daysDifference', daysDifference);
 
   return (
     <TouchableOpacity

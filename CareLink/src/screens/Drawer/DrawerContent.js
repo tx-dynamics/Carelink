@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import DefaultStyles from '../../config/Styles';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import Apptext from '../../components/Apptext';
@@ -120,6 +120,10 @@ function DrawerContent({navigation}) {
             dispatch(setFcmToken(''));
             dispatch(isNewUser(false));
             dispatch(userSave(null));
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'AskRegister'}],
+            });
             // dispatch(onBoarding(false));
             // dispatch(signUpOTPCheck(false));
             // dispatch(userType(false));

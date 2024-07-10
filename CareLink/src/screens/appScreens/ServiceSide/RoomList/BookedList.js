@@ -1,16 +1,44 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {FlatList, StyleSheet, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import IconHeaderComp from '../../../../components/IconHeaderComp';
-import colors from '../../../../config/colors';
 import {iconPath} from '../../../../config/icon';
 import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/LeftSideBoldHeading';
-import {appIcons} from '../../../../Constants/Utilities/assets';
 import {heightPixel, routes} from '../../../../Constants';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
-import {ListedData} from './AvailableList';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import {useRoute} from '@react-navigation/native';
+import {api} from '../../../../network/Environment';
+import {Method, callApi} from '../../../../network/NetworkManger';
+import Loader from '../../../../components/Loader';
 
 const BookedList = ({navigation}) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [bookedData, setBookedData] = useState(false);
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = `${api.listingStatus}?listingCount=false&status=booked`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setIsLoading(false);
+        setBookedData(result?.data?.data);
+      };
+
+      const onError = error => {
+        setIsLoading(false);
+      };
+
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AppGLobalView>
       <IconHeaderComp
@@ -18,7 +46,7 @@ const BookedList = ({navigation}) => {
         imgName={iconPath.leftArrow}
         onPress={() => navigation.goBack()}
       />
-      <LeftSideBoldHeading title={'Booked'} number={ListedData?.length} />
+      <LeftSideBoldHeading title={'Booked'} number={bookedData?.length} />
       <FlatList
         showsVerticalScrollIndicator={false}
         style={{
@@ -27,26 +55,28 @@ const BookedList = ({navigation}) => {
         ListHeaderComponent={() => (
           <View style={{marginTop: heightPixel(1)}}></View>
         )}
-        data={ListedData}
-        // keyExtractor={(item, index) => index}
+        data={bookedData}
+        keyExtractor={(item, index) => index}
         renderItem={({item, index}) => (
           <ServiceListingComp
-            onPress={() =>
+            rightTexPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: routes.bookedRoom,
+                screen: routes.listingOptions,
               })
             }
-            facilityData={item.facility}
-            pic={item.pic}
-            detail={
-              'Lorem ipsum dolor sit amet, c amet, c Lorem ipsum dolor sit amet, c '
-            }
+            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
+            facilityData={item.entities}
+            pic={item.photos[0]}
+            rightTxt={'Edit'}
+            detail={item?.notes}
             showProposals={true}
-            labelValue={'For 20 days'}
-            name={'ABC Rental Agency'}
+            labelValue={[item?.availabilityStart, item?.availabilityEnd]}
+            name={item?.rooms[0]?.room}
+            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
           />
         )}
       />
+      <Loader isVisible={isLoading} />
     </AppGLobalView>
   );
 };

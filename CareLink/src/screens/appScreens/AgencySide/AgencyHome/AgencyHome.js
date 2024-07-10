@@ -115,7 +115,6 @@ const AgencyHome = ({}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setListingDetails(result?.data?.listing);
-        console.log('Listing count is', result?.data?.listing[0]?.address);
         setIsLoading(false);
         fetchProposalDetails();
       };
@@ -139,9 +138,8 @@ const AgencyHome = ({}) => {
 
       const endPoint = `${api.getProposal}?query=${encodeURIComponent(
         JSON.stringify({user: userData?.userData?._id}),
-      )}`;
+      )}&userType=proposer`;
       const bodyParams = {};
-      //   console.log('data ', endPoint);
       const onSuccess = result => {
         setPropsalData({
           countsData: result?.data?.counts,
@@ -175,8 +173,6 @@ const AgencyHome = ({}) => {
       fetchProposalDetails();
     }, 2000);
   }, []);
-
-  console.log('Proposal', proposalData?.proposalList?.length);
 
   const navigation = useNavigation();
   return (
