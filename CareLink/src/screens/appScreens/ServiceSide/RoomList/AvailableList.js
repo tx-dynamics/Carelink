@@ -64,7 +64,11 @@ const AvailableList = ({navigation}) => {
           <ServiceListingComp
             rightTexPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: routes.listingOptions,
+                screen: routes.roomDetails,
+                params: {
+                  item,
+                  fromAvailableRooms: true,
+                },
               })
             }
             // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}

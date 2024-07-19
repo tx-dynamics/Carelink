@@ -106,11 +106,11 @@ const LoginScreen = () => {
                   res?.data?.user?.profileCompleted &&
                   res?.data?.user?.subscriptionId != null
                 ) {
-                  dispatch(userSave(true));
-                  dispatch(signUpOTPCheck(false));
                   dispatch(refreshToken(res?.data?.refreshToken));
                   dispatch(accessToken(res?.data?.token));
                   dispatch(setUserData(res?.data?.user));
+                  dispatch(userSave(true));
+                  dispatch(signUpOTPCheck(false));
                 } else if (res?.data?.user?.verified == false) {
                   navigation.navigate('EmailVerification', {
                     email: email?.toLowerCase(),

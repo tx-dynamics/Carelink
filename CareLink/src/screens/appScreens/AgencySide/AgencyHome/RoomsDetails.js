@@ -25,7 +25,8 @@ const RoomsDetails = ({navigation, route}) => {
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
   const [liked, setLiked] = useState(false);
 
-  const {item} = useRoute()?.params;
+  const {item, fromBookedRooms} = useRoute()?.params;
+  console.log('Item datta is ', fromBookedRooms);
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user?._id,
@@ -138,24 +139,25 @@ const RoomsDetails = ({navigation, route}) => {
           note={item?.notes}
         />
       </KeyboardAwareScrollView>
-      {!route?.params?.fromSubmitAcceptProposal && (
-        <FormButton
-          buttonTitle={
-            route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
-          }
-          onPress={() => {
-            navigation.navigate(
-              route?.params?.review
-                ? routes?.createContract
-                : routes.sendProposal,
-              {
-                proposalRawData,
-                serviceUserProfile,
-              },
-            );
-          }}
-        />
-      )}
+      {!route?.params?.fromSubmitAcceptProposal ||
+        (fromBookedRooms && (
+          <FormButton
+            buttonTitle={
+              route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
+            }
+            onPress={() => {
+              navigation.navigate(
+                route?.params?.review
+                  ? routes?.createContract
+                  : routes.sendProposal,
+                {
+                  proposalRawData,
+                  serviceUserProfile,
+                },
+              );
+            }}
+          />
+        ))}
     </AppGLobalView>
   );
 };

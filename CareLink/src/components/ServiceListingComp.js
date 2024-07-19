@@ -53,6 +53,7 @@ const ServiceListingComp = ({
 
   return (
     <TouchableOpacity
+      activeOpacity={0.5}
       disabled={disabled}
       onPress={onPress}
       style={[

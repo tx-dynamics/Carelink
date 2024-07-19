@@ -17,6 +17,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
 
 let paymentIndentId = '';
+let id = '';
 const PaymentPlans = ({navigation}) => {
   const dispatch = useDispatch();
   const usertype = useSelector(state => state.splash.userType);
@@ -27,6 +28,7 @@ const PaymentPlans = ({navigation}) => {
   const [selectedPlan, setSelectedPlan] = useState(
     plansData[0]?.priceId ? plansData[0]?.priceId : 0,
   );
+  const [userPlan, setUserPlan] = useState();
 
   const DATA = [
     {
@@ -130,7 +132,7 @@ const PaymentPlans = ({navigation}) => {
               res?.data?.clientSecret,
               res?.data?.subscriptionId,
             );
-            console.log('Subscription ---->');
+            console.log('Subscription ---->', res);
             paymentIndentId = res?.data?.subscriptionId;
             setIsLoading(false);
           } else {
@@ -157,6 +159,8 @@ const PaymentPlans = ({navigation}) => {
     }, 500);
   };
 
+  console.log('Plan data', userPlan);
+
   const openPaymentSheet = async () => {
     const {error} = await presentPaymentSheet();
 
@@ -171,7 +175,14 @@ const PaymentPlans = ({navigation}) => {
     setIsLoading(true);
     try {
       const endPoint = `${api.createIntent}/${paymentIndentId}`;
-      const data = {};
+      const data = {
+        subscriptionType:
+          plansData?.price == '$29.99'
+            ? 'basic'
+            : plansData?.price == '$59.99'
+            ? 'premium'
+            : 'platinum',
+      };
 
       await callApi(
         Method.POST,
@@ -235,6 +246,7 @@ const PaymentPlans = ({navigation}) => {
             desc={usertype === 'ServiceSide' ? item.description : item.desc1}
             onPress={() => {
               handlePayment(item);
+              setUserPlan(item);
             }}
           />
         )}

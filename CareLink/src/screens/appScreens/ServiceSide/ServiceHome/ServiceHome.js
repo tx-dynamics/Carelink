@@ -8,6 +8,7 @@ import {
   Text,
   View,
   SafeAreaView,
+  RefreshControl,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
@@ -114,11 +115,21 @@ const ServiceHome = ({}) => {
   });
 
   const [proposalsData, setProposalData] = useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    listingData();
+    // listingData();
     getReceivedProposals();
     fetchRoomDetailsData();
+  }, []);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+      getReceivedProposals();
+      fetchRoomDetailsData();
+    }, 2000);
   }, []);
 
   const availRooms = [];
@@ -184,57 +195,59 @@ const ServiceHome = ({}) => {
 
       const onError = error => {
         setLoading(false);
+        console.log('error on fetchRoomDetailsData', error);
       };
 
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setLoading(false);
+      console.log('Error is', error);
     } finally {
       setLoading(false);
     }
   };
 
-  const listingData = async () => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const currentDayMilliseconds = moment(today).valueOf();
-    let totalRooms = 0;
-    let inactiveRooms = 0;
-    try {
-      setLoading(true);
+  // const listingData = async () => {
+  //   const today = new Date();
+  //   today.setHours(0, 0, 0, 0);
+  //   const currentDayMilliseconds = moment(today).valueOf();
+  //   let totalRooms = 0;
+  //   let inactiveRooms = 0;
+  //   try {
+  //     setLoading(true);
 
-      const bodyParams = {};
-      const endPoint = `${api.getListing}?query=${encodeURIComponent(
-        JSON.stringify({user: userData._id}),
-      )}`;
+  //     const bodyParams = {};
+  //     const endPoint = `${api.getListing}?query=${encodeURIComponent(
+  //       JSON.stringify({user: userData._id}),
+  //     )}`;
 
-      const onSucess = result => {
-        result?.data?.listing?.forEach(element => {
-          if (element?.availabilityStart >= currentDayMilliseconds) {
-            totalRooms = totalRooms + 1;
-            availRooms.push(element);
-          }
-        });
+  //     const onSucess = result => {
+  //       result?.data?.listing?.forEach(element => {
+  //         if (element?.availabilityStart >= currentDayMilliseconds) {
+  //           totalRooms = totalRooms + 1;
+  //           availRooms.push(element);
+  //         }
+  //       });
 
-        setLoading(false);
-      };
-      const onError = error => {
-        setLoading(false);
-        RedFlashMessage(error.message);
-        console.log('Error', error);
-      };
+  //       setLoading(false);
+  //     };
+  //     const onError = error => {
+  //       setLoading(false);
+  //       RedFlashMessage(error.message);
+  //       console.log('Error', error);
+  //     };
 
-      await callApi(Method.GET, endPoint, bodyParams, onSucess, onError);
-    } catch (error) {
-      setLoading(false);
-      RedFlashMessage(
-        'Error Occured while fetch listing data Service side',
-        error,
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     await callApi(Method.GET, endPoint, bodyParams, onSucess, onError);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     RedFlashMessage(
+  //       'Error Occured while fetch listing data Service side',
+  //       error,
+  //     );
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const getReceivedProposals = async () => {
     try {
@@ -250,7 +263,7 @@ const ServiceHome = ({}) => {
       };
 
       const onError = error => {
-        console.log('🚀 ~ onError ~ error:', error);
+        console.log('🚀 ~ onError ~ error: 11', error);
         setLoading(false);
         RedFlashMessage(error);
       };
@@ -278,7 +291,11 @@ const ServiceHome = ({}) => {
         leftImgName={require('../../../../../assets/drawerIcon.png')}
         onPressLeft={() => navigation.dispatch(DrawerActions.toggleDrawer())}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View style={styles.txtView}>
           <Text style={styles.welcomeText}>Welcome</Text>
           <Apptext style={styles.rms}>{userData?.name}</Apptext>

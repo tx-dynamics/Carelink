@@ -6,7 +6,6 @@ import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/Left
 import {heightPixel, routes} from '../../../../Constants';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
-import {useRoute} from '@react-navigation/native';
 import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
@@ -28,11 +27,9 @@ const BookedList = ({navigation}) => {
         setIsLoading(false);
         setBookedData(result?.data?.data);
       };
-
       const onError = error => {
         setIsLoading(false);
       };
-
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setIsLoading(false);
@@ -59,20 +56,21 @@ const BookedList = ({navigation}) => {
         keyExtractor={(item, index) => index}
         renderItem={({item, index}) => (
           <ServiceListingComp
-            rightTexPress={() =>
+            onPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: routes.listingOptions,
+                screen: routes.roomDetails,
+                params: {
+                  item,
+                  fromBookedRooms: true,
+                },
               })
             }
-            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
-            facilityData={item.entities}
-            pic={item.photos[0]}
-            rightTxt={'Edit'}
+            facilityData={item?.entities}
+            pic={item?.photos[0]}
             detail={item?.notes}
             showProposals={true}
             labelValue={[item?.availabilityStart, item?.availabilityEnd]}
             name={item?.rooms[0]?.room}
-            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
           />
         )}
       />

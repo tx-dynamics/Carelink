@@ -5,9 +5,9 @@ export const STRIPE_KEY =
 // export const STRIPE_SECRET_KEY = '';
 export const DUMMY_IMAGE =
   'https://divet-bucket.s3.us-east-2.amazonaws.com/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper.png';
-// export const BASE_URL =
-//   'http://ec2-18-218-211-31.us-east-2.compute.amazonaws.com/'; // Development
-export const BASE_URL = 'https://4a68-103-147-42-107.ngrok-free.app/'; // Ngrok Link
+export const BASE_URL =
+  'http://ec2-18-218-211-31.us-east-2.compute.amazonaws.com/'; // Development
+// export const BASE_URL = 'https://32aa-103-147-42-107.ngrok-free.app/'; // Ngrok Link
 
 export const api = {
   login: 'api/v1/user/login',

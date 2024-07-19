@@ -87,6 +87,7 @@ const Register = () => {
           email: email?.toLowerCase(),
           password: isPassword,
           userType: usertype,
+          role: usertype == 'ServiceSide' ? 'serviceprovider' : 'agency',
           device: {id: dtk, deviceToken: fcm},
         };
 

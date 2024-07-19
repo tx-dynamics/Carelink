@@ -32,7 +32,7 @@ import {
 const EmailVerification = ({navigation, route}) => {
   const params = useRoute();
   const dispatch = useDispatch();
-  const [isOTP, setIsOTP] = useState('7042');
+  const [isOTP, setIsOTP] = useState('');
   const [visible, setVisible] = useState(false);
   const usertype = useSelector(state => state?.splash?.userType);
   const emailOnly = useSelector(state => state?.splash?.emailOnly);
