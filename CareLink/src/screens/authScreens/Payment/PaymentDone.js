@@ -30,7 +30,14 @@ const PaymentDone = ({navigation}) => {
         setTimeout(() => {
           navigation.reset({
             index: 0,
-            routes: [{name: routes.listingOptions}],
+            routes: [
+              {
+                name: routes.listingOptions,
+                params: {
+                  fromSignup: 'Yes',
+                },
+              },
+            ],
           });
         }, 1000);
       }

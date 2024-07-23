@@ -31,7 +31,8 @@ import EntityCheckComponent from '../../../components/EntityCheckComponent/Entit
 import {appIcons} from '../../../Constants/Utilities/assets';
 import {useSelector} from 'react-redux';
 
-const ListingOptions = ({navigation}) => {
+const ListingOptions = ({navigation, route}) => {
+  console.log('Routes are', route);
   const [basicData, setBasicData] = useState([
     {
       id: 0,
@@ -209,7 +210,7 @@ const ListingOptions = ({navigation}) => {
       return false;
     }
     if (value === '') {
-      RedFlashMessage('Select Room Floor');
+      RedFlashMessage('Select Room Space');
       return false;
     }
     if (startDate === null) {
@@ -230,7 +231,7 @@ const ListingOptions = ({navigation}) => {
       <IconHeaderComp
         title={'Add Listing'}
         onPress={() => navigation.goBack()}
-        imgName={iconPath.leftArrow}
+        imgName={!route?.params?.fromSignup == 'Yes' && iconPath.leftArrow}
         heading={'Add Listing Information'}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>

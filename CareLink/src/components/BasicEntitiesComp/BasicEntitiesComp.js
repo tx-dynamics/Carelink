@@ -15,20 +15,25 @@ import {appIcons} from '../../Constants/Utilities/assets';
 import EntityCheckComponent from '../EntityCheckComponent/EntityCheckComponent';
 import AddMoreComp from '../AddMoreComp/AddMoreComp';
 import AddMoreModal from '../AddMoreModal/AddMoreModal';
+import {RedFlashMessage} from '../../Constants/Utilities/assets/Snakbar';
 
 const BasicEntitiesComp = ({basicData, setBasicData}) => {
   const [add, setAdd] = useState('');
   const [isVisible, setVisible] = useState(false);
   const addMorePress = () => {
-    Keyboard.dismiss();
-    let data = {
-      id: basicData?.length,
-      name: add,
-      selected: true,
-    };
-    setBasicData([...basicData, data]);
-    setVisible(false);
-    setAdd('');
+    if (add) {
+      Keyboard.dismiss();
+      let data = {
+        id: basicData?.length,
+        name: add,
+        selected: true,
+      };
+      setBasicData([...basicData, data]);
+      setVisible(false);
+      setAdd('');
+    } else {
+      RedFlashMessage('Entity is required');
+    }
   };
   const onCheck = (item, index) => {
     const updatedDataArray = [...basicData]; // Create a copy of the dataArray

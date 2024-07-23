@@ -9,13 +9,13 @@ import DefaultStyles from '../config/Styles';
 import {heightPixel, widthPixel} from '../Constants';
 import colors from '../config/colors';
 
-function ChatDetailComp({msg, style}) {
+function ChatDetailComp({msg, style, time}) {
   return (
     <View style={[styles.PicMainView, style]}>
       <View style={styles.msgView}>
         <Apptext style={styles.msgTxt}>{msg}</Apptext>
       </View>
-      <Apptext style={styles.timeTxt}>04:30 PM</Apptext>
+      <Apptext style={styles.timeTxt}>{time}</Apptext>
     </View>
   );
 }
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     marginBottom: heightPixel(10),
   },
   msgView: {
+    marginLeft: widthPixel(5),
     maxWidth: widthPixel(330),
     borderRadius: widthPixel(30),
     paddingVertical: heightPixel(10),
@@ -58,7 +59,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: DefaultStyles.colors.lightPrimary,
     marginTop: heightPixel(5),
-    marginRight: widthPixel(10),
+    marginLeft: widthPixel(10),
+    alignSelf: 'flex-start',
   },
   ChatCallingView: {
     width: 35,

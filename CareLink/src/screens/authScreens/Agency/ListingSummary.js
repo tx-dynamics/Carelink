@@ -64,7 +64,9 @@ const ListingSummary = ({navigation}) => {
         setIsLoading(false);
         setVisible(false);
         dispatch(userSave(true));
-        navigation.navigate('HomeNavigator');
+        setTimeout(() => {
+          navigation.navigate('HomeNavigator');
+        }, 600);
       };
       const onError = error => {
         RedFlashMessage('Something Went Wrong!', error.message);
@@ -126,7 +128,6 @@ const ListingSummary = ({navigation}) => {
           coordinates: [myLocationData?.longitude, myLocationData?.latitude],
         },
       };
-      console.log('🚀 ~ handleSubmit ~ data:', JSON.stringify(data, ' ', 2));
 
       await callApi(
         Method.POST,

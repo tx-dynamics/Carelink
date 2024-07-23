@@ -17,6 +17,7 @@ import {
   setProposalAttender,
   setProposalUsers,
 } from '../../../../redux/Slices/proposalSlice';
+import moment from 'moment/moment';
 
 let socket;
 const ServiceChatDetail = ({navigation, route}) => {
@@ -92,7 +93,6 @@ const ServiceChatDetail = ({navigation, route}) => {
         leftImgName={require('../../../../../assets/headerBack.png')}
         onPressLeft={() => navigation.goBack()}
       />
-      <Text style={{color: 'red'}}>{messages[0]?.message}</Text>
       <View style={styles.direView}>
         <Image
           style={styles.imgStl}
@@ -105,15 +105,22 @@ const ServiceChatDetail = ({navigation, route}) => {
           showsVerticalScrollIndicator={false}
           inverted
           ref={ref}
-          keyExtractor={(item, index) => item?._id}
+          keyExtractor={item => item?._id}
           data={messages}
           renderItem={({item, index}) => {
-            console.log(item?.sender, userData?.userData?._id),
-              item?.sender == userData?.userData?._id ? (
-                <MyMessage msg={item?.message} key={index} />
-              ) : (
-                <ChatDetailComp msg={item?.message} key={index} />
-              );
+            return item?.sender === userData?.userData?._id ? (
+              <MyMessage
+                msg={item?.message}
+                key={index}
+                time={moment(item?.createdAt).format('HH:mm A')}
+              />
+            ) : (
+              <ChatDetailComp
+                msg={item?.message}
+                key={index}
+                time={moment(item?.createdAt).format('HH:mm A')}
+              />
+            );
           }}
         />
       </View>
@@ -126,13 +133,13 @@ const ServiceChatDetail = ({navigation, route}) => {
     </AppGLobalView>
   );
 };
-const MyMessage = React.memo(({msg}) => {
+const MyMessage = React.memo(({msg, time}) => {
   return (
     <View style={styles.PicMainView}>
       <View style={styles.msgView}>
         <Apptext style={styles.msgTxt}>{msg}</Apptext>
       </View>
-      <Apptext style={styles.timeTxt}>04:30 PM</Apptext>
+      <Apptext style={styles.timeTxt}>{time}</Apptext>
     </View>
   );
 });
@@ -148,7 +155,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: DefaultStyles.colors.lightPrimary,
     marginTop: heightPixel(5),
-    marginLeft: widthPixel(5),
+    marginRight: widthPixel(5),
+    alignSelf: 'flex-end',
   },
   marginView: {
     alignSelf: 'center',

@@ -19,7 +19,7 @@ import {
 import {Method, callApi} from '../../../network/NetworkManger';
 import {api} from '../../../network/Environment';
 import Loader from '../../../components/Loader';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setUserData} from '../../../redux/Slices/userDataSlice';
 
 const AddInformation = ({navigation}) => {
@@ -31,6 +31,8 @@ const AddInformation = ({navigation}) => {
   const [exp, setExp] = useState('');
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const userData = useSelector(store => store?.userDataSlice);
+  console.log('User data', userData);
   const [items, setItems] = useState([
     {
       id: 0,
@@ -78,6 +80,7 @@ const AddInformation = ({navigation}) => {
           res => {
             if (res?.status === 200 || res?.status === 201) {
               setIsLoading(false);
+              console.log('Response deata', res?.data?.user);
               dispatch(setUserData(res?.data?.user));
               SuccessFlashMessage(res?.message);
               navigation.navigate('PaymentPlans');

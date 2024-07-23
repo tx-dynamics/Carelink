@@ -193,38 +193,18 @@ const AgencyLocation = ({navigation, route}) => {
             title={'Apartment Number'}
             keyboardType="numeric"
           />
-          {myUserLocation?.zipCode == null ? (
-            <AppTextInput
-              value={zipCode}
-              onChangeText={text => setZipCode(text)}
-              title={'Zip Code'}
-              keyboardType="numeric"
-              maxLength={6}
-            />
-          ) : (
-            <AppTextInput
-              value={zipCode}
-              onChangeText={text => setZipCode(text)}
-              editable={false}
-              title={'Zip Code'}
-              keyboardType="numeric"
-              maxLength={6}
-            />
-          )}
-          {myUserLocation?.country == null ? (
-            <AppTextInput
-              value={isState}
-              title={'State'}
-              onChangeText={text => setState(text)}
-            />
-          ) : (
-            <AppTextInput
-              value={isState}
-              editable={false}
-              title={'State'}
-              onChangeText={text => setState(text)}
-            />
-          )}
+          <AppTextInput
+            value={zipCode}
+            onChangeText={text => setZipCode(text)}
+            title={'Zip Code'}
+            keyboardType="numeric"
+            maxLength={6}
+          />
+          <AppTextInput
+            value={isState}
+            title={'State'}
+            onChangeText={text => setState(text)}
+          />
         </View>
       </KeyboardAwareScrollView>
       <FormButton buttonTitle={'Next'} onPress={onNextPress} />

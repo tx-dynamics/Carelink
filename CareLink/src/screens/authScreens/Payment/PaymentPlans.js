@@ -119,7 +119,7 @@ const PaymentPlans = ({navigation}) => {
       setIsLoading(true);
       const endPoint = api.createIntent;
       const data = {
-        priceId: priceId, // Use the passed priceId or any default value
+        priceId: priceId,
       };
 
       await callApi(
@@ -132,7 +132,6 @@ const PaymentPlans = ({navigation}) => {
               res?.data?.clientSecret,
               res?.data?.subscriptionId,
             );
-            console.log('Subscription ---->', res);
             paymentIndentId = res?.data?.subscriptionId;
             setIsLoading(false);
           } else {
@@ -159,15 +158,13 @@ const PaymentPlans = ({navigation}) => {
     }, 500);
   };
 
-  console.log('Plan data', userPlan);
-
   const openPaymentSheet = async () => {
     const {error} = await presentPaymentSheet();
 
     if (error) {
-      Alert.alert(`Error code: ${error.code}`, error.message);
+      Alert.alert(`Error code: ${error?.code}`, error?.message);
     } else {
-      await verifyPaymentSheetParams(); // Pass the priceId to fetchPaymentSheetParams
+      await verifyPaymentSheetParams();
     }
   };
 
@@ -191,6 +188,7 @@ const PaymentPlans = ({navigation}) => {
         res => {
           if (res?.status === 200 || res?.status === 201) {
             dispatch(setUserData(res?.data?.user));
+            console.log('Payment data', res?.data?.user);
             setIsLoading(false);
             setTimeout(() => {
               navigation.reset({

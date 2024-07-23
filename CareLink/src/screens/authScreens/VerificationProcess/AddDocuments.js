@@ -127,7 +127,7 @@ const AddDocuments = ({navigation}) => {
                   },
                 ],
               });
-            }, 600);
+            }, 400);
           }
         }
       });

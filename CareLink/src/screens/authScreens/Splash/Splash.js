@@ -21,6 +21,7 @@ const Splash = ({navigation}) => {
         navigation.replace('AskRegister');
       } else {
         if (userData?.userData?.userType === 'ServiceSide') {
+          console.log('Splash hit');
           if (userData?.userData?.profileCompleted == false) {
             navigation.reset({
               index: 0,
