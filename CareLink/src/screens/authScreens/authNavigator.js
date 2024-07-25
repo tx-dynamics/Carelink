@@ -42,6 +42,7 @@ import ForgetUpdateScreen from './ForgetPasswordScreens/ForgetPasswordUpdate';
 import AddDocuments from './VerificationProcess/AddDocuments';
 import AddInformation from './VerificationProcess/AddInformation';
 import {useSelector} from 'react-redux';
+import SuccessfullListing from './Agency/SucessfullListing';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -87,6 +88,10 @@ const SplashNavigator = () => {
       <AuthStack.Screen
         name={routes.listingSummary}
         component={ListingSummary}
+      />
+      <AuthStack.Screen
+        name={routes.successfulListing}
+        component={SuccessfullListing}
       />
       <AuthStack.Screen name="PaymentPlans" component={PaymentPlans} />
       <AuthStack.Screen name="PaymentMethod" component={PaymentMethod} />

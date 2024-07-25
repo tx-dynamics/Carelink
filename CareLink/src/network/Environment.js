@@ -27,6 +27,8 @@ export const api = {
   getAgencyProfile: 'api/v1/user/me',
   getReviews: 'api/v1/review',
   deleteAccount: 'api/v1/user/deleteMe',
+  updatePassword: 'api/v1/user/updateMyPassword',
+  feedback: 'api/v1/feedback',
 
   // listing routes
   getListing: 'api/v1/listing',

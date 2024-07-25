@@ -1,20 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
-  FlatList,
   Image,
-  TextInput,
-  ActivityIndicator,
-  Text,
   View,
   Keyboard,
 } from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
-import FormInput from '../../../../components/FormInput';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
 import {heightPixel, widthPixel} from '../../../../Constants';
@@ -34,6 +28,7 @@ import {callApi, Method} from '../../../../network/NetworkManger';
 import {useDispatch, useSelector} from 'react-redux';
 import Loader from '../../../../components/Loader';
 import {setUserData} from '../../../../redux/Slices/userDataSlice';
+
 const EditProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const userData = useSelector(store => store?.userDataSlice);
@@ -41,15 +36,10 @@ const EditProfile = ({navigation}) => {
   const [isUpload, setUpload] = useState(false);
   const [img, setImg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  //   const onPressSave = () => {
-  //     SuccessFlashMessage('Profile has been updated');
-  //     navigation.goBack();
-  //   };
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const onPressSave = async () => {
-    console.log('Image', img);
-
     setIsLoading(true);
     if (img) {
       Keyboard.dismiss();
@@ -76,7 +66,6 @@ const EditProfile = ({navigation}) => {
       };
       const onSuccess = result => {
         setIsLoading(false);
-        console.log('Rews', result);
         // setUserData({...userData, image: img});
         dispatch(setUserData(result?.data?.user));
         SuccessFlashMessage('Profile has been updated');
@@ -123,10 +112,14 @@ const EditProfile = ({navigation}) => {
         <AppTextInput
           mainViewStyle={styles.firstNameStyle}
           title={'First name'}
+          onChangeText={text => setFirstName(text)}
+          value={firstName}
         />
         <AppTextInput
           mainViewStyle={styles.lastNameStyle}
           title={'Last name'}
+          onChangeText={text => setLastName | text}
+          value={lastName}
         />
       </KeyboardAwareScrollView>
       <FormButton onPress={onPressSave} buttonTitle={'Save Update'} />

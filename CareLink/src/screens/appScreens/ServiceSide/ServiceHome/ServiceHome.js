@@ -14,7 +14,11 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import {
+  DrawerActions,
+  useIsFocused,
+  useNavigation,
+} from '@react-navigation/native';
 import ServiceRoomComp from '../../../../components/ServiceRoomComp';
 import ProposalComp from '../../../../components/ProposalComp';
 import ReportComp from '../../../../components/ReportComp';
@@ -31,71 +35,16 @@ import colors from '../../../../config/colors';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import {RedFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
 import {callApi, Method} from '../../../../network/NetworkManger';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
 import moment from 'moment';
+import {setListingData} from '../../../../redux/Slices/roomListingSlice';
 const ServiceHome = ({}) => {
-  const DATA = [
-    {
-      name: 'ABC Rental Agency',
-      adress: 'Oakwood Heights',
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      no: '3',
-      no1: '3',
-      label: 'Rooms',
-      msg: 'Available',
-      width: wp('33%'),
-      msg1: 'Booked',
-      desc: `3 hr ago`,
-      route: routes.availableList,
-    },
-    {
-      name: 'Pearl Villa Estate',
-      adress: 'Meadowbrook Meadows',
-      id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-      no: '3',
-      no1: '9',
-      label: 'Proposals',
-      msg: 'Booked',
-      width: wp('53%'),
-      msg1: 'Submitted',
-      desc: `3 hr ago`,
-      route: routes.bookedList,
-    },
-    {
-      name: 'Eastern Street Rent',
-      adress: 'Willowbrook Terrace',
-      id: 'bd7a42cbea-c1b1-46c2-aed5-3ad53abb28ba',
-      no: '6',
-      no1: '3',
-      label: 'Rooms',
-      msg: 'Listed',
-      width: wp('53%'),
-      msg1: 'Booked',
-      desc: `3 hr ago`,
-      route: routes.listedList,
-    },
-    {
-      name: 'Eastern Street Rent',
-      adress: 'Willowbrook Terrace',
-      id: 'bd7a42cbea-c1b1-46c2-aed5-3ad53abb28ba',
-      no: '6',
-      no1: '3',
-      label: 'Rooms',
-      msg: 'Inactive',
-      width: wp('53%'),
-      msg1: 'Booked',
-      desc: `3 hr ago`,
-      inactive: true,
-      route: routes.inactiveList,
-    },
-  ];
+  const dispatch = useDispatch();
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
   const userData = useSelector(state => state?.userDataSlice?.userData);
-  const usertype = useSelector(
-    state => state?.userDataSlice?.userData?.userType,
-  );
   const [isLoading, setLoading] = useState(false);
   const [availableListing, setAvailableListing] = useState({
     availableRooms: 0,
@@ -118,10 +67,11 @@ const ServiceHome = ({}) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    // listingData();
-    getReceivedProposals();
-    fetchRoomDetailsData();
-  }, []);
+    if (isFocused) {
+      getReceivedProposals();
+      fetchRoomDetailsData();
+    }
+  }, [isFocused]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -131,11 +81,6 @@ const ServiceHome = ({}) => {
       fetchRoomDetailsData();
     }, 2000);
   }, []);
-
-  const availRooms = [];
-  const bookedRooms = [];
-  const listedRooms = [];
-  const inActiveRooms = [];
 
   const roomsRoutingData = [
     {
@@ -177,8 +122,8 @@ const ServiceHome = ({}) => {
       const bodyParams = {};
       const onSuccess = result => {
         setLoading(false);
-        // setInActiveData(result?.data?.data);
         console.log('Result is on fetchRoomDetailsData', result?.data?.counts);
+        dispatch(setListingData(result?.data?.counts));
         setAvailableListing({
           availableRooms: result?.data?.counts?.available,
         });

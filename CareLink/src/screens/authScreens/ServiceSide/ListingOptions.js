@@ -32,7 +32,6 @@ import {appIcons} from '../../../Constants/Utilities/assets';
 import {useSelector} from 'react-redux';
 
 const ListingOptions = ({navigation, route}) => {
-  console.log('Routes are', route);
   const [basicData, setBasicData] = useState([
     {
       id: 0,

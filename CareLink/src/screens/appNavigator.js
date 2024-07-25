@@ -188,6 +188,7 @@ const WithoutBottomTabnavigator = () => {
         name={routes.agencyDetail}
         component={AgencyDetail}
       />
+
       <StackNavigator.Screen name={routes.bookedRoom} component={BookedRooms} />
       <StackNavigator.Screen
         name={routes.bookedRoomAgency}

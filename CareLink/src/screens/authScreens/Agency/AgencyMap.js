@@ -27,7 +27,6 @@ import {Method, callApi} from '../../../network/NetworkManger';
 import {setAgencyAddress} from '../../../redux/Slices/agencyInfoSlice';
 
 const AgencyMap = ({navigation, route}) => {
-  console.log('Routes are', route);
   let currentLocation = {
     latitude: 31.449590774585772,
     longitude: 74.28036404773593,
@@ -72,7 +71,6 @@ const AgencyMap = ({navigation, route}) => {
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('Hit get Location');
           getLocation();
         } else {
         }
@@ -146,7 +144,6 @@ const AgencyMap = ({navigation, route}) => {
               },
             };
             const onSuccess = result => {
-              console.log('Result is', JSON.stringify(result));
               dispatch(setAgencyAddress(result?.data?.user?.address));
               dispatch(fromProfile(false));
               navigation.navigate('ProfileNavigator');
@@ -226,7 +223,6 @@ const AgencyMap = ({navigation, route}) => {
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.status === 'OK') {
-            console.log('Response of getAddressFromCoordinates', address);
             setAddress(responseJson?.results[0]?.formatted_address);
             setLatitude(responseJson?.results[0]?.geometry?.location?.lat);
             setLongitude(responseJson?.results[0]?.geometry?.location?.lng);
@@ -240,7 +236,6 @@ const AgencyMap = ({navigation, route}) => {
                   userLocation.streetNumber = item?.long_name;
                   break;
                 case 'route': // street name
-                  // console.log('streetNumber', item.long_name);
                   item.long_name?.length > 0 &&
                     (userLocation.streetAddress = userLocation.streetNumber
                       ? userLocation.streetNumber

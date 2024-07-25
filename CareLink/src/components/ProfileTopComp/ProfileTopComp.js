@@ -1,9 +1,8 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {heightPixel, widthPixel, wp} from '../../Constants';
 import colors from '../../config/colors';
 import Apptext from '../Apptext';
-import {appIcons} from '../../Constants/Utilities/assets';
 
 const ProfileTopComp = ({pic, name, city, memberDuration}) => {
   return (
@@ -13,7 +12,7 @@ const ProfileTopComp = ({pic, name, city, memberDuration}) => {
       </TouchableOpacity>
       <View style={{alignSelf: 'center'}}>
         <Apptext style={styles.jmsTxt}>{name}</Apptext>
-        <Apptext style={styles.dcTxt}>{'city'}</Apptext>
+        <Apptext style={styles.dcTxt}>{city}</Apptext>
       </View>
       <View style={styles.pinkBox}>
         <Apptext style={styles.mmbrTxt}>
@@ -60,6 +59,6 @@ const styles = StyleSheet.create({
   mmbrTxt: {
     fontSize: 12,
     alignSelf: 'center',
-    marginTop: heightPixel(5),
+    margin: heightPixel(5),
   },
 });

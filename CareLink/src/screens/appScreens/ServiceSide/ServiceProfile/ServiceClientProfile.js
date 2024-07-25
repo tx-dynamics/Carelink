@@ -20,10 +20,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fromProfile} from '../../../../redux/Slices/appSlice';
 import ProfileTopComp from '../../../../components/ProfileTopComp/ProfileTopComp';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import moment from 'moment';
 
 const ServiceClientProfile = ({navigation}) => {
-  const userData = useSelector(store => store?.userDataSlice);
   const dispatch = useDispatch();
+  const userData = useSelector(store => store?.userDataSlice);
+  console.log(
+    'Created at',
+    moment(userData?.userData?.createdAt).format('MMMM YYYY'),
+  );
+  const bookedListing = useSelector(store => store?.roomListingSlice);
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
@@ -34,7 +40,7 @@ const ServiceClientProfile = ({navigation}) => {
     },
     {
       id: 'bd7acbea-c1b1-4qds6c2-aed5-3ad53abb28ba',
-      count: '11',
+      count: bookedListing?.value?.booked?.toString(),
       forward: false,
       title: 'Booked Rooms',
       route: routes.bookedList,
@@ -84,9 +90,12 @@ const ServiceClientProfile = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <ProfileTopComp
-          name={'James Clear'}
+          name={userData?.userData?.name}
           pic={userData?.userData?.image}
-          memberDuration={'October 2023'}
+          memberDuration={moment(userData?.userData?.createdAt).format(
+            'MMMM YYYY',
+          )}
+          city={userData?.userData?.city}
         />
         <TouchableOpacity
           onPress={() =>

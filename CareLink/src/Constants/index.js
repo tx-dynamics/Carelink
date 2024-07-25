@@ -53,6 +53,7 @@ export const routes = {
   certificatesListing: 'certificatesListing',
   certificatesListingView: 'certificatesListingView',
   proposalListing: 'proposalListing',
+  successfulListing: 'successfulListing',
 };
 
 export const loaderStyles = {

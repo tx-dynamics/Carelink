@@ -21,7 +21,6 @@ import {
   RedFlashMessage,
   SuccessFlashMessage,
 } from '../../../Constants/Utilities/assets/Snakbar';
-import {uploadImageOnS3} from '../../../Services/HelpingMethods';
 
 const ListingSummary = ({navigation}) => {
   const {ProviderData, myLocationData} = useRoute()?.params;
@@ -42,7 +41,6 @@ const ListingSummary = ({navigation}) => {
   // Format the parsed date to DD MM YYYY
   const formattedStartDate = parsedStartDate.format('DD MMM YYYY');
   const formattedEndDate = parsedEndDate.format('DD MMM YYYY');
-
   const daysDifference = parsedEndDate.diff(parsedStartDate, 'days');
 
   // const imagesData = ProviderData?.data?.picturesData;
@@ -64,9 +62,12 @@ const ListingSummary = ({navigation}) => {
         setIsLoading(false);
         setVisible(false);
         dispatch(userSave(true));
-        setTimeout(() => {
-          navigation.navigate('HomeNavigator');
-        }, 600);
+        // setTimeout(() => {
+        navigation.reset({
+          index: 0,
+          routes: [{name: 'HomeNavigator'}],
+        });
+        // }, 1000);
       };
       const onError = error => {
         RedFlashMessage('Something Went Wrong!', error.message);
@@ -85,7 +86,9 @@ const ListingSummary = ({navigation}) => {
   };
   const onPressListNow = () => {
     setTimeout(() => {
-      setVisible(true);
+      navigation.navigate(routes.successfulListing, {
+        location: myLocationData?.streetAddress,
+      });
     }, 1000);
   };
 
@@ -102,7 +105,9 @@ const ListingSummary = ({navigation}) => {
       const data = {
         rooms: [
           {
-            room: ProviderData?.data?.rooms,
+            room: ProviderData?.data?.rooms?.label
+              ? ProviderData?.data?.rooms?.label
+              : ProviderData?.data?.rooms,
             floor: ProviderData?.data?.space,
             washroom: ProviderData?.data?.washrooom,
           },
@@ -135,10 +140,6 @@ const ListingSummary = ({navigation}) => {
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
-            console.log(
-              'Response of the data on create listing',
-              JSON.stringify(res),
-            );
             setIsLoading(false);
             SuccessFlashMessage(res?.message);
             onPressListNow();
@@ -149,13 +150,11 @@ const ListingSummary = ({navigation}) => {
         },
         err => {
           setIsLoading(false);
-          console.log('Error is', err);
           RedFlashMessage(err);
         },
       );
     } catch (error) {
       setIsLoading(false);
-      console.log('2. Error is', err);
       RedFlashMessage(error);
     } finally {
       setIsLoading(false);

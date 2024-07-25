@@ -6,16 +6,15 @@ import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/Left
 import {heightPixel, routes} from '../../../../Constants';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
-import {useRoute} from '@react-navigation/native';
 import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
+import {useDispatch} from 'react-redux';
 
 const AvailableList = ({navigation}) => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [availableData, setAvailableData] = useState(false);
-  // hooks
-  const {Roomdata} = useRoute()?.params;
 
   useEffect(() => {
     fetchUserData();
@@ -29,13 +28,11 @@ const AvailableList = ({navigation}) => {
       const onSuccess = result => {
         setIsLoading(false);
         setAvailableData(result?.data?.data);
-        console.log('Result is', result?.data?.data);
+        dispatch(setAvailableData(result?.data?.data));
       };
-
       const onError = error => {
         setIsLoading(false);
       };
-
       await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
     } catch (error) {
       setIsLoading(false);
@@ -49,7 +46,10 @@ const AvailableList = ({navigation}) => {
         imgName={iconPath.leftArrow}
         onPress={() => navigation.goBack()}
       />
-      <LeftSideBoldHeading title={'Available'} number={availableData?.length} />
+      <LeftSideBoldHeading
+        title={'Availables'}
+        number={availableData?.length}
+      />
       <FlatList
         showsVerticalScrollIndicator={false}
         style={{

@@ -26,7 +26,7 @@ const RoomsDetails = ({navigation, route}) => {
   const [liked, setLiked] = useState(false);
 
   const {item, fromBookedRooms} = useRoute()?.params;
-  console.log('Item datta is ', fromBookedRooms);
+  console.log('Routes data on room details', item?.status);
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user?._id,
@@ -106,6 +106,42 @@ const RoomsDetails = ({navigation, route}) => {
     }
   };
 
+  const handleActiveOrInactive = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = `${api?.createListing}/${item?._id}`;
+      const data = {
+        status: item?.status !== 'inactive' ? 'active' : 'inactive',
+      };
+
+      await callApi(
+        Method.PATCH,
+        endPoint,
+        data,
+        res => {
+          if (res?.status === 200 || res?.status === 201) {
+            console.log('Response is', res);
+            setIsLoading(false);
+            SuccessFlashMessage(res?.message);
+            navigation.navigate('HomeNavigator');
+          } else {
+            setIsLoading(false);
+            RedFlashMessage(res?.message);
+          }
+        },
+        err => {
+          setIsLoading(false);
+          RedFlashMessage(err);
+        },
+      );
+    } catch (error) {
+      setIsLoading(false);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <AppGLobalView style={styles.container}>
       <Loader isVisible={isLoading} />
@@ -158,6 +194,13 @@ const RoomsDetails = ({navigation, route}) => {
             }}
           />
         ))}
+      {(route?.params?.fromAvailableRooms ||
+        route?.params?.fromInactiveStatus) && (
+        <FormButton
+          buttonTitle={item?.status !== 'inactive' ? 'Inactive' : 'Active'}
+          onPress={() => handleActiveOrInactive()}
+        />
+      )}
     </AppGLobalView>
   );
 };

@@ -99,6 +99,7 @@ const LoginScreen = () => {
           data,
           res => {
             if (res?.status === 200 || res?.status === 201) {
+              console.log('User data', res?.data);
               if (res?.data?.user?.userType === 'ServiceSide') {
                 dispatch(userType('ServiceSide'));
                 if (

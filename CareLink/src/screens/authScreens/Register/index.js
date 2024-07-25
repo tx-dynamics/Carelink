@@ -38,6 +38,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
   const [isPassword, setPassword] = useState('');
   const [isPasswordConfirm, setPasswordConfirm] = useState('');
   const [isSecure, setSecure] = useState(true);
@@ -66,6 +67,8 @@ const Register = () => {
       RedFlashMessage('Email is required');
     } else if (!emailRegex.test(email)) {
       RedFlashMessage('Email is not valid');
+    } else if (!city) {
+      RedFlashMessage('City is required');
     } else if (!isPassword) {
       RedFlashMessage('Password is required');
     } else if (isPassword.length < 8) {
@@ -85,6 +88,7 @@ const Register = () => {
         const data = {
           name: firstName + ' ' + lastName,
           email: email?.toLowerCase(),
+          city: city,
           password: isPassword,
           userType: usertype,
           role: usertype == 'ServiceSide' ? 'serviceprovider' : 'agency',
@@ -170,6 +174,12 @@ const Register = () => {
             onChangeText={setEmail}
             title={'Email'}
             autoCapitalize={'none'}
+          />
+          <AppTextInput
+            mainViewStyle={styles.marginView}
+            value={city}
+            onChangeText={setCity}
+            title={'City'}
           />
           <AppTextInput
             mainViewStyle={styles.marginView}

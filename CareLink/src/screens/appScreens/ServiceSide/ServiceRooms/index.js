@@ -1,20 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TextInput,
-  ActivityIndicator,
-  Text,
-  View,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, ScrollView, FlatList, View} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import DefaultStyles from '../../../../config/Styles';
 import Apptext from '../../../../components/Apptext';
 import Header from '../../../../components/Header';
-import {DrawerActions, useNavigation, useRoute} from '@react-navigation/native';
+import {DrawerActions} from '@react-navigation/native';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import {heightPixel, routes, widthPixel} from '../../../../Constants';
 import {appIcons} from '../../../../Constants/Utilities/assets';

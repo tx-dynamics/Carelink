@@ -61,7 +61,11 @@ const InactiveList = ({navigation}) => {
           <ServiceListingComp
             rightTexPress={() =>
               navigation.navigate('withoutBottomTabnavigator', {
-                screen: routes.listingOptions,
+                screen: routes.roomDetails,
+                params: {
+                  item,
+                  fromInactiveStatus: true,
+                },
               })
             }
             // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}

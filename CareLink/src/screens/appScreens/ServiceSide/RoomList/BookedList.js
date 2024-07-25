@@ -9,8 +9,10 @@ import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
 import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
+import {useDispatch} from 'react-redux';
 
 const BookedList = ({navigation}) => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [bookedData, setBookedData] = useState(false);
 
@@ -26,6 +28,7 @@ const BookedList = ({navigation}) => {
       const onSuccess = result => {
         setIsLoading(false);
         setBookedData(result?.data?.data);
+        dispatch(setBookedData(result?.data?.data));
       };
       const onError = error => {
         setIsLoading(false);
