@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   View,
-  TextInput,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -44,12 +43,7 @@ const ServiceListingComp = ({
   var Endduration = moment?.utc(
     moment?.duration(labelValue[1])?.asMilliseconds(),
   );
-
-  console.log('Start duration', Startduration);
-  console.log('End duration', Endduration);
-
   const daysDifference = Endduration?.diff(Startduration, 'days');
-  console.log('formattedStartDate ', 'daysDifference', daysDifference);
 
   return (
     <TouchableOpacity
@@ -263,7 +257,7 @@ const styles = StyleSheet.create({
   rightBottomText: {
     top: heightPixel(1),
     fontSize: fontPixel(12),
-    fontFamily: fonts.Poppins_Light,
+    fontFamily: fonts.Poppins_Medium,
     color: colors.white,
   },
 });

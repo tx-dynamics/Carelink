@@ -10,83 +10,16 @@ import {heightPixel, routes, widthPixel} from '../../../../Constants';
 import {appIcons} from '../../../../Constants/Utilities/assets';
 import AppStatusbar from '../../../../components/AppStatusbar/AppStatusbar';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
+import {useSelector} from 'react-redux';
 
 const ServiceRooms = ({navigation}) => {
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      price: '$29.99',
-      plans: '/month',
-      adress: 'Brookside Place',
-      label: 'Debit/Credit Card',
-      description: `You will get 20 listing to post in a month with this monthly plan`,
-      pic: appIcons.dummyPic1,
-      facility: [
-        {
-          id: 1,
-          title: 'Wheelchair',
-        },
-        {
-          id: 2,
-          title: 'Car parking available',
-        },
-        {
-          id: 3,
-          title: 'Tarrece',
-        },
-      ],
-    },
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28b1',
-      price: '$20.99',
-      plans: '/month',
-      label: 'Debit/Credit Card',
-      adress: 'Hillcrest Heights',
-      description: `You will get 20 listing to post in a month with this monthly plan`,
-      pic: appIcons.dummyPic2,
-      facility: [
-        {
-          id: 1,
-          title: 'Wheelchair',
-        },
-        {
-          id: 2,
-          title: 'Car parking available',
-        },
-      ],
-    },
+  const availableListData = useSelector(
+    store => store?.roomListingSlice?.availableListing,
+  );
+  const bookedListData = useSelector(
+    store => store?.roomListingSlice?.bookedListing,
+  );
 
-    {
-      id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-      price: '$29.99',
-      plans: '/month',
-      label: 'PayPal',
-      adress: 'Magnolia Meadows',
-      description: `You will get 20 listing to post in a month with this monthly plan`,
-      pic: appIcons.dummyPic3,
-      facility: [
-        {
-          id: 1,
-          title: 'Wheelchair',
-        },
-      ],
-    },
-    {
-      id: 'bd7ac4bea-c1b1-46c2-aed5-3ad53abb28ba',
-      price: '$29.99',
-      plans: '/month',
-      label: 'PayPal',
-      adress: 'Magnolia Meadows',
-      description: `You will get 20 listing to post in a month with this monthly plan`,
-      pic: appIcons.dummyPic3,
-      facility: [
-        {
-          id: 1,
-          title: 'Wheelchair',
-        },
-      ],
-    },
-  ];
   return (
     <AppGLobalView style={styles.container}>
       <AppStatusbar />
@@ -101,11 +34,8 @@ const ServiceRooms = ({navigation}) => {
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.marginView}>
-          {/* <View style={styles.direcView}>
-                        <Apptext style={styles.rms} >Rooms Details</Apptext>
-                    </View> */}
           <Apptext style={[styles.rms, {marginTop: wp('6%')}]}>
-            Available ({DATA.length})
+            Available ({availableListData?.length})
           </Apptext>
           <View style={{marginTop: wp('5%')}}>
             <FlatList
@@ -114,39 +44,33 @@ const ServiceRooms = ({navigation}) => {
               ListHeaderComponent={() => (
                 <View style={{marginTop: heightPixel(1)}}></View>
               )}
-              data={DATA}
+              data={availableListData}
               keyExtractor={(item, index) => index}
               renderItem={({item, index}) => (
                 <ServiceListingComp
-                  rightTexPress={() =>
-                    navigation.navigate('withoutBottomTabnavigator', {
-                      screen: routes.listingOptions,
-                    })
-                  }
                   onPress={() =>
                     navigation.navigate('withoutBottomTabnavigator', {
-                      screen: routes.availableRoom,
+                      screen: routes.roomDetails,
+                      params: {
+                        item,
+                        fromAvailableRooms: true,
+                      },
                     })
                   }
-                  facilityData={item.facility}
-                  // facilty={item.facility}
-                  pic={item.pic}
+                  facilityData={item.entities}
+                  pic={item.photos[0]}
                   rightTxt={'Edit'}
-                  detail={
-                    'Lorem ipsum dolor sit amet, c amet, c Lorem ipsum dolor sit amet, c '
-                  }
+                  detail={item?.notes}
                   showProposals={true}
-                  labelValue={'For 20 days'}
-                  name={'ABC Rental Agency'}
-                  location={'7+ Year Experience'}
-                  when={'Right Now'}
-                  hourly={'$20-70 Hourly'}
-                  // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
+                  labelValue={[item?.availabilityStart, item?.availabilityEnd]}
+                  name={item?.rooms[0]?.room}
                 />
               )}
             />
           </View>
-          <Apptext style={styles.rms}>Booked ({DATA.length})</Apptext>
+          <Apptext style={styles.rms}>
+            Booked ({bookedListData?.length})
+          </Apptext>
           <View style={{marginTop: wp('5%')}}>
             <FlatList
               scrollEnabled={false}
@@ -154,46 +78,29 @@ const ServiceRooms = ({navigation}) => {
               ListHeaderComponent={() => (
                 <View style={{marginTop: heightPixel(1)}}></View>
               )}
-              data={DATA}
+              data={bookedListData}
               keyExtractor={(item, index) => index}
               renderItem={({item, index}) => (
                 <ServiceListingComp
                   onPress={() =>
                     navigation.navigate('withoutBottomTabnavigator', {
-                      screen: routes.bookedRoom,
+                      screen: routes.roomDetails,
+                      params: {
+                        item,
+                        fromBookedRooms: true,
+                      },
                     })
                   }
-                  pic={item.pic}
-                  detail={
-                    'Lorem ipsum dolor sit amet, c amet, c Lorem ipsum dolor sit amet, c '
-                  }
-                  facilityData={item.facility}
+                  facilityData={item?.entities}
+                  pic={item?.photos[0]}
+                  detail={item?.notes}
                   showProposals={true}
-                  labelValue={item.adress}
-                  name={'James Clear'}
-                  location={'7+ Year Experience'}
-                  when={'Right Now'}
-                  fors={'For 20 days'}
-                  hourly={'$20-70 Hourly'}
+                  labelValue={[item?.availabilityStart, item?.availabilityEnd]}
+                  name={item?.rooms[0]?.room}
                 />
               )}
             />
           </View>
-          {/* <Apptext style={styles.rms} >Posted (2)</Apptext> */}
-          {/* <View style={{ marginTop: wp('5%') }}>
-                        <FlatList showsVerticalScrollIndicator={false}
-                            data={DATA}
-                            keyExtractor={(item, index) => index}
-                            renderItem={({ item, index }) => (
-                                <ServiceListingComp
-                                    labelValue={"3 Room on 2nd Floor"}
-                                    when={"Right Now"}
-                                    fors={"For 20 days"}
-                                    hourly={"$20-70 Hourly"}
-                                />
-                            )}
-                        />
-                    </View> */}
         </View>
       </ScrollView>
     </AppGLobalView>

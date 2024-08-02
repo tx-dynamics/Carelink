@@ -84,12 +84,14 @@ export const agencyData = [
 ];
 
 const AgencyHome = ({}) => {
+  const navigation = useNavigation();
   const userData = useSelector(store => store?.userDataSlice);
   const isFocused = useIsFocused();
   const [listingDetails, setListingDetails] = useState([]);
   const [pending, setPending] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [bookedData, setBookedData] = useState([]);
   const [proposalData, setPropsalData] = useState({
     countsData: {},
     proposalList: [],
@@ -101,10 +103,29 @@ const AgencyHome = ({}) => {
     if (isFocused) {
       fetchListingDetails();
       fetchProposalDetails();
+      fetchBookedData();
     }
   }, [isFocused]);
 
   // functions
+
+  const fetchBookedData = async () => {
+    try {
+      setIsLoading(true);
+      const endPoint = `${api.listingStatus}?listingCount=false&status=booked`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setIsLoading(false);
+        setBookedData(result?.data?.data);
+      };
+      const onError = error => {
+        setIsLoading(false);
+      };
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
   const fetchListingDetails = async () => {
     try {
       setIsLoading(true);
@@ -174,7 +195,6 @@ const AgencyHome = ({}) => {
     }, 2000);
   }, []);
 
-  const navigation = useNavigation();
   return (
     <AppGLobalView style={styles.container}>
       <AppStatusbar />
@@ -201,16 +221,20 @@ const AgencyHome = ({}) => {
           <Apptext style={styles.rms}>Rooms & Proposals</Apptext>
         </View>
         <AgencyHomeComp
-          onPress={() =>
-            navigation.navigate('withoutBottomTabnavigator', {
-              screen: routes.bookedRoomAgency,
-              params: {
-                listingDetails,
-              },
-            })
-          }
+          onPress={() => {
+            if (bookedData?.length > 0) {
+              navigation.navigate('withoutBottomTabnavigator', {
+                screen: routes.bookedRoomAgency,
+                params: {
+                  bookedData,
+                },
+              });
+            } else {
+              RedFlashMessage('No booked rooms found');
+            }
+          }}
           labelValue={'Rooms'}
-          BookedRooms={listingDetails?.length}
+          BookedRooms={bookedData?.length}
           scndTxt={'Booked'}
         />
         <AgencyHomeComp
@@ -236,6 +260,7 @@ const AgencyHome = ({}) => {
                 screen: routes.customerListing,
                 params: {
                   listingDetails,
+                  fromAgency: true,
                 },
               })
             }>
@@ -254,6 +279,7 @@ const AgencyHome = ({}) => {
                   screen: routes.roomDetails,
                   params: {
                     item,
+                    fromAgencyHome: true,
                   },
                 })
               }

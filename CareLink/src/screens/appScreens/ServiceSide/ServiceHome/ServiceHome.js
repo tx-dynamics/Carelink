@@ -39,7 +39,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
 import moment from 'moment';
-import {setListingData} from '../../../../redux/Slices/roomListingSlice';
+import {
+  setAvailableData,
+  setBookedData,
+  setListingData,
+} from '../../../../redux/Slices/roomListingSlice';
 const ServiceHome = ({}) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
@@ -70,6 +74,8 @@ const ServiceHome = ({}) => {
     if (isFocused) {
       getReceivedProposals();
       fetchRoomDetailsData();
+      fetchAvailableList();
+      fetchBookedList();
     }
   }, [isFocused]);
 
@@ -152,48 +158,6 @@ const ServiceHome = ({}) => {
     }
   };
 
-  // const listingData = async () => {
-  //   const today = new Date();
-  //   today.setHours(0, 0, 0, 0);
-  //   const currentDayMilliseconds = moment(today).valueOf();
-  //   let totalRooms = 0;
-  //   let inactiveRooms = 0;
-  //   try {
-  //     setLoading(true);
-
-  //     const bodyParams = {};
-  //     const endPoint = `${api.getListing}?query=${encodeURIComponent(
-  //       JSON.stringify({user: userData._id}),
-  //     )}`;
-
-  //     const onSucess = result => {
-  //       result?.data?.listing?.forEach(element => {
-  //         if (element?.availabilityStart >= currentDayMilliseconds) {
-  //           totalRooms = totalRooms + 1;
-  //           availRooms.push(element);
-  //         }
-  //       });
-
-  //       setLoading(false);
-  //     };
-  //     const onError = error => {
-  //       setLoading(false);
-  //       RedFlashMessage(error.message);
-  //       console.log('Error', error);
-  //     };
-
-  //     await callApi(Method.GET, endPoint, bodyParams, onSucess, onError);
-  //   } catch (error) {
-  //     setLoading(false);
-  //     RedFlashMessage(
-  //       'Error Occured while fetch listing data Service side',
-  //       error,
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const getReceivedProposals = async () => {
     try {
       setLoading(true);
@@ -219,6 +183,43 @@ const ServiceHome = ({}) => {
 
       RedFlashMessage(error);
     } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchAvailableList = async () => {
+    try {
+      setLoading(true);
+      const endPoint = `${api.listingStatus}?listingCount=false&status=active`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setLoading(false);
+        dispatch(setAvailableData(result?.data?.data));
+      };
+      const onError = error => {
+        setLoading(false);
+      };
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
+
+  const fetchBookedList = async () => {
+    try {
+      setLoading(true);
+      const endPoint = `${api.listingStatus}?listingCount=false&status=booked`;
+      const bodyParams = {};
+      const onSuccess = result => {
+        setLoading(false);
+        setBookedData(result?.data?.data);
+        dispatch(setBookedData(result?.data?.data));
+      };
+      const onError = error => {
+        setLoading(false);
+      };
+      await callApi(Method.GET, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
       setLoading(false);
     }
   };

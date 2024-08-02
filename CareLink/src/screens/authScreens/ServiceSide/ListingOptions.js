@@ -29,7 +29,6 @@ import AddMoreModal from '../../../components/AddMoreModal/AddMoreModal';
 import Loader from '../../../components/Loader';
 import EntityCheckComponent from '../../../components/EntityCheckComponent/EntityCheckComponent';
 import {appIcons} from '../../../Constants/Utilities/assets';
-import {useSelector} from 'react-redux';
 
 const ListingOptions = ({navigation, route}) => {
   const [basicData, setBasicData] = useState([
@@ -95,6 +94,8 @@ const ListingOptions = ({navigation, route}) => {
       value: 'Room1',
     },
   ]);
+
+  console.log('Rooms are', roomValue);
   const minDate = new Date();
   const maxDate = new Date(2025, 6, 3);
 
@@ -115,7 +116,7 @@ const ListingOptions = ({navigation, route}) => {
     let data = {
       id: room?.length,
       label: add,
-      value: add + room?.length,
+      value: add,
     };
     setRoom([...room, data]);
     setRoomValue(data);
@@ -230,7 +231,10 @@ const ListingOptions = ({navigation, route}) => {
       <IconHeaderComp
         title={'Add Listing'}
         onPress={() => navigation.goBack()}
-        imgName={!route?.params?.fromSignup == 'Yes' && iconPath.leftArrow}
+        imgName={
+          (!route?.params?.fromSignup == 'Yes' || !route?.params?.fromAgency) &&
+          iconPath.leftArrow
+        }
         heading={'Add Listing Information'}
       />
       <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>

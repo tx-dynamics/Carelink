@@ -28,6 +28,7 @@ const AvailableList = ({navigation}) => {
       const onSuccess = result => {
         setIsLoading(false);
         setAvailableData(result?.data?.data);
+        console.log('Data is', JSON.stringify(result?.data?.data));
         dispatch(setAvailableData(result?.data?.data));
       };
       const onError = error => {
@@ -46,10 +47,7 @@ const AvailableList = ({navigation}) => {
         imgName={iconPath.leftArrow}
         onPress={() => navigation.goBack()}
       />
-      <LeftSideBoldHeading
-        title={'Availables'}
-        number={availableData?.length}
-      />
+      <LeftSideBoldHeading title={'Available'} number={availableData?.length} />
       <FlatList
         showsVerticalScrollIndicator={false}
         style={{

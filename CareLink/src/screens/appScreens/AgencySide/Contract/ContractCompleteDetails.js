@@ -22,17 +22,10 @@ import Loader from '../../../../components/Loader';
 import Apptext from '../../../../components/Apptext';
 
 const ContractCompeleteDetails = ({navigation, route}) => {
-  // states
   const [isLoading, setIsLoading] = useState(false);
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
   const proposalUsers = useSelector(state => state?.proposalSlice);
-  console.log('Proposal Users', proposalUsers?.proposalUsers[0]?.proposee);
-
-  //   const {item} = useRoute()?.params;
   const item = useSelector(store => store?.proposalSlice?.itemListing);
-  console.log('Item on Room Details', item);
-  // listing id
-
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user,
@@ -47,14 +40,12 @@ const ContractCompeleteDetails = ({navigation, route}) => {
   );
   const availableDate = moment(item?.availabilityStart).format('MMMM DD YYYY');
   const availableEnd = moment(item?.availabilityEnd).format('MMMM DD YYYY');
-  //   console.log('availableDate ', availableDate);
 
   const daysDifference = Endduration.diff(Startduration, 'days');
 
   const [liked, setLiked] = useState(false);
 
   const onHeartPress = async () => {
-    console.log('LKiked =====>', item?.liked);
     try {
       const endPoint = item?.liked
         ? `${api?.likeList / item?._id}`
@@ -65,8 +56,6 @@ const ContractCompeleteDetails = ({navigation, route}) => {
             listing: item?._id,
           };
 
-      console.log('Endpoint of like system', endPoint);
-      console.log('Body params of like system', bodyParams);
       const onSuccess = result => {
         SuccessFlashMessage(result?.message);
         setLiked(!liked);
@@ -86,10 +75,8 @@ const ContractCompeleteDetails = ({navigation, route}) => {
     }
   };
 
-  // hooks
   useEffect(() => {
     setLiked(item?.liked);
-    // Room Details
     if (route?.params?.review !== 'Room Details') {
       getServiceUserData();
     }

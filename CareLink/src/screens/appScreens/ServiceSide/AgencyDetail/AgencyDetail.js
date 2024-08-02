@@ -3,14 +3,10 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  ActivityIndicator,
-  TextInput,
-  Alert,
   Image,
   StyleSheet,
   ScrollView,
   StatusBar,
-  SafeAreaView,
 } from 'react-native';
 import {
   widthPercentageToDP as wp,
@@ -23,14 +19,13 @@ import ReviewsComp from '../../../../components/ReviewsComp';
 import {useSelector} from 'react-redux';
 import {appIcons} from '../../../../Constants/Utilities/assets';
 import {heightPixel, widthPixel} from '../../../../Constants';
-import {Rating, AirbnbRating} from 'react-native-ratings';
 import BrochureComp from '../../../../components/BrochureComp/BrochureComp';
 import BrochureModal from '../../../../components/BrochureModal/BrochureModal';
-import AgencyMenuPopUp from '../../../../components/AgencyMenuPopUp/AgencyMenuPopUp';
 import MenuModal, {
   MenuTextComp,
 } from '../../../../components/MenuModal/MenuModal';
 import {SuccessFlashMessage} from '../../../../Constants/Utilities/assets/Snakbar';
+
 const AgencyDetail = ({navigation, route}) => {
   const usertype = useSelector(state => state.splash.userType);
   const [isVisible, setVisible] = useState(false);

@@ -6,10 +6,10 @@ import LeftSideBoldHeading from '../../../../components/LeftSideBoldHeading/Left
 import {heightPixel, routes} from '../../../../Constants';
 import ServiceListingComp from '../../../../components/ServiceListingComp';
 import AppGLobalView from '../../../../components/AppGlobalView/AppGLobalView';
-import {useRoute} from '@react-navigation/native';
 import {api} from '../../../../network/Environment';
 import {Method, callApi} from '../../../../network/NetworkManger';
 import Loader from '../../../../components/Loader';
+import colors from '../../../../config/colors';
 
 const ListedList = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -58,22 +58,46 @@ const ListedList = ({navigation}) => {
         data={listedData}
         keyExtractor={(item, index) => index}
         renderItem={({item, index}) => (
-          <ServiceListingComp
-            rightTexPress={() =>
-              navigation.navigate('withoutBottomTabnavigator', {
-                screen: routes.listingOptions,
-              })
-            }
-            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
-            facilityData={item.entities}
-            pic={item.photos[0]}
-            rightTxt={'Edit'}
-            detail={item?.notes}
-            showProposals={true}
-            labelValue={[item?.availabilityStart, item?.availabilityEnd]}
-            name={item?.rooms[0]?.room}
-            // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
-          />
+          console.log('Item data', item),
+          (
+            <ServiceListingComp
+              rightTexPress={() =>
+                navigation.navigate('withoutBottomTabnavigator', {
+                  screen: routes.roomDetails,
+                  params: {
+                    item,
+                  },
+                })
+              }
+              // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: routes.availableRoom })}
+              facilityData={item.entities}
+              pic={item.photos[0]}
+              detail={item?.notes}
+              showProposals={true}
+              labelValue={[item?.availabilityStart, item?.availabilityEnd]}
+              name={item?.rooms[0]?.room}
+              statusStyle={{
+                backgroundColor:
+                  item?.status == 'active'
+                    ? colors.primary
+                    : item?.status == 'approved'
+                    ? colors.primary
+                    : item?.status == 'inactive'
+                    ? colors.black
+                    : colors.green,
+              }}
+              statusTab={
+                item?.status == 'active'
+                  ? 'Available'
+                  : item?.status == 'approved'
+                  ? 'Booked'
+                  : item?.status == 'inactive'
+                  ? 'Inactive'
+                  : 'Completed'
+              }
+              // onPress={() => navigation.navigate("withoutBottomTabnavigator", { screen: "ReceivedProposal" })}
+            />
+          )
         )}
       />
       <Loader isVisible={isLoading} />

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import DefaultStyles from '../../../../config/Styles';
 import FormButton from '../../../../components/FormButton';
 import Header from '../../../../components/Header';
@@ -19,14 +19,17 @@ import moment from 'moment';
 import {callApi, Method} from '../../../../network/NetworkManger';
 import {api} from '../../../../network/Environment';
 import Loader from '../../../../components/Loader';
+import Apptext from '../../../../components/Apptext';
+import colors from '../../../../config/colors';
+import DeleteModal from '../../../../components/DeleteModal/DeleteModal';
 
 const RoomsDetails = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [serviceUserProfile, setServiceUserProfile] = useState(null);
   const [liked, setLiked] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const {item, fromBookedRooms} = useRoute()?.params;
-  console.log('Routes data on room details', item?.status);
   const proposalRawData = {
     listingId: item?._id,
     serviceProviderId: item?.user?._id,
@@ -42,6 +45,13 @@ const RoomsDetails = ({navigation, route}) => {
   const availableDate = moment(item?.availabilityStart)?.format('MMMM DD YYYY');
   const availableEnd = moment(item?.availabilityEnd)?.format('MMMM DD YYYY');
   const daysDifference = Endduration?.diff(Startduration, 'days');
+
+  useEffect(() => {
+    setLiked(item?.liked);
+    if (route?.params?.review !== 'Room Details') {
+      getServiceUserData();
+    }
+  }, []);
 
   const onHeartPress = async () => {
     try {
@@ -70,27 +80,17 @@ const RoomsDetails = ({navigation, route}) => {
       );
     } catch (error) {
       RedFlashMessage('Listing Not Saved');
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // hooks
-  useEffect(() => {
-    setLiked(item?.liked);
-    // Room Details
-    if (route?.params?.review !== 'Room Details') {
-      getServiceUserData();
-    }
-  }, []);
-
-  //  service data
   const getServiceUserData = async () => {
     const id = item?._id ? item?._id : item?.user?._id;
-    console.log('ID is', id);
     try {
       setIsLoading(true);
       const bodyParams = {};
       const endPoint = `${api.getUserProfile}/${id}`;
-      console.log('Hit');
       const onSuccess = result => {
         setServiceUserProfile(result?.user);
         setIsLoading(false);
@@ -103,6 +103,8 @@ const RoomsDetails = ({navigation, route}) => {
     } catch (error) {
       setIsLoading(false);
       RedFlashMessage('Something Went Wrong!');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,7 +113,7 @@ const RoomsDetails = ({navigation, route}) => {
       setIsLoading(true);
       const endPoint = `${api?.createListing}/${item?._id}`;
       const data = {
-        status: item?.status !== 'inactive' ? 'active' : 'inactive',
+        status: item?.status == 'inactive' ? 'active' : 'inactive',
       };
 
       await callApi(
@@ -120,7 +122,6 @@ const RoomsDetails = ({navigation, route}) => {
         data,
         res => {
           if (res?.status === 200 || res?.status === 201) {
-            console.log('Response is', res);
             setIsLoading(false);
             SuccessFlashMessage(res?.message);
             navigation.navigate('HomeNavigator');
@@ -137,6 +138,28 @@ const RoomsDetails = ({navigation, route}) => {
     } catch (error) {
       setIsLoading(false);
       RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onDeleteListing = async () => {
+    try {
+      const endPoint = `${api?.createListing}/${item?._id}`;
+      const bodyParams = {};
+      console.log('End point', endPoint);
+
+      const onSuccess = result => {
+        SuccessFlashMessage(result?.message);
+        setVisible(false);
+        navigation.navigate('HomeNavigator');
+      };
+      const onError = error => {
+        RedFlashMessage(error.message);
+      };
+      await callApi(Method.DELETE, endPoint, bodyParams, onSuccess, onError);
+    } catch (error) {
+      RedFlashMessage('Listing Not Saved');
     } finally {
       setIsLoading(false);
     }
@@ -175,30 +198,51 @@ const RoomsDetails = ({navigation, route}) => {
           note={item?.notes}
         />
       </KeyboardAwareScrollView>
-      {!route?.params?.fromSubmitAcceptProposal ||
-        (fromBookedRooms && (
-          <FormButton
-            buttonTitle={
-              route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
-            }
-            onPress={() => {
-              navigation.navigate(
-                route?.params?.review
-                  ? routes?.createContract
-                  : routes.sendProposal,
-                {
-                  proposalRawData,
-                  serviceUserProfile,
-                },
-              );
-            }}
-          />
-        ))}
+      {(!route?.params?.fromSubmitAcceptProposal ||
+        fromBookedRooms ||
+        route?.params?.fromAgencyHome) && (
+        <FormButton
+          buttonTitle={
+            route?.params?.review ? 'Review & Continue' : 'Submit Proposal'
+          }
+          onPress={() => {
+            navigation.navigate(
+              route?.params?.review
+                ? routes?.createContract
+                : routes.sendProposal,
+              {
+                proposalRawData,
+                serviceUserProfile,
+              },
+            );
+          }}
+        />
+      )}
+      {route?.params?.fromInactiveStatus && (
+        <TouchableOpacity activeOpacity={0.5} onPress={() => setVisible(true)}>
+          <Apptext
+            style={{
+              color: colors.primary,
+              textAlign: 'center',
+              marginBottom: 10,
+            }}>
+            Delete Lisitng
+          </Apptext>
+        </TouchableOpacity>
+      )}
+
       {(route?.params?.fromAvailableRooms ||
         route?.params?.fromInactiveStatus) && (
         <FormButton
           buttonTitle={item?.status !== 'inactive' ? 'Inactive' : 'Active'}
           onPress={() => handleActiveOrInactive()}
+        />
+      )}
+      {route?.params?.fromInactiveStatus && (
+        <DeleteModal
+          visible={visible}
+          cancelPress={() => setVisible(false)}
+          deletePress={() => onDeleteListing()}
         />
       )}
     </AppGLobalView>

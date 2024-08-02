@@ -2,6 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   listing: {},
+  availableListing: [],
+  bookedListing: [],
 };
 
 export const roomListingSlice = createSlice({
@@ -12,10 +14,10 @@ export const roomListingSlice = createSlice({
       state.value = action.payload;
     },
     setAvailableData: (state, action) => {
-      state.value = action.payload;
+      state.availableListing = action.payload;
     },
     setBookedData: (state, action) => {
-      state.value = action.payload;
+      state.bookedListing = action.payload;
     },
   },
 });

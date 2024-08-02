@@ -89,51 +89,57 @@ const AddDocuments = ({navigation}) => {
   };
 
   const uploadImageData = async () => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
+      if (isData[isIndex]?.media.includes('https') && isIndex != 4) {
+        // Move to the next index
+        setIndex(isIndex + 1);
+        setIsLoading(false);
+      }
+      // Check if the current media is not null
+      else if (isData[isIndex]?.media) {
+        const str = isData[isIndex]?.media;
+        const imageObj = {
+          path: str,
+          name: str?.substring(str?.lastIndexOf('/') + 1), // Adjusted to get the correct name
+        };
 
-    if (isData[isIndex]?.media.includes('https') && isIndex != 4) {
-      // Move to the next index
-      setIndex(isIndex + 1);
-      setIsLoading(false);
-    }
-    // Check if the current media is not null
-    else if (isData[isIndex]?.media) {
-      const str = isData[isIndex]?.media;
-      const imageObj = {
-        path: str,
-        name: str?.substring(str?.lastIndexOf('/') + 1), // Adjusted to get the correct name
-      };
+        await uploadImageOnS3(imageObj, res => {
+          console.log('Response is', res);
+          // Update the media value in the current data object
+          if (res) {
+            const updatedData = [...isData];
+            updatedData[isIndex].media = res;
+            setData(updatedData);
+            setIndex(isIndex + 1);
+            setIsLoading(false);
 
-      await uploadImageOnS3(imageObj, res => {
-        console.log('Response is', res);
-        // Update the media value in the current data object
-        if (res) {
-          const updatedData = [...isData];
-          updatedData[isIndex].media = res;
-          setData(updatedData);
-          setIndex(isIndex + 1);
-          setIsLoading(false);
-
-          if (isIndex == 4) {
-            setTimeout(() => {
-              navigation.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: routes.addInformation,
-                    params: {
-                      imagesData: mediaValues,
+            if (isIndex == 4) {
+              setTimeout(() => {
+                navigation.reset({
+                  index: 0,
+                  routes: [
+                    {
+                      name: routes.addInformation,
+                      params: {
+                        imagesData: mediaValues,
+                      },
                     },
-                  },
-                ],
-              });
-            }, 400);
+                  ],
+                });
+              }, 400);
+            }
           }
-        }
-      });
-    } else {
+        });
+      } else {
+        setIsLoading(false);
+        RedFlashMessage(`${isData[isIndex].title} is Required`);
+      }
+    } catch (error) {
       setIsLoading(false);
-      RedFlashMessage(`${isData[isIndex].title} is Required`);
+      RedFlashMessage(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

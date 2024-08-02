@@ -62,12 +62,9 @@ const ListingSummary = ({navigation}) => {
         setIsLoading(false);
         setVisible(false);
         dispatch(userSave(true));
-        // setTimeout(() => {
-        navigation.reset({
-          index: 0,
-          routes: [{name: 'HomeNavigator'}],
-        });
-        // }, 1000);
+        setTimeout(() => {
+          navigation.navigate('HomeNavigator');
+        }, 1000);
       };
       const onError = error => {
         RedFlashMessage('Something Went Wrong!', error.message);
@@ -86,11 +83,14 @@ const ListingSummary = ({navigation}) => {
   };
   const onPressListNow = () => {
     setTimeout(() => {
-      navigation.navigate(routes.successfulListing, {
-        location: myLocationData?.streetAddress,
-      });
+      // navigation.navigate(routes.successfulListing, {
+      //   location: myLocationData?.streetAddress,
+      // });
+      setVisible(true);
     }, 1000);
   };
+
+  console.log('Providers data', ProviderData);
 
   const handleSubmit = async () => {
     try {

@@ -118,7 +118,7 @@ const EditProfile = ({navigation}) => {
         <AppTextInput
           mainViewStyle={styles.lastNameStyle}
           title={'Last name'}
-          onChangeText={text => setLastName | text}
+          onChangeText={text => setLastName(text)}
           value={lastName}
         />
       </KeyboardAwareScrollView>
