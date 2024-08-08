@@ -29,8 +29,12 @@ import AddMoreModal from '../../../components/AddMoreModal/AddMoreModal';
 import Loader from '../../../components/Loader';
 import EntityCheckComponent from '../../../components/EntityCheckComponent/EntityCheckComponent';
 import {appIcons} from '../../../Constants/Utilities/assets';
+import {useDispatch, useSelector} from 'react-redux';
+import {saveRooms} from '../../../redux/Slices/roomListingSlice';
 
 const ListingOptions = ({navigation, route}) => {
+  const dispatch = useDispatch();
+  const roomsData = useSelector(store => store?.roomListingSlice?.rooms);
   const [basicData, setBasicData] = useState([
     {
       id: 0,
@@ -87,15 +91,8 @@ const ListingOptions = ({navigation, route}) => {
       value: 'Second Floor',
     },
   ]);
-  const [room, setRoom] = useState([
-    {
-      id: 0,
-      label: 'Room 1',
-      value: 'Room1',
-    },
-  ]);
+  const [room, setRoom] = useState(roomsData);
 
-  console.log('Rooms are', roomValue);
   const minDate = new Date();
   const maxDate = new Date(2025, 6, 3);
 
@@ -119,6 +116,7 @@ const ListingOptions = ({navigation, route}) => {
       value: add,
     };
     setRoom([...room, data]);
+    dispatch(saveRooms([...room, data]));
     setRoomValue(data);
     setVisible(false);
     setAdd('');
